@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Helper.Data;
 using Helper.Models.Entities;
+using Helper.Models.BLL;
 
 namespace Helper.Areas.Admin.Controllers
 {
@@ -14,16 +15,21 @@ namespace Helper.Areas.Admin.Controllers
     public class AboutUsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly AboutUsManager _aboutUsManager;
 
-        public AboutUsController(ApplicationDbContext context)
+
+
+        public AboutUsController(ApplicationDbContext context, AboutUsManager aboutUsManager)
         {
             _context = context;
+            _aboutUsManager = aboutUsManager;
         }
 
         // GET: Admin/AboutUs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TBL_AboutUs.ToListAsync());
+            var AboutUsList = await _aboutUsManager.GetAll();
+            return View(AboutUsList);
         }
 
         // GET: Admin/AboutUs/Details/5
