@@ -62,8 +62,8 @@ namespace Helper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SignIn(LoginViewModel input)
         {
-            input.ReturnUrl ??= Url.Content("~/");
-
+            //input.ReturnUrl ??= Url.Content("~/");
+            input.ReturnUrl = input.ReturnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
                 if (HttpContext.Session.GetInt32(PublicHelper.SessionCaptcha).HasValue == false
