@@ -16,9 +16,11 @@ namespace Helper.Data
             : base(options)
         {
         }
-        public DbSet<Helper.Areas.Admin.Models.Class> Class { get; set; }
-        //public DbSet<AppUser> ApplicationUser { get; set; }
-        public DbSet<Helper.Areas.Admin.Models.ViewModels.LoginAdminViewModel> LoginAdminViewModel { get; set; }
+
+
+        //public DbSet<LoginAdminViewModel> LoginAdminViewModel { get; set; }
+        public DbSet<TBL_AboutUs> TBL_AboutUs { get; set; }
+
 
     }
 }

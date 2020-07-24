@@ -5,27 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Helper.Areas.Admin.Models;
 using Helper.Data;
+using Helper.Models.Entities;
 
-namespace Helper.Controllers
+namespace Helper.Areas.Admin.Controllers
 {
-    public class ClassesController : Controller
+    [Area("Admin")]
+    public class AboutUsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ClassesController(ApplicationDbContext context)
+        public AboutUsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Classes
+        // GET: Admin/AboutUs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Class.ToListAsync());
+            return View(await _context.TBL_AboutUs.ToListAsync());
         }
 
-        // GET: Classes/Details/5
+        // GET: Admin/AboutUs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,39 @@ namespace Helper.Controllers
                 return NotFound();
             }
 
-            var @class = await _context.Class
-                .FirstOrDefaultAsync(m => m.MyProperty == id);
-            if (@class == null)
+            var tBL_AboutUs = await _context.TBL_AboutUs
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (tBL_AboutUs == null)
             {
                 return NotFound();
             }
 
-            return View(@class);
+            return View(tBL_AboutUs);
         }
 
-        // GET: Classes/Create
+        // GET: Admin/AboutUs/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Classes/Create
+        // POST: Admin/AboutUs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MyProperty,sasa")] Class @class)
+        public async Task<IActionResult> Create([Bind("Title,Description,IsMain,Id")] TBL_AboutUs tBL_AboutUs)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@class);
+                _context.Add(tBL_AboutUs);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(@class);
+            return View(tBL_AboutUs);
         }
 
-        // GET: Classes/Edit/5
+        // GET: Admin/AboutUs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +74,22 @@ namespace Helper.Controllers
                 return NotFound();
             }
 
-            var @class = await _context.Class.FindAsync(id);
-            if (@class == null)
+            var tBL_AboutUs = await _context.TBL_AboutUs.FindAsync(id);
+            if (tBL_AboutUs == null)
             {
                 return NotFound();
             }
-            return View(@class);
+            return View(tBL_AboutUs);
         }
 
-        // POST: Classes/Edit/5
+        // POST: Admin/AboutUs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MyProperty,sasa")] Class @class)
+        public async Task<IActionResult> Edit(int id, [Bind("Title,Description,IsMain,Id")] TBL_AboutUs tBL_AboutUs)
         {
-            if (id != @class.MyProperty)
+            if (id != tBL_AboutUs.Id)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace Helper.Controllers
             {
                 try
                 {
-                    _context.Update(@class);
+                    _context.Update(tBL_AboutUs);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClassExists(@class.MyProperty))
+                    if (!TBL_AboutUsExists(tBL_AboutUs.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +114,10 @@ namespace Helper.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(@class);
+            return View(tBL_AboutUs);
         }
 
-        // GET: Classes/Delete/5
+        // GET: Admin/AboutUs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +125,30 @@ namespace Helper.Controllers
                 return NotFound();
             }
 
-            var @class = await _context.Class
-                .FirstOrDefaultAsync(m => m.MyProperty == id);
-            if (@class == null)
+            var tBL_AboutUs = await _context.TBL_AboutUs
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (tBL_AboutUs == null)
             {
                 return NotFound();
             }
 
-            return View(@class);
+            return View(tBL_AboutUs);
         }
 
-        // POST: Classes/Delete/5
+        // POST: Admin/AboutUs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var @class = await _context.Class.FindAsync(id);
-            _context.Class.Remove(@class);
+            var tBL_AboutUs = await _context.TBL_AboutUs.FindAsync(id);
+            _context.TBL_AboutUs.Remove(tBL_AboutUs);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClassExists(int id)
+        private bool TBL_AboutUsExists(int id)
         {
-            return _context.Class.Any(e => e.MyProperty == id);
+            return _context.TBL_AboutUs.Any(e => e.Id == id);
         }
     }
 }
