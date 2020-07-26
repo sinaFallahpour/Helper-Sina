@@ -1,9 +1,15 @@
+/Helper/Helper/ReactPages/node_modules 
+
 *.suo
 *.user
 _ReSharper.*
 bin
 obj
 packages
+
+
+
+
 
 
 ## Ignore Visual Studio temporary files, build results, and
