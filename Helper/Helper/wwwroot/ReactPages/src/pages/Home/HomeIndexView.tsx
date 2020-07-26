@@ -3,16 +3,13 @@ import ReactDOM from 'react-dom';
 import { observer } from 'mobx-react-lite';
 
 
-import ff from './66.png'
 
 import borderBottom from '../../../assets/hj/img/border-bottom.png';
 import intro from '../../../assets/hj/img/intro.svg';
-
 import one from '../../../assets/hj/img/1.png';
 import two from '../../../assets/hj/img/2.png';
 import tree from '../../../assets/hj/img/3.png';
 import Rectangle from '../../../assets/hj/img/Rectangle 2886.png';
-
 import service1 from '../../../assets/hj/img/service1.png';
 import service2 from '../../../assets/hj/img/service2.png';
 import service3 from '../../../assets/hj/img/service3.png';
@@ -20,10 +17,8 @@ import service4 from '../../../assets/hj/img/service4.png';
 import service5 from '../../../assets/hj/img/service5.png';
 import service6 from '../../../assets/hj/img/service6.png';
 import service7 from '../../../assets/hj/img/service7.png';
-//import workIndex from '../../../assets/hj/img/work index.svg';
 import slider1 from '../../../assets/hj/img/slider1 (1).png';
 import slider3 from '../../../assets/hj/img/slider1 (3).png';
-
 import workIndex from '../../../assets/hj/img/work index.svg';
 
 

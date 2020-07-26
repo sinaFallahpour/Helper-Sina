@@ -13,9 +13,9 @@ import service4 from '../../../assets/hj/img/service4.png';
 import service5 from '../../../assets/hj/img/service5.png';
 import service6 from '../../../assets/hj/img/service6.png';
 import service7 from '../../../assets/hj/img/service7.png';
-//import workIndex from '../../../assets/hj/img/work index.svg';
 import slider1 from '../../../assets/hj/img/slider1 (1).png';
 import slider3 from '../../../assets/hj/img/slider1 (3).png';
+import workIndex from '../../../assets/hj/img/work index.svg';
 var HoemIndexView = function () {
     return (React.createElement(Fragment, null,
         React.createElement("div", { className: "container" },
@@ -59,7 +59,7 @@ var HoemIndexView = function () {
                                 " ",
                                 React.createElement("span", { className: "text-center size-33  hj-work" }, " \u062E\u062F\u0645\u0627\u062A ")),
                             React.createElement("div", { className: "col-4 text-right pt-3" },
-                                React.createElement("img", { src: "~/hj/img/Rectangle 2886.png", className: "img-fluid" })))),
+                                React.createElement("img", { src: "/ReactPages/" + Rectangle, className: "img-fluid" })))),
                     React.createElement("div", { className: "row text-center mt-5 " },
                         React.createElement("div", { className: "col-md-3 col-6 py-3" },
                             React.createElement("img", { src: "/ReactPages/" + service1, className: "img-fluid ", alt: "Responsive image" }),
@@ -129,10 +129,10 @@ var HoemIndexView = function () {
                                 React.createElement("div", { className: "col-12 text-md-right text-center" },
                                     React.createElement("button", { type: "button", className: "btn btn-success hj-service-index-button " }, "\u0647\u0645\u06CC\u0646 \u062D\u0627\u0644\u0627 \u0634\u0631\u0648\u0639 \u06A9\u0646")))),
                         React.createElement("div", { className: "col-md-6 col-12 order-0 order-md-1 mt-md-0 mt-4" },
-                            React.createElement("img", { src: "~/hj/img/work index.svg", className: "img-fluid ", alt: "Responsive image" }))),
+                            React.createElement("img", { src: "/ReactPages/" + workIndex, className: "img-fluid ", alt: "Responsive image" }))),
                     React.createElement("div", { className: "row mt-5 pl-md-5" },
                         React.createElement("div", { className: "col-md-6 col-12 " },
-                            React.createElement("img", { src: "~/hj/img/work index.svg", className: "img-fluid ", alt: "Responsive image" })),
+                            React.createElement("img", { src: "/ReactPages/" + workIndex, className: "img-fluid ", alt: "Responsive image" })),
                         React.createElement("div", { className: "col-md-6 col-12  mt-3 pr-md-5" },
                             React.createElement("div", { className: "row  position-relative" },
                                 React.createElement("span", { className: "text-justify hj-intro-titr pb-1" }, "\u0628\u0631\u0627\u06CC \u0645\u062A\u062E\u0635\u0635\u06CC\u0646")),

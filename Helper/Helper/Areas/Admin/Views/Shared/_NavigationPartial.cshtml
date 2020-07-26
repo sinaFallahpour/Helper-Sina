@@ -115,7 +115,7 @@
                         <li><a href="accordion.html">آکاردیون</a></li>
                     </ul>
                 </li>
-                <li><a class="active" href="avatar.html">مدیریت درباره ما</a></li>
+                <li><a  class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")"  href="@Url.Action("Index","aboutUs")">مدیریت درباره ما</a></li>
             </ul>
         </div>
     </div>
