@@ -98,13 +98,13 @@ namespace Helper
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
+
             //BLL
             services.AddScoped<AboutUsManager>();
 
 
             //DAL
             services.AddScoped<AboutUsRepository>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

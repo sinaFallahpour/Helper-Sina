@@ -18,12 +18,15 @@ namespace Helper.Areas.Admin.Controllers
         private readonly AboutUsManager _aboutUsManager;
 
 
-
         public AboutUsController(ApplicationDbContext context, AboutUsManager aboutUsManager)
         {
             _context = context;
             _aboutUsManager = aboutUsManager;
         }
+
+
+        #region Index
+
 
         // GET: Admin/AboutUs
         public async Task<IActionResult> Index()
@@ -32,23 +35,11 @@ namespace Helper.Areas.Admin.Controllers
             return View(AboutUsList);
         }
 
-        // GET: Admin/AboutUs/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var tBL_AboutUs = await _context.TBL_AboutUs
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tBL_AboutUs == null)
-            {
-                return NotFound();
-            }
 
-            return View(tBL_AboutUs);
-        }
+        #endregion  Index
+
+        #region Create
 
         // GET: Admin/AboutUs/Create
         public IActionResult Create()
@@ -61,16 +52,32 @@ namespace Helper.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Description,IsMain,Id")] TBL_AboutUs tBL_AboutUs)
+        public IActionResult Create(TBL_AboutUs model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tBL_AboutUs);
-                await _context.SaveChangesAsync();
+                var result = _aboutUsManager.Add(model);
+                if (!result)
+                {
+                    ModelState.AddModelError("", "خطا دز ثبت اطلاعات");
+                    return View(model);
+                }
+                //_context.Add(tBL_AboutUs);
+                //await _context.SaveChangesAsync();
+
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(tBL_AboutUs);
+            return View(model);
         }
+
+
+        #endregion Create
+
+
+        #region  Edit
+
+
 
         // GET: Admin/AboutUs/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -80,48 +87,53 @@ namespace Helper.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tBL_AboutUs = await _context.TBL_AboutUs.FindAsync(id);
-            if (tBL_AboutUs == null)
+            var AboutUs = await _aboutUsManager.GetById(id);
+            if (AboutUs == null)
             {
                 return NotFound();
             }
-            return View(tBL_AboutUs);
+            return View(AboutUs);
         }
+
+
 
         // POST: Admin/AboutUs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title,Description,IsMain,Id")] TBL_AboutUs tBL_AboutUs)
+        public IActionResult Edit(int id, TBL_AboutUs model)
         {
-            if (id != tBL_AboutUs.Id)
+            if (id != model.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
+                var result = _aboutUsManager.Update(model);
+                if (!result)
                 {
-                    _context.Update(tBL_AboutUs);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TBL_AboutUsExists(tBL_AboutUs.Id))
+                    if (!TBL_AboutUsExists(model.Id))
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    ModelState.AddModelError("", "خطا دز ثبت اطلاعات");
+                    return View(model);
                 }
                 return RedirectToAction(nameof(Index));
+
             }
-            return View(tBL_AboutUs);
+            return View(model);
         }
+
+
+
+        #endregion  Edit
+
+
+        #region Delete
 
         // GET: Admin/AboutUs/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -131,30 +143,41 @@ namespace Helper.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tBL_AboutUs = await _context.TBL_AboutUs
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tBL_AboutUs == null)
+            var AboutUs = await _aboutUsManager.GetById(id);
+
+            if (AboutUs == null)
             {
                 return NotFound();
             }
 
-            return View(tBL_AboutUs);
+            return View(AboutUs);
         }
 
         // POST: Admin/AboutUs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var tBL_AboutUs = await _context.TBL_AboutUs.FindAsync(id);
-            _context.TBL_AboutUs.Remove(tBL_AboutUs);
-            await _context.SaveChangesAsync();
+            var result = _aboutUsManager.Delete(id);
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError("", "خطا دز ثبت اطلاعات");
+                return View(null);
+            }
+          
+
             return RedirectToAction(nameof(Index));
+
         }
+
+
+        #endregion Delete
 
         private bool TBL_AboutUsExists(int id)
         {
             return _context.TBL_AboutUs.Any(e => e.Id == id);
         }
+
+
     }
 }

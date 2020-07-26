@@ -1,0 +1,198 @@
+﻿@model Helper.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_landing.cshtml";
+}
+
+
+
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/hj/css/login.css" />
+}
+
+<div class="container w-100 mx-auto">
+    <div class="row w-100 mx-auto">
+        <div class="form-wrap">
+            <div class="tabs">
+                <h3 class="signup-tab"><a class="active" href="#signup-tab-content">ثبت نام </a></h3>
+                <h3 class="login-tab"><a href="#login-tab-content">ورود</a></h3>
+            </div><!--.tabs-->
+
+            <div class="tabs-content mt-4">
+                <div id="signup-tab-content" class="active text-center">
+                    <form asp-action="Register" asp-controller="Account2" class="signup-form" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <input type="text" asp-for="Nickname" class="input text-center  py-3 my-2" id="user_name" autocomplete="off" placeholder="نام کاربری">
+                        <br />
+                        <span asp-validation-for="Nickname" class="text-danger"> </span>
+
+
+                        <input type="email" asp-for="Email" class="input text-center  py-3 my-2" id="user_email" autocomplete="off" placeholder="ایمیل">
+                        @* <span asp-validation-for="Email" class="text-danger"> </span>*@
+                        <br />
+                        <span asp-validation-for="Email" class="text-danger"> </span>
+
+
+
+
+                        <input type="password" asp-for="Password" class="input text-center  py-3 my-2" id="user_pass" autocomplete="off" placeholder="رمز عبور">
+
+                        @*<span asp-validation-for="Password" class="text-danger"> </span>*@
+                        <br />
+                        <span asp-validation-for="Password" class="text-danger"> </span>
+
+
+
+                        <input type="password" asp-for="ConfirmPassword" class="input text-center  py-3 my-2" id="captcha" autocomplete="off" placeholder="تکرار رمز عبور">
+                        @* <span asp-validation-for="ConfirmPassword" class="text-danger"> </span>*@
+                        <br />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"> </span>
+
+
+
+
+
+
+                        <fieldset class="form-label-group form-group position-relative has-icon-left">
+                            <img alt="Captcha" class="float-right mx-1" onclick="RefreshCaptcha()" id="imgcpatcha" src="@Url.Action("Get","Captcha")" style="" />
+                            <div class="form-control-position" onclick="RefreshCaptcha()">
+                                <i class="fa fa-refresh"></i>
+                            </div>
+                        </fieldset>
+
+
+                        <input type="text" asp-for="Captcha" class="input text-center  py-3 my-2" id="user_pass" autocomplete="off" placeholder="پاسخ متن درون تصویر">
+                        <br />
+                        <span asp-validation-for="Captcha" class="text-danger"> </span>
+
+
+
+                        @*<fieldset class="form-label-group form-group position-relative has-icon-left">
+                                <input type="text" asp-for="Captcha" class="form-control" id="captcha" placeholder="پاسخ متن درون تصویر" required>
+                                <div class="form-control-position">
+                                    <i class="feather icon-user"></i>
+                                </div>
+                                <label for="captcha">پاسخ متن درون تصویر</label>
+                            </fieldset>*@
+
+
+
+
+                        <input asp-for="AcceptRules" class="checkbox" id="rules">
+                        <label for="rules" class="pr-4 my-3 mr-2 rules"><a href="#">قوانین</a> را میپذیرم   </label>
+                        <input type="submit" class="button" value="ثبت  نام ">
+
+                    </form><!--.login-form-->
+                    <div class="help-text">
+
+                        <p><a href="#">  قبلا ثبت نام کرده ام !</a></p>
+                    </div><!--.help-text-->
+                    <hr />
+                    <div class="row w-100 mx-auto text-center">
+                        <p class="w-100 text-center">می توانید از سرویس گوگل برای ثبت نام استفاده کنید </p>
+                    </div>
+                    <div class="row w-100 mx-auto text-center">
+                        <a href="#" class="mx-auto">
+                            <img src="~/hj/img/google-icon.png" class="text-center mx-auto img-fluid" /><br />
+                            <span class="text-center w-100">ثبت نام با گوگل</span>
+                        </a>
+                    </div>
+                </div><!--.signup-tab-content-->
+
+                <div id="login-tab-content">
+                    <form class="login-form text-center" asp-action="signIn" method="post">
+                        <input name="Username" type="text" class="input text-center  py-3 my-2" id="user_login" autocomplete="off" placeholder="نام کاربری ">
+                        <input name="Password" type="password" class="input text-center  py-3 my-2" id="user_pass" autocomplete="off" placeholder="رمز عبور">
+
+                        <input name="RememberMe" type="checkbox" class="checkbox" id="remember_me">
+
+                        <label  for="RememberMe" class="pr-4 my-3 "> مرا به خاطر بسپار</label>
+
+                        <input type="submit" class="button" value="ورود">
+                    </form><!--.login-form-->
+                    <div class="help-text mt-4">
+                        <p><a href="#">رمز عبور را فراموش کردید ؟  </a></p>
+                    </div><!--.help-text-->
+                </div><!--.login-tab-content-->
+            </div><!--.tabs-content-->
+        </div>
+    </div>
+</div>
+
+@*-------*@
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+        function RefreshCaptcha() {
+            var d = new Date();
+            $("#imgcpatcha").attr("src", "/Captcha/Get?" + d.getTime());
+        }
+
+
+
+
+        //$('form').submit(function (e) {
+        //    $('#form_alert').addClass('hidden');
+        //    e.preventDefault();
+        //    var form = $(this);
+        //    var url = form.attr('action');
+        //    $.ajax({
+        //        type: "POST",
+        //        url: url,
+        //        data: form.serialize(),
+        //        success: function (data) {
+        //            if (data.status == 0) {
+        //                $('#form_alert').addClass('alert-danger');
+        //                $('#form_alert').removeClass('hidden');
+        //                $('#form_alert p').html(data.error);
+        //            }
+        //            else if (data.status == 1) {
+        //                $('#form_alert').addClass('alert-success');
+        //                $('#form_alert').removeClass('hidden');
+        //                $('#form_alert p').html("ثبت نام با موفقیت انجام شد");
+        //                setTimeout(function () {
+        //                    window.location.replace(data.returnUrl);
+        //                }, 500);
+        //            }
+        //            else {
+        //                setTimeout(function () {
+        //                    window.location.reload();
+        //                }, 500);
+        //            }
+        //        }
+        //    });
+        //});
+
+
+    </script>
+
+
+
+
+
+
+
+    <script>
+        jQuery(document).ready(function ($) {
+            tab = $('.tabs h3 a');
+
+            tab.on('click', function (event) {
+                event.preventDefault();
+                tab.removeClass('active');
+                $(this).addClass('active');
+
+                tab_content = $(this).attr('href');
+                $('div[id$="tab-content"]').removeClass('active');
+                $(tab_content).addClass('active');
+            });
+        });
+    </script>
+}

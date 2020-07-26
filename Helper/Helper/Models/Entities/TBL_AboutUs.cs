@@ -10,14 +10,14 @@ namespace Helper.Models.Entities
     {
         [Required(ErrorMessage = "این فیلد الزامیست")]
         [MinLength(2, ErrorMessage = "حداقل 20 کاراکتر ")]
+        [Display(Name = " عنوان ")]
         public string Title { get; set; }
-
 
         [Required(ErrorMessage = "این فیلد الزامیست")]
         [MinLength(20, ErrorMessage = "حداقل 20 کاراکتر ")]
         [Display(Name = "متن درباره ما")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-
 
         [Required(ErrorMessage = "این فیلد الزامیست")]
         [Display(Name = "آیا متن اصلیست")]

@@ -19,8 +19,8 @@ namespace Helper.ViewModels
 
         public bool RememberMe { get; set; }
 
-        [Required]
-        [RegularExpression("([1-9][0-9]*)")]
-        public string Captcha { get; set; }
+        //[Required]
+        //[RegularExpression("([1-9][0-9]*)")]
+        //public string Captcha { get; set; }
     }
 }

@@ -38,5 +38,7 @@ namespace Helper.Models
         [StringLength(maximumLength: 200)]
         public string AvatarUrl { get; set; }
         public string Address { get; set; }
+
+        public bool AcceptRules { get; set; }
     }
 }

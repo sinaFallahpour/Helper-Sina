@@ -7,18 +7,16 @@ using Helper.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using DNTPersianUtils.Core;
 
 namespace Helper.Controllers
 {
-    public class AccountController : Controller
+    public class Account2Controller : Controller
     {
-
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public Account2Controller(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _roleManager = roleManager;
@@ -48,6 +46,7 @@ namespace Helper.Controllers
             }
 
             ViewBag.ReturnUrl = returnUrl;
+            //return new JsonResult(new { status="1", data = "", message="" });
             return View("index");
         }
 
@@ -114,39 +113,55 @@ namespace Helper.Controllers
                 if (HttpContext.Session.GetInt32(PublicHelper.SessionCaptcha).HasValue == false
                     || HttpContext.Session.GetInt32(PublicHelper.SessionCaptcha).ToString() != input.Captcha)
                 {
-                    return Json(new { Status = 0, Message = "کپچا را به درستی وارد کنید" });
+                    //return Json(new { Status = 0, Message = "کپچا را به درستی وارد کنید" });
+                    ModelState.AddModelError("", "کپچا را به درستی وارد کنید");
+                    return View(input);
                 }
-                var result = await _userManager.CreateAsync(new ApplicationUser
-                {
-                    AccessFailedCount = 0,
-                    AvatarUrl = "",
-                    Birthdate = "",
-                    Email = "",
-                    EmailConfirmed = false,
-                    FirstName = "",
-                    LastName = "",
-                    Gender = "",
-                    Nickname = input.Nickname,
-                    NormalizedUserName = input.Nickname.Normalize(),
-                    RegistrationDateTime = DateTime.Now,
-                    UserName = input.Email,
-                    Phone = "",
-                    PhoneNumber = ""
-                }, input.Password);
+              
+                   var  result = await _userManager.CreateAsync(new ApplicationUser
+                    {
+                        AccessFailedCount = 0,
+                        AvatarUrl = "",
+                        Birthdate = "",
+                        Email = input.Email,
+                        EmailConfirmed = false,
+                        FirstName = "",
+                        LastName = "",
+                        Gender = "",
+                        Nickname = input.Nickname,
+                        NormalizedUserName = input.Nickname.Normalize(),
+                        RegistrationDateTime = DateTime.Now,
+                        UserName = input.Email,
+                        Phone = "",
+                        PhoneNumber = "",
+                        AcceptRules = input.AcceptRules
+                    }, input.Password);
+                
+
+
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(input.Email), "user");
                     var signIn = await _signInManager.PasswordSignInAsync(input.Email, input.Password, isPersistent: false, lockoutOnFailure: false);
                     if (signIn.Succeeded)
-                        return new JsonResult(new { Status = 1, input.ReturnUrl });
-
-                    return new JsonResult(new { Status = 1, input.ReturnUrl });
+                    {
+                        RedirectToAction("Home", "Index");
+                        //return new JsonResult(new { Status = 1, input.ReturnUrl });
+                    }
+                    //return new JsonResult(new { Status = 1, input.ReturnUrl });
                 }
                 else
                 {
                     if (result.Errors.Where(i => i.Code == "DuplicateUserName").Any())
-                        return new JsonResult(new { Status = 0, Message = string.Format("نام کاربری {0} از قبل ثبت شده است", input.Email) });
-                    return new JsonResult(new { Status = 0, Message = result.Errors.First().Code });
+                    {
+                        ModelState.AddModelError("", string.Format("نام کاربری {0} از قبل ثبت شده است", input.Email));
+                        return View(input);
+                    }
+
+                    ModelState.AddModelError("", result.Errors.First().Description);
+                    return View(input);
+                    //return new JsonResult(new { Status = 0, Message = string.Format("نام کاربری {0} از قبل ثبت شده است", input.Email) });
+                    //return new JsonResult(new { Status = 0, Message = result.Errors.First().Code });
                 }
             }
             var errors = new List<string>();
@@ -155,9 +170,15 @@ namespace Helper.Controllers
                 foreach (var err in item.Errors)
                 {
                     errors.Add(err.ErrorMessage);
+                    ModelState.AddModelError("", err.ErrorMessage);
+
+
                 }
             }
-            return new JsonResult(new { Status = 0, Message = errors.First() });
+            //ModelState.AddModelError("", errors.First());
+
+            return View(input);
+            //return new JsonResult(new { Status = 0, Message = errors.First() });
         }
 
         [HttpGet]
@@ -216,6 +237,21 @@ namespace Helper.Controllers
         {
             return View();
         }
+
+
+
+        ///// <summary>
+        ///// adding Identity error to modestate
+        ///// </summary>
+        ///// <param name="result"></param>
+        //private void AddErrors(IdentityResult result)
+        //{
+        //    foreach (var error in result.Errors)
+        //    {
+        //        ModelState.AddModelError("", error);
+        //    }
+        //}
+
 
     }
 }
