@@ -6,10 +6,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Helper.Models.Entities
+namespace Helper.Areas.Admin.Models.ViewModels.Slider
 {
-    public class TBL_Slide : BaseEntity<int>
+    public class EditSliderViewModel
     {
+
+        public int Id { get; set; }
+
+
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "عنوان")]
         public string Title { get; set; }
@@ -20,9 +24,7 @@ namespace Helper.Models.Entities
 
         public string PhotoAddress { get; set; }
 
-        [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "عکس")]
-        [NotMapped]
         public IFormFile Photo { get; set; }
     }
 }

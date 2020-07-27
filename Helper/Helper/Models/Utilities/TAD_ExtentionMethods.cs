@@ -49,7 +49,7 @@ namespace Helper.Models.Utilities
         public static bool IsImage(this IFormFile file)
         {
             var extention = Path.GetExtension(file.FileName).ToLower();
-            return (extention == ".svg" || extention == ".jpeg" || extention == ".jpg" || extention == ".png");
+            return ( extention == ".jpeg" || extention == ".jpg" || extention == ".png");
         }
 
 

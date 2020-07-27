@@ -6,5 +6,20 @@
 ._dataTableImage {
     height: 60px;
     width: 60px;
-    
 }
+
+
+._border {
+    border: 2px solid black;
+}
+
+._editimageContainer {
+    width: 400px;
+    max-height:200px;
+}
+
+    ._editimageContainer > img {
+        display:block;
+        height: 100%;
+        width: 100%;
+    }

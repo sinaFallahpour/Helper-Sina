@@ -10,6 +10,7 @@ using Helper.Models.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Helper.Models.Utilities;
 using System.IO;
+using Helper.Areas.Admin.Models.ViewModels.Slider;
 
 namespace Helper.Areas.Admin.Controllers
 {
@@ -74,7 +75,7 @@ namespace Helper.Areas.Admin.Controllers
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
 
-                    model.PhotoAddress = "/ReactPages/assets/uploads/slider/"+ uniqueFileName;
+                    model.PhotoAddress = "/ReactPages/assets/uploads/slider/" + uniqueFileName;
                 }
                 try
                 {
@@ -86,19 +87,14 @@ namespace Helper.Areas.Admin.Controllers
                     }
                     ModelState.AddModelError("", "خطا در ثبت");
                     return View(model);
-            }
+                }
                 catch
-            {
-                ModelState.AddModelError("", "خطا در ثبت");
-                return View(model);
+                {
+                    ModelState.AddModelError("", "خطا در ثبت");
+                    return View(model);
+                }
+
             }
-
-
-
-
-
-
-        }
             return View(model);
         }
 
@@ -117,49 +113,92 @@ namespace Helper.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
             var tBL_Slide = await _context.TBL_Sliders.FindAsync(id);
+            var model = new EditSliderViewModel()
+            {
+                Id = tBL_Slide.Id,
+                Description = tBL_Slide.Description,
+                PhotoAddress = tBL_Slide.PhotoAddress,
+                Title = tBL_Slide.Title
+            };
             if (tBL_Slide == null)
             {
                 return NotFound();
             }
-            return View(tBL_Slide);
+            return View(model);
         }
 
-        // POST: Admin/Slides/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title,Description,PhotoAddress,Id")] TBL_Slide tBL_Slide)
+        public IActionResult Edit(int id, EditSliderViewModel model)
         {
-            if (id != tBL_Slide.Id)
+            if (id != model.Id)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(tBL_Slide);
-                    await _context.SaveChangesAsync();
+                    var slideFromDb = _context.TBL_Sliders.SingleOrDefault(c => c.Id == model.Id);
+                    slideFromDb.Description = model.Description;
+                    slideFromDb.Title = model.Title;
+                    if (model.Photo != null)
+                    {
+                        string uniqueFileName = null;
+                        if (!model.Photo.IsImage())
+                        {
+                            ModelState.AddModelError("", "به فرمت عکس وارد کنید");
+                            return View(model);
+                        }
+                        if (model.Photo.Length > 5000000)
+                        {
+                            ModelState.AddModelError("", "حجم فایل زیاد است");
+                            return View(model);
+                        }
+                        if (model.Photo != null && model.Photo.Length > 0 && model.Photo.IsImage())
+                        {
+                            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "ReactPages/assets/uploads/slider");
+                            uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
+                            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                            model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                            slideFromDb.PhotoAddress = "/ReactPages/assets/uploads/slider/" + uniqueFileName;
+                        }
+                    }
+
+                    var result = _context.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TBL_SlideExists(tBL_Slide.Id))
+                    if (!TBL_SlideExists(model.Id))
                     {
                         return NotFound();
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("", "خطا در ثبت");
+                        return View(model);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(tBL_Slide);
+            return View(model);
         }
+
+
+
+
+
+
+
+
+
+
 
         // GET: Admin/Slides/Delete/5
         public async Task<IActionResult> Delete(int? id)

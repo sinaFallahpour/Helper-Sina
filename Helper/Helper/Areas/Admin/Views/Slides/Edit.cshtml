@@ -1,44 +1,44 @@
-﻿@model Helper.Models.Entities.TBL_Slide
+﻿@model Helper.Areas.Admin.Models.ViewModels.Slider.EditSliderViewModel
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Edit</h1>
+@*<h1>Edit</h1>
 
-<h4>TBL_Slide</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhotoAddress" class="control-label"></label>
-                <input asp-for="PhotoAddress" class="form-control" />
-                <span asp-validation-for="PhotoAddress" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>TBL_Slide</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhotoAddress" class="control-label"></label>
+                    <input asp-for="PhotoAddress" class="form-control" />
+                    <span asp-validation-for="PhotoAddress" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
 
 
 
@@ -49,18 +49,8 @@
 
 
 @section Style{
-
-
+    <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -69,9 +59,18 @@
 <div class="card">
     <div class="card-body">
         <h6 class="card-title"> فرم درباره ما</h6>
-        <form asp-action="Edit" class="needs-validation" novalidate="">
+        <form asp-action="Edit" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-row">
+                <div class="  _editimageContainer">
+                    <img  src="@Model.PhotoAddress" class="d-block " id="UploadedImage" />
+                </div>
+            </div>
+
+
+
             <input type="hidden" asp-for="Id" />
 
             <!-- input -->
@@ -96,20 +95,26 @@
                 </div>
             </div>
 
+            <input name="Photo" type="file" class="custom-file-input" onchange="readURL(this);" id="customFile">
             <!-- fileUpload checkBox && selectOption -->
             <div class="form-row">
-                <div class="col-md-3 mb-3">
-
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="IsMain" /> @Html.DisplayNameFor(model => model.IsMain)
-                        </label>
+                <div class="col-md-6 mb-3">
+                    <div class="custom-file">
+                        @*<input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">*@
+                        <label class="form-contro custom-file-label" for="customFile">انتخاب فایل </label>
                     </div>
+                    <span asp-validation-for="Photo" class="text-danger"> </span>
+
                 </div>
             </div>
 
+
             <button type="submit" class="btn btn-primary">ارسال</button>
             <a asp-action="Index" class="btn btn-success">بازگشت ب لیست</a>
+
+
+
+
 
         </form>
 
@@ -151,6 +156,25 @@
         }, false);
 
 
+
+
+
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#UploadedImage')
+                        .attr('src', e.target.result)
+                        .width(400)
+                        //.height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
     </script>
 }
