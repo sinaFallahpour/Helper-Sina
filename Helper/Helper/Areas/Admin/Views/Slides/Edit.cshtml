@@ -1,0 +1,156 @@
+﻿@model Helper.Models.Entities.TBL_Slide
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>TBL_Slide</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhotoAddress" class="control-label"></label>
+                <input asp-for="PhotoAddress" class="form-control" />
+                <span asp-validation-for="PhotoAddress" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+
+
+
+
+
+@section Style{
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title"> فرم درباره ما</h6>
+        <form asp-action="Edit" class="needs-validation" novalidate="">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <!-- input -->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Title" for="validationCustom03"></label>
+                    <input asp-for="Title" class="form-control" id="validationCustom03"
+                           placeholder="عنوان">
+                    <span asp-validation-for="Title" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Description" for="validationCustom03"></label>
+                    <textarea asp-for="Description" type="" class="form-control" id="validationCustom03"
+                              placeholder="متن درباره ما">
+                    </textarea>
+                    <span asp-validation-for="Description" class="text-danger"> </span>
+
+                </div>
+            </div>
+
+            <!-- fileUpload checkBox && selectOption -->
+            <div class="form-row">
+                <div class="col-md-3 mb-3">
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsMain" /> @Html.DisplayNameFor(model => model.IsMain)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">ارسال</button>
+            <a asp-action="Index" class="btn btn-success">بازگشت ب لیست</a>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+
+        //  اعتبارسنجی فرم
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+
+
+
+    </script>
+}

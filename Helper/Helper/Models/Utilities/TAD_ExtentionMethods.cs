@@ -1,5 +1,6 @@
 ﻿//using Antlr.Runtime.Misc;
 using Helper.Models.Utilities;
+using Microsoft.AspNetCore.Http;
 //using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,22 @@ namespace Helper.Models.Utilities
                         .Replace("\"", "")
                         .Replace("\'", "");
         }
+
+
+
+
+
+        /// <summary>
+        /// آیا فایل عکس است؟
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static bool IsImage(this IFormFile file)
+        {
+            var extention = Path.GetExtension(file.FileName).ToLower();
+            return (extention == ".svg" || extention == ".jpeg" || extention == ".jpg" || extention == ".png");
+        }
+
 
 
 

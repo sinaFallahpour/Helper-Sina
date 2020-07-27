@@ -129,30 +129,6 @@ namespace Helper.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Helper.Models.Entities.Setting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Key")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Settings");
-                });
-
             modelBuilder.Entity("Helper.Models.Entities.TBL_AboutUs", b =>
                 {
                     b.Property<int>("Id")
@@ -174,6 +150,79 @@ namespace Helper.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TBL_AboutUs");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_Setting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TBL_Settings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2020, 7, 27, 9, 29, 55, 642, DateTimeKind.Local).AddTicks(9196),
+                            Key = "AboutUs",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Value = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2020, 7, 27, 9, 29, 55, 646, DateTimeKind.Local).AddTicks(3374),
+                            Key = "Contactus",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Value = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2020, 7, 27, 9, 29, 55, 646, DateTimeKind.Local).AddTicks(3428),
+                            Key = "Slider",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Value = ""
+                        });
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_Slide", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotoAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TBL_Sliders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

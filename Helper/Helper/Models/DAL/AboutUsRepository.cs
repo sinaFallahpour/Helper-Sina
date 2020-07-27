@@ -75,7 +75,7 @@ namespace Helper.Models.DAL
                     return true;
                 return false;
             }
-            catch (Exception ex)
+            catch 
             {
                 return false;
             }
@@ -118,7 +118,7 @@ namespace Helper.Models.DAL
                     return true;
                 return false;
             }
-            catch (Exception ex)
+            catch 
             {
                 return false;
             }
@@ -150,7 +150,7 @@ namespace Helper.Models.DAL
 
                 return new DeleteAboutUsViewModel(aboutUs, false);
             }
-            catch (Exception ex)
+            catch 
             {
                 return new DeleteAboutUsViewModel(aboutUs, false);
             }

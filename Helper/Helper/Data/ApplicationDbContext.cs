@@ -8,7 +8,7 @@ using Helper.Models.Entities;
 using Helper.Areas.Admin.Models.ViewModels;
 using Helper.Models;
 using Helper.ViewModels;
-
+using Helper.Extention;
 namespace Helper.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -19,17 +19,19 @@ namespace Helper.Data
         }
 
 
-        //public DbSet<LoginAdminViewModel> LoginAdminViewModel { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            //adding database vaku for Setting
+            builder.Seed();
+        }
+
         public DbSet<TBL_AboutUs> TBL_AboutUs { get; set; }
-        public DbSet<Setting> Settings { get; set; }
+        public DbSet<TBL_Setting> TBL_Settings { get; set; }
 
+        public DbSet<TBL_Slide> TBL_Sliders { get; set; }
 
-        //public DbSet<LoginAdminViewModel> LoginAdminViewModel { get; set; }
-        //public DbSet<Helper.ViewModels.RegisterViewModel> RegisterViewModel { get; set; }
-
-
-        //public DbSet<LoginAdminViewModel> LoginAdminViewModel { get; set; }
-        //public DbSet<Helper.ViewModels.RegisterViewModel> RegisterViewModel { get; set; }
 
     }
 }
