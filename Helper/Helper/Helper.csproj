@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-Helper-C665BD93-1347-459D-9780-7209EBEBAD39</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Areas\Admin\Data\**" />
+    <Content Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <None Remove="Areas\Admin\Data\**" />
+  </ItemGroup>
+
 
 
   <ItemGroup>
@@ -24,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Models\Enums\" />
     <Folder Include="Models\ViewModels\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\clipboard\dialogs\" />

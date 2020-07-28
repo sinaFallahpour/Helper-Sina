@@ -24,10 +24,10 @@ namespace Helper.Areas.Admin.Models.ViewModels.Sttings
         [AllowHtml]
         public string ContactUs { get; set; }
 
-        public List<string> ImagesAddresses { get; set; }
+        //public List<string> ImagesAddresses { get; set; }
 
-        [NotMapped]
-        public IFormFile Photo { get; set; }
+        //[NotMapped]
+        //public IFormFile Photo { get; set; }
 
 
     }

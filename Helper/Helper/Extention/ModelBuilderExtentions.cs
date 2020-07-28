@@ -26,12 +26,6 @@ namespace Helper.Extention
                        Key = "Contactus",
                        CreatedAt = DateTime.Now,
                        Value = ""
-                   }, new TBL_Setting()
-                   {
-                       Id = 3,
-                       Key = "Slider",
-                       CreatedAt = DateTime.Now,
-                       Value = ""
                    }
                  );
         }

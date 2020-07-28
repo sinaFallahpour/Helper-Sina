@@ -101,11 +101,6 @@ namespace Helper.Areas.Admin.Controllers
 
 
 
-
-
-
-
-
         // GET: Admin/Slides/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -114,6 +109,10 @@ namespace Helper.Areas.Admin.Controllers
                 return NotFound();
             }
             var tBL_Slide = await _context.TBL_Sliders.FindAsync(id);
+            if (tBL_Slide == null)
+            {
+                return NotFound();
+            }
             var model = new EditSliderViewModel()
             {
                 Id = tBL_Slide.Id,
@@ -121,10 +120,7 @@ namespace Helper.Areas.Admin.Controllers
                 PhotoAddress = tBL_Slide.PhotoAddress,
                 Title = tBL_Slide.Title
             };
-            if (tBL_Slide == null)
-            {
-                return NotFound();
-            }
+           
             return View(model);
         }
 
@@ -165,6 +161,18 @@ namespace Helper.Areas.Admin.Controllers
                             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                             model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
 
+
+
+                            //Delete LastImage Image
+                            var LastImagePath =  slideFromDb.PhotoAddress.Substring(1);
+                            LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                            if (!string.IsNullOrEmpty(slideFromDb.PhotoAddress) && System.IO.File.Exists(LastImagePath))
+                            {
+                                System.IO.File.Delete(LastImagePath);
+                            }
+
+
+                            //update Newe Pic Address To database
                             slideFromDb.PhotoAddress = "/ReactPages/assets/uploads/slider/" + uniqueFileName;
                         }
                     }
@@ -195,11 +203,6 @@ namespace Helper.Areas.Admin.Controllers
 
 
 
-
-
-
-
-
         // GET: Admin/Slides/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -223,15 +226,61 @@ namespace Helper.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tBL_Slide = await _context.TBL_Sliders.FindAsync(id);
-            _context.TBL_Sliders.Remove(tBL_Slide);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var slideFromDb = await _context.TBL_Sliders.FindAsync(id);
+            if (slideFromDb != null)
+            {
+                //Delete LastImage Image
+                var LastImagePath = slideFromDb.PhotoAddress.Substring(1);
+                LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                if (!string.IsNullOrEmpty(slideFromDb.PhotoAddress) && System.IO.File.Exists(LastImagePath))
+                {
+                    System.IO.File.Delete(LastImagePath);
+                }
+
+                try
+                {
+                    _context.TBL_Sliders.Remove(slideFromDb);
+                    var result = _context.SaveChanges();
+                    if (result > 0)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    ModelState.AddModelError("", "خطا در ثبت");
+                    return View(slideFromDb);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "خطا در ثبت");
+                    return View(slideFromDb);
+                }
+
+
+
+
+                //_context.TBL_Sliders.Remove(slideFromDb);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
+            }
+            return NotFound();
         }
 
         private bool TBL_SlideExists(int id)
         {
             return _context.TBL_Sliders.Any(e => e.Id == id);
+        }
+
+
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+                //db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

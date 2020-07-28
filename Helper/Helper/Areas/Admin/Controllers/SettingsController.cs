@@ -40,13 +40,13 @@ namespace Helper.Areas.Admin.Controllers
                 ContactUs = context.Where(c => c.Key == "Contactus").SingleOrDefault().Value,
                 Aboutus = context.Where(c => c.Key == "AboutUs").SingleOrDefault().Value,
             };
-            var slidersImagesAddress = context.Where(c => c.Key == "Slider").SingleOrDefault().Value.Split("###");
+            //var slidersImagesAddress = context.Where(c => c.Key == "Slider").SingleOrDefault().Value.Split("###");
 
-            model.ImagesAddresses = new List<string>();
-            foreach (var item in slidersImagesAddress)
-            {
-                model.ImagesAddresses.Add(item);
-            }
+            //model.ImagesAddresses = new List<string>();
+            //foreach (var item in slidersImagesAddress)
+            //{
+            //    model.ImagesAddresses.Add(item);
+            //}
 
             return View(model);
         }
@@ -70,28 +70,28 @@ namespace Helper.Areas.Admin.Controllers
                 try
                 {
 
-                    string uniqueFileName = null;
-                    if (!model.Photo.IsImage())
-                    {
-                        ModelState.AddModelError("", "به فرمت عکس وارد کنید");
-                        return View(model);
-                    }
-                    if (model.Photo.Length > 5000000)
-                    {
-                        ModelState.AddModelError("", "حجم فایل زیاد است");
-                        return View(model);
-                    }
-                    if (model.Photo != null && model.Photo.Length > 0 && model.Photo.IsImage())
-                    {
-                        var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "ReactPages/assets/uploads/slider");
-                        uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    //string uniqueFileName = null;
+                    //if (!model.Photo.IsImage())
+                    //{
+                    //    ModelState.AddModelError("", "به فرمت عکس وارد کنید");
+                    //    return View(model);
+                    //}
+                    //if (model.Photo.Length > 5000000)
+                    //{
+                    //    ModelState.AddModelError("", "حجم فایل زیاد است");
+                    //    return View(model);
+                    //}
+                    //if (model.Photo != null && model.Photo.Length > 0 && model.Photo.IsImage())
+                    //{
+                    //    var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "ReactPages/assets/uploads/slider");
+                    //    uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
+                    //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    //    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
 
-                        //update database
-                        var sliderImageAddress = _context.TBL_Settings.SingleOrDefault(c => c.Key == "Slider");
-                        sliderImageAddress.Value = uniqueFileName;
-                    }
+                    //    //update database
+                    //    var sliderImageAddress = _context.TBL_Settings.SingleOrDefault(c => c.Key == "Slider");
+                    //    sliderImageAddress.Value = uniqueFileName;
+                    //}
 
 
                     var contactUs = _context.TBL_Settings.SingleOrDefault(c => c.Key == "Contactus");
@@ -204,5 +204,24 @@ namespace Helper.Areas.Admin.Controllers
         {
             return _context.TBL_Settings.Any(e => e.Id == id);
         }
+
+
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+                //db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+
+
+
+
     }
 }

@@ -179,5 +179,19 @@ namespace Helper.Areas.Admin.Controllers
         }
 
 
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+                //db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+
+
     }
 }
