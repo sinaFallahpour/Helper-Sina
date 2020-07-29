@@ -109,17 +109,38 @@
             <ul>
                 <li class="navigation-divider"> </li>
 
-                <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","aboutUs")">مدیریت درباره ما</a></li>
-                <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","Slides")">مدیریت   اسلاید</a></li>
-                <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>
+                <li><a class='@Html.IsSelected("Aboutus", "Index","admin")' href="@Url.Action("Index","aboutUs")">مدیریت درباره ما</a></li>
+                <li><a class='@Html.IsSelected("Slides", "Index","admin")' href="@Url.Action("Index","Slides")">مدیریت   اسلاید</a></li>
+                <li><a class='@Html.IsSelected("Settings", "Index","admin")' href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>
+
+
+
+                @* <li><a  class='@Html.IsSelected("Home", "settings","admin")' href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>*@
+
+
+
+
                 <li>
                     <a href="#">مدیریت ادمین</a>
                     <ul>
-                        <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
-                        <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Profile","admins")">  پروفایل</a></li>
+                        <li><a  class='@Html.IsSelected("Admins", "Index","admin") _menuNav' href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
+                        <li><a class='@Html.IsSelected("Admins", "Profile","admin")' href="@Url.Action("Profile","admins")">  پروفایل</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </div>
+
+
+
+@*@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+     var sd  =  $("li._menuNav").parent("ul._menuNav")
+
+        console.log(sd)
+
+
+    </script>
+}*@
