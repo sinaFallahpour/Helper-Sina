@@ -107,17 +107,18 @@
         </div>
         <div class="open" id="elements">
             <ul>
-                <li class="navigation-divider">عناصر رابط کاربری</li>
+                <li class="navigation-divider"> </li>
+
+                <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","aboutUs")">مدیریت درباره ما</a></li>
+                <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","Slides")">مدیریت   اسلاید</a></li>
+                <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>
                 <li>
-                    <a href="#">پایه</a>
+                    <a href="#">مدیریت ادمین</a>
                     <ul>
-                        <li><a class="active" href="alerts.html">پیام</a></li>
-                        <li><a href="accordion.html">آکاردیون</a></li>
+                        <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
+                        <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Profile","admins")">  پروفایل</a></li>
                     </ul>
                 </li>
-                <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","aboutUs")">مدیریت درباره ما</a></li>
-                <li><a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"?"active":"")" href="@Url.Action("Index","aboutUs")">مدیریت درباره ما</a></li>
-
             </ul>
         </div>
     </div>

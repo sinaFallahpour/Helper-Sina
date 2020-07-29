@@ -11,10 +11,12 @@ using Microsoft.AspNetCore.Hosting;
 using Helper.Models.Utilities;
 using System.IO;
 using Helper.Areas.Admin.Models.ViewModels.Slider;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Helper.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =Static.ADMINROLE)]
     public class SlidesController : Controller
     {
         private readonly ApplicationDbContext _context;

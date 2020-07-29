@@ -33,9 +33,8 @@ namespace Helper.Data
 
         public DbSet<TBL_Slide> TBL_Sliders { get; set; }
 
-        public DbSet<Helper.Areas.Admin.Models.ViewModels.User.AdminLoginViewModel> AdminLoginViewModel { get; set; }
 
-        
+
 
 
     }

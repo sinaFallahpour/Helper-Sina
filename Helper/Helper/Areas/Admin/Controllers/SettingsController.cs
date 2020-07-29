@@ -13,11 +13,13 @@ using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Helper.Models.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Helper.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [RequestSizeLimit(long.MaxValue)]
+    //[RequestSizeLimit(long.MaxValue)]
+    [Authorize(Roles = Static.ADMINROLE)]
     public class SettingsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -70,30 +72,6 @@ namespace Helper.Areas.Admin.Controllers
                 try
                 {
 
-                    //string uniqueFileName = null;
-                    //if (!model.Photo.IsImage())
-                    //{
-                    //    ModelState.AddModelError("", "به فرمت عکس وارد کنید");
-                    //    return View(model);
-                    //}
-                    //if (model.Photo.Length > 5000000)
-                    //{
-                    //    ModelState.AddModelError("", "حجم فایل زیاد است");
-                    //    return View(model);
-                    //}
-                    //if (model.Photo != null && model.Photo.Length > 0 && model.Photo.IsImage())
-                    //{
-                    //    var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "ReactPages/assets/uploads/slider");
-                    //    uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
-                    //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    //    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
-
-                    //    //update database
-                    //    var sliderImageAddress = _context.TBL_Settings.SingleOrDefault(c => c.Key == "Slider");
-                    //    sliderImageAddress.Value = uniqueFileName;
-                    //}
-
-
                     var contactUs = _context.TBL_Settings.SingleOrDefault(c => c.Key == "Contactus");
                     if (contactUs != null)
                     {
@@ -107,9 +85,6 @@ namespace Helper.Areas.Admin.Controllers
                         aboutUs.Value = model.Aboutus;
                         aboutUs.UpdatedAt = DateTime.Now;
                     }
-
-
-
 
                     var result = _context.SaveChanges();
                     if (result > 0)
@@ -128,84 +103,6 @@ namespace Helper.Areas.Admin.Controllers
             }
             return View(model);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(SettingsViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(model);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(tBL_Setting);
-        //}
-
-        // GET: Admin/Settings/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var tBL_Setting = await _context.TBL_Settings.FindAsync(id);
-        //    if (tBL_Setting == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(tBL_Setting);
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private bool TBL_SettingExists(int id)
-        {
-            return _context.TBL_Settings.Any(e => e.Id == id);
-        }
-
-
 
 
 

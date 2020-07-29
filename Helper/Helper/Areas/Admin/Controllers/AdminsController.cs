@@ -39,19 +39,22 @@ namespace Helper.Areas.Admin.Controllers
         /// GetA All Admins
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = Static.ADMINROLE)]
         public IActionResult Index()
         {
 
-            var Admins = (from user in _context.Users
-                          from userRole in user.UserRole
-                          join role in _context.Roles.Where(c => c.Name == Static.ADMINROLE) on userRole.RoleId equals role.Id
-                          select new AdminListViewModel()
-                          {
-                              FullName = user.FirstName + " " + user.LastName,
-                              Gender = user.Gender,
-                              Nickname = user.Nickname,
-                              PhotoAddress = user.PhotoAddress
-                          }).ToList();
+            var AdminRoleId = _context.Roles.Where(c => c.Name == Static.ADMINROLE).FirstOrDefault().Id;
+            var UserRoles = _context.UserRoles.Where(c => c.RoleId == AdminRoleId).Select(c => c.UserId).ToList();
+
+            var Admins = _context.Users.Where(o => UserRoles.Contains(o.Id))
+                .Select(c => new AdminListViewModel
+                {
+                    Id = c.Id,
+                    FullName = c.FirstName + " " + c.LastName,
+                    Gender = c.Gender,
+                    Nickname = c.Nickname,
+                    PhotoAddress = c.PhotoAddress
+                }).ToList();
 
             return View(Admins);
         }
@@ -63,8 +66,6 @@ namespace Helper.Areas.Admin.Controllers
         public IActionResult Create()
         {
             return View();
-
-
         }
 
 
@@ -129,7 +130,6 @@ namespace Helper.Areas.Admin.Controllers
 
 
         public IActionResult Login(string returnUrl)
-
         {
             returnUrl = string.IsNullOrEmpty(returnUrl) ? "/admin/admins/Profile" : returnUrl;
 
@@ -201,6 +201,44 @@ namespace Helper.Areas.Admin.Controllers
             }
             return View(model);
         }
+
+
+
+
+        //LogOut
+        [HttpGet]
+        public async Task<IActionResult> Logout(string returnUrl = null)
+        {
+            await _signInManager.SignOutAsync();
+            returnUrl = returnUrl ?? Url.Content("/admin/admins/login");
+            return LocalRedirect(returnUrl);
+        }
+
+
+       //فک کنم این  برا اکس هست
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Json((Status: 1, Message: "Logged Out"));
+        }
+
+
+
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+                //db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+
 
 
     }

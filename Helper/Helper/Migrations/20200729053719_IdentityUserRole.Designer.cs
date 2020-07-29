@@ -4,14 +4,16 @@ using Helper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200729053719_IdentityUserRole")]
+    partial class IdentityUserRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,7 +189,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 7, 28, 22, 49, 5, 951, DateTimeKind.Local).AddTicks(5512),
+                            CreatedAt = new DateTime(2020, 7, 28, 22, 37, 18, 574, DateTimeKind.Local).AddTicks(5236),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -195,7 +197,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 7, 28, 22, 49, 5, 955, DateTimeKind.Local).AddTicks(2948),
+                            CreatedAt = new DateTime(2020, 7, 28, 22, 37, 18, 578, DateTimeKind.Local).AddTicks(3789),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -254,15 +256,15 @@ namespace Helper.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ee3408dc-6808-4882-9a22-ea752ed9de04",
-                            ConcurrencyStamp = "aa68f18b-344f-4aa6-9d40-70f74da812c0",
+                            Id = "91a22380-39c9-470d-bd5f-782555a79051",
+                            ConcurrencyStamp = "4060bdb0-5774-44db-9702-ce4e2fcb63eb",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "7fe8f0b2-732b-4e99-a2a4-106e221b3c14",
-                            ConcurrencyStamp = "b3326663-1e7c-482e-98b0-147194eeb7c6",
+                            Id = "5dceb720-14c9-4d61-bb1e-d7826358bec3",
+                            ConcurrencyStamp = "32a43b2a-b711-4e7f-9e58-bdef191fe362",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -349,6 +351,10 @@ namespace Helper.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("ApplicationUserId");
@@ -356,6 +362,8 @@ namespace Helper.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -375,6 +383,23 @@ namespace Helper.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Helper.Models.ApplicationUserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
+
+                    b.Property<string>("RolesId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasIndex("RolesId");
+
+                    b.HasIndex("UsersId");
+
+                    b.HasDiscriminator().HasValue("ApplicationUserRole");
                 });
 
             modelBuilder.Entity("Helper.Models.ApplicationUser", b =>
@@ -437,6 +462,17 @@ namespace Helper.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Helper.Models.ApplicationUserRole", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Roles")
+                        .WithMany()
+                        .HasForeignKey("RolesId");
+
+                    b.HasOne("Helper.Models.ApplicationUser", "Users")
+                        .WithMany()
+                        .HasForeignKey("UsersId");
                 });
 #pragma warning restore 612, 618
         }

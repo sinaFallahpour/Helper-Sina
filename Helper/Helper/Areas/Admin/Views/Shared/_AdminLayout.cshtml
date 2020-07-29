@@ -55,101 +55,36 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ایجاد</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item">کاربر</a>
-                        <a href="#" class="dropdown-item">دسته‌بندی</a>
-                        <a href="#" class="dropdown-item">محصول</a>
-                        <a href="#" class="dropdown-item">گزارش</a>
+                        <a asp-action="create" asp-controller="admins" asp-area="admin" class="dropdown-item">ادمین</a>
+                        <a asp-action="create" asp-controller="slides" asp-area="admin" class="dropdown-item">اسلاید‌</a>
+                        <a asp-action="Index" asp-controller="settings" asp-area="admin" class="dropdown-item">تنظیمات</a>
+
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">اپ ها</a>
-                    <div class="dropdown-menu dropdown-menu-big dropdown-menu-right">
-                        <div class="p-3">
-                            <div class="row row-xs">
-                                <div class="col-6">
-                                    <a href="chat.html">
-                                        <div class="p-3 border-radius-1 border text-center mb-3">
-                                            <i class="width-23 height-23" data-feather="message-circle"></i>
-                                            <div class="mt-2">چت</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="inbox.html">
-                                        <div class="p-3 border-radius-1 border text-center mb-3">
-                                            <i class="width-23 height-23" data-feather="mail"></i>
-                                            <div class="mt-2">ایمیل</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="app-todo.html">
-                                        <div class="p-3 border-radius-1 border text-center">
-                                            <i class="width-23 height-23" data-feather="check-circle"></i>
-                                            <div class="mt-2">تو دو</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="file-manager.html">
-                                        <div class="p-3 border-radius-1 border text-center">
-                                            <i class="width-23 height-23" data-feather="file"></i>
-                                            <div class="mt-2">فایل منیجر</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+            
             </ul>
         </div>
 
         <div>
             <ul class="navbar-nav">
 
+
                 <li class="nav-item">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img width="18" class="mr-2" src="~/Admin/assets/media/image/flags/261-china.png" alt="flag"> چین
-                    </a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">احراز هویت</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <img width="18" src="~/Admin/assets/media/image/flags/003-tanzania.png" class="mr-2" alt="flag">
-                            تانزانیا
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <img width="18" src="~/Admin/assets/media/image/flags/262-united-kingdom.png" class="mr-2"
-                                 alt="flag"> انگلستان
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <img width="18" src="~/Admin/assets/media/image/flags/013-tunisia.png" class="mr-2" alt="flag">
-                            تونس
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <img width="18" src="~/Admin/assets/media/image/flags/044-spain.png" class="mr-2" alt="flag"> اسپانیا
-                        </a>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a  asp-action="LogOut"  asp-controller="admins" asp-area="admin" class="dropdown-item">خروج</a>
+                            <a  asp-action="Profile"  asp-controller="admins" asp-area="admin" class="dropdown-item">پروفایل</a>
+                        }
+                        @*<a href="#" class="dropdown-item">دسته</a>
+                        <a href="#" class="dropdown-item">محصول</a>
+                        <a href="#" class="dropdown-item">گزارش</a>*@
                     </div>
                 </li>
 
-                <!-- begin::header search -->
-                <li class="nav-item">
-                    <a href="#" class="nav-link" title="جست‌و‌جو" data-toggle="dropdown">
-                        <i data-feather="search"></i>
-                    </a>
-                    <div class="dropdown-menu p-2 dropdown-menu-right">
-                        <form>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="جستجو">
-                                <div class="input-group-prepend">
-                                    <button class="btn" type="button">
-                                        <i data-feather="search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-                <!-- end::header search -->
+
                 <!-- begin::header minimize/maximize -->
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link" title="تمام صفحه" data-toggle="fullscreen">
@@ -158,301 +93,8 @@
                     </a>
                 </li>
                 <!-- end::header minimize/maximize -->
-                <!-- begin::header messages dropdown -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link nav-link-notify" title="گفت‌گوها" data-toggle="dropdown">
-                        <i data-feather="message-circle"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-left dropdown-menu-big">
-                        <div class="p-4 text-center d-flex justify-content-between"
-                             data-backround-image="~/Admin/assets/media/image/image1.jpg">
-                            <h6 class="mb-0">گفت‌گوها</h6>
-                            <small class="font-size-11 opacity-7">2 گفت‌گو خوانده نشده</small>
-                        </div>
-                        <div>
-                            <ul class="list-group list-group-flush">
-                                <li>
-                                    <a href="#" class="list-group-item d-flex hide-show-toggler">
-                                        <div>
-                                            <figure class="avatar avatar-sm m-r-15">
-                                                <img src="~/Admin/assets/media/image/user/man_avatar1.jpg"
-                                                     class="rounded-circle" alt="user">
-                                            </figure>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
-                                                علی احمدی
-                                                <i title="Mark as read" data-toggle="tooltip"
-                                                   class="hide-show-toggler-item fa fa-circle-o font-size-11"></i>
-                                            </p>
-                                            <div class="small text-muted">
-                                                <span class="mr-2">02:30 بعدازظهر</span>
-                                                <span>آخرین تغییر رو کامیت کردم</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                       class="list-group-item d-flex align-items-center hide-show-toggler">
-                                        <div>
-                                            <figure class="avatar avatar-sm m-r-15">
-                                                <img src="~/Admin/assets/media/image/user/women_avatar5.jpg"
-                                                     class="rounded-circle" alt="user">
-                                            </figure>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
-                                                صنم صفایی
-                                                <i title="Mark as read" data-toggle="tooltip"
-                                                   class="hide-show-toggler-item fa fa-circle-o font-size-11"></i>
-                                            </p>
-                                            <div class="small text-muted">
-                                                <span class="mr-2">08:36 بعدازظهر</span>
-                                                <span>فایل نهایی ارسال شد؟</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="text-divider small pb-2 pl-3 pt-3">
-                                    <span>گفت‌گوهای قدیمی</span>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                       class="list-group-item d-flex align-items-center hide-show-toggler">
-                                        <div>
-                                            <figure class="avatar avatar-sm m-r-15">
-                                                <img src="~/Admin/assets/media/image/user/man_avatar3.jpg"
-                                                     class="rounded-circle" alt="user">
-                                            </figure>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
-                                                احمد رضایی
-                                                <i title="Mark as unread" data-toggle="tooltip"
-                                                   class="hide-show-toggler-item fa fa-check font-size-11"></i>
-                                            </p>
-                                            <div class="small text-muted">
-                                                <span class="mr-2">11:09 بعدازظهر</span>
-                                                <span>آخرین تغییر رو کامیت کردم</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="list-group-item d-flex hide-show-toggler">
-                                        <div>
-                                            <figure class="avatar avatar-sm m-r-15">
-                                                <img src="~/Admin/assets/media/image/user/man_avatar2.jpg"
-                                                     class="rounded-circle" alt="user">
-                                            </figure>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
-                                                الهه جم
-                                                <i title="Mark as unread" data-toggle="tooltip"
-                                                   class="hide-show-toggler-item fa fa-check font-size-11"></i>
-                                            </p>
-                                            <div class="small text-muted">
-                                                <span class="mr-2">دیروز</span>
-                                                <span>فایل نهایی ارسال شد؟</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                       class="list-group-item d-flex align-items-center hide-show-toggler">
-                                        <div>
-                                            <figure class="avatar avatar-sm m-r-15">
-                                                <img src="~/Admin/assets/media/image/user/women_avatar1.jpg"
-                                                     class="rounded-circle" alt="user">
-                                            </figure>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
-                                                نیلوفر فروهر
-                                                <i title="Mark as unread" data-toggle="tooltip"
-                                                   class="hide-show-toggler-item fa fa-check font-size-11"></i>
-                                            </p>
-                                            <div class="small text-muted">
-                                                <span class="mr-2">دیروز</span>
-                                                <span>فایل نهایی ارسال شد؟</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="p-2 text-right">
-                            <ul class="list-inline small">
-                                <li class="list-inline-item">
-                                    <a href="#">علامتگذاری به عنوان خوانده شده</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <!-- end::header messages dropdown -->
-                <!-- begin::header notification dropdown -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link nav-link-notify" title="اطلاعیه‌ها" data-toggle="dropdown">
-                        <i data-feather="bell"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-left dropdown-menu-big">
-                        <div class="p-4 text-center d-flex justify-content-between"
-                             data-backround-image="~/Admin/assets/media/image/image1.jpg">
-                            <h6 class="mb-0">اطلاعیه‌ها</h6>
-                            <small class="font-size-11 opacity-7">1 اطلاعیه خوانده نشده</small>
-                        </div>
-                        <div>
-                            <ul class="list-group list-group-flush">
-                                <li>
-                                    <a href="#" class="list-group-item d-flex hide-show-toggler">
-                                        <div>
-                                            <figure class="avatar avatar-sm m-r-15">
-                                                <span class="avatar-title bg-success-bright text-success rounded-circle">
-                                                    <i class="ti-user"></i>
-                                                </span>
-                                            </figure>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
-                                                ثبت نام خریدار جدید
-                                                <i title="Mark as read" data-toggle="tooltip"
-                                                   class="hide-show-toggler-item fa fa-circle-o font-size-11"></i>
-                                            </p>
-                                            <span class="text-muted small">20 دقیقه قبل</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="text-divider small pb-2 pl-3 pt-3">
-                                    <span>اطلاعیه‌های قبلی</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="list-group-item d-flex hide-show-toggler">
-                                        <div>
-                                            <figure class="avatar avatar-sm m-r-15">
-                                                <span class="avatar-title bg-warning-bright text-warning rounded-circle">
-                                                    <i class="ti-package"></i>
-                                                </span>
-                                            </figure>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
-                                                سفارش جدید دریافت شد
-                                                <i title="Mark as unread" data-toggle="tooltip"
-                                                   class="hide-show-toggler-item fa fa-check font-size-11"></i>
-                                            </p>
-                                            <span class="text-muted small">45 ثانیه قبل</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                       class="list-group-item d-flex align-items-center hide-show-toggler">
-                                        <div>
-                                            <figure class="avatar avatar-sm m-r-15">
-                                                <span class="avatar-title bg-danger-bright text-danger rounded-circle">
-                                                    <i class="ti-server"></i>
-                                                </span>
-                                            </figure>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
-                                                به سقف مجاز سرور نزدیک شده اید
-                                                <i title="Mark as unread" data-toggle="tooltip"
-                                                   class="hide-show-toggler-item fa fa-check font-size-11"></i>
-                                            </p>
-                                            <span class="text-muted small">55 ثانیه قبل</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                       class="list-group-item d-flex align-items-center hide-show-toggler">
-                                        <div>
-                                            <figure class="avatar avatar-sm m-r-15">
-                                                <span class="avatar-title bg-info-bright text-info rounded-circle">
-                                                    <i class="ti-layers"></i>
-                                                </span>
-                                            </figure>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
-                                                اپ های دارای بروزسانی
-                                                <i title="Mark as unread" data-toggle="tooltip"
-                                                   class="hide-show-toggler-item fa fa-check font-size-11"></i>
-                                            </p>
-                                            <span class="text-muted small">دیروز</span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="p-2 text-right">
-                            <ul class="list-inline small">
-                                <li class="list-inline-item">
-                                    <a href="#">علامتگذاری به عنوان خوانده شده</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <!-- end::header notification dropdown -->
-                <!-- begin::user menu -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" title="User menu" data-toggle="dropdown">
-                        <i data-feather="settings"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-left dropdown-menu-big">
-                        <div class="p-4 text-center d-flex justify-content-between"
-                             data-backround-image="~/Admin/assets/media/image/image1.jpg">
-                            <h6 class="mb-0">تنظیمات</h6>
-                        </div>
-                        <div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-                                        <label class="custom-control-label" for="customSwitch1">مجوز ارسال اطلاعیه</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                                        <label class="custom-control-label" for="customSwitch2">پنهان کردن درخواست ها</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch3" checked>
-                                        <label class="custom-control-label" for="customSwitch3">افزایش سرعت انجام دستورات</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch4" checked>
-                                        <label class="custom-control-label" for="customSwitch4">پنهان کردن منو</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                                        <label class="custom-control-label" for="customSwitch5">به خاطرسپاری بازدید</label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch6">
-                                        <label class="custom-control-label" for="customSwitch6">فعالسازی تولید گزارش خودکار</label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <!-- end::user menu -->
+
+                
             </ul>
 
             <!-- begin::mobile header toggler -->
@@ -552,12 +194,12 @@
                 <div>
                     <ul>
                         <li>
-                            <a href="#" data-toggle="tooltip" data-placement="right" title="تنظیمات">
+                            <a asp-action="Index" asp-controller="settings" asp-area="admin" data-toggle="tooltip" data-placement="right" title="تنظیمات">
                                 <i data-feather="settings"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="login.html" data-toggle="tooltip" data-placement="right" title="خروج">
+                            <a asp-action="LogOut"  asp-controller="admins" asp-area="admin" data-toggle="tooltip" data-placement="right" title="خروج">
                                 <i data-feather="log-out"></i>
                             </a>
                         </li>
@@ -599,141 +241,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-
-
                         @RenderBody();
-                        @*<div class="card">
-                                                        <div class="card-body">
-                                                            <h6 class="card-title">تولتیپ</h6>
-                                                            <P>
-                                                                اگر علاقه دارید با استقاده از کد پایین میتوانید به راحتی مشاهده نمایید برای استفاده از تولتیپ باید چگونه عمل کنید
-                                                            </P>
-                                                            <form class="needs-validation" novalidate>
-                                                                <div class="form-row">
-                                                                    <div class="col-md-4 mb-3">
-                                                                        <label for="validationTooltip01">نام</label>
-                                                                        <input type="text" class="form-control" id="validationTooltip01"
-                                                                               placeholder="نام"
-                                                                               value="باران" required>
-                                                                        <div class="valid-tooltip">
-                                                                            عالی!
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-4 mb-3">
-                                                                        <label for="validationTooltip02">نام خانوادگی</label>
-                                                                        <input type="text" class="form-control" id="validationTooltip02"
-                                                                               placeholder="نام خانوادگی"
-                                                                               value="معصومی" required>
-                                                                        <div class="valid-tooltip">
-                                                                            عالی!
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-4 mb-3">
-                                                                        <label for="validationTooltipUsername">نام کاربری</label>
-                                                                        <div class="input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text"
-                                                                                      id="validationTooltipUsernamePrepend">@@</span>
-                                                                                </div>
-                                                                                <input type="text" class="form-control" id="validationTooltipUsername"
-                                                                                       placeholder="نام کاربری"
-                                                                                       aria-describedby="validationTooltipUsernamePrepend"
-                                                                                       required>
-                                                                                <div class="invalid-tooltip">
-                                                                                    لطفا یک نام کاربری معتبر انتخاب کنید
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-row">
-                                                                        <div class="col-md-6 mb-3">
-                                                                            <label for="validationTooltip03">شهر</label>
-                                                                            <input type="text" class="form-control" id="validationTooltip03"
-                                                                                   placeholder="شهر"
-                                                                                   required>
-                                                                            <div class="invalid-tooltip">
-                                                                                لطفا یک شهر معتبر انتخاب کنید
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-3 mb-3">
-                                                                            <label for="validationTooltip04">استان</label>
-                                                                            <input type="text" class="form-control" id="validationTooltip04"
-                                                                                   placeholder="استان"
-                                                                                   required>
-                                                                            <div class="invalid-tooltip">
-                                                                                لطفا یک استان معتبر انتخاب کنید
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-3 mb-3">
-                                                                            <label for="validationTooltip05">کدپستی</label>
-                                                                            <input type="text" class="form-control" id="validationTooltip05"
-                                                                                   placeholder="کدپستی" required>
-                                                                            <div class="invalid-tooltip">
-                                                                                لطفا یک کدپستی معتبر انتخاب کنید
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <button class="btn btn-primary" type="submit">ارسال</button>
-                                                                </form>
-                                                                <div data-label="کد نمونه" class="demo-code-preview">
-                                                                    <pre><code class="language-html">&lt;form class="needs-validation" novalidate&gt;
-                              &lt;div class="form-row"&gt;
-                                &lt;div class="col-md-4 mb-3"&gt;
-                                  &lt;label for="validationTooltip01"&gt;نام&lt;/label&gt;
-                                  &lt;input type="text" class="form-control" id="validationTooltip01" placeholder="نام" value="باران" required&gt;
-                                  &lt;div class="valid-tooltip"&gt;
-                                    عالی!
-                                  &lt;/div&gt;
-                                &lt;/div&gt;
-                                &lt;div class="col-md-4 mb-3"&gt;
-                                  &lt;label for="validationTooltip02"&gt;نام خانوادگی&lt;/label&gt;
-                                  &lt;input type="text" class="form-control" id="validationTooltip02" placeholder="نام خانوادگی" value="معصومی" required&gt;
-                                  &lt;div class="valid-tooltip"&gt;
-                                    عالی!
-                                  &lt;/div&gt;
-                                &lt;/div&gt;
-                                &lt;div class="col-md-4 mb-3"&gt;
-                                  &lt;label for="validationTooltipUsername"&gt;Username&lt;/label&gt;
-                                  &lt;div class="input-group"&gt;
-                                    &lt;div class="input-group-prepend"&gt;
-                                      &lt;span class="input-group-text" id="validationTooltipUsernamePrepend"&gt;@@&lt;/span&gt;
-                                    &lt;/div&gt;
-                                    &lt;input type="text" class="form-control" id="validationTooltipUsername" placeholder="نام کاربری" aria-describedby="validationTooltipUsernamePrepend" required&gt;
-                                    &lt;div class="invalid-tooltip"&gt;
-                                      لطفا یک نام کاربری معتبر انتخاب کنید
-                                    &lt;/div&gt;
-                                  &lt;/div&gt;
-                                &lt;/div&gt;
-                              &lt;/div&gt;
-                              &lt;div class="form-row"&gt;
-                                &lt;div class="col-md-6 mb-3"&gt;
-                                  &lt;label for="validationTooltip03"&gt;City&lt;/label&gt;
-                                  &lt;input type="text" class="form-control" id="validationTooltip03" placeholder="شهر" required&gt;
-                                  &lt;div class="invalid-tooltip"&gt;
-                                    لطفا یک شهر معتبر انتخاب کنید
-                                  &lt;/div&gt;
-                                &lt;/div&gt;
-                                &lt;div class="col-md-3 mb-3"&gt;
-                                  &lt;label for="validationTooltip04"&gt;State&lt;/label&gt;
-                                  &lt;input type="text" class="form-control" id="validationTooltip04" placeholder="استان" required&gt;
-                                  &lt;div class="invalid-tooltip"&gt;
-                                    لطفا یک استان معتبر انتخاب کنید
-                                  &lt;/div&gt;
-                                &lt;/div&gt;
-                                &lt;div class="col-md-3 mb-3"&gt;
-                                  &lt;label for="validationTooltip05"&gt;Zip&lt;/label&gt;
-                                  &lt;input type="text" class="form-control" id="validationTooltip05" placeholder="کدپستی" required&gt;
-                                  &lt;div class="invalid-tooltip"&gt;
-                                    لطفا یک کدپستی معتبر انتخاب کنید
-                                  &lt;/div&gt;
-                                &lt;/div&gt;
-                              &lt;/div&gt;
-                              &lt;button class="btn btn-primary" type="submit"&gt;ارسال&lt;/button&gt;
-                            &lt;/form&gt;</code></pre>
-                                                                </div>
-                                                            </div>
-                                                        </div>*@
-
                     </div>
                 </div>
 
