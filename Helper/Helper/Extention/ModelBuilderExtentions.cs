@@ -18,14 +18,14 @@ namespace Helper.Extention
                    new TBL_Setting()
                    {
                        Id = 1,
-                       Key = "AboutUs",
+                       Key = PublicHelper.AboutUsKeyName,
                        CreatedAt = DateTime.Now,
                        Value = ""
                    },
                    new TBL_Setting()
                    {
                        Id = 2,
-                       Key = "Contactus",
+                       Key =PublicHelper.ContactKeyName,
                        CreatedAt = DateTime.Now,
                        Value = ""
                    }
@@ -35,14 +35,14 @@ namespace Helper.Extention
             builder.Entity<IdentityRole>().HasData(
                 new IdentityRole()
                 {
-                    Name = Static.ADMINROLE,
-                    NormalizedName = Static.ADMINROLE.Normalize(),
+                    Name = PublicHelper.ADMINROLE,
+                    NormalizedName = PublicHelper.ADMINROLE.Normalize(),
                     Id = Guid.NewGuid().ToString(),
                 },
                  new IdentityRole()
                  {
-                     Name = Static.USERROLE,
-                     NormalizedName = Static.USERROLE.Normalize(),
+                     Name = PublicHelper.USERROLE,
+                     NormalizedName = PublicHelper.USERROLE.Normalize(),
                      Id = Guid.NewGuid().ToString(),
                  }
 

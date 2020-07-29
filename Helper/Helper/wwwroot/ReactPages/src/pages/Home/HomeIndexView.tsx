@@ -319,15 +319,6 @@ const HoemIndexView: React.FC = () => {
 
 
 
-
-
-
-
-
-
-
-
-
 ReactDOM.render(
     <HoemIndexView />
     ,

@@ -4,6 +4,8 @@ const webPack = require("webpack");
 module.exports = {
     entry: {
         HomeIndex: "./src/pages/Home/HomeIndexView.tsx",
+        HomeAbout: "./src/pages/Home/HomeAboutUs.tsx",
+        HomeContact: "./src/pages/Home/HomeContact.tsx",
         NewsIndex: "./src/pages/News/NewsIndexView.tsx",
     },
     //این خط ارور را به جای  این که در باندل نشان دهد  در کد اصلی نشان میدهد

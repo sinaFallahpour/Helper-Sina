@@ -12,6 +12,10 @@
     <None Remove="Areas\Admin\Data\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\ReactPages\src\pages\Home\HomeAboutUs.tsx" />
+  </ItemGroup>
+
 
 
   <ItemGroup>
@@ -49,6 +53,10 @@
     <None Include="wwwroot\lib\ckeditor\ckeditor.js" />
     <None Include="wwwroot\lib\ckeditor\config.js" />
     <None Include="wwwroot\lib\ckeditor\styles.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\ReactPages\src\pages\Home\HomeAboutUs.tsx" />
   </ItemGroup>
 
 </Project>
