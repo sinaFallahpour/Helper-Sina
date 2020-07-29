@@ -111,6 +111,8 @@
         <!-- form -->
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="Login" asp-area="Admin" asp-controller="AdminAccount" method="post">
+
+            <input type="hidden" asp-for="ReturnUrl"/>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label text-right d-block">@Html.DisplayNameFor(c => c.UserName)</label>
                 <input asp-for="UserName" class="form-control" placeholder="نام کاربری" />

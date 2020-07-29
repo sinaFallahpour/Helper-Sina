@@ -59,7 +59,7 @@ namespace Helper
                 options.Cookie.Name = "YourAppCookieName";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(7);
-                options.LoginPath = "/Login";
+                options.LoginPath = "/admin/admins/Login";
                 // ReturnUrlParameter requires 
                 //using Microsoft.AspNetCore.Authentication.Cookies;
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;

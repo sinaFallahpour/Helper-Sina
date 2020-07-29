@@ -1,0 +1,140 @@
+﻿@model Helper.Areas.Admin.Models.ViewModels.User.AdminLoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>بورداش - قالب داشبرد ادمین</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Admin/assets/media/image/favicon.png" />
+
+    <!-- Plugin styles -->
+    <link rel="stylesheet" href="~/Admin/vendors/bundle.css" type="text/css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="~/Admin/assets/css/app.min.css" type="text/css">
+
+
+</head>
+<body class="form-membership">
+
+    <!-- begin::preloader-->
+    <div class="preloader">
+        <div class="preloader-icon"></div>
+    </div>
+    <!-- end::preloader -->
+
+    <div class="form-wrapper">
+
+        <!-- logo -->
+        <div id="logo">
+            <img class="logo" src="~/Admin/assets/media/image/logo-F.png" alt="image">
+            <img class="logo-dark" src="~/Admin/assets/media/image/logo-dark.html" alt="image">
+        </div>
+        <!-- ./ logo -->
+
+        <h3>ورود</h3>
+
+        <!-- form -->
+        <form asp-action="Login" asp-area="Admin" asp-controller="Admins" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <span>@ViewBag.Error</span>
+            }
+            <input type="hidden" value="@ViewBag.ReturnUrl" />
+            <div class="form-group">
+                <label asp-for="Username" class="control-label text-right d-block">@Html.DisplayNameFor(c => c.Username)</label>
+                <input asp-for="Username" class="form-control" placeholder="نام کاربری" />
+                <span asp-validation-for="Username" class="d-block text-danger text-right"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label text-right d-block">@Html.DisplayNameFor(c => c.Password)</label>
+                <input asp-for="Password" class="form-control" placeholder="گذر واژه ..." />
+                <span asp-validation-for="Password" class="d-block text-danger text-right "></span>
+            </div>
+
+
+
+            <div class="form-group d-flex justify-content-between">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" asp-for="RememberMe" class="custom-control-input" checked="" id="customCheck1">
+                    <label class="custom-control-label" for="customCheck1">مرا به خاطر بسپار</label>
+                </div>
+                <a href="recover-password.html">بازگردانی رمزعبور</a>
+            </div>
+
+            <button type="submit" value="ورود" class=" btn btn-primary btn-block">ورود</button>
+            @*<button class="btn btn-primary btn-block">ورود</button>*@
+            <hr>
+            @*<p class="text-muted">ورود با استفاده از شبکه‌های اجتماعی</p>*@
+            @*<ul class="list-inline">
+
+                <li class="list-inline-item">
+                    <a href="#" class="btn btn-floating btn-google">
+                        <i class="fa fa-google"></i>
+                    </a>
+                </li>
+
+            </ul>*@
+            <hr>
+            <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-outline-light btn-sm"> صفحه اصلی</a>
+        </form>
+        <!-- ./ form -->
+
+    </div>
+
+    <!-- Plugin scripts -->
+    <script src="~/Admin/vendors/bundle.js"></script>
+
+    <!-- App scripts -->
+    <script src="~/Admin/assets/js/app.min.js"></script>
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

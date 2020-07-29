@@ -9,6 +9,7 @@ using Helper.Areas.Admin.Models.ViewModels;
 using Helper.Models;
 using Helper.ViewModels;
 using Helper.Extention;
+using Helper.Areas.Admin.Models.ViewModels.User;
 namespace Helper.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -18,7 +19,7 @@ namespace Helper.Data
         {
         }
 
-
+       
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -31,6 +32,10 @@ namespace Helper.Data
         public DbSet<TBL_Setting> TBL_Settings { get; set; }
 
         public DbSet<TBL_Slide> TBL_Sliders { get; set; }
+
+        public DbSet<Helper.Areas.Admin.Models.ViewModels.User.AdminLoginViewModel> AdminLoginViewModel { get; set; }
+
+        
 
 
     }

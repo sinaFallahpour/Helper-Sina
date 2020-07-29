@@ -1,0 +1,275 @@
+﻿@model Helper.Areas.Admin.Models.ViewModels.User.AdminCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<h1>Create</h1>
+
+<h4>AdminCreateViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nickname" class="control-label"></label>
+                <input asp-for="Nickname" class="form-control" />
+                <span asp-validation-for="Nickname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" class="form-control"></select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+
+
+
+
+@section Style{
+
+
+}
+
+
+
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title"> فرم ایجاد اسلایدر</h6>
+
+
+
+        <form asp-action="Create" class="needs-validation" novalidate="" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.IsSuccess))
+            {
+                <span class="text-success d-block text-center"> @ViewBag.IsSuccess   </span>
+            }
+
+
+            @if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <span class="text-success d-block text-center"> @ViewBag.Error   </span>
+            }
+
+
+            <div class="form-row">
+                <div class="col-md-8 mb-3">
+                    <img class="d-block " id="UploadedImage" />
+                </div>
+            </div>
+
+
+            <!-- input -->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="FirstName" for="validationCustom03"></label>
+                    <input asp-for="FirstName" class="form-control" id="validationCustom03s"
+                           placeholder="نام">
+                    <span asp-validation-for="FirstName" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LastName" for="validationCustom03"></label>
+                    <input asp-for="LastName" class="form-control" id="validationCustom03"
+                           placeholder="نام خانوادگی" />
+
+                    <span asp-validation-for="LastName" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Nickname" for="validationCustom03"></label>
+                    <input asp-for="Nickname" class="form-control" id="validationCustom03"
+                           placeholder="نام مستعار  " />
+
+                    <span asp-validation-for="Nickname" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Username" for="validationCustom03"></label>
+                    <input asp-for="Username" class="form-control" id="validationCustom03"
+                           placeholder="  نام کاربری" />
+
+                    <span asp-validation-for="Username" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Password" for="validationCustom03"></label>
+                    <input asp-for="Password" class="form-control" id="validationCustom03"
+                           placeholder="رمز عبور" />
+
+                    <span asp-validation-for="Password" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ConfirmPassword" for="validationCustom03"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" id="validationCustom03"
+                           placeholder=" تکرار رمز عبور" />
+
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Gender" for="validationCustom03"></label>
+                    <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()">
+                        @*<option selected="selected" value="">Please select</option>*@
+                    </select>
+
+
+                    @*<input asp-for="Gender" class="form-control" id="validationCustom03"
+                placeholder=" جنسیت" />*@
+
+                    <span asp-validation-for="Gender" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+
+            @* <input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">*@
+            <!-- fileUpload checkBox && selectOption -->
+            @*<div class="form-row">
+
+            <div class="col-md-6 mb-3">
+                <div class="custom-file">
+                   <input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">
+                    <label class="form-contro custom-file-label" for="customFile">انتخاب فایل </label>
+                </div>
+                <span asp-validation-for="Photo" class="text-danger"> </span>
+
+            </div>
+        </div>*@
+
+
+            <button type="submit" class="btn btn-primary">ارسال</button>
+            <a asp-action="Index" class="btn btn-success">بازگشت به لیست</a>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+
+        //  اعتبارسنجی فرم
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+
+
+
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#UploadedImage')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+}

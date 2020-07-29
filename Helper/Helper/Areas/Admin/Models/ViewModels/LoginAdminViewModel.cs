@@ -12,7 +12,11 @@ namespace Helper.Areas.Admin.Models.ViewModels
     {
 
         [Key]
-        public int MyProperty { get; set; }
+        public int Id { get; set; }
+
+
+        public string ReturnUrl { get; set; }
+
         //[Required(ErrorMessage = "ایمیل الزامیست")]
         //[Display(Name = "ایمیل")]
         //[EmailAddress]
@@ -30,6 +34,7 @@ namespace Helper.Areas.Admin.Models.ViewModels
 
         [Display(Name = "مرا به خاطر بسپار؟")]
         public bool RememberMe { get; set; }
+
 
 
     }

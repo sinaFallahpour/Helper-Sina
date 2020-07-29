@@ -45,6 +45,9 @@ namespace Helper.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedAdminId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -99,6 +102,9 @@ namespace Helper.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PhotoAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("RegistrationDateTime")
                         .HasColumnType("datetime2");
 
@@ -117,6 +123,8 @@ namespace Helper.Migrations
                         .HasMaxLength(10);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedAdminId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -179,7 +187,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 7, 27, 9, 29, 55, 642, DateTimeKind.Local).AddTicks(9196),
+                            CreatedAt = new DateTime(2020, 7, 28, 10, 6, 51, 340, DateTimeKind.Local).AddTicks(6506),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -187,16 +195,8 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 7, 27, 9, 29, 55, 646, DateTimeKind.Local).AddTicks(3374),
+                            CreatedAt = new DateTime(2020, 7, 28, 10, 6, 51, 344, DateTimeKind.Local).AddTicks(2156),
                             Key = "Contactus",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Value = ""
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2020, 7, 27, 9, 29, 55, 646, DateTimeKind.Local).AddTicks(3428),
-                            Key = "Slider",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
                         });
@@ -250,6 +250,22 @@ namespace Helper.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "60529ca8-7666-4ce2-903c-39e7d25e2542",
+                            ConcurrencyStamp = "3cbec140-f477-4711-b880-99863ed2a256",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "e6dbf045-5280-4c91-b7d8-bfbe62a4d19b",
+                            ConcurrencyStamp = "5da0c1bf-8d64-479b-af01-083a81ce40c8",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -330,7 +346,12 @@ namespace Helper.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("RoleId");
 
@@ -354,6 +375,13 @@ namespace Helper.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Helper.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("Helper.Models.ApplicationUser", "CreatedAdmin")
+                        .WithMany()
+                        .HasForeignKey("CreatedAdminId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -385,6 +413,10 @@ namespace Helper.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
+                    b.HasOne("Helper.Models.ApplicationUser", null)
+                        .WithMany("UserRole")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")

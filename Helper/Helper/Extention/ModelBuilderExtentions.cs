@@ -1,4 +1,6 @@
 ﻿using Helper.Models.Entities;
+using Helper.Models.Utilities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,25 @@ namespace Helper.Extention
                        Value = ""
                    }
                  );
+
+
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole()
+                {
+                    Name = Static.ADMINROLE,
+                    NormalizedName = Static.ADMINROLE.Normalize(),
+                    Id = Guid.NewGuid().ToString(),
+                },
+                 new IdentityRole()
+                 {
+                     Name = Static.USERROLE,
+                     NormalizedName = Static.USERROLE.Normalize(),
+                     Id = Guid.NewGuid().ToString(),
+                 }
+
+                 );
+
+
         }
     }
 }

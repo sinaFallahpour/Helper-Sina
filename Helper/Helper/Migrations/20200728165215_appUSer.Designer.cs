@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200727150405_s")]
-    partial class s
+    [Migration("20200728165215_appUSer")]
+    partial class appUSer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,9 @@ namespace Helper.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedAdminId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
@@ -101,6 +104,9 @@ namespace Helper.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PhotoAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("RegistrationDateTime")
                         .HasColumnType("datetime2");
 
@@ -119,6 +125,8 @@ namespace Helper.Migrations
                         .HasMaxLength(10);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedAdminId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -181,7 +189,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 7, 27, 8, 4, 5, 541, DateTimeKind.Local).AddTicks(8396),
+                            CreatedAt = new DateTime(2020, 7, 28, 9, 52, 15, 122, DateTimeKind.Local).AddTicks(5712),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -189,16 +197,8 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 7, 27, 8, 4, 5, 545, DateTimeKind.Local).AddTicks(2348),
+                            CreatedAt = new DateTime(2020, 7, 28, 9, 52, 15, 126, DateTimeKind.Local).AddTicks(860),
                             Key = "Contactus",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Value = ""
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2020, 7, 27, 8, 4, 5, 545, DateTimeKind.Local).AddTicks(2402),
-                            Key = "Slider",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
                         });
@@ -211,14 +211,16 @@ namespace Helper.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Description")
-                        .HasColumnType("int");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhotoAddress")
-                        .HasColumnType("int");
+                    b.Property<string>("PhotoAddress")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Title")
-                        .HasColumnType("int");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -330,7 +332,12 @@ namespace Helper.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("RoleId");
 
@@ -354,6 +361,13 @@ namespace Helper.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Helper.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("Helper.Models.ApplicationUser", "CreatedAdmin")
+                        .WithMany()
+                        .HasForeignKey("CreatedAdminId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -385,6 +399,10 @@ namespace Helper.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
+                    b.HasOne("Helper.Models.ApplicationUser", null)
+                        .WithMany("UserRole")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
