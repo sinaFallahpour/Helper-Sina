@@ -1,5 +1,7 @@
 /Helper/Helper/ReactPages/node_modules 
 
+/Helper/client-app/node_modules
+
 *.suo
 *.user
 _ReSharper.*
