@@ -16,7 +16,7 @@ import Footer from '../layout/Footer'
 import { ToastContainer } from 'react-toastify';
 import { RootStoreContext } from '../stores/rootStore';
 import LoadingComponent from './LoadingComponent';
-import ModalContainer from '../common/modals/ModalContainer';
+// import ModalContainer from '../common/modals/ModalContainer';
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
@@ -35,7 +35,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
 
   return (
     <Fragment>
-      <ModalContainer />
+      {/* <ModalContainer /> */}
       <ToastContainer position='bottom-right' />
 
       

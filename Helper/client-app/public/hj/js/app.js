@@ -281,9 +281,9 @@ $("#Pricerange-down").on("click", function () {
 
 //-----loader----
 // Preloader JS
-$(window).on('load', function () {
-    $(".loader").fadeOut(500);
-});
+// $(window).on('load', function () {
+//     $(".loader").fadeOut(500);
+// });
 
 
 //---endloader-------

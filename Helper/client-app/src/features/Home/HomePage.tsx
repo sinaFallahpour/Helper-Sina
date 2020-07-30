@@ -2,12 +2,19 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { observer } from 'mobx-react-lite';
 
+import CountUp from 'react-countup';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper'
+
 const HomePage: React.FC = () => {
+
+
+    useEffect(() => {
+    }, []);
 
 
     return (
         <Fragment>
-
 
             {/*  // @*...............intro..................*@*/}
             <div className="container">
@@ -21,8 +28,6 @@ const HomePage: React.FC = () => {
                     </b>
                         </div>
                         <div className="row w-100 mx-auto pt-3 pt-md-2">
-
-
                             <img src={window.location.origin + "/hj/img/border-bottom.png"} className="img-fluid" />
                         </div>
                         <div className="row mt-3 mx-auto">
@@ -38,7 +43,7 @@ const HomePage: React.FC = () => {
                         </div>
                     </div>
                     <div className="col-md-6 col-12 mr-lg-4 order-md-1 order-0">
-                        <img src={window.location.origin + "/ReactPages/"} className="img-fluid" alt="Responsive image" />
+                        <img src={window.location.origin + "/hj/img/intro.svg"} className="img-fluid" alt="Responsive image" />
                     </div>
 
                 </div>
@@ -56,6 +61,8 @@ const HomePage: React.FC = () => {
                                 <img src={window.location.origin + "/hj/img/1.png"} className="img-fluid " alt="Responsive image" />
                                 <h4 className="pt-4">تعداد خدمات دهندگان</h4>
                                 <span className="timer" data-to="3556" data-speed="8000"></span>
+                                <CountUp className="timer" start={0} end={3556} duration={4} />
+
                             </div>
                             <div className="col-md-4  mb-5">
                                 {/* src={window.location.origin + "/ReactPages/" + two} */}
@@ -63,12 +70,15 @@ const HomePage: React.FC = () => {
 
                                 <h4 className="pt-4">خدمات انجام شده</h4>
                                 <span className="timer" data-to="3556" data-speed="8000"></span>
+                                <CountUp className="timer" start={0} end={3556} duration={4} />
+
                             </div>
                             <div className="col-md-4  mb-5">
                                 {/* src={window.location.origin + "/ReactPages/" + tree} */}
                                 <img src={window.location.origin + "/hj/img/3.png"} className="img-fluid" alt="Responsive image" />
                                 <h4 className="pt-4">شهر های تحت پوشش</h4>
                                 <span className="timer" data-to="3556" data-speed="8000"></span>
+                                <CountUp className="timer" start={0} end={3556} duration={4} />
                             </div>
                         </div>
                         {/*  //@*........................service....................*@  */}
@@ -265,54 +275,50 @@ const HomePage: React.FC = () => {
                         <div className="row w-100  mx-auto">
                             <div className="col-12">
                                 {/*   //---- Swiper -------*/}
+                                {/*                                 
                                 <div className="swiper-container swiper-container1">
                                     <div className="swiper-wrapper">
                                         <div className="swiper-slide">
-                                        {/* src={window.location.origin + "/ReactPages/" + slider1}  */}
                                             <img
                                                 src={window.location.origin + "/hj/img/slider1 (1).png"}
 
-                                               className="img-fluid" alt="Responsive image" />
+                                                className="img-fluid" alt="Responsive image" />
                                             <div className="row w-100 text-justify Text-blue mx-auto">
                                                 <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
                                                 <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
                                             </div>
                                         </div>
                                         <div className="swiper-slide">
-                                        {/* src={window.location.origin + "/ReactPages/" + slider3} */}
-                                            <img 
-                                             src={window.location.origin + "/hj/img/slider1 (3).png"}
-                                            className="img-fluid" alt="Responsive image" />
-                                            <div className="row w-100 text-justify Text-blue mx-auto">
-                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
-                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
-                                            </div>
-                                        </div>
-                                        <div className="swiper-slide">
-                                        {/* src={window.location.origin + "/ReactPages/" + slider1} */}
                                             <img
-                                             src={window.location.origin + "/hj/img/slider1 (1).png"}
-                                             className="img-fluid" alt="Responsive image" />
+                                                src={window.location.origin + "/hj/img/slider1 (3).png"}
+                                                className="img-fluid" alt="Responsive image" />
                                             <div className="row w-100 text-justify Text-blue mx-auto">
                                                 <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
                                                 <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
                                             </div>
                                         </div>
                                         <div className="swiper-slide">
-                                        {/* src={window.location.origin + "/ReactPages/" + slider3} */}
-                                            <img 
-                                             src={window.location.origin + "/hj/img/slider1 (3).png"}
-                                            className="img-fluid" alt="Responsive image" />
-                                            <div className="row w-100 text-justify Text-blue mx-auto">
-                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
-                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
-                                            </div>
-                                        </div>
-                                        <div className="swiper-slide">
-                                        {/* src={window.location.origin + "/ReactPages/" + slider1} */}
                                             <img
-                                             src={window.location.origin + "/hj/img/slider1 (1).png"}
-                                          className="img-fluid" alt="Responsive image" />
+                                                src={window.location.origin + "/hj/img/slider1 (1).png"}
+                                                className="img-fluid" alt="Responsive image" />
+                                            <div className="row w-100 text-justify Text-blue mx-auto">
+                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
+                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
+                                            </div>
+                                        </div>
+                                        <div className="swiper-slide">
+                                            <img
+                                                src={window.location.origin + "/hj/img/slider1 (3).png"}
+                                                className="img-fluid" alt="Responsive image" />
+                                            <div className="row w-100 text-justify Text-blue mx-auto">
+                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
+                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
+                                            </div>
+                                        </div>
+                                        <div className="swiper-slide">
+                                            <img
+                                                src={window.location.origin + "/hj/img/slider1 (1).png"}
+                                                className="img-fluid" alt="Responsive image" />
                                             <div className="row w-100 text-justify Text-blue mx-auto">
                                                 <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
                                                 <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
@@ -321,12 +327,136 @@ const HomePage: React.FC = () => {
 
 
                                     </div>
-                                    {/* -- Add Pagination -- */}
+                                      -- Add Pagination --  
                                     <div className="swiper-pagination"></div>
                                 </div>
+                            */}
 
 
                                 {/*   //-- Swiper JS --*/}
+
+
+
+
+
+                                {/*   //---- Swiper -------*/}
+
+                                <Swiper
+                                className="swiper-container swiper-container1"
+                                    effect="coverflow"
+                                    grabCursor={true}
+                                    centeredSlides={false}
+                                    slidesPerView="auto"
+
+                                    pagination={{ clickable: true }}
+
+                                    coverflowEffect={{
+                                        rotate: 50,
+                                        stretch: 0,
+                                        depth: 100,
+                                        modifier: 1,
+                                        slideShadows: true,
+                                    }}
+
+                                    spaceBetween={10}
+                                    onSwiper={(swiper) => console.log(swiper)}
+                                    onSlideChange={() => console.log('slide change')}
+
+                                >
+                                    <div className="swiper-wrapper">
+
+                                        <SwiperSlide 
+                                        className="swiper-slide"
+                                        >
+                                            <img
+                                                src={window.location.origin + "/hj/img/slider1 (1).png"}
+
+                                                className="img-fluid" alt="Responsive image" />
+                                            <div className="row w-100 text-justify Text-blue mx-auto">
+                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل1</b></span></div>
+                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
+                                            </div>
+                                        </SwiperSlide>
+                                        <SwiperSlide   className="swiper-slide">
+                                            <img
+                                                src={window.location.origin + "/hj/img/slider1 (1).png"}
+
+                                                className="img-fluid" alt="Responsive image" />
+                                            <div className="row w-100 text-justify Text-blue mx-auto">
+                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل2</b></span></div>
+                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
+                                            </div>
+                                        </SwiperSlide>
+                                        <SwiperSlide   className="swiper-slide">
+                                            <img
+                                                src={window.location.origin + "/hj/img/slider1 (1).png"}
+
+                                                className="img-fluid" alt="Responsive image" />
+                                            <div className="row w-100 text-justify Text-blue mx-auto">
+                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل3</b></span></div>
+                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
+                                            </div>
+                                        </SwiperSlide>
+
+                                        <SwiperSlide   className="swiper-slide">
+                                            <img
+                                                src={window.location.origin + "/hj/img/slider1 (1).png"}
+
+                                                className="img-fluid" alt="Responsive image" />
+                                            <div className="row w-100 text-justify Text-blue mx-auto">
+                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل4</b></span></div>
+                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
+                                            </div>
+                                        </SwiperSlide>
+                                        <SwiperSlide   className="swiper-slide">
+                                            <img
+                                                src={window.location.origin + "/hj/img/slider1 (1).png"}
+
+                                                className="img-fluid" alt="Responsive image" />
+                                            <div className="row w-100 text-justify Text-blue mx-auto">
+                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
+                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
+                                            </div>
+                                        </SwiperSlide>
+                                    </div>
+                                    <div className="swiper-pagination"></div>
+                                </Swiper>
+
+
+
+
+                                {/* <div className="swiper-container swiper-container1">
+                                    <div className="swiper-wrapper">
+                                        <div className="swiper-slide">
+                                            <img
+                                                src={window.location.origin + "/hj/img/slider1 (1).png"}
+
+                                                className="img-fluid" alt="Responsive image" />
+                                            <div className="row w-100 text-justify Text-blue mx-auto">
+                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
+                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div className="swiper-pagination"></div>
+                                </div> */}
+
+
+                                {/*   //-- Swiper JS --*/}
+
+
+
+
+
+
+
+
+
+
+
 
                             </div>
                         </div>
@@ -336,21 +466,9 @@ const HomePage: React.FC = () => {
 
                 {/* //@...........end Why Helper?........*@  */}
 
-
-
-
             </div>
 
-
             {/* //@*..............end contect...............*@ */}
-
-
-
-
-
-
-
-
 
         </Fragment>
 

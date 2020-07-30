@@ -1,3 +1,5 @@
+
+
 {
   "compilerOptions": {
     "target": "es5",
@@ -16,11 +18,16 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "experimentalDecorators":true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "preserve",
+    "experimentalDecorators": true,
   },
   "include": [
-    "src"
-  ]
+    "src",
+    "./typings-custom/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+]
 }
+

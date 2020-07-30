@@ -2,8 +2,10 @@ import axios, { AxiosResponse } from 'axios';
 
 import { history } from '../..';
 import { toast } from 'react-toastify';
+  
 import { IUser, IUserFormValues } from '../models/user';
 import { IProfile, IPhoto } from '../models/profile';
+import "react-toastify/dist/ReactToastify.css"
 
 axios.defaults.baseURL = 'https://localhost:44340/api';
 
