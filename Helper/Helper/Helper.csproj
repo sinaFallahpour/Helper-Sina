@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Admin\Data\**" />
+    <Compile Remove="Models\ViewModels\**" />
     <Content Remove="Areas\Admin\Data\**" />
+    <Content Remove="Models\ViewModels\**" />
     <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Models\ViewModels\**" />
     <None Remove="Areas\Admin\Data\**" />
+    <None Remove="Models\ViewModels\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,7 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\clipboard\dialogs\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\plugins\" />
     <Folder Include="wwwroot\ReactPages\assets\uploads\Slider\" />

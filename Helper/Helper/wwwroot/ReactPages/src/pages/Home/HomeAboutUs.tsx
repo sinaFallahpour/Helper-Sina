@@ -5,6 +5,8 @@ import ReactHtmlParser, { processNodes, convertNodeToElement } from 'react-html-
 
 import agent from '../../app/api/agent'
 
+import borderbig from '../../../assets/hj/img/borderbig green.png';
+
 const HoemAboutUsView: React.FC = () => {
 
     const [aboutUs, setAboutUs] = useState(undefined);
@@ -26,7 +28,7 @@ const HoemAboutUsView: React.FC = () => {
         }
         fetchMyAPI();
     }, []);
-   
+
 
     if (loading) {
         return (
@@ -41,10 +43,22 @@ const HoemAboutUsView: React.FC = () => {
     }
     return (
         <Fragment>
-            <div className="container">
-                {ReactHtmlParser(aboutUs || "")}
+
+
+
+            <div className="container mx-auto p-0 m-0 mt-5">
+                <div className="row w-100 p-0 m-0 mx-auto">
+                    <div className="col-md-10 col-8 text-right"><h3><b>  درباره ما</b></h3></div>
+                </div>
+                <div className="row w-100 mx-auto">
+                    <img src={"/ReactPages/" + borderbig} className="img-fluid mx-auto" />
+                </div>
+
+                <div className="row  p-2 m-0  mt-3">
+                    {ReactHtmlParser(aboutUs || "")}
+                </div>
+
             </div>
-           
         </Fragment>
 
 

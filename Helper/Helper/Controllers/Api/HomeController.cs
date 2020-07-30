@@ -24,20 +24,20 @@ namespace Helper.Controllers.Api
 
         // GET: api/Home/aboutUs
         [HttpGet("aboutUs")]
-        public async Task<JsonResult> AboutUs()
+        public async Task<JsonResult> _AboutUs()
         {
             var AboutUs = await _context.TBL_Settings.Where(c => c.Key == PublicHelper.AboutUsKeyName).FirstOrDefaultAsync();
-            return new JsonResult(new { Status = 1, Message = "", data = AboutUs });
+            return new JsonResult(new { Status = 1, Message = "", Data = AboutUs });
         }
 
 
 
         // GET: api/Home/ContactUs
         [HttpGet("ContactUs")]
-        public async Task<JsonResult> ContactUs()
+        public async Task<JsonResult> _ContactUs()
         {
             var ContactUs = await _context.TBL_Settings.Where(c => c.Key == PublicHelper.ContactKeyName).FirstOrDefaultAsync();
-            return new JsonResult(new { Status = 1, Message = "", data = ContactUs });
+            return new JsonResult(new { Status = 1, Message = "", Data = ContactUs });
         }
 
 

@@ -33,23 +33,23 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav w-100 text-md-center text-right mt-3">
                         <div class="col-md-3">
-                            <li class="nav-item active">
-                                <a class="nav-link " href="#">صفحه اصلی </a>
+                            <li class='@Html.IsSelected("Home", "Index","") nav-item'>
+                                <a asp-action="Index" asp-controller="Home" class="nav-link ">صفحه اصلی </a>
                             </li>
                         </div>
                         <div class="col-md-2">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">اخبار</a>
+                            <li class='@Html.IsSelected("News", "Index","") nav-item'>
+                                <a asp-action="Index" asp-controller="News" class="nav-link">اخبار</a>
                             </li>
                         </div>
                         <div class="col-md-2">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">تماس با ما</a>
+                            <li class='@Html.IsSelected("Contactus", "Index","") nav-item'>
+                                <a asp-action="ContactUs" asp-controller="Home" class="nav-link">تماس با ما</a>
                             </li>
                         </div>
                         <div class="col-md-2">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">درباره ما</a>
+                            <li class='@Html.IsSelected("Aboutus", "Index","") nav-item'>
+                                <a asp-action="AboutUs" asp-controller="Home" class="nav-link">درباره ما</a>
                             </li>
                         </div>
                         <div class="col-md-3">

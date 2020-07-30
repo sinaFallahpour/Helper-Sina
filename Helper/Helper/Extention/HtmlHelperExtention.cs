@@ -14,18 +14,18 @@ namespace Helper.Extention
 
         public static string IsSelected(this IHtmlHelper htmlHelper, string controllers, string actions,string areas, string cssClass = "active")
         {
-            controllers = controllers.ToLower();
-            actions = actions.ToLower();
-            areas = areas.ToLower();
+            controllers = controllers?.ToLower();
+            actions = actions?.ToLower();
+            areas = areas?.ToLower();
 
             string currentAction = htmlHelper.ViewContext.RouteData.Values["action"] as string;
-            currentAction = currentAction.ToLower();
+            currentAction = currentAction?.ToLower();
 
             string currentController = htmlHelper.ViewContext.RouteData.Values["controller"] as string;
-            currentController = currentController.ToLower();
+            currentController = currentController?.ToLower();
          
             string currentArea = htmlHelper.ViewContext.RouteData.Values["area"] as string;
-            currentArea = currentArea.ToLower();
+            currentArea = currentArea?.ToLower();
 
             IEnumerable<string> acceptedActions = (actions ?? currentAction).Split(',');
             IEnumerable<string> acceptedControllers = (controllers ?? currentController).Split(',');
@@ -34,7 +34,7 @@ namespace Helper.Extention
             //acceptedAreas.Contains(acceptedAreas)
             var actionResult = acceptedActions.Contains(currentAction);
             var controllerResult = acceptedControllers.Contains(currentController);
-            var arearResult = acceptedAreas.Contains(currentArea);
+            var arearResult =currentArea!=null ? acceptedAreas.Contains(currentArea): true;
 
             var res = actionResult && controllerResult && arearResult ?
                 cssClass : String.Empty;

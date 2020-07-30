@@ -16,8 +16,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Web.Mvc;
 using Helper.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Helper.Models.BLL;
-using Helper.Models.DAL;
+
+
 
 namespace Helper
 {
@@ -99,12 +99,8 @@ namespace Helper
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
 
-            //BLL
-            services.AddScoped<AboutUsManager>();
-
-
-            //DAL
-            services.AddScoped<AboutUsRepository>();
+           
+            //services.AddScoped<AboutUsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

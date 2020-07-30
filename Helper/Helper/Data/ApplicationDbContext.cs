@@ -34,7 +34,6 @@ namespace Helper.Data
 
         public DbSet<TBL_Slide> TBL_Sliders { get; set; }
 
-        public DbSet<Helper.Controllers.Clsadasdass> Clsadasdass { get; set; }
 
 
 

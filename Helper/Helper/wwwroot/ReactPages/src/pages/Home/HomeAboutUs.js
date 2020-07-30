@@ -38,6 +38,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactHtmlParser from 'react-html-parser';
 import agent from '../../app/api/agent';
+import borderbig from '../../../assets/hj/img/borderbig green.png';
 var HoemAboutUsView = function () {
     var _a = useState(undefined), aboutUs = _a[0], setAboutUs = _a[1];
     var _b = useState(false), loading = _b[0], setloading = _b[1];
@@ -79,7 +80,14 @@ var HoemAboutUsView = function () {
                     React.createElement("span", { className: "sr-only" }, "Loading...")))));
     }
     return (React.createElement(Fragment, null,
-        React.createElement("div", { className: "container" }, ReactHtmlParser(aboutUs || ""))));
+        React.createElement("div", { className: "container mx-auto p-0 m-0 mt-5" },
+            React.createElement("div", { className: "row w-100 p-0 m-0 mx-auto" },
+                React.createElement("div", { className: "col-md-10 col-8 text-right" },
+                    React.createElement("h3", null,
+                        React.createElement("b", null, " \u062A\u0645\u0627\u0633 \u0628\u0627 \u0645\u0627")))),
+            React.createElement("div", { className: "row w-100 mx-auto" },
+                React.createElement("img", { src: "/ReactPages/" + borderbig, className: "img-fluid mx-auto" })),
+            React.createElement("div", { className: "row  p-2 m-0  mt-3" }, ReactHtmlParser(aboutUs || "")))));
 };
 ReactDOM.render(React.createElement(HoemAboutUsView, null), document.getElementById('root'));
 //# sourceMappingURL=HomeAboutUs.js.map
