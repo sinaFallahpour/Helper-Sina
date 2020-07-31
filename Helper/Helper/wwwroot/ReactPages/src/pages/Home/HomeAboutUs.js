@@ -84,7 +84,7 @@ var HoemAboutUsView = function () {
             React.createElement("div", { className: "row w-100 p-0 m-0 mx-auto" },
                 React.createElement("div", { className: "col-md-10 col-8 text-right" },
                     React.createElement("h3", null,
-                        React.createElement("b", null, " \u062A\u0645\u0627\u0633 \u0628\u0627 \u0645\u0627")))),
+                        React.createElement("b", null, "  \u062F\u0631\u0628\u0627\u0631\u0647 \u0645\u0627")))),
             React.createElement("div", { className: "row w-100 mx-auto" },
                 React.createElement("img", { src: "/ReactPages/" + borderbig, className: "img-fluid mx-auto" })),
             React.createElement("div", { className: "row  p-2 m-0  mt-3" }, ReactHtmlParser(aboutUs || "")))));

@@ -25,9 +25,9 @@ axios.interceptors.response.use(undefined, error => {
     toast.error('خطایی رخ داده!');
   }
   const { status, data, config } = error.response;
-  if (status === 404) {
-    history.push('/notfound');
-  }
+  // if (status === 404) {
+  //   history.push('/notfound');
+  // }
   if (
     status === 400 &&
     config.method === 'get' &&
@@ -36,6 +36,7 @@ axios.interceptors.response.use(undefined, error => {
     history.push('/notfound');
   }
   if (status === 500) {
+    console.log(error)
     toast.error('خطایی رخ داده!');
   }
   throw error.response;
@@ -43,10 +44,10 @@ axios.interceptors.response.use(undefined, error => {
 
 const responseBody = (response: AxiosResponse) => response.data;
 
-const sleep = (ms: number) => (response: AxiosResponse) =>
-  new Promise<AxiosResponse>(resolve =>
-    setTimeout(() => resolve(response), ms)
-  );
+// const sleep = (ms: number) => (response: AxiosResponse) =>
+//   new Promise<AxiosResponse>(resolve =>
+//     setTimeout(() => resolve(response), ms)
+//   );
 
 const requests = {
   get: (url: string) =>
@@ -101,11 +102,20 @@ const Profiles = {
 };
 
 
+const AboutUs = {
+  aboutUs: () => requests.get(`/Home/aboutUs`),
+};
+
+const ContactUs = {
+  contactUs: () => requests.get(`/Home/ContactUs`),
+};
 
 
 
 
 export default {
   User,
-  Profiles
+  Profiles,
+  AboutUs,
+  ContactUs
 };

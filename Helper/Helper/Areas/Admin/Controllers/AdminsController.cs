@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Helper.Areas.Admin.Models.ViewModels.User;
 using Helper.Data;
 using Helper.Models;
+using Helper.Models.Enums;
 using Helper.Models.Utilities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Helper.Areas.Admin.Controllers
 {
@@ -20,17 +24,144 @@ namespace Helper.Areas.Admin.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-
+        private readonly IHostingEnvironment _hostingEnvironment;
         public AdminsController(ApplicationDbContext context,
              UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+                        IHostingEnvironment hostingEnvironment)
+
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _hostingEnvironment = hostingEnvironment;
+
+
+
         }
+
+
+
+
+        [Authorize(Roles = Static.ADMINROLE)]
+        public async Task<IActionResult> Profile(string Username)
+        {
+            var currentUsername = "";
+            if (!string.IsNullOrEmpty(Username))
+            {
+                currentUsername = Username;
+            }
+            else
+            {
+                currentUsername = User.Identity.Name;
+            }
+            //var currentAdnmin = await _userManager.FindByNameAsync(currentUsername);
+            var UserProfile = await _context.Users.Where(c => c.Username == currentUsername)
+            .Select(o => new AdminProfileViewModel
+            {
+                Id = o.Id,
+                Username = o.Username,
+                Email = o.Email,
+                Nickname = o.Nickname,
+                FirstName = o.FirstName,
+                LastName = o.LastName,
+                Address = o.Address,
+                Birthdate = o.Birthdate,
+                NationalCode = o.NationalCode,
+                Phone = o.Phone,
+                PhotoAddress = o.PhotoAddress
+            }).FirstOrDefaultAsync();
+            if (UserProfile == null)
+            {
+                return NotFound();
+            }
+
+            return View(UserProfile);
+        }
+
+
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(string id, AdminProfileViewModel model)
+        {
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var profileFromDb = await _userManager.FindByIdAsync(model.Id);
+                    //_context.Users.SingleOrDefault(c => c.Id == model.Id);
+                    profileFromDb.Username = model.Username;
+                    profileFromDb.Email = model.Email;
+                    profileFromDb.Nickname = model.Nickname;
+                    profileFromDb.FirstName = model.FirstName;
+                    profileFromDb.LastName = model.LastName;
+                    profileFromDb.Birthdate = model.Birthdate;
+                    profileFromDb.NationalCode = model.NationalCode;
+                    profileFromDb.Phone = model.Phone;
+                    profileFromDb.Address = model.Address;
+
+                    if (model.Photo != null)
+                    {
+                        string uniqueFileName = null;
+                        if (!model.Photo.IsImage())
+                        {
+                            ModelState.AddModelError("", "به فرمت عکس وارد کنید");
+                            return View(model);
+                        }
+                        if (model.Photo.Length > 5000000)
+                        {
+                            ModelState.AddModelError("", "حجم فایل زیاد است");
+                            return View(model);
+                        }
+                        if (model.Photo != null && model.Photo.Length > 0 && model.Photo.IsImage())
+                        {
+                            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/User");
+                            uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
+                            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                            model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                            //Delete LastImage Image
+                            if (!string.IsNullOrEmpty(profileFromDb.PhotoAddress))
+                            {
+                                var LastImagePath = profileFromDb.PhotoAddress.Substring(1);
+                                LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                                if (System.IO.File.Exists(LastImagePath))
+                                {
+                                    System.IO.File.Delete(LastImagePath);
+                                }
+                            }
+
+                            //update Newe Pic Address To database
+                            profileFromDb.PhotoAddress = "/Upload/User/" + uniqueFileName;
+                        }
+                    }
+
+                    var result = _context.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    ModelState.AddModelError("", "خطا در ثبت");
+                    return View(model);
+                }
+
+            }
+            return View(model);
+        }
+
+
+
 
 
 
@@ -53,11 +184,19 @@ namespace Helper.Areas.Admin.Controllers
                     FullName = c.FirstName + " " + c.LastName,
                     Gender = c.Gender,
                     Nickname = c.Nickname,
-                    PhotoAddress = c.PhotoAddress
+                    PhotoAddress = c.PhotoAddress,
+                    Username = c.UserName
+
                 }).ToList();
 
             return View(Admins);
         }
+
+
+
+
+
+
 
 
 
@@ -88,7 +227,7 @@ namespace Helper.Areas.Admin.Controllers
                     EmailConfirmed = false,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    Gender = model.Gender.GetEnumDescription(),
+                    //Gender = model.Gender.GetEnumDescription(),
                     Nickname = model.Nickname,
                     NormalizedUserName = model.Nickname.Normalize(),
                     RegistrationDateTime = DateTime.Now,
@@ -215,7 +354,7 @@ namespace Helper.Areas.Admin.Controllers
         }
 
 
-       //فک کنم این  برا اکس هست
+        //فک کنم این  برا اکس هست
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -223,6 +362,13 @@ namespace Helper.Areas.Admin.Controllers
             return Json((Status: 1, Message: "Logged Out"));
         }
 
+
+
+
+        private bool TBL_ProfileExists(string id)
+        {
+            return _context.Users.Any(e => e.Id == id);
+        }
 
 
 

@@ -13,9 +13,9 @@ const Header: React.FC = () => {
                         </div>
                     </div>
                     <div className="row text-center w-100 mx-auto">
-                        <div className="col-4 p-0 "><img src="~/hj/img/bag1.png" className="img-fluid" alt="Responsive image" /></div>
-                        <div className="col-4 p-0"><img src="~/hj/img/bag2.png" className="img-fluid" alt="Responsive image" /></div>
-                        <div className="col-4 p-0"><img src="~/hj/img/bag3.png" className="img-fluid" alt="Responsive image" /></div>
+                        <div className="col-4 p-0 "><img src={window.location.origin + "/hj/img/bag1.png"} className="img-fluid" alt="Responsive images" /></div>
+                        <div className="col-4 p-0"><img src={window.location.origin + "/hj/img/bag2.png"} className="img-fluid" alt="Responsive image2" /></div>
+                        <div className="col-4 p-0"><img src={window.location.origin + "/hj/img/bag3.png"} className="img-fluid" alt="Responsive image3" /></div>
                     </div>
                     <div className="row text-center mt-5">
                         <div className="col-12">
@@ -33,7 +33,10 @@ const Header: React.FC = () => {
                         </h3>
                             </div>
                             <div className="row w-100 pt-5">
-                                <img src="~/hj/img/border-bottom.png" className="img-fluid mr-4" />
+                                <img
+                                    src={window.location.origin + "/hj/img/border-bottom.png"}
+                                    className="img-fluid mr-4"
+                                    alt="img4" />
                             </div>
                             <div className="col-12 pt-5">
                                 <p className="text-justify hj-footer-ditalis">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</p>
@@ -75,7 +78,7 @@ const Header: React.FC = () => {
                     <div className="col-lg-2  col-12 text-right">
                         <div className="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
                         <div className="row w-100">
-                            <div className="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" className="img-fluid mr-2" /></div>
+                            <div className="col-md-11 mx-auto"> <img src={window.location.origin + "/hj/img/border-bottom.png"} className="img-fluid mr-2"  alt="img5"/></div>
 
                         </div>
                         <div className="col-12 py-2"><span><i className="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
@@ -90,7 +93,7 @@ const Header: React.FC = () => {
                     <div className="col-lg-2  col-12 text-right">
                         <div className="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
                         <div className="row w-100">
-                            <div className="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" className="img-fluid mr-2" /></div>
+                            <div className="col-md-11 mx-auto"> <img src={window.location.origin + "/hj/img/border-bottom.png"} className="img-fluid mr-2" alt="img6" /></div>
 
                         </div>
                         <div className="col-12 py-2"><span><i className="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
@@ -105,7 +108,7 @@ const Header: React.FC = () => {
                     <div className="col-lg-2  col-12 text-right">
                         <div className="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
                         <div className="row w-100">
-                            <div className="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" className="img-fluid mr-2" /></div>
+                            <div className="col-md-11 mx-auto"> <img     src={window.location.origin + "/hj/img/border-bottom.png"}  className="img-fluid mr-2" alt="img7"/></div>
 
                         </div>
                         <div className="col-12 py-2"><span><i className="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
@@ -120,7 +123,7 @@ const Header: React.FC = () => {
                     <div className="col-lg-2 col-12 text-right">
                         <div className="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
                         <div className="row w-100">
-                            <div className="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" className="img-fluid mr-2" /></div>
+                            <div className="col-md-11 mx-auto"> <img  src={window.location.origin + "/hj/img/border-bottom.png"} className="img-fluid mr-2" alt="img8"/></div>
 
                         </div>
                         <div className="col-12 py-2"><span><i className="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
@@ -135,7 +138,7 @@ const Header: React.FC = () => {
                     <div className="col-lg-2  col-12 text-right">
                         <div className="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
                         <div className="row w-100">
-                            <div className="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" className="img-fluid mr-2" /></div>
+                            <div className="col-md-11 mx-auto"> <img  src={window.location.origin + "/hj/img/border-bottom.png"} className="img-fluid mr-2" alt="img9"/></div>
 
                         </div>
                         <div className="col-12 py-2"><span><i className="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
@@ -153,13 +156,17 @@ const Header: React.FC = () => {
                 <div className="container mt-5">
                     <div className="row w-100 text-center mx-auto width-70">
                         <div className="col-4">
-                            <img src="~/hj/img/logo1.svg " className="img-fluid" alt="Responsive image" />
+                            <img src={window.location.origin + "/hj/img/logo1.svg"}  className="img-fluid" alt="Responsive image12" />
                         </div>
                         <div className="col-4">
-                            <img src="~/hj/img/logo1.svg" className="img-fluid" alt="Responsive image" />
+                            <img src={window.location.origin + "/hj/img/logo1.svg"} 
+                             className="img-fluid" 
+                             alt="Responsive image10" />
                         </div>
                         <div className="col-4">
-                            <img src="~/hj/img/logo1.svg" className="img-fluid" alt="Responsive image" />
+                            <img src={window.location.origin + "/hj/img/logo1.svg"} 
+                             className="img-fluid" 
+                             alt="Responsive image11" />
                         </div>
                     </div>
                 </div>

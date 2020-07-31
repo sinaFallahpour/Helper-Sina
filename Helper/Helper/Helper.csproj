@@ -43,6 +43,8 @@
     <Folder Include="wwwroot\lib\ckeditor\plugins\plugins\" />
     <Folder Include="wwwroot\ReactPages\assets\uploads\Slider\" />
     <Folder Include="wwwroot\ReactPages\typings-custom\" />
+    <Folder Include="wwwroot\Upload\Slider\" />
+    <Folder Include="wwwroot\Upload\User\" />
    
   </ItemGroup>
 

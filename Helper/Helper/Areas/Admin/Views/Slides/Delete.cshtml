@@ -46,6 +46,18 @@
             </div>
 
 
+            <!-- IsActive -->
+            <div class="form-group">
+                <div class="custom-control custom-checkbox custom-checkbox-secondary">
+                    <input asp-for="IsActive" type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                    <label asp-for="IsActive" class="custom-control-label" for="customCheck1"> ‌   آیا فعال است؟</label>
+
+                    <span asp-validation-for="IsActive" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
             <button type="submit" class="btn btn-danger">حذف</button>
             <button type="submit" asp-action="Index" class="btn btn-success">بازگشت ب لیست</button>
         </form>

@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Helper.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles =Static.ADMINROLE)]
+    [Authorize(Roles = Static.ADMINROLE)]
     public class SlidesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -33,7 +33,7 @@ namespace Helper.Areas.Admin.Controllers
         // GET: Admin/Slides
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TBL_Sliders.ToListAsync());
+            return View(await _context.TBL_Sliders.OrderBy(c => c.IsActive).ToListAsync());
         }
 
 
@@ -120,9 +120,10 @@ namespace Helper.Areas.Admin.Controllers
                 Id = tBL_Slide.Id,
                 Description = tBL_Slide.Description,
                 PhotoAddress = tBL_Slide.PhotoAddress,
-                Title = tBL_Slide.Title
+                Title = tBL_Slide.Title,
+                IsActive = tBL_Slide.IsActive
             };
-           
+
             return View(model);
         }
 
@@ -143,6 +144,8 @@ namespace Helper.Areas.Admin.Controllers
                     var slideFromDb = _context.TBL_Sliders.SingleOrDefault(c => c.Id == model.Id);
                     slideFromDb.Description = model.Description;
                     slideFromDb.Title = model.Title;
+                    slideFromDb.IsActive = model.IsActive;
+
                     if (model.Photo != null)
                     {
                         string uniqueFileName = null;
@@ -158,7 +161,7 @@ namespace Helper.Areas.Admin.Controllers
                         }
                         if (model.Photo != null && model.Photo.Length > 0 && model.Photo.IsImage())
                         {
-                            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "ReactPages/assets/uploads/slider");
+                            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/Slider");
                             uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
                             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                             model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
@@ -166,16 +169,22 @@ namespace Helper.Areas.Admin.Controllers
 
 
                             //Delete LastImage Image
-                            var LastImagePath =  slideFromDb.PhotoAddress.Substring(1);
-                            LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
-                            if (!string.IsNullOrEmpty(slideFromDb.PhotoAddress) && System.IO.File.Exists(LastImagePath))
+                            //var LastImagePath =  slideFromDb.PhotoAddress.Substring(1);
+                            //LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                            if (!string.IsNullOrEmpty(slideFromDb.PhotoAddress))
                             {
-                                System.IO.File.Delete(LastImagePath);
+                                var LastImagePath = slideFromDb.PhotoAddress.Substring(1);
+                                LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                                if (System.IO.File.Exists(LastImagePath))
+                                {
+                                    System.IO.File.Delete(LastImagePath);
+                                }
+
+                                //System.IO.File.Delete(LastImagePath);
                             }
 
-
                             //update Newe Pic Address To database
-                            slideFromDb.PhotoAddress = "/ReactPages/assets/uploads/slider/" + uniqueFileName;
+                            slideFromDb.PhotoAddress = "/Upload/Slider/" + uniqueFileName;
                         }
                     }
 
@@ -185,15 +194,8 @@ namespace Helper.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TBL_SlideExists(model.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
                         ModelState.AddModelError("", "خطا در ثبت");
                         return View(model);
-                    }
                 }
 
             }

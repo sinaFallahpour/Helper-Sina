@@ -18,6 +18,9 @@ namespace Helper.Models.Entities
         [Display(Name = "توضیحات")]
         public string Description { get; set; }
 
+        [Display(Name = " آیا فعال است ")]
+        public bool IsActive { get; set; }
+
         public string PhotoAddress { get; set; }
 
         [Required(ErrorMessage = "الزامیست")]

@@ -5,78 +5,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-@*<h1>Create</h1>
-
-    <h4>TBL_Slide</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Title" class="control-label"></label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PhotoAddress" class="control-label"></label>
-                    <input asp-for="PhotoAddress" class="form-control" />
-                    <span asp-validation-for="PhotoAddress" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @section Style{
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="card">
     <div class="card-body">
@@ -129,7 +62,23 @@
 
                 </div>
             </div>
+            <div class="form-group">
+                <div class="custom-control custom-checkbox custom-checkbox-secondary">
+                    <input asp-for="IsActive" type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                    <label asp-for="IsActive" class="custom-control-label" for="customCheck1"> ‌   آیا فعال است؟</label>
 
+                    <span asp-validation-for="IsActive" class="text-danger"> </span>
+                </div>
+            </div>
+
+            @*<div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="IsActive" for="validationCustom03"></label>
+                    <input asp-for="IsActive" class="form-control" id="validationCustom03" />
+
+                    <span asp-validation-for="IsActive" class="text-danger"> </span>
+                </div>
+            </div>*@
 
             <button type="submit" class="btn btn-primary">ارسال</button>
             <a asp-action="Index" class="btn btn-success">بازگشت به لیست</a>
@@ -138,19 +87,6 @@
 
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

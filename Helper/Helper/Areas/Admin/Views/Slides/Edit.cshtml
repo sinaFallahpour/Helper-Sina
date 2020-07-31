@@ -5,41 +5,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-@*<h1>Edit</h1>
-
-    <h4>TBL_Slide</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Title" class="control-label"></label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PhotoAddress" class="control-label"></label>
-                    <input asp-for="PhotoAddress" class="form-control" />
-                    <span asp-validation-for="PhotoAddress" class="text-danger"></span>
-                </div>
-                <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
-
 
 
 
@@ -65,7 +30,7 @@
 
             <div class="form-row">
                 <div class="  _editimageContainer">
-                    <img  src="@Model.PhotoAddress" class="d-block " id="UploadedImage" />
+                    <img src="@Model.PhotoAddress" class="d-block " id="UploadedImage" />
                 </div>
             </div>
 
@@ -105,6 +70,16 @@
                     </div>
                     <span asp-validation-for="Photo" class="text-danger"> </span>
 
+                </div>
+            </div>
+
+            <!-- IsActive -->
+            <div class="form-group">
+                <div class="custom-control custom-checkbox custom-checkbox-secondary">
+                    <input asp-for="IsActive"  class="custom-control-input" id="customCheck1" >
+                    <label asp-for="IsActive" class="custom-control-label" for="customCheck1"> ‌   آیا فعال است؟</label>
+
+                    <span asp-validation-for="IsActive" class="text-danger"> </span>
                 </div>
             </div>
 
@@ -169,7 +144,7 @@
                     $('#UploadedImage')
                         .attr('src', e.target.result)
                         .width(400)
-                        //.height(200);
+                    //.height(200);
                 };
 
                 reader.readAsDataURL(input.files[0]);

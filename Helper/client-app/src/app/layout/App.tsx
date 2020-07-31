@@ -4,14 +4,28 @@ import {
   Route,
   withRouter,
   RouteComponentProps,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 
+
+
+/* Pages */
 import HomePage from './../../features/Home/HomePage';
-import NotFound from './NotFound';
 
 import Header from '../layout/Header';
 import Footer from '../layout/Footer'
+import AboutUs from '../../features/aboutUs/AboutUs'
+import ContactUS from '../../features/contactUs/ContactUS'
+
+//Account
+import Login from '../../features/Account/Login'
+import Register from '../../features/Account/Register'
+
+import NotFound from './NotFound';
+/*End  Pages */
+
+
 
 import { ToastContainer } from 'react-toastify';
 import { RootStoreContext } from '../stores/rootStore';
@@ -38,39 +52,23 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
       {/* <ModalContainer /> */}
       <ToastContainer position='bottom-right' />
 
-      
+
       <Header />
       < >
         <Switch>
           <Route exact path='/' component={HomePage} />
-
+          <Route path='/aboutus' component={AboutUs} />
+          <Route path='/contactus' component={ContactUS} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+          <Route  component={NotFound} />
+          
         </Switch>
       </>
       <Footer />
-      
-      
-      {/* <Route
-        path={'/(.+)'}
-        render={() => (
-          <Fragment>
-            <Header />
-            < >
-              <Switch>
-                <Route exact path='/activities' component={ActivityDashboard} />
-                <Route path='/activities/:id' component={ActivityDetails} />
-                <Route
-                  key={location.key}
-                  path={['/createActivity', '/manage/:id']}
-                  component={ActivityForm}
-                />
-                <Route path='/profile/:username' component={ProfilePage} />
-                <Route component={NotFound} />
-              </Switch>
-            </>
-            <Footer />
-          </Fragment>
-        )}
-      /> */}
+
+
+
     </Fragment>
   );
 };

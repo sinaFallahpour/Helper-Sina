@@ -22,6 +22,7 @@ namespace Helper.Areas.Admin.Models.ViewModels.Slider
         [Display(Name = "توضیحات")]
         public string Description { get; set; }
 
+        public bool IsActive { get; set; }
         public string PhotoAddress { get; set; }
 
         [Display(Name = "عکس")]

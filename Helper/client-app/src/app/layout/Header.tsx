@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { NavLink } from 'react-router-dom'
 const Header: React.FC = () => {
     return (
         // @*...........header............*@
@@ -22,7 +22,9 @@ const Header: React.FC = () => {
                         </div>
 
                         <div className="col-md-4 col-2 text-center p-2">
-                            <img src="~/hj/img/logo.png" className="img-fluid" alt="Responsive image" />
+                            <img
+                                src={window.location.origin + "/hj/img/logo.png"}
+                                className="img-fluid" alt="Responsive image1" />
                         </div>
                         <div className="col-md-4  col-5 d-flex justify-content-center align-items-center">
                             <button type="button" className="btn btn-link hj-index-login">ورود / ثبت نام</button>
@@ -38,22 +40,26 @@ const Header: React.FC = () => {
                             <ul className="navbar-nav w-100 text-md-center text-right mt-3">
                                 <div className="col-md-3">
                                     <li className='@Html.IsSelected("Home", "Index","") nav-item'>
-                                        <a asp-action="Index" asp-controller="Home" className="nav-link ">صفحه اصلی </a>
+                                        {/* <a className="nav-link ">صفحه اصلی </a> */}
+                                        <NavLink className="nav-link " to='/' > صفحه اصلی </NavLink>
                                     </li>
                                 </div>
                                 <div className="col-md-2">
                                     <li className='@Html.IsSelected("News", "Index","") nav-item'>
-                                        <a asp-action="Index" asp-controller="News" className="nav-link">اخبار</a>
+                                        {/* <a  className="nav-link">اخبار</a> */}
+                                        <NavLink className="nav-link " to='/newses'  >  اخبار </NavLink>
                                     </li>
                                 </div>
                                 <div className="col-md-2">
                                     <li className='@Html.IsSelected("Contactus", "Index","") nav-item'>
-                                        <a asp-action="ContactUs" asp-controller="Home" className="nav-link">تماس با ما</a>
+                                        {/* <a className="nav-link">تماس با ما</a> */}
+                                        <NavLink className="nav-link " to='/contactUs'  >  تماس با ما </NavLink>
                                     </li>
                                 </div>
                                 <div className="col-md-2">
                                     <li className='@Html.IsSelected("Aboutus", "Index","") nav-item'>
-                                        <a asp-action="AboutUs" asp-controller="Home" className="nav-link">درباره ما</a>
+                                        {/* <a className="nav-link">درباره ما</a> */}
+                                        <NavLink className="nav-link " to='/aboutUs'>   درباره ما  </NavLink>
                                     </li>
                                 </div>
                                 <div className="col-md-3">
@@ -71,9 +77,9 @@ const Header: React.FC = () => {
                 </div>
             </div>
         </div>
-        /* @*........end navbar.......*@ */ 
-        
-        
+        /* @*........end navbar.......*@ */
+
+
     )
 }
 

@@ -36,6 +36,14 @@ namespace Helper
             services.AddDbContext<ApplicationDbContext>(options =>
               options.UseSqlServer(
                   Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
+                });
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -127,7 +135,7 @@ namespace Helper
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCors("CorsPolicy");
             //app.UseEndpoints(endpoints =>
             //{
             //    endpoints.MapControllerRoute(

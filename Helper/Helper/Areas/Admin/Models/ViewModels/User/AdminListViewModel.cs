@@ -23,5 +23,7 @@ namespace Helper.Areas.Admin.Models.ViewModels.User
 
         public string PhotoAddress { get; set; }
 
+        public string Username { get; set; }
+
     }
 }
