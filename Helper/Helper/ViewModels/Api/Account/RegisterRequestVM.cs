@@ -21,10 +21,16 @@ namespace Helper.ViewModels.Api.Account
 
 
 
-        [Required(ErrorMessage ="")]
+        [Required(ErrorMessage = "این فیلد الزامیست")]
         [EmailAddress(ErrorMessage ="به فرمت  ایمیل وارد کنید")]
         [Display(Name = "ایمیل")]
         public string Email { get; set; }
+
+
+        /// <summary>
+        /// قوانین را مپذیرم؟
+        /// </summary>
+        public bool AcceptRules { get; set; }
 
     }
 }

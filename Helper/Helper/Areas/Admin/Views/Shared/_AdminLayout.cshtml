@@ -1,5 +1,9 @@
-﻿@{
+﻿@inject IHttpContextAccessor  HttpContextAccessor
+@{
     Layout = null;
+    var claims = HttpContextAccessor.HttpContext.User.Claims;
+    var PhotoAddress=  claims.Where(c => c.Type == "PhotoAddress").Select(c => c.Value).FirstOrDefault();
+
 }
 
 <!DOCTYPE html>
@@ -51,17 +55,17 @@
                     </a>
                 </li>
                 <!-- end::navigation-toggler -->
-
+               
                 <li class="nav-item">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ایجاد</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a asp-action="create" asp-controller="admins" asp-area="admin" class="dropdown-item">ادمین</a>
-                        <a asp-action="create" asp-controller="slides" asp-area="admin" class="dropdown-item">اسلاید‌</a>
-                        <a asp-action="Index" asp-controller="settings" asp-area="admin" class="dropdown-item">تنظیمات</a>
+                        <a asp-action="create" asp-controller="admins" asp-area="admin" class="@Html.IsSelected("Admins", "Create","admin","active") dropdown-item">ادمین</a>
+                        <a asp-action="create" asp-controller="slides" asp-area="admin" class="@Html.IsSelected("Slides", "Create","admin","active") dropdown-item">اسلاید‌</a>
+                        <a asp-action="Index" asp-controller="settings" asp-area="admin" class="@Html.IsSelected("Settings", "Index","admin","active") dropdown-item">تنظیمات</a>
 
                     </div>
                 </li>
-            
+
             </ul>
         </div>
 
@@ -75,12 +79,12 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <a  asp-action="LogOut"  asp-controller="admins" asp-area="admin" class="dropdown-item">خروج</a>
-                            <a  asp-action="Profile"  asp-controller="admins" asp-area="admin" class="dropdown-item">پروفایل</a>
+                            <a asp-action="LogOut" asp-controller="admins" asp-area="admin" class="dropdown-item">خروج</a>
+                            <a asp-action="Profile" asp-controller="admins" asp-area="admin" class="dropdown-item">پروفایل</a>
                         }
                         @*<a href="#" class="dropdown-item">دسته</a>
-                        <a href="#" class="dropdown-item">محصول</a>
-                        <a href="#" class="dropdown-item">گزارش</a>*@
+                            <a href="#" class="dropdown-item">محصول</a>
+                            <a href="#" class="dropdown-item">گزارش</a>*@
                     </div>
                 </li>
 
@@ -94,7 +98,7 @@
                 </li>
                 <!-- end::header minimize/maximize -->
 
-                
+
             </ul>
 
             <!-- begin::mobile header toggler -->
@@ -118,10 +122,10 @@
 
             <div class="navigation-menu-tab">
                 <div>
-                    <div class="navigation-menu-tab-header" data-toggle="tooltip" title="رکسانا رادمهر" data-placement="right">
+                    <div class="navigation-menu-tab-header" data-toggle="tooltip" title="@User.Identity.Name" data-placement="right">
                         <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
                             <figure class="avatar avatar-sm">
-                                <img src="~/Admin/assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="avatar">
+                                <img src="@PhotoAddress" class="rounded-circle" alt="avatar">
                             </figure>
                         </a>
                         <div class="dropdown-menu dropdown-menu-left dropdown-menu-big">
@@ -130,7 +134,7 @@
                                     <img src="~/Admin/assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="image">
                                 </figure>
                                 <h6 class="d-flex align-items-center justify-content-center">
-                                    رکسانا رادمهر
+                                    @User.Identity.Name
                                     <a href="#" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="ویرایش پروفایل">
                                         <i data-feather="edit-2"></i>
                                     </a>
@@ -199,7 +203,7 @@
                             </a>
                         </li>
                         <li>
-                            <a asp-action="LogOut"  asp-controller="admins" asp-area="admin" data-toggle="tooltip" data-placement="right" title="خروج">
+                            <a asp-action="LogOut" asp-controller="admins" asp-area="admin" data-toggle="tooltip" data-placement="right" title="خروج">
                                 <i data-feather="log-out"></i>
                             </a>
                         </li>
@@ -209,7 +213,7 @@
 
             <!-- begin::navigation menu -->
             @*<partial name="_New" view-data=@(i+1) />*@
-            <partial name="_NavigationPartial"  />
+            <partial name="_NavigationPartial" />
 
             <!-- end::navigation menu -->
 

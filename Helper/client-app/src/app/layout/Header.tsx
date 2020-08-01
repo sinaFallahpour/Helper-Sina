@@ -27,7 +27,7 @@ const Header: React.FC = () => {
                                 className="img-fluid" alt="Responsive image1" />
                         </div>
                         <div className="col-md-4  col-5 d-flex justify-content-center align-items-center">
-                            <button type="button" className="btn btn-link hj-index-login">ورود / ثبت نام</button>
+                            <NavLink to="/login"  className="btn btn-link hj-index-login">ورود / ثبت نام</NavLink>
                         </div>
                     </div>
                     {/* @*......navbarbootsrap.....*@ */}

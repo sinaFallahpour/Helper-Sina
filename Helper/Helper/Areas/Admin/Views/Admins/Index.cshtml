@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Helper.Areas.Admin.Models.ViewModels.User.AdminListViewModel>
-
+@using Microsoft.AspNetCore.Identity;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -38,26 +38,23 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            <img class="_dataTableImage" src="@item.PhotoAddress" />
-                        </td>
-                        <td class="text-center"><a asp-action="Profile" asp-route-Id="@item.Id"> @Html.DisplayFor(modelItem => item.Username)</a>  </td>
-                        <td class="text-center">  @Html.DisplayFor(modelItem => item.Nickname)</td>
-                        <td class="text-center">  @Html.DisplayFor(modelItem => item.FullName)</td>
-                        <td>
+                <tr>
+                    <td>
+                        <img class="_dataTableImage" src="@item.PhotoAddress" />
+                    </td>
+                    <td class="text-center"><a asp-action="Profile" asp-route-Id="@item.Id"> @Html.DisplayFor(modelItem => item.Username)</a>  </td>
+                    <td class="text-center">  @Html.DisplayFor(modelItem => item.Nickname)</td>
+                    <td class="text-center">  @Html.DisplayFor(modelItem => item.FullName)</td>
+                    <td>
+                       
                             <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
-                                    <i class="">تصحیح </i>
+                                <a type="button" class="btn btn-warning" asp-action="Profile" asp-route-Username="@item.Username">
+                                    <i class="">پروفایل </i>
                                 </a>
-
-                                @*<a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
-                                        <i class="">حذف</i>
-                                    </a>*@
                             </div>
-                        </td>
-
-                    </tr>
+                       
+                    </td>
+                </tr>
                 }
             </tbody>
             <tfoot>

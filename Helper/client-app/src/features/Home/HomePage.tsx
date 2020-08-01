@@ -185,7 +185,6 @@ const HomePage: React.FC = () => {
                     </div>
 
                 </div>
-
                 {/*  //@*..........work...........*@    */}
                 <div className="row hj-work-index pt-md-5">
                     <div className="container pt-md-5 mt-5">

@@ -5,97 +5,19 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-@*<h1>Profile</h1>
-
-<h4>AdminProfileViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Profile">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nickname" class="control-label"></label>
-                <input asp-for="Nickname" class="form-control" />
-                <span asp-validation-for="Nickname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Birthdate" class="control-label"></label>
-                <input asp-for="Birthdate" class="form-control" />
-                <span asp-validation-for="Birthdate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NationalCode" class="control-label"></label>
-                <input asp-for="NationalCode" class="form-control" />
-                <span asp-validation-for="NationalCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhotoAddress" class="control-label"></label>
-                <input asp-for="PhotoAddress" class="form-control" />
-                <span asp-validation-for="PhotoAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>*@
 
 
+@section Style{
+    <link href="~/lib/dateicker/datepicker.css" rel="stylesheet" />
+    <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
 
-
-
-
-
-
-
-
-
+}
 
 
 
 <div class="card">
     <div class="card-body">
-        <h6 class="card-title"> فرم ایجاد اسلایدر</h6>
+        <h3> پروفایل </h3>
 
 
 
@@ -103,6 +25,11 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <div class="form-row">
+                <div class="  _editimageContainer">
+                    <img src="@Model.PhotoAddress" class="d-block " id="UploadedImage" />
+                </div>
+            </div>
             @if (!string.IsNullOrEmpty(ViewBag.IsSuccess))
             {
                 <span class="text-success d-block text-center"> @ViewBag.IsSuccess   </span>
@@ -146,9 +73,9 @@
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label  for="validationCustom03">نام مستعار</label>
+                    <label for="validationCustom03">نام مستعار</label>
                     <input asp-for="Nickname" class="form-control" id="validationCustom03"
-                        placeholder="نام مستعار" />
+                           placeholder="نام مستعار" />
 
                     <span asp-validation-for="Nickname" class="text-danger"> </span>
                 </div>
@@ -179,7 +106,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="Birthdate" for="validationCustom03"></label>
-                    <input asp-for="Birthdate" class="form-control" id="validationCustom03"
+                    <input asp-for="Birthdate" class="form-control" id="Birthdate"
                            placeholder=@Html.DisplayNameFor(c=>c.Birthdate) />
 
                     <span asp-validation-for="Birthdate" class="text-danger"> </span>
@@ -189,7 +116,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="NationalCode" for="validationCustom03"></label>
-                    <input asp-for="NationalCode" class="form-control" id="validationCustom03"
+                    <input asp-for="NationalCode" class="form-control" id="validationCustom03" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')"
                            placeholder=@Html.DisplayNameFor(c=>c.NationalCode) />
 
                     <span asp-validation-for="NationalCode" class="text-danger"> </span>
@@ -199,7 +126,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="Phone" for="validationCustom03"></label>
-                    <input asp-for="Phone" class="form-control" id="validationCustom03"
+                    <input asp-for="Phone" class="form-control" id="validationCustom03" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')"
                            placeholder=@Html.DisplayNameFor(c=>c.Phone) />
 
                     <span asp-validation-for="Phone" class="text-danger"> </span>
@@ -208,14 +135,14 @@
 
 
             @*<div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="Gender" for="validationCustom03"></label>
-                <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()">
-                    <option selected="selected" value="">Please select</option>
-                </select>
-                <span asp-validation-for="Gender" class="text-danger"> </span>
-            </div>
-        </div>*@
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Gender" for="validationCustom03"></label>
+                        <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()">
+                            <option selected="selected" value="">Please select</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger"> </span>
+                    </div>
+                </div>*@
 
 
             <div class="form-row">
@@ -240,33 +167,6 @@
                     <span asp-validation-for="Address" class="text-danger"> </span>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            @* <input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">*@
-            <!-- fileUpload checkBox && selectOption -->
-            @*<div class="form-row">
-
-            <div class="col-md-6 mb-3">
-                <div class="custom-file">
-                   <input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">
-                    <label class="form-contro custom-file-label" for="customFile">انتخاب فایل </label>
-                </div>
-                <span asp-validation-for="Photo" class="text-danger"> </span>
-
-            </div>
-        </div>*@
 
 
             <button type="submit" class="btn btn-primary">ارسال</button>
@@ -305,9 +205,13 @@
 
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
+    <script src="~/lib/dateicker/kamadatepicker.js"></script>
 
     <script>
+
+        kamaDatepicker('Birthdate');
+        $("#Birthdate").keypress(function (event) { event.preventDefault(); });
+
 
         //  اعتبارسنجی فرم
         window.addEventListener('load', function () {

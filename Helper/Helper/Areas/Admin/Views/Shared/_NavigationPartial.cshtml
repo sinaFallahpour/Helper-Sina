@@ -5,7 +5,7 @@
     <div>
         <div id="navigation-logo">
             <a href="index.html">
-                <img class="logo" src="~/Admin/assets/media/image/logo-F.png" alt="logo">
+                <img class="logo" style="width:60px" src="~/hj/img/logo.png" alt="logo">
                 <img class="logo-light" src="~/Admin/assets/media/image/logo-light.png" alt="light logo">
             </a>
         </div>
@@ -108,25 +108,28 @@
         <div class="open" id="elements">
             <ul>
                 <li class="navigation-divider"> </li>
+                <li class="navigation-divider"> </li>
 
-                <li><a class='@Html.IsSelected("Aboutus", "Index","admin")' href="@Url.Action("Index","aboutUs")">مدیریت درباره ما</a></li>
-                <li><a class='@Html.IsSelected("Slides", "Index","admin")' href="@Url.Action("Index","Slides")">مدیریت   اسلاید</a></li>
-                <li><a class='@Html.IsSelected("Settings", "Index","admin")' href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>
+                <li><a class='@Html.IsSelected("Slides", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","Slides")">مدیریت   اسلاید</a></li>
+                <li><a class='@Html.IsSelected("Settings", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>
 
 
 
                 @* <li><a  class='@Html.IsSelected("Home", "settings","admin")' href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>*@
 
 
+                <li><a class='@Html.IsSelected("Admins", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
+                <li><a class='@Html.IsSelected("Admins", "Profile","admin","btn btn-primary text-white shadow-lg") d-block text-center ' href="@Url.Action("Profile","admins")">  پروفایل</a></li>
 
 
-                <li>
-                    <a href="#">مدیریت ادمین</a>
+
+                @*<li>
+                    <a class="d-block text-center" href="#">مدیریت ادمین</a>
                     <ul>
-                        <li><a  class='@Html.IsSelected("Admins", "Index","admin") _menuNav' href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
-                        <li><a class='@Html.IsSelected("Admins", "Profile","admin")' href="@Url.Action("Profile","admins")">  پروفایل</a></li>
+                        <li><a class='@Html.IsSelected("Admins", "Index","admin","btn btn-primary text-white") ' href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
+                        <li><a class='@Html.IsSelected("Admins", "Profile","admin","btn btn-primary text-white")' href="@Url.Action("Profile","admins")">  پروفایل</a></li>
                     </ul>
-                </li>
+                </li>*@
             </ul>
         </div>
     </div>

@@ -16,8 +16,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Web.Mvc;
 using Helper.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
-
+using Helper.Common;
+using Helper.Models.Service;
 
 namespace Helper
 {
@@ -87,6 +87,17 @@ namespace Helper
                     options.ViewLocationFormats.Add("/{0}.cshtml");
                 });
 
+
+
+
+
+
+
+
+            //add more claim to  cookie
+            services.AddTransient<IUserClaimsPrincipalFactory<ApplicationUser>, MyClaimPrincipalFactory>();
+
+
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -107,8 +118,8 @@ namespace Helper
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
 
-           
-            //services.AddScoped<AboutUsRepository>();
+
+            services.AddScoped<JwtGenerator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

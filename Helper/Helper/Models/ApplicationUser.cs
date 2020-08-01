@@ -12,9 +12,6 @@ namespace Helper.Models
     public class ApplicationUser : IdentityUser
     {
 
-        public string Username { get; set; }
-
-        public string Email { get; set; }
 
         [StringLength(maximumLength: 100,ErrorMessage ="حداکثر 100 کاراکتر وارد کنید")]
         [Display(Name = "نام ")]

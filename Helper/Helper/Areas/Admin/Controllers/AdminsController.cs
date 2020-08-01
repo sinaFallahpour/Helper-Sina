@@ -58,11 +58,11 @@ namespace Helper.Areas.Admin.Controllers
                 currentUsername = User.Identity.Name;
             }
             //var currentAdnmin = await _userManager.FindByNameAsync(currentUsername);
-            var UserProfile = await _context.Users.Where(c => c.Username == currentUsername)
-            .Select(o => new AdminProfileViewModel
+            var UserProfile = await _context.Users.Where(c => c.UserName == currentUsername)
+            .Select(o => new AdminProfileViewModel       
             {
                 Id = o.Id,
-                Username = o.Username,
+                Username = o.UserName,
                 Email = o.Email,
                 Nickname = o.Nickname,
                 FirstName = o.FirstName,
@@ -100,7 +100,7 @@ namespace Helper.Areas.Admin.Controllers
                 {
                     var profileFromDb = await _userManager.FindByIdAsync(model.Id);
                     //_context.Users.SingleOrDefault(c => c.Id == model.Id);
-                    profileFromDb.Username = model.Username;
+                    profileFromDb.UserName = model.Username;
                     profileFromDb.Email = model.Email;
                     profileFromDb.Nickname = model.Nickname;
                     profileFromDb.FirstName = model.FirstName;
