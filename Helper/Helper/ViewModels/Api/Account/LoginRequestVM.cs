@@ -11,11 +11,15 @@ namespace Helper.ViewModels.Api.Account
 
 
         [Required(ErrorMessage = "این فیلد الزامیست")]
+        [MinLength(3, ErrorMessage = "حداقل 3 کاراکتر وارد کنید")]
+        [MaxLength(20, ErrorMessage = "حداکثر 20 کاراکتر وارد کنید")]
         [Display(Name = "نام کاربری")]
         public string UserName { get; set; }
 
 
         [Required(ErrorMessage = "این فیلد الزامیست")]
+        [MinLength(6, ErrorMessage = "حداقل 6 کاراکتر وارد کنید")]
+        [MaxLength(20, ErrorMessage = "حداکثر 20 کاراکتر وارد کنید")]
         [DataType(DataType.Password)]
         [Display(Name = "رمز عبور")]
         public string Password { get; set; }

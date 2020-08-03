@@ -24,13 +24,25 @@
 
             @if (!string.IsNullOrEmpty(ViewBag.IsSuccess))
             {
-                <span class="text-success d-block text-center"> @ViewBag.IsSuccess   </span>
+
+                <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
+                    <strong>   @ViewBag.IsSuccess</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
             }
 
 
             @if (!string.IsNullOrEmpty(ViewBag.Error))
             {
-                <span class="text-success d-block text-center"> @ViewBag.Error   </span>
+                <div class="alert alert-warning alert-dismissible fade show col-md-8" role="alert">
+                    <strong>  @ViewBag.Error </strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             }
 
 
@@ -105,18 +117,18 @@
 
 
             @*<div class="form-row">
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Gender" for="validationCustom03"></label>
-                    <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()">
-                          <option selected="selected" value="">Please select</option>
-                    </select>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Gender" for="validationCustom03"></label>
+                <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()">
+                      <option selected="selected" value="">Please select</option>
+                </select>
 
 
-                 
 
-                    <span asp-validation-for="Gender" class="text-danger"> </span>
-                </div>
-            </div>*@
+
+                <span asp-validation-for="Gender" class="text-danger"> </span>
+            </div>
+        </div>*@
 
 
 

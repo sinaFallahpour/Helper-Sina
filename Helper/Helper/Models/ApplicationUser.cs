@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Helper.Models.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -80,10 +81,21 @@ namespace Helper.Models
 
 
 
+
+
+        //relation with likes
+        public virtual ICollection<TBL_NewsLike> NewsLike { get; set; }
+
+        //realtion with comments
+        public virtual ICollection<TBL_NewsComment> NewsComments { get; set; }
+
+
+
+
         //public virtual ICollection<IdentityUserRole<int>> Roles { get; } = new List<IdentityUserRole<int>>();
 
 
-        public ICollection<IdentityUserRole<string>> UserRole { get; set; }
+        //public ICollection<IdentityUserRole<string>> UserRole { get; set; }
 
 
         #endregion  Relation

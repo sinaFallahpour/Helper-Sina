@@ -49,9 +49,24 @@ namespace Helper.Models.Utilities
         public static bool IsImage(this IFormFile file)
         {
             var extention = Path.GetExtension(file.FileName).ToLower();
-            return ( extention == ".jpeg" || extention == ".jpg" || extention == ".png");
+            return (extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == ".bmp" || extention == ".gif" || extention == ".tiff");
+
         }
 
+
+
+
+        /// <summary>
+        /// آیا فایل  فیلم  است؟
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static bool IsVideo(this IFormFile file)
+        {
+            var extention = Path.GetExtension(file.FileName).ToLower();
+            return (extention == ".mp4" || extention == ".avi" || extention == ".hd" || extention == ".mpg" || extention == ".gif" || extention == ".vtt" || extention == ".mov" || extention == ".mkv" || extention == ".wmv");
+
+        }
 
 
 

@@ -137,27 +137,102 @@ namespace Helper.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Helper.Models.Entities.TBL_AboutUs", b =>
+            modelBuilder.Entity("Helper.Models.Entities.TBL_NewsArticleVideo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .IsRequired()
+                    b.Property<string>("ArticlePhotoAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("bit");
+                    b.Property<int>("CommentsCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreateDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1500)")
+                        .HasMaxLength(1500);
+
+                    b.Property<int>("LikesCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NewsType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeenCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasColumnType("nvarchar(550)")
+                        .HasMaxLength(550);
+
+                    b.Property<string>("VideoAddress")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TBL_AboutUs");
+                    b.ToTable("TBL_NewsArticleVideo");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_NewsComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("NewsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1500)")
+                        .HasMaxLength(1500);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NewsId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TBL_NewsComment");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_NewsLike", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CrateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("NewsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NewsId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TBL_NewsLike");
                 });
 
             modelBuilder.Entity("Helper.Models.Entities.TBL_Setting", b =>
@@ -187,7 +262,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 7, 30, 22, 28, 40, 262, DateTimeKind.Local).AddTicks(2289),
+                            CreatedAt = new DateTime(2020, 8, 2, 9, 56, 29, 772, DateTimeKind.Local).AddTicks(5263),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -195,7 +270,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 7, 30, 22, 28, 40, 265, DateTimeKind.Local).AddTicks(7513),
+                            CreatedAt = new DateTime(2020, 8, 2, 9, 56, 29, 777, DateTimeKind.Local).AddTicks(2837),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -211,7 +286,8 @@ namespace Helper.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(550)")
+                        .HasMaxLength(550);
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -257,15 +333,15 @@ namespace Helper.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ffbb377b-05df-4647-8258-643b40a86a9e",
-                            ConcurrencyStamp = "12201b9f-f3e2-4ead-a384-a51d071a974d",
+                            Id = "cb2f58ba-d33a-49a4-8785-1b297d2b7b92",
+                            ConcurrencyStamp = "ddd20dbd-4f7f-4b17-947b-0c34ece0d1c9",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "df779b39-c96a-4cbf-8c4f-47f13b290d58",
-                            ConcurrencyStamp = "084b5c8e-2ff0-414f-9840-e939e6481bc4",
+                            Id = "e0f939b9-db87-4144-baa0-e0b0f26dc028",
+                            ConcurrencyStamp = "f78f0f71-5dbd-4d95-b5c5-bbfd25b42525",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -349,12 +425,7 @@ namespace Helper.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("RoleId");
 
@@ -387,6 +458,28 @@ namespace Helper.Migrations
                         .HasForeignKey("CreatedAdminId");
                 });
 
+            modelBuilder.Entity("Helper.Models.Entities.TBL_NewsComment", b =>
+                {
+                    b.HasOne("Helper.Models.Entities.TBL_NewsArticleVideo", "NewsArticleVideo")
+                        .WithMany("NewsComments")
+                        .HasForeignKey("NewsId");
+
+                    b.HasOne("Helper.Models.ApplicationUser", "User")
+                        .WithMany("NewsComments")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_NewsLike", b =>
+                {
+                    b.HasOne("Helper.Models.Entities.TBL_NewsArticleVideo", "NewsArticleVideo")
+                        .WithMany("NewsLike")
+                        .HasForeignKey("NewsId");
+
+                    b.HasOne("Helper.Models.ApplicationUser", "User")
+                        .WithMany("NewsLike")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -416,10 +509,6 @@ namespace Helper.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Helper.Models.ApplicationUser", null)
-                        .WithMany("UserRole")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")

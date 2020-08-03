@@ -19,11 +19,13 @@ namespace Helper.Models.Service
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(PublicHelper.SECREKEY));
         }
 
-        public string CreateToken(ApplicationUser user)
+        public string CreateToken(ApplicationUser user,string role="user")
         {
+          
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.NameId, user.UserName),
+                new Claim("role",role)
             };
 
             // generate signing credentials
@@ -33,7 +35,9 @@ namespace Helper.Models.Service
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(7),
-                SigningCredentials = creds
+                SigningCredentials = creds,
+                
+                
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

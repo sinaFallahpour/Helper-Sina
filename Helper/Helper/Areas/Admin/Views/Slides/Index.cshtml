@@ -22,6 +22,8 @@
 
 
 
+
+
 <a asp-action="Create" class="btn btn-primary mb-3">ایجاد اسلاید</a>
 <div class="card">
     <div class="card-body">
@@ -42,28 +44,28 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td class="text-center"> @Html.DisplayFor(modelItem => item.Id) </td>
+                    <tr>
+                        <td class="text-center"> @Html.DisplayFor(modelItem => item.Id) </td>
 
-                    <td>
-                        <img class="_dataTableImage" src="@item.PhotoAddress" />
-                    </td>
+                        <td>
+                            <img class="_dataTableImage" src="@item.PhotoAddress" />
+                        </td>
 
-                    <td class="text-center">  @Html.DisplayFor(modelItem => item.Title)</td>
-                    <td class="text-center">  @Html.DisplayFor(modelItem => item.IsActive)</td>
+                        <td class="text-center">  @Html.DisplayFor(modelItem => item.Title)</td>
+                        <td class="text-center">  @Html.DisplayFor(modelItem => item.IsActive)</td>
 
-                    <td>
-                        <div class="btn-group" role="group">
-                            <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
-                                <i class="">تصحیح </i>
-                            </a>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="">تصحیح </i>
+                                </a>
 
-                            <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
-                                <i class="">حذف</i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
+                                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                    <i class="">حذف</i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                 }
             </tbody>
             <tfoot>
@@ -74,7 +76,7 @@
                         @Html.DisplayNameFor(model => model.Title)
                     </th>
                     <th class="text-center">
-                      وضعیت
+                        وضعیت
                     </th>
                     <th> </th>
 

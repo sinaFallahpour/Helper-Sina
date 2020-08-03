@@ -11,6 +11,8 @@ using Helper.ViewModels;
 using Helper.Extention;
 using Helper.Areas.Admin.Models.ViewModels.User;
 using Helper.Controllers;
+using Helper.Areas.Admin.Models.ViewModels.NewFolder;
+using Helper.Areas.Admin.Models.ViewModels.News;
 namespace Helper.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -20,7 +22,8 @@ namespace Helper.Data
         {
         }
 
-       
+   
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -29,14 +32,21 @@ namespace Helper.Data
             builder.Seed();
         }
 
-        public DbSet<TBL_AboutUs> TBL_AboutUs { get; set; }
         public DbSet<TBL_Setting> TBL_Settings { get; set; }
 
         public DbSet<TBL_Slide> TBL_Sliders { get; set; }
 
-        public DbSet<Helper.Areas.Admin.Models.ViewModels.User.AdminProfileViewModel> AdminProfileViewModel { get; set; }
 
 
+        public DbSet<TBL_NewsArticleVideo> TBL_NewsArticleVideo { get; set; }
+
+        public DbSet<TBL_NewsComment> TBL_NewsComment { get; set; }
+
+        public DbSet<TBL_NewsLike> TBL_NewsLike { get; set; }
+
+        public DbSet<Helper.Areas.Admin.Models.ViewModels.NewFolder.NewsListViewModel> NewsListViewModel { get; set; }
+
+        public DbSet<Helper.Areas.Admin.Models.ViewModels.News.CreateArticleViewModel> CreateArticleViewModel { get; set; }
 
 
 

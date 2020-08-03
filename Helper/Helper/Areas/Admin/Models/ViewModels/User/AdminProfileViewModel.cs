@@ -16,7 +16,7 @@ namespace Helper.Areas.Admin.Models.ViewModels.User
         [Required(ErrorMessage = "این فیلد الزامیست")]
         [MinLength(4, ErrorMessage = "حداقل 4 کاراکتر وارد کنید")]
         [MaxLength(20, ErrorMessage = "حداقل 20 کاراکتر وارد کنید")]
-        [Display(Name = "ایمیل")]
+        [Display(Name = "نام کاربری")]
         public string Username { get; set; }
 
 

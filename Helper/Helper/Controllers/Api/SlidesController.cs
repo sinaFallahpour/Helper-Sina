@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Helper.Models.Enums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Helper.Controllers.Api
 {
@@ -21,13 +23,14 @@ namespace Helper.Controllers.Api
             _context = context;
         }
 
-        
+
 
         /// <summary>
-        /// 
+        /// /api/slides/list?model=1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,Roles ="Admin")]
         [HttpGet("List")]
         public IActionResult List(SlideType model)
         {

@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
 
 import CountUp from 'react-countup';
-import { Swiper, SwiperSlide } from 'swiper/react';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+import Slides from './slides';
 
 const HomePage: React.FC = () => {
 
@@ -93,11 +94,11 @@ const HomePage: React.FC = () => {
                         <div className="row mt-md-5 pt-md-5">
                             <div className="row w-100 p-0 m-0 pt-md-5 mt-md-5 mx-auto hj-work-header">
                                 {/* src={"/ReactPages/" + Rectangle} */}
-                                <div className="col-4 text-left pt-3"><img src={window.location.origin + "/hj/img/Rectangle 2886.png"} className="img-fluid" alt="imm"/></div>
+                                <div className="col-4 text-left pt-3"><img src={window.location.origin + "/hj/img/Rectangle 2886.png"} className="img-fluid" alt="imm" /></div>
                                 <div className="col-4 text-center pt-3  pt-md-2 pt-lg-0 mx-auto"> <span className="text-center size-33  hj-work"> خدمات </span></div>
 
                                 {/* src={"/ReactPages/" + Rectangle} */}
-                                <div className="col-4 text-right pt-3"><img src={window.location.origin + "/hj/img/Rectangle 2886.png"} className="img-fluid" alt="img"/></div>
+                                <div className="col-4 text-right pt-3"><img src={window.location.origin + "/hj/img/Rectangle 2886.png"} className="img-fluid" alt="img" /></div>
                             </div>
                         </div>
                         <div className="row text-center mt-5 ">
@@ -194,8 +195,8 @@ const HomePage: React.FC = () => {
                                 {/* src={"/ReactPages/" + Rectangle} */}
                                 <img
                                     src={window.location.origin + "/hj/img/Rectangle 2886.png"}
-                                    className="img-fluid" 
-                                    alt="im"/>
+                                    className="img-fluid"
+                                    alt="im" />
 
                             </div>
                             <div className="col-md-4 col-6 text-center mx-auto mt-md-0 mt-3"> <span className="text-center size-33 hj-work">چطور کار میکنه</span></div>
@@ -203,7 +204,7 @@ const HomePage: React.FC = () => {
                                 {/* src={"/ReactPages/" + Rectangle}  */}
                                 <img
                                     src={window.location.origin + "/hj/img/Rectangle 2886.png"}
-                                    className="img-fluid" alt="img8"/>
+                                    className="img-fluid" alt="img8" />
                             </div>
                         </div>
 
@@ -219,7 +220,7 @@ const HomePage: React.FC = () => {
                                     {/* src={window.location.origin + "/ReactPages/" + borderBottom} */}
                                     <img
                                         src={window.location.origin + "/hj/img/border-bottom.png"}
-                                        className="img-fluid" alt="img11"/>
+                                        className="img-fluid" alt="img11" />
                                 </div>
 
                                 <div className="row pt-3 mx-auto">
@@ -256,7 +257,7 @@ const HomePage: React.FC = () => {
                                     {/* src={window.location.origin + "/ReactPages/" + borderBottom} */}
                                     <img
                                         src={window.location.origin + "/hj/img/border-bottom.png"}
-                                        className="img-fluid" alt="img12"/>
+                                        className="img-fluid" alt="img12" />
                                 </div>
                                 <div className="row pt-3">
                                     <span className="text-justify hj-intro-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span>
@@ -344,11 +345,11 @@ const HomePage: React.FC = () => {
                                 {/*   //-- Swiper JS --*/}
 
 
-
+                                <Slides />
 
 
                                 {/*   //---- Swiper -------*/}
-
+                                {/* 
                                 <Swiper
                                     className="swiper-container swiper-container1"
                                     effect="coverflow"
@@ -429,28 +430,8 @@ const HomePage: React.FC = () => {
                                     </div>
                                     <div className="swiper-pagination"></div>
                                 </Swiper>
+ */}
 
-
-
-
-                                {/* <div className="swiper-container swiper-container1">
-                                    <div className="swiper-wrapper">
-                                        <div className="swiper-slide">
-                                            <img
-                                                src={window.location.origin + "/hj/img/slider1 (1).png"}
-
-                                                className="img-fluid" alt="Responsive image11" />
-                                            <div className="row w-100 text-justify Text-blue mx-auto">
-                                                <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>تایتل</b></span></div>
-                                                <div className="col-12 text-cener mx-auto py-2"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span></div>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                    <div className="swiper-pagination"></div>
-                                </div> */}
 
 
                                 {/*   //-- Swiper JS --*/}

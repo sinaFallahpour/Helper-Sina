@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Helper.Areas.Admin.Models.ViewModels.User;
 using Helper.Data;
+using Helper.Extention;
 using Helper.Models;
 using Helper.Models.Enums;
 using Helper.Models.Utilities;
@@ -128,7 +129,13 @@ namespace Helper.Areas.Admin.Controllers
                             var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/User");
                             uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
                             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                            model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await model.Photo.CopyToAsync(stream);
+                            }
+
+                            //model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
 
                             //Delete LastImage Image
                             if (!string.IsNullOrEmpty(profileFromDb.PhotoAddress))
@@ -146,7 +153,13 @@ namespace Helper.Areas.Admin.Controllers
                         }
                     }
 
+
                     var result = _context.SaveChanges();
+                    if (result > 0)
+                    {
+                        //refresh Cookie
+                        await HttpContext.RefreshLoginAsync();
+                    }
                     return RedirectToAction(nameof(Index));
 
                 }
@@ -217,7 +230,7 @@ namespace Helper.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = await _userManager.CreateAsync(new ApplicationUser
+                var user = new ApplicationUser
                 {
                     AccessFailedCount = 0,
                     AvatarUrl = "",
@@ -235,10 +248,12 @@ namespace Helper.Areas.Admin.Controllers
                     Phone = "",
                     PhoneNumber = "",
                     CreatedAdminId = User.FindFirstValue(ClaimTypes.NameIdentifier)
-                }, model.Password);
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(model.Username), Static.ADMINROLE);
+                    await _userManager.AddToRoleAsync(user, Static.ADMINROLE);
                     ViewBag.IsSuccess = "ثبت موفثیت آمیز";
                     return View(model);
                 }

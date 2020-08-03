@@ -18,6 +18,10 @@ using Helper.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Helper.Common;
 using Helper.Models.Service;
+using API.Middleware;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Helper
 {
@@ -37,6 +41,7 @@ namespace Helper
               options.UseSqlServer(
                   Configuration.GetConnectionString("DefaultConnection")));
 
+            //cors origin
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", policy =>
@@ -44,9 +49,12 @@ namespace Helper
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
                 });
             });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+
+            //setting  of identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -61,6 +69,9 @@ namespace Helper
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
+
+            //setting of cookie
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/accessDenied";
@@ -73,6 +84,28 @@ namespace Helper
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
             });
+
+
+
+            //jwt seeting 
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(PublicHelper.SECREKEY));
+
+
+            services.AddAuthentication()
+               .AddCookie(cfg => { cfg.SlidingExpiration = true; })
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = key,
+                        ValidateAudience = false,
+                        ValidateIssuer = false
+                    };
+                });
+
+
+
 
             services.AddSession();
 
@@ -125,6 +158,7 @@ namespace Helper
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

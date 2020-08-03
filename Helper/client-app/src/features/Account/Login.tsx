@@ -1,34 +1,94 @@
-import React, { useRef, createRef, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
+import { NavLink, Redirect } from 'react-router-dom'
+import { Form, Button } from 'semantic-ui-react';
+import { history } from '../..';
+
+import { IUserFormValues } from '../../app/models/user';
 
 
-// jQuery(document).ready(function ($) {
-//     tab = $('.tabs h3 a');
+//tyhese are for formValidation
+import { Form as FinalForm, Field } from 'react-final-form';
+import { FORM_ERROR } from 'final-form';
 
-//     tab.on('click', function (event) {
-//         event.preventDefault();
-//         tab.removeClass('active');
-//         $(this).addClass('active');
 
-//         tab_content = $(this).attr('href');
-//         $('div[id$="tab-content"]').removeClass('active');
-//         $(tab_content).addClass('active');
-//     });
-// });
+import {
+    combineValidators,
+    isRequired,
+    composeValidators,
+    hasLengthGreaterThan,
+    matchesPattern,
+    hasLengthLessThan
+
+} from 'revalidate';
+
+import { RootStoreContext } from '../../app/stores/rootStore';
+import TextInput from '../../app/common/form/TextInput';
+import ErrorMessage from '../../app/common/form/ErrorMessage';
+
+
+
+
+
+//register validation
+const registervalidate = combineValidators({
+    email: composeValidators(
+        isRequired({ message: 'ایمیل الزامیست' }),
+        matchesPattern(/^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/
+        )({ message: 'به فرمت ایمیل وارد کنید' }),
+        hasLengthLessThan(30)({ message: "حداکثر 30 کاراکتر وارد کنید" })
+    )('email'),
+
+    password: composeValidators(
+        isRequired({ message: 'پسورد الزامیست' }),
+        hasLengthGreaterThan(6)({ message: "حداقل 6 کاراکتر وارد کنید" }),
+        hasLengthLessThan(20)({ message: "حداکثر 20 کاراکتر وارد کنید" })
+
+    )('password'),
+
+    username: composeValidators(
+        isRequired({ message: ' نام کاربری الزامیست ' }),
+        hasLengthGreaterThan(3)({ message: "حداقل 3 کاراکتر وارد کنید" }),
+        hasLengthLessThan(20)({ message: " حداکثر 20 کاراکتر وارد کنید " })
+    )('username'),
+});
+
+
+//login validate
+const loginvalidate = combineValidators({
+
+    password: composeValidators(
+        isRequired({ message: 'پسورد الزامیست' }),
+        hasLengthGreaterThan(6)({ message: "حداقل 6 کاراکتر" }),
+        hasLengthLessThan(20)({ message: "حداکثر 20 کاراکتر وارد کنید" })
+    )('password'),
+
+    username: composeValidators(
+        isRequired({ message: ' نام کاربری الزامیست ' }),
+        hasLengthGreaterThan(3)({ message: "حداقل 3 کاراکتر وارد کنید" }),
+        hasLengthLessThan(20)({ message: " حداکثر 20 کاراکتر وارد کنید " })
+    )('username'),
+})
+
+const getReturnURL = (loc: any) => {
+    const { state } = loc;
+    return state ? state.from.pathname : "/profile";
+}
 
 
 const Login = () => {
 
+    const rootStore = useContext(RootStoreContext);
+    const { login, register, isLoggedIn } = rootStore.userStore;
 
     const [showLogin, setShowLogin] = useState(false)
 
     const handleTabChange = (showRegister: boolean) => {
-        if (showLogin != showRegister)
+        if (showLogin !== showRegister)
             setShowLogin(showRegister)
-          
-
     }
 
+
+    if (isLoggedIn) return <Redirect to="/profile" />
 
     return (
         <>
@@ -58,30 +118,76 @@ const Login = () => {
 
                         <div className="tabs-content mt-4">
 
-
-
-
-
-
                             {!showLogin ?
 
 
                                 <div id="signup-tab-content" className="active text-center">
-                                    <form className="signup-form" action="" method="post">
-                                        <input autoComplete="off" type="text" className="input text-center  py-3 my-2" id="user_name" placeholder="نام کاربری" />
-                                        <input type="email" className="input text-center  py-3 my-2" id="user_email" autoComplete="off" placeholder="ایمیل" />
 
-                                        <input type="password" className="input text-center  py-3 my-2" id="user_pass" autoComplete="off" placeholder="رمز عبور" />
-                                        <input type="checkbox" className="checkbox" id="rules" />
+                                    {/* ........register from.................s   */}
+                                    <FinalForm
+                                        onSubmit={(values: IUserFormValues) =>
+                                            register(values, '/profile')
+                                                .catch(error => ({
+                                                    [FORM_ERROR]: error
+                                                }))
+                                        }
+                                        validate={registervalidate}
+                                        render={({
+                                            handleSubmit,
+                                            submitting,
+                                            submitError,
+                                            invalid,
+                                            pristine,
+                                            dirtySinceLastSubmit,
+                                            form,
+                                            touched,
+                                            error
+                                        }) => (
 
 
-                                        <label className="pr-4 my-3 mr-2 rules"><a href="#">قوانین</a> را میپذیرم   </label>
-                                        <input type="submit" className="button" value="ثبت نام " />
-                                    </form>
+                                                <Form
+                                                    onSubmit={handleSubmit} error
 
+                                                    className="signup-form"
+                                                >
+                                                    {submitError && !dirtySinceLastSubmit && (
+                                                        <ErrorMessage
+                                                            error={submitError}
+                                                        />
+                                                    )}
+
+                                                    <Field name='username' component={TextInput} type="text" id="user_name" className="input text-center  py-3 my-2" placeholder='نام کاربری' />
+                                                    <Field name='email' component={TextInput} type="email" id="user_email" className="input text-center  py-3 my-2" placeholder='ایمیل' />
+                                                    <Field name='password' type="password" component={TextInput} id="user_pass" className="input text-center  py-3 my-2" placeholder='رمز عبور' />
+                                                    <br></br>
+
+                                                    {/* <input type="checkbox" name="acceptRules" className="checkbox" style={{ visibility: "unset" }} id="rules" /> */}
+                                                    <Field name='acceptRules' type="checkbox" component={TextInput} id="acceptRules" className="checkboxss" style={{ visibility: "unset" }} />
+                                                    <label className="pr-4 my-3 mr-2 "> قوانین را میپذیرم   </label>
+
+                                                    {submitting ?
+                                                        <button className="button" type="button" disabled>
+                                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                            <span className="sr-only">Loading...</span>
+                                                        </button>
+                                                        :
+                                                        <Button
+                                                            // disabled={(invalid && !dirtySinceLastSubmit) || pristine}
+                                                            className={((invalid && !dirtySinceLastSubmit) || pristine) ? 'button btn disabled' : 'button'}
+                                                            disabled={((invalid && !dirtySinceLastSubmit) || pristine)}
+                                                            loading={submitting}
+                                                            color='teal'
+                                                            content='ثبت نام'
+
+                                                            fluid
+                                                        />
+                                                    }
+                                                    {/* <button type="submit" className="button" value="ثبت نام" >  </button> */}
+                                                </Form>
+                                            )}
+                                    />
                                     <div className="help-text">
-
-                                        <p><NavLink to="/r">  قبلا ثبت نام کرده ام !</NavLink></p>
+                                        <p><a onClick={() => setShowLogin(true)} >  قبلا ثبت نام کرده ام !</a></p>
                                     </div>
                                     <hr />
                                     <div className="row w-100 mx-auto text-center">
@@ -89,7 +195,7 @@ const Login = () => {
                                     </div>
                                     <div className="row w-100 mx-auto text-center">
                                         <a href="#" className="mx-auto">
-                                            <img src= {window.location.origin +"/hj/img/google-icon.png"}
+                                            <img src={window.location.origin + "/hj/img/google-icon.png"}
                                                 className="text-center mx-auto img-fluid"
                                                 alt="img" /><br />
                                             <span className="text-center w-100">ثبت نام با گوگل</span>
@@ -99,28 +205,79 @@ const Login = () => {
                                 :
 
                                 <div id="login-tab-content active">
-                                    <form className=" login-form text-center" action="" method="post">
-                                        <input type="text" className="input text-center  py-3 my-2" id="user_login" autoComplete="off" placeholder="نام کاربری " />
-                                        <input type="password" className="input text-center  py-3 my-2" id="user_pass" autoComplete="off" placeholder="رمز عبور" />
+                                    {/* <form className=" login-form text-center" action="" method="post"> */}
 
-                                        <input type="checkbox" className="checkbox" id="remember_me" />
 
-                                        <label className="pr-4 my-3 "> مرا به خاطر بسپار</label>
+                                    {/* ........login from.................s   */}
+                                    <FinalForm
+                                        onSubmit={(values: IUserFormValues) =>
+                                            login(values, getReturnURL(history.location)).catch(error => ({
+                                                [FORM_ERROR]: error
+                                            }))
+                                        }
+                                        validate={loginvalidate}
+                                        render={({
+                                            handleSubmit,
+                                            submitting,
+                                            submitError,
+                                            invalid,
+                                            pristine,
+                                            dirtySinceLastSubmit,
+                                            form,
+                                            touched,
+                                            error
+                                        }) => (
 
-                                        <input type="submit" className="button" value="ورود" />
-                                    </form>
+
+                                                <Form
+                                                    onSubmit={handleSubmit} error
+
+                                                    className="signup-form login-form text-center"
+                                                >
+                                                    {submitError && !dirtySinceLastSubmit && (
+                                                        <ErrorMessage
+                                                            error={submitError}
+                                                        />
+                                                    )}
+
+                                                    <Field name='username' component={TextInput} type="text" id="user_name" className="input text-center  py-3 my-2" placeholder='نام کاربری' />
+                                                    <Field name='password' type="password" component={TextInput} id="user_pass" className="input text-center  py-3 my-2" placeholder='رمز عبور' />
+
+                                                    <br></br>
+                                                    <Field name='rememberMe' type="checkbox" component={TextInput} id="rememberMe" className="checkboxس" style={{ visibility: "unset" }} />
+
+                                                    {/* <input type="checkbox" className="checkbox" id="remember_me" /> */}
+
+                                                    <label className="pr-4 my-3 "> مرا به خاطر بسپار</label>
+
+                                                    {submitting ?
+                                                        <button className="button" type="button" disabled>
+                                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                            <span className="sr-only">Loading...</span>
+                                                        </button>
+                                                        :
+                                                        <Button
+                                                            // disabled={(invalid && !dirtySinceLastSubmit) || pristine}
+                                                            className={((invalid && !dirtySinceLastSubmit) || pristine) ? 'button btn disabled' : 'button'}
+                                                            disabled={((invalid && !dirtySinceLastSubmit) || pristine)}
+                                                            loading={submitting}
+                                                            color='teal'
+                                                            content='ورود'
+
+                                                            fluid
+                                                        />
+                                                    }
+                                                </Form>
+                                            )}
+                                    />
+                                    {/* </form> */}
 
                                     <div className="help-text mt-4">
                                         <p><a href="#">رمز عبور را فراموش کردید ؟  </a></p>
                                     </div>
 
                                 </div>
-
-
                             }
-
-
-
 
 
                             {/* <!--.login-tab-content--> */}

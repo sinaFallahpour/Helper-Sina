@@ -5,7 +5,7 @@ import {
   withRouter,
   RouteComponentProps,
   Switch,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 
 
@@ -30,12 +30,13 @@ import NotFound from './NotFound';
 import { ToastContainer } from 'react-toastify';
 import { RootStoreContext } from '../stores/rootStore';
 import LoadingComponent from './LoadingComponent';
+import ProtectedRout from '../common/ProtectedRout/protectedRout';
 // import ModalContainer from '../common/modals/ModalContainer';
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
   const { setAppLoaded, token, appLoaded } = rootStore.commonStore;
-  const { getUser } = rootStore.userStore;
+  const { getUser, isLoggedIn } = rootStore.userStore;
 
   useEffect(() => {
     if (token) {
@@ -45,13 +46,12 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
     }
   }, [getUser, setAppLoaded, token])
 
-  if (!appLoaded) return <LoadingComponent content='Loading app...' />
+  //  if (!appLoaded) return <LoadingComponent content='Loading app...' />
 
   return (
     <Fragment>
       {/* <ModalContainer /> */}
       <ToastContainer position='bottom-right' />
-
 
       <Header />
       < >
@@ -59,10 +59,40 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
           <Route exact path='/' component={HomePage} />
           <Route path='/aboutus' component={AboutUs} />
           <Route path='/contactus' component={ContactUS} />
+          <ProtectedRout path="/contactus" targetPath='/login'
+            exact={true}
+            component={Login}
+          />
+
           <Route path='/login' component={Login} />
+
+
+          {/* <Route
+            path='/aboutus'
+            render={props => {
+              if (!isLoggedIn) {
+                return <Redirect  to={{
+                  pathname: "/login",
+                
+                  state: { from: props.location }
+                }} />
+              }
+              else {
+                return <AboutUs />
+              }
+
+            }}
+          /> */}
+
+
+
+          {/* <ProtectedRout path="/login" targetPath='/profile'
+            exact={true}
+            component={Login}
+          /> */}
           <Route path='/register' component={Register} />
-          <Route  component={NotFound} />
-          
+          <Route component={NotFound} />
+
         </Switch>
       </>
       <Footer />

@@ -1,4 +1,5 @@
-﻿using Helper.Models.Entities;
+﻿using Helper.Data;
+using Helper.Models.Entities;
 using Helper.Models.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ namespace Helper.Extention
 {
     public static class ModelBuilderExtentions
     {
-
+       
         public static void Seed(this ModelBuilder builder)
         {
             builder.Entity<TBL_Setting>().HasData(
@@ -50,5 +51,11 @@ namespace Helper.Extention
 
 
         }
+
+
+
+
+
+       
     }
 }

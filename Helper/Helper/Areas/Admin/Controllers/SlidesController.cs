@@ -25,7 +25,7 @@ namespace Helper.Areas.Admin.Controllers
 
         public SlidesController(ApplicationDbContext context,
             IHostingEnvironment hostingEnvironment)
-        {
+        {   
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
@@ -33,7 +33,8 @@ namespace Helper.Areas.Admin.Controllers
         // GET: Admin/Slides
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TBL_Sliders.OrderBy(c => c.IsActive).ToListAsync());
+            var slides = await _context.TBL_Sliders.OrderBy(c => c.IsActive==true).ToListAsync();
+            return View(slides);
         }
 
 
@@ -72,12 +73,12 @@ namespace Helper.Areas.Admin.Controllers
                 }
                 if (model.Photo != null && model.Photo.Length > 0 && model.Photo.IsImage())
                 {
-                    var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "ReactPages/assets/uploads/slider");
+                    var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/Slider");
                     uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
 
-                    model.PhotoAddress = "/ReactPages/assets/uploads/slider/" + uniqueFileName;
+                    model.PhotoAddress = "/Upload/Slider/" + uniqueFileName;
                 }
                 try
                 {
@@ -194,8 +195,8 @@ namespace Helper.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                        ModelState.AddModelError("", "خطا در ثبت");
-                        return View(model);
+                    ModelState.AddModelError("", "خطا در ثبت");
+                    return View(model);
                 }
 
             }

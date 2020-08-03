@@ -2,16 +2,24 @@ import axios, { AxiosResponse } from 'axios';
 
 import { history } from '../..';
 import { toast } from 'react-toastify';
-  
+
 import { IUser, IUserFormValues } from '../models/user';
 import { IProfile, IPhoto } from '../models/profile';
 import "react-toastify/dist/ReactToastify.css"
-
+import { ISlide } from '../models/slide';
+import { IResponse } from '../models/reponse';
+import Cookies from 'js-cookie'
 axios.defaults.baseURL = 'https://localhost:44340/api';
 
 axios.interceptors.request.use(
   config => {
-    const token = window.localStorage.getItem('jwt');
+    let token: string | undefined = '';
+    const sesionValue = sessionStorage.getItem('jwt');
+    if (sesionValue)
+      token = sesionValue;
+    else token = Cookies.get('jwt')
+
+    // const token = window.localStorage.getItem('jwt');
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
@@ -81,11 +89,11 @@ const requests = {
 
 
 const User = {
-  current: (): Promise<IUser> => requests.get('/user'),
-  login: (user: IUserFormValues): Promise<IUser> =>
-    requests.post(`/user/login`, user),
-  register: (user: IUserFormValues): Promise<IUser> =>
-    requests.post(`/user/register`, user)
+  current: (): Promise<IResponse<IUser>> => requests.get('/account/currentUser'),
+  login: (user: IUserFormValues): Promise<IResponse<IUser>> =>
+    requests.post(`/account/login`, user),
+  register: (user: IUserFormValues): Promise<IResponse<IUser>> =>
+    requests.post(`/account/register`, user)
 };
 
 const Profiles = {
@@ -102,6 +110,12 @@ const Profiles = {
 };
 
 
+
+const Slides = {
+  list: (slideType: number): Promise<IResponse<ISlide[]>> =>
+    requests.get(`/Slides/list?model=${slideType}`)
+};
+
 const AboutUs = {
   aboutUs: () => requests.get(`/Home/aboutUs`),
 };
@@ -117,5 +131,6 @@ export default {
   User,
   Profiles,
   AboutUs,
-  ContactUs
+  ContactUs,
+  Slides
 };
