@@ -6,7 +6,7 @@
 }
 
 @section Style{
-
+    <link href="~/SinaCustom/css/main.css" rel="stylesheet" />
 
 }
 
@@ -24,7 +24,6 @@
                     <img class="d-block " id="UploadedImage" />
                 </div>
             </div>
-
 
             <!-- input -->
             <div class="form-row">
@@ -70,7 +69,7 @@
             <div class="form-row">
                 <div class="col-md-9 mb-3">
                     <label asp-for="Description" for="Description"></label>
-                    <textarea asp-for="Description" type="" class="form-control" id="Description"
+                    <textarea asp-for="Description" type="" class="form-control _areaHeght" id="Description"
                               placeholder="متن مقاله ...">
                     </textarea>
                     <span asp-validation-for="Description" class="text-danger"> </span>
@@ -115,11 +114,8 @@
 
 
 
-        //فعال سازی ckeditor
-        $(function () {
-            CKEDITOR.replace('Description');
-        });
-
+      
+      
 
 
 

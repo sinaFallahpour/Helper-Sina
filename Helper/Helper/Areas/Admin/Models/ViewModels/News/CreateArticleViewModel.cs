@@ -14,7 +14,7 @@ namespace Helper.Areas.Admin.Models.ViewModels.News
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = " عکس مقاله")]
         [AllowedExtensions(new string[] { ".jpg", ".png", ".svg", ".gif" })]
-        [MaxFileSize(10 * 1024 * 1024)]
+        [MaxFileSize(20 * 1024 * 1024)]
         [NotMapped]
         public IFormFile ArticlePhoto { get; set; }
 

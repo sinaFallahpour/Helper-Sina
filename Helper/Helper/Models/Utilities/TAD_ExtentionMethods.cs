@@ -61,13 +61,18 @@ namespace Helper.Models.Utilities
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
+        /// 
         public static bool IsVideo(this IFormFile file)
         {
             var extention = Path.GetExtension(file.FileName).ToLower();
             return (extention == ".mp4" || extention == ".avi" || extention == ".hd" || extention == ".mpg" || extention == ".gif" || extention == ".vtt" || extention == ".mov" || extention == ".mkv" || extention == ".wmv");
-
         }
 
+        //public static bool IsVideo(this IFormFile file)
+        //{
+        //    var extention = Path.GetExtension(file.FileName).ToLower();
+        //    return (extention == ".mp4" || extention == ".ogg");
+        //}
 
 
 

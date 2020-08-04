@@ -51,7 +51,7 @@ export default class ProfileStore {
         if (this.profile) {
           this.profile.photos.push(photo);
           if (photo.isMain && this.rootStore.userStore.user) {
-            this.rootStore.userStore.user.image = photo.url;
+            this.rootStore.userStore.user.photoAddress = photo.url;
             this.profile.image = photo.url;
           }
         }
@@ -74,9 +74,9 @@ export default class ProfileStore {
       await agent.Profiles.updateProfile(profile);
       runInAction(() => {
         if (
-          profile.displayName !== this.rootStore.userStore.user!.displayName
+          profile.displayName !== this.rootStore.userStore.user!.username
         ) {
-          this.rootStore.userStore.user!.displayName = profile.displayName!;
+          this.rootStore.userStore.user!.username = profile.displayName!;
         }
         this.profile = { ...this.profile!, ...profile };
       });

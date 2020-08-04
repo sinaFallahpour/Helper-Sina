@@ -9,6 +9,7 @@ using Helper.Models.Service;
 using Helper.Models.Utilities;
 using Helper.ViewModels.Api;
 using Helper.ViewModels.Api.Account;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -146,9 +147,17 @@ namespace Helper.Controllers.Api
 
 
         [HttpGet("currentUser")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
         public async Task<ActionResult> CurrentUser()
         {
             var currentUsername = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+
+
+
+         
+
+
 
             //return username;
 

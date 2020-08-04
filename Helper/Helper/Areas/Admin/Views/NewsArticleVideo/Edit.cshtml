@@ -1,72 +1,135 @@
-﻿@model Helper.Models.Entities.TBL_NewsArticleVideo
-
+﻿@model Helper.Areas.Admin.Models.ViewModels.News.EditNewsViewModel
+@using Helper.Models.Enums
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Edit</h1>
 
-<h4>TBL_NewsArticleVideo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+
+@section Style{
+    <link href="~/SinaCustom/css/main.css" rel="stylesheet" />
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="mb-3"> فرم ایجاد فیلم و خبر</h3>
+
+        <form asp-action="Edit" class="needs-validation" novalidate="" enctype="multipart/form-data">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LikesCount" class="control-label"></label>
-                <input asp-for="LikesCount" class="form-control" />
-                <span asp-validation-for="LikesCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CommentsCount" class="control-label"></label>
-                <input asp-for="CommentsCount" class="form-control" />
-                <span asp-validation-for="CommentsCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SeenCount" class="control-label"></label>
-                <input asp-for="SeenCount" class="form-control" />
-                <span asp-validation-for="SeenCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NewsType" class="control-label"></label>
-                <select asp-for="NewsType" class="form-control"></select>
-                <span asp-validation-for="NewsType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ArticlePhotoAddress" class="control-label"></label>
-                <input asp-for="ArticlePhotoAddress" class="form-control" />
-                <span asp-validation-for="ArticlePhotoAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VideoAddress" class="control-label"></label>
-                <input asp-for="VideoAddress" class="form-control" />
-                <span asp-validation-for="VideoAddress" class="text-danger"></span>
-            </div>
+
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+
+            @*<div class="form-row">
+                    <div class="col-md-8 mb-3">
+                        <img class="d-block " id="UploadedImage" />
+                    </div>
+                </div>*@
+
+            <div class="form-row">
+                <div class="col-md-8 mb-3">
+                    <video width="400" controls>
+                        <source src="@Model.VideoAddress" id="video_here">
+                        <source src="mov_bbb.ogg" id="video_here">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
             </div>
+
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Title" for="validationCustom03" class="text-dark"></label>
+                    <input asp-for="Title" class="form-control" id="validationCustom03s"
+                           placeholder="عنوان">
+                    <span asp-validation-for="Title" class="text-danger"> </span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="NewsType" for="validationCustom03" class="text-dark"></label>
+
+                    <select asp-for="NewsType" class="custom-select custom-select-lg">
+                        @*<option selected>این انتخابگر را امتحان کنید</option>*@
+                        @if (Model.NewsType == NewsType.News)
+                        {
+                            <option selected value="0">خبر</option>
+                            <option value="2">فیلم آموزشی</option>
+                        }
+                        else
+                        {
+                            <option  value="0">خبر</option>
+                            <option selected value="2">فیلم آموزشی</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="text-dark" for="file">انتخاب  فیلم  </label>
+                    <input asp-for="Video" class=" form-control custom-file-label mt-4  file_multi_video" onchange="readURL(this);" id="file">
+                    <span asp-validation-for="Video" class="text-danger"> </span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Description" for="Description"></label>
+                    <textarea asp-for="Description" type="" class="form-control _areaHeght" id="Description" rows="3" cols="4"
+                              placeholder="متن مقاله ...">
+                    </textarea>
+                    <span asp-validation-for="Description" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">ارسال</button>
+            <a asp-action="Index" class="btn btn-success">بازگشت به لیست</a>
+
         </form>
+
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+
+        //  اعتبارسنجی فرم
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+
+
+
+        //preview of video
+        $(document).on("change", ".file_multi_video", function (evt) {
+            var $source = $('#video_here');
+            $source[0].src = URL.createObjectURL(this.files[0]);
+            $source.parent()[0].load();
+        });
+
+
+
+    </script>
+
+}
+
+
+
+
 

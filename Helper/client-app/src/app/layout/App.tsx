@@ -18,6 +18,9 @@ import Footer from '../layout/Footer'
 import AboutUs from '../../features/aboutUs/AboutUs'
 import ContactUS from '../../features/contactUs/ContactUS'
 
+//news
+import NewsPage from '../../features/news/NewsPage'
+
 //Account
 import Login from '../../features/Account/Login'
 import Register from '../../features/Account/Register'
@@ -58,11 +61,12 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/aboutus' component={AboutUs} />
+          <Route path='/newses' component={NewsPage} />
           <Route path='/contactus' component={ContactUS} />
-          <ProtectedRout path="/contactus" targetPath='/login'
+          {/* <ProtectedRout path="/contactus" targetPath='/login'
             exact={true}
             component={Login}
-          />
+          /> */}
 
           <Route path='/login' component={Login} />
 

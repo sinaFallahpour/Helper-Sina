@@ -155,8 +155,8 @@ namespace Helper.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1500)")
-                        .HasMaxLength(1500);
+                        .HasColumnType("nvarchar(2000)")
+                        .HasMaxLength(2000);
 
                     b.Property<int>("LikesCount")
                         .HasColumnType("int");
@@ -169,8 +169,8 @@ namespace Helper.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(550)")
-                        .HasMaxLength(550);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("VideoAddress")
                         .HasColumnType("nvarchar(max)");
@@ -262,7 +262,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 2, 9, 56, 29, 772, DateTimeKind.Local).AddTicks(5263),
+                            CreatedAt = new DateTime(2020, 8, 3, 10, 40, 51, 208, DateTimeKind.Local).AddTicks(6854),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -270,7 +270,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 2, 9, 56, 29, 777, DateTimeKind.Local).AddTicks(2837),
+                            CreatedAt = new DateTime(2020, 8, 3, 10, 40, 51, 212, DateTimeKind.Local).AddTicks(2525),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -333,15 +333,15 @@ namespace Helper.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cb2f58ba-d33a-49a4-8785-1b297d2b7b92",
-                            ConcurrencyStamp = "ddd20dbd-4f7f-4b17-947b-0c34ece0d1c9",
+                            Id = "3f8ec8be-0edf-4591-b5fb-b5aa64920be0",
+                            ConcurrencyStamp = "ab40bac9-3317-4483-93bf-996f229387bd",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "e0f939b9-db87-4144-baa0-e0b0f26dc028",
-                            ConcurrencyStamp = "f78f0f71-5dbd-4d95-b5c5-bbfd25b42525",
+                            Id = "48db39c3-ce91-4345-a842-973507854ddd",
+                            ConcurrencyStamp = "afb967f8-1bc3-4243-9157-15b2354aa1f2",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -462,7 +462,8 @@ namespace Helper.Migrations
                 {
                     b.HasOne("Helper.Models.Entities.TBL_NewsArticleVideo", "NewsArticleVideo")
                         .WithMany("NewsComments")
-                        .HasForeignKey("NewsId");
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Helper.Models.ApplicationUser", "User")
                         .WithMany("NewsComments")
@@ -473,7 +474,8 @@ namespace Helper.Migrations
                 {
                     b.HasOne("Helper.Models.Entities.TBL_NewsArticleVideo", "NewsArticleVideo")
                         .WithMany("NewsLike")
-                        .HasForeignKey("NewsId");
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Helper.Models.ApplicationUser", "User")
                         .WithMany("NewsLike")

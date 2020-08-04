@@ -22,6 +22,11 @@ using API.Middleware;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
+using AutoMapper;
+using Helper.Models.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Helper
 {
@@ -83,6 +88,16 @@ namespace Helper
                 //using Microsoft.AspNetCore.Authentication.Cookies;
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
+            });
+
+
+            //file szize checking
+            services.Configure<FormOptions>(options =>
+            {
+                //options.MultipartBodyLengthLimit = 60000000;
+
+                options.ValueLengthLimit = int.MaxValue;
+                options.MultipartBodyLengthLimit = int.MaxValue;
             });
 
 
@@ -151,13 +166,17 @@ namespace Helper
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
 
+            //inject autoMapper
+            services.AddAutoMapper(typeof(TBL_NewsArticleVideo).Assembly);
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<JwtGenerator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IHttpContextAccessor accesor)
         {
+
             app.UseMiddleware<ErrorHandlingMiddleware>();
             if (env.IsDevelopment())
             {

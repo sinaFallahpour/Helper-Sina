@@ -5,8 +5,9 @@ import CommonStore from './commonStore';
 import ModalStore from './modalStore';
 import ProfileStore from './profileStore';
 import SlidesStore from './slidesStore';
+import NewsStore from './newsStore';
 
-configure({enforceActions: 'always'});
+configure({ enforceActions: 'always' });
 
 export class RootStore {
     userStore: UserStore;
@@ -15,6 +16,7 @@ export class RootStore {
     profileStore: ProfileStore;
 
     slideStore: SlidesStore;
+    newsStore: NewsStore;
 
 
     constructor() {
@@ -24,6 +26,7 @@ export class RootStore {
         this.profileStore = new ProfileStore(this);
 
         this.slideStore = new SlidesStore(this);
+        this.newsStore = new NewsStore(this);
 
     }
 }

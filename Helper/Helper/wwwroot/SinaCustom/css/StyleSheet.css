@@ -3,6 +3,10 @@
 
 
 
+._areassss {
+    border: 2px solid black;
+}
+
 ._dataTableImage {
     height: 60px;
     width: 60px;
@@ -15,11 +19,11 @@
 
 ._editimageContainer {
     width: 400px;
-    max-height:200px;
+    max-height: 200px;
 }
 
     ._editimageContainer > img {
-        display:block;
+        display: block;
         height: 100%;
         width: 100%;
     }

@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { ISlide } from '../models/slide';
 import { IResponse } from '../models/reponse';
 import Cookies from 'js-cookie'
+import { INews } from '../models/news';
 axios.defaults.baseURL = 'https://localhost:44340/api';
 
 axios.interceptors.request.use(
@@ -19,6 +20,7 @@ axios.interceptors.request.use(
       token = sesionValue;
     else token = Cookies.get('jwt')
 
+  
     // const token = window.localStorage.getItem('jwt');
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
@@ -105,8 +107,6 @@ const Profiles = {
   deletePhoto: (id: string) => requests.del(`/photos/${id}`),
   updateProfile: (profile: Partial<IProfile>) =>
     requests.put(`/profiles`, profile),
-
-
 };
 
 
@@ -114,6 +114,11 @@ const Profiles = {
 const Slides = {
   list: (slideType: number): Promise<IResponse<ISlide[]>> =>
     requests.get(`/Slides/list?model=${slideType}`)
+};
+
+const Newses = {
+  list: (newsType: number): Promise<IResponse<INews[]>> =>
+    requests.get(`/Newses/list?newsType=${newsType}`)
 };
 
 const AboutUs = {
@@ -132,5 +137,6 @@ export default {
   Profiles,
   AboutUs,
   ContactUs,
-  Slides
+  Slides,
+  Newses
 };

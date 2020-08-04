@@ -22,13 +22,29 @@ namespace Helper.Data
         {
         }
 
-   
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            //adding database vaku for Setting
+            //1 to n news and comment
+            builder.Entity<TBL_NewsArticleVideo>().HasMany(b => b.NewsComments)
+                 .WithOne(p => p.NewsArticleVideo)
+                  .HasForeignKey(p => p.NewsId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+
+            //1 to n bew and like
+            builder.Entity<TBL_NewsArticleVideo>().HasMany(b => b.NewsLike)
+                 .WithOne(p => p.NewsArticleVideo)
+                  .HasForeignKey(p => p.NewsId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+
+
+
+            //adding database value for Setting
             builder.Seed();
         }
 
@@ -44,9 +60,11 @@ namespace Helper.Data
 
         public DbSet<TBL_NewsLike> TBL_NewsLike { get; set; }
 
-        public DbSet<Helper.Areas.Admin.Models.ViewModels.NewFolder.NewsListViewModel> NewsListViewModel { get; set; }
+        public DbSet<Helper.Areas.Admin.Models.ViewModels.News.EditNewsViewModel> EditNewsViewModel { get; set; }
 
-        public DbSet<Helper.Areas.Admin.Models.ViewModels.News.CreateArticleViewModel> CreateArticleViewModel { get; set; }
+        public DbSet<Helper.Areas.Admin.Models.ViewModels.News.EditArticleViewModel> EditArticleViewModel { get; set; }
+
+
 
 
 

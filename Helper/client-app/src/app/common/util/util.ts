@@ -9,3 +9,10 @@ export const combineDateAndTime = (date: Date, time: Date) => {
     return new Date(dateString + ' ' + timeString);
 }
 
+
+//substring latrege strin [...]
+export const toShortString = (text:string, count:number) => {
+    if (!text) return "";
+    if (text.length >= count) return text.substring(0, count) + "[...]";
+    else return text;
+};

@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Helper.Areas.Admin.Models.ViewModels.NewFolder.NewsListViewModel>
-
+@using   Helper.Models.Enums;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -15,75 +15,6 @@
     <link rel="stylesheet" href="~/Admin/vendors/dataTable//dataTables.min.css" type="text/css">
     <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
 }
-
-
-
-
-
-@*<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LikesCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommentsCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SeenCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NewsType)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NewsType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LikesCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CommentsCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SeenCount)
-                </td>
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>*@
-
-
-
-
-
 
 
 <a asp-action="Create" class="btn btn-primary mb-3">ایجاد خبار یا ویدیو</a>
@@ -125,10 +56,18 @@
                         <td>
 
                             <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
-                                    <i class="">تصحیح </i>
-                                </a>
-
+                                @if (item.NewsType == NewsType.Arrticle)
+                                {
+                                    <a type="button" class="btn btn-warning" asp-action="EditArticle" asp-route-id="@item.Id">
+                                        <i class="">تصحیح </i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                                        <i class="">تصحیح </i>
+                                    </a>
+                                }
                                 <a type="button" class="btn btn-danger" asp-action="Details" asp-route-id="@item.Id">
                                     <i class="">جزییات </i>
                                 </a>
@@ -166,13 +105,6 @@
 
     </div>
 </div>
-
-
-
-
-
-
-
 
 
 

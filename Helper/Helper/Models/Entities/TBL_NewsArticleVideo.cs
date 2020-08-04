@@ -14,7 +14,7 @@ namespace Helper.Models.Entities
     {
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "توضیحات")]
-        [MaxLength(550, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [MaxLength(50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
         [MinLength(1, ErrorMessage = "حداقل 1 کاراکتر وارد کنید")]
         public string Title { get; set; }
 
@@ -22,7 +22,7 @@ namespace Helper.Models.Entities
 
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "توضیحات")]
-        [MaxLength(1500, ErrorMessage = "حداکثر 1500 کاراکتر وارد کنید")]
+        [MaxLength(2000, ErrorMessage = "حداکثر 2000 کاراکتر وارد کنید")]
         [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر وارد کنید")]
         public string Description { get; set; }
 
@@ -41,7 +41,7 @@ namespace Helper.Models.Entities
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = " عکس مقاله")]
         [AllowedExtensions(new string[] { ".jpg", ".png", ".svg", ".gif" })]
-        [MaxFileSize(10 * 1024 * 1024)]
+        [MaxFileSize(20 * 1024 * 1024)]
         [NotMapped]
         public IFormFile ArticlePhoto { get; set; }
 
@@ -56,9 +56,6 @@ namespace Helper.Models.Entities
         public IFormFile Video { get; set; }
 
         public string VideoAddress { get; set; }
-
-
-
 
 
 

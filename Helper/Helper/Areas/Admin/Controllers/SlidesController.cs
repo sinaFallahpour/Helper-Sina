@@ -25,7 +25,7 @@ namespace Helper.Areas.Admin.Controllers
 
         public SlidesController(ApplicationDbContext context,
             IHostingEnvironment hostingEnvironment)
-        {   
+        {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
@@ -33,7 +33,7 @@ namespace Helper.Areas.Admin.Controllers
         // GET: Admin/Slides
         public async Task<IActionResult> Index()
         {
-            var slides = await _context.TBL_Sliders.OrderBy(c => c.IsActive==true).ToListAsync();
+            var slides = await _context.TBL_Sliders.OrderBy(c => c.IsActive == true).ToListAsync();
             return View(slides);
         }
 
@@ -66,7 +66,7 @@ namespace Helper.Areas.Admin.Controllers
                     ModelState.AddModelError("", "به فرمت عکس وارد کنید");
                     return View(model);
                 }
-                if (model.Photo.Length > 5000000)
+                if (model.Photo.Length > 15000000)
                 {
                     ModelState.AddModelError("", "حجم فایل زیاد است");
                     return View(model);
@@ -147,6 +147,7 @@ namespace Helper.Areas.Admin.Controllers
                     slideFromDb.Title = model.Title;
                     slideFromDb.IsActive = model.IsActive;
 
+                    #region file validation
                     if (model.Photo != null)
                     {
                         string uniqueFileName = null;
@@ -155,7 +156,7 @@ namespace Helper.Areas.Admin.Controllers
                             ModelState.AddModelError("", "به فرمت عکس وارد کنید");
                             return View(model);
                         }
-                        if (model.Photo.Length > 5000000)
+                        if (model.Photo.Length > 15000000)
                         {
                             ModelState.AddModelError("", "حجم فایل زیاد است");
                             return View(model);
@@ -188,6 +189,8 @@ namespace Helper.Areas.Admin.Controllers
                             slideFromDb.PhotoAddress = "/Upload/Slider/" + uniqueFileName;
                         }
                     }
+                    #endregion file validation
+
 
                     var result = _context.SaveChanges();
                     return RedirectToAction(nameof(Index));
