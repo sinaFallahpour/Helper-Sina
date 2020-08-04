@@ -24,7 +24,11 @@ export default class UserStore {
         runInAction(() => {
           this.user = res.data;
         });
-        this.rootStore.commonStore.setToken(res.data.token,values.rememberMe);
+        this.rootStore.commonStore.setToken(res.data.token, values.rememberMe);
+       
+        // اگر تیکمرا بخاطر بسپار را نزده بود دیگه صفحه را رفرش نکن چونتو سشن استورج ریختی توکنو
+        if (!values.rememberMe)
+          return
         window.location.href = returnURL;
         // history.push('/profile')
 

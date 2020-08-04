@@ -1,73 +1,159 @@
 ﻿@model Helper.Models.Entities.TBL_NewsArticleVideo
+@using Helper.Models.Enums
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>TBL_NewsArticleVideo</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LikesCount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LikesCount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CommentsCount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CommentsCount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SeenCount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SeenCount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NewsType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NewsType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ArticlePhotoAddress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ArticlePhotoAddress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VideoAddress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VideoAddress)
-        </dd>
-    </dl>
+
+
+
+
+
+
+
+
+
+
+@section Style{
+    <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/SinaCustom/css/main.css" rel="stylesheet" />
+}
+
+
+<div class="card">
+    <div class="card-body">
+        @*@if (Model.NewsType == NewsType.Arrticle)
+        {
+            <h2 class="card-title">     </h2>
+        }
+        else if (Model.NewsType == NewsType.News)
+        {
+            <h3 class="card-title">   حذف   خبر. آیا مطمئن به حذف هستید؟</h3>
+        }
+        else
+        {
+            <h3 class="card-title">   حذف   فیلم. آیا مطمئن به حذف هستید؟</h3>
+        }*@
+
+        <form asp-action="Delete" class="needs-validation" novalidate="">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (Model.NewsType == NewsType.Arrticle)
+            {
+                <div class="form-row">
+                    <div class="  _editimageContainer">
+                        <img src="@Model.ArticlePhotoAddress" class="d-block " id="UploadedImage" />
+                    </div>
+                </div>
+            }
+            @if (Model.NewsType != NewsType.Arrticle)
+            {
+                @*<div class="form-row">
+                    <div class="  _editimageContainer">
+                        <img src="@Model.VideoAddress" class="d-block " id="UploadedImage" />
+                    </div>
+                </div>*@
+
+
+                <div class="form-row">
+                    <div class="col-md-8 mb-3">
+                        <video width="400" controls>
+                            <source src="@Model.VideoAddress#t=0.7" id="video_here">
+                            <source src="mov_bbb.ogg" id="video_here">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                </div>
+
+            }
+
+
+
+            <input type="hidden" asp-for="Id" />
+            <!-- input -->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Title" for="validationCustom03"></label>
+                    <input readonly asp-for="Title" class="form-control" id="validationCustom03"
+                           placeholder="عنوان">
+                    <span asp-validation-for="Title" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LikesCount" for="validationCustom03"></label>
+                    <input readonly asp-for="LikesCount" class="form-control" id="validationCustom03"
+                           placeholder="تعداد لایک">
+                    <span asp-validation-for="LikesCount" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="SeenCount" for="validationCustom03"></label>
+                    <input readonly asp-for="SeenCount" class="form-control" id="validationCustom03"
+                           placeholder="تعداد بازدید">
+                    <span asp-validation-for="SeenCount" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CommentsCount" for="validationCustom03"></label>
+                    <input readonly asp-for="CommentsCount" class="form-control" id="validationCustom03"
+                           placeholder="تعداد  کامنت">
+                    <span asp-validation-for="CommentsCount" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Description" for="validationCustom03"></label>
+                    <textarea readonly asp-for="Description" type="" class="form-control _areaHeght" id="validationCustom03"
+                              placeholder="متن  ما">
+                    </textarea>
+                    <span asp-validation-for="Description" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+            @*<button type="submit" class="btn btn-danger">حذف</button>*@
+            <button type="submit" asp-action="Index" class="btn btn-success">بازگشت ب لیست</button>
+        </form>
+
+
+
+
+
+
+
+        @*@if (Model.NewsComments.Count != 0) {
+
+            foreach (var item in Model.NewsComments)
+            {
+                <h2>@item.User.FirstName</h2>
+                <div>@item.Text</div>
+            }
+        }*@
+
+
+
+
+
+
+
+
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

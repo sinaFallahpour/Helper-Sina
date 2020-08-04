@@ -28,13 +28,16 @@ namespace Helper.Models.Entities
 
         public string CreateDate { get; set; }
 
-
+        [Display(Name = "تعداد لایک")]
         public int LikesCount { get; set; }
-
+        
+        [Display(Name = "تعدادکامنت")]
         public int CommentsCount { get; set; }
 
+        [Display(Name = "تعداد بازدید")]
         public int SeenCount { get; set; }
 
+        [Display(Name = "  دسته بندی")]
         public NewsType NewsType { get; set; }
 
 

@@ -1,19 +1,23 @@
 import React, { useEffect, useContext } from 'react'
 import { RootStoreContext } from '../../app/stores/rootStore';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 
 import { siteUrl } from '../../config.json'
 import { observer } from 'mobx-react-lite';
 
 import MiniLoading from '../../app/common/Loading/MiniLoading'
 
+import './../../style/sina.css'
+import { toShortString } from '../../app/common/util/util';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
+
 const Slides = () => {
     const rootStore = useContext(RootStoreContext);
     const { slidesList, loadSlides, loadingSlides } = rootStore.slideStore;
 
 
-    SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
     useEffect(() => {
         loadSlides();
@@ -28,13 +32,15 @@ const Slides = () => {
         <div>
 
             <Swiper
-                className="swiper-container swiper-container1"
+                className="swiper-container swiper-container1 "
                 effect="coverflow"
                 grabCursor={true}
                 centeredSlides={false}
+                navigation={Navigation}
                 slidesPerView={3}
-                pagination={{ clickable: true,
-                	el: '.swiper-pagination',
+                pagination={{
+                    clickable: true,
+                    el: '.swiper-pagination',
                 }}
 
                 coverflowEffect={{
@@ -44,20 +50,25 @@ const Slides = () => {
                     modifier: 1,
                     slideShadows: true,
                 }}
-                spaceBetween={10}
+                autoplay={{
+                    delay: 5000,
+                    disableOnInteraction: false,
+                    stopOnLastSlide: false,
+                }}
+                spaceBetween={30}
             >
 
-                <div className="swiper-wrapper">
+                <div className="swiper-wrapper ">
                     {slidesList?.map((slide, index) => {
                         return (<SwiperSlide key={index}
-                            className="swiper-slide"
+                            className="swiper-slide _swiper-slider"
                         >
                             <img
                                 src={siteUrl + slide.photoAddress}
-                                className="img-fluid" alt="Responsive image11" />
+                                className="img-fluid _swiper-image" alt="Responsive image11 " />
                             <div className="row w-100 text-justify Text-blue mx-auto">
                                 <div className="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>{slide.title}</b></span></div>
-                                <div className="col-12 text-cener mx-auto py-2"><span>{slide.description} </span></div>
+                                <div className="col-12 text-cener mx-auto py-2 _swiper-text"><span>{toShortString( slide.description,300)} </span></div>
                             </div>
                         </SwiperSlide>
                         )

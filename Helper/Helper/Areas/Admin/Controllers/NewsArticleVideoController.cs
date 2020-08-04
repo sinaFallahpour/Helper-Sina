@@ -63,14 +63,15 @@ namespace Helper.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tBL_NewsArticleVideo = await _context.TBL_NewsArticleVideo
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tBL_NewsArticleVideo == null)
+            var newsFromDb = await _context.TBL_NewsArticleVideo
+                .Where(c => c.Id == id).Include(c => c.NewsComments).FirstOrDefaultAsync();
+               
+            if (newsFromDb == null)
             {
                 return NotFound();
             }
 
-            return View(tBL_NewsArticleVideo);
+            return View(newsFromDb);
         }
         #endregion
 
@@ -341,9 +342,6 @@ namespace Helper.Areas.Admin.Controllers
 
         #endregion  Edit Vide and news
 
-
-
-
         #region  Edit Vide and news
 
         // GET: Admin/TBL_NewsArticleVideo/Edit/5
@@ -450,10 +448,6 @@ namespace Helper.Areas.Admin.Controllers
         }
 
         #endregion  Edit Vide and news
-
-
-
-
 
         #region delete   article news video
 
