@@ -3,7 +3,9 @@ import { observable, action, runInAction, computed, toJS } from "mobx";
 
 import { INews } from '../models/news'
 import agent from "../api/agent";
-
+import { toast } from "react-toastify";
+import { totalmem } from "os";
+import { NewsType } from "../models/enums/newsType";
 
 
 export default class NewsStore {
@@ -18,7 +20,7 @@ export default class NewsStore {
     @observable loadingNews = false;
     @observable loadingVideos = false;
     @observable loadingArticle = false;
-
+    @observable loadingLike = false;
 
 
     //get newses
@@ -93,5 +95,68 @@ export default class NewsStore {
             });
         }
     };
+
+
+    //like article
+    @action Like = async (model: INews) => {
+        if (!this.rootStore.userStore.isLoggedIn) {
+            toast.warn('لطفا ابتدا وارد سایت شوید')
+            return
+        }
+        this.loadingLike = true;
+        try {
+
+            const res = await agent.Newses.Like(model.id);
+
+            runInAction('like article', () => {
+                if (res.status === 1) {
+
+                    if (model.newsType === NewsType.arrticle) {
+                        const oldArticle = this.articles.find(c => c.id == model.id);
+                        if(oldArticle!.isLiked){
+                            oldArticle!.isLiked = !oldArticle?.isLiked
+                            oldArticle!.likesCount--;
+                        }
+                        else{
+                            oldArticle!.isLiked = !oldArticle?.isLiked
+                            oldArticle!.likesCount++;
+                        }
+                       
+                    }
+                    else if (model.newsType == NewsType.videos) {
+                        const oldvideos = this.videos.find(c => c.id == model.id);
+                        if(oldvideos!.isLiked){
+                            oldvideos!.isLiked = !oldvideos?.isLiked;
+                            oldvideos!.likesCount--;
+                        }
+                        else{
+                            oldvideos!.isLiked = !oldvideos?.isLiked;
+                            oldvideos!.likesCount++;
+                        }
+                     
+                    }
+                    else if (model.newsType == NewsType.news) {
+                        const oldnews = this.newses.find(c => c.id == model.id);
+                        if (oldnews!.isLiked) {
+                            oldnews!.isLiked = !oldnews?.isLiked
+                            oldnews!.likesCount++;
+                        }else{
+                            oldnews!.isLiked = !oldnews?.isLiked
+                            oldnews!.likesCount--;
+                        }
+                    }
+                }
+                this.loadingLike = false;
+            });
+        } catch (error) {
+            runInAction('like artcle  error', () => {
+                toast.error('خطا در ثبت لایک')
+                this.loadingLike = false;
+            });
+        }
+    };
+
+
+
 
 }

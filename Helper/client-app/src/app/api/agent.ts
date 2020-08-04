@@ -7,7 +7,7 @@ import { IUser, IUserFormValues } from '../models/user';
 import { IProfile, IPhoto } from '../models/profile';
 import "react-toastify/dist/ReactToastify.css"
 import { ISlide } from '../models/slide';
-import { IResponse } from '../models/reponse';
+import { IResponse, IRespon } from '../models/reponse';
 import Cookies from 'js-cookie'
 import { INews } from '../models/news';
 axios.defaults.baseURL = 'https://localhost:44340/api';
@@ -20,7 +20,7 @@ axios.interceptors.request.use(
       token = sesionValue;
     else token = Cookies.get('jwt')
 
-  
+
     // const token = window.localStorage.getItem('jwt');
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
@@ -118,7 +118,10 @@ const Slides = {
 
 const Newses = {
   list: (newsType: number): Promise<IResponse<INews[]>> =>
-    requests.get(`/Newses/list?newsType=${newsType}`)
+    requests.get(`/Newses/list?newsType=${newsType}`),
+
+  Like: (newsId: string): Promise<IRespon> =>
+    requests.get(`/Newses/LikeNews?newsId=${newsId}`)
 };
 
 const AboutUs = {

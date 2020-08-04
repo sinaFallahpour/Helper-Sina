@@ -1,0 +1,13 @@
+._swiper-slider {
+  height: 500;
+  /* border: 3px solid black; */
+}
+
+._swiper-image {
+  height: 280px;
+  border-radius: 4px;
+}
+._swiper-text{
+    height: 240px;
+    
+}

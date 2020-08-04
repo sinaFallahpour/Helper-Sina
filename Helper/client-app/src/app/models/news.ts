@@ -10,7 +10,7 @@ export interface INews {
     articlePhotoAddress?:string;
     videoAddress?:string;
 
-    isLiked:true;
+    isLiked:boolean;
     
 }
 

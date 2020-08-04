@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import { RootStoreContext } from '../../app/stores/rootStore';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
 import { siteUrl } from '../../config.json'
 import { observer } from 'mobx-react-lite';
@@ -10,6 +11,9 @@ import MiniLoading from '../../app/common/Loading/MiniLoading'
 const Slides = () => {
     const rootStore = useContext(RootStoreContext);
     const { slidesList, loadSlides, loadingSlides } = rootStore.slideStore;
+
+
+    SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
     useEffect(() => {
         loadSlides();
@@ -28,8 +32,10 @@ const Slides = () => {
                 effect="coverflow"
                 grabCursor={true}
                 centeredSlides={false}
-                slidesPerView="auto"
-                pagination={{ clickable: true }}
+                slidesPerView={3}
+                pagination={{ clickable: true,
+                	el: '.swiper-pagination',
+                }}
 
                 coverflowEffect={{
                     rotate: 50,

@@ -87,7 +87,7 @@ const NewsPage: React.FC = () => {
         <div className="row w-100 p-0 m-0 mx-auto">
           <div className="col-md-10 col-8 text-right">
             <h3>
-              <b> ویدئو های آموزشی</b>
+              <b>  مفالات آموزشی </b>
             </h3>
           </div>
           <div className="col-md-2 col-4 text-news">

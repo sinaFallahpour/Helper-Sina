@@ -24,6 +24,8 @@ import NewsPage from '../../features/news/NewsPage'
 //Account
 import Login from '../../features/Account/Login'
 import Register from '../../features/Account/Register'
+import LogOut from '../../features/Account/LogOut'
+import Profile from '../../features/Profile/Profile'
 
 import NotFound from './NotFound';
 /*End  Pages */
@@ -69,6 +71,8 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
           /> */}
 
           <Route path='/login' component={Login} />
+          <Route path='/LogOut' component={LogOut} />
+          <Route path='/profile/:username' component={Profile} />
 
 
           {/* <Route

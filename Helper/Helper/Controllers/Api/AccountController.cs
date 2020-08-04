@@ -95,7 +95,6 @@ namespace Helper.Controllers.Api
         [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterRequestVM model)
         {
-
             if (!ModelState.IsValid)
             {
                 var errors = new List<string>();
@@ -138,7 +137,6 @@ namespace Helper.Controllers.Api
                 return new JsonResult(new { Status = 1, Message = " ثبت نام موفقیت آمیز", Data = userInfo });
             }
             return new JsonResult(new { Status = 0, Message = " خطا در ثبت" });
-
         }
 
 
@@ -164,7 +162,7 @@ namespace Helper.Controllers.Api
             try
             {
                 var user = await _userManager.FindByNameAsync(currentUsername);
-                if (user == null)
+                if (user != null)
                 {
                     var userRoles = await _userManager.GetRolesAsync(user);
                     var role = userRoles.First();

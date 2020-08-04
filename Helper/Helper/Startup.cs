@@ -91,7 +91,7 @@ namespace Helper
             });
 
 
-            //file szize checking
+            //file size checking
             services.Configure<FormOptions>(options =>
             {
                 //options.MultipartBodyLengthLimit = 60000000;
@@ -105,11 +105,13 @@ namespace Helper
             //jwt seeting 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(PublicHelper.SECREKEY));
 
-
+            //JwtBearerDefaults.AuthenticationScheme
             services.AddAuthentication()
                .AddCookie(cfg => { cfg.SlidingExpiration = true; })
-                .AddJwtBearer(opt =>
+                
+               .AddJwtBearer( opt =>
                 {
+                   
                     opt.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,

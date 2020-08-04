@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { RootStoreContext } from '../stores/rootStore';
 const Header: React.FC = () => {
+
+    const rootStore = useContext(RootStoreContext);
+    const { isLoggedIn } = rootStore.userStore;
+    const { user } = rootStore.userStore;
     return (
         // @*...........header............*@
         <div className="container p-0 mx-auto">
@@ -17,7 +22,6 @@ const Header: React.FC = () => {
                                     <option value="saab">Ln EN</option>
 
                                 </select>
-
                             </form>
                         </div>
 
@@ -27,7 +31,15 @@ const Header: React.FC = () => {
                                 className="img-fluid" alt="Responsive image1" />
                         </div>
                         <div className="col-md-4  col-5 d-flex justify-content-center align-items-center">
-                            <NavLink to="/login" className="btn btn-link hj-index-login">ورود / ثبت نام</NavLink>
+                            {
+                                isLoggedIn ?
+                                    <>
+                                        <NavLink to="/LogOut" className="btn btn-link hj-index-login">خروج </NavLink>/
+                                        <NavLink to={`/profile/${user?.username}`} className="btn btn-link hj-index-login">پروفایل </NavLink>
+                                    </>
+                                    :
+                                    <NavLink to="/login" className="btn btn-link hj-index-login">ورود / ثبت نام</NavLink>
+                            }
                         </div>
                     </div>
                     {/* @*......navbarbootsrap.....*@ */}

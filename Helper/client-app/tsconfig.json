@@ -1,5 +1,3 @@
-
-
 {
   "compilerOptions": {
     "target": "es5",
@@ -17,10 +15,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "experimentalDecorators": true,
+    "experimentalDecorators": true
   },
   "include": [
     "src",
@@ -28,6 +26,5 @@
   ],
   "exclude": [
     "node_modules"
-]
+  ]
 }
-

@@ -239,8 +239,6 @@ namespace Helper.Areas.Admin.Controllers
         #endregion
 
 
-
-
         #region  Edit Vide and news
 
         // GET: Admin/TBL_NewsArticleVideo/Edit/5
