@@ -57,13 +57,13 @@ namespace Helper.Controllers.Api
         //  /api/AccountSettings/Profile?username=2Fsina
         [HttpGet("Profile")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult> Profile(string username)
+        public async Task<ActionResult> Profile(string Id)
         {
             var currentUsername = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var currentSerialNumber = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == PublicHelper.SerialNumberClaim)?.Value;
             try
             {
-                var user = await _context.Users.Where(c => c.UserName == username && c.UserName == currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
+                var user = await _context.Users.Where(c => c.Id == Id && c.UserName == currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
 
                 if (user != null)
                 {
@@ -90,7 +90,7 @@ namespace Helper.Controllers.Api
         //  /api/AccountSettings/ChangePeronalInfo
         [HttpPut("ChangePeronalInfo")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult> ChangePeronalInfo(string username, ChangePrsonalInfoVM model)
+        public async Task<ActionResult> ChangePeronalInfo(string Id, ChangePrsonalInfoVM model)
         {
             if (!ModelState.IsValid)
             {
@@ -176,7 +176,7 @@ namespace Helper.Controllers.Api
         //  /api/AccountSettings/ChangePassword
         [HttpPut("ChangePassword")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult> ChangePassword(string username, ChangePasswordRequestVM model)
+        public async Task<ActionResult> ChangePassword(string Id, ChangePasswordRequestVM model)
         {
             if (!ModelState.IsValid)
             {
@@ -196,7 +196,7 @@ namespace Helper.Controllers.Api
 
             try
             {
-                var user = await _context.Users.Where(c => c.UserName ==username && c.UserName== currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
+                var user = await _context.Users.Where(c => c.Id ==Id && c.UserName== currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
               
                 if (user != null)
                 {
@@ -248,7 +248,7 @@ namespace Helper.Controllers.Api
         //  /api/AccountSettings/ChangeAccountBank
         [HttpPut("ChangeAccountBank")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult> ChangeAccountBank(string username, ChangeAccountBankVM model)
+        public async Task<ActionResult> ChangeAccountBank(string Id, ChangeAccountBankVM model)
         {
             if (!ModelState.IsValid)
             {

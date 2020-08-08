@@ -52,7 +52,6 @@ interface IProps {
 const PersonalInformation: React.FC<IProps> = ({ profile }) => {
 
 
-
     const rootStore = useContext(RootStoreContext);
     const {
         changePersonalInformation
@@ -202,8 +201,6 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
                                         </Field>
 
                                     </div>
-                                    <pre>{JSON.stringify(form.getState(), null, 2)}</pre>
-
 
 
                                     <div className="row w-100 mx-auto mt-4 pt-4">
@@ -283,9 +280,9 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
 
                     </div>
 
-                    <div className="row w-100 mx-auto mt-4 pt-4">
+                    {/* <div className="row w-100 mx-auto mt-4 pt-4">
                         <button type="button" className="btn btn-success w-25 mx-auto Confirmation">ذخیره تنظیمات</button>
-                    </div>
+                    </div> */}
 
 
                 </div>

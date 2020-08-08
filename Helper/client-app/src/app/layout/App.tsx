@@ -82,7 +82,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
           /> */}
 
           <Route
-            path='/AccountSettingsPage/:username'
+            path='/AccountSettingsPage/:id'
             exact={true}
             render={props => {
               if (!isLoggedIn) {

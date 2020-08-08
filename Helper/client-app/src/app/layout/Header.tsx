@@ -35,7 +35,7 @@ const Header: React.FC = () => {
                                 isLoggedIn ?
                                     <>
                                         <NavLink to="/LogOut" className="btn btn-link hj-index-login">خروج </NavLink>/
-                                        <NavLink to={`/profile/${user?.username}`} className="btn btn-link hj-index-login">پروفایل </NavLink>
+                                        <NavLink to={`/profile/${user?.id}`} className="btn btn-link hj-index-login">پروفایل </NavLink>
                                     </>
                                     :
                                     <NavLink to="/login" className="btn btn-link hj-index-login">ورود / ثبت نام</NavLink>

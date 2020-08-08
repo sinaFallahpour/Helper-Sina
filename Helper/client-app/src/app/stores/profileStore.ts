@@ -58,8 +58,8 @@ export default class ProfileStore {
   //change Password
   @action changePassword = async (model: IChangePasswordRQ) => {
     try {
-      const currentusername = toJS(this.rootStore.userStore.user)!.userName
-      const res = await agent.Profiles.changePassword(currentusername!, model);
+      const currentUserId = toJS(this.rootStore.userStore.user)!.id
+      const res = await agent.Profiles.changePassword(currentUserId!, model);
       const { status, statusCode, data, message } = res
       if (res && status === 1) {
         runInAction(() => {
@@ -85,8 +85,8 @@ export default class ProfileStore {
   //change BankAccount
   @action chnageBankAccount = async (model: IChangeBankRQ) => {
     try {
-      const currentusername = toJS(this.rootStore.userStore.user)!.userName
-      const res = await agent.Profiles.changeAccountBank(currentusername!, model);
+      const currentUsreId = toJS(this.rootStore.userStore.user)!.id
+      const res = await agent.Profiles.changeAccountBank(currentUsreId!, model);
       const { status, statusCode, data, message } = res
       if (res && status === 1) {
         runInAction(() => {
@@ -114,14 +114,14 @@ export default class ProfileStore {
   //change personalInformation
   @action changePersonalInformation = async (model: IChangePersonalInfoRE) => {
     try {
-      const currentusername = toJS(this.rootStore.userStore.user)!.userName
+      const currentUsreId = toJS(this.rootStore.userStore.user)!.id
       console.log(this.rootStore.userStore.user)
-      const res = await agent.Profiles.changePeronalInfo(currentusername!, model);
+      const res = await agent.Profiles.changePeronalInfo(currentUsreId!, model);
       const { status, statusCode, data, message } = res
       if (res && status === 1) {
         runInAction(() => {
            this.rootStore.userStore.user = res.data.currentUser;
-          // this.rootStore.commonStore.setToken(res.data.currentUser.token, true);
+           this.rootStore.commonStore.setToken(res.data.currentUser.token, true);
           const body = { ...res.data }
           delete body.currentUser;
           this.profile! = { ...this.profile, ...body }

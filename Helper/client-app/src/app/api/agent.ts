@@ -107,17 +107,17 @@ const User = {
 };
 
 const Profiles = {
-  get: (username: string): Promise<IResponse<IProfile>> =>
-    requests.get(`/AccountSettings/Profile?username=${username}`),
+  get: (Id: string): Promise<IResponse<IProfile>> =>
+    requests.get(`/AccountSettings/Profile?Id=${Id}`),
 
-  changePassword: (username: string, changePassModel: IChangePasswordRQ): Promise<IResponse<IUser>> =>
-    requests.put(`/AccountSettings/ChangePassword?username=${username}`, { ...changePassModel }),
+  changePassword: (Id: string, changePassModel: IChangePasswordRQ): Promise<IResponse<IUser>> =>
+    requests.put(`/AccountSettings/ChangePassword?Id=${Id}`, { ...changePassModel }),
 
-  changePeronalInfo: (username:string, changePersonalInfoModel: IChangePrsonalInfoRQ): Promise<IResponse<IChangePersonalInfoRE>> =>
-    requests.put(`/AccountSettings/ChangePeronalInfo?username=${username}`, changePersonalInfoModel),
+  changePeronalInfo: (Id: string, changePersonalInfoModel: IChangePrsonalInfoRQ): Promise<IResponse<IChangePersonalInfoRE>> =>
+    requests.put(`/AccountSettings/ChangePeronalInfo?Id=${Id}`, changePersonalInfoModel),
 
-  changeAccountBank: (username: string, changeBankModel: IChangeBankRQ): Promise<IResponse<IChangeBankRE>> =>
-    requests.put(`/AccountSettings/ChangeAccountBank?username=${username}`, changeBankModel),
+  changeAccountBank: (Id: string, changeBankModel: IChangeBankRQ): Promise<IResponse<IChangeBankRE>> =>
+    requests.put(`/AccountSettings/ChangeAccountBank?Id=${Id}`, changeBankModel),
 
   // updateProfile: (profile: Partial<IProfile>) =>
   //   requests.put(`/AccountSettings`, profile),

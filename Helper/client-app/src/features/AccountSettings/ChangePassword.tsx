@@ -71,7 +71,6 @@ const ChangePassword: React.FC<IProps> = ({ profile }) => {
 
 
     const handleChangePassubmit = async (values: any) => {
-        console.log(values)
 
         try {
             let res = await changePassword(values);

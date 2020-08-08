@@ -12,7 +12,7 @@ import LoadingTransparent from '../../app/common/Loading/LoadingTransparent';
 
 
 interface RouteParams {
-    username: string;
+    id: string;
 }
 
 interface IProps extends RouteComponentProps<RouteParams> { }
@@ -28,7 +28,7 @@ const AccountSettingsPage: React.FC<IProps> = ({ match }) => {
     } = rootStore.profileStore;
 
     useEffect(() => {
-        loadProfile(match.params.username);
+        loadProfile(match.params.id);
     }, [loadProfile, match]);
 
     if (loadingProfile) return <LoadingTransparent />;
