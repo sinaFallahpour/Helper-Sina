@@ -17,8 +17,7 @@ import {
     composeValidators,
     hasLengthGreaterThan,
     matchesPattern,
-    hasLengthLessThan
-
+    hasLengthLessThan,
 } from 'revalidate';
 
 import { RootStoreContext } from '../../app/stores/rootStore';
@@ -35,20 +34,20 @@ const registervalidate = combineValidators({
         isRequired({ message: 'ایمیل الزامیست' }),
         matchesPattern(/^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/
         )({ message: 'به فرمت ایمیل وارد کنید' }),
-        hasLengthLessThan(30)({ message: "حداکثر 30 کاراکتر وارد کنید" })
+        hasLengthLessThan(31)({ message: "حداکثر 30 کاراکتر وارد کنید" })
     )('email'),
 
     password: composeValidators(
         isRequired({ message: 'پسورد الزامیست' }),
-        hasLengthGreaterThan(6)({ message: "حداقل 6 کاراکتر وارد کنید" }),
-        hasLengthLessThan(20)({ message: "حداکثر 20 کاراکتر وارد کنید" })
+        hasLengthGreaterThan(5)({ message: "حداقل 6 کاراکتر وارد کنید" }),
+        hasLengthLessThan(21)({ message: "حداکثر 20 کاراکتر وارد کنید" })
 
     )('password'),
 
     username: composeValidators(
         isRequired({ message: ' نام کاربری الزامیست ' }),
-        hasLengthGreaterThan(3)({ message: "حداقل 3 کاراکتر وارد کنید" }),
-        hasLengthLessThan(20)({ message: " حداکثر 20 کاراکتر وارد کنید " })
+        hasLengthGreaterThan(3)({ message: "حداقل4  کاراکتر وارد کنید" }),
+        hasLengthLessThan(21)({ message: " حداکثر 20 کاراکتر وارد کنید " })
     )('username'),
 });
 
@@ -58,13 +57,13 @@ const loginvalidate = combineValidators({
 
     password: composeValidators(
         isRequired({ message: 'پسورد الزامیست' }),
-        hasLengthGreaterThan(6)({ message: "حداقل 6 کاراکتر" }),
-        hasLengthLessThan(20)({ message: "حداکثر 20 کاراکتر وارد کنید" })
+        hasLengthGreaterThan(5)({ message: "حداقل 6 کاراکتر" }),
+        hasLengthLessThan(20)({ message: "حداکثر 20 کاراکتر وارد کنید" }),
     )('password'),
 
     username: composeValidators(
         isRequired({ message: ' نام کاربری الزامیست ' }),
-        hasLengthGreaterThan(3)({ message: "حداقل 3 کاراکتر وارد کنید" }),
+        hasLengthGreaterThan(3)({ message: "حداقل 4 کاراکتر وارد کنید" }),
         hasLengthLessThan(20)({ message: " حداکثر 20 کاراکتر وارد کنید " })
     )('username'),
 })
@@ -80,7 +79,7 @@ const Login = () => {
     const rootStore = useContext(RootStoreContext);
     const { login, register, isLoggedIn } = rootStore.userStore;
 
-    const [showLogin, setShowLogin] = useState(false)
+    const [showLogin, setShowLogin] = useState(true)
 
     const handleTabChange = (showRegister: boolean) => {
         if (showLogin !== showRegister)
@@ -94,7 +93,7 @@ const Login = () => {
         <>
             <div className="container w-100 mx-auto">
                 <div className="row w-100 mx-auto">
-                    <div className="form-wrap">
+                    <div className="form-wrap w-100" >
                         <div className="tabs">
                             <h3 className="signup-tab">
                                 <a
@@ -117,20 +116,27 @@ const Login = () => {
                         {/* <!--.tabs--> */}
 
                         <div className="tabs-content mt-4">
-
                             {!showLogin ?
-
 
                                 <div id="signup-tab-content" className="active text-center">
 
                                     {/* ........register from.................s   */}
                                     <FinalForm
+
                                         onSubmit={(values: IUserFormValues) =>
                                             register(values, '/profile')
                                                 .catch(error => ({
                                                     [FORM_ERROR]: error
                                                 }))
                                         }
+                                        initialValues={{
+                                            email: '',
+                                            acceptRules: true,
+                                            password: '',
+                                            rememberMe: true,
+                                            username: ''
+                                        }}
+
                                         validate={registervalidate}
                                         render={({
                                             handleSubmit,
@@ -147,7 +153,6 @@ const Login = () => {
 
                                                 <Form
                                                     onSubmit={handleSubmit} error
-
                                                     className="signup-form"
                                                 >
                                                     {submitError && !dirtySinceLastSubmit && (
@@ -156,14 +161,43 @@ const Login = () => {
                                                         />
                                                     )}
 
-                                                    <Field name='username' component={TextInput} type="text" id="user_name" className="input text-center  py-3 my-2" placeholder='نام کاربری' />
-                                                    <Field name='email' component={TextInput} type="email" id="user_email" className="input text-center  py-3 my-2" placeholder='ایمیل' />
-                                                    <Field name='password' type="password" component={TextInput} id="user_pass" className="input text-center  py-3 my-2" placeholder='رمز عبور' />
+                                                    <Field
+                                                        name='username'
+                                                        component={TextInput}
+                                                        type="text" id="user_name"
+                                                        className="input text-center py-3 my-2 mx-auto"
+                                                        placeholder='نام کاربری'
+                                                    />
+
+                                                    <Field
+                                                        name='email'
+                                                        value='qwer1234'
+                                                        component={TextInput}
+                                                        type="email"
+                                                        id="user_email"
+                                                        className="input text-center py-3 my-2 mx-auto"
+                                                        placeholder='ایمیل'
+                                                    />
+
+                                                    <Field
+                                                        name='password'
+                                                        type="password"
+                                                        component={TextInput} id="user_pass"
+                                                        className="input text-center  py-3 my-2 mx-auto"
+                                                        placeholder='رمز عبور' />
                                                     <br></br>
 
-                                                    {/* <input type="checkbox" name="acceptRules" className="checkbox" style={{ visibility: "unset" }} id="rules" /> */}
-                                                    <Field name='acceptRules' type="checkbox" component={TextInput} id="acceptRules" className="checkboxss" style={{ visibility: "unset" }} />
-                                                    <label className="pr-4 my-3 mr-2 "> قوانین را میپذیرم   </label>
+                                                    <label className="pr-4 my-3 mr-5 d-flex align-item-center ">
+                                                        قوانین را میپذیرم
+                                                         <Field
+                                                            name='acceptRules'
+                                                            type="checkbox"
+                                                            component={TextInput}
+                                                            id="acceptRules"
+                                                            className="checkboxss "
+                                                            style={{ visibility: "unset" }}
+                                                        />
+                                                    </label>
 
                                                     {submitting ?
                                                         <button className="button" type="button" disabled>
@@ -215,6 +249,13 @@ const Login = () => {
                                                 [FORM_ERROR]: error
                                             }))
                                         }
+                                        initialValues={{
+                                            email: '',
+                                            acceptRules: true,
+                                            password: '',
+                                            rememberMe: true,
+                                            username: ""
+                                        }}
                                         validate={loginvalidate}
                                         render={({
                                             handleSubmit,
@@ -223,9 +264,7 @@ const Login = () => {
                                             invalid,
                                             pristine,
                                             dirtySinceLastSubmit,
-                                            form,
-                                            touched,
-                                            error
+                                           
                                         }) => (
 
 
@@ -240,15 +279,45 @@ const Login = () => {
                                                         />
                                                     )}
 
-                                                    <Field name='username' component={TextInput} type="text" id="user_name" className="input text-center  py-3 my-2" placeholder='نام کاربری' />
-                                                    <Field name='password' type="password" component={TextInput} id="user_pass" className="input text-center  py-3 my-2" placeholder='رمز عبور' />
+                                                    <Field
+                                                        name='username'
+                                                        component={TextInput}
+                                                        type="text"
+                                                        id="user_name"
+                                                        className="input text-center  py-3 my-2 mx-auto"
+                                                        placeholder='نام کاربری'
+                                                    />
+
+                                                    <Field
+                                                        name='password'
+                                                        type="password"
+                                                        component={TextInput}
+                                                        id="user_pass"
+                                                        className="input text-center py-3 my-2 mx-auto"
+                                                        placeholder='رمز عبور'
+                                                    />
 
                                                     <br></br>
-                                                    <Field name='rememberMe' type="checkbox" component={TextInput} id="rememberMe" className="checkboxس" style={{ visibility: "unset" }} />
 
-                                                    {/* <input type="checkbox" className="checkbox" id="remember_me" /> */}
+                                                    <div className="row w-100 mx-auto">
 
-                                                    <label className="pr-4 my-3 "> مرا به خاطر بسپار</label>
+                                                        {/* <input type="checkbox" className="checkbox" id="remember_me" /> */}
+
+                                                        {/* <label className="pr-4 my-3 "> مرا به خاطر بسپار</label> */}
+                                                        <label className="pr-4 my-3 mr-5 ml-5 d-flex align-item-center">
+                                                            مرا به خاطر بسپار
+                                                           <Field
+                                                                name='rememberMe'
+                                                                type="checkbox"
+                                                                component={TextInput}
+                                                                id="rememberMe"
+                                                                className="checkboxس"
+                                                                style={{ visibility: "unset" }}
+                                                            />
+                                                        </label>
+
+                                                        <br></br>
+                                                    </div>
 
                                                     {submitting ?
                                                         <button className="button" type="button" disabled>

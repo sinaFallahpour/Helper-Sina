@@ -12,21 +12,33 @@ interface IProps {
 
 
 const ProtectedRout: React.FC<IProps> = ({ path, targetPath, exact, component: Component, ...rest }) => {
-
     const rootStore = useContext(RootStoreContext);
     const { isLoggedIn } = rootStore.userStore;
 
     return (
-        isLoggedIn ?
 
-            (<Route path={path} exact={exact} component={Component} {...rest}/>)
-            :
-            (<Redirect to={{
-                pathname: "/login",
-                state: { from: targetPath }
-            }}
-            />)
-        )
+        <Route render={prop => {
+            if (!isLoggedIn) {
+                return <Redirect to={{
+                    pathname: "/login",
+                    state: { from: prop.location },
+                }} />
+            }
+            else {
+                return <Component />
+            }
+        }} />
+        // isLoggedIn ?
+
+        //     (<Route path={path} exact={exact} component={Component} {...rest}/>)
+        //     :
+
+        // (<Redirect to={{
+        //     pathname: "/login",
+        //     state: { from: targetPath }
+        // }}
+        // />)
+    )
 
 }
 

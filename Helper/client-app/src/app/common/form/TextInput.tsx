@@ -1,6 +1,6 @@
 import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
-import { FormFieldProps } from 'semantic-ui-react';
+import { FormFieldProps, Form } from 'semantic-ui-react';
 
 interface IProps
     extends FieldRenderProps<string, HTMLInputElement>,
@@ -10,26 +10,28 @@ interface IProps
 const TextInput: React.FC<IProps> = ({
     input,
     meta: { touched, error },
-    type,
     placeholder,
     className,
     width
 }) => {
     return (
         < >
+          {/* <Form.Field error={touched && !!error} type={type} width={width}> */}
             <input {...input}
                 placeholder={placeholder}
-                className={className}
+                className={className + ' d-block'}
                 autoComplete="off"
+               
             />
 
             {touched && error && (
-               
-                    <label className="text-danger">
-                        {error}
-                    </label>
-                
+
+                <label className="text-danger w-10 d-block">
+                    {error}
+                </label>
+
             )}
+            {/* </Form.Field> */}
         </>
     );
 };

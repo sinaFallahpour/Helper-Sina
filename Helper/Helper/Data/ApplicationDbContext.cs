@@ -13,6 +13,7 @@ using Helper.Areas.Admin.Models.ViewModels.User;
 using Helper.Controllers;
 using Helper.Areas.Admin.Models.ViewModels.NewFolder;
 using Helper.Areas.Admin.Models.ViewModels.News;
+using Helper.ViewModels.Api.AccountSettings;
 namespace Helper.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -59,15 +60,6 @@ namespace Helper.Data
         public DbSet<TBL_NewsComment> TBL_NewsComment { get; set; }
 
         public DbSet<TBL_NewsLike> TBL_NewsLike { get; set; }
-
-        public DbSet<Helper.Areas.Admin.Models.ViewModels.News.EditNewsViewModel> EditNewsViewModel { get; set; }
-
-        public DbSet<Helper.Areas.Admin.Models.ViewModels.News.EditArticleViewModel> EditArticleViewModel { get; set; }
-
-
-
-
-
 
     }
 }

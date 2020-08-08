@@ -1,4 +1,5 @@
 ﻿using Helper.Models.Entities;
+using Helper.Models.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -14,12 +15,12 @@ namespace Helper.Models
     {
 
 
-        [StringLength(maximumLength: 100,ErrorMessage ="حداکثر 100 کاراکتر وارد کنید")]
+        [StringLength(maximumLength: 100, ErrorMessage = "حداکثر 100 کاراکتر وارد کنید")]
         [Display(Name = "نام ")]
         public string FirstName { get; set; }
 
         [StringLength(maximumLength: 100, ErrorMessage = "حداکثر 100 کاراکتر وارد کنید")]
-        [Display(Name ="نام خانوادگی")]
+        [Display(Name = "نام خانوادگی")]
         public string LastName { get; set; }
 
         [StringLength(maximumLength: 200, ErrorMessage = "حداکثر 200 کاراکتر وارد کنید")]
@@ -54,6 +55,58 @@ namespace Helper.Models
         public string Address { get; set; }
 
 
+
+
+
+
+        /// <summary>
+        /// زبان سایت
+        /// </summary>
+        public SiteLanguage SiteLanguage { get; set; }
+
+
+
+
+
+        /// <summary>
+        ///نام بانک
+        /// </summary>
+        public string BankName { get; set; }
+
+
+        /// <summary>
+        /// نام صاحب حساب بانک
+        /// </summary>
+        public string AccountOwner { get; set; }
+
+
+        /// <summary>
+        /// شماره کارت
+        /// </summary>
+        public string CardNumber { get; set; }
+
+        /// <summary>
+        /// شماره شبا
+        /// </summary>
+        public string ShabaNumber { get; set; }
+
+
+        /// <summary>
+        /// شماره ویزا یا مسترکارد
+        /// </summary>
+        public string VisaNumber { get; set; }
+
+
+
+
+
+        /// <summary>
+        /// این همان توکنی که در دیتا بیس ذخیره میکنیم
+        /// </summary>
+        public string  SerialNumber { get; set; }
+
+
+
         /// <summary>
         /// قوانین را مپذیرم؟
         /// </summary>
@@ -68,7 +121,7 @@ namespace Helper.Models
         [NotMapped]
         public IFormFile Photo { get; set; }
 
-       
+
         #region Relation
 
 

@@ -1,23 +1,102 @@
+import { siteLanguage } from './enums/siteLanguage'
+import { IUser } from './user'
+
+
+//................................... RESPONSE....................................
+
+//Response of  get Profile
 export interface IProfile {
-  displayName: string;
-  username: string;
-  bio: string;
-  image: string;
-  following: boolean;
-  followersCount: number;
-  followingCount: number;
-  photos: IPhoto[];
+  id: string
+  userName: string
+  email: string
+  phone: string
+  /// زبان سایت
+  siteLanguage: siteLanguage
+  ///نام بانک
+  bankName: string
+  /// نام صاحب حساب بانک
+  accountOwner: string
+  /// شماره کارت
+  cardNumber: string
+  /// شماره شبا
+  shabaNumber: string
+  /// شماره ویزا یا مسترکارد
+  visaNumber: string
 }
 
-export interface IPhoto {
-  id: string;
-  url: string;
-  isMain: boolean;
+
+//Response of changeProfile
+export interface IChangePersonalInfoRE {
+  Id: string;
+  userName: string;
+  email: string;
+  phone: string;
+  /// زبان سایت
+  siteLanguage: siteLanguage;
+  currentUser: IUser;
+
 }
 
-export interface IUserActivity {
-  id: string;
-  title: string;
-  category: string;
-  date: Date;
+
+//Response of ChangeBank
+export interface IChangeBankRE {
+  Id: string
+  ///نام بانک
+  bankName: string
+  /// نام صاحب حساب بانک
+  accountOwner: string
+  /// شماره کارت
+  cardNumber: string
+  /// شماره شبا
+  shabaNumber: string
+  /// شماره ویزا یا مسترکارد
+  visaNumber: string
+  currentUser: IUser
 }
+
+
+
+
+//................................... REQUEST....................................
+
+//Request of changeProfile
+export interface IChangePasswordRQ {
+  oldPassword: string
+  newPassword: string
+}
+
+//Request of changeProfile
+export interface IChangePrsonalInfoRQ {
+  userName: string;
+  email: string;
+  phone: string;
+  /// زبان سایت
+  siteLanguage: siteLanguage;
+  currentUser: IUser;
+
+}
+
+
+//Request of changeProfile
+export interface IChangeBankRQ {
+
+  ///نام بانک
+  bankName: string
+
+  /// نام صاحب حساب بانک
+  accountOwner: string
+
+  /// شماره کارت
+  cardNumber: string
+
+  /// شماره شبا
+  shabaNumber: string
+
+
+  /// شماره ویزا یا مسترکارد
+  visaNumber: string
+
+}
+
+
+

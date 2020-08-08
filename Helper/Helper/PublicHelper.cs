@@ -21,5 +21,8 @@ namespace Helper
 
         public const string SECREKEY = "this is secret Key";
 
+        public const string SerialNumberClaim = "serialNumber";
+
+
     }
 }

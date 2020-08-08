@@ -1,4 +1,4 @@
-import { observable, computed, action, runInAction } from 'mobx';
+import { observable, computed, action, runInAction, toJS } from 'mobx';
 import { IUser, IUserFormValues } from '../models/user';
 import agent from '../api/agent';
 import { RootStore } from './rootStore';
@@ -29,7 +29,7 @@ export default class UserStore {
         // اگر تیکمرا بخاطر بسپار را نزده بود دیگه صفحه را رفرش نکن چونتو سشن استورج ریختی توکنو
         if (!values.rememberMe)
           return
-        window.location.href = returnURL;
+        window.location.href =returnURL;
         // history.push('/profile')
 
       }
@@ -59,7 +59,7 @@ export default class UserStore {
       const res = await agent.User.current();
       if (res && res.status === 1) {
         runInAction(() => {
-          this.user = res.data;
+          this.user =res.data ;
         });
       }
     } catch (error) {

@@ -6,8 +6,8 @@ import {
   RouteComponentProps,
   Switch,
   Redirect,
+  Router,
 } from 'react-router-dom';
-
 
 
 /* Pages */
@@ -23,9 +23,12 @@ import NewsPage from '../../features/news/NewsPage'
 
 //Account
 import Login from '../../features/Account/Login'
-import Register from '../../features/Account/Register'
 import LogOut from '../../features/Account/LogOut'
 import Profile from '../../features/Profile/Profile'
+
+
+//account Settings
+import AccountSettingsPage from '../../features/AccountSettings/AccountSettingsPage'
 
 import NotFound from './NotFound';
 /*End  Pages */
@@ -44,6 +47,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
   const { getUser, isLoggedIn } = rootStore.userStore;
 
   useEffect(() => {
+
     if (token) {
       getUser().finally(() => setAppLoaded())
     } else {
@@ -51,8 +55,8 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
     }
   }, [getUser, setAppLoaded, token])
 
-  //  if (!appLoaded) return <LoadingComponent content='Loading app...' />
-
+  // if (!appLoaded) return <LoadingComponent  />
+  if (!appLoaded) return <div>....</div>
   return (
     <Fragment>
       {/* <ModalContainer /> */}
@@ -65,40 +69,36 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
           <Route path='/aboutus' component={AboutUs} />
           <Route path='/newses' component={NewsPage} />
           <Route path='/contactus' component={ContactUS} />
-          {/* <ProtectedRout path="/contactus" targetPath='/login'
-            exact={true}
-            component={Login}
-          /> */}
 
-          <Route path='/login' component={Login} />
+          <Route exact path='/login' component={Login} />
           <Route path='/LogOut' component={LogOut} />
           <Route path='/profile/:username' component={Profile} />
 
+          {/* <ProtectedRout
+            path="/AccountSettingsPage/:username"
+            targetPath='/login'
+            exact={true}
+            component={AccountSettingsPage}
+          /> */}
 
-          {/* <Route
-            path='/aboutus'
+          <Route
+            path='/AccountSettingsPage/:username'
+            exact={true}
             render={props => {
               if (!isLoggedIn) {
-                return <Redirect  to={{
+                return <Redirect to={{
                   pathname: "/login",
-                
-                  state: { from: props.location }
+                  state: { from: props.location },
                 }} />
               }
               else {
-                return <AboutUs />
+                return <AccountSettingsPage {...props} />
               }
 
             }}
-          /> */}
+          />
 
 
-
-          {/* <ProtectedRout path="/login" targetPath='/profile'
-            exact={true}
-            component={Login}
-          /> */}
-          <Route path='/register' component={Register} />
           <Route component={NotFound} />
 
         </Switch>

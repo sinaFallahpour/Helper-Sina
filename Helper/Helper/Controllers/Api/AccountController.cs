@@ -41,6 +41,12 @@ namespace Helper.Controllers.Api
             _httpContextAccessor = httpContextAccessor;
         }
 
+
+
+
+
+        #region  login
+
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<JsonResult> Login(LoginRequestVM model)
@@ -59,7 +65,8 @@ namespace Helper.Controllers.Api
             }
 
 
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            //var user = await _userManager.FindByNameAsync(model.UserName);
+            var user = await _context.Users.Where(c => c.UserName == model.UserName).FirstOrDefaultAsync();
             if (user == null)
             {
                 return new JsonResult(new { Status = 0, Message = " نام کاربری یا رمز عبور اشتباست " });
@@ -69,11 +76,17 @@ namespace Helper.Controllers.Api
                 .CheckPasswordSignInAsync(user, model.Password, false);
             if (result.Succeeded)
             {
+                var SerialNumber = Guid.NewGuid().ToString().GetHash();
+
                 var userRoles = await _userManager.GetRolesAsync(user);
                 var role = userRoles.First();
+                user.SerialNumber = SerialNumber;
+                await _context.SaveChangesAsync();
+
                 // TODO: generate token
                 var userInfo = new UserVM
                 {
+                    Id = user.Id,
                     Nickname = user.Nickname,
                     Token = _jwtGenerator.CreateToken(user, role),
                     UserName = user.UserName,
@@ -87,10 +100,10 @@ namespace Helper.Controllers.Api
             return new JsonResult(new { Status = 0, Message = " نام کاربری یا رمز عبور اشتباست " });
         }
 
+        #endregion
 
 
-
-
+        #region register
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterRequestVM model)
@@ -114,11 +127,15 @@ namespace Helper.Controllers.Api
             if (await _context.Users.Where(x => x.Email == model.Email).AnyAsync())
                 return new JsonResult(new { Status = 0, Message = "این ایمیل  موجود است" });
 
+
+
+            var SerialNumber = Guid.NewGuid().ToString().GetHash();
             var user = new ApplicationUser
             {
                 Email = model.Email,
                 UserName = model.UserName,
-                AcceptRules = model.AcceptRules
+                AcceptRules = model.AcceptRules,
+                SerialNumber = SerialNumber
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -128,6 +145,7 @@ namespace Helper.Controllers.Api
 
                 var userInfo = new UserVM
                 {
+                    Id = user.Id,
                     Nickname = user.Nickname,
                     Token = _jwtGenerator.CreateToken(user, PublicHelper.USERROLE),
                     UserName = user.UserName,
@@ -139,29 +157,24 @@ namespace Helper.Controllers.Api
             return new JsonResult(new { Status = 0, Message = " خطا در ثبت" });
         }
 
+        #endregion
 
 
 
 
+        #region CurrentUser
 
-        [HttpGet("currentUser")]
+        [HttpGet("currentUser")]     
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-
         public async Task<ActionResult> CurrentUser()
         {
             var currentUsername = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-
-
-
-         
-
-
-
-            //return username;
+            var currentSerialNumber = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == PublicHelper.SerialNumberClaim)?.Value;
 
             try
             {
-                var user = await _userManager.FindByNameAsync(currentUsername);
+                //var user = await _userManager.FindByNameAsync(currentUsername);
+                var user = await _context.Users.Where(c => c.UserName == currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
                 if (user != null)
                 {
                     var userRoles = await _userManager.GetRolesAsync(user);
@@ -169,28 +182,26 @@ namespace Helper.Controllers.Api
 
                     var currentUser = new UserVM
                     {
+                        Id = user.Id,
                         Email = user.Email,
                         Nickname = user.Nickname,
                         UserName = user.UserName,
                         PhotoAddress = user.PhotoAddress,
                         Token = _jwtGenerator.CreateToken(user, role),
-
                     };
                     return new JsonResult(new { Status = 1, Message = "", Data = currentUser });
                 }
                 return new JsonResult(new { Status = 0, Message = "کاربری یافت نشد", });
-
             }
             catch
             {
-                return new JsonResult(new { Status = 0, Message = "کاربری یافت نشد", });
+                return new JsonResult(new { Status = 0, Message = "خطایی رخ داده است", });
             }
-
-
 
         }
 
 
+        #endregion
 
 
 

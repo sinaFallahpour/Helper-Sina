@@ -1,7 +1,7 @@
 export interface IRespon {
     status: number,
     message: string,
-    
+    statusCode?:number
 }
 
 

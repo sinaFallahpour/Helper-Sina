@@ -4,7 +4,15 @@ import { history } from '../..';
 import { toast } from 'react-toastify';
 
 import { IUser, IUserFormValues } from '../models/user';
-import { IProfile, IPhoto } from '../models/profile';
+import {
+  IProfile,
+  IChangePersonalInfoRE,
+  IChangeBankRE,
+  IChangePasswordRQ,
+  IChangePrsonalInfoRQ,
+  IChangeBankRQ
+} from '../models/profile';
+
 import "react-toastify/dist/ReactToastify.css"
 import { ISlide } from '../models/slide';
 import { IResponse, IRespon } from '../models/reponse';
@@ -95,18 +103,24 @@ const User = {
   login: (user: IUserFormValues): Promise<IResponse<IUser>> =>
     requests.post(`/account/login`, user),
   register: (user: IUserFormValues): Promise<IResponse<IUser>> =>
-    requests.post(`/account/register`, user)
+    requests.post(`/account/register`, user),
 };
 
 const Profiles = {
-  get: (username: string): Promise<IProfile> =>
-    requests.get(`/profiles/${username}`),
-  uploadPhoto: (photo: Blob): Promise<IPhoto> =>
-    requests.postForm(`/photos`, photo),
-  setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
-  deletePhoto: (id: string) => requests.del(`/photos/${id}`),
-  updateProfile: (profile: Partial<IProfile>) =>
-    requests.put(`/profiles`, profile),
+  get: (username: string): Promise<IResponse<IProfile>> =>
+    requests.get(`/AccountSettings/Profile?username=${username}`),
+
+  changePassword: (username: string, changePassModel: IChangePasswordRQ): Promise<IResponse<IUser>> =>
+    requests.put(`/AccountSettings/ChangePassword?username=${username}`, { ...changePassModel }),
+
+  changePeronalInfo: (username:string, changePersonalInfoModel: IChangePrsonalInfoRQ): Promise<IResponse<IChangePersonalInfoRE>> =>
+    requests.put(`/AccountSettings/ChangePeronalInfo?username=${username}`, changePersonalInfoModel),
+
+  changeAccountBank: (username: string, changeBankModel: IChangeBankRQ): Promise<IResponse<IChangeBankRE>> =>
+    requests.put(`/AccountSettings/ChangeAccountBank?username=${username}`, changeBankModel),
+
+  // updateProfile: (profile: Partial<IProfile>) =>
+  //   requests.put(`/AccountSettings`, profile),
 };
 
 
@@ -131,8 +145,6 @@ const AboutUs = {
 const ContactUs = {
   contactUs: () => requests.get(`/Home/ContactUs`),
 };
-
-
 
 
 export default {

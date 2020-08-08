@@ -2,8 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 
 import CountUp from 'react-countup';
 // import { Swiper, SwiperSlide } from 'swiper/react';
-import Slides from './slides';
-
+import Slides from './Slides'
 const HomePage: React.FC = () => {
 
 
@@ -431,8 +430,6 @@ const HomePage: React.FC = () => {
                                     <div className="swiper-pagination"></div>
                                 </Swiper>
  */}
-
-
 
                                 {/*   //-- Swiper JS --*/}
 

@@ -4,7 +4,6 @@ import { observable, action, runInAction, computed, toJS } from "mobx";
 import { INews } from '../models/news'
 import agent from "../api/agent";
 import { toast } from "react-toastify";
-import { totalmem } from "os";
 import { NewsType } from "../models/enums/newsType";
 
 
@@ -123,7 +122,7 @@ export default class NewsStore {
                         }
                        
                     }
-                    else if (model.newsType == NewsType.videos) {
+                    else if (model.newsType === NewsType.videos) {
                         const oldvideos = this.videos.find(c => c.id == model.id);
                         if(oldvideos!.isLiked){
                             oldvideos!.isLiked = !oldvideos?.isLiked;
@@ -135,7 +134,7 @@ export default class NewsStore {
                         }
                      
                     }
-                    else if (model.newsType == NewsType.news) {
+                    else if (model.newsType === NewsType.news) {
                         const oldnews = this.newses.find(c => c.id == model.id);
                         if (oldnews!.isLiked) {
                             oldnews!.isLiked = !oldnews?.isLiked
