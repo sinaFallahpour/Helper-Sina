@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
- const Profile = () => {
+ const MyProfile = () => {
     return (
         <>
             Profile...
@@ -12,4 +12,4 @@ import React from 'react'
 
 
 
-export default    Profile
+export default    MyProfile

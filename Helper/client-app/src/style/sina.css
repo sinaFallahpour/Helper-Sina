@@ -10,3 +10,11 @@
 ._swiper-text{
     height: 240px;
 }
+
+
+._button-service-active{
+  color: #fff;
+  background: #9BC93A;
+  border: 0;
+  transition: .3s;
+}

@@ -1,9 +1,11 @@
-import React, { useState, FormEvent, useContext } from 'react'
+import React, { useState, FormEvent, useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite';
 
 import { IProfile } from '../../app/models/profile';
-
 import { Form as FinalForm, Field } from 'react-final-form';
+
+import { siteLanguage as siteLanguageEnum } from '../../app/models/enums/siteLanguage'
+import '../../style/sina.css';
 
 import {
     combineValidators,
@@ -18,7 +20,6 @@ import {
 import { Form, Button, Input } from 'semantic-ui-react';
 import { FORM_ERROR } from 'final-form';
 import { RootStoreContext } from '../../app/stores/rootStore';
-import { profile } from 'console';
 
 
 
@@ -57,8 +58,42 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
         changePersonalInformation
     } = rootStore.profileStore;
 
+    //ایا سلکت آپشن باز است یا نه
+    const [IsOpen, setIsOpen] = useState(true);
+
+    const handleOpenSelect = () => {
+        setIsOpen(prevstate => !prevstate)
+    }
+
+
+    const [siteLan, setsiteLanguage] = useState(profile.siteLanguage)
+
+    const handleSiteLanguage = (status: number) => {
+        let SIL;
+        if (status === 1 && siteLan === siteLanguageEnum.english) {
+            SIL = siteLanguageEnum.persian;
+        } else if (status === 0 && siteLan === siteLanguageEnum.persian) {
+            SIL = siteLanguageEnum.english;
+        }
+        else return
+
+        setsiteLanguage(SIL)
+    }
+
+    useEffect(() => {
+        setsiteLanguage(profile.siteLanguage)
+    }, [profile.siteLanguage])
+
+
+    const isSiteLANGChange = () => {
+        let res = profile.siteLanguage === siteLan
+        return res
+    }
+
+
 
     const handleChangePersonalInformation = async (values: any) => {
+        console.log(values)
         try {
             let res = await changePersonalInformation(values);
             // if (res && res.status === 0 && res.statusCode === 400) {
@@ -86,7 +121,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
                     <FinalForm
                         onSubmit={handleChangePersonalInformation}
                         validate={validate}
-                        initialValues={profile}
+                        initialValues={{ ...profile, siteLanguage: siteLan }}
 
                         render={({
                             handleSubmit,
@@ -203,6 +238,79 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
                                     </div>
 
 
+                                    <Field
+                                        name='siteLanguage'
+                                        type='hidden'
+                                        value={siteLan}
+                                    >
+                                        {props => (
+                                            <>
+                                                <input
+                                                    {...props}
+                                                    {...props.input}
+                                                />
+                                            </>
+                                        )}
+                                    </Field>
+
+                                    <label className="text-right w-100 pr-3 mt-2" htmlFor="">زبان وبسایت و اعلامه های رسمی </label>
+                                    <div className="row w-100 mx-auto my-2 hj-form-profile hj-maharat ">
+
+                                        <div className="col-md-7 col-8  mx-auto text-left py-2 ">
+                                            <h6 className="pt-1 pl-4">
+
+                                                {siteLan ? 'فارسی' : 'انگلیسی'}
+                                            </h6>
+                                        </div>
+                                        <div className="col-md-5 col-4  mx-auto">
+                                            <i
+                                                // className="fas fa-chevron-down pl-3 pt-3"
+                                                className={
+                                                    IsOpen ?
+                                                        'fa-chevron-up  fas fa-chevron-down pl-3 pt-3'
+                                                        :
+                                                        ' fas fa-chevron-down pl-3 pt-3'
+                                                }
+                                                id="select-down"
+                                                onClick={() => { handleOpenSelect() }}
+                                            ></i>
+                                        </div>
+                                    </div>
+
+
+                                    <div
+                                        // className="row w-100 mx-auto hj-select  "
+                                        className={IsOpen ? 'hj-select-block  row w-100 mx-auto hj-select ' : 'row w-100 mx-auto hj-select '}
+                                    >
+                                        <div className="col-sm-2 col-12 py-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => { handleSiteLanguage(1) }}
+                                                className={siteLan ? '_button-service-active btn  w-100 button-Service' : 'btn  w-100 button-Service'}
+                                            >
+                                                فارسی
+                                            </button>
+                                        </div>
+                                        <div className="col-sm-2 col-12  py-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => { handleSiteLanguage(0) }}
+                                                className={!siteLan ? '_button-service-active btn  w-100 button-Service' : 'btn  w-100 button-Service'}
+
+
+                                            >
+                                                انگلیسی
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+
+
                                     <div className="row w-100 mx-auto mt-4 pt-4">
                                         {submitting ?
                                             <button className="button btn btn-success w-25 mx-auto Confirmation" type="button" disabled>
@@ -212,7 +320,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
                                             :
                                             <Button
                                                 className='btn btn-success w-25 mx-auto Confirmation '
-                                                disabled={((invalid && !dirtySinceLastSubmit) || pristine)}
+                                                disabled={isSiteLANGChange()&& (    (  invalid && !dirtySinceLastSubmit) || pristine)}
 
                                                 loading={submitting}
                                                 content='ذخیره تنطیمات'
@@ -257,7 +365,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
                     </div> */}
 
 
-
+                    {/* 
                     <label className="text-right w-100 pr-3 mt-2" htmlFor="">زبان وبسایت و اعلامه های رسمی </label>
                     <div className="row w-100 mx-auto my-2 hj-form-profile hj-maharat ">
 
@@ -265,12 +373,22 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
                             <h6 className="pt-1 pl-4">فارسی</h6>
                         </div>
                         <div className="col-md-5 col-4  mx-auto">
-                            <i className="fas fa-chevron-down pl-3 pt-3" id="select-down"></i>
+                            <i
+                                // className="fas fa-chevron-down pl-3 pt-3"
+                                className={IsOpen ? 'fa-chevron-up  fas fa-chevron-down pl-3 pt-3' : ' fas fa-chevron-down pl-3 pt-3'}
+                                id="select-down"
+                                onClick={() => { handleOpenSelect() }}
+                            ></i>
                         </div>
-                    </div>
+                    </div> */}
 
 
-                    <div className="row w-100 mx-auto hj-select  ">
+                    {/* 
+
+                    <div
+                        // className="row w-100 mx-auto hj-select  "
+                        className={IsOpen ? 'hj-select-block  row w-100 mx-auto hj-select ' : 'row w-100 mx-auto hj-select '}
+                    >
                         <div className="col-sm-2 col-12 py-2">
                             <button type="button" className="btn  w-100 button-Service">فارسی</button>
                         </div>
@@ -278,7 +396,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
                             <button type="button" className="btn  w-100 button-Service">انگلیسی</button>
                         </div>
 
-                    </div>
+                    </div> */}
 
                     {/* <div className="row w-100 mx-auto mt-4 pt-4">
                         <button type="button" className="btn btn-success w-25 mx-auto Confirmation">ذخیره تنظیمات</button>

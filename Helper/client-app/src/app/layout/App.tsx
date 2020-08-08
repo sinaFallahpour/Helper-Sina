@@ -24,7 +24,7 @@ import NewsPage from '../../features/news/NewsPage'
 //Account
 import Login from '../../features/Account/Login'
 import LogOut from '../../features/Account/LogOut'
-import Profile from '../../features/Profile/Profile'
+import MyProfile from '../../features/MyProfile/MyProfile'
 
 
 //account Settings
@@ -72,7 +72,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
 
           <Route exact path='/login' component={Login} />
           <Route path='/LogOut' component={LogOut} />
-          <Route path='/profile/:username' component={Profile} />
+          <Route path='/profile/:username' component={MyProfile} />
 
           {/* <ProtectedRout
             path="/AccountSettingsPage/:username"
