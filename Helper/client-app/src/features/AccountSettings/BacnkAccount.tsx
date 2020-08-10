@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, useContext } from 'react'
 import { observer } from 'mobx-react-lite';
-import { IProfile } from '../../app/models/profile';
+import { IProfile } from '../../app/models/accountSettings';
 
 import { Form as FinalForm, Field } from 'react-final-form';
 
@@ -64,10 +64,10 @@ const BacnkAccount: React.FC<IProps> = ({ profile }) => {
     const rootStore = useContext(RootStoreContext);
     const {
         chnageBankAccount
-    } = rootStore.profileStore;
+    } = rootStore.accountSettingsStore;
 
 
-    const handleChangeBankAccount = async (values: any) => {
+    const submit = async (values: any) => {
         try {
             let res = await chnageBankAccount(values);
             if (res && res.status === 0 && res.statusCode === 400) {
@@ -87,7 +87,7 @@ const BacnkAccount: React.FC<IProps> = ({ profile }) => {
                 <div className="row hj-form  mx-auto">
 
                     <FinalForm
-                        onSubmit={handleChangeBankAccount}
+                        onSubmit={submit}
                         validate={validate}
                         initialValues={profile}
 

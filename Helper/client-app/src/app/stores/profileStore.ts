@@ -1,19 +1,20 @@
 import { RootStore } from './rootStore';
 import { observable, action, runInAction, computed, reaction } from 'mobx';
-import { IProfile, IChangePasswordRQ, IChangeBankRQ, IChangePersonalInfoRE } from '../models/profile';
+import { IProfile, IChangePasswordRQ, IChangeBankRQ, IChangePersonalInfoRE } from '../models/accountSettings';
 import agent from '../api/agent';
 import { toast } from 'react-toastify';
 import { toJS } from 'mobx'
 import { history } from '../..'
 import { FORM_ERROR } from 'final-form';
+import { IProfileRE } from '../models/profile';
 
-export default class ProfileStore {
+export default class AccountSettingsStore {
   rootStore: RootStore;
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
   }
 
-  @observable profile: IProfile | null = null;
+  @observable profile: IProfileRE | null = null;
   @observable loadingProfile = true;
 
 
@@ -28,10 +29,10 @@ export default class ProfileStore {
 
 
 
-  @action loadProfile = async (username: string) => {
+  @action loadProfile = async (id: string) => {
     this.loadingProfile = true;
     try {
-      const res = await agent.Profiles.get(username);
+      const res = await agent.Profiles.get(id);
       if (res && res.status === 1) {
         runInAction(() => {
           this.profile = toJS(res.data);
@@ -55,81 +56,24 @@ export default class ProfileStore {
   };
 
 
-  //change Password
-  @action changePassword = async (model: IChangePasswordRQ) => {
-    try {
-      const currentUserId = toJS(this.rootStore.userStore.user)!.id
-      const res = await agent.Profiles.changePassword(currentUserId!, model);
-      const { status, statusCode, data, message } = res
-      if (res && status === 1) {
-        runInAction(() => {
-          this.rootStore.userStore.user = res.data;
-          this.rootStore.commonStore.setToken(res.data.token, true);
-        });
-        toast.success('پسورد تغییر یافت')
-      }
-      else if (res && status === 0 && statusCode === 400) {
-        return res;
-      }
-      else if (res && status == 0)
-        return res
-    } catch (error) {
-      toast.error('خطایی رخداده');
-    }
-  };
 
 
 
 
-
-  //change BankAccount
-  @action chnageBankAccount = async (model: IChangeBankRQ) => {
+  //updateProfile
+  @action updateProfile = async (model: IProfileRE) => {
     try {
       const currentUsreId = toJS(this.rootStore.userStore.user)!.id
-      const res = await agent.Profiles.changeAccountBank(currentUsreId!, model);
+      const res = await agent.Profiles.updateProfile(currentUsreId!, model);
       const { status, statusCode, data, message } = res
       if (res && status === 1) {
         runInAction(() => {
           this.rootStore.userStore.user = res.data.currentUser;
-          this.rootStore.commonStore.setToken(res.data.currentUser.token, true);
-          const body = { ...res.data }
-          delete body.currentUser;
-           this.profile! = { ...this.profile, ...body }
-        });
-        toast.success('ثبت موفقیت آمیز تغییرات')
-      }
-      else if (res && status === 0 && statusCode === 400) {
-        return res;
-      }
-      else if (res && status == 0)
-        return res
-    } catch (error) {
-      toast.error('خطایی رخداده');
-    }
-  };
-
-
-
-
-  //change personalInformation
-  @action changePersonalInformation = async (model: IChangePersonalInfoRE) => {
-    try {
-      const currentUsreId = toJS(this.rootStore.userStore.user)!.id
-      console.log(this.rootStore.userStore.user)
-      const res = await agent.Profiles.changePeronalInfo(currentUsreId!, model);
-      const { status, statusCode, data, message } = res
-      if (res && status === 1) {
-        runInAction(() => {
-           this.rootStore.userStore.user = res.data.currentUser;
-           this.rootStore.commonStore.setToken(res.data.currentUser.token, true);
+          this.rootStore.commonStore.setToken(res?.data?.currentUser?.token, true);
           const body = { ...res.data }
           delete body.currentUser;
           this.profile! = { ...this.profile, ...body }
         });
-     
-        // window.location.href=`/accountSettingsPage/${res.data.currentUser.userName}`
-        //history.push(`/accountSettingsPage/${res.data.currentUser.userName}`)
-
         toast.success('ثبت موفقیت آمیز تغییرات')
       }
       else if (res && status === 0 && statusCode === 400) {
@@ -138,7 +82,7 @@ export default class ProfileStore {
       else if (res && status == 0)
         return res
     } catch (error) {
-      toast.error('خطایی رخداده');
+      toast.error('خطایی رخ داده');
     }
   };
 

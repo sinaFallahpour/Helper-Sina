@@ -11,13 +11,14 @@ import {
   IChangePasswordRQ,
   IChangePrsonalInfoRQ,
   IChangeBankRQ
-} from '../models/profile';
+} from '../models/accountSettings';
 
 import "react-toastify/dist/ReactToastify.css"
 import { ISlide } from '../models/slide';
 import { IResponse, IRespon } from '../models/reponse';
 import Cookies from 'js-cookie'
 import { INews } from '../models/news';
+import { IProfileRE } from '../models/profile';
 axios.defaults.baseURL = 'https://localhost:44340/api';
 
 axios.interceptors.request.use(
@@ -52,6 +53,9 @@ axios.interceptors.response.use(undefined, error => {
     data.errors.hasOwnProperty('id')
   ) {
     history.push('/notfound');
+  }
+  if(status===401){
+    toast.error('  عدم دسترسي . لطفا وارد سايت شويد!');
   }
   if (status === 500) {
     console.log(error)
@@ -106,7 +110,7 @@ const User = {
     requests.post(`/account/register`, user),
 };
 
-const Profiles = {
+const AccountSettings = {
   get: (Id: string): Promise<IResponse<IProfile>> =>
     requests.get(`/AccountSettings/Profile?Id=${Id}`),
 
@@ -124,6 +128,15 @@ const Profiles = {
 };
 
 
+
+const Profiles = {
+  get: (Id: string): Promise<IResponse<IProfileRE>> =>
+    requests.get(`/Profile/Profile?Id=${Id}`),
+
+  updateProfile: (Id: string, model: IProfileRE): Promise<IResponse<IProfileRE>> =>
+    requests.put(`/Profile/UpdateProfile?Id=${Id}`, model),
+
+};
 
 const Slides = {
   list: (slideType: number): Promise<IResponse<ISlide[]>> =>
@@ -149,6 +162,7 @@ const ContactUs = {
 
 export default {
   User,
+  AccountSettings,
   Profiles,
   AboutUs,
   ContactUs,

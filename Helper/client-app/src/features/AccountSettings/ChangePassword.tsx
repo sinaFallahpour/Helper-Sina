@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, useContext } from 'react'
 import { observer } from 'mobx-react-lite';
-import { IProfile, IChangePasswordRQ } from '../../app/models/profile';
+import { IProfile, IChangePasswordRQ } from '../../app/models/accountSettings';
 import { Form as FinalForm, Field } from 'react-final-form';
 import {
     combineValidators,
@@ -55,7 +55,7 @@ const ChangePassword: React.FC<IProps> = ({ profile }) => {
     const rootStore = useContext(RootStoreContext);
     const {
         changePassword
-    } = rootStore.profileStore;
+    } = rootStore.accountSettingsStore;
 
 
     // const rootStore = useContext(RootStoreContext);
@@ -70,7 +70,23 @@ const ChangePassword: React.FC<IProps> = ({ profile }) => {
     })
 
 
-    const handleChangePassubmit = async (values: any) => {
+    const handlePasswordType = (event: React.MouseEvent, selector: number) => {
+        let res = ''
+        if (selector == 0) {
+            res = passwordType.oldpass === 'text' ? 'password' : 'text';
+            setPasswordType(prevstate => ({ ...passwordType, oldpass: res }))
+        }
+        if (selector == 1) {
+            res = passwordType.newpass === 'text' ? 'password' : 'text';
+            setPasswordType(prevstate => ({ ...passwordType, newpass: res }))
+        } if (selector == 2) {
+            res = passwordType.newpassconfirm === 'text' ? 'password' : 'text'
+            setPasswordType(prevstate => ({ ...passwordType, newpassconfirm: res }))
+        }
+    }
+
+
+    const submit = async (values: any) => {
 
         try {
             let res = await changePassword(values);
@@ -103,20 +119,7 @@ const ChangePassword: React.FC<IProps> = ({ profile }) => {
 
 
 
-    const handlePasswordType = (event: React.MouseEvent, selector: number) => {
-        let res = ''
-        if (selector == 0) {
-            res = passwordType.oldpass === 'text' ? 'password' : 'text';
-            setPasswordType(prevstate => ({ ...passwordType, oldpass: res }))
-        }
-        if (selector == 1) {
-            res = passwordType.newpass === 'text' ? 'password' : 'text';
-            setPasswordType(prevstate => ({ ...passwordType, newpass: res }))
-        } if (selector == 2) {
-            res = passwordType.newpassconfirm === 'text' ? 'password' : 'text'
-            setPasswordType(prevstate => ({ ...passwordType, newpassconfirm: res }))
-        }
-    }
+
 
 
 
@@ -126,7 +129,7 @@ const ChangePassword: React.FC<IProps> = ({ profile }) => {
                 <div className="row w-100 mx-auto">
                     <div className="col-md-8 col-12 mx-auto">
                         <FinalForm
-                            onSubmit={handleChangePassubmit}
+                            onSubmit={submit}
 
 
                             // onSubmit={(values) =>

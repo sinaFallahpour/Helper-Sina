@@ -25,7 +25,7 @@ const AccountSettingsPage: React.FC<IProps> = ({ match }) => {
         loadingProfile,
         profile,
         loadProfile,
-    } = rootStore.profileStore;
+    } = rootStore.accountSettingsStore;
 
     useEffect(() => {
         loadProfile(match.params.id);

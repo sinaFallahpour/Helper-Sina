@@ -68,9 +68,7 @@ namespace Helper.Areas.Admin.Controllers
                 Nickname = o.Nickname,
                 FirstName = o.FirstName,
                 LastName = o.LastName,
-                Address = o.Address,
                 Birthdate = o.Birthdate,
-                NationalCode = o.NationalCode,
                 Phone = o.Phone,
                 PhotoAddress = o.PhotoAddress
             }).FirstOrDefaultAsync();
@@ -107,9 +105,8 @@ namespace Helper.Areas.Admin.Controllers
                     profileFromDb.FirstName = model.FirstName;
                     profileFromDb.LastName = model.LastName;
                     profileFromDb.Birthdate = model.Birthdate;
-                    profileFromDb.NationalCode = model.NationalCode;
                     profileFromDb.Phone = model.Phone;
-                    profileFromDb.Address = model.Address;
+               
 
                     if (model.Photo != null)
                     {

@@ -70,7 +70,7 @@ const loginvalidate = combineValidators({
 
 const getReturnURL = (loc: any) => {
     const { state } = loc;
-    return state ? state.from.pathname : "/profile";
+    return state ? state.from.pathname : null;
 }
 
 
@@ -124,7 +124,7 @@ const Login = () => {
                                     <FinalForm
 
                                         onSubmit={(values: IUserFormValues) =>
-                                            register(values, '/profile')
+                                            register(values, getReturnURL(history.location))
                                                 .catch(error => ({
                                                     [FORM_ERROR]: error
                                                 }))
@@ -245,9 +245,10 @@ const Login = () => {
                                     {/* ........login from.................s   */}
                                     <FinalForm
                                         onSubmit={(values: IUserFormValues) =>
-                                            login(values, getReturnURL(history.location)).catch(error => ({
-                                                [FORM_ERROR]: error
-                                            }))
+                                            login(values, getReturnURL(history.location))
+                                                .catch(error => ({
+                                                    [FORM_ERROR]: error
+                                                }))
                                         }
                                         initialValues={{
                                             email: '',
@@ -264,7 +265,7 @@ const Login = () => {
                                             invalid,
                                             pristine,
                                             dirtySinceLastSubmit,
-                                           
+
                                         }) => (
 
 

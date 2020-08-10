@@ -20,22 +20,22 @@ namespace Helper
         {
             var host = CreateHostBuilder(args).Build();
 
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var context = services.GetRequiredService<ApplicationDbContext>();
-                    //var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    context.Database.Migrate();
-                    //Seed.SeedData(context, userManager).Wait();
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occured during migration");
-                }
-            }
+            //using (var scope = host.Services.CreateScope())
+            //{
+            //    var services = scope.ServiceProvider;
+            //    try
+            //    {
+            //        var context = services.GetRequiredService<ApplicationDbContext>();
+            //        //var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+            //        context.Database.Migrate();
+            //        //Seed.SeedData(context, userManager).Wait();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        var logger = services.GetRequiredService<ILogger<Program>>();
+            //        logger.LogError(ex, "An error occured during migration");
+            //    }
+            //}
 
 
             host.Run();

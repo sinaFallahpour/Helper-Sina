@@ -7,14 +7,19 @@
   height: 280px;
   border-radius: 4px;
 }
-._swiper-text{
-    height: 240px;
+._swiper-text {
+  height: 240px;
 }
 
-
-._button-service-active{
+._button-service-active {
   color: #fff;
-  background: #9BC93A;
+  background: #9bc93a;
   border: 0;
-  transition: .3s;
+  transition: 0.3s;
+}
+
+._formInput {
+  color: black !important;
+  font-size: 19px;
+
 }

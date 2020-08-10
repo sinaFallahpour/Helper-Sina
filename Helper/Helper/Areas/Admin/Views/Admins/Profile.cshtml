@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Profile";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var photoAddress = Model.PhotoAddress ?? "/Upload/USer/user.jpg";
 }
 
 
@@ -27,7 +28,8 @@
 
             <div class="form-row">
                 <div class="  _editimageContainer">
-                    <img src="@Model.PhotoAddress" class="d-block " id="UploadedImage" />
+                    <img src="@photoAddress"
+                         class="d-block " id="UploadedImage" />
                 </div>
             </div>
             @if (!string.IsNullOrEmpty(ViewBag.IsSuccess))

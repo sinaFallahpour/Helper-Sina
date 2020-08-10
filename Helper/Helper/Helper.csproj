@@ -49,7 +49,6 @@
     <Folder Include="wwwroot\ReactPages\typings-custom\" />
     <Folder Include="wwwroot\Upload\News\" />
     <Folder Include="wwwroot\Upload\Slider\" />
-    <Folder Include="wwwroot\Upload\User\" />
    
   </ItemGroup>
 

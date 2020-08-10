@@ -79,7 +79,7 @@ namespace Helper.Controllers.Api
                 var SerialNumber = Guid.NewGuid().ToString().GetHash();
 
                 var userRoles = await _userManager.GetRolesAsync(user);
-                var role = userRoles.First();
+                var role = userRoles?.First();
                 user.SerialNumber = SerialNumber;
                 await _context.SaveChangesAsync();
 
@@ -96,7 +96,6 @@ namespace Helper.Controllers.Api
                 };
                 return new JsonResult(new { Status = 1, Message = "ورود موفقیت آمیز", Data = userInfo });
             }
-
             return new JsonResult(new { Status = 0, Message = " نام کاربری یا رمز عبور اشتباست " });
         }
 

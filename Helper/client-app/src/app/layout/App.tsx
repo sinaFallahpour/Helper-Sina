@@ -24,7 +24,7 @@ import NewsPage from '../../features/news/NewsPage'
 //Account
 import Login from '../../features/Account/Login'
 import LogOut from '../../features/Account/LogOut'
-import MyProfile from '../../features/MyProfile/MyProfile'
+import MyProfilePage from '../../features/MyProfile/MyProfilePage'
 
 
 //account Settings
@@ -49,14 +49,15 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
   useEffect(() => {
 
     if (token) {
-      getUser().finally(() => setAppLoaded())
+      getUser().
+        finally(() => setAppLoaded())
     } else {
       setAppLoaded();
     }
   }, [getUser, setAppLoaded, token])
 
-  // if (!appLoaded) return <LoadingComponent  />
-  if (!appLoaded) return <div>....</div>
+  if (!appLoaded) return <LoadingComponent />
+
   return (
     <Fragment>
       {/* <ModalContainer /> */}
@@ -72,7 +73,34 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
 
           <Route exact path='/login' component={Login} />
           <Route path='/LogOut' component={LogOut} />
-          <Route path='/profile/:username' component={MyProfile} />
+
+
+
+
+
+
+          {/* <Route path='/profile/id:string' component={MyProfilePage} /> */}
+
+
+          <Route
+            path='/profile/:id'
+            exact={true}
+            render={props => {
+              if (!isLoggedIn) {
+                return <Redirect to={{
+                  pathname: "/login",
+                  state: { from: props.location },
+                }} />
+              }
+              else {
+                return <MyProfilePage {...props} />
+              }
+            }}
+          />
+
+
+
+          {/* <Route path='/profile/id:string' component={MyProfilePage} /> */}
 
           {/* <ProtectedRout
             path="/AccountSettingsPage/:username"

@@ -197,7 +197,7 @@ namespace Helper.Controllers
                     FirstName = name,
                     LastName = "",
                     Gender = "",
-                    NationalCode = "",
+                 
                     Nickname = name,
                     UserName = name,
                     NormalizedUserName = name.Normalize(),

@@ -4,14 +4,16 @@ using Helper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200810053936_new applicationuser")]
+    partial class newapplicationuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +35,9 @@ namespace Helper.Migrations
                     b.Property<string>("AccountOwner")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AvatarUrl")
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
@@ -47,10 +52,6 @@ namespace Helper.Migrations
                     b.Property<string>("CardNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -59,8 +60,7 @@ namespace Helper.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Descriptions")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
@@ -93,6 +93,10 @@ namespace Helper.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NationalCode")
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("Nickname")
                         .HasColumnType("nvarchar(200)")
@@ -286,24 +290,6 @@ namespace Helper.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TBL_Settings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 10, 3, 34, 21, 208, DateTimeKind.Local).AddTicks(2535),
-                            Key = "AboutUs",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Value = ""
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 10, 3, 34, 21, 211, DateTimeKind.Local).AddTicks(9680),
-                            Key = "Contactus",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Value = ""
-                        });
                 });
 
             modelBuilder.Entity("Helper.Models.Entities.TBL_Slide", b =>
@@ -358,22 +344,6 @@ namespace Helper.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "f0b5a3de-ee9c-4ed9-a460-bb92669f0d5f",
-                            ConcurrencyStamp = "944164ec-b6d5-4a7c-86b0-26e112c8ab32",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
-                        },
-                        new
-                        {
-                            Id = "ab210a2c-0c3a-4e1b-a914-3934c83ceae2",
-                            ConcurrencyStamp = "632cec3b-e26b-4351-9972-26737e6c9d91",
-                            Name = "User",
-                            NormalizedName = "User"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

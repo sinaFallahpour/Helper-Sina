@@ -4,14 +4,16 @@ using Helper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200810054221_nn")]
+    partial class nn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +35,9 @@ namespace Helper.Migrations
                     b.Property<string>("AccountOwner")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AvatarUrl")
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
@@ -47,10 +52,6 @@ namespace Helper.Migrations
                     b.Property<string>("CardNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -59,8 +60,7 @@ namespace Helper.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Descriptions")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
@@ -93,6 +93,10 @@ namespace Helper.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NationalCode")
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("Nickname")
                         .HasColumnType("nvarchar(200)")
@@ -291,7 +295,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 10, 3, 34, 21, 208, DateTimeKind.Local).AddTicks(2535),
+                            CreatedAt = new DateTime(2020, 8, 9, 22, 42, 20, 815, DateTimeKind.Local).AddTicks(824),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -299,7 +303,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 10, 3, 34, 21, 211, DateTimeKind.Local).AddTicks(9680),
+                            CreatedAt = new DateTime(2020, 8, 9, 22, 42, 20, 819, DateTimeKind.Local).AddTicks(5835),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -362,15 +366,15 @@ namespace Helper.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f0b5a3de-ee9c-4ed9-a460-bb92669f0d5f",
-                            ConcurrencyStamp = "944164ec-b6d5-4a7c-86b0-26e112c8ab32",
+                            Id = "3f120f56-a027-45ff-99ff-d73c687722a8",
+                            ConcurrencyStamp = "94f1ccd7-7912-4866-8e10-cd3e14425637",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "ab210a2c-0c3a-4e1b-a914-3934c83ceae2",
-                            ConcurrencyStamp = "632cec3b-e26b-4351-9972-26737e6c9d91",
+                            Id = "fe3b64b8-2b5a-4a26-86fe-3b3276bfabe9",
+                            ConcurrencyStamp = "eb56940f-5681-49ce-bb4a-0cd5323673b3",
                             Name = "User",
                             NormalizedName = "User"
                         });

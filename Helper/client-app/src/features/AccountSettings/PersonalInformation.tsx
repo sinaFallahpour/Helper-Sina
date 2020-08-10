@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite';
 
-import { IProfile } from '../../app/models/profile';
+import { IProfile } from '../../app/models/accountSettings';
 import { Form as FinalForm, Field } from 'react-final-form';
 
 import { siteLanguage as siteLanguageEnum } from '../../app/models/enums/siteLanguage'
@@ -56,7 +56,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
     const rootStore = useContext(RootStoreContext);
     const {
         changePersonalInformation
-    } = rootStore.profileStore;
+    } = rootStore.accountSettingsStore;
 
     //ایا سلکت آپشن باز است یا نه
     const [IsOpen, setIsOpen] = useState(true);
@@ -92,8 +92,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
 
 
 
-    const handleChangePersonalInformation = async (values: any) => {
-        console.log(values)
+    const submit = async (values: any) => {
         try {
             let res = await changePersonalInformation(values);
             // if (res && res.status === 0 && res.statusCode === 400) {
@@ -102,7 +101,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
             if (res && res.status == 0)
                 return { [FORM_ERROR]: res.message }
         } catch (error) {
-            return { [FORM_ERROR]: 'خطایی رخداده' }
+            return { [FORM_ERROR]: 'خطایی رخ داده' }
         }
     };
 
@@ -119,7 +118,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
 
 
                     <FinalForm
-                        onSubmit={handleChangePersonalInformation}
+                        onSubmit={submit}
                         validate={validate}
                         initialValues={{ ...profile, siteLanguage: siteLan }}
 
@@ -210,7 +209,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
                                     <div className="form-group w-100 position-relative">
                                         <Field
                                             name='phone'
-                                            placeholder='6037 9099 9900 9900'
+                                            placeholder='شماره تماس'
                                             type='number'
                                             className='form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark'
                                             value={profile.phone}
@@ -320,7 +319,7 @@ const PersonalInformation: React.FC<IProps> = ({ profile }) => {
                                             :
                                             <Button
                                                 className='btn btn-success w-25 mx-auto Confirmation '
-                                                disabled={isSiteLANGChange()&& (    (  invalid && !dirtySinceLastSubmit) || pristine)}
+                                                disabled={isSiteLANGChange() && ((invalid && !dirtySinceLastSubmit) || pristine)}
 
                                                 loading={submitting}
                                                 content='ذخیره تنطیمات'

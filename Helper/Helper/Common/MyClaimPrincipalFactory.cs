@@ -23,7 +23,7 @@ namespace Helper.Common
             var claims = await base.GenerateClaimsAsync(user);
 
             // user Photo address to cookies
-            claims.AddClaim(new Claim(PublicHelper.USERPHOTOADDRESS, user.PhotoAddress));
+            claims.AddClaim(new Claim(PublicHelper.USERPHOTOADDRESS, user.PhotoAddress ?? "/Upload/User/user.jpg"));
 
             return claims;
         }

@@ -31,9 +31,7 @@ namespace Helper.Models
         [Display(Name = " تاریخ تولد ")]
         public string Birthdate { get; set; }
 
-        [StringLength(maximumLength: 10, ErrorMessage = "حداکثر 10 کاراکتر وارد کنید")]
-        [Display(Name = "  کد ملی ")]
-        public string NationalCode { get; set; }
+      
 
         [StringLength(maximumLength: 10, ErrorMessage = "حداکثر 10 کاراکتر وارد کنید")]
         [Display(Name = "  جنسیت  ")]
@@ -51,12 +49,25 @@ namespace Helper.Models
         [StringLength(maximumLength: 200, ErrorMessage = "حداکثر 200 کاراکتر وارد کنید")]
         public string AvatarUrl { get; set; }
 
-        [Display(Name = "  آدرس ")]
-        public string Address { get; set; }
+
+
+        /// <summary>
+        /// توضیحات خود
+        /// </summary>
+        [StringLength(maximumLength: 1000, ErrorMessage = "حداکثر 1000 کاراکتر وارد کنید")]
+        public string Descriptions { get; set; }
+
+
+        [StringLength(maximumLength: 100, ErrorMessage = "حداکثر 100 کاراکتر وارد کنید")]
+        public string  City { get; set; }
 
 
 
+        [StringLength(maximumLength: 300, ErrorMessage = "حداکثر 300 کاراکتر وارد کنید")]
+        public string LanguageKnowing { get; set; }
 
+
+        public bool IsMarid { get; set; }
 
 
         /// <summary>
