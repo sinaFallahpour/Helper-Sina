@@ -4,14 +4,16 @@ using Helper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200810203313_Servcice")]
+    partial class Servcice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -264,86 +266,6 @@ namespace Helper.Migrations
                     b.ToTable("TBL_NewsLike");
                 });
 
-            modelBuilder.Entity("Helper.Models.Entities.TBL_Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CommentCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAgreement")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LikeCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaxPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinpRice")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SeenCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SendType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServiceType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Skills")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TBL_Service");
-                });
-
-            modelBuilder.Entity("Helper.Models.Entities.TBL_ServiceLevel2", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MonthCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TBL_ServiceLevel2");
-                });
-
             modelBuilder.Entity("Helper.Models.Entities.TBL_Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -371,7 +293,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 10, 14, 21, 12, 944, DateTimeKind.Local).AddTicks(8970),
+                            CreatedAt = new DateTime(2020, 8, 10, 13, 33, 12, 202, DateTimeKind.Local).AddTicks(1692),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -379,7 +301,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 10, 14, 21, 12, 948, DateTimeKind.Local).AddTicks(5769),
+                            CreatedAt = new DateTime(2020, 8, 10, 13, 33, 12, 205, DateTimeKind.Local).AddTicks(9281),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -413,58 +335,6 @@ namespace Helper.Migrations
                     b.ToTable("TBL_Sliders");
                 });
 
-            modelBuilder.Entity("Helper.Models.Entities.TBL_User_Comment_Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1500)")
-                        .HasMaxLength(1500);
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServiceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserCommentService");
-                });
-
-            modelBuilder.Entity("Helper.Models.Entities.TBL_User_Like_Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServiceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserLikeSerive");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -494,15 +364,15 @@ namespace Helper.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "63a50bdf-4cf1-46ae-af05-11642b1979de",
-                            ConcurrencyStamp = "1037029d-5536-4870-a85d-25429e6d95f6",
+                            Id = "ad0cc2fb-3594-456b-a751-0985f8d95d37",
+                            ConcurrencyStamp = "e0f55caa-bded-4565-8ba0-637d81a2f572",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "db77bb68-6d0a-4462-9e32-dae30cb9821b",
-                            ConcurrencyStamp = "9428f622-78b3-42bc-ad29-a16c2d0f0d14",
+                            Id = "1e3e4ec7-0488-4dac-96ad-ea26fb51ccaf",
+                            ConcurrencyStamp = "a9708268-dd7c-4a36-8b7a-6acc113f64c0",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -640,35 +510,6 @@ namespace Helper.Migrations
 
                     b.HasOne("Helper.Models.ApplicationUser", "User")
                         .WithMany("NewsLike")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Helper.Models.Entities.TBL_Service", b =>
-                {
-                    b.HasOne("Helper.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Helper.Models.Entities.TBL_User_Comment_Service", b =>
-                {
-                    b.HasOne("Helper.Models.Entities.TBL_Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId");
-
-                    b.HasOne("Helper.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Helper.Models.Entities.TBL_User_Like_Service", b =>
-                {
-                    b.HasOne("Helper.Models.Entities.TBL_Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId");
-
-                    b.HasOne("Helper.Models.ApplicationUser", "User")
-                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 

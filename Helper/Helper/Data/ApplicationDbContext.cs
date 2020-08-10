@@ -61,5 +61,37 @@ namespace Helper.Data
 
         public DbSet<TBL_NewsLike> TBL_NewsLike { get; set; }
 
+
+
+        /// <summary>
+        /// خدمت ها
+        /// </summary>
+        public DbSet<TBL_Service> TBL_Service { get; set; }
+
+
+        /// <summary>
+        ///  نوع هاي خدمت 
+        /// </summary>
+        public DbSet<TBL_ServiceLevel2> TBL_ServiceLevel2 { get; set; }
+
+
+
+        /// <summary>
+        /// لايك ها خدمت هايي از كاربر
+        /// </summary>
+        public DbSet<TBL_User_Like_Service> UserLikeSerive { get; set; }
+
+
+
+        /// <summary>
+        /// كامنت هاي كاربر روي خدمت هايي
+        /// </summary>
+        public DbSet<TBL_User_Comment_Service> UserCommentService { get; set; }
+
+
+
+
+
+
     }
 }

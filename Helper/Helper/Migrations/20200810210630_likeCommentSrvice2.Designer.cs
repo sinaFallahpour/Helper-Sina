@@ -4,14 +4,16 @@ using Helper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200810210630_likeCommentSrvice2")]
+    partial class likeCommentSrvice2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -371,7 +373,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 10, 14, 21, 12, 944, DateTimeKind.Local).AddTicks(8970),
+                            CreatedAt = new DateTime(2020, 8, 10, 14, 6, 29, 404, DateTimeKind.Local).AddTicks(8900),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -379,7 +381,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 10, 14, 21, 12, 948, DateTimeKind.Local).AddTicks(5769),
+                            CreatedAt = new DateTime(2020, 8, 10, 14, 6, 29, 408, DateTimeKind.Local).AddTicks(4664),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -494,15 +496,15 @@ namespace Helper.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "63a50bdf-4cf1-46ae-af05-11642b1979de",
-                            ConcurrencyStamp = "1037029d-5536-4870-a85d-25429e6d95f6",
+                            Id = "554f0ca2-1a09-42fc-a1a3-84c4c6b69926",
+                            ConcurrencyStamp = "b752e118-5a7a-4f4e-a179-3935d6a5cf82",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "db77bb68-6d0a-4462-9e32-dae30cb9821b",
-                            ConcurrencyStamp = "9428f622-78b3-42bc-ad29-a16c2d0f0d14",
+                            Id = "196d3d14-4214-4330-8428-2ad077bfa247",
+                            ConcurrencyStamp = "f0a8ac7b-3460-4157-bb69-2eef4e51cec7",
                             Name = "User",
                             NormalizedName = "User"
                         });

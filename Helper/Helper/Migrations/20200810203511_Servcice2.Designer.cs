@@ -4,14 +4,16 @@ using Helper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200810203511_Servcice2")]
+    partial class Servcice2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -320,30 +322,6 @@ namespace Helper.Migrations
                     b.ToTable("TBL_Service");
                 });
 
-            modelBuilder.Entity("Helper.Models.Entities.TBL_ServiceLevel2", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MonthCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TBL_ServiceLevel2");
-                });
-
             modelBuilder.Entity("Helper.Models.Entities.TBL_Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -371,7 +349,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 10, 14, 21, 12, 944, DateTimeKind.Local).AddTicks(8970),
+                            CreatedAt = new DateTime(2020, 8, 10, 13, 35, 11, 476, DateTimeKind.Local).AddTicks(3007),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -379,7 +357,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 10, 14, 21, 12, 948, DateTimeKind.Local).AddTicks(5769),
+                            CreatedAt = new DateTime(2020, 8, 10, 13, 35, 11, 479, DateTimeKind.Local).AddTicks(7653),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -413,58 +391,6 @@ namespace Helper.Migrations
                     b.ToTable("TBL_Sliders");
                 });
 
-            modelBuilder.Entity("Helper.Models.Entities.TBL_User_Comment_Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1500)")
-                        .HasMaxLength(1500);
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServiceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserCommentService");
-                });
-
-            modelBuilder.Entity("Helper.Models.Entities.TBL_User_Like_Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServiceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserLikeSerive");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -494,15 +420,15 @@ namespace Helper.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "63a50bdf-4cf1-46ae-af05-11642b1979de",
-                            ConcurrencyStamp = "1037029d-5536-4870-a85d-25429e6d95f6",
+                            Id = "a7b49ed6-8e25-42cc-a0ba-951cddd8bf55",
+                            ConcurrencyStamp = "0d197605-f7b8-469f-9454-0df034eab42a",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "db77bb68-6d0a-4462-9e32-dae30cb9821b",
-                            ConcurrencyStamp = "9428f622-78b3-42bc-ad29-a16c2d0f0d14",
+                            Id = "58a81558-e582-4293-b2c8-7a5b17b0764b",
+                            ConcurrencyStamp = "e296356a-726f-4d22-b29d-66fe64f9fa56",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -645,28 +571,6 @@ namespace Helper.Migrations
 
             modelBuilder.Entity("Helper.Models.Entities.TBL_Service", b =>
                 {
-                    b.HasOne("Helper.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Helper.Models.Entities.TBL_User_Comment_Service", b =>
-                {
-                    b.HasOne("Helper.Models.Entities.TBL_Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId");
-
-                    b.HasOne("Helper.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Helper.Models.Entities.TBL_User_Like_Service", b =>
-                {
-                    b.HasOne("Helper.Models.Entities.TBL_Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId");
-
                     b.HasOne("Helper.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
