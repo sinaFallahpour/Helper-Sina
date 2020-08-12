@@ -12,17 +12,26 @@ namespace Helper.Areas.Admin.Models.ViewModels.Sttings
     public class SettingsViewModel
     {
 
-        [Required(ErrorMessage ="الزامیست")]
+        [Required(ErrorMessage ="  متن درباره  ما الزامیست")]
         [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر")]
         [Display(Name ="درباره ما")]
         [AllowHtml]
         public string Aboutus { get; set; }
 
-        [Required(ErrorMessage = "الزامیست")]
+        [Required(ErrorMessage = " متن ارتبط با ما الزامیست")]
         [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر")]
         [Display(Name = "ارتبط با ما")]
         [AllowHtml]
         public string ContactUs { get; set; }
+
+
+        [Required(ErrorMessage = " متن قوانین سایت الزامیست")]
+        [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر")]
+        [Display(Name = "قوانین سایت")]
+        [AllowHtml]
+        public string SiteRules { get; set; }
+
+
 
         //public List<string> ImagesAddresses { get; set; }
 

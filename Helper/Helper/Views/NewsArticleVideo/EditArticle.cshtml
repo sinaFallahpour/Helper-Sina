@@ -30,14 +30,14 @@
 
 
             @*<div class="form-row">
-                    <div class="col-md-8 mb-3">
-                        <video width="400" controls>
-                            <source src="@Model.VideoAddress" id="video_here">
-                            <source src="mov_bbb.ogg" id="video_here">
-                            Your browser does not support HTML5 video.
-                        </video>
-                    </div>
-                </div>*@
+            <div class="col-md-8 mb-3">
+                <video width="400" controls>
+                    <source src="@Model.VideoAddress" id="video_here">
+                    <source src="mov_bbb.ogg" id="video_here">
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+        </div>*@
 
 
 
@@ -49,22 +49,22 @@
                     <span asp-validation-for="Title" class="text-danger"> </span>
                 </div>
                 @*<div class="col-md-6 mb-3">
-                    <label asp-for="NewsType" for="validationCustom03" class="text-dark"></label>
+                <label asp-for="NewsType" for="validationCustom03" class="text-dark"></label>
 
-                    <select asp-for="NewsType" class="custom-select custom-select-lg">
-                        <option selected>این انتخابگر را امتحان کنید</option>
-                        @if (Model.NewsType == NewsType.News)
-                        {
-                            <option selected value="0">خبر</option>
-                            <option value="2">فیلم آموزشی</option>
-                        }
-                        else
-                        {
-                            <option value="0">خبر</option>
-                            <option selected value="2">فیلم آموزشی</option>
-                        }
-                    </select>
-                </div>*@
+                <select asp-for="NewsType" class="custom-select custom-select-lg">
+                    <option selected>این انتخابگر را امتحان کنید</option>
+                    @if (Model.NewsType == NewsType.News)
+                    {
+                        <option selected value="0">خبر</option>
+                        <option value="2">فیلم آموزشی</option>
+                    }
+                    else
+                    {
+                        <option value="0">خبر</option>
+                        <option selected value="2">فیلم آموزشی</option>
+                    }
+                </select>
+            </div>*@
 
                 <div class="col-md-4 mb-3">
                     <label class="text-dark" for="file">انتخاب  عکس  </label>
@@ -82,8 +82,8 @@
             </div>
 
 
-            <button type="submit" class="btn btn-primary">ارسال</button>
-            <a asp-action="Index" class="btn btn-success">بازگشت به لیست</a>
+            <button type="submit" class="btn btn-success">ارسال</button>
+            <a asp-action="Index" class="btn btn-warning">بازگشت به لیست</a>
 
         </form>
 

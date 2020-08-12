@@ -22,9 +22,9 @@
                     <div class="col-md-9 mb-3">
                         <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
                             <div asp-validation-summary="ModelOnly" class="text-danger">
-                                <strong>
+                                @*<strong>
                                     @TempData["Success"]
-                                </strong>
+                                </strong>*@
                             </div>
 
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -75,16 +75,6 @@
             </div>
 
 
-            <div class="form-row">
-                <div class="col-md-6 mb-3">
-                    <label asp-for="IsEnabled" for="IsEnabled"></label>
-                    <input asp-for="IsEnabled" class="form-control" id="validationCustom03s"
-                           placeholder=@Html.DisplayNameFor(model => model.IsEnabled)>
-                    <span asp-validation-for="IsEnabled" class="text-danger"> </span>
-                </div>
-            </div>
-
-
             <div class="form-row mb-4">
                 <div class="custom-control custom-checkbox custom-control-inline">
                     <input asp-for="IsEnabled" type="checkbox" id="customCheckBoxInline2" class="custom-control-input">
@@ -101,8 +91,9 @@
             </label>
         </div>*@
 
-            <button type="submit" class="btn btn-primary">ارسال</button>
-            <a asp-action="Index" class="btn btn-success">بازگشت به لیست</a>
+            <button type="submit" class="btn btn-success">ارسال</button>
+            <a asp-action="Index" class="btn btn-warning">بازگشت به لیست</a>
+
 
         </form>
 

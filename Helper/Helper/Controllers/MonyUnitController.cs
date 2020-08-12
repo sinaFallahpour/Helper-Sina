@@ -63,9 +63,9 @@ namespace Helper.Controllers
                     await _context.SaveChangesAsync();
                     TempData["Success"] = "ثبت موفقیت آمیز";
                     return View(model);
-                   
+
                 }
-                catch 
+                catch
                 {
                     ModelState.AddModelError("", "خطا در ثبت واحد پول");
                     return View(model);
@@ -131,6 +131,7 @@ namespace Helper.Controllers
                         return View(model);
                     }
                     MonyFromDB.Name = model.Name;
+                    MonyFromDB.IsEnabled = model.IsEnabled;
                     await _context.SaveChangesAsync();
 
                     TempData["Success"] = "ثبت موفقیت آمیز";

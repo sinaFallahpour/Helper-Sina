@@ -29,7 +29,14 @@ namespace Helper.Extention
                        Key =PublicHelper.ContactKeyName,
                        CreatedAt = DateTime.Now,
                        Value = ""
-                   }
+                   },
+                    new TBL_Setting()
+                    {
+                        Id = 3,
+                        Key = PublicHelper.SiteRulesKeyName,
+                        CreatedAt = DateTime.Now,
+                        Value = ""
+                    }
                  );
 
 

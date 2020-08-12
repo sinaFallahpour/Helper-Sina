@@ -18,11 +18,11 @@ namespace Helper.Areas.Admin.Models.ViewModels.User
         public string FullName { get; set; }
 
         [Display(Name = " جنسیت")]
-
         public string Gender { get; set; }
 
         public string PhotoAddress { get; set; }
 
+        [Display(Name ="نام کاربری")]
         public string Username { get; set; }
 
     }

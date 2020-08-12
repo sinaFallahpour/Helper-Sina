@@ -60,9 +60,17 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <a asp-action="create" asp-controller="NewsArticleVideo" asp-area="admin" class="@Html.IsSelected("NewsArticleVideo", "Create","admin","active") dropdown-item">خبر وفیلم</a>
                         <a asp-action="createArticle" asp-controller="NewsArticleVideo" asp-area="admin" class="@Html.IsSelected("NewsArticleVideo", "CreateArticle","admin","active") dropdown-item">مقاله </a>
-                        <a asp-action="create" asp-controller="admins" asp-area="admin" class="@Html.IsSelected("Admins", "Create","admin","active") dropdown-item">ادمین</a>
                         <a asp-action="create" asp-controller="slides" asp-area="admin" class="@Html.IsSelected("Slides", "Create","admin","active") dropdown-item">اسلاید‌</a>
+
+                        <a asp-action="create" asp-controller="Category" asp-area="admin" class="@Html.IsSelected("Category", "Create","admin","active") dropdown-item">دسته بندی‌</a>
+                        <a asp-action="create" asp-controller="Cities" asp-area="admin" class="@Html.IsSelected("Cities", "Create","admin","active") dropdown-item">شهر ‌</a>
+                        <a asp-action="create" asp-controller="MonyUnit" asp-area="admin" class="@Html.IsSelected("MonyUnit", "Create","admin","active") dropdown-item">واحد پول‌</a>
+
+
                         <a asp-action="Index" asp-controller="settings" asp-area="admin" class="@Html.IsSelected("Settings", "Index","admin","active") dropdown-item">تنظیمات</a>
+                        <a asp-action="create" asp-controller="admins" asp-area="admin" class="@Html.IsSelected("Admins", "Create","admin","active") dropdown-item">ادمین</a>
+                        <a asp-action="Profile" asp-controller="admins" asp-area="admin" class="@Html.IsSelected("Admins", "Profile","admin","active") dropdown-item">پروفایل</a>
+
                     </div>
                 </li>
 

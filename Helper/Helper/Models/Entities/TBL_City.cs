@@ -8,8 +8,8 @@ namespace Helper.Models.Entities
 {
     public class TBL_City : BaseEntity<int>
     {
-        [Required(ErrorMessage = "عنوان دسته بندی الزامیست ")]
-        [Display(Name = "عنوان دسته بندی")]
+        [Required(ErrorMessage = "  نام شهر الزامیست ")]
+        [Display(Name = "نام شهر")]
         public string Name { get; set; }
 
         public DateTime CreateDate { get; set; }

@@ -8,8 +8,8 @@ namespace Helper.Models.Entities
 {
     public class TBL_Category : BaseEntity<int>
     {
-        [Required(ErrorMessage = "عنوان دسته بندی الزامیست ")]
-        [Display(Name = "عنوان دسته بندی")]
+        [Required(ErrorMessage = "نام دسته بندی الزامیست ")]
+        [Display(Name = "نام دسته بندی")]
         public string Name { get; set; }
 
         public DateTime CreateDate { get; set; }

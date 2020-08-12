@@ -20,18 +20,54 @@
         <h6 class="card-title"> فرم درباره ما</h6>
         <form asp-action="Index" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <div class="alert alert-success text-center alert-dismissible fade show col-md-12" role="alert">
+
+                            @{ foreach (var modelState in ViewData.ModelState.Values)
+                                    foreach (var error in modelState.Errors)
+                                    {
+                                        <ul>
+                                            <li>
+                                                @error.ErrorMessage.ToString()
+                                            </li>
+                                        </ul>
+                                    }
+                            }
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+
+
 
             @if (!string.IsNullOrEmpty(ViewBag.Success))
             {
-                <span class="text-success d-block text-center"> @ViewBag.Success   </span>
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <div class="alert alert-success text-center alert-dismissible fade show col-md-12" role="alert">
+                            <strong> @ViewBag.Success</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             }
 
             <!-- input -->
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label asp-for="Aboutus" for="validationCustom03"></label>
-                    <textarea asp-for="Aboutus" class="form-control" id="AboutUs"
+                    <textarea asp-for="Aboutus" rows="4" class="form-control" id="AboutUs"
                               placeholder="درباره ما...">
                     </textarea>
                     <span asp-validation-for="Aboutus" class="text-danger"> </span>
@@ -41,46 +77,28 @@
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label asp-for="ContactUs" for="validationCustom03"></label>
-                    <textarea asp-for="ContactUs" type="" class="form-control" id="ContactUs"
+                    <textarea asp-for="ContactUs" type="" rows="4" class="form-control" id="ContactUs"
                               placeholder="متن ارتباط با ما...">
                     </textarea>
                     <span asp-validation-for="ContactUs" class="text-danger"> </span>
                 </div>
             </div>
 
-
-
-            @*<div class="form-row">
+            <div class="form-row">
                 <div class="col-md-12 mb-3">
-                 <label> عکس</label>
-                    <input  asp-for="Photo" multiple />
-                    <textarea asp-for="ContactUs" type="" class="form-control" id="ContactUs"
-                              placeholder="متن ارتباط با ما...">
+                    <label asp-for="SiteRules" for="validationCustom03"></label>
+                    <textarea asp-for="SiteRules" type="" rows="4" class="form-control" id="SiteRules"
+                              placeholder="متن قوانین سایت...">
                     </textarea>
-                    <span asp-validation-for="ContactUs" class="text-danger"> </span>
+                    <span asp-validation-for="SiteRules" class="text-danger"> </span>
                 </div>
-            </div>*@
+            </div>
 
 
-
-            <button type="submit" class="btn btn-primary">ارسال</button>
-
+            <button type="submit" class="btn btn-success">ارسال</button>
         </form>
-
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -93,6 +111,7 @@
 
         //  اعتبارسنجی فرم
         window.addEventListener('load', function () {
+
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
             // Loop over them and prevent submission
@@ -109,14 +128,11 @@
 
 
 
-
-
-
-
         //فعال سازی ckeditor
         $(function () {
             CKEDITOR.replace('AboutUs');
             CKEDITOR.replace('ContactUs');
+             CKEDITOR.replace('SiteRules');
 
         });
 

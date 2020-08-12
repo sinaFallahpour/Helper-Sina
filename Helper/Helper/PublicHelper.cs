@@ -14,6 +14,8 @@ namespace Helper
 
         public const string AboutUsKeyName = "AboutUs";
         public const string ContactKeyName = "Contactus";
+        public const string SiteRulesKeyName = "SiteRules";
+
 
         public const string CitiesKeyName = "City";
         public const string categoriesKeyName = "Category";

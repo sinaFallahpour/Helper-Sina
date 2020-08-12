@@ -15,6 +15,8 @@ namespace Helper.Controllers
     [Authorize(Roles = Static.ADMINROLE)]
     public class CategoryController : Controller
     {
+
+        #region  Ctor
         private readonly ApplicationDbContext _context;
 
         public CategoryController(ApplicationDbContext context)
@@ -22,12 +24,15 @@ namespace Helper.Controllers
             _context = context;
         }
 
+        #endregion
+
+        #region  List
         // GET: Admin/TBL_Category
         public async Task<IActionResult> Index()
         {
             return View(await _context.TBL_Category.ToListAsync());
         }
-
+        #endregion
 
         #region  create category
         // GET: Admin/TBL_Category/Create
@@ -68,8 +73,6 @@ namespace Helper.Controllers
         }
 
         #endregion
-
-
 
         #region Edit
 
@@ -119,6 +122,7 @@ namespace Helper.Controllers
                         return View(model);
                     }
                     catFromDb.Name = model.Name;
+                    catFromDb.IsEnabled = model.IsEnabled;
                     await _context.SaveChangesAsync();
                     TempData["Success"] = "ثبت موفقیت آمیز";
                     return View(model);
@@ -143,7 +147,6 @@ namespace Helper.Controllers
 
 
         #endregion
-
 
 
         #region Delete
@@ -195,7 +198,7 @@ namespace Helper.Controllers
 
 
 
-        #endregion 
+        #endregion
 
 
 

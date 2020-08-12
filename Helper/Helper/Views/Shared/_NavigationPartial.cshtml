@@ -4,7 +4,7 @@
     <!-- begin::navigation-logo -->
     <div>
         <div id="navigation-logo">
-            <a href="index.html">
+            <a href="/">
                 <img class="logo" style="width:60px" src="~/hj/img/logo.png" alt="logo">
                 <img class="logo-light" src="~/Admin/assets/media/image/logo-light.png" alt="light logo">
             </a>
@@ -111,18 +111,11 @@
                 <li class="navigation-divider"> </li>
 
                 <li><a class='@Html.IsSelected("NewsArticleVideo", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","NewsArticleVideo")">مدیریت اخبار و مقالات فیلم  </a></li>
-
                 <li><a class='@Html.IsSelected("Slides", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","Slides")">مدیریت   اسلاید</a></li>
                 <li><a class='@Html.IsSelected("Category", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","Category")">مدیریت  دسته بندی ها</a></li>
                 <li><a class='@Html.IsSelected("Cities", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","Cities")">مدیریت  شهر ها</a></li>
-
+                <li><a class='@Html.IsSelected("MonyUnit", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","MonyUnit")">مدیریت  واحد پول</a></li>
                 <li><a class='@Html.IsSelected("Settings", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>
-
-
-
-                @* <li><a  class='@Html.IsSelected("Home", "settings","admin")' href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>*@
-
-
                 <li><a class='@Html.IsSelected("Admins", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
                 <li><a class='@Html.IsSelected("Admins", "Profile","admin","btn btn-primary text-white shadow-lg") d-block text-center ' href="@Url.Action("Profile","admins")">  پروفایل</a></li>
 

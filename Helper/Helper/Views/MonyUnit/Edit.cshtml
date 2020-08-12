@@ -74,18 +74,17 @@
                 </div>
             </div>
 
-
             <div class="form-row mb-4">
                 <div class="custom-control custom-checkbox custom-control-inline">
                     <input asp-for="IsEnabled" type="checkbox" id="customCheckBoxInline2" class="custom-control-input">
                     <label asp-for="IsEnabled" class="custom-control-label" for="customCheckBoxInline2">آیا فعال است؟</label>
                     <span asp-validation-for="IsEnabled" class="text-danger"> </span>
                 </div>
-
             </div>
 
-            <button type="submit" class="btn btn-primary">ارسال</button>
-            <a asp-action="Index" class="btn btn-success">بازگشت ب لیست</a>
+
+            <button type="submit" class="btn btn-success">ارسال</button>
+            <a asp-action="Index" class="btn btn-warning">بازگشت به لیست</a>
 
         </form>
     </div>
