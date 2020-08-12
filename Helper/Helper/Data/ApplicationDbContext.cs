@@ -89,8 +89,16 @@ namespace Helper.Data
         public DbSet<TBL_User_Comment_Service> UserCommentService { get; set; }
 
 
+        public DbSet<TBL_User_SeenProfile> UserSeenProfile { get; set; }
 
 
+        public DbSet<Helper.Models.Entities.TBL_Category> TBL_Category { get; set; }
+
+
+        public DbSet<TBL_City> TBL_City { get; set; }
+
+
+        public DbSet<TBL_MonyUnit> TBL_MonyUnit { get; set; }
 
 
     }

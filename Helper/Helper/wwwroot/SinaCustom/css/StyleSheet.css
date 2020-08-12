@@ -8,8 +8,8 @@
 }
 
 ._dataTableImage {
-    height: 60px;
-    width: 60px;
+    height: 100px;
+    width: 120px;
 }
 
 
@@ -27,3 +27,13 @@
         height: 100%;
         width: 100%;
     }
+
+
+._table-corder-reduse {
+    border-radius: 6px
+}
+
+
+._noneBorder {
+    border: none !important;
+}

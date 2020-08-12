@@ -16,10 +16,6 @@
     <None Remove="Models\ViewModels\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\ReactPages\src\pages\Home\HomeAboutUs.tsx" />
-  </ItemGroup>
-
 
 
   <ItemGroup>
@@ -36,7 +32,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0-preview1.19506.1" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.7.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
@@ -45,16 +41,9 @@
   <ItemGroup>
     <Folder Include="wwwroot\lib\ckeditor\plugins\clipboard\dialogs\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\plugins\" />
-    <Folder Include="wwwroot\ReactPages\assets\uploads\Slider\" />
-    <Folder Include="wwwroot\ReactPages\typings-custom\" />
     <Folder Include="wwwroot\Upload\News\" />
     <Folder Include="wwwroot\Upload\Slider\" />
    
-  </ItemGroup>
-
-  <ItemGroup>
-  
-    <None Include="Views\Account\Login.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,10 +51,6 @@
     <None Include="wwwroot\lib\ckeditor\ckeditor.js" />
     <None Include="wwwroot\lib\ckeditor\config.js" />
     <None Include="wwwroot\lib\ckeditor\styles.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="wwwroot\ReactPages\src\pages\Home\HomeAboutUs.tsx" />
   </ItemGroup>
 
 </Project>

@@ -12,6 +12,7 @@ namespace Helper.Models.Entities
     {
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "عنوان")]
+        [MaxLength(50,ErrorMessage ="حداکثر 50 کاراکتر")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "الزامیست")]
@@ -23,6 +24,7 @@ namespace Helper.Models.Entities
         [Display(Name = " آیا فعال است ")]
         public bool IsActive { get; set; }
 
+     
         public string PhotoAddress { get; set; }
 
         [Required(ErrorMessage = "الزامیست")]

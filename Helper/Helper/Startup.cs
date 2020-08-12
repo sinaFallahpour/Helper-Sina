@@ -49,10 +49,22 @@ namespace Helper
             //cors origin
             services.AddCors(opt =>
             {
+
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
                 });
+
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperlanding.niknet.co").AllowCredentials();
+                });
+
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperadmin.niknet.co").AllowCredentials();
+                });
+
             });
 
             services.AddControllersWithViews();
@@ -83,7 +95,7 @@ namespace Helper
                 options.Cookie.Name = "YourAppCookieName";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(7);
-                options.LoginPath = "/admin/admins/Login";
+                options.LoginPath = "/admins/Login";
                 // ReturnUrlParameter requires 
                 //using Microsoft.AspNetCore.Authentication.Cookies;
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
@@ -108,18 +120,18 @@ namespace Helper
             //JwtBearerDefaults.AuthenticationScheme
             services.AddAuthentication()
                .AddCookie(cfg => { cfg.SlidingExpiration = true; })
-                
-               .AddJwtBearer( opt =>
-                {
-                   
-                    opt.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = key,
-                        ValidateAudience = false,
-                        ValidateIssuer = false
-                    };
-                });
+
+               .AddJwtBearer(opt =>
+               {
+
+                   opt.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuerSigningKey = true,
+                       IssuerSigningKey = key,
+                       ValidateAudience = false,
+                       ValidateIssuer = false
+                   };
+               });
 
 
 
@@ -176,7 +188,7 @@ namespace Helper
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IHttpContextAccessor accesor)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHttpContextAccessor accesor)
         {
 
             app.UseMiddleware<ErrorHandlingMiddleware>();

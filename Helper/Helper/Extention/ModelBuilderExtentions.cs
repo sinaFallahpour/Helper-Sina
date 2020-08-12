@@ -33,21 +33,21 @@ namespace Helper.Extention
                  );
 
 
-            builder.Entity<IdentityRole>().HasData(
-                new IdentityRole()
-                {
-                    Name = PublicHelper.ADMINROLE,
-                    NormalizedName = PublicHelper.ADMINROLE.Normalize(),
-                    Id = Guid.NewGuid().ToString(),
-                },
-                 new IdentityRole()
-                 {
-                     Name = PublicHelper.USERROLE,
-                     NormalizedName = PublicHelper.USERROLE.Normalize(),
-                     Id = Guid.NewGuid().ToString(),
-                 }
+            //builder.Entity<IdentityRole>().HasData(
+            //    new IdentityRole()
+            //    {
+            //        Name = PublicHelper.ADMINROLE,
+            //        NormalizedName = PublicHelper.ADMINROLE.Normalize(),
+            //        Id = Guid.NewGuid().ToString(),
+            //    },
+            //     new IdentityRole()
+            //     {
+            //         Name = PublicHelper.USERROLE,
+            //         NormalizedName = PublicHelper.USERROLE.Normalize(),
+            //         Id = Guid.NewGuid().ToString(),
+            //     }
 
-                 );
+            //     );
 
 
         }
