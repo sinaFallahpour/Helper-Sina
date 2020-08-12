@@ -1,6 +1,8 @@
 /Helper/Helper/ReactPages/node_modules 
 
 /Helper/client-app/node_modules
+/client-app/node_modules
+/client-app/build
 
 *.suo
 *.user

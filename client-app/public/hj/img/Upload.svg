@@ -1,0 +1,6 @@
+<svg id="Upload" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="upload-2" data-name="upload" transform="translate(0 1.005)">
+    <path id="Path" d="M7.714,3.285l-3-3a1.034,1.034,0,0,0-1.42,0l-3,3a1,1,0,0,0,1.42,1.42L3,3.405V16a1,1,0,1,0,2,0V3.405l1.29,1.3a1,1,0,1,0,1.42-1.42Z" transform="translate(7.996)" fill="#5d44c9"/>
+    <path id="Path-2" data-name="Path" d="M21,10H3A3,3,0,0,1,0,7V1A1,1,0,0,1,2,1V7A1,1,0,0,0,3,8H21a1,1,0,0,0,1-1V1a1,1,0,0,1,2,0V7A3,3,0,0,1,21,10Z" transform="translate(0 11.995)" fill="#5d44c9"/>
+  </g>
+</svg>
