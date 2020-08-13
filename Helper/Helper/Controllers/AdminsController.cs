@@ -42,9 +42,36 @@ namespace Helper.Controllers
         }
 
 
+        #region  List
+        /// <summary>
+        /// GetA All Admins
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Index()
+        {
+
+            var AdminRoleId = _context.Roles.Where(c => c.Name == Static.ADMINROLE).FirstOrDefault().Id;
+            var UserRoles = _context.UserRoles.Where(c => c.RoleId == AdminRoleId).Select(c => c.UserId).ToList();
+
+            var Admins = _context.Users.Where(o => UserRoles.Contains(o.Id))
+                .Select(c => new AdminListViewModel
+                {
+                    Id = c.Id,
+                    FullName = c.FirstName + " " + c.LastName,
+                    Gender = c.Gender,
+                    Nickname = c.Nickname,
+                    PhotoAddress = c.PhotoAddress,
+                    Username = c.UserName
+
+                }).ToList();
+
+            return View(Admins);
+        }
 
 
-      
+        #endregion
+
+        #region   Profile
         public async Task<IActionResult> Profile(string Username)
         {
             var currentUsername = "";
@@ -58,7 +85,7 @@ namespace Helper.Controllers
             }
             //var currentAdnmin = await _userManager.FindByNameAsync(currentUsername);
             var UserProfile = await _context.Users.Where(c => c.UserName == currentUsername)
-            .Select(o => new AdminProfileViewModel       
+            .Select(o => new AdminProfileViewModel
             {
                 Id = o.Id,
                 Username = o.UserName,
@@ -77,9 +104,6 @@ namespace Helper.Controllers
 
             return View(UserProfile);
         }
-
-
-
 
 
 
@@ -104,7 +128,7 @@ namespace Helper.Controllers
                     profileFromDb.LastName = model.LastName;
                     profileFromDb.Birthdate = model.Birthdate;
                     profileFromDb.Phone = model.Phone;
-               
+
 
                     if (model.Photo != null)
                     {
@@ -169,40 +193,9 @@ namespace Helper.Controllers
         }
 
 
+        #endregion
 
-
-
-
-
-        /// <summary>
-        /// GetA All Admins
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult Index()
-        {
-
-            var AdminRoleId = _context.Roles.Where(c => c.Name == Static.ADMINROLE).FirstOrDefault().Id;
-            var UserRoles = _context.UserRoles.Where(c => c.RoleId == AdminRoleId).Select(c => c.UserId).ToList();
-
-            var Admins = _context.Users.Where(o => UserRoles.Contains(o.Id))
-                .Select(c => new AdminListViewModel
-                {
-                    Id = c.Id,
-                    FullName = c.FirstName + " " + c.LastName,
-                    Gender = c.Gender,
-                    Nickname = c.Nickname,
-                    PhotoAddress = c.PhotoAddress,
-                    Username = c.UserName
-
-                }).ToList();
-
-            return View(Admins);
-        }
-
-
-
-
-      
+        #region Create
         public IActionResult Create()
         {
             return View();
@@ -216,14 +209,26 @@ namespace Helper.Controllers
 
             if (ModelState.IsValid)
             {
+                if (await _context.Users.Where(x => x.UserName == model.Username).AnyAsync())
+                {
+                    ModelState.AddModelError("", "این نام کاربری موجود است");
+                    return View(model);
+                }
+
+                if (await _context.Users.Where(x => x.Email == model.Email).AnyAsync())
+                {
+                    ModelState.AddModelError("", "این ایمیل  موجود است");
+                    return View(model);
+                }
+
                 var user = new ApplicationUser
                 {
                     AccessFailedCount = 0,
                     AvatarUrl = "",
                     Birthdate = "",
-                    Email = "",
+                    Email = model.Email,
                     NormalizedEmail = "",
-                    EmailConfirmed = false,
+                    EmailConfirmed = true,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     //Gender = model.Gender.GetEnumDescription(),
@@ -266,9 +271,9 @@ namespace Helper.Controllers
             return View(model);
         }
 
+        #endregion
 
-
-
+        #region Login
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
@@ -283,8 +288,6 @@ namespace Helper.Controllers
             //return LocalRedirect(returnUrl);
             return View();
         }
-
-
 
 
 
@@ -345,7 +348,9 @@ namespace Helper.Controllers
         }
 
 
+        #endregion
 
+        #region logOut
 
         //LogOut
         [HttpGet]
@@ -366,6 +371,8 @@ namespace Helper.Controllers
             return Json((Status: 1, Message: "Logged Out"));
         }
 
+
+        #endregion
 
 
 

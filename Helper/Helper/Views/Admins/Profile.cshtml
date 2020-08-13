@@ -46,9 +46,9 @@
             @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
 
             <div class="form-row">
-                <div class="  _editimageContainer">
+                <div class="  col-md-6 mb-3">
                     <img src="@photoAddress"
-                         class="d-block " id="UploadedImage" />
+                         class="d-block _editimageContainer" id="UploadedImage" />
                 </div>
             </div>
             @if (!string.IsNullOrEmpty(ViewBag.IsSuccess))
@@ -261,8 +261,8 @@
                 reader.onload = function (e) {
                     $('#UploadedImage')
                         .attr('src', e.target.result)
-                        .width(300)
-                        .height(200);
+                        .width("100%")
+                        .height(300);
                 };
 
                 reader.readAsDataURL(input.files[0]);

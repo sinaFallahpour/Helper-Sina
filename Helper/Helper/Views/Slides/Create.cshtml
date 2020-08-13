@@ -24,7 +24,7 @@
             <input type="hidden" name="Id" id="Id" value="0" />
 
             <div class="form-row">
-                <div class="col-md-8 mb-3">
+                <div class="col-md-6 mb-3">
                     <img class="d-block " id="UploadedImage" />
                 </div>
             </div>
@@ -123,8 +123,8 @@
                 reader.onload = function (e) {
                     $('#UploadedImage')
                         .attr('src', e.target.result)
-                        .width(150)
-                        .height(200);
+                        .width("100%")
+                        .height(240);
                 };
 
                 reader.readAsDataURL(input.files[0]);

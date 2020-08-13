@@ -36,6 +36,14 @@ namespace Helper.Areas.Admin.Models.ViewModels.User
         [Display(Name = "نام کاربری")]
         public string Username { get; set; }
 
+
+        [Required(ErrorMessage = "این فیلد الزامیست")]
+        [EmailAddress(ErrorMessage = "به فرمت  ایمیل وارد کنید")]
+        [MaxLength(30, ErrorMessage = "حداکثر 30 کاراکتر وارد کنید")]
+        [Display(Name = "ایمیل")]
+        public string Email { get; set; }
+
+
         [Required(ErrorMessage = "این فیلد الزامیست")]
         [DataType(DataType.Password)]
         [Display(Name = "رمز عبور")]

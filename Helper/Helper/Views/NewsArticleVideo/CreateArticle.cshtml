@@ -27,7 +27,7 @@
             <input type="hidden" name="Id" id="Id" value="0" />
             <!-- input -->
             <div class="form-row">
-                <div class="col-md-9 mb-3">
+                <div class="col-md-6 mb-3">
                     <label asp-for="Title" for="validationCustom03" class="text-dark"></label>
                     <input asp-for="Title" class="form-control" id="validationCustom03s"
                            placeholder="عنوان">
@@ -37,23 +37,11 @@
 
 
 
-            @*<div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="NewsType" for="validationCustom03"></label>
-                <select asp-for="NewsType" class="form-control" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()">
-                    <option selected="selected" value="">Please select</option>
-                </select>
-                <span asp-validation-for="NewsType" class="text-danger"> </span>
-            </div>
-        </div>*@
 
-
-
-            <!-- fileUpload checkBox && selectOption -->
-            @*<input asp-for="ArticlePhoto" class="custom-file-input" onchange="readURL(this);" id="customFile">*@
+           
 
             <div class="form-row">
-                <div class="col-md-9 mb-3">
+                <div class="col-md-6 mb-3">
                     <div>
                         <input asp-for="ArticlePhoto" class="custom-file-input" onchange="readURL(this);" id="customFile">
                     </div>
@@ -67,7 +55,7 @@
 
 
             <div class="form-row">
-                <div class="col-md-9 mb-3">
+                <div class="col-md-6 mb-3">
                     <label asp-for="Description" for="Description"></label>
                     <textarea asp-for="Description" type="" class="form-control _areaHeght" id="Description"
                               placeholder="متن مقاله ...">

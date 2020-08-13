@@ -19,8 +19,8 @@ import { IResponse, IRespon } from '../models/reponse';
 import Cookies from 'js-cookie'
 import { INews } from '../models/news';
 import { IProfileRE } from '../models/profile';
-// axios.defaults.baseURL = 'https://localhost:44340/api';
-axios.defaults.baseURL = 'https://helperadmin.niknet.co/api';
+ axios.defaults.baseURL = 'https://localhost:44340/api';
+// axios.defaults.baseURL = 'https://helperadmin.niknet.co/api';
 
 axios.interceptors.request.use(
   config => {

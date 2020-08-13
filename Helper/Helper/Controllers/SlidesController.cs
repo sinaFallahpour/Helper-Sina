@@ -19,6 +19,8 @@ namespace Helper.Controllers
     [Authorize(Roles = Static.ADMINROLE)]
     public class SlidesController : Controller
     {
+
+        #region  ctor
         private readonly ApplicationDbContext _context;
 
         private readonly IHostingEnvironment _hostingEnvironment;
@@ -30,16 +32,19 @@ namespace Helper.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
+
+        #endregion
+
+        #region List
         // GET: Admin/Slides
         public async Task<IActionResult> Index()
         {
             var slides = await _context.TBL_Sliders.OrderBy(c => c.IsActive == true).ToListAsync();
             return View(slides);
         }
+        #endregion
 
-
-
-
+        #region Create
 
         // GET: Admin/Slides/Create
         public IActionResult Create()
@@ -51,9 +56,9 @@ namespace Helper.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create( TBL_Slide model)
+        public IActionResult Create(TBL_Slide model)
         {
-      
+
             if (ModelState.IsValid)
             {
                 string uniqueFileName = null;
@@ -77,8 +82,11 @@ namespace Helper.Controllers
                     var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/Slider");
                     uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
 
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                         model.Photo.CopyTo(stream);
+                    }
                     model.PhotoAddress = "/Upload/Slider/" + uniqueFileName;
                 }
                 try
@@ -110,6 +118,9 @@ namespace Helper.Controllers
 
 
 
+        #endregion
+
+        #region Edit
         // GET: Admin/Slides/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -172,13 +183,14 @@ namespace Helper.Controllers
                             var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/Slider");
                             uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
                             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                            model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                            //model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
 
 
-
-                            //Delete LastImage Image
-                            //var LastImagePath =  slideFromDb.PhotoAddress.Substring(1);
-                            //LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                model.Photo.CopyTo(stream);
+                            }
+                      
                             if (!string.IsNullOrEmpty(slideFromDb.PhotoAddress))
                             {
                                 var LastImagePath = slideFromDb.PhotoAddress.Substring(1);
@@ -212,10 +224,11 @@ namespace Helper.Controllers
             return View(model);
         }
 
+        #endregion Edit
 
+        #region Delete
 
-
-
+        #region Delete
 
         // GET: Admin/Slides/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -269,8 +282,6 @@ namespace Helper.Controllers
                 }
 
 
-
-
                 //_context.TBL_Sliders.Remove(slideFromDb);
                 //await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
@@ -278,14 +289,16 @@ namespace Helper.Controllers
             return NotFound();
         }
 
+
+        #endregion
+
+        #endregion
+
+
         private bool TBL_SlideExists(int id)
         {
             return _context.TBL_Sliders.Any(e => e.Id == id);
         }
-
-
-
-
 
         protected override void Dispose(bool disposing)
         {

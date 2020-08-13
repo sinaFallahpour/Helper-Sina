@@ -22,6 +22,7 @@ namespace Helper.Areas.Admin.Models.ViewModels.User
 
 
         [EmailAddress(ErrorMessage = "ایمیل را به درستی وارد کنید")]
+        [Required(ErrorMessage = "این فیلد الزامیست")]
         [Display(Name = "ایمیل")]
         public string  Email{ get; set; }
 

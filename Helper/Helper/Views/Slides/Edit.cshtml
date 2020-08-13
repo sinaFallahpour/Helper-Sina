@@ -29,12 +29,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-row">
-                <div class="  _editimageContainer">
-                    <img src="@Model.PhotoAddress" class="d-block " id="UploadedImage" />
+                <div class="col-md-6 mb-3  ">
+                    <img src="@Model.PhotoAddress" class="d-block _editimageContainer" id="UploadedImage" />
                 </div>
             </div>
 
-
+           
 
             <input type="hidden" asp-for="Id" />
 
@@ -52,7 +52,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="Description" for="validationCustom03"></label>
-                    <textarea asp-for="Description" type="" class="form-control" id="validationCustom03"
+                    <textarea asp-for="Description" type="" rows="4" class="form-control _min-height260" id="validationCustom03"
                               placeholder="متن درباره ما">
                     </textarea>
                     <span asp-validation-for="Description" class="text-danger"> </span>
@@ -69,7 +69,6 @@
                         <label class="form-contro custom-file-label" for="customFile">انتخاب فایل </label>
                     </div>
                     <span asp-validation-for="Photo" class="text-danger"> </span>
-
                 </div>
             </div>
 
@@ -86,18 +85,10 @@
             <button type="submit" class="btn btn-success">ارسال</button>
             <a asp-action="Index" class="btn btn-warning">بازگشت به لیست</a>
 
-
-
-
-
         </form>
 
     </div>
 </div>
-
-
-
-
 
 
 
@@ -130,11 +121,6 @@
         }, false);
 
 
-
-
-
-
-
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -142,8 +128,8 @@
                 reader.onload = function (e) {
                     $('#UploadedImage')
                         .attr('src', e.target.result)
-                        .width(400)
-                    //.height(200);
+                        .width("100%")
+                        .height(300);
                 };
 
                 reader.readAsDataURL(input.files[0]);

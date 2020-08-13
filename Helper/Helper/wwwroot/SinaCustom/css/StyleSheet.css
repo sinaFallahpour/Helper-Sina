@@ -18,8 +18,8 @@
 }
 
 ._editimageContainer {
-    width: 400px;
-    max-height: 200px;
+    width: 100%;
+    max-height: 300px;
 }
 
     ._editimageContainer > img {
@@ -36,4 +36,9 @@
 
 ._noneBorder {
     border: none !important;
+}
+
+
+._min-height260 {
+    min-height: 260px !important;
 }

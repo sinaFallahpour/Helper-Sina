@@ -49,22 +49,43 @@ namespace Helper
             //cors origin
             services.AddCors(opt =>
             {
-
-                opt.AddPolicy("CorsPolicy", policy =>
+                services.AddCors(options =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
+                    options.AddPolicy("CorsApi",
+                        builder => builder.WithOrigins("http://localhost:4200", "http://mywebsite.com")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
                 });
 
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperlanding.niknet.co").AllowCredentials();
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperlanding.niknet.co",
+                               "http://localhost:3000",
+                                "https://helperadmin.niknet.co")
+                    .AllowCredentials();
                 });
 
-                opt.AddPolicy("CorsPolicy", policy =>
-                {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperadmin.niknet.co").AllowCredentials();
-                });
 
+
+                //opt.AddPolicy("CorsPolicy", policy =>
+                //{
+                //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
+                //});
+
+                //opt.AddPolicy("CorsPolicy", policy =>
+                //{
+                //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperlanding.niknet.co").AllowCredentials();
+                //});
+
+                //opt.AddPolicy("CorsPolicy", policy =>
+                //{
+                //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperadmin.niknet.co").AllowCredentials();
+                //});
+
+                //opt.AddPolicy("CorsPolicy", policy =>
+                //{
+                //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
+                //});
             });
 
             services.AddControllersWithViews();
@@ -83,6 +104,7 @@ namespace Helper
                 options.User.RequireUniqueEmail = false;
             })
             .AddRoleManager<RoleManager<IdentityRole>>()
+            //این توکن میسازه   باید باشه برا چنج پسورد و.کانفیرم ایمیل
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -123,7 +145,6 @@ namespace Helper
 
                .AddJwtBearer(opt =>
                {
-
                    opt.TokenValidationParameters = new TokenValidationParameters
                    {
                        ValidateIssuerSigningKey = true,
@@ -243,14 +264,6 @@ namespace Helper
                 );
 
             });
-
-
-
-
-
-
-
-
         }
     }
 }
