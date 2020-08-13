@@ -37,12 +37,33 @@ namespace Helper.Data
 
 
             //1 to n bew and like
-            builder.Entity<TBL_NewsArticleVideo>().HasMany(b => b.NewsLike)
+            builder.Entity<TBL_NewsArticleVideo>()
+                .HasMany(b => b.NewsLike)
                  .WithOne(p => p.NewsArticleVideo)
                   .HasForeignKey(p => p.NewsId)
                       .OnDelete(DeleteBehavior.Cascade);
 
 
+
+            builder.Entity<TBL_EducationalHistory>(entity =>
+            {
+                entity.HasKey(c => c.UserId);
+                entity.HasOne(c => c.User)
+                    .WithOne(c => c.EducationHistry)
+                        .HasForeignKey<TBL_EducationalHistory>(c => c.UserId)
+                            .OnDelete(DeleteBehavior.Cascade);
+            });
+
+
+
+            builder.Entity<TBL_WorkExperience>(entity =>
+            {
+                entity.HasKey(c => c.UserId);
+                entity.HasOne(c => c.User)
+                    .WithOne(c => c.WorkExperience)
+                        .HasForeignKey<TBL_WorkExperience>(c => c.UserId)
+                            .OnDelete(DeleteBehavior.Cascade);
+            });
 
 
             //adding database value for Setting
@@ -62,7 +83,6 @@ namespace Helper.Data
         public DbSet<TBL_NewsLike> TBL_NewsLike { get; set; }
 
 
-
         /// <summary>
         /// خدمت ها
         /// </summary>
@@ -73,7 +93,6 @@ namespace Helper.Data
         ///  نوع هاي خدمت 
         /// </summary>
         public DbSet<TBL_ServiceLevel2> TBL_ServiceLevel2 { get; set; }
-
 
 
         /// <summary>
@@ -92,13 +111,17 @@ namespace Helper.Data
         public DbSet<TBL_User_SeenProfile> UserSeenProfile { get; set; }
 
 
-        public DbSet<Helper.Models.Entities.TBL_Category> TBL_Category { get; set; }
+        public DbSet<TBL_Category> TBL_Category { get; set; }
 
 
         public DbSet<TBL_City> TBL_City { get; set; }
 
-
         public DbSet<TBL_MonyUnit> TBL_MonyUnit { get; set; }
+
+        public DbSet<TBL_WorkExperience> TBL_WorkExperience { get; set; }
+
+        public DbSet<TBL_EducationalHistory> TBL_EducationalHistory { get; set; }
+
 
 
     }

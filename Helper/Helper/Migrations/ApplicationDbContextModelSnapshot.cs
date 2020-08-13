@@ -33,10 +33,6 @@ namespace Helper.Migrations
                     b.Property<string>("AccountOwner")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AvatarUrl")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
-
                     b.Property<string>("BankName")
                         .HasColumnType("nvarchar(max)");
 
@@ -73,16 +69,12 @@ namespace Helper.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
-
-                    b.Property<bool>("IsMarid")
-                        .HasColumnType("bit");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<string>("LanguageKnowing")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasColumnType("nvarchar(600)")
+                        .HasMaxLength(600);
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(100)")
@@ -93,6 +85,9 @@ namespace Helper.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("MarriedType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nickname")
                         .HasColumnType("nvarchar(200)")
@@ -137,16 +132,16 @@ namespace Helper.Migrations
                     b.Property<int>("SiteLanguage")
                         .HasColumnType("int");
 
+                    b.Property<string>("Skils")
+                        .HasColumnType("nvarchar(600)")
+                        .HasMaxLength(600);
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
-
-                    b.Property<string>("VerificationCode")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
 
                     b.Property<string>("VisaNumber")
                         .HasColumnType("nvarchar(max)");
@@ -208,6 +203,28 @@ namespace Helper.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TBL_City");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_EducationalHistory", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EnterDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExitDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaghTa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnivercityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("TBL_EducationalHistory");
                 });
 
             modelBuilder.Entity("Helper.Models.Entities.TBL_MonyUnit", b =>
@@ -434,7 +451,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 12, 11, 51, 57, 738, DateTimeKind.Local).AddTicks(7057),
+                            CreatedAt = new DateTime(2020, 8, 13, 6, 54, 22, 825, DateTimeKind.Local).AddTicks(212),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -442,7 +459,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 12, 11, 51, 57, 742, DateTimeKind.Local).AddTicks(2426),
+                            CreatedAt = new DateTime(2020, 8, 13, 6, 54, 22, 828, DateTimeKind.Local).AddTicks(9008),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -450,7 +467,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2020, 8, 12, 11, 51, 57, 742, DateTimeKind.Local).AddTicks(2483),
+                            CreatedAt = new DateTime(2020, 8, 13, 6, 54, 22, 828, DateTimeKind.Local).AddTicks(9063),
                             Key = "SiteRules",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -560,6 +577,36 @@ namespace Helper.Migrations
                     b.HasIndex("SeenerId");
 
                     b.ToTable("UserSeenProfile");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_WorkExperience", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("EnterDate")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("ExitDate")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Semat")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("TBL_WorkExperience");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -700,6 +747,15 @@ namespace Helper.Migrations
                         .HasForeignKey("CreatedAdminId");
                 });
 
+            modelBuilder.Entity("Helper.Models.Entities.TBL_EducationalHistory", b =>
+                {
+                    b.HasOne("Helper.Models.ApplicationUser", "User")
+                        .WithOne("EducationHistry")
+                        .HasForeignKey("Helper.Models.Entities.TBL_EducationalHistory", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Helper.Models.Entities.TBL_NewsComment", b =>
                 {
                     b.HasOne("Helper.Models.Entities.TBL_NewsArticleVideo", "NewsArticleVideo")
@@ -762,6 +818,15 @@ namespace Helper.Migrations
                     b.HasOne("Helper.Models.ApplicationUser", "Seener")
                         .WithMany()
                         .HasForeignKey("SeenerId");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_WorkExperience", b =>
+                {
+                    b.HasOne("Helper.Models.ApplicationUser", "User")
+                        .WithOne("WorkExperience")
+                        .HasForeignKey("Helper.Models.Entities.TBL_WorkExperience", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

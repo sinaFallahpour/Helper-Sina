@@ -58,7 +58,7 @@ namespace Helper.Controllers
                 {
                     Id = c.Id,
                     FullName = c.FirstName + " " + c.LastName,
-                    Gender = c.Gender,
+                    Gender = c.Gender == UserGender.Man ? "مرد " : "زن",
                     Nickname = c.Nickname,
                     PhotoAddress = c.PhotoAddress,
                     Username = c.UserName
@@ -224,7 +224,7 @@ namespace Helper.Controllers
                 var user = new ApplicationUser
                 {
                     AccessFailedCount = 0,
-                    AvatarUrl = "",
+               
                     Birthdate = "",
                     Email = model.Email,
                     NormalizedEmail = "",

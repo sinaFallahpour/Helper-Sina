@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Helper.Data;
 using Helper.Models;
+using Helper.Models.Entities;
 using Helper.Models.Service;
 using Helper.Models.Utilities;
 using Helper.ViewModels.Api;
@@ -129,12 +130,16 @@ namespace Helper.Controllers.Api
 
 
             var SerialNumber = Guid.NewGuid().ToString().GetHash();
+
+
             var user = new ApplicationUser
             {
                 Email = model.Email,
                 UserName = model.UserName,
                 AcceptRules = model.AcceptRules,
-                SerialNumber = SerialNumber
+                SerialNumber = SerialNumber,
+                WorkExperience = new TBL_WorkExperience(),
+                EducationHistry=new TBL_EducationalHistory(),
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 

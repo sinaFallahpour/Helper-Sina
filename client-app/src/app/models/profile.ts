@@ -1,4 +1,7 @@
 import { siteLanguage } from './enums/siteLanguage'
+import { userGender } from './enums/userGender'
+import { userMarriedType } from './enums/userMarriedType'
+
 import { IUser } from './user'
 
 
@@ -13,12 +16,30 @@ export interface IProfileRE {
   descriptions: string;
   birthdate: string;
   LanguageKnowing: string;
-  IsMarid: boolean;
+  gender: userGender;
+  marriedType: userMarriedType;
   phone: string;
-  city:string;
+  city: string;
+  educationHistryDTO: IEducationHistry;
+  workExperienceDTO: IWorkExperienceDTO;
   currentUser: IUser | null;
 }
 
 
+export interface IEducationHistry {
+  maghTa: string;
+  univercityName: string;
+  enterDate: string;
+  exitDate: string;
+
+}
+
+export interface IWorkExperienceDTO {
+  companyName: string;
+  semat: string;
+  enterDate: string;
+  exitDate: string;
+  descriptions: string;
+}
 
 //................................... REQUEST....................................

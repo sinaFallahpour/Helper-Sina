@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200811080315_Cities")]
-    partial class Cities
+    [Migration("20200813135157_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,10 +34,6 @@ namespace Helper.Migrations
 
                     b.Property<string>("AccountOwner")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AvatarUrl")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
 
                     b.Property<string>("BankName")
                         .HasColumnType("nvarchar(max)");
@@ -75,16 +71,12 @@ namespace Helper.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
-
-                    b.Property<bool>("IsMarid")
-                        .HasColumnType("bit");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<string>("LanguageKnowing")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
+                        .HasColumnType("nvarchar(600)")
+                        .HasMaxLength(600);
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(100)")
@@ -95,6 +87,9 @@ namespace Helper.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("MarriedType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nickname")
                         .HasColumnType("nvarchar(200)")
@@ -139,6 +134,10 @@ namespace Helper.Migrations
                     b.Property<int>("SiteLanguage")
                         .HasColumnType("int");
 
+                    b.Property<string>("Skils")
+                        .HasColumnType("nvarchar(600)")
+                        .HasMaxLength(600);
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -146,11 +145,10 @@ namespace Helper.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<string>("VerificationCode")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
-
                     b.Property<string>("VisaNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ddddd")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -178,6 +176,9 @@ namespace Helper.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -197,6 +198,9 @@ namespace Helper.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -204,6 +208,47 @@ namespace Helper.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TBL_City");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_EducationalHistory", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EnterDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExitDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaghTa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnivercityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("TBL_EducationalHistory");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_MonyUnit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TBL_MonyUnit");
                 });
 
             modelBuilder.Entity("Helper.Models.Entities.TBL_NewsArticleVideo", b =>
@@ -411,7 +456,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 11, 12, 33, 14, 791, DateTimeKind.Local).AddTicks(8902),
+                            CreatedAt = new DateTime(2020, 8, 13, 6, 51, 57, 63, DateTimeKind.Local).AddTicks(6115),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -419,8 +464,16 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 11, 12, 33, 14, 795, DateTimeKind.Local).AddTicks(2349),
+                            CreatedAt = new DateTime(2020, 8, 13, 6, 51, 57, 67, DateTimeKind.Local).AddTicks(1207),
                             Key = "Contactus",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Value = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2020, 8, 13, 6, 51, 57, 67, DateTimeKind.Local).AddTicks(1263),
+                            Key = "SiteRules",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
                         });
@@ -446,7 +499,8 @@ namespace Helper.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -530,6 +584,36 @@ namespace Helper.Migrations
                     b.ToTable("UserSeenProfile");
                 });
 
+            modelBuilder.Entity("Helper.Models.Entities.TBL_WorkExperience", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("EnterDate")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("ExitDate")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Semat")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("TBL_WorkExperience");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -555,22 +639,6 @@ namespace Helper.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "7a8793cf-071a-4196-b1fe-311e7a644b60",
-                            ConcurrencyStamp = "2d67399f-e459-4372-a3f6-f08ea2c09ae4",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
-                        },
-                        new
-                        {
-                            Id = "df7be1a6-cd00-4f2c-874b-63a9a6de8d14",
-                            ConcurrencyStamp = "7cea8724-f904-4901-85b5-a904ef823c5b",
-                            Name = "User",
-                            NormalizedName = "User"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -684,6 +752,15 @@ namespace Helper.Migrations
                         .HasForeignKey("CreatedAdminId");
                 });
 
+            modelBuilder.Entity("Helper.Models.Entities.TBL_EducationalHistory", b =>
+                {
+                    b.HasOne("Helper.Models.ApplicationUser", "User")
+                        .WithOne("EducationHistry")
+                        .HasForeignKey("Helper.Models.Entities.TBL_EducationalHistory", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Helper.Models.Entities.TBL_NewsComment", b =>
                 {
                     b.HasOne("Helper.Models.Entities.TBL_NewsArticleVideo", "NewsArticleVideo")
@@ -746,6 +823,15 @@ namespace Helper.Migrations
                     b.HasOne("Helper.Models.ApplicationUser", "Seener")
                         .WithMany()
                         .HasForeignKey("SeenerId");
+                });
+
+            modelBuilder.Entity("Helper.Models.Entities.TBL_WorkExperience", b =>
+                {
+                    b.HasOne("Helper.Models.ApplicationUser", "User")
+                        .WithOne("WorkExperience")
+                        .HasForeignKey("Helper.Models.Entities.TBL_WorkExperience", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

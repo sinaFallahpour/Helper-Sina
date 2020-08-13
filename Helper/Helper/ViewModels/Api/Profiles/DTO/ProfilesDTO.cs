@@ -49,11 +49,23 @@ namespace Helper.ViewModels.Api.Profiles.DTO
         public string LanguageKnowing { get; set; }
 
 
-        public bool IsMarid { get; set; }
+        public UserGender Gender { get; set; }
 
+        public UserMarriedType MarriedType { get; set; }
+        
+        
         public string   City { get; set; }
 
         public UserVM CurrentUser { get; set; }
+
+
+        public  EducationHistoryDTO EducationHistryDTO { get; set; }
+
+
+        //رابطه کاربر با  سابقه کار
+        //public int WorkExperienceId { get; set; }
+        //[ForeignKey("WorkExperienceId")]
+        public  WorkExperienceDTO WorkExperienceDTO { get; set; }
 
 
 

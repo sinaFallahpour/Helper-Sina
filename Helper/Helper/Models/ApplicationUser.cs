@@ -14,7 +14,6 @@ namespace Helper.Models
     public class ApplicationUser : IdentityUser
     {
 
-
         [StringLength(maximumLength: 100, ErrorMessage = "حداکثر 100 کاراکتر وارد کنید")]
         [Display(Name = "نام ")]
         public string FirstName { get; set; }
@@ -31,11 +30,28 @@ namespace Helper.Models
         [Display(Name = " تاریخ تولد ")]
         public string Birthdate { get; set; }
 
-      
 
-        [StringLength(maximumLength: 10, ErrorMessage = "حداکثر 10 کاراکتر وارد کنید")]
         [Display(Name = "  جنسیت  ")]
-        public string Gender { get; set; }
+        public UserGender Gender { get; set; }
+
+
+        [Display(Name = "وضعیت")]
+        public UserMarriedType MarriedType { get; set; }
+
+        /// <summary>
+        /// زبان  های مسلط
+        /// </summary>
+        [StringLength(maximumLength: 600, ErrorMessage = "حداکثر 600 کاراکتر وارد کنید")]
+        public string LanguageKnowing { get; set; }
+
+
+        [StringLength(maximumLength: 600, ErrorMessage = "حداکثر 600 کاراکتر وارد کنید")]
+        /// <summary>
+        /// مهارت های کاربر
+        /// </summary>
+        public string Skils { get; set; }
+
+
 
         [StringLength(maximumLength: 20, ErrorMessage = "حداکثر 20 کاراکتر وارد کنید")]
         [Display(Name = "   شماره تماس ")]
@@ -43,11 +59,6 @@ namespace Helper.Models
 
         public DateTime RegistrationDateTime { get; set; }
 
-        [StringLength(maximumLength: 10, ErrorMessage = "حداکثر 10 کاراکتر وارد کنید")]
-        public string VerificationCode { get; set; }
-
-        [StringLength(maximumLength: 200, ErrorMessage = "حداکثر 200 کاراکتر وارد کنید")]
-        public string AvatarUrl { get; set; }
 
 
 
@@ -59,23 +70,14 @@ namespace Helper.Models
 
 
         [StringLength(maximumLength: 100, ErrorMessage = "حداکثر 100 کاراکتر وارد کنید")]
-        public string  City { get; set; }
-
-
-
-        [StringLength(maximumLength: 300, ErrorMessage = "حداکثر 300 کاراکتر وارد کنید")]
-        public string LanguageKnowing { get; set; }
-
-
-        public bool IsMarid { get; set; }
+        public string City { get; set; }
+     
 
 
         /// <summary>
         /// زبان سایت
         /// </summary>
         public SiteLanguage SiteLanguage { get; set; }
-
-
 
 
 
@@ -114,7 +116,7 @@ namespace Helper.Models
         /// <summary>
         /// این همان توکنی که در دیتا بیس ذخیره میکنیم
         /// </summary>
-        public string  SerialNumber { get; set; }
+        public string SerialNumber { get; set; }
 
 
 
@@ -144,15 +146,26 @@ namespace Helper.Models
         public string CreatedAdminId { get; set; }
 
 
-
-
-
         //relation with likes
         public virtual ICollection<TBL_NewsLike> NewsLike { get; set; }
 
         //realtion with comments
         public virtual ICollection<TBL_NewsComment> NewsComments { get; set; }
 
+
+
+        //رابطه کاربر با سابقه تحصیلی
+        //public int EduHistoryId { get; set; }
+
+     
+        public virtual TBL_EducationalHistory EducationHistry { get; set; }
+
+
+
+        //رابطه کاربر با  سابقه کار
+        //public int WorkExperienceId { get; set; }
+        //[ForeignKey("WorkExperienceId")]
+        public virtual TBL_WorkExperience WorkExperience { get; set; }
 
 
 
