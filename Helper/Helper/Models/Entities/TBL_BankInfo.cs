@@ -1,41 +1,14 @@
-﻿using Helper.Models.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Helper.ViewModels.Api.AccountSettings.DTO
+namespace Helper.Models.Entities
 {
-    public class ProfileDTO
+    public class TBL_BankInfo    /* : BaseEntity<int>*/
     {
-
-        public string Id { get; set; }
-
-
-        public string UserName { get; set; }
-
-
-        public string Email { get; set; }
-
-
-        public string Phone { get; set; }
-
-
-
-
-
-
-
-
-        public int MyProperty { get; set; }
-
-
-
-        /// <summary>
-        /// زبان سایت
-        /// </summary>
-        public SiteLanguage SiteLanguage { get; set; }
-
 
         /// <summary>
         ///نام بانک
@@ -64,6 +37,20 @@ namespace Helper.ViewModels.Api.AccountSettings.DTO
         /// شماره ویزا یا مسترکارد
         /// </summary>
         public string VisaNumber { get; set; }
+
+
+
+
+        #region Relations
+        [Key]
+        public string UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser User { get; set; }
+
+
+
+        #endregion
 
     }
 }

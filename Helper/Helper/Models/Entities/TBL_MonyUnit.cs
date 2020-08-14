@@ -18,5 +18,22 @@ namespace Helper.Models.Entities
         /// 
         [Display(Name = "  آیا فعال است؟")]
         public bool IsEnabled { get; set; }
+
+
+
+        #region Relation
+        /// <summary>
+        /// لیست واحد های پولی پلن
+        /// </summary>
+        public virtual ICollection<TBL_Plane_MonyUnit> PlansMonyUnit { get; set; }
+
+        #endregion
+
+
+
+
+
+
+
     }
 }

@@ -60,7 +60,7 @@ interface IProps {
 
 const BacnkAccount: React.FC<IProps> = ({ profile }) => {
 
-   
+
     const rootStore = useContext(RootStoreContext);
     const {
         chnageBankAccount
@@ -70,11 +70,10 @@ const BacnkAccount: React.FC<IProps> = ({ profile }) => {
     const submit = async (values: any) => {
         try {
             let res = await chnageBankAccount(values);
-            if (res && res.status === 0 && res.statusCode === 400) {
-                return { [FORM_ERROR]: 'پسورد اشتباست ' }
-            }
+            if (res && res.status === 0 && res.statusCode === 400)
+                return { [FORM_ERROR]: res.message }
             else if (res && res.status == 0)
-                return { [FORM_ERROR]: 'پسورد اشتباست ' }
+                return { [FORM_ERROR]: res.message }
         } catch (error) {
             return { [FORM_ERROR]: 'خطایی رخداده' }
         }
@@ -242,7 +241,7 @@ const BacnkAccount: React.FC<IProps> = ({ profile }) => {
                                             className='form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark'
                                             value={profile.visaNumber}
                                             autoComplete='off'
-                                            
+
                                         >
                                             {props => (
                                                 <>
@@ -252,7 +251,7 @@ const BacnkAccount: React.FC<IProps> = ({ profile }) => {
                                                     >شماره ویزا یا مستر کارت</label>
 
                                                     <input
-                                              
+
                                                         {...props}
                                                         {...props.input}
                                                     />
@@ -288,44 +287,6 @@ const BacnkAccount: React.FC<IProps> = ({ profile }) => {
                                 </Form>
                             )}
                     />
-
-
-
-
-
-
-
-                    {/* <div className="form-group w-100">
-                        <label className="text-right w-100 pr-3" htmlFor="Owner-name">نام صاحب حساب </label>
-                        <input type="text" className="form-control text-center hj-form-profile w-100 py-3  text-dark" id="Owner-name" placeholder=" نیما کفش آرا" />
-                    </div>
-
-                    <div className="form-group w-100">
-                        <label className="text-right w-100 pr-3" htmlFor="Bank-name">نام بانک</label>
-                        <input type="text" className="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="Bank-name" placeholder="سامان" />
-                    </div>
-
-                    <div className="form-group w-100">
-                        <label className="text-right w-100 pr-3" htmlFor="card-number"> شماره کارت</label>
-                        <input type="text" className="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="card-number" placeholder=" 6541981656498" />
-                    </div>
-
-                    <div className="form-group w-100 position-relative">
-                        <label className="text-right w-100 pr-3" htmlFor="shaba-number"> شماره شبا</label>
-                        <input type="text" className="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="shaba-number" placeholder=" 6541981656498" />
-                        <img src={window.location.origin + "/hj/img/ss.png"} className="img-fluid hj-shaba" />
-                    </div>
-
-                    <div className="form-group w-100 position-relative">
-                        <label className="text-right w-100 pr-3" htmlFor="visa-number">  شماره ویزا یا مستر کارت</label>
-                        <input type="text" className="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="visa-number" placeholder=" 6541981656498" />
-                        <img src={window.location.origin + "/hj/img/visa.png"} className="img-fluid hj-visa" />
-                    </div>
-
-                    <div className="row w-100 mx-auto mt-4 pt-4">
-                        <button type="button" className="btn btn-success w-25 mx-auto Confirmation">ذخیره تنظیمات</button>
-                    </div> */}
-
                 </div>
             </div>
 

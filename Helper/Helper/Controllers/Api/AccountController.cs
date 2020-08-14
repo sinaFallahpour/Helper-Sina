@@ -139,7 +139,8 @@ namespace Helper.Controllers.Api
                 AcceptRules = model.AcceptRules,
                 SerialNumber = SerialNumber,
                 WorkExperience = new TBL_WorkExperience(),
-                EducationHistry=new TBL_EducationalHistory(),
+                EducationHistry = new TBL_EducationalHistory(),
+                BankInfo = new TBL_BankInfo(),
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -168,7 +169,7 @@ namespace Helper.Controllers.Api
 
         #region CurrentUser
 
-        [HttpGet("currentUser")]     
+        [HttpGet("currentUser")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> CurrentUser()
         {

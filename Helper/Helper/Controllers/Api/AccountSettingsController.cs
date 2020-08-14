@@ -63,7 +63,10 @@ namespace Helper.Controllers.Api
             var currentSerialNumber = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == PublicHelper.SerialNumberClaim)?.Value;
             try
             {
-                var user = await _context.Users.Where(c => c.Id == Id && c.UserName == currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
+                var user = await _context.Users
+                    .Where(c => c.Id == Id && c.UserName == currentUsername && c.SerialNumber == currentSerialNumber)
+                    .Include(c=>c.BankInfo)
+                    .FirstOrDefaultAsync();
 
                 if (user != null)
                 {
@@ -112,21 +115,14 @@ namespace Helper.Controllers.Api
             {
                 var user = await _context.Users.Where(c => c.UserName == currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
 
-
-
-
-                //var user = await _userManager.FindByNameAsync(currentUsername);
                 if (user != null)
                 {
 
-                    if (await _context.Users.Where(x => x.UserName == model.UserName && x.UserName!=user.UserName ).AnyAsync() )
+                    if (await _context.Users.Where(x => x.UserName == model.UserName && x.UserName != user.UserName).AnyAsync())
                         return new JsonResult(new { Status = 0, Message = "این نام کاربری موجود است" });
 
-                    if (await _context.Users.Where(x => x.Email == model.Email && x.Email !=user.Email ).AnyAsync())
+                    if (await _context.Users.Where(x => x.Email == model.Email && x.Email != user.Email).AnyAsync())
                         return new JsonResult(new { Status = 0, Message = "این ایمیل  موجود است" });
-
-
-
 
 
                     //var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
@@ -159,16 +155,13 @@ namespace Helper.Controllers.Api
                 }
                 return new JsonResult(new { Status = 0, Message = "کاربری یافت نشد", });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new JsonResult(new { Status = 0, Message = "خطایی رخ داده است", });
             }
         }
 
         #endregion
-
-
-
 
 
         #region   ChangePassword
@@ -196,8 +189,8 @@ namespace Helper.Controllers.Api
 
             try
             {
-                var user = await _context.Users.Where(c => c.Id ==Id && c.UserName== currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
-              
+                var user = await _context.Users.Where(c => c.Id == Id && c.UserName == currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
+
                 if (user != null)
                 {
                     var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
@@ -268,18 +261,24 @@ namespace Helper.Controllers.Api
 
             try
             {
-                var user = await _context.Users.Where(c => c.UserName == currentUsername && c.SerialNumber == currentSerialNumber).FirstOrDefaultAsync();
+                var user = await _context.Users
+                    .Where(c => c.UserName == currentUsername && c.SerialNumber == currentSerialNumber)
+                    .Include(c => c.BankInfo)
+                    .FirstOrDefaultAsync();
 
                 //var user = await _userManager.FindByNameAsync(currentUsername);
                 if (user != null)
                 {
-                    //var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-                    user.BankName = model.BankName;
-                    user.CardNumber = model.CardNumber;
-                    user.AccountOwner = model.AccountOwner;
-                    user.ShabaNumber = model.ShabaNumber;
-                    user.VisaNumber = model.VisaNumber;
 
+                    if (user.BankInfo != null)
+                    {
+                        user.BankInfo.AccountOwner = model.BankName;
+                        user.BankInfo.CardNumber = model.CardNumber;
+                        user.BankInfo.BankName = model.BankName;
+                        user.BankInfo.ShabaNumber = model.ShabaNumber;
+                        user.BankInfo.VisaNumber = model.VisaNumber;
+                    
+                    }
 
                     var SerialNumber = Guid.NewGuid().ToString().GetHash();
                     user.SerialNumber = SerialNumber;

@@ -33,6 +33,8 @@ namespace Helper.ViewModels.Api.Profiles
 
 
         [StringLength(11, MinimumLength = 1, ErrorMessage = "فقط 11 کاراکتر وارد کنید")]
+        [MaxLength(11,ErrorMessage = "فقط 11 کاراکتر وارد کنید")]
+        [MinLength(11,ErrorMessage = "فقط 11 کاراکتر وارد کنید")]
         [Display(Name = "شماره تماس ")]
         public string Phone { get; set; }
 
@@ -47,7 +49,7 @@ namespace Helper.ViewModels.Api.Profiles
 
         /* اطلاعات شخصی  */
 
-        [StringLength(maximumLength: 50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [MaxLength( 50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
         [Display(Name = " تاریخ تولد ")]
         public string Birthdate { get; set; }
 
@@ -57,7 +59,7 @@ namespace Helper.ViewModels.Api.Profiles
         [Display(Name = "وضعیت")]
         public UserMarriedType MarriedType { get; set; }
 
-        [StringLength(maximumLength: 600, ErrorMessage = "حداکثر 600 کاراکتر وارد کنید")]
+        [MaxLength( 600, ErrorMessage = "حداکثر 600 کاراکتر وارد کنید")]
         public string LanguageKnowing { get; set; }
 
        

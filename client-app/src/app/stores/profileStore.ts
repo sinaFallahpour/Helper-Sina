@@ -15,7 +15,7 @@ export default class AccountSettingsStore {
   }
 
   @observable profile: IProfileRE | null = null;
-  @observable loadingProfile = true;
+  @observable loadingProfile = false;
 
 
 

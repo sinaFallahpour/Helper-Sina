@@ -49,13 +49,13 @@ namespace Helper
             //cors origin
             services.AddCors(opt =>
             {
-                services.AddCors(options =>
-                {
-                    options.AddPolicy("CorsApi",
-                        builder => builder.WithOrigins("http://localhost:4200", "http://mywebsite.com")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
-                });
+                //services.AddCors(options =>
+                //{
+                //    options.AddPolicy("CorsApi",
+                //        builder => builder.WithOrigins("http://localhost:4200", "http://mywebsite.com")
+                //    .AllowAnyHeader()
+                //    .AllowAnyMethod());
+                //});
 
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
@@ -64,28 +64,7 @@ namespace Helper
                                 "https://helperadmin.niknet.co")
                     .AllowCredentials();
                 });
-
-
-
-                //opt.AddPolicy("CorsPolicy", policy =>
-                //{
-                //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
-                //});
-
-                //opt.AddPolicy("CorsPolicy", policy =>
-                //{
-                //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperlanding.niknet.co").AllowCredentials();
-                //});
-
-                //opt.AddPolicy("CorsPolicy", policy =>
-                //{
-                //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperadmin.niknet.co").AllowCredentials();
-                //});
-
-                //opt.AddPolicy("CorsPolicy", policy =>
-                //{
-                //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
-                //});
+              
             });
 
             services.AddControllersWithViews();

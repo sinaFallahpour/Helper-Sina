@@ -152,6 +152,13 @@ interface IProps extends RouteComponentProps<RouteParams> { }
 const EditProfile: React.FC<IProps> = ({ match }) => {
 
 
+    const [startrLoading, setStartrLoading] = useState(true)
+
+    setTimeout(() => {
+        setStartrLoading(false)
+    }, 2000);
+
+
     //ایا سلکت آپشن باز است یا نه
     const [IsOpen, setIsOpen] = useState(true);
 
@@ -187,7 +194,9 @@ const EditProfile: React.FC<IProps> = ({ match }) => {
         loadProfile(match.params.id);
     }, [loadProfile, match]);
 
-    if (loadingProfile) return <LoadingTransparent />;
+
+
+    if (loadingProfile || startrLoading) return <LoadingTransparent />;
 
 
     const submit = async (values: any) => {

@@ -16,7 +16,7 @@ import './../../style/sina.css'
 SwiperCore.use([Navigation, Pagination, Autoplay])
 const Newses = () => {
     const rootStore = useContext(RootStoreContext);
-    const { loadingNews, loadNews, newsesList,loadingLike,Like } = rootStore.newsStore;
+    const { loadingNews, loadNews, newsesList, loadingLike, Like } = rootStore.newsStore;
 
     const [likeTarget, setLikeTarget] = useState<string | undefined>(
         undefined
@@ -94,8 +94,8 @@ const Newses = () => {
                                         <div className="card-body">
                                             <div className="row w-100 p-0 m-0 hj-option-card text-center">
                                                 <div className="col-4 p-0 m-0">
-                                                   
-                                                {loadingLike && likeTarget == news.id ?
+
+                                                    {loadingLike && likeTarget == news.id ?
                                                         <i
                                                             className=" fa fa-spinner fa-spin fa-2x fa-fw pl-2"
                                                         ></i>

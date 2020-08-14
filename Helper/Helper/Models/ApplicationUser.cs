@@ -73,7 +73,6 @@ namespace Helper.Models
         public string City { get; set; }
      
 
-
         /// <summary>
         /// زبان سایت
         /// </summary>
@@ -81,33 +80,45 @@ namespace Helper.Models
 
 
 
-        /// <summary>
-        ///نام بانک
-        /// </summary>
-        public string BankName { get; set; }
+
+        ///// <summary>
+        /////نام بانک
+        ///// </summary>
+        //public string BankName { get; set; }
 
 
-        /// <summary>
-        /// نام صاحب حساب بانک
-        /// </summary>
-        public string AccountOwner { get; set; }
+        ///// <summary>
+        ///// نام صاحب حساب بانک
+        ///// </summary>
+        //public string AccountOwner { get; set; }
 
 
-        /// <summary>
-        /// شماره کارت
-        /// </summary>
-        public string CardNumber { get; set; }
+        ///// <summary>
+        ///// شماره کارت
+        ///// </summary>
+        //public string CardNumber { get; set; }
 
-        /// <summary>
-        /// شماره شبا
-        /// </summary>
-        public string ShabaNumber { get; set; }
+        ///// <summary>
+        ///// شماره شبا
+        ///// </summary>
+        //public string ShabaNumber { get; set; }
 
 
-        /// <summary>
-        /// شماره ویزا یا مسترکارد
-        /// </summary>
-        public string VisaNumber { get; set; }
+        ///// <summary>
+        ///// شماره ویزا یا مسترکارد
+        ///// </summary>
+        //public string VisaNumber { get; set; }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -161,11 +172,18 @@ namespace Helper.Models
         public virtual TBL_EducationalHistory EducationHistry { get; set; }
 
 
-
         //رابطه کاربر با  سابقه کار
         //public int WorkExperienceId { get; set; }
         //[ForeignKey("WorkExperienceId")]
         public virtual TBL_WorkExperience WorkExperience { get; set; }
+
+
+
+        //رابطه کاربر با اطلاعات بانکی 
+        //public int WorkExperienceId { get; set; }
+        //[ForeignKey("WorkExperienceId")]
+        public virtual TBL_BankInfo BankInfo { get; set; }
+
 
 
 

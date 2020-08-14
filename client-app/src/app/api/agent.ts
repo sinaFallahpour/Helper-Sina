@@ -13,13 +13,18 @@ import {
   IChangeBankRQ
 } from '../models/accountSettings';
 
-import "react-toastify/dist/ReactToastify.css"
 import { ISlide } from '../models/slide';
+import { IPlan } from '../models/Plan';
+
+
 import { IResponse, IRespon } from '../models/reponse';
 import Cookies from 'js-cookie'
 import { INews } from '../models/news';
 import { IProfileRE } from '../models/profile';
- axios.defaults.baseURL = 'https://localhost:44340/api';
+
+import "react-toastify/dist/ReactToastify.css"
+
+axios.defaults.baseURL = 'https://localhost:44340/api';
 // axios.defaults.baseURL = 'https://helperadmin.niknet.co/api';
 
 axios.interceptors.request.use(
@@ -55,7 +60,7 @@ axios.interceptors.response.use(undefined, error => {
   ) {
     history.push('/notfound');
   }
-  if(status===401){
+  if (status === 401) {
     toast.error('  عدم دسترسي . لطفا وارد سايت شويد!');
   }
   if (status === 500) {
@@ -136,7 +141,12 @@ const Profiles = {
 
   updateProfile: (Id: string, model: IProfileRE): Promise<IResponse<IProfileRE>> =>
     requests.put(`/Profile/UpdateProfile?Id=${Id}`, model),
+};
 
+
+const Planses = {
+  list: (): Promise<IResponse<IPlan[]>> =>
+    requests.get(`/Plans/List`),
 };
 
 const Slides = {
@@ -164,6 +174,7 @@ const ContactUs = {
 export default {
   User,
   AccountSettings,
+  Planses,
   Profiles,
   AboutUs,
   ContactUs,

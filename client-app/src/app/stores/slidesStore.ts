@@ -24,11 +24,7 @@ export default class ModalStore {
         return this.slides;
     }
 
-    // @action slidesList = () => {
-    //     console.log(this.slides)
-    //     return this.slides;
-
-    // }
+   
 
 
     //load slides

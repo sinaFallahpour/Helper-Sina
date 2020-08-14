@@ -51,21 +51,67 @@ namespace Helper.Controllers
                 try
                 {
                     var MonyFromDb = await _context
-                            .TBL_MonyUnit
-                            .Where(c => c.Name == model.Name)
-                            .FirstOrDefaultAsync();
+                        .TBL_MonyUnit
+                        .Where(c => c.Name == model.Name)
+                        .FirstOrDefaultAsync();
+
+
                     if (MonyFromDb != null)
                     {
                         ModelState.AddModelError("", "اين  واحد پول موجود است");
                         return View(model);
                     }
-                    _context.Add(model);
+
+                    //await _context.AddAsync(model);
+
+                    //   var PlansMonyUnit = new List<TBL_Plane_MonyUnit>() {
+                    //   new TBL_Plane_MonyUnit(){
+                    //          IsEnabled=model.IsEnabled,
+                    //          MonyName=model.Name,
+                    //   }
+                    //};
+
+                    //   model.PlansMonyUnit = PlansMonyUnit;
+
+
+                    var plans = _context.TBL_Plans.ToList();
+
+                    foreach (var item in plans)
+                    {
+                        if (item.PlansMonyUnit != null)
+                        {
+                            item.PlansMonyUnit.Add(new TBL_Plane_MonyUnit()
+                            {
+                                IsEnabled = model.IsEnabled,
+                                MonyName = model.Name,
+                                MonyUnit = model
+                            });
+                        }
+                        else
+                        {
+                            var PlanListMony = new List<TBL_Plane_MonyUnit>() {
+                                new TBL_Plane_MonyUnit()
+                                {
+                                    IsEnabled = model.IsEnabled,
+                                    MonyName = model.Name,
+                                    MonyUnit = model
+                                }
+                            };
+                            item.PlansMonyUnit = PlanListMony;
+                        }
+                    }
+
+
+                    await _context.AddAsync(model);
+                    //await _context.AddAsync(planMony);
+
+
                     await _context.SaveChangesAsync();
                     TempData["Success"] = "ثبت موفقیت آمیز";
                     return View(model);
 
                 }
-                catch
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("", "خطا در ثبت واحد پول");
                     return View(model);
@@ -76,8 +122,6 @@ namespace Helper.Controllers
         }
 
         #endregion
-
-
 
         #region   Edit MonyUnit
 
@@ -90,7 +134,11 @@ namespace Helper.Controllers
                 return NotFound();
             }
 
-            var Mony = await _context.TBL_MonyUnit.FindAsync(id);
+            var Mony = await _context.TBL_MonyUnit
+                .Where(c => c.Id == id)
+                .Include(c => c.PlansMonyUnit)
+                .FirstOrDefaultAsync();
+
             if (Mony == null)
             {
                 return NotFound();
@@ -115,11 +163,11 @@ namespace Helper.Controllers
             {
                 try
                 {
-                    var ExistedCity = await _context
+                    var ExistedMony = await _context
                         .TBL_MonyUnit
                         .Where(c => c.Name == model.Name && c.Id != id)
                         .FirstOrDefaultAsync();
-                    if (ExistedCity != null)
+                    if (ExistedMony != null)
                     {
                         ModelState.AddModelError("", "اين  واحد پول موجود است");
                         return View(model);
@@ -132,6 +180,15 @@ namespace Helper.Controllers
                     }
                     MonyFromDB.Name = model.Name;
                     MonyFromDB.IsEnabled = model.IsEnabled;
+
+                    var planMaony = await _context.TBL_Plane_MonyUnit.Where(c => c.MonyUnitId == model.Id).ToListAsync();
+
+                    foreach (var item in planMaony)
+                    {
+                        item.MonyName = model.Name;
+                        item.IsEnabled = model.IsEnabled;
+                    }
+
                     await _context.SaveChangesAsync();
 
                     TempData["Success"] = "ثبت موفقیت آمیز";
@@ -201,8 +258,6 @@ namespace Helper.Controllers
             }
 
         }
-
-
 
         #endregion
 

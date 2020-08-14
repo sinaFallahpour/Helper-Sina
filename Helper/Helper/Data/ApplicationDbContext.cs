@@ -44,7 +44,7 @@ namespace Helper.Data
                       .OnDelete(DeleteBehavior.Cascade);
 
 
-
+            //1 به 0 کاربر واطلاعات درسی
             builder.Entity<TBL_EducationalHistory>(entity =>
             {
                 entity.HasKey(c => c.UserId);
@@ -55,7 +55,7 @@ namespace Helper.Data
             });
 
 
-
+            //1 به 0 کاربر واطلاعات کاری
             builder.Entity<TBL_WorkExperience>(entity =>
             {
                 entity.HasKey(c => c.UserId);
@@ -64,6 +64,29 @@ namespace Helper.Data
                         .HasForeignKey<TBL_WorkExperience>(c => c.UserId)
                             .OnDelete(DeleteBehavior.Cascade);
             });
+
+
+            //1 به 0 کاربر واطلاعات بانکی
+            builder.Entity<TBL_WorkExperience>(entity =>
+            {
+                entity.HasKey(c => c.UserId);
+                entity.HasOne(c => c.User)
+                    .WithOne(c => c.WorkExperience)
+                        .HasForeignKey<TBL_WorkExperience>(c => c.UserId)
+                            .OnDelete(DeleteBehavior.Cascade);
+            });
+
+
+
+             //پول ورابطه ان  به  ان  با پول پلن
+            builder.Entity<TBL_MonyUnit>(entity =>
+            {
+                entity.HasMany(c => c.PlansMonyUnit)
+                  .WithOne(c => c.MonyUnit)
+                  .OnDelete(DeleteBehavior.Cascade);
+            });
+           
+
 
 
             //adding database value for Setting
@@ -98,17 +121,16 @@ namespace Helper.Data
         /// <summary>
         /// لايك ها خدمت هايي از كاربر
         /// </summary>
-        public DbSet<TBL_User_Like_Service> UserLikeSerive { get; set; }
-
+        public DbSet<TBL_User_Like_Service> TBL_UserLikeSerive { get; set; }
 
 
         /// <summary>
         /// كامنت هاي كاربر روي خدمت هايي
         /// </summary>
-        public DbSet<TBL_User_Comment_Service> UserCommentService { get; set; }
+        public DbSet<TBL_User_Comment_Service> TBL_UserCommentService { get; set; }
 
 
-        public DbSet<TBL_User_SeenProfile> UserSeenProfile { get; set; }
+        public DbSet<TBL_User_SeenProfile> TBL_UserSeenProfile { get; set; }
 
 
         public DbSet<TBL_Category> TBL_Category { get; set; }
@@ -116,11 +138,45 @@ namespace Helper.Data
 
         public DbSet<TBL_City> TBL_City { get; set; }
 
-        public DbSet<TBL_MonyUnit> TBL_MonyUnit { get; set; }
+       
 
+
+        /// <summary>
+        ///اطلاعات کاری کاربر
+        /// </summary>
         public DbSet<TBL_WorkExperience> TBL_WorkExperience { get; set; }
 
+
+        /// <summary>
+        ///اطلاعات درسی کاربر
+        /// </summary>
         public DbSet<TBL_EducationalHistory> TBL_EducationalHistory { get; set; }
+        
+
+        /// <summary>
+        ///اطلاعات بانکی کاربر
+        /// </summary>
+        public DbSet<TBL_BankInfo> TBL_BankInfo { get; set; }
+
+
+
+        /// <summary>
+        ///پلن های موجود
+        /// </summary>
+        public DbSet<TBL_Plans> TBL_Plans { get; set; }
+
+
+        /// <summary>
+        /// واحد های پول
+        /// </summary>
+        public DbSet<TBL_MonyUnit> TBL_MonyUnit { get; set; }
+
+        /// <summary>
+        /// پنل و واحد پول
+        /// </summary>
+        public DbSet<TBL_Plane_MonyUnit> TBL_Plane_MonyUnit { get; set; }
+
+
 
 
 

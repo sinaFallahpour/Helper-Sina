@@ -110,6 +110,7 @@
                 <li class="navigation-divider"> </li>
                 <li class="navigation-divider"> </li>
 
+                <li><a class='@Html.IsSelected("plans", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","plans")">مدیریت پلن  سرویس ها</a></li>
                 <li><a class='@Html.IsSelected("NewsArticleVideo", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","NewsArticleVideo")">مدیریت اخبار و مقالات فیلم  </a></li>
                 <li><a class='@Html.IsSelected("Slides", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","Slides")">مدیریت   اسلاید</a></li>
                 <li><a class='@Html.IsSelected("Category", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","Category")">مدیریت  دسته بندی ها</a></li>
@@ -122,12 +123,12 @@
 
 
                 @*<li>
-                        <a class="d-block text-center" href="#">مدیریت ادمین</a>
-                        <ul>
-                            <li><a class='@Html.IsSelected("Admins", "Index","admin","btn btn-primary text-white") ' href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
-                            <li><a class='@Html.IsSelected("Admins", "Profile","admin","btn btn-primary text-white")' href="@Url.Action("Profile","admins")">  پروفایل</a></li>
-                        </ul>
-                    </li>*@
+            <a class="d-block text-center" href="#">مدیریت ادمین</a>
+            <ul>
+                <li><a class='@Html.IsSelected("Admins", "Index","admin","btn btn-primary text-white") ' href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
+                <li><a class='@Html.IsSelected("Admins", "Profile","admin","btn btn-primary text-white")' href="@Url.Action("Profile","admins")">  پروفایل</a></li>
+            </ul>
+        </li>*@
             </ul>
         </div>
     </div>

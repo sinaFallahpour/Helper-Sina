@@ -26,10 +26,10 @@ interface IProps extends RouteComponentProps<RouteParams> { }
 const MyProfilePage: React.FC<IProps> = (props) => {
 
 
-    
+
     return (
         <>
-         <div className="container-fluid w-75 mx-auto mt-5 p-0 m-0">
+            <div className="container-fluid w-75 mx-auto mt-5 p-0 m-0">
                 <div className="row w-100 mx-auto text-center">
                     <div className="col-12">
                         <img src={window.location.origin + "/hj/img/img profile.png"} className="img-fluid mx-auto text-center" />
@@ -58,7 +58,7 @@ const MyProfilePage: React.FC<IProps> = (props) => {
                                     <EditProfile {...props} />
 
 
-                                    
+
                                     {/* ------dashbord----- */}
 
 

@@ -7,6 +7,7 @@ import AccountSettingsStore from './accountSettingsStore';
 import SlidesStore from './slidesStore';
 import NewsStore from './newsStore';
 import ProfileStore from './profileStore'
+import PlaneStore from './PlanStore'
 
 
 configure({ enforceActions: 'always' });
@@ -20,6 +21,7 @@ export class RootStore {
     slideStore: SlidesStore;
     newsStore: NewsStore;
     profileStore: ProfileStore;
+    planStore: PlaneStore;
 
 
     constructor() {
@@ -31,6 +33,7 @@ export class RootStore {
         this.slideStore = new SlidesStore(this);
         this.newsStore = new NewsStore(this);
         this.profileStore = new ProfileStore(this);
+        this.planStore = new PlaneStore(this);
 
     }
 }

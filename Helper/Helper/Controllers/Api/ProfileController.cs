@@ -186,15 +186,6 @@ namespace Helper.Controllers.Api
                     user.LanguageKnowing = model.LanguageKnowing;
 
 
-                    //user.Phone = model.Phone;
-
-
-                    //user.LanguageKnowing = model.LanguageKnowing;
-                    //user.Nickname = model.Nickname;
-                    //user.IsMarid = model.IsMarid;
-                    //user.Descriptions = model.Descriptions;
-                    //user.City = model.City;
-                    //user.Birthdate = model.Birthdate;
 
 
                     var SerialNumber = Guid.NewGuid().ToString().GetHash();
@@ -227,9 +218,6 @@ namespace Helper.Controllers.Api
         }
 
         #endregion
-
-
-
 
     }
 }

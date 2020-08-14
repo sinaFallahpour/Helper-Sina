@@ -30,6 +30,12 @@ import MyProfilePage from '../../features/MyProfile/MyProfilePage'
 //account Settings
 import AccountSettingsPage from '../../features/AccountSettings/AccountSettingsPage'
 
+
+//Plan
+import PlanPage from '../../features/Plan/PlanPage'
+
+
+
 import NotFound from './NotFound';
 /*End  Pages */
 
@@ -49,8 +55,8 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
   useEffect(() => {
 
     if (token) {
-      getUser().
-        finally(() => setAppLoaded())
+      getUser()
+        .finally(() => setAppLoaded())
     } else {
       setAppLoaded();
     }
@@ -126,6 +132,24 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
             }}
           />
 
+
+
+
+          <Route
+            path='/plan'
+            exact={true}
+            render={props => {
+              if (!isLoggedIn) {
+                return <Redirect to={{
+                  pathname: "/login",
+                  state: { from: props.location },
+                }} />
+              }
+              else {
+                return <PlanPage  />
+              }
+            }}
+          />
 
           <Route component={NotFound} />
 
