@@ -9,7 +9,9 @@
     font-family: IranSans;
     src: url('../font/IranSans/ttf/IRANSansWeb(FaNum)_Light.ttf');
 }
-
+.card-Index{
+    height:320PX;
+}
 
 *:not(i) {
     font-family: IranSans !important;

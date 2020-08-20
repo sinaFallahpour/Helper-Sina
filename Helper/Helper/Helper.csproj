@@ -52,6 +52,8 @@
     <None Include="wwwroot\lib\ckeditor\ckeditor.js" />
     <None Include="wwwroot\lib\ckeditor\config.js" />
     <None Include="wwwroot\lib\ckeditor\styles.js" />
+    <None Include="wwwroot\lib\swal-alert\sweetalert.js" />
+    <None Include="wwwroot\lib\swal-alert\sweetalert.min.js" />
   </ItemGroup>
 
 </Project>

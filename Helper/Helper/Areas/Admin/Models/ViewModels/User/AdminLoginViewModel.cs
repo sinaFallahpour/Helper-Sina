@@ -11,7 +11,7 @@ namespace Helper.Areas.Admin.Models.ViewModels.User
         [Key]
         public string Id { get; set; }
 
-        public string ReturnUrl { get; set; }
+        public string returnUrl { get; set; }
 
         [Required(ErrorMessage = "این فیلد الزامیست")]
         [Display(Name ="نام کاربری")]

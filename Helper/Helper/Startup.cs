@@ -81,6 +81,7 @@ namespace Helper
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.User.RequireUniqueEmail = false;
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789@#+-اآبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئيك";
             })
             .AddRoleManager<RoleManager<IdentityRole>>()
             //این توکن میسازه   باید باشه برا چنج پسورد و.کانفیرم ایمیل
@@ -95,8 +96,8 @@ namespace Helper
                 options.AccessDeniedPath = "/accessDenied";
                 options.Cookie.Name = "YourAppCookieName";
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromDays(7);
-                options.LoginPath = "/admins/Login";
+                options.ExpireTimeSpan = TimeSpan.FromDays(1);
+                options.LoginPath = "/admin/admins/Login";
                 // ReturnUrlParameter requires 
                 //using Microsoft.AspNetCore.Authentication.Cookies;
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;

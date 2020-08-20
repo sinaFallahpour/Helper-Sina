@@ -16,10 +16,13 @@ namespace Helper.Areas.Admin.Models.ViewModels.Slider
 
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "عنوان")]
+        [MaxLength(50, ErrorMessage = "حداکثر 50 کاراکتر")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "توضیحات")]
+        [MaxLength(550, ErrorMessage = "حداکثر 550 کاراکتر وارد کنید")]
+        [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر وارد کنید")]
         public string Description { get; set; }
 
         public bool IsActive { get; set; }

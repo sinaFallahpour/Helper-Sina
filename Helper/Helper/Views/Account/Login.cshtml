@@ -1,0 +1,168 @@
+﻿@model Helper.ViewModels.LoginVm
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_landing.cshtml";
+}
+
+
+@*<h1>Login</h1>
+
+    <h4>LoginVm</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ReturnUrl" class="control-label"></label>
+                    <input asp-for="ReturnUrl" class="form-control" />
+                    <span asp-validation-for="ReturnUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+
+
+
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/hj/css/login.css" />
+}
+
+<div class="container w-100 mx-auto">
+    <div class="row w-100 mx-auto">
+        <div class="form-wrap">
+            <div class="tabs">
+                <h3 class="signup-tab"><a class="active" href="#signup-tab-content">ثبت نام </a></h3>
+                <h3 class="login-tab"><a href="#login-tab-content">ورود</a></h3>
+            </div><!--.tabs-->
+
+            <div class="tabs-content mt-4">
+
+                <div id="signup-tab-content" class="active text-center">
+
+                    <form asp-action="Register" class="ui error form signup-form">
+
+
+
+
+                        @if (!string.IsNullOrEmpty(ViewBag.Error))
+                        {
+                            <div className="alert alert-danger text-danger" role="alert">@ViewBag.Error</div>
+                        }
+
+                        <input type="hidden" name="Id" value="0" />
+
+                        <input asp-for="Username" class="input text-center  py-3 my-2 mx-auto d-block" id="user_name" autocomplete="off" placeholder="نام کاربری">
+                        <span asp-validation-for="Username" class="text-danger w-10 d-block"> </span>
+
+
+
+                        <input name="email" class="input text-center  py-3 my-2 mx-auto d-block" id="user_email" autocomplete="off" placeholder="ایمیل">
+                        <span class="text-danger w-10 d-block"> </span>
+
+
+                        <input asp-for="Password" class="input text-center  py-3 my-2 mx-auto d-block" id="user_pass" autocomplete="off" placeholder="رمز عبور">
+                        <span asp-validation-for="Password" class="text-danger w-10 d-block"> </span>
+
+
+                        <br />
+                        <input type="checkbox" class="checkbox" id="rules">
+                        <label for="rules" class="pr-4 my-3 mr-2 rules"><a href="#">قوانین</a> را میپذیرم   </label>
+                        <input type="submit" class="button" value="ثبت نام ">
+                    </form><!--.login-form-->
+                    <div class="help-text">
+
+                        <p><a href="#">  قبلا ثبت نام کرده ام !</a></p>
+                    </div><!--.help-text-->
+                    <hr />
+                    <div class="row w-100 mx-auto text-center">
+                        <p class="w-100 text-center">می توانید از سرویس گوگل برای ثبت نام استفاده کنید </p>
+
+                    </div>
+                    <div class="row w-100 mx-auto text-center">
+                        <a href="#" class="mx-auto">
+                            <img src="~/hj/img/google-icon.png" class="text-center mx-auto img-fluid" /><br />
+                            <span class="text-center w-100">ثبت نام با گوگل</span>
+                        </a>
+                    </div>
+                </div><!--.signup-tab-content-->
+
+                <div id="login-tab-content">
+                    <form asp-action="Login" class="login-form text-center">
+                        <input type="hidden" name="Id" value="0" />
+                        <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="Username" class="input text-center  py-3 my-2" id="user_login" autocomplete="off" placeholder="نام کاربری ">
+                        <span asp-validation-for="Username" class="text-danger w-10 d-block"> </span>
+
+                        <input asp-for="Password" class="input text-center  py-3 my-2" id="user_pass" autocomplete="off" placeholder="رمز عبور">
+                        <span asp-validation-for="Password" class="text-danger w-10 d-block"> </span>
+
+                        <input type="checkbox" name="RememberMe" class="checkbox" id="remember_me">
+
+                        <label for="remember_me" class="pr-4 my-3 "> مرا به خاطر بسپار</label>
+
+                        <input type="submit" class="button" value="ورود">
+                    </form><!--.login-form-->
+                    <div class="help-text mt-4">
+                        <p><a href="#">رمز عبور را فراموش کردید ؟  </a></p>
+                    </div><!--.help-text-->
+                </div><!--.login-tab-content-->
+            </div><!--.tabs-content-->
+        </div>
+    </div>
+</div>
+
+@*-------*@
+
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+        jQuery(document).ready(function ($) {
+            tab = $('.tabs h3 a');
+
+            tab.on('click', function (event) {
+                event.preventDefault();
+                tab.removeClass('active');
+                $(this).addClass('active');
+
+                tab_content = $(this).attr('href');
+                $('div[id$="tab-content"]').removeClass('active');
+                $(tab_content).addClass('active');
+            });
+        });
+    </script>
+}
+
+
+

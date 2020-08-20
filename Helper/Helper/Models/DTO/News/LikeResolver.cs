@@ -30,6 +30,7 @@ namespace Helper.Models.DTO.News
    
         public bool Resolve(TBL_NewsArticleVideo source, ListNewsDTO destination, bool destMember, ResolutionContext context)
         {
+          
             var currentUsername = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
          

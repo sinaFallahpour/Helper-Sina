@@ -42,3 +42,9 @@
 ._min-height260 {
     min-height: 260px !important;
 }
+
+
+._article {
+    height: 320px;
+    outline: none;
+}

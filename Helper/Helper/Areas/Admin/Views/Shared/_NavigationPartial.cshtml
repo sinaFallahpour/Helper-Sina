@@ -1,0 +1,148 @@
+﻿
+<div class="navigation-menu-body">
+
+    <!-- begin::navigation-logo -->
+    <div>
+        <div id="navigation-logo">
+            <a href="/">
+                <img class="logo" style="width:60px" src="~/hj/img/logo.png" alt="logo">
+                <img class="logo-light" src="~/Admin/assets/media/image/logo-light.png" alt="light logo">
+            </a>
+        </div>
+    </div>
+    <!-- end::navigation-logo -->
+
+    <div class="navigation-menu-group">
+
+        <div id="dashboards">
+            <ul>
+                <li class="navigation-divider">داشبردها</li>
+                <li><a href="index.html">CRM سیستم</a></li>
+                <li><a href="dashboard-two.html">ایکامرس<span class="badge badge-danger">2</span></a></li>
+                <li><a href="dashboard-three.html">آنالیستیک</a></li>
+                <li><a href="dashboard-four.html">مدیریت پروژه</a></li>
+                <li><a href="dashboard-five.html">مدیریت هلپ‌دسک</a></li>
+                <li class="navigation-divider">مخاطبان</li>
+                <li>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item d-flex align-items-center">
+                            <div>
+                                <div class="avatar avatar-sm m-r-10">
+                                    <img src="assets/media/image/user/man_avatar1.jpg" class="rounded-circle" alt="image">
+                                </div>
+                            </div>
+                            <span>علی احمدی</span>
+                        </a>
+                        <a href="#" class="list-group-item d-flex align-items-center">
+                            <div>
+                                <div class="avatar avatar-sm m-r-10">
+                                    <img src="assets/media/image/user/women_avatar2.jpg" class="rounded-circle" alt="image">
+                                </div>
+                            </div>
+                            <span>الهه جم </span>
+                        </a>
+                        <a href="#" class="list-group-item d-flex align-items-center">
+                            <div>
+                                <div class="avatar avatar-sm m-r-10">
+                                    <img src="~/Admin/assets/media/image/user/women_avatar4.jpg" class="rounded-circle" alt="image">
+                                </div>
+                            </div>
+                            <span>کیمیا فروزش</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="navigation-divider">دنبال‌کنندگان</li>
+                <li>
+                    <div class="avatar-group ml-4">
+                        <a href="#" class="avatar">
+                            <span class="avatar-title bg-success rounded-circle">آ</span>
+                        </a>
+                        <a href="#" class="avatar">
+                            <img src="~/Admin/assets/media/image/user/women_avatar5.jpg" class="rounded-circle" alt="avatar">
+                        </a>
+                        <a href="#" class="avatar">
+                            <img src="~/Admin/assets/media/image/user/women_avatar2.jpg" class="rounded-circle" alt="avatar">
+                        </a>
+                        <a href="#" class="avatar">
+                            <span class="avatar-title bg-info rounded-circle">س</span>
+                        </a>
+                        <a href="#" class="avatar">
+                            <span class="avatar-title bg-dark rounded-circle">+30</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="apps">
+            <ul>
+                <li class="navigation-divider">اپ های وب</li>
+                <li>
+                    <a href="chat.html">
+                        <span>چت</span>
+                        <span class="badge badge-danger">5</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="inbox.html">
+                        <span>ایمیل</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="app-todo.html">
+                        <span>تو دو</span>
+                        <span class="badge badge-warning">2</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="active" href="file-manager.html">
+                        <span>فایل منیجر</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="calendar.html">
+                        <span>تقویم</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="open" id="elements">
+            <ul>
+                <li class="navigation-divider"> </li>
+                <li class="navigation-divider"> </li>
+
+                <li><a class='@Html.IsSelected("plans", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","plans")">مدیریت پلن  سرویس ها</a></li>
+                <li><a class='@Html.IsSelected("NewsArticleVideo", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","NewsArticleVideo")">مدیریت اخبار و مقالات فیلم  </a></li>
+                <li><a class='@Html.IsSelected("Slides", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","Slides")">مدیریت   اسلاید</a></li>
+                <li><a class='@Html.IsSelected("Category", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","Category")">مدیریت  دسته بندی ها</a></li>
+                <li><a class='@Html.IsSelected("Cities", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","Cities")">مدیریت  شهر ها</a></li>
+                <li><a class='@Html.IsSelected("MonyUnit", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","MonyUnit")">مدیریت  واحد پول</a></li>
+                <li><a class='@Html.IsSelected("Settings", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","settings")">مدیریت  تنظیمات</a></li>
+                <li><a class='@Html.IsSelected("Admins", "Index","admin","btn btn-primary text-white shadow-lg") d-block text-center' href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
+                <li><a class='@Html.IsSelected("Admins", "Profile","admin","btn btn-primary text-white shadow-lg") d-block text-center ' href="@Url.Action("Profile","admins")">  پروفایل</a></li>
+
+
+
+                @*<li>
+            <a class="d-block text-center" href="#">مدیریت ادمین</a>
+            <ul>
+                <li><a class='@Html.IsSelected("Admins", "Index","admin","btn btn-primary text-white") ' href="@Url.Action("Index","admins")">   لیست ادمین ها</a></li>
+                <li><a class='@Html.IsSelected("Admins", "Profile","admin","btn btn-primary text-white")' href="@Url.Action("Profile","admins")">  پروفایل</a></li>
+            </ul>
+        </li>*@
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+@*@section Scripts{
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script>
+         var sd  =  $("li._menuNav").parent("ul._menuNav")
+
+            console.log(sd)
+
+
+        </script>
+    }*@

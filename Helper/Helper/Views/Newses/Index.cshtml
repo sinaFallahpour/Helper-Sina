@@ -1,0 +1,284 @@
+﻿@model Helper.ViewModels.NewsesVM
+@using Helper.Models.Utilities;
+@using System.Security.Claims;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_landing.cshtml";
+}
+
+
+@section Styles{
+    <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
+}
+<div class="container mx-auto p-0 m-0 mt-5">
+    <div class="row w-100 p-0 m-0 mx-auto">
+        <div class="col-md-10 col-8 text-right"><h3><b>اخبار هلپر</b></h3></div>
+        <div class="col-md-2 col-4 text-news"><span> جدید ترین ها</span></div>
+    </div>
+    <div class="row w-100 mx-auto">
+        <img src="~/hj/img/borderbig green.png" class="img-fluid mx-auto" />
+    </div>
+
+    @*---SLIDER---*@
+    <div class="swiper-container swiper-container2">
+        <div class="swiper-wrapper">
+
+
+
+
+            @foreach (var item in Model.Newses)
+            {
+                <div class="swiper-slide">
+                    <div class=" col-12 mx-auto  my-3">
+                        <div class="card w-100 hj-card-news">
+                            @* <img class="card-img-top img-fluid" src="~/hj/img/imgNews.png" alt="new" />*@
+                            <video controls preload="metadata" class="_article card-img-top img-fluid _swiper-image">
+                                <source src="@item.VideoAddress" id="video_here" />
+                                <source src="mov_bbb.ogg" id="video_here" />
+                                Your browser does not support HTML5 video.
+                            </video>
+                            <div class="card-body card-Index">
+                                <div class="row w-100 p-0 m-0 hj-option-card text-center">
+                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like">@item.LikesCount</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like">@item.CommentsCount</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
+                                </div>
+                                <h5 class="card-title text-right pt-4"> @item.Title</h5>
+                                <p class="card-text text-justify size-14"> @item.Description.GetSummary(500) </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        @*<div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>*@
+    </div>
+
+    @*--END SLIDER---*@
+
+</div>
+@*-------*@
+<div class="container mx-auto p-0 m-0 mt-5">
+    <div class="row w-100 p-0 m-0 mx-auto">
+        <div class="col-md-10 col-8 text-right"><h3><b> ویدئو های آموزشی</b></h3></div>
+        <div class="col-md-2 col-4 text-news"><span> جدید ترین ها</span></div>
+    </div>
+    <div class="row w-100 mx-auto">
+        <img src="/hj/img/borderbig green.png" class="img-fluid mx-auto">
+    </div>
+
+    <div class="swiper-container swiper-container2 swiper-container-initialized swiper-container-horizontal swiper-container-rtl">
+        <div class="swiper-wrapper">
+
+            @foreach (var item in Model.Videos)
+            {
+
+                <div class="swiper-slide">
+                    <div class=" col-12 mx-auto  my-3">
+                        <div class="card w-100 hj-card-news">
+                            @* <img class="card-img-top img-fluid" src="~/hj/img/imgNews.png" alt="new" />*@
+                            <video controls preload="metadata" class="_article card-img-top img-fluid _swiper-image">
+                                <source src="@item.VideoAddress" id="video_here" />
+                                <source src="mov_bbb.ogg" id="video_here" />
+                                Your browser does not support HTML5 video.
+                            </video>
+                            <div class="card-body card-Index">
+                                <div class="row w-100 p-0 m-0 hj-option-card text-center">
+                                    <div class="col-4 p-0 m-0">
+                                        @if (item.isLiked)
+                                        {
+                                            <i onclick="toggleLike('#like-'+@item.Id,@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 fas"></i>
+
+                                        }
+                                        else
+                                        {
+                                            <i onclick="toggleLike('#like-'+@item.Id,@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 "></i>
+
+                                        }
+
+                                        <span class="hj-like" id="likeCount-@item.Id">@item.LikesCount</span>
+                                    </div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like">@item.CommentsCount</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
+                                </div>
+                                <h5 class="card-title text-right pt-4"> @item.Title</h5>
+                                <p class="card-text text-justify size-14"> @item.Description.GetSummary(500) </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 4"></span></div>
+        <!-- Add Arrows -->
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+    </div>
+
+
+</div>
+@*---billbord---*@
+<div class="container mt-3 mx-auto">
+    <div class="row w-100 mx-auto">
+        <div class="col-md-6 py-2 news-billbord">
+            <img src="~/hj/img/imgNews.svg" class="img-fluid" />
+        </div>
+        <div class="col-md-6 py-2 news-billbord">
+            <img src="~/hj/img/imgNews.svg" class="img-fluid" />
+        </div>
+    </div>
+</div>
+
+@*----articles----*@
+<div class="container mx-auto p-0 m-0 mt-5">
+    <div class="row w-100 p-0 m-0 mx-auto">
+        <div class="col-md-10 col-8 text-right"><h3><b> ویدئو های آموزشی</b></h3></div>
+        <div class="col-md-2 col-4 text-news"><span> جدید ترین ها</span></div>
+    </div>
+    <div class="row w-100 mx-auto">
+        <img src="/hj/img/borderbig green.png" class="img-fluid mx-auto">
+    </div>
+
+    <div class="swiper-container swiper-container3 swiper-container-initialized swiper-container-horizontal swiper-container-rtl">
+        <div class="swiper-wrapper" style="transform: translate3d(1170px, 0px, 0px); transition-duration: 0ms;">
+
+
+            @foreach (var item in Model.Articles)
+            {
+
+                <div class="swiper-slide" style="width: 360px; margin-left: 30px;">
+                    <div class=" col-12 mx-auto  my-3 p-0">
+                        <div class="card w-100 hj-card-news">
+                            <img class="card-img-top" src="@item.ArticlePhotoAddress" alt="new">
+
+                            <div class="card-body card-Index">
+                                <div class="row w-100 p-0 m-0 hj-option-card text-center">
+                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like">@item.LikesCount</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like">@item.CommentsCount</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
+                                </div>
+                                <h5 class="card-title text-right pt-4"> @item.Title</h5>
+                                <p class="card-text text-justify size-14">@item.Description.GetSummary(300)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 4"></span></div>
+        <!-- Add Arrows -->
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+    </div>
+
+
+</div>
+
+
+
+
+<input type="hidden" name="userId" id="userId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+@*--modal---*@
+
+
+<!-- Central Modal Small -->
+<div class="modal fade" id="centralPlay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog modal-large" role="document">
+
+
+        <div class="modal-content modal-video">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.aparat.com/c2a034dd-2198-4451-8077-f304d1e5f8b3" allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Central Modal Small -->
+
+
+
+
+
+
+@section Scripts{
+
+    <script src="~/SinaCustom/js/main.js"></script>
+    <script src="~/lib/swal-alert/sweetalert.min.js"></script>
+    <script>
+
+
+        const toggleLike = (tagId, newsId) => {
+            //لایک یا دیسلایک محصول
+            //$(document).on("click", ".like-btn", function () {
+            var UserId = $("#userId").val();
+
+            var NewsId = newsId;
+            if (!UserId)
+                FailedAlert("برای لایک کردن محصولات ابتدا لاگین کنید.");
+
+            var data = {
+                //UserId: UserId,
+                "newsID": NewsId
+
+            };
+            console.log(JSON.stringify(data))
+            //alert(data.newsID)
+            $.ajax({
+                method: "POST",
+                url: '/Newses/ToggleLike',
+                data: data,
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                    if (r.status) {
+                        if (r.isLiked) {
+                            $(tagId).removeClass().addClass("far fa-heart pl-2 fas")
+                            //$(".like-btn").addClass("like");
+                        }
+                        else {
+                            $(tagId).removeClass().addClass("far fa-heart pl-2 ")
+                            $(".like-btn").removeClass("like");
+                        }
+                        var likeEl = `#likeCount-${newsId}`
+                        $(likeEl).html(r.likeCount);
+                    }
+                    else
+                        FailedAlert(r.message);
+                },
+                error: function () {
+                    FailedAlert("خطا رخ داده است.");
+                }
+            });
+
+            //})
+
+        }
+    </script>
+
+
+
+}

@@ -1,0 +1,101 @@
+﻿<div class="container p-0 mx-auto">
+    @*........navbar.......*@
+    <div class="row hj-header mt-5 m-0">
+        <div class="col-12 p-md-0 m-md-0">
+            <div class="row">
+
+                <div class="col-md-4 col-5 d-flex justify-content-center align-items-center">
+                    <form action="/action_page.php" class="hj-language text-right">
+
+                        <select name="language" id="language">
+                            <option value="volvo">Ln فارسی</option>
+                            <option value="saab">Ln EN</option>
+
+                        </select>
+
+                    </form>
+                </div>
+
+                <div class="col-md-4 col-2 text-center p-2">
+                    <img src="~/hj/img/logo.png" class="img-fluid" alt="Responsive image">
+                </div>
+
+
+
+
+                <div class="col-md-4  col-5 d-flex justify-content-center align-items-center">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("خروج", "LogOut", "Account", new { Area = "", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) }, new { @class = "btn btn-link hj-index-login" })
+                        <a href="" class="btn btn-link hj-index-login"> پروفایل</a> 
+                        
+                        
+                        
+                        }
+                                    else
+                                    {
+                        <a href="@Url.Action("Login","Account")" class="btn btn-link hj-index-login"> ورود / ثبت نام</a>}
+
+                </div>
+
+
+
+                @*{
+                    isLoggedIn ?
+                    <>
+                    <NavLink to="/LogOut" className="btn btn-link hj-index-login">خروج </NavLink>/
+                    <NavLink to={`/profile/${user?.id}`} className="btn btn-link hj-index-login">پروفایل </NavLink>
+                    </>
+                    :
+                    }*@
+
+
+
+
+            </div>
+            @*......navbarbootsrap.....*@
+            <nav class="navbar navbar-expand-lg navbar-light bg-light hj-navbarbootstrap p-md-0 m-md-0 ">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav w-100 text-md-center text-right mt-3">
+                        <div class="col-md-3">
+                            <li class="nav-item active">
+                                <a class="nav-link " href="/">صفحه اصلی </a>
+                            </li>
+                        </div>
+                        <div class="col-md-2">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index","Newses")">اخبار</a>
+                            </li>
+                        </div>
+                        <div class="col-md-2">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("ContactUs","Home")">تماس با ما</a>
+                            </li>
+                        </div>
+                        <div class="col-md-2">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("AboutUs","Home")">درباره ما</a>
+                            </li>
+                        </div>
+                        <div class="col-md-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">کارشناسان</a>
+                            </li>
+                        </div>
+
+                    </ul>
+                </div>
+            </nav>
+
+            @*.....End navbarboottrap.....*@
+
+        </div>
+    </div>
+</div>
+
+@*........end navbar.......*@
+

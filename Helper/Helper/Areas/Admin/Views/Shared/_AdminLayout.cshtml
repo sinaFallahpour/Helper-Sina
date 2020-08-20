@@ -1,0 +1,289 @@
+﻿@inject IHttpContextAccessor  HttpContextAccessor
+@{
+    Layout = null;
+    var claims = HttpContextAccessor.HttpContext.User.Claims;
+    var PhotoAddress = claims.Where(c => c.Type == "PhotoAddress").Select(c => c.Value).FirstOrDefault();
+
+}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>پنل مدیریت محتوای هلپر</title>
+
+    <!-- Favicon  همه پیج ها دارند-->
+    <link rel="shortcut icon" href="~/Admin/assets/media/image/logo-light.png" />
+
+
+    <!-- Plugin styles  همه پیج ها دارند-->
+    <link rel="stylesheet" href="~/Admin/vendors/bundle.css" type="text/css">
+
+    <!-- Prism  همه پیج ها دارند-->
+    <link rel="stylesheet" href="~/Admin/vendors/prism/prism.css" type="text/css">
+
+    <!-- App styles  همه پیج ها دارند-->
+    <link rel="stylesheet" href="~/Admin/assets/css/app.min.css" type="text/css">
+
+    @RenderSection("Style", false)
+</head>
+<body>
+
+    <!-- begin::preloader-->
+    <div class="preloader">
+        <div class="preloader-icon"></div>
+    </div>
+    <!-- end::preloader -->
+    <!-- begin::header -->
+    <div class="header">
+
+        <div>
+            <ul class="navbar-nav">
+
+                <!-- begin::navigation-toggler -->
+                <li class="nav-item navigation-toggler">
+                    <a href="#" class="nav-link" title="Hide navigation">
+                        <i data-feather="arrow-left"></i>
+                    </a>
+                </li>
+                <li class="nav-item navigation-toggler mobile-toggler">
+                    <a href="#" class="nav-link" title="Show navigation">
+                        <i data-feather="menu"></i>
+                    </a>
+                </li>
+                <!-- end::navigation-toggler -->
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ایجاد</a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a asp-action="create" asp-controller="NewsArticleVideo" asp-area="admin" class="@Html.IsSelected("NewsArticleVideo", "Create","admin","active") dropdown-item">خبر وفیلم</a>
+                        <a asp-action="createArticle" asp-controller="NewsArticleVideo" asp-area="admin" class="@Html.IsSelected("NewsArticleVideo", "CreateArticle","admin","active") dropdown-item">مقاله </a>
+                        <a asp-action="create" asp-controller="slides" asp-area="admin" class="@Html.IsSelected("Slides", "Create","admin","active") dropdown-item">اسلاید‌</a>
+
+                        <a asp-action="create" asp-controller="Category" asp-area="admin" class="@Html.IsSelected("Category", "Create","admin","active") dropdown-item">دسته بندی‌</a>
+                        <a asp-action="create" asp-controller="Cities" asp-area="admin" class="@Html.IsSelected("Cities", "Create","admin","active") dropdown-item">شهر ‌</a>
+                        <a asp-action="create" asp-controller="MonyUnit" asp-area="admin" class="@Html.IsSelected("MonyUnit", "Create","admin","active") dropdown-item">واحد پول‌</a>
+
+
+                        <a asp-action="Index" asp-controller="settings" asp-area="admin" class="@Html.IsSelected("Settings", "Index","admin","active") dropdown-item">تنظیمات</a>
+                        <a asp-action="create" asp-controller="admins" asp-area="admin" class="@Html.IsSelected("Admins", "Create","admin","active") dropdown-item">ادمین</a>
+                        <a asp-action="Profile" asp-controller="admins" asp-area="admin" class="@Html.IsSelected("Admins", "Profile","admin","active") dropdown-item">پروفایل</a>
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <div>
+            <ul class="navbar-nav">
+
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">احراز هویت</a>
+                    <div class="dropdown-menu dropdown-menu-right">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("خروج", "LogOut", "admins",
+                          new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) },
+                          new { @class = "dropdown-item" }
+                              )
+
+                            @*<a asp-action="LogOut" asp-controller="admins" asp-area="admin" class="dropdown-item">خروج</a>*@
+                            <a asp-action="Profile" asp-controller="admins" asp-area="admin" class="dropdown-item">پروفایل</a>
+                        }
+                        @*<a href="#" class="dropdown-item">دسته</a>
+                            <a href="#" class="dropdown-item">محصول</a>
+                            <a href="#" class="dropdown-item">گزارش</a>*@
+                    </div>
+                </li>
+
+
+                <!-- begin::header minimize/maximize -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" title="تمام صفحه" data-toggle="fullscreen">
+                        <i class="maximize" data-feather="maximize"></i>
+                        <i class="minimize" data-feather="minimize"></i>
+                    </a>
+                </li>
+                <!-- end::header minimize/maximize -->
+
+
+            </ul>
+
+            <!-- begin::mobile header toggler -->
+            <ul class="navbar-nav d-flex align-items-center">
+                <li class="nav-item header-toggler">
+                    <a href="#" class="nav-link">
+                        <i data-feather="arrow-down"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- end::mobile header toggler -->
+        </div>
+
+    </div>
+    <!-- end::header -->
+    <!-- begin::main -->
+    <div id="main">
+
+        <!-- begin::navigation -->
+        <div class="navigation">
+
+            <div class="navigation-menu-tab">
+                <div>
+                    <div class="navigation-menu-tab-header" data-toggle="tooltip" title="@User.Identity.Name" data-placement="right">
+                        <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
+                            <figure class="avatar avatar-sm">
+                                <img src="@PhotoAddress" class="rounded-circle" alt="avatar">
+                            </figure>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left dropdown-menu-big">
+                            <div class="p-3 text-center" data-backround-image="~/Admin/assets/media/image/image1.jpg">
+                                @*<figure class="avatar mb-3">
+                                        <img src="~/Admin/assets/media/image/user/women_avatar1.jpg" class="rounded-circle" alt="image">
+                                    </figure>*@
+                                <figure class="avatar mb-3">
+                                    <img src="@PhotoAddress" class="rounded-circle" alt="avatar">
+                                </figure>
+
+                                <h6 class="d-flex align-items-center justify-content-center">
+                                    @User.Identity.Name
+                                    <a asp-action="profile" asp-controller="admins" asp-area="admin" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="ویرایش پروفایل">
+                                        <i data-feather="edit-2"></i>
+                                    </a>
+                                </h6>
+                                @*<small>شارژ: <strong>1000 تومان</strong></small>*@
+                            </div>
+                            <div class="dropdown-menu-body">
+
+                                <div class="list-group list-group-flush">
+                                    <a asp-action="Profile" asp-controller="admins" asp-area="admin" class="list-group-item">پروفایل</a>
+
+                                    @* <a  asp-action="login"  asp-controller="admins"  asp-area="admin"  class="list-group-item" data-sidebar-target="#settings"> فرم ورود </a>*@
+                                    <a asp-action="logOut" asp-controller="admins" asp-area="admin" class="list-group-item text-danger" data-sidebar-target="#settings">خروج</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <ul>
+                        <li>
+                            <a href="#" data-toggle="tooltip" data-placement="right" title="داشبردها"
+                               data-nav-target="#dashboards">
+                                <i data-feather="bar-chart-2"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tooltip" data-placement="right" title="اپ ها" data-nav-target="#apps">
+                                <i data-feather="command"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="active" href="#" data-toggle="tooltip" data-placement="right" title="عناصر رابط کاربری"
+                               data-nav-target="#elements">
+                                <i data-feather="layers"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tooltip" data-placement="right" title="صفحات" data-nav-target="#pages">
+                                <i data-feather="copy"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <a asp-action="Index" asp-controller="settings" asp-area="admin" data-toggle="tooltip" data-placement="right" title="تنظیمات">
+                                <i data-feather="settings"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="LogOut" asp-controller="admins" asp-area="admin" data-toggle="tooltip" data-placement="right" title="خروج">
+                                <i data-feather="log-out"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- begin::navigation menu -->
+            @*<partial name="_New" view-data=@(i+1) />*@
+            <partial name="_NavigationPartial" />
+
+            <!-- end::navigation menu -->
+
+        </div>
+        <!-- end::navigation -->
+        <!-- begin::main-content -->
+        <div class="main-content">
+
+            <!-- begin::page-header -->
+            <div class="page-header">
+                <div class="container-fluid d-sm-flex justify-content-between">
+                    <h4>اعتبارسنجی فرم</h4>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">داشبرد</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">فرمها</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">اعتبارسنجی فرم</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!-- end::page-header -->
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @RenderBody();
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- begin::footer -->
+            <footer>
+                <div class="container-fluid">
+                    <div>© 1399 | قالب مدیریت بورداش ورژن 1.0.0 ارایه از  <a href="">AFARIDTEAM</a></div>
+
+                    <div>
+                        <nav class="nav">
+                            <a href="https://www.rtl-theme.com/standard/" class="nav-link">لیسانس</a>
+                            <a href="#" class="nav-link">تغییر لاگ</a>
+                            <a href="#" class="nav-link">راهنمایی</a>
+                        </nav>
+                    </div>
+                </div>
+            </footer>
+            <!-- end::footer -->
+
+        </div>
+        <!-- end::main-content -->
+
+    </div>
+    <!-- end::main -->
+    <!-- Plugin scripts  همه پیج ها دارند-->
+    <script src="~/Admin/vendors/bundle.js"></script>
+
+    <!-- Prism  همه پیج ها دارند-->
+    <script src="~/Admin/vendors/prism/prism.js"></script>
+
+    <!-- App scripts همه پیج ها دارند -->
+    <script src="~/Admin/assets/js/app.min.js"></script>
+
+    @RenderSection("Scripts", false)
+</body>
+
+</html>

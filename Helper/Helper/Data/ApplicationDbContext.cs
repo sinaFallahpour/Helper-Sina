@@ -176,6 +176,16 @@ namespace Helper.Data
         /// </summary>
         public DbSet<TBL_Plane_MonyUnit> TBL_Plane_MonyUnit { get; set; }
 
+        /// <summary>
+        /// پنل و واحد پول
+        /// </summary>
+        public DbSet<Helper.ViewModels.LoginVm> LoginVm { get; set; }
+
+        /// <summary>
+        /// پنل و واحد پول
+        /// </summary>
+        public DbSet<Helper.ViewModels.NewsesVM> NewsesVM { get; set; }
+
 
 
 
