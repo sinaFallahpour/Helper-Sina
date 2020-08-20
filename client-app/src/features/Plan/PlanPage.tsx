@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { RouteComponentProps } from 'react-router-dom';
 import { RootStoreContext } from '../../app/stores/rootStore';
 import LoadingTransparent from '../../app/common/Loading/LoadingTransparent';
-import { toShortString } from '../../app/common/util/util';
+import { toShortString, getPriceFormat } from '../../app/common/util/util';
 
 
 const PlanPage: React.FC = () => {
@@ -14,14 +14,22 @@ const PlanPage: React.FC = () => {
 
     const [startrLoading, setStartrLoading] = useState(true)
 
+
+
     setTimeout(() => {
         setStartrLoading(false)
     }, 2000);
 
 
     useEffect(() => {
+
         loadPlanses();
     }, [loadPlanses]);
+
+
+   
+    
+
 
 
     if (startrLoading || loadingPlanses) return <LoadingTransparent />
@@ -62,15 +70,19 @@ const PlanPage: React.FC = () => {
 
 
                     {plansesList?.map((plan, index) => {
+
+
                         return (
-                            <div className="col-lg-3 col-md-6 col-12 py-3 " > 
-                                <div className="card card1" style={{height:'500px'}}>
+                            <div className="col-lg-3 col-md-6 col-12 py-3 " >
+
+                                <div
+
+                                    className={plan.isSelected ? 'card card3' : 'card card1'}
+                                    style={{ height: '500px' }}>
                                     <div className="row mx-auto w-100 pr-3 pt-2  pt-3">
 
-                                        <h4 className="text-right">
-
+                                        <h4 className={plan.isSelected ? 'text-card3 text-right' : ' text-right'} >
                                             {plan.name}
-
                                         </h4>
 
                                     </div>
@@ -79,14 +91,42 @@ const PlanPage: React.FC = () => {
                                     </div>
                                     <div className="card-body">
 
-                                        <p className="card-text text-justify" style={{height:'210px'}}>{toShortString(plan.description, 220)} </p>
-                                        <h4 className="card-title text-center hj-text-service py-3">150.000<br /><span className="size-15">ریال</span> </h4>
-                                        <a href="#" className="btn btn-helper w-75 mx-auto d-block py-2"> نوع دیفالت</a>
+                                        <p className={plan.isSelected ? 'text-card3 card-text text-justify' : 'card-text text-justify'} style={{ height: '210px' }}>{toShortString(plan.description, 220)} </p>
+                                        <h4 className={plan.isSelected ? 'text-card3 card-title text-center hj-text-service py-3' : 'text-dark card-title text-center hj-text-service py-3 '}>{getPriceFormat(plan.planMonyUnitDTO[0].price.toString())}
+                                            <br />
+                                            <div className="row w-75 mx-auto text-center">
+                                                <span className="size-15 mx-auto">
+                                                    <select
+                                                     
+                                                        className="form-control text-left currency  "
+                                                    >
+                                                        {plan.planMonyUnitDTO.map((el, index) => {
+                                                            return (
+                                                                <option
+                                                                    value={el.price}
+                                                                    key={index} >{el!.monyName}
+                                                                </option>
+                                                            )
+
+                                                        })}
+
+                                                    </select>
+                                                </span>
+                                            </div>
+
+                                        </h4>
+                                        <button
+                                            className={plan.isSelected ? 'btn-card3 btn btn-helper w-75 mx-auto d-block py-2' : 'btn btn-helper w-75 mx-auto d-block py-2'}
+
+                                        >  {plan.isSelected ? 'انتخاب شده' : 'انتخاب'}</button>
                                     </div>
                                 </div>
                             </div>
                         )
                     })}
+
+
+
 
 
                     <div className="col-lg-3 col-md-6 col-12 py-3">

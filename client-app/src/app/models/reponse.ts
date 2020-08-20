@@ -5,8 +5,6 @@ export interface IRespon {
 }
 
 
-
-
 export interface IResponse<T>  extends IRespon {
     // status: number,
     // message: string,

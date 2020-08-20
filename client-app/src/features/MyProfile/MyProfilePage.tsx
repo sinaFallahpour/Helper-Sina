@@ -2,11 +2,6 @@ import React from 'react'
 
 import { observer } from 'mobx-react-lite';
 
-
-
-
-
-
 import EditProfile from './EditProfile'
 import MyNotification from './MyNotification'
 import MyChat from './MyChat'
@@ -48,8 +43,17 @@ const MyProfilePage: React.FC<IProps> = (props) => {
 
                                 <nav>
                                     <div className="nav nav-tabs nav-fill p-0 m-0 w-100" id="nav-tab" role="tablist">
-                                        <a className="nav-item nav-link active w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ویرایش پروفایل</a>
-                                        <a className="nav-item nav-link w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">دشبورد</a>
+                                        <a className="nav-item nav-link active w-50 pt-4 text-right" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ویرایش پروفایل</a>
+                                        <a className="nav-item nav-link w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">                           <div className="form-group">
+
+                                            <select className="form-control my-3 dashTab  " id="">
+                                                <option>دشبورد</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div></a>
                                     </div>
                                 </nav>
                                 <div className="tab-content py-3 px-sm-0 mt-5" id="nav-tabContent">

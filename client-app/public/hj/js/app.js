@@ -1,19 +1,19 @@
-var swiper = new Swiper(".swiper-container1", {
-  effect: "coverflow",
-  grabCursor: true,
-  centeredSlides: true,
-  slidesPerView: "auto",
-  coverflowEffect: {
-    rotate: 50,
-    stretch: 0,
-    depth: 100,
-    modifier: 1,
-    slideShadows: true,
-  },
-  pagination: {
-    el: ".swiper-pagination",
-  },
-});
+// var swiper = new Swiper(".swiper-container1", {
+//   effect: "coverflow",
+//   grabCursor: true,
+//   centeredSlides: true,
+//   slidesPerView: "auto",
+//   coverflowEffect: {
+//     rotate: 50,
+//     stretch: 0,
+//     depth: 100,
+//     modifier: 1,
+//     slideShadows: true,
+//   },
+//   pagination: {
+//     el: ".swiper-pagination",
+//   },
+// });
 
 //-----timer number----
 (function ($) {
@@ -279,34 +279,34 @@ $("#Pricerange-down").on("click", function () {
 //-----show password----
 
 //---pas1--
-function showpass1() {
-  var x = document.getElementById("password1");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
+// function showpass1() {
+//   var x = document.getElementById("password1");
+//   if (x.type === "password") {
+//     x.type = "text";
+//   } else {
+//     x.type = "password";
+//   }
+// }
 
 //- pass 2---
 
-function showpass2() {
-  var x = document.getElementById("password2");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
+// function showpass2() {
+//   var x = document.getElementById("password2");
+//   if (x.type === "password") {
+//     x.type = "text";
+//   } else {
+//     x.type = "password";
+//   }
+// }
 
 //- pass 2---
-function showpass3() {
-  var x = document.getElementById("password3");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
+// function showpass3() {
+//   var x = document.getElementById("password3");
+//   if (x.type === "password") {
+//     x.type = "text";
+//   } else {
+//     x.type = "password";
+//   }
+// }
 
 //----end show passw0rd--

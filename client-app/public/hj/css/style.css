@@ -686,7 +686,7 @@ body {
         border-top-left-radius: .25rem;
         border-top-right-radius: .25rem;
         color: #9BC93A;
-        font-size: 20px;
+        font-size: 20px !important;
     }
 
     .hj-form-profile {
@@ -841,11 +841,12 @@ body {
 
     .service-form {
         border: 2px solid #9e9797ab;
-        border-radius: 41px;
+        border-radius: 10px;
         height: 57px;
         background-color: white;
         color: #232020;
         padding-top: 5px;
+        outline: none;
         box-shadow: 1px 1px 9px #a2a1a180;
     }
 
@@ -863,10 +864,21 @@ body {
             transition: .3s;
         }
 
-    .hj-select {
+    /* .hj-select {
         display: none;
-    }
-
+    } */
+.dashTab{
+    border: 0px !important;
+    color: #9BC93A;
+    font-size: 20px;
+    text-align: center;
+    /* width: 100%; */
+    background: transparent;
+    outline: none;
+}
+.dashTab > option{
+  text-align: center !important;
+}
     .hj-select-block {
         display: block;
     }
@@ -2206,3 +2218,7 @@ body {
 }
 
 /*---end chat----*/
+.currency{
+    border: 0px ;
+    background: transparent;
+}

@@ -8,6 +8,7 @@ import SlidesStore from './slidesStore';
 import NewsStore from './newsStore';
 import ProfileStore from './profileStore'
 import PlaneStore from './PlanStore'
+import ServiceStore from './serviceStore'
 
 
 configure({ enforceActions: 'always' });
@@ -22,6 +23,7 @@ export class RootStore {
     newsStore: NewsStore;
     profileStore: ProfileStore;
     planStore: PlaneStore;
+    serviceStore: ServiceStore;
 
 
     constructor() {
@@ -34,6 +36,7 @@ export class RootStore {
         this.newsStore = new NewsStore(this);
         this.profileStore = new ProfileStore(this);
         this.planStore = new PlaneStore(this);
+        this.serviceStore = new ServiceStore(this);
 
     }
 }
