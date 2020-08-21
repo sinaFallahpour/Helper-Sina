@@ -196,6 +196,16 @@ namespace Helper.Data
         /// </summary>
         public DbSet<Helper.ViewModels.ProfileVM2> ProfileVM2 { get; set; }
 
+        /// <summary>
+        /// پنل و واحد پول
+        /// </summary>
+        public DbSet<Helper.ViewModels.AccountSettingsVM> AccountSettingsVM { get; set; }
+
+        /// <summary>
+        /// پنل و واحد پول
+        /// </summary>
+        public DbSet<Helper.ViewModels.ChangePasswordVM> ChangePasswordVM { get; set; }
+
 
 
 

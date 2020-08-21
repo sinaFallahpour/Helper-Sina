@@ -347,11 +347,9 @@ namespace Helper.Controllers
             return View(model);
         }
 
-
         #endregion
 
         #region logOut
-
         //LogOut
         [HttpGet]
         [AllowAnonymous]

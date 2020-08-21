@@ -40,7 +40,7 @@ namespace Helper.Controllers
 
         public IActionResult Index(string returnUrl)
         {
-            returnUrl = string.IsNullOrEmpty(returnUrl) ? "/Profile" : returnUrl;
+            returnUrl = string.IsNullOrEmpty(returnUrl) ? "/profiles" : returnUrl;
 
             if (_signInManager.IsSignedIn(User))
             {
@@ -60,7 +60,7 @@ namespace Helper.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
-            returnUrl = string.IsNullOrEmpty(returnUrl) ? "/Profile" : returnUrl;
+            returnUrl = string.IsNullOrEmpty(returnUrl) ? "/profiles" : returnUrl;
 
             if (_signInManager.IsSignedIn(User))
             {
@@ -82,7 +82,7 @@ namespace Helper.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginVm model)
         {
-            model.ReturnUrl = model.ReturnUrl ?? "/Profile";
+            model.ReturnUrl = model.ReturnUrl ?? "/profiles";
             var AdminReturnUrl = model.ReturnUrl ?? "/admin/admins/Profile";
             ViewBag.ActiveTab = "Login";
             if (ModelState.IsValid)
@@ -137,7 +137,7 @@ namespace Helper.Controllers
         [HttpPost]                      
         public async Task<ActionResult> Register(RegisterVm model)
         {
-            model.ReturnUrl = model.ReturnUrl ?? "/Profile";
+            model.ReturnUrl = model.ReturnUrl ?? "/profiles";
             ViewBag.ActiveTab = "Register";
             if (ModelState.IsValid)
             {

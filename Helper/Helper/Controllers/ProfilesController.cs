@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Helper.Data;
+using Helper.Extention;
 using Helper.Models;
 using Helper.ViewModels;
 using Helper.ViewModels.Api.Profiles.DTO;
@@ -137,7 +138,7 @@ namespace Helper.Controllers
                             return new JsonResult(new { Status = 0, Message = " ایمیل  موجود است" });
 
 
-
+                        userFromDb.Nickname = model.Nickname;
                         userFromDb.UserName = model.UserName;
                         userFromDb.Email = model.Email;
                         userFromDb.City = model.City;
@@ -170,6 +171,7 @@ namespace Helper.Controllers
 
                         var result = _context.SaveChanges();
 
+                        await HttpContext.RefreshLoginAsync();
                         TempData["Success"] = "ثبت موفقیت آمیز";
                         return View(model);
                         //return RedirectToAction(nameof(Index));
@@ -188,7 +190,7 @@ namespace Helper.Controllers
             }
             return View(model);
 
-         
+
         }
 
         #endregion
