@@ -5,12 +5,6 @@
     Layout = "~/Views/Shared/_landing.cshtml";
 
 
-    var tabCondition = string.IsNullOrEmpty(TempData["ActiveTab"] as string) || (!string.IsNullOrEmpty(TempData["ActiveTab"] as string) && TempData["ActiveTab"] as string == "Info");
-
-
-    var infoClassName = (string.IsNullOrEmpty(TempData["ActiveTab"] as string) || (!string.IsNullOrEmpty(TempData["ActiveTab"] as string) && TempData["ActiveTab"] as string == "Info")) ? "active" : "";
-    var accountClassName = (!string.IsNullOrEmpty(TempData["ActiveTab"] as string) && TempData["ActiveTab"] as string == "account") ? "active" : "";
-    var passClassName = (!string.IsNullOrEmpty(TempData["ActiveTab"] as string) && TempData["ActiveTab"] as string == "pass") ? "active" : "";
 
 }
 
@@ -20,6 +14,9 @@
 
 
 
+@section Styles{
+    <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
+}
 
 
 
@@ -66,24 +63,12 @@
                     <nav>
 
                         <div class="nav nav-tabs nav-fill p-0 m-0 w-100" id="nav-tab" role="tablist">
-                            @if (tabCondition)
-                            {
-                                <a class="nav-item nav-link w-25 active" id="nav-Personal-tab" data-toggle="tab" href="#nav-Personal" role="tab" aria-controls="nav-profile" aria-selected="false"> اطلاعات شخصی</a>
-                                <a class="nav-item nav-link w-25" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> حساب بانکی</a>
-                                <a class="nav-item nav-link  w-25" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="true"> رمز عبور</a>
-                            }
-                            else if ((!string.IsNullOrEmpty(TempData["ActiveTab"] as string) && TempData["ActiveTab"] as string == "account"))
-                            {
-                                <a class="nav-item nav-link w-25 " id="nav-Personal-tab" data-toggle="tab" href="#nav-Personal" role="tab" aria-controls="nav-profile" aria-selected="false"> اطلاعات شخصی</a>
-                                <a class="nav-item nav-link w-25 active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> حساب بانکی</a>
-                                <a class="nav-item nav-link  w-25" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="true"> رمز عبور</a>
-                            }
-                            else
-                            {
-                                <a class="nav-item nav-link w-25 " id="nav-Personal-tab" data-toggle="tab" href="#nav-Personal" role="tab" aria-controls="nav-profile" aria-selected="false"> اطلاعات شخصی</a>
-                                <a class="nav-item nav-link w-25 " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> حساب بانکی</a>
-                                <a class="nav-item nav-link  w-25 active" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="true"> رمز عبور</a>
-                            }
+
+
+                            <a class="nav-item nav-link w-25 active" id="nav-Personal-tab" data-toggle="tab" href="#nav-Personal" role="tab" aria-controls="nav-profile" aria-selected="false"> اطلاعات شخصی</a>
+                            <a class="nav-item nav-link w-25" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> حساب بانکی</a>
+                            <a class="nav-item nav-link  w-25" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="true"> رمز عبور</a>
+
 
 
                         </div>
@@ -92,49 +77,13 @@
                     <div class="tab-content py-3 px-sm-0 mt-5" id="nav-tabContent">
 
                         @*---------tab1--------------*@
-                        <div class="@infoClassName tab-pane fade show " id="nav-Personal" role="tabpanel" aria-labelledby="nav-Personal-tab">
-                            <form asp-action="ChangePeronalInfo">
+                        <div class=" tab-pane fade show active" id="nav-Personal" role="tabpanel" aria-labelledby="nav-Personal-tab">
+                            <form asp-action="ChangePeronalInfo"  id="chnageInfoSubmit" >
 
 
-
-
-
-                                <input asp-for="Id" type="hidden" />
+                                <input asp-for="Id" id="infoId" type="hidden" />
 
                                 <div class="row hj-form  mx-auto">
-                                    @if (!string.IsNullOrEmpty(TempData["InfoSuccess"] as string))
-                                    {
-                                        <div class="form-group w-100">
-
-                                            <div class="form-row">
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="alert  alert-success  text-right alert-dismissible fade show col-md-12" role="alert">
-                                                        <strong>  @TempData["InfoSuccess"]</strong>
-                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                            <span class="ml-4" aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-
-                                    @if (!string.IsNullOrEmpty(TempData["InfoError"] as string))
-                                    {
-                                        <div class="form-group w-100">
-
-                                            <div class="form-row">
-                                                <div class="col-md-12 mb-3">
-                                                    <div class="alert alert-warning  text-right alert-dismissible fade show col-md-12" role="alert">
-                                                        <strong>  @TempData["InfoError"] </strong>
-                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                            <span class="ml-4" aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
 
                                     <div class="form-group w-100">
                                         <label asp-for="UserName" class="text-right w-100 pr-3" for="name"> </label>
@@ -177,7 +126,7 @@
                                     </div>
 
                                     <div class="row w-100 mx-auto mt-4 pt-4">
-                                        <input type="submit" class="btn btn-success w-25 mx-auto Confirmation" value="ذخیره تنطیمات" />
+                                        <input type="submit" id="changeInfoSubmit" class="btn btn-success w-25 mx-auto Confirmation" value="ذخیره تنطیمات" />
                                     </div>
 
                                 </div>
@@ -187,14 +136,14 @@
 
 
                         @*-----------tab2------------------*@
-                        <div class="@accountClassName tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form asp-action="ChangeAccountBank">
+                        <div class=" tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <form asp-action="ChangeAccountBank" id="changeBankSubmit">
 
 
 
 
 
-                                <input asp-for="Id" type="hidden" />
+                                <input asp-for="Id" id="accountId" type="hidden" />
 
                                 <div class="row hj-form  mx-auto">
                                     @if (!string.IsNullOrEmpty(TempData["BankSuccess"] as string))
@@ -267,7 +216,7 @@
                                     </div>
 
                                     <div class="row w-100 mx-auto mt-4 pt-4">
-                                        <input type="submit" class="btn btn-success w-25 mx-auto Confirmation" value="ذخیره تنظیمات" />
+                                        <input type="submit" id="chnageBankSubmit" class="btn btn-success w-25 mx-auto Confirmation" value="ذخیره تنظیمات" />
                                     </div>
 
                                 </div>
@@ -276,51 +225,21 @@
 
                         </div>
                         @*--------tab3--------*@
-                        <div class=" @passClassName tab-pane fade " id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
-                            <form asp-action="ChangePassword">
+                        <div class=" tab-pane fade " id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
+                            <form asp-action="ChangePassword" id="changePassForm">
 
 
 
-                                <input asp-for="Id" type="hidden" />
+                                <input asp-for="Id" id="passId" type="hidden" />
                                 <div class="row w-100 mx-auto">
 
 
 
 
                                     <div class="col-md-8 col-12 mx-auto">
-                                        @if (!string.IsNullOrEmpty(TempData["PassSuccess"] as string))
-                                        {
-                                            <div class="form-group w-100">
+                                    
 
-                                                <div class="form-row">
-                                                    <div class="col-md-12 mb-3">
-                                                        <div class="alert  alert-success  text-right alert-dismissible fade show col-md-12" role="alert">
-                                                            <strong>  @TempData["PassSuccess"]</strong>
-                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                <span class="ml-4" aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-
-                                        @if (!string.IsNullOrEmpty(TempData["PassError"] as string))
-                                        {
-                                            <div class="form-group w-100">
-
-                                                <div class="form-row">
-                                                    <div class="col-md-12 mb-3">
-                                                        <div class="alert alert-warning  text-right alert-dismissible fade show col-md-12" role="alert">
-                                                            <strong>  @TempData["PassError"] </strong>
-                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                <span class="ml-4" aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
+                                     
                                         <div class="form-group w-100 position-relative">
                                             <label class="text-right w-100 pr-3" for="password1"> رمز عبور فعلی</label>
 
@@ -332,7 +251,7 @@
                                                    data-val-minlength="حداقل 6 کاراکتر وارد کنید"
                                                    data-val-minlength-min="6"
                                                    data-val-required="این فیلد الزامیست"
-                                                   id="OldPassword"
+                                                   id="password1"
                                                    maxlength="20"
                                                    name="OldPassword"
                                                    placeholder=" ***************">
@@ -379,8 +298,16 @@
                                             <span class="text-center d-block text-danger field-validation-valid" data-valmsg-for="NewPasswordConfirm" data-valmsg-replace="true"></span>
                                         </div>
                                         <div class="row w-100 mx-auto mt-4 pt-4">
-                                            <input type="submit" value="ذخیره تنظیمات" class="btn btn-success w-25 mx-auto Confirmation" />
+                                            <input type="submit" id="chnagePassSubmit" value="ذخیره تنظیمات" class="btn btn-success w-25 mx-auto Confirmation" />
                                         </div>
+
+
+                                        @*<div class="row w-100 mx-auto mt-4 pt-4">
+                                                <button className="btn btn-success w-25 mx-auto Confirmation" type="button" disabled>
+
+                                                </button>
+                                            </div>*@
+
                                     </div>
                                 </div>
                             </form>
@@ -400,4 +327,157 @@
 
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/swal-alert/sweetalert.min.js"></script>
+    <script src="~/SinaCustom/js/main.js"></script>
+
+
+    <script>
+
+     
+
+        
+        //chnage account settings
+        $("#chnageInfoSubmit").submit(function (e) {
+            e.preventDefault();
+            if (!$(this).valid()) {
+                return;
+            }
+            var username = $("#name").val();
+            var email = $("#email").val();
+            var phone= $("#number-Phone").val();
+            var siteLanguage = 1;
+            var Id = $("#infoId").val()
+
+            var data = {
+                "UserName": username,
+                "Email": email,
+                "Phone": phone,
+                "SiteLanguage": siteLanguage,
+
+                "Id": Id
+            };
+            $("#changeInfoSubmit").prop('disabled', true);
+            $.ajax({
+                method: "POST",
+                url: '/AccountSettings/ChangePeronalInfo',
+                data: data,
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                    if (r.status) {
+                        $("#changeInfoSubmit").prop('disabled', false);
+                        SuccessAlert(r.message)
+                    }
+                    else {
+                        $("#changeInfoSubmit").prop('disabled', false);
+                        FailedAlert(r.message);
+                    }
+                },
+                error: function () {
+                    $("#changeInfoSubmit").prop('disabled', false);
+                    FailedAlert("خطا رخ داده است.");
+                }
+            });
+        })
+
+
+
+
+
+
+
+        //chnage account settings
+        $("#changeBankSubmit").submit(function (e) {
+            e.preventDefault();
+            if (!$(this).valid()) {
+                return;
+            }
+            var ownername = $("#Owner-name").val();
+            var banckname = $("#Bank-name").val();
+            var cardNumber = $("#card-number").val();
+            var shabaNumber = $("#shaba-number").val();
+            var visalNumber = $("#visa-number").val();
+            var Id = $("#accountId").val()
+
+            var data = {
+                "BankName": ownername,
+                "AccountOwner": banckname,
+                "CardNumber": cardNumber,
+                "ShabaNumber": shabaNumber,
+                "VisaNumber": visalNumber,
+
+                "Id": Id
+            };
+            $("#chnageBankSubmit").prop('disabled', true);
+            $.ajax({
+                method: "POST",
+                url: '/AccountSettings/ChangeAccountBank',
+                data: data,
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                    if (r.status) {
+                        $("#chnageBankSubmit").prop('disabled', false);
+                        SuccessAlert(r.message)
+                    }
+                    else {
+                        $("#chnageBankSubmit").prop('disabled', false);
+                        FailedAlert(r.message);
+                    }
+                },
+                error: function () {
+                    $("#chnageBankSubmit").prop('disabled', false);
+                    FailedAlert("خطا رخ داده است.");
+                }
+            });
+        })
+
+
+
+
+
+
+        //change Password
+        $("#changePassForm").submit(function (e) {
+            e.preventDefault();
+            if (!$(this).valid()) {
+                return;
+            }
+            var oldPass = $("#password1").val();
+            var newPass = $("#password2").val();
+            var newPassConfiem = $("#password3").val();
+
+            var Id = $("#passId").val()
+            var data = {
+                "OldPassword": oldPass,
+                "NewPassword": newPass,
+                "NewPasswordConfirm": newPassConfiem,
+                "Id": Id
+            };
+            $("#chnagePassSubmit").prop('disabled', true);
+            $.ajax({
+                method: "POST",
+                url: '/AccountSettings/ChangePassword',
+                data: data,
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                    if (r.status) {
+                        $("#chnagePassSubmit").prop('disabled', false);
+                        SuccessAlert(r.message)
+                    }
+                    else {
+                        $("#chnagePassSubmit").prop('disabled', false);
+                        FailedAlert(r.message);
+                    }
+                },
+                error: function () {
+                    $("#chnagePassSubmit").prop('disabled', false);
+                    FailedAlert("خطا رخ داده است.");
+                }
+            });
+        })
+
+
+
+
+
+    </script>
 }
