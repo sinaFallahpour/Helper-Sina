@@ -34,8 +34,6 @@ import AccountSettingsPage from '../../features/AccountSettings/AccountSettingsP
 //Plan
 import PlanPage from '../../features/Plan/PlanPage'
 
-//Service
-import CreateServicePage from '../../features/service/CreateServicePage'
 
 
 import NotFound from './NotFound';
@@ -148,28 +146,10 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                 }} />
               }
               else {
-                return <PlanPage />
+                return <PlanPage  />
               }
             }}
           />
-
-
-          <Route
-            path='/CreateService/:id'
-            exact={true}
-            render={props => {
-              if (!isLoggedIn) {
-                return <Redirect to={{
-                  pathname: "/login",
-                  state: { from: props.location },
-                }} />
-              }
-              else {
-                return <CreateServicePage {...props} />
-              }
-            }}
-          />
-
 
           <Route component={NotFound} />
 

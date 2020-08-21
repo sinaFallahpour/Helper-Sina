@@ -3,51 +3,12 @@
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_landing.cshtml";
+
+    var tabCondition = string.IsNullOrEmpty(ViewBag.ActiveTab) || (!string.IsNullOrEmpty(ViewBag.ActiveTab) && ViewBag.ActiveTab == "Login");
+    var LoginActiveTabclassName = tabCondition ? "active" : "";
+    var RegisterActiveTabclassName = !tabCondition ? "active" : "";
+
 }
-
-
-@*<h1>Login</h1>
-
-    <h4>LoginVm</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Login">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="ReturnUrl" class="control-label"></label>
-                    <input asp-for="ReturnUrl" class="form-control" />
-                    <span asp-validation-for="ReturnUrl" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Username" class="control-label"></label>
-                    <input asp-for="Username" class="form-control" />
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
-                    </label>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
-
-
-
-
 
 
 @section Styles {
@@ -58,48 +19,95 @@
     <div class="row w-100 mx-auto">
         <div class="form-wrap">
             <div class="tabs">
-                <h3 class="signup-tab"><a class="active" href="#signup-tab-content">ثبت نام </a></h3>
-                <h3 class="login-tab"><a href="#login-tab-content">ورود</a></h3>
+                @if (tabCondition)
+                {
+                    <h3 class="signup-tab"><a href="#signup-tab-content">ثبت نام </a></h3>
+                    <h3 class="login-tab"><a class="active" href="#login-tab-content">ورود</a></h3>
+                }
+                else
+                {
+                    <h3 class="signup-tab"><a class="active" href="#signup-tab-content">ثبت نام </a></h3>
+                    <h3 class="login-tab"><a href="#login-tab-content">ورود</a></h3>
+                }
+
+
+
             </div><!--.tabs-->
 
             <div class="tabs-content mt-4">
 
-                <div id="signup-tab-content" class="active text-center">
+
+                <div id="signup-tab-content" class="@RegisterActiveTabclassName text-center">
 
                     <form asp-action="Register" class="ui error form signup-form">
-
-
-
-
-                        @if (!string.IsNullOrEmpty(ViewBag.Error))
+                        @if (!string.IsNullOrEmpty(ViewBag.RegisterError))
                         {
-                            <div className="alert alert-danger text-danger" role="alert">@ViewBag.Error</div>
+                            <div class="alert alert-warning" role="alert">
+                                @ViewBag.RegisterError
+                            </div>
                         }
 
+
                         <input type="hidden" name="Id" value="0" />
-
-                        <input asp-for="Username" class="input text-center  py-3 my-2 mx-auto d-block" id="user_name" autocomplete="off" placeholder="نام کاربری">
-                        <span asp-validation-for="Username" class="text-danger w-10 d-block"> </span>
+                        <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
 
 
+                        @*......._Username....... *@
 
-                        <input name="email" class="input text-center  py-3 my-2 mx-auto d-block" id="user_email" autocomplete="off" placeholder="ایمیل">
-                        <span class="text-danger w-10 d-block"> </span>
+                        <input placeholder="نام کاربری"
+                               class="input text-center  py-3 my-2 mx-auto d-block"
+                               type="text" data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
+                               data-val-maxlength-max="20" data-val-minlength="حداقل 3 کاراکتر وارد کنید"
+                               data-val-minlength-min="3" data-val-required="این فیلد الزامیست" id="zUsername"
+                               maxlength="20" name="_Username" value="">
+
+                        <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Username" data-valmsg-replace="true"></span>
 
 
-                        <input asp-for="Password" class="input text-center  py-3 my-2 mx-auto d-block" id="user_pass" autocomplete="off" placeholder="رمز عبور">
-                        <span asp-validation-for="Password" class="text-danger w-10 d-block"> </span>
+                        @*......._Email....... *@
+                        <input placeholder="ایمیل"
+                               class="input text-center  py-3 my-2 mx-auto d-block"
+                               type="email" data-val="true" data-val-email="به فرمت  ایمیل وارد کنید"
+                               data-val-maxlength="حداکثر 30 کاراکتر وارد کنید"
+                               data-val-maxlength-max="30" data-val-required="این فیلد الزامیست" id="zEmail"
+                               maxlength="30" name="_Email" value="">
+
+                        <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Email" data-valmsg-replace="true"></span>
 
 
-                        <br />
-                        <input type="checkbox" class="checkbox" id="rules">
-                        <label for="rules" class="pr-4 my-3 mr-2 rules"><a href="#">قوانین</a> را میپذیرم   </label>
+
+                        @*......._password....... *@
+                        <input placeholder="رمز عبور"
+                               class="input text-center  py-3 my-2 mx-auto d-block"
+                               type="password"
+                               data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
+                               data-val-maxlength-max="20" data-val-minlength="حداقل 6 کاراکتر وارد کنید"
+                               data-val-minlength-min="6" data-val-required="این فیلد الزامیست"
+                               id="zPassword" maxlength="20" name="_Password">
+
+                        <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Password" data-valmsg-replace="true"></span>
+
+
+                        <input class="checkbox"
+                               type="checkbox"
+                               data-val="true"
+                               data-val-required="این فیلد الزامیست"
+                               name="AcceptRules"
+                               id="AcceptRules"
+                               value="true">
+
+                        <label for="AcceptRules" class="pr-4 my-3 ">  قوانین را میپذیرم  </label>
+
+
+
+
                         <input type="submit" class="button" value="ثبت نام ">
-                    </form><!--.login-form-->
+                    </form>
+                    <!--.login-form-->
                     <div class="help-text">
-
-                        <p><a href="#">  قبلا ثبت نام کرده ام !</a></p>
-                    </div><!--.help-text-->
+                        <p><a href="/account/login">  قبلا ثبت نام کرده ام !</a></p>
+                    </div>
+                    <!--.help-text-->
                     <hr />
                     <div class="row w-100 mx-auto text-center">
                         <p class="w-100 text-center">می توانید از سرویس گوگل برای ثبت نام استفاده کنید </p>
@@ -113,8 +121,21 @@
                     </div>
                 </div><!--.signup-tab-content-->
 
-                <div id="login-tab-content">
+
+
+
+                <div id="login-tab-content" class="@LoginActiveTabclassName">
+
+
+
                     <form asp-action="Login" class="login-form text-center">
+                        @if (!string.IsNullOrEmpty(ViewBag.Error))
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                @ViewBag.Error
+                            </div>
+                        }
+
                         <input type="hidden" name="Id" value="0" />
                         <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -124,12 +145,13 @@
                         <input asp-for="Password" class="input text-center  py-3 my-2" id="user_pass" autocomplete="off" placeholder="رمز عبور">
                         <span asp-validation-for="Password" class="text-danger w-10 d-block"> </span>
 
-                        <input type="checkbox" name="RememberMe" class="checkbox" id="remember_me">
+                        <input asp-for="RememberMe" class="checkbox" id="remember_me">
 
                         <label for="remember_me" class="pr-4 my-3 "> مرا به خاطر بسپار</label>
 
                         <input type="submit" class="button" value="ورود">
-                    </form><!--.login-form-->
+                    </form>
+                    <!--.login-form-->
                     <div class="help-text mt-4">
                         <p><a href="#">رمز عبور را فراموش کردید ؟  </a></p>
                     </div><!--.help-text-->
@@ -139,6 +161,9 @@
     </div>
 </div>
 
+
+
+<!--.tabs-->
 @*-------*@
 
 

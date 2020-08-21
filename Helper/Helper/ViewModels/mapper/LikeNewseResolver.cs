@@ -27,12 +27,12 @@ namespace Helper.ViewModels.mapper
         public bool Resolve(TBL_NewsArticleVideo source, Newse destination, bool destMember, ResolutionContext context)
         {
 
-            var currentUsername = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
 
             //we shoud return bool  (not Task<bool>) becasue of this we use 'Resule' after SingleOrDefaultAsync
             var currentUser = _context.Users
-                .SingleOrDefaultAsync(x => x.UserName == currentUsername).Result;
+                .SingleOrDefaultAsync(x => x.Id == currentUserId).Result;
 
             if (currentUser == null)
                 return false;

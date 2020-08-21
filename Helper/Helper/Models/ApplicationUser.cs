@@ -81,48 +81,6 @@ namespace Helper.Models
 
 
 
-        ///// <summary>
-        /////نام بانک
-        ///// </summary>
-        //public string BankName { get; set; }
-
-
-        ///// <summary>
-        ///// نام صاحب حساب بانک
-        ///// </summary>
-        //public string AccountOwner { get; set; }
-
-
-        ///// <summary>
-        ///// شماره کارت
-        ///// </summary>
-        //public string CardNumber { get; set; }
-
-        ///// <summary>
-        ///// شماره شبا
-        ///// </summary>
-        //public string ShabaNumber { get; set; }
-
-
-        ///// <summary>
-        ///// شماره ویزا یا مسترکارد
-        ///// </summary>
-        //public string VisaNumber { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         /// <summary>
         /// این همان توکنی که در دیتا بیس ذخیره میکنیم

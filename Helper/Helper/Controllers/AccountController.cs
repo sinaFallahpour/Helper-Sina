@@ -68,7 +68,7 @@ namespace Helper.Controllers
                     return Redirect("/admin/admins/Profile");
                 return Redirect(returnUrl);
             }
-
+            ViewBag.ActiveTab = "Login";
             ViewBag.ReturnUrl = returnUrl;
             //return LocalRedirect(returnUrl);
             return View();
@@ -84,6 +84,7 @@ namespace Helper.Controllers
         {
             model.ReturnUrl = model.ReturnUrl ?? "/Profile";
             var AdminReturnUrl = model.ReturnUrl ?? "/admin/admins/Profile";
+            ViewBag.ActiveTab = "Login";
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(model.Username);
@@ -104,10 +105,12 @@ namespace Helper.Controllers
                 }
                 else
                 {
+
                     ViewBag.Error = "نام کاربری یا رمز عبور اشتباه است ";
                     return View(model);
                 }
             }
+
             var errors = new List<string>();
             foreach (var item in ModelState.Values)
             {
@@ -116,6 +119,7 @@ namespace Helper.Controllers
                     errors.Add(err.ErrorMessage);
                 }
             }
+            ModelState.AddModelError("", errors.First());
             return View(model);
         }
 
@@ -123,65 +127,88 @@ namespace Helper.Controllers
 
 
 
+
+
         #region  Register
 
+
         [AllowAnonymous]
-        [HttpPost("register")]
-        public async Task<ActionResult> Register(RegisterRequestVM model)
+        [ValidateAntiForgeryToken]
+        [HttpPost]                      
+        public async Task<ActionResult> Register(RegisterVm model)
         {
-            if (!ModelState.IsValid)
+            model.ReturnUrl = model.ReturnUrl ?? "/Profile";
+            ViewBag.ActiveTab = "Register";
+            if (ModelState.IsValid)
             {
-                var errors = new List<string>();
-                foreach (var item in ModelState.Values)
+                if (await _context.Users.Where(x => x.UserName == model._Username).AnyAsync())
                 {
-                    foreach (var err in item.Errors)
-                    {
-                        errors.Add(err.ErrorMessage);
-                    }
+                    ViewBag.RegisterError = "نام کاربری موجود است.";
+                    return View("Login");
                 }
-                return new JsonResult(new { Status = 0, Message = "bad request", Data = errors });
-            }
 
-            if (await _context.Users.Where(x => x.UserName == model.UserName).AnyAsync())
-                return new JsonResult(new { Status = 0, Message = "این نام کاربری موجود است" });
-
-            if (await _context.Users.Where(x => x.Email == model.Email).AnyAsync())
-                return new JsonResult(new { Status = 0, Message = "این ایمیل  موجود است" });
-
-
-
-            var SerialNumber = Guid.NewGuid().ToString().GetHash();
-
-
-            var user = new ApplicationUser
-            {
-                Email = model.Email,
-                UserName = model.UserName,
-                AcceptRules = model.AcceptRules,
-                SerialNumber = SerialNumber,
-                WorkExperience = new TBL_WorkExperience(),
-                EducationHistry = new TBL_EducationalHistory(),
-                BankInfo = new TBL_BankInfo(),
-            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(user, Static.USERROLE);
-
-                var userInfo = new UserVM
+                if (await _context.Users.Where(x => x.Email == model._Email).AnyAsync())
                 {
-                    Id = user.Id,
-                    Nickname = user.Nickname,
-                    //Token = JwtGenerator.CreateToken(user, PublicHelper.USERROLE),
-                    UserName = user.UserName,
-                    PhotoAddress = user.PhotoAddress,
-                    Email = user.Email
+                    ViewBag.RegisterError = " ایمیل موجود است.";
+                    return View("Login");
+                }
+                var user = new ApplicationUser
+                {
+                    Email = model._Email,
+                    NormalizedEmail = model._Email.Normalize(),
+                    UserName = model._Username,
+                    NormalizedUserName = model._Username.Normalize(),
+                    AcceptRules = model.AcceptRules,
+                    //SerialNumber = SerialNumber,
+                    WorkExperience = new TBL_WorkExperience(),
+                    EducationHistry = new TBL_EducationalHistory(),
+                    BankInfo = new TBL_BankInfo(),
                 };
-                return new JsonResult(new { Status = 1, Message = " ثبت نام موفقیت آمیز", Data = userInfo });
+                var result = await _userManager.CreateAsync(user, model._Password);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, Static.USERROLE);
+
+                    var loginResult = await _signInManager.PasswordSignInAsync(model._Username, model._Password, true, lockoutOnFailure: false);
+                    if (loginResult.Succeeded)
+                        return LocalRedirect(model.ReturnUrl);
+                    return LocalRedirect(model.ReturnUrl);
+                }
+                else
+                {
+                    if (result.Errors.Where(i => i.Code == "DuplicateUserName").Any())
+                    {
+                        ViewBag.RegisterError = string.Format("نام کاربری {0} از قبل ثبت شده است", model._Username);
+                        return View("Login");
+                    }
+                    if (result.Errors.Where(i => i.Code == "DuplicateEmail").Any())
+                    {
+                        ViewBag.RegisterError = string.Format(" ایمیل {0} از قبل ثبت شده است", model._Email);
+                        return View("Login");
+                    }
+                    ViewBag.RegisterError = "خطا در ثبت";
+                    return View("Login");
+                }
+
             }
-            return new JsonResult(new { Status = 0, Message = " خطا در ثبت" });
+
+
+            var errors = new List<string>();
+            foreach (var item in ModelState.Values)
+            {
+                foreach (var err in item.Errors)
+                {
+                    errors.Add(err.ErrorMessage);
+                }
+            }
+            ModelState.AddModelError("", errors.First());
+            return View("Login");
         }
+
+
+
+
 
         #endregion
 

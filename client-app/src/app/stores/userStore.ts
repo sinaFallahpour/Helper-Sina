@@ -17,13 +17,7 @@ export default class UserStore {
     return !!this.user;
   }
 
-  @action login = async (values: any, returnURL: string) => {
-    values.username = values.username2;
-    values.password = values.password2;
-
-    // values.username2
-    // values.password
-    // console.log(values)
+  @action login = async (values: IUserFormValues, returnURL: string) => {
     try {
       const res = await agent.User.login(values);
 
@@ -59,6 +53,7 @@ export default class UserStore {
         this.rootStore.commonStore.setToken(res.data.token, true);
         // window.location.href = returnURL ? returnURL : `/profile/${res.data.id}`;
         history.push(returnURL ? returnURL : `/profile/${res.data.id}`);
+
         return
       }
       throw res;

@@ -4,7 +4,6 @@ export interface IPlan {
     serviceCount: string;
     description: string;
     duration: string;
-    isSelected:boolean;
     planMonyUnitDTO: IPlanMonyUnitDTO[];
 
 }

@@ -82,37 +82,14 @@ namespace Helper.Controllers
 
 
 
-
-        //public IActionResult ToggleLike(int? ProductId, int? UserId)
-        //{
-        //    if (ProductId == null)
-        //        return new { Status = false, Message = "محصول یافت نشد." };
-
-        //    if (UserId == null)
-        //        return new { Status = false, Message = "برای لایک محصول ابتدا لاگین کنید." };
-
-        //    LikeManager LikeManager = new LikeManager();
-        //    ToggleLikeViewModel Res = LikeManager.ToggleLike((int)UserId, (int)ProductId);
-        //    if (Res == null)
-        //        return new { Status = false, Message = "خطا رخ داده است." };
-
-        //    return new { Status = true, LikeCount = Res.LikeCount, IsLiked = Res.IsLiked };
-
-        //}
-
-
-
-
-
-
-
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
-        public async Task<IActionResult> ToggleLike(int? newsID)
+        public  IActionResult ToggleLike(int? newsID)
         {
             var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            var userId = _context.Users.Where(c => c.Id == currentUserId).FirstOrDefault()?.Id;
+            var user = _context.Users.Where(c => c.Id == currentUserId).FirstOrDefault();
+            var userId = user.Id;
             if (string.IsNullOrEmpty(userId))
                 return new JsonResult(new { Status = false, Message = "برای لایک  ابتدا لاگین کنید." });
             if (newsID == null)
@@ -123,13 +100,12 @@ namespace Helper.Controllers
             //if (User.Identity.IsAuthenticated) {
             //    return new JsonResult(new { Status = 0, Message = "ابتدا وارد حساب خود شوید" });
             //}
-            var newsFromDb = await _context.TBL_NewsArticleVideo.FindAsync(newsID);
+            var newsFromDb = _context.TBL_NewsArticleVideo.Find(newsID);
             if (newsFromDb == null)
-            {
                 return new JsonResult(new { Status = false, Message = "این خبر یا مقاله موجود نیست" });
-            }
+            
             var IsLiked = false;
-            var oldLike = await _context.TBL_NewsLike.Where(c => c.UserId == userId && c.NewsId == newsFromDb.Id).FirstOrDefaultAsync();
+            var oldLike = _context.TBL_NewsLike.Where(c => c.UserId == userId && c.NewsId == newsFromDb.Id).FirstOrDefault();
             if (oldLike != null)
             {
                 _context.TBL_NewsLike.Remove(oldLike);
@@ -138,7 +114,6 @@ namespace Helper.Controllers
             }
             else
             {
-                IsLiked = true;
                 var newsLike = new TBL_NewsLike()
                 {
                     UserId = userId,
@@ -147,11 +122,12 @@ namespace Helper.Controllers
                 };
                 _context.TBL_NewsLike.Add(newsLike);
                 newsFromDb.LikesCount++;
+                IsLiked = true;
             }
 
             try
             {
-                await _context.SaveChangesAsync();
+                 _context.SaveChanges();
                 //return new { Status = true, LikeCount = Res.LikeCount, IsLiked = Res.IsLiked };
                 return new JsonResult(new { Status = true, LikeCount = newsFromDb.LikesCount, IsLiked = IsLiked });
             }

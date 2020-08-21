@@ -27,14 +27,17 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         @Html.ActionLink("خروج", "LogOut", "Account", new { Area = "", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) }, new { @class = "btn btn-link hj-index-login" })
-                        <a href="" class="btn btn-link hj-index-login"> پروفایل</a> 
+                        <a href="/profiles" class="btn btn-link hj-index-login"> پروفایل</a> 
                         
                         
                         
                         }
                                     else
                                     {
-                        <a href="@Url.Action("Login","Account")" class="btn btn-link hj-index-login"> ورود / ثبت نام</a>}
+                        <a href="@Url.Action("Login","Account")" class="btn btn-link hj-index-login"> ورود / ثبت نام</a>
+                        
+                        
+                        }
 
                 </div>
 

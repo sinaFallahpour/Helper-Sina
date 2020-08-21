@@ -55,17 +55,17 @@ const registervalidate = combineValidators({
 //login validate
 const loginvalidate = combineValidators({
 
-    password2: composeValidators(
+    password: composeValidators(
         isRequired({ message: 'پسورد الزامیست' }),
         hasLengthGreaterThan(5)({ message: "حداقل 6 کاراکتر" }),
         hasLengthLessThan(20)({ message: "حداکثر 20 کاراکتر وارد کنید" }),
-    )('password2'),
+    )('password'),
 
-    username2: composeValidators(
+    username: composeValidators(
         isRequired({ message: ' نام کاربری الزامیست ' }),
         hasLengthGreaterThan(3)({ message: "حداقل 4 کاراکتر وارد کنید" }),
         hasLengthLessThan(20)({ message: " حداکثر 20 کاراکتر وارد کنید " })
-    )('username2'),
+    )('username'),
 })
 
 const getReturnURL = (loc: any) => {
@@ -235,7 +235,9 @@ const Login = () => {
                                             <span className="text-center w-100">ثبت نام با گوگل</span>
                                         </a> </div>
                                 </div>
+
                                 :
+
                                 <div id="login-tab-content active">
                                     {/* <form className=" login-form text-center" action="" method="post"> */}
 
@@ -279,7 +281,7 @@ const Login = () => {
                                                     )}
 
                                                     <Field
-                                                        name='username2'
+                                                        name='username'
                                                         component={TextInput}
                                                         type="text"
                                                         id="user_name"
@@ -288,7 +290,7 @@ const Login = () => {
                                                     />
 
                                                     <Field
-                                                        name='password2'
+                                                        name='password'
                                                         type="password"
                                                         component={TextInput}
                                                         id="user_pass"
@@ -318,7 +320,7 @@ const Login = () => {
                                                         <br></br>
                                                     </div>
 
-                                                    {submitting  ?
+                                                    {submitting ?
                                                         <button className="button" type="button" disabled>
                                                             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                                             <span className="sr-only">Loading...</span>

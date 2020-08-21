@@ -40,7 +40,20 @@
                             </video>
                             <div class="card-body card-Index">
                                 <div class="row w-100 p-0 m-0 hj-option-card text-center">
-                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like">@item.LikesCount</span></div>
+                                    <div class="col-4 p-0 m-0" id="likeConta-@item.Id">
+                                        @if (item.isLiked)
+                                        {
+                                            <i onclick="toggleLike('#like-@item.Id',@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 fas"></i>
+
+                                        }
+                                        else
+                                        {
+                                            <i onclick="toggleLike('#like-@item.Id',@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 "></i>
+
+                                        }
+
+                                        <span class="hj-like" id="likeCount-@item.Id">@item.LikesCount</span>
+                                    </div>
                                     <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like">@item.CommentsCount</span></div>
                                     <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
                                 </div>
@@ -93,15 +106,15 @@
                             </video>
                             <div class="card-body card-Index">
                                 <div class="row w-100 p-0 m-0 hj-option-card text-center">
-                                    <div class="col-4 p-0 m-0">
+                                    <div class="col-4 p-0 m-0" id="likeConta-@item.Id">
                                         @if (item.isLiked)
                                         {
-                                            <i onclick="toggleLike('#like-'+@item.Id,@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 fas"></i>
+                                            <i onclick="toggleLike('#like-@item.Id',@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 fas"></i>
 
                                         }
                                         else
                                         {
-                                            <i onclick="toggleLike('#like-'+@item.Id,@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 "></i>
+                                            <i onclick="toggleLike('#like-@item.Id',@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 "></i>
 
                                         }
 
@@ -164,7 +177,18 @@
 
                             <div class="card-body card-Index">
                                 <div class="row w-100 p-0 m-0 hj-option-card text-center">
-                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like">@item.LikesCount</span></div>
+                                    <div class="col-4 p-0 m-0" id="likeConta-@item.Id">
+                                        @if (item.isLiked)
+                                        {
+                                            <i onclick="toggleLike('#like-@item.Id',@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 fas"></i>
+                                        }
+                                        else
+                                        {
+                                            <i onclick="toggleLike('#like-@item.Id',@item.Id)" id="like-@item.Id" class="far fa-heart pl-2 "></i>
+                                        }
+                                        <span class="hj-like" id="likeCount-@item.Id">@item.LikesCount</span>
+
+                                    </div>
                                     <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like">@item.CommentsCount</span></div>
                                     <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
                                 </div>
@@ -174,6 +198,11 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
+
             }
 
 
@@ -231,23 +260,21 @@
     <script src="~/lib/swal-alert/sweetalert.min.js"></script>
     <script>
 
-
+        //لایک یا دیسلایک خبر
         const toggleLike = (tagId, newsId) => {
-            //لایک یا دیسلایک محصول
-            //$(document).on("click", ".like-btn", function () {
+
             var UserId = $("#userId").val();
-
             var NewsId = newsId;
-            if (!UserId)
+            if (!UserId) {
                 FailedAlert("برای لایک کردن محصولات ابتدا لاگین کنید.");
-
+                return
+            }
             var data = {
-                //UserId: UserId,
                 "newsID": NewsId
-
             };
-            console.log(JSON.stringify(data))
-            //alert(data.newsID)
+            $(tagId).remove();
+            var el = `<i id="loading-${newsId}" class="fa fa-spinner fa-spin fa-2x fa-fw pl-2"></i>`
+            $(`#likeConta-${newsId}`).prepend(el)
             $.ajax({
                 method: "POST",
                 url: '/Newses/ToggleLike',
@@ -256,12 +283,14 @@
                 success: function (r) {
                     if (r.status) {
                         if (r.isLiked) {
-                            $(tagId).removeClass().addClass("far fa-heart pl-2 fas")
-                            //$(".like-btn").addClass("like");
+                            $(`#loading-${newsId}`).remove();
+                            var el2 = `<i onclick="toggleLike('${tagId}',${newsId})" id="like-${newsId}" class="far fa-heart pl-2 fas"></i>`
+                            $(`#likeConta-${newsId}`).prepend(el2)
                         }
                         else {
-                            $(tagId).removeClass().addClass("far fa-heart pl-2 ")
-                            $(".like-btn").removeClass("like");
+                            $(`#loading-${newsId}`).remove();
+                            var el2 = `<i onclick="toggleLike('${tagId}',${newsId})" id="like-${newsId}" class="far fa-heart pl-2 "></i>`
+                            $(`#likeConta-${newsId}`).prepend(el2)
                         }
                         var likeEl = `#likeCount-${newsId}`
                         $(likeEl).html(r.likeCount);
@@ -273,8 +302,6 @@
                     FailedAlert("خطا رخ داده است.");
                 }
             });
-
-            //})
 
         }
     </script>

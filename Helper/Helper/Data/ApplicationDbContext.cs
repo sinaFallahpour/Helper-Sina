@@ -186,6 +186,16 @@ namespace Helper.Data
         /// </summary>
         public DbSet<Helper.ViewModels.NewsesVM> NewsesVM { get; set; }
 
+        /// <summary>
+        /// پنل و واحد پول
+        /// </summary>
+        public DbSet<Helper.ViewModels.RegisterVm> RegisterVm { get; set; }
+
+        /// <summary>
+        /// پنل و واحد پول
+        /// </summary>
+        public DbSet<Helper.ViewModels.ProfileVM2> ProfileVM2 { get; set; }
+
 
 
 

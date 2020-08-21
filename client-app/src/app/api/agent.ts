@@ -1,52 +1,53 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from 'axios';
 
-import { history } from "../..";
-import { toast } from "react-toastify";
+import { history } from '../..';
+import { toast } from 'react-toastify';
 
-import { IUser, IUserFormValues } from "../models/user";
+import { IUser, IUserFormValues } from '../models/user';
 import {
   IProfile,
   IChangePersonalInfoRE,
   IChangeBankRE,
   IChangePasswordRQ,
   IChangePrsonalInfoRQ,
-  IChangeBankRQ,
-} from "../models/accountSettings";
+  IChangeBankRQ
+} from '../models/accountSettings';
 
-import { ISlide } from "../models/slide";
-import { IPlan } from "../models/Plan";
+import { ISlide } from '../models/slide';
+import { IPlan } from '../models/Plan';
 
-import { IResponse, IRespon } from "../models/reponse";
-import Cookies from "js-cookie";
-import { INews } from "../models/news";
-import { IProfileRE } from "../models/profile";
-import { IService, ISelectInfo } from "../models/service";
 
-import "react-toastify/dist/ReactToastify.css";
+import { IResponse, IRespon } from '../models/reponse';
+import Cookies from 'js-cookie'
+import { INews } from '../models/news';
+import { IProfileRE } from '../models/profile';
 
-axios.defaults.baseURL = "https://localhost:44340/api";
+import "react-toastify/dist/ReactToastify.css"
+
+axios.defaults.baseURL = 'https://localhost:44340/api';
 // axios.defaults.baseURL = 'https://helperadmin.niknet.co/api';
-// axios.defaults.baseURL = '/api';
 
 axios.interceptors.request.use(
-  (config) => {
-    let token: string | undefined = "";
-    const sesionValue = sessionStorage.getItem("jwt");
-    if (sesionValue) token = sesionValue;
-    else token = Cookies.get("jwt");
+  config => {
+    let token: string | undefined = '';
+    const sesionValue = sessionStorage.getItem('jwt');
+    if (sesionValue)
+      token = sesionValue;
+    else token = Cookies.get('jwt')
+
 
     // const token = window.localStorage.getItem('jwt');
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
   }
 );
 
-axios.interceptors.response.use(undefined, (error) => {
-  if (error.message === "Network Error" && !error.response) {
-    toast.error("خطایی رخ داده!");
+axios.interceptors.response.use(undefined, error => {
+  if (error.message === 'Network Error' && !error.response) {
+    toast.error('خطایی رخ داده!');
   }
   const { status, data, config } = error.response;
   // if (status === 404) {
@@ -54,17 +55,17 @@ axios.interceptors.response.use(undefined, (error) => {
   // }
   if (
     status === 400 &&
-    config.method === "get" &&
-    data.errors.hasOwnProperty("id")
+    config.method === 'get' &&
+    data.errors.hasOwnProperty('id')
   ) {
-    history.push("/notfound");
+    history.push('/notfound');
   }
   if (status === 401) {
-    toast.error("  عدم دسترسي . لطفا وارد سايت شويد!");
+    toast.error('  عدم دسترسي . لطفا وارد سايت شويد!');
   }
   if (status === 500) {
-    console.log(error);
-    toast.error("خطایی رخ داده!");
+    console.log(error)
+    toast.error('خطایی رخ داده!');
   }
   throw error.response;
 });
@@ -77,24 +78,38 @@ const responseBody = (response: AxiosResponse) => response.data;
 //   );
 
 const requests = {
-  get: (url: string) => axios.get(url).then(responseBody),
-  post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
-  put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
-  del: (url: string) => axios.delete(url).then(responseBody),
+  get: (url: string) =>
+    axios
+      .get(url)
+      .then(responseBody),
+  post: (url: string, body: {}) =>
+    axios
+      .post(url, body)
+      .then(responseBody),
+  put: (url: string, body: {}) =>
+    axios
+      .put(url, body)
+      .then(responseBody),
+  del: (url: string) =>
+    axios
+      .delete(url)
+      .then(responseBody),
   postForm: (url: string, file: Blob) => {
     let formData = new FormData();
-    formData.append("File", file);
+    formData.append('File', file);
     return axios
       .post(url, formData, {
-        headers: { "Content-type": "multipart/form-data" },
+        headers: { 'Content-type': 'multipart/form-data' }
       })
       .then(responseBody);
-  },
+  }
 };
 
+
+
+
 const User = {
-  current: (): Promise<IResponse<IUser>> =>
-    requests.get("/account/currentUser"),
+  current: (): Promise<IResponse<IUser>> => requests.get('/account/currentUser'),
   login: (user: IUserFormValues): Promise<IResponse<IUser>> =>
     requests.post(`/account/login`, user),
   register: (user: IUserFormValues): Promise<IResponse<IUser>> =>
@@ -105,66 +120,38 @@ const AccountSettings = {
   get: (Id: string): Promise<IResponse<IProfile>> =>
     requests.get(`/AccountSettings/Profile?Id=${Id}`),
 
-  changePassword: (
-    Id: string,
-    changePassModel: IChangePasswordRQ
-  ): Promise<IResponse<IUser>> =>
-    requests.put(`/AccountSettings/ChangePassword?Id=${Id}`, {
-      ...changePassModel,
-    }),
+  changePassword: (Id: string, changePassModel: IChangePasswordRQ): Promise<IResponse<IUser>> =>
+    requests.put(`/AccountSettings/ChangePassword?Id=${Id}`, { ...changePassModel }),
 
-  changePeronalInfo: (
-    Id: string,
-    changePersonalInfoModel: IChangePrsonalInfoRQ
-  ): Promise<IResponse<IChangePersonalInfoRE>> =>
-    requests.put(
-      `/AccountSettings/ChangePeronalInfo?Id=${Id}`,
-      changePersonalInfoModel
-    ),
+  changePeronalInfo: (Id: string, changePersonalInfoModel: IChangePrsonalInfoRQ): Promise<IResponse<IChangePersonalInfoRE>> =>
+    requests.put(`/AccountSettings/ChangePeronalInfo?Id=${Id}`, changePersonalInfoModel),
 
-  changeAccountBank: (
-    Id: string,
-    changeBankModel: IChangeBankRQ
-  ): Promise<IResponse<IChangeBankRE>> =>
-    requests.put(
-      `/AccountSettings/ChangeAccountBank?Id=${Id}`,
-      changeBankModel
-    ),
+  changeAccountBank: (Id: string, changeBankModel: IChangeBankRQ): Promise<IResponse<IChangeBankRE>> =>
+    requests.put(`/AccountSettings/ChangeAccountBank?Id=${Id}`, changeBankModel),
 
   // updateProfile: (profile: Partial<IProfile>) =>
   //   requests.put(`/AccountSettings`, profile),
 };
 
+
+
 const Profiles = {
   get: (Id: string): Promise<IResponse<IProfileRE>> =>
     requests.get(`/Profile/Profile?Id=${Id}`),
 
-  updateProfile: (
-    Id: string,
-    model: IProfileRE
-  ): Promise<IResponse<IProfileRE>> =>
+  updateProfile: (Id: string, model: IProfileRE): Promise<IResponse<IProfileRE>> =>
     requests.put(`/Profile/UpdateProfile?Id=${Id}`, model),
 };
 
+
 const Planses = {
-  list: (): Promise<IResponse<IPlan[]>> => requests.get(`/Plans/List`),
-};
-
-//service
-const Services = {
-  Create: (model: IService): Promise<IRespon> =>
-    requests.post(`/Services/Create`, model),
-
-  hasAcceptedPlan: (): Promise<IRespon> =>
-    requests.get(`/Services/HasAcceptedPlan`),
-
-  getServiceSelect: (): Promise<IResponse<ISelectInfo>> =>
-    requests.get(`/Services/getServiceSelect`),
+  list: (): Promise<IResponse<IPlan[]>> =>
+    requests.get(`/Plans/List`),
 };
 
 const Slides = {
   list: (slideType: number): Promise<IResponse<ISlide[]>> =>
-    requests.get(`/Slides/list?model=${slideType}`),
+    requests.get(`/Slides/list?model=${slideType}`)
 };
 
 const Newses = {
@@ -172,7 +159,7 @@ const Newses = {
     requests.get(`/Newses/list?newsType=${newsType}`),
 
   Like: (newsId: string): Promise<IRespon> =>
-    requests.get(`/Newses/LikeNews?newsId=${newsId}`),
+    requests.get(`/Newses/LikeNews?newsId=${newsId}`)
 };
 
 const AboutUs = {
@@ -183,6 +170,7 @@ const ContactUs = {
   contactUs: () => requests.get(`/Home/ContactUs`),
 };
 
+
 export default {
   User,
   AccountSettings,
@@ -191,6 +179,5 @@ export default {
   AboutUs,
   ContactUs,
   Slides,
-  Newses,
-  Services
+  Newses
 };

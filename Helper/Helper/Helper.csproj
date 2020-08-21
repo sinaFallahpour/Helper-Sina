@@ -7,13 +7,21 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Admin\Data\**" />
+    <Compile Remove="Controllers\Api\**" />
     <Compile Remove="Models\ViewModels\**" />
     <Content Remove="Areas\Admin\Data\**" />
+    <Content Remove="Controllers\Api\**" />
     <Content Remove="Models\ViewModels\**" />
     <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Controllers\Api\**" />
     <EmbeddedResource Remove="Models\ViewModels\**" />
     <None Remove="Areas\Admin\Data\**" />
+    <None Remove="Controllers\Api\**" />
     <None Remove="Models\ViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\ProfileVM.cs" />
   </ItemGroup>
 
 
