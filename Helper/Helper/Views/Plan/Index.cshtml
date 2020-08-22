@@ -1,0 +1,320 @@
+﻿@model IEnumerable<Helper.ViewModels.PlanVM>
+@using Helper.Models.Utilities
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_landing.cshtml";
+}
+
+@*<h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Plan)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MonyUnit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MonyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Plan.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MonyUnit.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MonyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsEnabled)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row mt-md-5 pt-md-5">
+        <div class="col-md-5 col-12 ml-lg-5 order-md-0 order-1 hj-intro-h">
+            <div class="row mx-auto">
+                <span class="text-justify size-33">
+                    <b>
+                        ایجاد خدمت
+                    </b>
+                </span>
+            </div>
+            <div class="row w-100 mx-auto pt-3 pt-md-2">
+                <img src="~/hj/img/border-bottom.png" class="img-fluid" />
+            </div>
+            <div class="row mt-3 mx-auto">
+                <span class="text-justify hj-intro-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span>
+            </div>
+
+        </div>
+        <div class="col-md-6 col-12 mr-lg-4 order-md-1 order-0">
+            <img src="~/hj/img/Group 2678.svg" class="img-fluid" alt="Responsive image">
+        </div>
+
+    </div>
+    @*...................end intro.....................*@
+</div>
+@*-----card-----*@
+<div class="container p-0 mt-3">
+    <div class="row w-100 mx-auto">
+
+
+
+        @foreach (var item in Model)
+        {
+            if (item.IsFree)
+            {
+                <div class="col-lg-3 col-md-6 col-12 py-3">
+                    <div class="card card1">
+                        <div class="row mx-auto w-100 pr-3 pt-2  pt-3">
+
+                            <h4 class="text-right">
+                                @item.Name
+                            </h4>
+
+                        </div>
+                        <div class="row w-100 mx-auto pt-3 pt-md-2 text-right">
+                            <img src="~/hj/img/border-bottom.png" class="img-fluid w-75 pr-3" />
+                        </div>
+                        <div class="card-body">
+
+                            <p class="card-text text-justify" style="height:200px">@item.Description.GetSummary(190) </p>
+                            <h4 class=" card-title text-center hj-text-service py-3">
+                                <span class="price-@item.Id">
+                                    @item?.PlanMonyUnits.First()?.Price.ToString().GetPriceFormat()
+                                </span>
+                                <br />
+
+                                <br />
+                                <div class="row w-75 mx-auto text-center">
+                                    <span class="size-15 mx-auto">
+                                        <select class="form-control text-left currency" data-id="@item.Id">
+                                            @foreach (var item2 in item.PlanMonyUnits)
+                                            {
+                                                <option value="@item2.Price">
+                                                    @item2.MonyName
+                                                </option>
+                                            }
+                                        </select>
+                                    </span>
+                                </div>
+
+                            </h4>
+                            @if (item.IsSelected)
+                            {
+                                <button type="button" class="btn-card3 btn btn-helper w-75 mx-auto d-block py-2"> انتخاب شده</button>
+                            }
+                            else
+                            {
+                                <button type="button" class=" btn btn-helper w-75 mx-auto d-block py-2"> انتخاب </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+
+                <div class="col-lg-3 col-md-6 col-12 py-3">
+                    <div class="card card4">
+                        <div class="row mx-auto w-100 pr-3 pt-2  pt-3">
+
+                            <h4 class="text-right">
+                                @item.Name
+                            </h4>
+
+                        </div>
+                        <div class="row w-100 mx-auto pt-3 pt-md-2 text-right">
+                            <img src="~/hj/img/border-bottom.png" class="img-fluid w-75 pr-3" />
+                        </div>
+                        <div class="card-body">
+
+                            <p class="card-text text-justify" style="height:200px">@item.Description.GetSummary(190) </p>
+                            <h4 class=" card-title text-center hj-text-service py-3 text-dark">
+                                @*150.000<br /><span class="size-15">ریال</span>*@
+                                <span class="price-@item.Id">
+                                    @item?.PlanMonyUnits.First()?.Price.ToString().GetPriceFormat()
+                                </span>
+
+                                <br />
+
+                                <br />
+                                <div class="row w-75 mx-auto text-center">
+                                    <span class="size-15 mx-auto">
+                                        <select class="form-control text-left currency  " data-id="@item.Id">
+                                            @foreach (var item2 in item.PlanMonyUnits)
+                                            {
+                                                <option value="@item2.Price">
+                                                    @item2.MonyName
+                                                </option>
+                                            }
+                                        </select>
+                                    </span>
+                                </div>
+
+                            </h4>
+                            @if (item.IsSelected)
+                            {
+                                <button  type="button" class="btn-card3 btn btn-helper w-75 mx-auto d-block py-2"> انتخاب شده</button>
+                            }
+                            else
+                            {
+                                <button  type="button" class=" btn btn-helper w-75 mx-auto d-block py-2 bg-dark"> انتخاب </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+        }
+        <div class="col-lg-3 col-md-6 col-12 py-3">
+            <div class="card card1">
+                <div class="row mx-auto w-100 pr-3 pt-2  pt-3">
+
+                    <h4 class="text-right">
+
+                        ایجاد خدمت
+
+                    </h4>
+
+                </div>
+                <div class="row w-100 mx-auto pt-3 pt-md-2 text-right">
+                    <img src="~/hj/img/border-bottom.png" class="img-fluid w-75 pr-3" />
+                </div>
+                <div class="card-body">
+
+                    <p class="card-text text-justify">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه </p>
+                    <h4 class="card-title text-center hj-text-service py-3">150.000<br /><span class="size-15">ریال</span> </h4>
+                    <a href="#" class="btn btn-helper w-75 mx-auto d-block py-2"> نوع دیفالت</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12 py-3">
+            <div class="card card4">
+                <div class="row mx-auto w-100 pr-3 pt-2  pt-3">
+
+                    <h4 class="text-right">
+
+                        ایجاد خدمت
+
+                    </h4>
+
+                </div>
+                <div class="row w-100 mx-auto pt-3 pt-md-2 text-right">
+                    <img src="~/hj/img/border-bottom.png" class="img-fluid w-75 pr-3" />
+                </div>
+                <div class="card-body">
+
+                    <p class="card-text text-justify">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه </p>
+                    <h4 class="card-title text-center hj-text-service py-3 text-dark">150.000<br /><span class="size-15">ریال</span> </h4>
+                    <a href="#" class="btn btn-helper w-75 mx-auto d-block py-2 bg-dark"> نوع دیفالت</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12 py-3">
+            <div class="card card3">
+                <div class="row mx-auto w-100 pr-3 pt-2  pt-3">
+
+                    <h4 class="text-right text-card3">
+
+                        ایجاد خدمت
+
+                    </h4>
+
+                </div>
+                <div class="row w-100 mx-auto pt-3 pt-md-2 text-right">
+                    <img src="~/hj/img/border-bottom.png" class="img-fluid w-75 pr-3" />
+                </div>
+                <div class="card-body">
+
+                    <p class="card-text text-justify text-card3">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه </p>
+                    <h4 class="card-title text-center hj-text-service py-3 text-card3">150.000<br /><span class="size-15">ریال</span> </h4>
+                    <a href="#" class="btn btn-helper btn-card3 w-75 mx-auto d-block py-2"> نوع دیفالت</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12 py-3">
+            <div class="card card4">
+                <div class="row mx-auto w-100 pr-3 pt-2  pt-3">
+
+                    <h4 class="text-right">
+
+                        ایجاد خدمت
+
+                    </h4>
+
+                </div>
+                <div class="row w-100 mx-auto pt-3 pt-md-2 text-right">
+                    <img src="~/hj/img/border-bottom.png" class="img-fluid w-75 pr-3" />
+                </div>
+                <div class="card-body">
+
+                    <p class="card-text text-justify">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه </p>
+                    <h4 class="card-title text-center hj-text-service py-3 text-dark">150.000<br /><span class="size-15">ریال</span> </h4>
+                    <a href="#" class="btn btn-helper w-75 mx-auto d-block py-2 bg-dark"> نوع دیفالت</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    <script src="~/SinaCustom/js/main.js"></script>
+    <script>
+
+
+        $(document).on('change', '.currency', function () {
+            id = $(this).data('id')
+            price = $(this).val()
+            $('.price-' + id).html(getPriceFormat(price))
+        })
+
+
+
+    </script>
+
+}

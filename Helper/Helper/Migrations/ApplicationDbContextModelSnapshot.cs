@@ -63,6 +63,9 @@ namespace Helper.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsUsedFree")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LanguageKnowing")
                         .HasColumnType("nvarchar(600)")
                         .HasMaxLength(600);
@@ -107,6 +110,15 @@ namespace Helper.Migrations
 
                     b.Property<string>("PhotoAddress")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlanCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PlanExpDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PlanId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("RegistrationDateTime")
                         .HasColumnType("datetime2");
@@ -399,6 +411,9 @@ namespace Helper.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsFree")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -418,19 +433,31 @@ namespace Helper.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CommentCount")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAgreement")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSendByEmail")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSendByNOtification")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSendBySms")
                         .HasColumnType("bit");
 
                     b.Property<int>("LikeCount")
@@ -442,8 +469,11 @@ namespace Helper.Migrations
                     b.Property<int>("MinpRice")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("MonyUnitId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<int>("SeenCount")
                         .HasColumnType("int");
@@ -457,38 +487,23 @@ namespace Helper.Migrations
                     b.Property<string>("Skills")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("MonyUnitId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("TBL_Service");
-                });
-
-            modelBuilder.Entity("Helper.Models.Entities.TBL_ServiceLevel2", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MonthCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TBL_ServiceLevel2");
                 });
 
             modelBuilder.Entity("Helper.Models.Entities.TBL_Setting", b =>
@@ -518,7 +533,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 14, 15, 39, 2, 48, DateTimeKind.Local).AddTicks(3918),
+                            CreatedAt = new DateTime(2020, 8, 22, 11, 12, 58, 314, DateTimeKind.Local).AddTicks(5151),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -526,7 +541,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 14, 15, 39, 2, 52, DateTimeKind.Local).AddTicks(2622),
+                            CreatedAt = new DateTime(2020, 8, 22, 11, 12, 58, 317, DateTimeKind.Local).AddTicks(1834),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -534,7 +549,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2020, 8, 14, 15, 39, 2, 52, DateTimeKind.Local).AddTicks(2682),
+                            CreatedAt = new DateTime(2020, 8, 22, 11, 12, 58, 317, DateTimeKind.Local).AddTicks(1889),
                             Key = "SiteRules",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -870,6 +885,18 @@ namespace Helper.Migrations
 
             modelBuilder.Entity("Helper.Models.Entities.TBL_Service", b =>
                 {
+                    b.HasOne("Helper.Models.Entities.TBL_Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("Helper.Models.Entities.TBL_City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId");
+
+                    b.HasOne("Helper.Models.Entities.TBL_MonyUnit", "MonyUnit")
+                        .WithMany()
+                        .HasForeignKey("MonyUnitId");
+
                     b.HasOne("Helper.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");

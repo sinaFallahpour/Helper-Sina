@@ -37,6 +37,16 @@ namespace Helper.ViewModels.mapper
             //  ;
 
 
+
+
+            //بایند 2 طرفه
+            CreateMap<TBL_Plans, PlanVM>()
+                  .ForMember(d => d.PlanMonyUnits, o => o.MapFrom(s => s.PlansMonyUnit))
+                   .ForMember(d => d.IsSelected, o => o.MapFrom<PlanResolver>());
+
+
+            CreateMap<TBL_Plane_MonyUnit, MonyUnitTVM>();
+
         }
     }
 }

@@ -1,0 +1,447 @@
+﻿@model Helper.ViewModels.CreateServiceVM
+
+@{
+    ViewData["Title"] = "CreateService";
+    Layout = "~/Views/Shared/_landing.cshtml";
+
+
+}
+
+@*<h1>CreateService</h1>
+
+    <h4>CreateServiceVM</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateService">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreateDate" class="control-label"></label>
+                    <input asp-for="CreateDate" class="form-control" />
+                    <span asp-validation-for="CreateDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Skills" class="control-label"></label>
+                    <input asp-for="Skills" class="form-control" />
+                    <span asp-validation-for="Skills" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ServiceType" class="control-label"></label>
+                    <select asp-for="ServiceType" class="form-control"></select>
+                    <span asp-validation-for="ServiceType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SendType" class="control-label"></label>
+                    <select asp-for="SendType" class="form-control"></select>
+                    <span asp-validation-for="SendType" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsAgreement" /> @Html.DisplayNameFor(model => model.IsAgreement)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LikeCount" class="control-label"></label>
+                    <input asp-for="LikeCount" class="form-control" />
+                    <span asp-validation-for="LikeCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CommentCount" class="control-label"></label>
+                    <input asp-for="CommentCount" class="form-control" />
+                    <span asp-validation-for="CommentCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SeenCount" class="control-label"></label>
+                    <input asp-for="SeenCount" class="form-control" />
+                    <span asp-validation-for="SeenCount" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsSendByEmail" /> @Html.DisplayNameFor(model => model.IsSendByEmail)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsSendByNOtification" /> @Html.DisplayNameFor(model => model.IsSendByNOtification)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsSendBySms" /> @Html.DisplayNameFor(model => model.IsSendBySms)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MinpRice" class="control-label"></label>
+                    <input asp-for="MinpRice" class="form-control" />
+                    <span asp-validation-for="MinpRice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaxPrice" class="control-label"></label>
+                    <input asp-for="MaxPrice" class="form-control" />
+                    <span asp-validation-for="MaxPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                        <label asp-for="UserId" class="control-label"></label>
+                        <input asp-for="UserId" class="form-control" />
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <input asp-for="CategoryId" class="form-control" />
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MonyUnitId" class="control-label"></label>
+                    <input asp-for="MonyUnitId" class="form-control" />
+                    <span asp-validation-for="MonyUnitId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+
+
+
+
+
+
+
+
+@section Styles{
+    <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
+    <link href="~/lib/jquery.tagsinput/jquery.tagsinput.min.css" rel="stylesheet" />
+
+
+}
+
+
+
+
+<div class="container">
+    <div class="row mt-md-5 pt-md-5">
+        <div class="col-md-5 col-12 ml-lg-5 order-md-0 order-1 hj-intro-h">
+            <div class="row mx-auto">
+                <span class="text-justify size-33">
+                    <b>
+                        ایجاد خدمت
+                    </b>
+                </span>
+            </div>
+            <div class="row w-100 mx-auto pt-3 pt-md-2">
+                <img src="~/hj/img/border-bottom.png" class="img-fluid" />
+            </div>
+            <div class="row mt-3 mx-auto">
+                <span class="text-justify hj-intro-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span>
+            </div>
+
+        </div>
+        <div class="col-md-6 col-12 mr-lg-4 order-md-1 order-0">
+            <img src="~/hj/img/Group 2665.svg" class="img-fluid" alt="Responsive image">
+        </div>
+
+    </div>
+    @*...................end intro.....................*@
+</div>
+
+
+@*-----------------form-----------------*@
+<div class="container mx-auto">
+    <!-- Tabs -->
+    <section id="tabs">
+        <div class="container p-0 m-0">
+
+            <div class="row w-100 mx-auto">
+                <div class="col-xs-12 p-0 m-0 ">
+
+                    <nav>
+
+                        <div class="nav nav-tabs nav-fill p-0 m-0 w-100" id="nav-tab" role="tablist">
+
+                            <a class="nav-item nav-link active w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">درخواست خدمت</a>
+                            <a class="nav-item nav-link w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">ارائه خدمت</a>
+
+                        </div>
+
+                    </nav>
+                    <div class="tab-content py-3 px-sm-0 mt-5" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+
+                        </div>
+                        <form asp-action="CreateService" id="donnerForm">
+
+
+                            <input type="hidden" name="Id" id="Id" value="0" />
+
+                            -@*------dashbord-----*@
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <div class="row w-100 mx-auto my-3 text-center service-form">
+                                    <input asp-for="Title" id="Title" placeholder='عنوان خدمت' class="text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                    <span asp-validation-for="Title" class="text-center w-100 text-danger"> </span>
+                                    @*<h5 class="text-center w-100 pt-2"> تایتل خدمت</h5>*@
+                                </div>
+                                <div class="row w-100 mx-auto my-3  text-center service-form service-form-detalis">
+
+                                    <textarea asp-for="Description" id="Description" placeholder='توضیحات خدمت' class="text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
+                                </textarea>
+                                    <span asp-validation-for="Description" class="text-center w-100 text-danger"> </span>
+
+                                    @*<input class="form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput"/>*@
+                                    @*<h6 class="text-center w-100 pt-2 pb-5 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>*@
+
+
+                                </div>
+
+                                @*<div class="col-md-6 p-0 m-0 mb-4">
+                                        <label asp-for="MarriedType" class="control-label"></label>
+                                        <select asp-for="MarriedType" placeholder="جنسیت" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserMarriedType>()"></select>
+                                        <span asp-validation-for="MarriedType" class="text-center d-block text-danger"></span>
+
+                                    </div>*@
+
+
+
+
+
+
+
+                                @*<div class="form-group">
+                                        @Html.LabelFor(model => model.PostCategoryID, "کاربر ارشد", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("AdminID", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.AdminID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+
+
+
+
+                                <div className="form-group">
+                                    <h5 class="text-lg-right"> دسته بندی</h5>
+                                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control my-3 service-form" })
+                                    <span asp-validation-for="CategoryId" class="text-center w-100 text-danger"></span>
+                                </div>
+
+
+
+
+                                <div className="form-group">
+                                    <h5 class="text-right"> شهر </h5>
+                                    @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control my-3 service-form" })
+                                    <span asp-validation-for="CategoryId" class="text-center w-100 text-danger"></span>
+                                </div>
+
+
+                                <div class="row w-100 mx-auto my-3 text-center service-form">
+                                    <input asp-for="Skills" id="Skills" placeholder=' مهارت های مورد نظر' class="text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                    <span asp-validation-for="Skills" class="text-center w-100 text-danger"> </span>
+                                </div>
+
+
+
+
+                                <div class="row w-100 mx-auto hj-select">
+                                    <div class="col-sm-2 col-12 py-2">
+                                        <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                    </div>
+                                    <div class="col-sm-2 col-12  py-2">
+                                        <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                    </div>
+
+                                </div>
+
+                                <div class="row w-100 mx-auto">
+                                    <div class="col-lg-10 col-md-8 col-6">
+                                        <h5 class="text-right Pricerange  ">بازه قیمت</h5>
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 col-6 text-news">
+                                        @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "form-control text-left currency" })
+                                        <span asp-validation-for="MonyUnitId" class="text-center w-100 text-danger"></span>
+                                        @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
+                                    </div>
+                                </div>
+                                <div class="row w-100 mx-auto  pb-5 active">
+                                    <div class="col-sm-6 py-2">
+                                        <input asp-for="MinpRice" min="0" class="form-control text-center hj-input-service py-3" placeholder="از قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <span asp-validation-for="MinpRice" class="text-center  text-danger d-block"></span>
+                                    </div>
+                                    <div class="col-sm-6 py-2">
+                                        <input asp-for="MaxPrice" min="0" class="form-control text-center hj-input-service py-3 " placeholder="تا قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <span asp-validation-for="MaxPrice" class="text-center  text-danger d-block"></span>
+                                    </div>
+                                </div>
+                                <div class="row w-100 mx-auto ">
+                                    <div class="col-12 text-right">
+                                        @*<input asp-for="IsAgreement" />*@
+                                        @*<input asp-for="IsSendByEmail" />
+                                            <input asp-for="IsSendByNOtification" />*@
+
+
+
+                                        <input class="checkbox-service" type="checkbox" data-val="true" data-val-required="The IsAgreement field is required." id="IsAgreement" name="IsAgreement" value="true">
+
+                                        @*<input name="IsAgreement" id="IsAgreement" value="false" type="checkbox" class="checkbox-service">*@
+                                        <label for="IsAgreement" class="label-chekbox"> توافقی</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="row w-100 p-0 m-0 mx-auto pt-md-3 pt-5 mt-3">
+                                    <div class="col-12  text-right"><h5><b> نحوه ارسال به خدمات دهندگان</b></h5></div>
+
+                                </div>
+                                <div class="row w-100 mx-auto">
+                                    <img src="~/hj/img/borderbig green.png" class="img-fluid mx-auto" />
+                                </div>
+
+
+                                <div class="row w-100 mx-auto text-md-center text-right mt-3">
+                                    <div class="col-md-4">
+                                        <input type="checkbox" id="IsSendByEmail" name="IsSendByEmail" class="checkbox-service">
+                                        @*<input name="IsSendByEmail" id="IsSendByEmail" type="checkbox" class="checkbox-service">*@
+                                        <label for="IsSendByEmail" class="label-chekbox"> ایمیل</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input name="IsSendByNOtification" type="checkbox" id="IsSendByNOtification" class="checkbox-service">
+                                        <label for="IsSendByNOtification" class="label-chekbox"> نوتیفیکیشن</label>
+                                    </div>
+                                    <div class="col-md-4">  <input name="IsSendBySms" type="checkbox" id="IsSendBySms" class="checkbox-service"><label for="IsSendBySms" class="label-chekbox"> اس ام اس</label></div>
+                                </div>
+                                <div class="row w-100 mx-auto mt-4 pt-4">
+                                    <input type="submit" id="createBtnSubmit" value="تایید" class="btn btn-success w-25 mx-auto Confirmation">
+                                </div>
+
+
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ./Tabs -->
+</div>
+
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/swal-alert/sweetalert.min.js"></script>
+    <script src="~/SinaCustom/js/main.js"></script>
+    <script src="~/lib/jquery.tagsinput/jquery.tagsinput.min.js"></script>
+
+    <script>
+
+
+
+
+        $('#Skills').tagsInput({
+            'interactive': true,
+            'defaultText': 'وارد کنید',
+
+        });
+        $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+
+        //change Password
+        $("#donnerForm").submit(function (e) {
+            e.preventDefault();
+            if (!$(this).valid()) {
+                return;
+            }
+
+
+
+            //data = $(this).serialize()
+
+            id = $("#Id").val();
+            title = $("#Title").val();
+            description = $("#Description").val()
+            catId = $("#CategoryId").val()
+            cityId = $("#CityId").val()
+            monyUnitId = $("#MonyUnitId").val()
+            minpRice = $("#MinpRice").val()
+            maxPrice = $("#MaxPrice").val()
+            skills = $("#Skills").val();
+
+            isAgreement = $("#IsAgreement").val() == "on" ? true : false
+            emailVal = $("#IsSendByEmail").val() == "on" ? true : false
+            notifVal = $("#IsSendByNtification").val() == "on" ? true : false
+            smsVal = $("#IsSendBySms").val() == "on" ? true : false
+
+
+
+            var data = {
+                "Id": id,
+                "Title": title,
+                "Description": description,
+                "CategoryId": catId,
+                "CityId": cityId,
+                "MonyUnitId": monyUnitId,
+                "MinpRice": minpRice,
+                "MaxPrice": maxPrice,
+                "IsAgreement": isAgreement,
+                "IsSendByEmail": emailVal,
+                "IsSendByNOtification": notifVal,
+                "IsSendBySms": smsVal,
+                "Skills": skills,
+                "ServiceType": 0
+            };
+
+
+
+            $("#createBtnSubmit").prop('disabled', true);
+            $.ajax({
+                method: "POST",
+                url: "/Services/CreateService",
+                data: data,
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                    if (r.status) {
+                        $("#createBtnSubmit").prop('disabled', false);
+                        SuccessAlert(r.message)
+                    }
+                    else {
+                        $("#createBtnSubmit").prop('disabled', false);
+                        FailedAlert(r.message);
+                    }
+                },
+                error: function () {
+                    $("#createBtnSubmit").prop('disabled', false);
+                    FailedAlert("خطا رخ داده است.");
+                }
+            });
+        })
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+}

@@ -112,10 +112,10 @@ namespace Helper.Data
         public DbSet<TBL_Service> TBL_Service { get; set; }
 
 
-        /// <summary>
-        ///  نوع هاي خدمت 
-        /// </summary>
-        public DbSet<TBL_ServiceLevel2> TBL_ServiceLevel2 { get; set; }
+        ///// <summary>
+        /////  نوع هاي خدمت 
+        ///// </summary>
+        //public DbSet<TBL_ServiceLevel2> TBL_ServiceLevel2 { get; set; }
 
 
         /// <summary>
@@ -159,7 +159,6 @@ namespace Helper.Data
         public DbSet<TBL_BankInfo> TBL_BankInfo { get; set; }
 
 
-
         /// <summary>
         ///پلن های موجود
         /// </summary>
@@ -179,34 +178,9 @@ namespace Helper.Data
         /// <summary>
         /// پنل و واحد پول
         /// </summary>
-        public DbSet<Helper.ViewModels.LoginVm> LoginVm { get; set; }
+        public DbSet<Helper.ViewModels.CreateServiceVM> CreateServiceVM { get; set; }
 
-        /// <summary>
-        /// پنل و واحد پول
-        /// </summary>
-        public DbSet<Helper.ViewModels.NewsesVM> NewsesVM { get; set; }
-
-        /// <summary>
-        /// پنل و واحد پول
-        /// </summary>
-        public DbSet<Helper.ViewModels.RegisterVm> RegisterVm { get; set; }
-
-        /// <summary>
-        /// پنل و واحد پول
-        /// </summary>
-        public DbSet<Helper.ViewModels.ProfileVM2> ProfileVM2 { get; set; }
-
-        /// <summary>
-        /// پنل و واحد پول
-        /// </summary>
-        public DbSet<Helper.ViewModels.AccountSettingsVM> AccountSettingsVM { get; set; }
-
-        /// <summary>
-        /// پنل و واحد پول
-        /// </summary>
-        public DbSet<Helper.ViewModels.ChangePasswordVM> ChangePasswordVM { get; set; }
-
-
+       
 
 
 

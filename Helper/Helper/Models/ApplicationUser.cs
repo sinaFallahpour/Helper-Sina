@@ -71,7 +71,7 @@ namespace Helper.Models
 
         [StringLength(maximumLength: 100, ErrorMessage = "حداکثر 100 کاراکتر وارد کنید")]
         public string City { get; set; }
-     
+
 
         /// <summary>
         /// زبان سایت
@@ -126,7 +126,7 @@ namespace Helper.Models
         //رابطه کاربر با سابقه تحصیلی
         //public int EduHistoryId { get; set; }
 
-     
+
         public virtual TBL_EducationalHistory EducationHistry { get; set; }
 
 
@@ -149,6 +149,31 @@ namespace Helper.Models
 
 
         //public ICollection<IdentityUserRole<string>> UserRole { get; set; }
+
+
+
+
+        /// <summary>
+        /// آیدی آخرین پلن رزرو شده
+        /// </summary>
+        public int PlanId { get; set; }
+
+
+        /// <summary>
+        /// تاریخ روزی که پلن اکسپایر میشه
+        /// </summary>
+        public DateTime PlanExpDate { get; set; }
+
+        /// <summary>
+        /// تعداد از خدمت که  میتونم ارایه بدم
+        /// </summary>
+        public int PlanCount { get; set; }
+
+
+        /// <summary>
+        /// آیا از پلن رایگان استفاده کرده است یا نه
+        /// </summary>
+        public bool IsUsedFree { get; set; }
 
 
         #endregion  Relation

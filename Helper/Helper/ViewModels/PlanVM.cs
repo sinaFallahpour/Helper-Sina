@@ -4,26 +4,31 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Helper.Models.Entities
+namespace Helper.ViewModels
 {
-    public class TBL_Plans
+    public class PlanVM
     {
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "نام")]
         public string Name { get; set; }
-
-
 
 
         /// <summary>
         /// تعداد سرویس های این پلن
         /// </summary>
-        [Required(ErrorMessage = "الزامیست")]
         [Display(Name = " تعداد سرویس قابل استفاده")]
         public int ServiceCount { get; set; }
+
+
+
+        /// <summary>
+        /// توضیحات
+        /// </summary>
+        [Display(Name = "توضیحات")]
+        public string Description { get; set; }
+
 
 
 
@@ -35,33 +40,35 @@ namespace Helper.Models.Entities
         public int Duration { get; set; }
 
 
-        /// <summary>
-        /// آیا رایگان است
-        /// </summary>
-        public bool IsFree { get; set; }
 
 
 
+        public bool IsSelected { get; set; }
 
 
-        /// <summary>
-        /// توضیحات
-        /// </summary>
-        [MaxLength(220, ErrorMessage = "حداکثر 220 کاراکتر وارد کنید")]
-        [Display(Name = "توضیحات")]
-        public string Description { get; set; }
 
-
-        #region  Realtion
-
+        public bool  IsFree { get; set; }
+        
+        
         /// <summary>
         /// لیست واحد های پولی پلن
         /// </summary>
-        public virtual ICollection<TBL_Plane_MonyUnit> PlansMonyUnit { get; set; }
+        public virtual ICollection<MonyUnitTVM> PlanMonyUnits { get; set; }
+    }
 
 
 
-        #endregion Realtion
+    public class MonyUnitTVM {
+        /// <summary>
+        /// قیمت پنل
+        /// </summary>
+        [Display(Name = "قیت")]
+        public int Price { get; set; }
 
+
+
+
+        [Display(Name = "نام واحد پول")]
+        public string MonyName { get; set; }
     }
 }

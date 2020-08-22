@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Helper.Data;
-using Helper.Migrations;
 using Helper.Models.Entities;
 using Helper.Models.Enums;
 using Helper.ViewModels;

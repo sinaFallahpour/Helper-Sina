@@ -10,8 +10,6 @@ namespace Helper.Models.Entities
     {
 
 
-
-
         #region   relation
         public string UserId { get; set; }
 

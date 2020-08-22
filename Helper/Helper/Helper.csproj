@@ -62,6 +62,7 @@
     <None Include="wwwroot\lib\ckeditor\styles.js" />
     <None Include="wwwroot\lib\swal-alert\sweetalert.js" />
     <None Include="wwwroot\lib\swal-alert\sweetalert.min.js" />
+    <None Include="wwwroot\lib\tagsinput\bootstrap-tagsinput.js" />
   </ItemGroup>
 
 </Project>
