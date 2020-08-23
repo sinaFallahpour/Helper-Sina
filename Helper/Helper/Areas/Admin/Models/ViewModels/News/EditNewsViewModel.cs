@@ -22,5 +22,16 @@ namespace Helper.Areas.Admin.Models.ViewModels.News
         public string VideoAddress { get; set; }
 
 
+
+
+        [Display(Name = " English Video ")]
+        [AllowedExtensions(new string[] { ".mp4", ".ogg", ".avi", ".hd", ".mpg", ".gif", ".vtt", ".mov", ".mkv", ".wmv" })]
+        [MaxFileSize(100 * 1024 * 1024)]
+        [NotMapped]
+        public IFormFile EnglishVideo { get; set; }
+
+        public string EnglishVideoAddress { get; set; }
+
+
     }
 }

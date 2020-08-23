@@ -14,6 +14,9 @@ using System.IO;
 using Helper.Models.Enums;
 using Helper.Models.Utilities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Helper.Areas.Admin.ViewModel;
+using System.Runtime.CompilerServices;
 
 namespace Helper.Controllers
 {
@@ -51,6 +54,7 @@ namespace Helper.Controllers
                     SeenCount = c.SeenCount,
                     Title = c.Title,
                     NewsType = c.NewsType,
+                    EnglishTitle = c.EnglishTitle
                 }).ToListAsync();
 
             return View(newses);
@@ -70,7 +74,7 @@ namespace Helper.Controllers
 
             var newsFromDb = await _context.TBL_NewsArticleVideo
                 .Where(c => c.Id == id).Include(c => c.NewsComments).FirstOrDefaultAsync();
-               
+
             if (newsFromDb == null)
             {
                 return NotFound();
@@ -96,45 +100,39 @@ namespace Helper.Controllers
             if (ModelState.IsValid)
             {
                 #region File validation
-                string uniqueFileName = null;
-                if (model.Video == null)
-                {
-                    ModelState.AddModelError("", "لطفا فیلم را آپلود کنید");
-                    return View(model);
-                }
-                if (!model.Video.IsVideo())
-                {
-                    ModelState.AddModelError("", "به فرمت   مناسب فیلم وارد کنید");
-                    return View(model);
-                }
-                if (model.Video.Length > 41000000)
-                {
-                    ModelState.AddModelError("", "حجم فایل باید کمتر از 41 مگابایت باشد ");
-                    return View(model);
-                }
-                if (model.Video.Length > 0)
-                {
-                    var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/News");
-                    uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Video.FileName);
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.Video.CopyToAsync(stream);
-                    }
-
-                    model.VideoAddress = "/Upload/News/" + uniqueFileName;
+                var res = await UploadVideo(model.Video, false);
+                if (res.Status == false)
+                {
+                    ModelState.AddModelError("", res.Message);
+                    return View(model);
                 }
+                model.VideoAddress = res.Message;
+
+                var res2 = await UploadVideo(model.EngishVideo, false);
+                if (res2.Status == false)
+                {
+                    ModelState.AddModelError("", res2.Message);
+                    return View(model);
+                }
+                model.EnglishViewVideoAddress = res2.Message;
+
+
+
                 #endregion File validation
                 try
                 {
                     var TBL_Article = new TBL_NewsArticleVideo()
                     {
                         Title = model.Title,
+                        EnglishTitle = model.EnglishTitle,
                         NewsType = model.NewsType,
                         Description = model.Description,
+                        EnglishDescription = model.EnglishDescription,
                         VideoAddress = model.VideoAddress,
+                        EnglishVideoAddress = model.EnglishViewVideoAddress,
                         CreateDate = DateTime.Now.ToString(),
+
                         CommentsCount = 0,
                         LikesCount = 0,
                         SeenCount = 0,
@@ -149,7 +147,7 @@ namespace Helper.Controllers
                     ModelState.AddModelError("", "خطا در ثبت");
                     return View(model);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("", "خطا در ثبت");
                     return View(model);
@@ -159,7 +157,136 @@ namespace Helper.Controllers
         }
 
 
+
+
+
+        private async Task<ResponseVM> UploadVideo(IFormFile file, bool IsEditMode)
+        {
+
+
+            string uniqueFileName = null;
+            if (IsEditMode == false && file == null)
+            {
+                return new ResponseVM
+                {
+                    Status = false,
+                    Message = "لطفا فیلم را آپلود کنید",
+                };
+            }
+            if (file == null)
+            {
+                return new ResponseVM
+                {
+                    Status = true,
+                    Message = "no File",
+                };
+            }
+            if (!file.IsVideo())
+            {
+                return new ResponseVM
+                {
+                    Status = false,
+                    Message = "به فرمت   مناسب فیلم وارد کنید",
+                };
+            }
+            if (file.Length > 41000000)
+            {
+                return new ResponseVM
+                {
+                    Status = false,
+                    Message = "حجم فایل باید کمتر از 41 مگابایت باشد ",
+                };
+            }
+            if (file.Length == 0)
+            {
+                return new ResponseVM
+                {
+                    Status = false,
+                    Message = "حجم فایل 0 است ",
+                };
+            }
+
+            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/News");
+            uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + file.FileName);
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            return new ResponseVM
+            {
+                Status = true,
+                Message = "/Upload/News/" + uniqueFileName
+            };
+        }
+
+
+
+        private async Task<ResponseVM> UploadImage(IFormFile file, bool IsEditMode)
+        {
+
+
+            string uniqueFileName = null;
+            if (IsEditMode == false && file == null)
+            {
+                return new ResponseVM
+                {
+                    Status = false,
+                    Message = "لطفا عکس را آپلود کنید",
+                };
+            }
+            if (file == null)
+            {
+                return new ResponseVM
+                {
+                    Status = true,
+                    Message = "no File",
+                };
+            }
+            if (!file.IsImage())
+            {
+                return new ResponseVM
+                {
+                    Status = false,
+                    Message = "به فرمت   مناسب عکس وارد کنید",
+                };
+            }
+            if (file.Length > 22000000)
+            {
+                return new ResponseVM
+                {
+                    Status = false,
+                    Message = "حجم فایل باید کمتر از 22 مگابایت باشد ",
+                };
+            }
+            if (file.Length == 0)
+            {
+                return new ResponseVM
+                {
+                    Status = false,
+                    Message = "حجم فایل 0 است ",
+                };
+            }
+
+            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/News");
+            uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + file.FileName);
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            return new ResponseVM
+            {
+                Status = true,
+                Message = "/Upload/News/" + uniqueFileName
+            };
+        }
+
+
         #endregion 
+
 
         #region CreateArticle
 
@@ -174,50 +301,44 @@ namespace Helper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateArticle(CreateArticleViewModel model)
         {
-
             if (ModelState.IsValid)
             {
                 #region File validation
-                string uniqueFileName = null;
-                if (model.ArticlePhoto == null)
-                {
-                    ModelState.AddModelError("", "لطفا عکس را آپلود کنید");
-                    return View(model);
-                }
-                if (!model.ArticlePhoto.IsImage())
-                {
-                    ModelState.AddModelError("", "به فرمت عکس وارد کنید");
-                    return View(model);
-                }
-                if (model.ArticlePhoto.Length > 22000000)
-                {
-                    ModelState.AddModelError("", "حجم فایل زیاد است");
-                    return View(model);
-                }
-                if (model.ArticlePhoto.Length > 0)
-                {
-                    var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/News");
-                    uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.ArticlePhoto.FileName);
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.ArticlePhoto.CopyToAsync(stream);
-                    }
-                    //model.ArticlePhoto.CopyTo(new FileStream(filePath, FileMode.Create));
-
-                    model.ArticlePhotoAddress = "/Upload/News/" + uniqueFileName;
+                var res = await UploadImage(model.ArticlePhoto, false);
+                if (res.Status == false)
+                {
+                    ModelState.AddModelError("", res.Message);
+                    return View(model);
                 }
+                model.ArticlePhotoAddress = res.Message;
+
+                var res2 = await UploadImage(model.EnglishArticlePhoto, false);
+                if (res2.Status == false)
+                {
+                    ModelState.AddModelError("", res2.Message);
+                    return View(model);
+                }
+                model.EnglishArticlePhotoAddress = res2.Message;
+
+
                 #endregion File validation
                 try
                 {
+
                     var TBL_Article = new TBL_NewsArticleVideo()
                     {
                         Title = model.Title,
-                        NewsType = NewsType.Arrticle,
+                        EnglishTitle = model.EnglishTitle,
+                        NewsType =NewsType.Arrticle,
                         Description = model.Description,
+                        EnglishDescription = model.EnglishDescription,
+
                         ArticlePhotoAddress = model.ArticlePhotoAddress,
+                        EnglishArticlePhotoAddress = model.EnglishArticlePhotoAddress,
+                      
                         CreateDate = DateTime.Now.ToString(),
+
                         CommentsCount = 0,
                         LikesCount = 0,
                         SeenCount = 0,
@@ -232,7 +353,7 @@ namespace Helper.Controllers
                     ModelState.AddModelError("", "خطا در ثبت");
                     return View(model);
                 }
-                catch
+                catch  
                 {
                     ModelState.AddModelError("", "خطا در ثبت");
                     return View(model);
@@ -254,9 +375,9 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            
+
             var news = await _context.TBL_NewsArticleVideo.FindAsync(id);
-            
+
             if (news == null)
             {
                 return NotFound();
@@ -265,10 +386,15 @@ namespace Helper.Controllers
             {
                 Id = news.Id,
                 Title = news.Title,
+                EnglishTitle = news.EnglishTitle,
+
                 NewsType = NewsType.Arrticle,
                 Description = news.Description,
+                EnglishDescription = news.EnglishDescription,
                 VideoAddress = news.VideoAddress,
+                EnglishVideoAddress = news.EnglishVideoAddress,
                 CreateDate = DateTime.Now.ToString(),
+
             };
             return View(model);
         }
@@ -288,47 +414,76 @@ namespace Helper.Controllers
             {
                 try
                 {
-                    var newsFromDb =await _context.TBL_NewsArticleVideo.FirstOrDefaultAsync(c => c.Id == model.Id);
+                    var newsFromDb = await _context.TBL_NewsArticleVideo.FirstOrDefaultAsync(c => c.Id == model.Id);
                     newsFromDb.Description = model.Description;
+                    newsFromDb.EnglishDescription = model.EnglishDescription;
                     newsFromDb.Title = model.Title;
+                    newsFromDb.EnglishTitle = model.EnglishTitle;
 
                     #region file validation
-                    if (model.Video != null)
+
+
+                    var res = await UploadVideo(model.Video, true);
+                    if (res.Status == false)
                     {
-                        string uniqueFileName = null;
-                        if (!model.Video.IsVideo())
-                        {
-                            ModelState.AddModelError("", "به فرمت فیلم وارد کنید");
-                            return View(model);
-                        }
-                        if (model.Video.Length > 41000000)
-                        {
-                            ModelState.AddModelError("", "حجم فایل زیاد است");
-                            return View(model);
-                        }
-                        if ( model.Video.Length > 0 )
-                        {
-                            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/Slider");
-                            uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Video.FileName);
-                            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                            model.Video.CopyTo(new FileStream(filePath, FileMode.Create));
-
-
-                            //Delete LastImage Image
-                            if (!string.IsNullOrEmpty(newsFromDb.VideoAddress))
-                            {
-                                var LastImagePath = newsFromDb.VideoAddress.Substring(1);
-                                LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
-                                if (System.IO.File.Exists(LastImagePath))
-                                {
-                                    System.IO.File.Delete(LastImagePath);
-                                }
-                            }
-
-                            //update Newe Pic Address To database
-                            newsFromDb.VideoAddress = "/Upload/Slider/" + uniqueFileName;
-                        }
+                        ModelState.AddModelError("", res.Message);
+                        return View(model);
                     }
+                    if (res.Message != "no File")
+                    {
+                        model.VideoAddress = res.Message;
+                    }
+
+                    var res2 = await UploadVideo(model.EnglishVideo, true);
+                    if (res2.Status == false)
+                    {
+                        ModelState.AddModelError("", res2.Message);
+                        return View(model);
+                    }
+                    if (res2.Message != "no File")
+                    {
+                        model.EnglishVideoAddress = res2.Message;
+                    }
+
+
+
+                    //Delete LastImage video
+                    if (res.Message != "no File")
+                    {
+                        if (!string.IsNullOrEmpty(newsFromDb.VideoAddress))
+                        {
+                            var LastImagePath = newsFromDb.VideoAddress.Substring(1);
+                            LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                            if (System.IO.File.Exists(LastImagePath))
+                            {
+                                System.IO.File.Delete(LastImagePath);
+                            }
+                        }
+
+                        newsFromDb.VideoAddress = model.VideoAddress;
+                    }
+
+
+                    //Delete LastImage video
+                    if (res2.Message != "no File")
+                    {
+                        if (!string.IsNullOrEmpty(newsFromDb.EnglishVideoAddress))
+                        {
+                            var LastImagePath = newsFromDb.EnglishVideoAddress.Substring(1);
+                            LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                            if (System.IO.File.Exists(LastImagePath))
+                            {
+                                System.IO.File.Delete(LastImagePath);
+                            }
+                        }
+                        newsFromDb.EnglishVideoAddress = model.EnglishVideoAddress;
+                    }
+
+
+                    //update Newe Pic Address To database
+                    //newsFromDb.VideoAddress = "/Upload/Slider/" + uniqueFileName;
+                    //}
+
                     #endregion file validation
 
                     var result = _context.SaveChanges();
@@ -342,12 +497,12 @@ namespace Helper.Controllers
                 }
             }
             return View(model);
-          
+
         }
 
         #endregion  Edit Vide and news
 
-        #region  Edit Vide and news
+        #region  Edit Article
 
         // GET: Admin/TBL_NewsArticleVideo/Edit/5
         public async Task<IActionResult> EditArticle(int? id)
@@ -357,19 +512,22 @@ namespace Helper.Controllers
                 return NotFound();
             }
 
-            var news = await _context.TBL_NewsArticleVideo.FindAsync(id);
+            var article = await _context.TBL_NewsArticleVideo.FindAsync(id);
 
-            if (news == null)
+            if (article == null)
             {
                 return NotFound();
             }
             var model = new EditArticleViewModel()
             {
-                Id = news.Id,
-                Title = news.Title,
+                Id = article.Id,
+                Title = article.Title,
+                EnglishTitle = article.EnglishTitle,
                 NewsType = NewsType.Arrticle,
-                Description = news.Description,
-                ArticlePhotoAddress = news.ArticlePhotoAddress,
+                Description = article.Description,
+                EnglishDescription = article.Description,
+                ArticlePhotoAddress = article.ArticlePhotoAddress,
+                EnglishArticlePhotoAddress = article.EnglishArticlePhotoAddress,
                 CreateDate = DateTime.Now.ToString(),
             };
             return View(model);
@@ -392,50 +550,76 @@ namespace Helper.Controllers
                 {
                     var articleFromDb = await _context.TBL_NewsArticleVideo.FirstOrDefaultAsync(c => c.Id == model.Id);
                     articleFromDb.Description = model.Description;
+                    articleFromDb.EnglishDescription = model.EnglishDescription;
+                    articleFromDb.EnglishTitle = model.EnglishTitle;
                     articleFromDb.Title = model.Title;
 
+
+
                     #region file validation
-                    if (model.ArticlePhoto != null)
+
+
+                    var res = await UploadImage(model.ArticlePhoto, true);
+                    if (res.Status == false)
                     {
-                        string uniqueFileName = null;
-                        if (!model.ArticlePhoto.IsImage())
-                        {
-                            ModelState.AddModelError("", "به فرمت فیلم وارد کنید");
-                            return View(model);
-                        }
-                        if (model.ArticlePhoto.Length > 22000000)
-                        {
-                            ModelState.AddModelError("", "حجم فایل زیاد است");
-                            return View(model);
-                        }
-                        if (model.ArticlePhoto.Length > 0)
-                        {
-                            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/Slider");
-                            uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.ArticlePhoto.FileName);
-                            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                            using (var stream = new FileStream(filePath, FileMode.Create))
-                            {
-                                await model.ArticlePhoto.CopyToAsync(stream);
-                            }
-
-                            //model.ArticlePhoto.CopyTo(new FileStream(filePath, FileMode.Create));
-
-                            //Delete LastImage Image
-                            if (!string.IsNullOrEmpty(articleFromDb.ArticlePhotoAddress))
-                            {
-                                var LastImagePath = articleFromDb.ArticlePhotoAddress.Substring(1);
-                                LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
-                                if (System.IO.File.Exists(LastImagePath))
-                                {
-                                    System.IO.File.Delete(LastImagePath);
-                                }
-                            }
-
-                            //update Newe Pic Address To database
-                            articleFromDb.ArticlePhotoAddress = "/Upload/Slider/" + uniqueFileName;
-                        }
+                        ModelState.AddModelError("", res.Message);
+                        return View(model);
                     }
+                    if (res.Message != "no File")
+                    {
+                        model.ArticlePhotoAddress = res.Message;
+                    }
+
+                    var res2 = await UploadImage(model.englishArticlePhoto, true);
+                    if (res2.Status == false)
+                    {
+                        ModelState.AddModelError("", res2.Message);
+                        return View(model);
+                    }
+                    if (res2.Message != "no File")
+                    {
+                        model.EnglishArticlePhotoAddress = res2.Message;
+                    }
+
+
+
+                    //Delete LastImage video
+                    if (res.Message != "no File")
+                    {
+                        if (!string.IsNullOrEmpty(articleFromDb.ArticlePhotoAddress))
+                        {
+                            var LastImagePath = articleFromDb.ArticlePhotoAddress.Substring(1);
+                            LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                            if (System.IO.File.Exists(LastImagePath))
+                            {
+                                System.IO.File.Delete(LastImagePath);
+                            }
+                        }
+
+                        articleFromDb.ArticlePhotoAddress = model.ArticlePhotoAddress;
+                    }
+
+
+                    //Delete LastImage video
+                    if (res2.Message != "no File")
+                    {
+                        if (!string.IsNullOrEmpty(articleFromDb.EnglishArticlePhotoAddress))
+                        {
+                            var LastImagePath = articleFromDb.EnglishVideoAddress.Substring(1);
+                            LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                            if (System.IO.File.Exists(LastImagePath))
+                            {
+                                System.IO.File.Delete(LastImagePath);
+                            }
+                        }
+                        articleFromDb.EnglishVideoAddress = model.EnglishArticlePhotoAddress;
+                    }
+
+
+                    //update Newe Pic Address To database
+                    //newsFromDb.VideoAddress = "/Upload/Slider/" + uniqueFileName;
+                    //}
+
                     #endregion file validation
 
                     var result = _context.SaveChanges();
@@ -487,31 +671,63 @@ namespace Helper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
             var NewsFromDb = await _context.TBL_NewsArticleVideo.FindAsync(id);
-
 
             if (NewsFromDb != null)
             {
                 if (NewsFromDb.NewsType == NewsType.Arrticle)
                 {
                     //delete Image
-                    var LastImagePath = NewsFromDb.ArticlePhotoAddress.Substring(1);
-                    LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
-                    if (!string.IsNullOrEmpty(NewsFromDb.ArticlePhotoAddress) && System.IO.File.Exists(LastImagePath))
+                    if (!string.IsNullOrEmpty(NewsFromDb.ArticlePhotoAddress))
                     {
-                        System.IO.File.Delete(LastImagePath);
+                        var LastImagePath = NewsFromDb.ArticlePhotoAddress.Substring(1);
+                        LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                        if (System.IO.File.Exists(LastImagePath))
+                        {
+                            System.IO.File.Delete(LastImagePath);
+                        }
                     }
+                    //delete english Image
+                    if (!string.IsNullOrEmpty(NewsFromDb.EnglishArticlePhotoAddress))
+                    {
+                        var EnglishLastImagePath = NewsFromDb.EnglishArticlePhotoAddress.Substring(1);
+                        EnglishLastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, EnglishLastImagePath);
+
+                        if (System.IO.File.Exists(EnglishLastImagePath))
+                        {
+                            System.IO.File.Delete(EnglishLastImagePath);
+                        }
+                    }
+
                 }
                 else
                 {
+
                     //delete videos
-                    var LastImagePath = NewsFromDb.VideoAddress.Substring(1);
-                    LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
-                    if (!string.IsNullOrEmpty(NewsFromDb.VideoAddress) && System.IO.File.Exists(LastImagePath))
+
+                    if (!string.IsNullOrEmpty(NewsFromDb.VideoAddress))
                     {
-                        System.IO.File.Delete(LastImagePath);
+                        var LastImagePath = NewsFromDb.VideoAddress.Substring(1);
+                        LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+
+                        if (System.IO.File.Exists(LastImagePath))
+                        {
+                            System.IO.File.Delete(LastImagePath);
+                        }
                     }
+
+
+                    //delete EnglishVideo
+                    if (!string.IsNullOrEmpty(NewsFromDb.EnglishVideoAddress))
+                    {
+                        var lastPathes = NewsFromDb.EnglishVideoAddress.Substring(1);
+                        lastPathes = Path.Combine(_hostingEnvironment.WebRootPath, lastPathes);
+                        if (System.IO.File.Exists(lastPathes))
+                        {
+                            System.IO.File.Delete(lastPathes);
+                        }
+                    }
+
                 }
 
 

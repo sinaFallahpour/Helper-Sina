@@ -19,5 +19,16 @@ namespace Helper.Areas.Admin.Models.ViewModels.News
         public IFormFile ArticlePhoto { get; set; }
 
         public string ArticlePhotoAddress { get; set; }
+
+
+
+        [Required(ErrorMessage = "الزامیست")]
+        [Display(Name = " عکس EnglishArticle")]
+        [AllowedExtensions(new string[] { ".jpg", ".png", ".svg", ".gif" })]
+        [MaxFileSize(20 * 1024 * 1024)]
+        [NotMapped]
+        public IFormFile EnglishArticlePhoto { get; set; }
+
+        public string EnglishArticlePhotoAddress { get; set; }
     }
 }

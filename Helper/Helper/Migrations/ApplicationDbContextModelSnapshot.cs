@@ -289,6 +289,22 @@ namespace Helper.Migrations
                         .HasColumnType("nvarchar(2000)")
                         .HasMaxLength(2000);
 
+                    b.Property<string>("EnglishArticlePhotoAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EnglishDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(2000)")
+                        .HasMaxLength(2000);
+
+                    b.Property<string>("EnglishTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("EnglishVideoAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("LikesCount")
                         .HasColumnType("int");
 
@@ -472,9 +488,6 @@ namespace Helper.Migrations
                     b.Property<int?>("MonyUnitId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
                     b.Property<int>("SeenCount")
                         .HasColumnType("int");
 
@@ -533,7 +546,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 22, 11, 12, 58, 314, DateTimeKind.Local).AddTicks(5151),
+                            CreatedAt = new DateTime(2020, 8, 23, 13, 45, 49, 358, DateTimeKind.Local).AddTicks(5483),
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -541,7 +554,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 22, 11, 12, 58, 317, DateTimeKind.Local).AddTicks(1834),
+                            CreatedAt = new DateTime(2020, 8, 23, 13, 45, 49, 361, DateTimeKind.Local).AddTicks(2750),
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -549,7 +562,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2020, 8, 22, 11, 12, 58, 317, DateTimeKind.Local).AddTicks(1889),
+                            CreatedAt = new DateTime(2020, 8, 23, 13, 45, 49, 361, DateTimeKind.Local).AddTicks(2817),
                             Key = "SiteRules",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -689,6 +702,75 @@ namespace Helper.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("TBL_WorkExperience");
+                });
+
+            modelBuilder.Entity("Helper.ViewModels.CreateServiceVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommentCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<bool>("IsAgreement")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSendByEmail")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSendByNOtification")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSendBySms")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinpRice")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MonyUnitId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeenCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Skills")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(800)")
+                        .HasMaxLength(800);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(80)")
+                        .HasMaxLength(80);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CreateServiceVM");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

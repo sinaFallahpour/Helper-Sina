@@ -24,6 +24,14 @@
                     <img class="d-block " id="UploadedImage" />
                 </div>
             </div>
+
+             <div class="form-row">
+                <div class="col-md-8 mb-3">
+                    <img class="d-block " id="UploadedEnglishImage" />
+                </div>
+            </div>
+
+
             <input type="hidden" name="Id" id="Id" value="0" />
             <!-- input -->
             <div class="form-row">
@@ -34,11 +42,18 @@
                     <span asp-validation-for="Title" class="text-danger"> </span>
                 </div>
             </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EnglishTitle" for="validationCustom03" class="text-dark"></label>
+                    <input asp-for="EnglishTitle" class="form-control" id="validationCustom03s"
+                           placeholder="عنوان">
+                    <span asp-validation-for="EnglishTitle" class="text-danger"> </span>
+                </div>
+            </div>
 
 
 
 
-           
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
@@ -49,6 +64,18 @@
                         <label class="form-contro custom-file-label" for="customFile">انتخاب  عکس مقاله </label>
                     </div>
                     <span asp-validation-for="ArticlePhoto" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <div>
+                        <input asp-for="EnglishArticlePhoto" class="custom-file-input" onchange="readURL2(this);" id="customFile2">
+                    </div>
+                    <div class="custom-file">
+                        <label class="form-contro custom-file-label" for="customFile2">انتخاب   EnglishImage </label>
+                    </div>
+                    <span asp-validation-for="EnglishArticlePhoto" class="text-danger"> </span>
                 </div>
             </div>
 
@@ -64,6 +91,15 @@
                 </div>
             </div>
 
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EnglishDescription" for="EnglishDescription"></label>
+                    <textarea asp-for="EnglishDescription" type="" class="form-control _areaHeght" id="EnglishDescription"
+                              placeholder="متن EnglishDescrition ...">
+                    </textarea>
+                    <span asp-validation-for="EnglishDescription" class="text-danger"> </span>
+                </div>
+            </div>
 
 
 
@@ -123,6 +159,23 @@
         }
 
 
+
+
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#UploadedEnglishImage')
+                        .attr('src', e.target.result)
+                        .width(500)
+                        .height(300);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
         
     </script>
 

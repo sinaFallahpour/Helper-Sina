@@ -16,6 +16,9 @@ namespace Helper.Areas.Admin.Models.ViewModels.NewFolder
         [Display(Name ="عنوان")]
         public string Title { get; set; }
 
+        [Display(Name = "EnglishTitle")]
+        public string EnglishTitle { get; set; }
+
         [Display(Name = "تعداد لایک")]
         public int LikesCount { get; set; }
 

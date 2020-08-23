@@ -18,7 +18,7 @@
 
         <form asp-action="Edit" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="lert alert-success text-danger"></div>
 
             <input type="hidden" asp-for="Id" />
 
@@ -29,26 +29,53 @@
             </div>
         </div>*@
 
+
             <div class="form-row">
-                <div class="col-md-8 mb-3">
-                    <video width="400" controls>
-                        <source src="@Model.VideoAddress" id="video_here">
-                        <source src="mov_bbb.ogg" id="video_here">
-                        Your browser does not support HTML5 video.
-                    </video>
+                <div class="col-md-6 mb-3">
+                    <div class="form-row">
+                        <div class="col-md-8 mb-3">
+                            <video width="400" controls>
+                                <source src="@Model.VideoAddress" id="video_here">
+                                <source src="mov_bbb.ogg" id="video_here">
+                                Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-8 mb-3">
+                            <video width="400" controls>
+                                <source src="@Model.EnglishVideoAddress" id="video_here">
+                                <source src="mov_bbb.ogg" id="Englishvideo_here">
+                                Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
 
+
+
             <div class="form-row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-9 mb-3">
                     <label asp-for="Title" for="validationCustom03" class="text-dark"></label>
                     <input asp-for="Title" class="form-control" id="validationCustom03s"
                            placeholder="عنوان">
                     <span asp-validation-for="Title" class="text-danger"> </span>
                 </div>
-                <div class="col-md-6 mb-3">
+
+                <div class="col-md-9 mb-3">
+                    <label asp-for="EnglishTitle" for="validationCustom03" class="text-dark"></label>
+                    <input asp-for="EnglishTitle" class="form-control" id="validationCustom03s"
+                           placeholder="EnglishTitle">
+                    <span asp-validation-for="EnglishTitle" class="text-danger"> </span>
+                </div>
+
+
+
+                <div class="col-md-9 mb-3">
                     <label asp-for="NewsType" for="validationCustom03" class="text-dark"></label>
 
                     <select asp-for="NewsType" class="custom-select custom-select-lg">
@@ -66,18 +93,53 @@
                     </select>
                 </div>
 
-                <div class="col-md-6 mb-3">
+                <div class="col-md-9 mb-3">
                     <label class="text-dark" for="file">انتخاب  فیلم  </label>
-                    <input asp-for="Video" class=" form-control custom-file-label mt-4  file_multi_video" onchange="readURL(this);" id="file">
+                    <input asp-for="Video" class=" file_multi_video" onchange="readURL(this);" id="file">
                     <span asp-validation-for="Video" class="text-danger"> </span>
                 </div>
 
-                <div class="col-md-6 mb-3">
+
+
+                <div class="col-md-9 mb-3">
+
+                    <label class="text-dark" for="Englisgfile">انتخاب  EngishVideo  </label>
+                    <input asp-for="EnglishVideo" class=" file_multi_Englisvideo" onchange="readURL(this);" id="Englisgfile">
+
+                    <span asp-validation-for="EnglishVideo" class="text-danger"> </span>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="col-md-9 mb-3">
                     <label asp-for="Description" for="Description"></label>
                     <textarea asp-for="Description" type="" class="form-control _areaHeght" id="Description" rows="3" cols="4"
                               placeholder="متن مقاله ...">
                     </textarea>
                     <span asp-validation-for="Description" class="text-danger"> </span>
+                </div>
+
+                <div class="col-md-9 mb-3">
+                    <label asp-for="EnglishDescription" for="Description"></label>
+                    <textarea asp-for="EnglishDescription" type="" class="form-control _areaHeght" id="Description" rows="3" cols="4"
+                              placeholder="متن EnglishDescription ...">
+                    </textarea>
+                    <span asp-validation-for="EnglishDescription" class="text-danger"> </span>
                 </div>
             </div>
 
@@ -124,6 +186,12 @@
         });
 
 
+        //preview of Englishvideo
+        $(document).on("change", ".file_multi_Englisvideo", function (evt) {
+            var $source = $('#Englishvideo_here');
+            $source[0].src = URL.createObjectURL(this.files[0]);
+            $source.parent()[0].load();
+        });
 
     </script>
 

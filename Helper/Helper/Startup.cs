@@ -27,6 +27,9 @@ using AutoMapper;
 using Helper.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace Helper
 {
@@ -42,6 +45,11 @@ namespace Helper
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+
+
+
             services.AddDbContext<ApplicationDbContext>(options =>
               options.UseSqlServer(
                   Configuration.GetConnectionString("DefaultConnection")));
@@ -178,7 +186,14 @@ namespace Helper
             //services.AddRazorPages();
 
 
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddMvc(options => options.EnableEndpointRouting = false)
+                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
+                    options => { options.ResourcesPath = "Resources"; })
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(ShareResource));
+                });
 
 
             //inject autoMapper
@@ -207,6 +222,30 @@ namespace Helper
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+           
+
+            //2 زبانه
+            var supportedCultures = new List<CultureInfo>()
+            {
+                new CultureInfo(PublicHelper.persianCultureName),
+                new CultureInfo(PublicHelper.EngCultureName)
+            };
+            var options = new RequestLocalizationOptions()
+            {
+                DefaultRequestCulture = new RequestCulture(PublicHelper.persianCultureName),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures,
+                RequestCultureProviders = new List<IRequestCultureProvider>()
+                {
+                    new QueryStringRequestCultureProvider(),
+                    new CookieRequestCultureProvider()
+                }
+            };
+            app.UseRequestLocalization(options);
+
+
+
 
             app.UseRouting();
 

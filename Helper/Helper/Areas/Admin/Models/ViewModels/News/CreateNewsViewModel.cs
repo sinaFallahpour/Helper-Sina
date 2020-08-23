@@ -22,7 +22,17 @@ namespace Helper.Areas.Admin.Models.ViewModels.News
         public string VideoAddress { get; set; }
 
 
-      
+
+
+        [Required(ErrorMessage = "الزامیست")]
+        [Display(Name = " EngishVideo ")]
+        [AllowedExtensions(new string[] { ".mp4", ".ogg", ".avi", ".hd", ".mpg", ".gif", ".vtt", ".mov", ".mkv", ".wmv" })]
+        [MaxFileSize(100 * 1024 * 1024)]
+        [NotMapped]
+        public IFormFile EngishVideo { get; set; }
+
+        public string EnglishViewVideoAddress { get; set; }
+
 
     }
 }

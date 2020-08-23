@@ -1,4 +1,8 @@
-﻿<div class="container p-0 mx-auto">
+﻿@using Helper
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<div class="container p-0 mx-auto">
     @*........navbar.......*@
     <div class="row hj-header mt-5 m-0">
         <div class="col-12 p-md-0 m-md-0">
@@ -7,11 +11,11 @@
                 <div class="col-md-4 col-5 d-flex justify-content-center align-items-center">
                     <form action="/action_page.php" class="hj-language text-right">
 
-                        <select name="language" id="language">
-                            <option value="volvo">Ln فارسی</option>
-                            <option value="saab">Ln EN</option>
-
+                        <select name="language" id="language" onchange="changeLanguage(this);">
+                            <option value="@PublicHelper.persianCultureName">  Ln فارسی  </option>
+                            <option value="@PublicHelper.EngCultureName"> Ln EN  </option>
                         </select>
+
 
                     </form>
                 </div>
@@ -22,22 +26,22 @@
 
 
 
-              
+
                 <div class="col-md-4  col-5 d-flex justify-content-center align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        @Html.ActionLink("خروج", "LogOut", "Account", new { Area = "", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) }, new { @class = "btn btn-link hj-index-login" })
-                        <a href="/profiles" class="btn btn-link hj-index-login"> پروفایل</a> 
-                        
-                        
-                        
-                        }
-                                    else
-                                    {
-                        <a href="@Url.Action("Login","Account")" class="btn btn-link hj-index-login"> ورود / ثبت نام</a>
-                        
-                        
-                        }
+                        @Html.ActionLink(Localizer["logOut"].Value, "LogOut", "Account", new { Area = "", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) }, new { @class = "btn btn-link hj-index-login" })
+                        <a href="/profiles" class="btn btn-link hj-index-login"> @Localizer["Profile"]</a>
+
+
+
+                    }
+                    else
+                    {
+                <a href="@Url.Action("Login","Account")" class="btn btn-link hj-index-login">  @Localizer["Login"] / @Localizer["SignIn"]</a>
+
+
+                    }
 
                 </div>
 
@@ -66,27 +70,27 @@
                     <ul class="navbar-nav w-100 text-md-center text-right mt-3">
                         <div class="col-md-3">
                             <li class="nav-item active">
-                                <a class="nav-link " href="/">صفحه اصلی </a>
+                                <a class="nav-link " href="/"> @Localizer["Home"] </a>
                             </li>
                         </div>
                         <div class="col-md-2">
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index","Newses")">اخبار</a>
+                                <a class="nav-link" href="@Url.Action("Index","Newses")"> @Localizer["Newses"]</a>
                             </li>
                         </div>
                         <div class="col-md-2">
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("ContactUs","Home")">تماس با ما</a>
+                                <a class="nav-link" href="@Url.Action("ContactUs","Home")"> @Localizer["ContactUs"] </a>
                             </li>
                         </div>
                         <div class="col-md-2">
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("AboutUs","Home")">درباره ما</a>
+                                <a class="nav-link" href="@Url.Action("AboutUs","Home")">@Localizer["AboutUs"]</a>
                             </li>
                         </div>
                         <div class="col-md-3">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">کارشناسان</a>
+                                <a class="nav-link" href="#">@Localizer["Exports"]</a>
                             </li>
                         </div>
 
@@ -101,4 +105,20 @@
 </div>
 
 @*........end navbar.......*@
+
+
+
+
+<script>
+
+
+    const changeLanguage = (culturName) => {
+        $.get(`/Home/ChangeLanguage?culture=${culturName.value}`,
+            function (res) {
+
+            });
+    }
+
+</script>
+
 

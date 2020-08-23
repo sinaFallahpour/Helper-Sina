@@ -29,5 +29,9 @@ namespace Helper
         public const string SerialNumberClaim = "serialNumber";
 
 
+
+        public const string EngCultureName = "en-US";
+        public const string persianCultureName = "fa-IR";
+
     }
 }

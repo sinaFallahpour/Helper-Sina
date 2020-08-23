@@ -20,6 +20,15 @@ namespace Helper.Areas.Admin.Models.ViewModels.News
 
         public string ArticlePhotoAddress { get; set; }
 
-     
+
+
+        [Display(Name = " عکس EnglishArticle")]
+        [AllowedExtensions(new string[] { ".jpg", ".png", ".svg", ".gif" })]
+        [MaxFileSize(20 * 1024 * 1024)]
+        [NotMapped]
+        public IFormFile englishArticlePhoto { get; set; }
+
+        public string EnglishArticlePhotoAddress { get; set; }
+
     }
 }

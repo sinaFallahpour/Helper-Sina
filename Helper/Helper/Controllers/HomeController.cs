@@ -11,6 +11,9 @@ using Helper.Models.Utilities;
 using Helper.Data;
 using Helper.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
+using System.Globalization;
 
 namespace Helper.Controllers
 {
@@ -74,6 +77,8 @@ namespace Helper.Controllers
 
 
 
+
+
         public IActionResult Table()
         {
             return View();
@@ -86,5 +91,20 @@ namespace Helper.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+        [AllowAnonymous]
+        public IActionResult ChangeLanguage(string culture)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
+
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+
+    
+
     }
 }

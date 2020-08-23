@@ -20,11 +20,35 @@ namespace Helper.Areas.Admin.Models.ViewModels.News
         public string Title { get; set; }
 
 
+
+        [Required(ErrorMessage = "این فیلد الزامیست")]
+        [Display(Name = "EnglishTitle")]
+        [MaxLength(50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [MinLength(1, ErrorMessage = "حداقل 1 کاراکتر وارد کنید")]
+        public string EnglishTitle { get; set; }
+
+
+
+
+
+
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "توضیحات")]
-        [MaxLength(2500, ErrorMessage = "حداکثر 2500 کاراکتر وارد کنید")]
+        [MaxLength(2000, ErrorMessage = "حداکثر 2000 کاراکتر وارد کنید")]
         [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر وارد کنید")]
         public string Description { get; set; }
+
+
+
+
+        [Required(ErrorMessage = "الزامیست")]
+        [Display(Name = "EnglishDescription")]
+        [MaxLength(2000, ErrorMessage = "حداکثر 2000 کاراکتر وارد کنید")]
+        [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر وارد کنید")]
+        public string EnglishDescription { get; set; }
+
+
+
 
         public string CreateDate { get; set; }
 

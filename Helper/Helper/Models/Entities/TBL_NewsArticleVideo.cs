@@ -12,12 +12,18 @@ namespace Helper.Models.Entities
 {
     public class TBL_NewsArticleVideo : BaseEntity<int>
     {
-        [Required(ErrorMessage = "الزامیست")]
+        [Required(ErrorMessage = "Required")]
         [Display(Name = "توضیحات")]
         [MaxLength(50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
         [MinLength(1, ErrorMessage = "حداقل 1 کاراکتر وارد کنید")]
         public string Title { get; set; }
 
+
+        [Required(ErrorMessage = "این فیلد الزامیست")]
+        [Display(Name = "EnglishTitle")]
+        [MaxLength(50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [MinLength(1, ErrorMessage = "حداقل 1 کاراکتر وارد کنید")]
+        public string EnglishTitle { get; set; }
 
 
         [Required(ErrorMessage = "الزامیست")]
@@ -25,6 +31,18 @@ namespace Helper.Models.Entities
         [MaxLength(2000, ErrorMessage = "حداکثر 2000 کاراکتر وارد کنید")]
         [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر وارد کنید")]
         public string Description { get; set; }
+
+
+
+        [Required(ErrorMessage = "الزامیست")]
+        [Display(Name = "EnglishDescription")]
+        [MaxLength(2000, ErrorMessage = "حداکثر 2000 کاراکتر وارد کنید")]
+        [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر وارد کنید")]
+        public string EnglishDescription { get; set; }
+
+
+
+
 
         public string CreateDate { get; set; }
 
@@ -51,6 +69,29 @@ namespace Helper.Models.Entities
         public string ArticlePhotoAddress { get; set; }
 
 
+
+
+
+
+        [Required(ErrorMessage = "الزامیست")]
+        [Display(Name = " عکس مقاله")]
+        [AllowedExtensions(new string[] { ".jpg", ".png", ".svg", ".gif" })]
+        [MaxFileSize(20 * 1024 * 1024)]
+        [NotMapped]
+        public IFormFile EnglishArticlePhoto { get; set; }
+
+        public string EnglishArticlePhotoAddress { get; set; }
+
+
+
+
+
+
+
+
+
+
+
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = " فیلم ")]
         [AllowedExtensions(new string[] { ".mp4", ".avi", ".hd", ".mpg", ".gif", ".vtt", ".mov", ".mkv", ".wmv" })]
@@ -63,9 +104,20 @@ namespace Helper.Models.Entities
 
 
 
+        [Required(ErrorMessage = "الزامیست")]
+        [Display(Name = " فیلم ")]
+        [AllowedExtensions(new string[] { ".mp4", ".avi", ".hd", ".mpg", ".gif", ".vtt", ".mov", ".mkv", ".wmv" })]
+        [MaxFileSize(30 * 1024 * 1024)]
+        [NotMapped]
+        public IFormFile EnglishVideo { get; set; }
+
+        public string EnglishVideoAddress { get; set; }
+
+
+
         #region  Relation
 
-       
+
         //relation with likes
         public virtual ICollection<TBL_NewsLike> NewsLike { get; set; }
 
