@@ -491,9 +491,6 @@ namespace Helper.Migrations
                     b.Property<int>("SeenCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("SendType")
-                        .HasColumnType("int");
-
                     b.Property<int>("ServiceType")
                         .HasColumnType("int");
 
@@ -529,6 +526,9 @@ namespace Helper.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("EnglishValue")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Key")
                         .HasColumnType("nvarchar(max)");
 
@@ -546,7 +546,8 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 23, 13, 45, 49, 358, DateTimeKind.Local).AddTicks(5483),
+                            CreatedAt = new DateTime(2020, 8, 25, 15, 2, 28, 459, DateTimeKind.Local).AddTicks(4723),
+                            EnglishValue = "",
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -554,7 +555,8 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 23, 13, 45, 49, 361, DateTimeKind.Local).AddTicks(2750),
+                            CreatedAt = new DateTime(2020, 8, 25, 15, 2, 28, 462, DateTimeKind.Local).AddTicks(2368),
+                            EnglishValue = "",
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -562,7 +564,8 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2020, 8, 23, 13, 45, 49, 361, DateTimeKind.Local).AddTicks(2817),
+                            CreatedAt = new DateTime(2020, 8, 25, 15, 2, 28, 462, DateTimeKind.Local).AddTicks(2434),
+                            EnglishValue = "",
                             Key = "SiteRules",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
@@ -583,6 +586,9 @@ namespace Helper.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<int>("LanguageType")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhotoAddress")
                         .HasColumnType("nvarchar(max)");

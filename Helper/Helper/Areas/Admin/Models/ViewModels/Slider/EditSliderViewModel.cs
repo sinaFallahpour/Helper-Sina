@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Helper.Models.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,6 +25,10 @@ namespace Helper.Areas.Admin.Models.ViewModels.Slider
         [MaxLength(550, ErrorMessage = "حداکثر 550 کاراکتر وارد کنید")]
         [MinLength(10, ErrorMessage = "حداقل 10 کاراکتر وارد کنید")]
         public string Description { get; set; }
+
+
+        [Display(Name = "زبان")]
+        public LanguageType LanguageType { get; set; }
 
         public bool IsActive { get; set; }
         public string PhotoAddress { get; set; }

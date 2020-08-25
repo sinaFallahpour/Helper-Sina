@@ -1,4 +1,5 @@
 ﻿@model Helper.ViewModels.ProfileVM2
+@using System.Globalization
 
 @{
     ViewData["Title"] = "Index";
@@ -13,8 +14,20 @@
 @section Styles{
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
 
-    <link href="~/lib/dateicker/datepicker.css" rel="stylesheet" />
+
     <link href="~/lib/jquery.tagsinput/jquery.tagsinput.min.css" rel="stylesheet" />
+
+    @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+    {
+        <link href="~/lib/dateicker/datepicker.css" rel="stylesheet" />
+    }
+    else
+    {
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-uCQmAoax6aJTxC03VlH0uCEtE0iLi83TW1Qh6VezEZ5Y17rTrIE+8irz4H4ehM7Fbfbm8rb30OkxVkuwhXxrRg==" crossorigin="anonymous" />
+    }
+
+
+
 }
 
 <div class="container-fluid w-75 mx-auto mt-5 p-0 m-0">
@@ -23,7 +36,7 @@
             <img src="~/hj/img/img profile.png" class="img-fluid mx-auto text-center" />
         </div>
         <div class="col-12 pt-4">
-            <h3>نیما کفش آرا</h3>
+            <h3 class="text-center">نیما کفش آرا</h3>
             <span>مشاور املاک</span>
         </div>
     </div>
@@ -38,8 +51,8 @@
 
                         <div class="nav nav-tabs nav-fill p-0 m-0 w-100" id="nav-tab" role="tablist">
 
-                            <a class="nav-item nav-link active w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ویرایش پروفایل</a>
-                            <a class="nav-item nav-link w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">دشبورد</a>
+                            <a class="nav-item nav-link active w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"> @ViewData["EditProfile"] </a>
+                            <a class="nav-item nav-link w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">@ViewData["Dashboard"]</a>
 
                         </div>
 
@@ -77,7 +90,7 @@
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
                                                     <div class="alert alert-warning  text-right alert-dismissible fade show col-md-12" role="alert">
-                                                        <strong>asasaasa @TempData["Error"] </strong>
+                                                        <strong>   @TempData["Error"] </strong>
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                             <span class="ml-4" aria-hidden="true">&times;</span>
                                                         </button>
@@ -89,33 +102,36 @@
 
                                 </div>
 
+
+
+
                                 <input type="hidden" asp-for="Id" />
                                 <div class="row hj-form  mx-auto">
                                     <div class="form-group w-100">
-                                        <input asp-for="Nickname" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="" placeholder="نام ونام خانوادگی">
+                                        <input asp-for="Nickname" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" placeholder="@ViewData["NameAndLastNamePL"]">
                                         <span asp-validation-for="Nickname" class="text-center d-block text-danger"></span>
                                     </div>
 
                                     <div class="form-group w-100">
 
-                                        <input asp-for="UserName" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="" placeholder="نام کاربری">
+                                        <input asp-for="UserName" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" placeholder="@ViewData["UserNamePL"]">
                                         <span asp-validation-for="UserName" class="text-center d-block text-danger"></span>
                                     </div>
 
 
                                     <div class="form-group w-100">
 
-                                        <input asp-for="Email" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="" placeholder="ایمیل">
+                                        <input asp-for="Email" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="" placeholder="@ViewData["EmailPL"]">
                                         <span asp-validation-for="Email" class="text-center d-block text-danger"></span>
                                     </div>
 
                                     <div class="form-group w-100">
-                                        <input asp-for="City" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="" placeholder="شهر">
+                                        <input asp-for="City" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="" placeholder="@ViewData["CityPL"]">
                                         <span asp-validation-for="City" class="text-center d-block text-danger"></span>
                                     </div>
 
                                     <div class="form-group w-100">
-                                        <input asp-for="Phone" type="number" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="" placeholder="شماره تماس">
+                                        <input asp-for="Phone" type="number" autocomplete="off" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" placeholder="@ViewData["MobileNumber"]">
                                         <span asp-validation-for="Phone" class="text-center d-block text-danger"></span>
                                     </div>
 
@@ -123,39 +139,41 @@
 
                                 <div class="container hj-form mt-5 m-0 p-0 mx-auto">
                                     <div class="row w-100 p-0 m-0">
-                                        <div class="col-md-11 col-10 text-right"><h3 class="size20">سوابق کاری</h3></div>
+                                        <div class="col-md-11 col-10 text-right"><h3 class="size20">  @ViewData["Resume"]</h3></div>
                                         <div class="col-md-1 col-2 text-left pt-2"> <i class="fa fa-plus-circle hj-sum" id="plus-profile"></i></div>
                                     </div>
                                     <div class="row w-100 hj-Records hj-form mt-3  mx-auto p-0 m-0 px-2" id="Record">
                                         <div class="form-group w-100 text-right">
-                                            <label asp-for="CompanyName" for="exampleInputCompany">شرکت</label>
-                                            <input asp-for="CompanyName" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="exampleInputCompany" placeholder="نام شرکت">
+                                            <label asp-for="CompanyName" for="exampleInputCompany">@ViewData["Office"]</label>
+                                            <input asp-for="CompanyName" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="exampleInputCompany" placeholder="@ViewData["OfficePL"]">
                                             <span asp-validation-for="CompanyName" class="text-center d-block text-danger"></span>
                                         </div>
 
                                         <div class="form-group w-100 text-right">
-                                            <label for="exampleInputPosition">سمت</label>
-                                            <input asp-for="Semat" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="exampleInputPosition" placeholder="سمت خود را وارد کنید ">
+                                            <label for="exampleInputPosition">@ViewData["Position"]</label>
+
+
+                                            <input asp-for="Semat" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="exampleInputPosition" placeholder="@ViewData["PositionPL"] ">
                                             <span asp-validation-for="Semat" class="text-danger"></span>
                                         </div>
 
                                         <div class="form-group w-100 text-right">
                                             <div class="col-md-6 p-0 m-0">
-                                                <label for="exampleInputOfDate">از تاریخ</label>
-                                                <input asp-for="WorkEnterDate" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="WorkEnterDate" placeholder=" تاریخ شروع کار">
+                                                <label for="exampleInputOfDate">@ViewData["from"]  </label>
+                                                <input asp-for="WorkEnterDate" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="WorkEnterDate" placeholder="@ViewData["fromPL"]">
                                                 <span asp-validation-for="WorkEnterDate" class="text-center d-block text-danger"></span>
 
                                             </div>
                                             <div class="col-md-6 p-0 m-0">
-                                                <label for="exampleInputOnDate">تا تاریخ</label>
-                                                <input asp-for="WorkExitDate" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="WorkExitDate" placeholder="تاریخ اتمام کار">
+                                                <label for="exampleInputOnDate"> @ViewData["to"] </label>
+                                                <input asp-for="WorkExitDate" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="WorkExitDate" placeholder="@ViewData["toPL"]">
                                                 <span asp-validation-for="WorkExitDate" class="text-center d-block text-danger"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group w-100 text-right">
-                                            <label for="exampleInputDetalis" class="mt-md-3">توضیحات </label>
-                                            <textarea asp-for="WorkDescriptions" class="form-control hj-form-profile " id="exampleInputDetalis" rows="3" placeholder="توضیحات ..."></textarea>
+                                            <label for="exampleInputDetalis" class="mt-md-3">@ViewData["DescriptionPL"] </label>
+                                            <textarea asp-for="WorkDescriptions" class="form-control hj-form-profile " id="exampleInputDetalis" rows="3" placeholder="@ViewData["DescriptionPL"] ..."></textarea>
                                             <span asp-validation-for="WorkDescriptions" class="text-center d-block text-danger"></span>
                                         </div>
 
@@ -165,37 +183,34 @@
 
 
 
-
-
-
                                 <div class="container hj-form mt-5 m-0 p-0 mx-auto">
                                     <div class="row w-100 p-0 m-0">
-                                        <div class="col-md-11 col-10 text-right"><h4 class="size20">سوابق تحصیلی</h4></div>
+                                        <div class="col-md-11 col-10 text-right"><h4 class="size20">@ViewData["AcademicRecords"]  </h4></div>
                                         <div class="col-md-1 col-2 text-left pt-2"> <i class="fa fa-plus-circle hj-sum" id="plus-profile2"></i></div>
                                     </div>
 
                                     <div class="row w-100 hj-Records hj-form mt-3  mx-auto p-0 m-0 px-2" id="Record2">
                                         <div class="form-group w-100 text-right">
-                                            <label asp-for="MaghTa" for="exampleInputCompany">مقطع</label>
+                                            <label asp-for="MaghTa" for="exampleInputCompany">@ViewData["GradePL"]</label>
                                             <input asp-for="MaghTa" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="exampleInputCompany" placeholder=" مقطع">
                                             <span asp-validation-for="MaghTa" class="text-danger"></span>
                                         </div>
 
                                         <div class="form-group w-100 text-right">
-                                            <label for="exampleInputPosition">نام دانشگاه</label>
+                                            <label for="exampleInputPosition">   @ViewData["UniverCityName"]</label>
                                             <input asp-for="UnivercityName" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="exampleInputPosition" placeholder=" نام دانشگاه را وارد کنید ">
                                             <span asp-validation-for="UnivercityName" class="text-center d-block text-danger"></span>
                                         </div>
 
                                         <div class="form-group w-100 text-right">
                                             <div class="col-md-6 p-0 m-0 mb-4">
-                                                <label for="exampleInputOfDate">از تاریخ</label>
+                                                <label for="exampleInputOfDate">@ViewData["from"]  </label>
                                                 <input asp-for="EduEnterDate" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="EduEnterDate" placeholder="تاریخ شروع تحصیل">
                                                 <span asp-validation-for="EduEnterDate" class="text-center d-block text-danger"></span>
 
                                             </div>
                                             <div class="col-md-6 p-0 m-0 mb-4">
-                                                <label for="exampleInputOnDate">تا تاریخ</label>
+                                                <label for="exampleInputOnDate">  @ViewData["to"]</label>
                                                 <input asp-for="EduExitDate" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="EduExitDate" placeholder="تاریخ پایان تحصیل">
                                                 <span asp-validation-for="EduExitDate" class="text-center d-block text-danger"></span>
                                             </div>
@@ -210,21 +225,21 @@
 
                                 <div class="container hj-form mt-5 m-0 p-0 mx-auto">
                                     <div class="row w-100 p-0 m-0">
-                                        <div class="col-md-11 col-10 text-right"><h4 class="size20">سایر اطلاعات</h4></div>
+                                        <div class="col-md-11 col-10 text-right"><h4 class="size20">  @ViewData["OtherInfo"]</h4></div>
                                         <div class="col-md-1 col-2 text-left pt-2"> <i class="fa fa-plus-circle hj-sum" id="plus-profile3"></i></div>
                                     </div>
                                     <div class="row w-100 hj-Records hj-form mt-3  mx-auto p-0 m-0 px-2" id="Record3">
 
                                         <div class="form-group w-100 text-right">
-                                            <label asp-for="Birthdate" for="Birthdate">تاریخ تولد</label>
-                                            <input asp-for="Birthdate" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="Birthdate" placeholder="تاریخ تولد خود را وارد کنید">
+                                            <label asp-for="Birthdate" for="Birthdate"> @ViewData["BirthDate"] </label>
+                                            <input asp-for="Birthdate" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="Birthdate" placeholder="@ViewData["BirthDatePL"]">
                                             <span asp-validation-for="Birthdate" class="text-danger"></span>
                                         </div>
 
 
                                         <div class="form-group w-100 text-right">
-                                            <label asp-for="LanguageKnowing" for="Birthdate"> زبان های  تسلط دارید</label>
-                                            <input asp-for="LanguageKnowing" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="LanguageKnowing" placeholder=" زبان هایی که مسلط هستید را وارد کنید ">
+                                            <label asp-for="LanguageKnowing" for="Birthdate">  @ViewData["LanguageKnowing"]     </label>
+                                            <input asp-for="LanguageKnowing" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="LanguageKnowing" placeholder="@ViewData["LanguageKnowingPL"] ">
                                             <span asp-validation-for="LanguageKnowing" class="text-danger"></span>
                                         </div>
 
@@ -247,21 +262,19 @@
 
                                         <div class="form-group w-100 text-right">
                                             <div class="col-md-6 p-0 m-0 mb-4">
-                                                <label asp-for="MarriedType" class="control-label"></label>
-                                                <select asp-for="MarriedType" placeholder="جنسیت" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserMarriedType>()"></select>
+                                                <label asp-for="MarriedType" class="control-label">@ViewData["genderPL"]</label>
+                                                <select asp-for="MarriedType" placeholder="@ViewData["genderPL"]" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserMarriedType>()"></select>
                                                 <span asp-validation-for="MarriedType" class="text-center d-block text-danger"></span>
 
                                             </div>
                                             <div class="col-md-6 p-0 m-0 mb-4">
-                                                <label asp-for="Gender" class="control-label"></label>
-                                                <select asp-for="Gender" placeholder="وضعیت" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()"> </select>
+                                                <label asp-for="Gender" class="control-label">@ViewData["SituationPL"]</label>
+                                                <select asp-for="Gender" placeholder=" @ViewData["SituationPL"]" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()"> </select>
                                                 <span asp-validation-for="Gender" class="text-center d-block text-danger"></span>
                                             </div>
                                             <label className="text-right w-100 pr-3 mt-md-3">   </label>
 
                                         </div>
-
-
 
                                     </div>
                                 </div>
@@ -270,7 +283,7 @@
 
                                 <div class="container m-0 p-0 mx-auto">
                                     <div class="row text-center mt-5 d-block">
-                                        <input type="submit" value="ذخیره تغیرات" class="btn btn-success w-25 mx-auto Confirmation mb-5" />
+                                        <input type="submit" value="@ViewData["SaveChanges"]" class="btn btn-success w-25 mx-auto Confirmation mb-5" />
 
                                         @* <button type="submit" class=" btn btn-success w-25 mx-auto Confirmation mb-5 "> ذخیره تغیرات </button>*@
                                     </div>
@@ -1415,53 +1428,106 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
     <script src="~/lib/jquery.tagsinput/jquery.tagsinput.min.js"></script>
     <script src="~/lib/dateicker/kamadatepicker.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
     <script>
 
+           @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+                           {
+                    <text>
+                $(document).ready(function() {
+
+                     
+                    $('#LanguageKnowing').tagsInput({
+                        'interactive':true,
+                        'defaultText': 'وارد کنید',
+                    });
+                    $("#LanguageKnowing_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+
+
+
+                     kamaDatepicker('Birthdate');
+                    $("#Birthdate").keypress(function(event) { event.preventDefault(); });
+
+                     kamaDatepicker('WorkEnterDate');
+                     $("#WorkEnterDate").keypress(function (event) { event.preventDefault(); });
+                     kamaDatepicker('WorkExitDate');
+                     $("#WorkExitDate").keypress(function (event) { event.preventDefault(); });
+
+                      kamaDatepicker('EduEnterDate');
+                      $("#EduEnterDate").keypress(function (event) { event.preventDefault(); });
+
+                     kamaDatepicker('EduExitDate');
+                     $("#EduExitDate").keypress(function (event) { event.preventDefault(); });
+
+                  })
+                </text>
+
+           }
+          else {
+
+               <text>
         $(document).ready(function () {
+            
+                    $('#LanguageKnowing').tagsInput({
+                        'interactive': true,
+                        'defaultText': 'Enter new',
+                    });
+                   $("#LanguageKnowing_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
 
 
-            $('#LanguageKnowing').tagsInput({
-                'interactive':true,
-                'defaultText': 'وارد کنید',
 
-            });
-            $("#LanguageKnowing_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
 
-            kamaDatepicker('Birthdate');
-            $("#Birthdate").keypress(function (event) { event.preventDefault(); });
 
-            kamaDatepicker('WorkEnterDate');
-            $("#WorkEnterDate").keypress(function (event) { event.preventDefault(); });
-            kamaDatepicker('WorkExitDate');
+                 $('#Birthdate').datepicker()
+                $("#Birthdate").keypress(function (event) { event.preventDefault(); });
+
+
+                $('#WorkEnterDate').datepicker()
+               $("#WorkEnterDate").keypress(function (event) { event.preventDefault(); });
+ 
+             $('#WorkExitDate').datepicker()
             $("#WorkExitDate").keypress(function (event) { event.preventDefault(); });
 
-            kamaDatepicker('EduEnterDate');
+
+            $('#EduEnterDate').datepicker()
             $("#EduEnterDate").keypress(function (event) { event.preventDefault(); });
 
-            kamaDatepicker('EduExitDate');
-            $("#EduExitDate").keypress(function (event) { event.preventDefault(); });
+
+            $('#EduExitDate').datepicker()
+             $("#EduExitDate").keypress(function (event) { event.preventDefault(); });
+
+
+
 
 
         })
+
+                </text>
+
+
+            }
+
 
 
 
 
 
         var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
+           var chart = new Chart(ctx, {
             // The type of chart we want to create
-            type: 'line',
+               type: 'line',
 
-            // The data for our dataset
-            data: {
-                labels: ['آبان', 'آذر', 'دی', 'بهمن'],
-                datasets: [{
+               // The data for our dataset
+               data: {
+
+                   labels: ['آبان', 'آذر', 'دی', 'بهمن'],
+                   datasets: [{
                     label: 'درآمد کسب شده',
-                    backgroundColor: '#fff0',
-                    borderColor: '#9BC93A',
+                       backgroundColor: '#fff0',
+                       borderColor: '#9BC93A',
 
-                    data: [0, 50.00, 30.00, 80.00]
+                       data: [0, 50.00, 30.00, 80.00]
                 }]
             },
 
@@ -1478,12 +1544,12 @@
 
         $("#profile-img").click(function () {
             $("#status-options").toggleClass("active");
-        });
+           });
 
         $(".expand-button").click(function () {
             $("#profile").toggleClass("expanded");
             $("#contacts").toggleClass("expanded");
-        });
+           });
 
         $("#status-options ul li").click(function () {
             $("#profile-img").removeClass();
@@ -1493,42 +1559,42 @@
             $("#status-offline").removeClass("active");
             $(this).addClass("active");
 
-            if ($("#status-online").hasClass("active")) {
+               if ($("#status-online").hasClass("active")) {
                 $("#profile-img").addClass("online");
-            } else if ($("#status-away").hasClass("active")) {
+               } else if ($("#status-away").hasClass("active")) {
                 $("#profile-img").addClass("away");
-            } else if ($("#status-busy").hasClass("active")) {
+               } else if ($("#status-busy").hasClass("active")) {
                 $("#profile-img").addClass("busy");
-            } else if ($("#status-offline").hasClass("active")) {
+               } else if ($("#status-offline").hasClass("active")) {
                 $("#profile-img").addClass("offline");
-            } else {
+               } else {
                 $("#profile-img").removeClass();
-            };
+               };
 
             $("#status-options").removeClass("active");
-        });
+           });
 
         function newMessage() {
-            message = $(".message-input input").val();
-            if ($.trim(message) == '') {
-                return false;
-            }
+               message = $(".message-input input").val();
+               if ($.trim(message) == '') {
+                   return false;
+               }
             $('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
             $('.message-input input').val(null);
             $('.contact.active .preview').html('<span>You: </span>' + message);
             $(".messages").animate({ scrollTop: $(document).height() }, "fast");
-        };
+           };
 
         $('.submit').click(function () {
-            newMessage();
-        });
+               newMessage();
+           });
 
         $(window).on('keydown', function (e) {
-            if (e.which == 13) {
-                newMessage();
-                return false;
-            }
-        });
+               if (e.which == 13) {
+                   newMessage();
+                   return false;
+               }
+           });
 //# sourceURL=pen.js
     </script>
 }

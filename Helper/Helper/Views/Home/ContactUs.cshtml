@@ -1,4 +1,5 @@
 ﻿@model Helper.Models.Entities.TBL_Setting
+@using System.Globalization
 
 @{
     ViewData["Title"] = "ContactUs";
@@ -10,17 +11,25 @@
 
 <div class="container mx-auto p-0 m-0 mt-5">
     <div class="row w-100 p-0 m-0 mx-auto">
-        <div class="col-md-10 col-8 text-right"><h3><b>  تماس با  ما</b></h3></div>
+        <div class="col-md-10 col-8 text-right"><h3><b>   @ViewData["ContactUs"]  </b></h3></div>
     </div>
     <div class="row w-100 mx-auto">
-        <img src="/hj/img/borderbig green.png" 
+        <img src="/hj/img/borderbig green.png"
              alt="img1"
              class="img-fluid mx-auto" />
     </div>
 
     <div class="row  p-2 m-0  mt-3">
-        
-        @Html.Raw(Model.Value)
+        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+        {
+            @Html.Raw(Model.Value)
+        }
+        else
+        {
+            @Html.Raw(Model.EnglishValue)
+        }
+
+
     </div>
 
 </div>

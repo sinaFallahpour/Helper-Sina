@@ -132,6 +132,15 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="InValidEmail" xml:space="preserve">
+    <value>Please provide a valid email address.</value>
+  </data>
+  <data name="Maximum length is {1} characters" xml:space="preserve">
+    <value>Maximum length is {1} characters</value>
+  </data>
+  <data name="Minimum length is {1} characters" xml:space="preserve">
+    <value>Minimum length is {1} characters</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>This Field is Required</value>
   </data>

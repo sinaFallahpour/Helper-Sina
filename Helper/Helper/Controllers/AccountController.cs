@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace Helper.Controllers
 {
@@ -24,15 +25,18 @@ namespace Helper.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private IStringLocalizer<AccountController> _localizer;
         public AccountController(ApplicationDbContext context,
              UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+             IStringLocalizer<AccountController> localizer)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _localizer = localizer;
         }
 
 
@@ -40,6 +44,7 @@ namespace Helper.Controllers
 
         public IActionResult Index(string returnUrl)
         {
+            returnViewDate();
             returnUrl = string.IsNullOrEmpty(returnUrl) ? "/profiles" : returnUrl;
 
             if (_signInManager.IsSignedIn(User))
@@ -60,7 +65,8 @@ namespace Helper.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
-            returnUrl = string.IsNullOrEmpty(returnUrl) ? "/profiles" : returnUrl;
+            returnViewDate();
+           // returnUrl = string.IsNullOrEmpty(returnUrl) ? "/profiles" : returnUrl;
 
             if (_signInManager.IsSignedIn(User))
             {
@@ -82,9 +88,18 @@ namespace Helper.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginVm model)
         {
-            model.ReturnUrl = model.ReturnUrl ?? "/profiles";
+            var UserReturnUrl = model.ReturnUrl ?? "/profiles";
             var AdminReturnUrl = model.ReturnUrl ?? "/admin/admins/Profile";
+
+            model.ReturnUrl = UserReturnUrl;
+
+
+
+
+
+
             ViewBag.ActiveTab = "Login";
+            returnViewDate();
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(model.Username);
@@ -97,10 +112,17 @@ namespace Helper.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    if (User.IsInRole(Static.ADMINROLE))
+                    var existingRole = await _userManager.GetRolesAsync(user);  
+                    var role = existingRole.SingleOrDefault();
+
+                    if (role == Static.ADMINROLE)
                     {
                         return LocalRedirect(AdminReturnUrl);
                     }
+                    //if (User.IsInRole(Static.ADMINROLE))
+                    //{
+                    //    return LocalRedirect(AdminReturnUrl);
+                    //}
                     return LocalRedirect(model.ReturnUrl);
                 }
                 else
@@ -134,9 +156,10 @@ namespace Helper.Controllers
 
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [HttpPost]                      
+        [HttpPost]
         public async Task<ActionResult> Register(RegisterVm model)
         {
+            returnViewDate();
             model.ReturnUrl = model.ReturnUrl ?? "/profiles";
             ViewBag.ActiveTab = "Register";
             if (ModelState.IsValid)
@@ -159,6 +182,9 @@ namespace Helper.Controllers
                     UserName = model._Username,
                     NormalizedUserName = model._Username.Normalize(),
                     AcceptRules = model.AcceptRules,
+                    
+                    //عدم استفاده از پلن رایگان
+                    IsUsedFree=false,
                     //SerialNumber = SerialNumber,
                     WorkExperience = new TBL_WorkExperience(),
                     EducationHistry = new TBL_EducationalHistory(),
@@ -237,6 +263,25 @@ namespace Helper.Controllers
 
 
         #endregion
+
+
+
+
+
+        private void returnViewDate()
+        {
+            ViewData["Login"] = _localizer["Login"];
+            ViewData["Register"] = _localizer["Register"];
+            ViewData["RememberMe"] = _localizer["RememberMe"];
+            ViewData["ForgotPassword"] = _localizer["ForgotPassword"];
+            ViewData["UseGoogleText"] = _localizer["UseGoogleText"];
+            ViewData["LogInWithGoogle"] = _localizer["LogInWithGoogle"];
+            ViewData["AcceptRole"] = _localizer["AcceptRole"];
+            ViewData["UserName"] = _localizer["UserName"];
+            ViewData["Password"] = _localizer["Password"];
+            ViewData["ImLogin"] = _localizer["ImLogin"];
+
+        }
 
 
     }

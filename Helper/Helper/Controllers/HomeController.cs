@@ -14,6 +14,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
+using Microsoft.Extensions.Localization;
+using Helper.Models.Enums;
+using Helper.Models.Entities;
+using DNTPersianUtils.Core;
 
 namespace Helper.Controllers
 {
@@ -22,21 +26,63 @@ namespace Helper.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILogger<HomeController> _logger;
+        private IStringLocalizer<HomeController> _localizer;
 
-        public HomeController(ILogger<HomeController> logger,
-            ApplicationDbContext context)
+        public HomeController(
+            ApplicationDbContext context,
+             IStringLocalizer<HomeController> localizer)
         {
-            _logger = logger;
             _context = context;
-
+            _localizer = localizer;
         }
 
 
 
         public async Task<IActionResult> Index()
         {
-            var slides = await _context.TBL_Sliders.Where(c => c.IsActive == true).ToListAsync();
+            ViewData["WhyHelper"] = _localizer["WhyHelper"];
+            ViewData["HowHelperWork"] = _localizer["HowHelperWork"];
+
+            ViewData["StartNow"] = _localizer["StartNow"];
+            ViewData["ForProfessionals"] = _localizer["ForProfessionals"];
+            ViewData["ForProfessionalsText"] = _localizer["ForProfessionalsText"];
+
+            ViewData["NumberOfServiceProviders"] = _localizer["NumberOfServiceProviders"];
+            ViewData["ServicesProvided"] = _localizer["ServicesProvided"];
+            ViewData["citiesOfCovered"] = _localizer["citiesOfCovered"];
+
+
+            ViewData["ForUsers"] = _localizer["ForUsers"];
+
+            ViewData["ForUsersText"] = _localizer["ForUsersText"];
+
+            ViewData["ViewCategories"] = _localizer["ViewCategories"];
+            ViewData["SeeAll"] = _localizer["SeeAll"];
+            ViewData["Service"] = _localizer["Service"];
+
+
+
+            ViewData["Title1"] = _localizer["Title1"];
+            ViewData["Text2"] = _localizer["Text2"];
+
+
+
+
+
+            List<TBL_Slide> slides;
+            if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+                slides = await _context.TBL_Sliders
+                    .Where(c => c.IsActive == true && c.LanguageType==LanguageType.Persian)
+                    .ToListAsync();
+            }
+            else
+            {
+                slides = await _context.TBL_Sliders
+                    .Where(c => c.IsActive == true && c.LanguageType==LanguageType.English)
+                    .ToListAsync();
+            }
+           
             var model = new HomePageVM
             {
                 Slides = slides,
@@ -49,6 +95,8 @@ namespace Helper.Controllers
 
         public async Task<IActionResult> AboutUs()
         {
+            ViewData["AbouUs"] = _localizer["AbouUs"];
+
             var AboutUs = await _context.TBL_Settings.Where(c => c.Key == PublicHelper.AboutUsKeyName).FirstOrDefaultAsync();
             return View(AboutUs);
         }
@@ -58,6 +106,8 @@ namespace Helper.Controllers
 
         public async Task<IActionResult> ContactUs()
         {
+            ViewData["ContactUs"] = _localizer["ContactUs"];
+
             var ContactUs = await _context.TBL_Settings.Where(c => c.Key == PublicHelper.ContactKeyName).FirstOrDefaultAsync();
             return View(ContactUs);
         }
@@ -68,6 +118,8 @@ namespace Helper.Controllers
 
         public async Task<IActionResult> SiteRules()
         {
+            ViewData["SiteRoles"] = _localizer["SiteRoles"];
+
             var SiteRules = await _context.TBL_Settings.Where(c => c.Key == PublicHelper.SiteRulesKeyName).FirstOrDefaultAsync();
             return View(SiteRules);
         }
@@ -104,7 +156,7 @@ namespace Helper.Controllers
         }
 
 
-    
+
 
     }
 }

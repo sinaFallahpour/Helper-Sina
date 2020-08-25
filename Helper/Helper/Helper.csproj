@@ -48,6 +48,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\ViewModels\Plan\" />
+    <Folder Include="Resources\Controllers\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\clipboard\dialogs\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\plugins\" />
     <Folder Include="wwwroot\Upload\News\" />

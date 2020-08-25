@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace Helper.Controllers
 {
@@ -23,19 +24,22 @@ namespace Helper.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
+        private IStringLocalizer<ProfilesController> _localizer;
+
         public ProfilesController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ApplicationDbContext context,
                //JwtGenerator jwtGenerator,
                IHttpContextAccessor httpContextAccessor,
-                  IMapper mapper
-            )
+                  IMapper mapper,
+           IStringLocalizer<ProfilesController> localizer)
         {
             _context = context;
             _userManager = userManager;
 
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
+            _localizer = localizer;
         }
 
 
@@ -47,6 +51,14 @@ namespace Helper.Controllers
         [Authorize]
         public async Task<ActionResult> Index()
         {
+
+
+            returnViewDate();
+
+
+
+
+
             var UserId = User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var user = await _context
                     .Users
@@ -73,27 +85,14 @@ namespace Helper.Controllers
                         EduExitDate = c.EducationHistry.ExitDate,
                         MaghTa = c.EducationHistry.MaghTa,
                         UnivercityName = c.EducationHistry.UnivercityName,
-                        //EducationHistryDTO = new EducationHistoryDTO
-                        //{
-                        //    EnterDate = c.EducationHistry.EnterDate,
-                        //    ExitDate = c.EducationHistry.ExitDate,
-                        //    MaghTa = c.EducationHistry.MaghTa,
-                        //    UnivercityName = c.EducationHistry.UnivercityName,
-                        //},
+
 
                         WorkEnterDate = c.WorkExperience.EnterDate,
                         WorkExitDate = c.WorkExperience.ExitDate,
                         WorkDescriptions = c.WorkExperience.Descriptions,
                         Semat = c.WorkExperience.Semat,
                         CompanyName = c.WorkExperience.CompanyName,
-                        //WorkExperienceDTO = new WorkExperienceDTO
-                        //{
-                        //    EnterDate = c.WorkExperience.EnterDate,
-                        //    ExitDate = c.WorkExperience.ExitDate,
-                        //    Descriptions = c.WorkExperience.Descriptions,
-                        //    Semat = c.WorkExperience.Semat,
-                        //    CompanyName = c.WorkExperience.CompanyName,
-                        //},
+
                     })
                     .FirstOrDefaultAsync();
             if (user != null)
@@ -103,6 +102,7 @@ namespace Helper.Controllers
 
         }
 
+        #endregion
 
 
 
@@ -116,6 +116,9 @@ namespace Helper.Controllers
         [Authorize]
         public async Task<ActionResult> Index(string Id, ProfileVM2 model)
         {
+            returnViewDate();
+
+
             if (Id != model.Id)
             {
                 return NotFound();
@@ -132,11 +135,17 @@ namespace Helper.Controllers
                     if (userFromDb != null)
                     {
                         if (await _context.Users.Where(x => x.UserName == model.UserName && x.UserName != userFromDb.UserName).AnyAsync())
-                            return new JsonResult(new { Status = 0, Message = " نام کاربری موجود است" });
-
+                        {
+                            TempData["Error"] = _localizer["ExistUserName"].Value.ToString();
+                            return View(model);
+                        }
+ 
                         if (await _context.Users.Where(x => x.Email == model.Email && x.Email != userFromDb.Email).AnyAsync())
-                            return new JsonResult(new { Status = 0, Message = " ایمیل  موجود است" });
-
+                        {
+                            TempData["Error"] = _localizer["ExistEmail"].Value.ToString();
+                            return View(model);
+                        }
+ 
 
                         userFromDb.Nickname = model.Nickname;
                         userFromDb.UserName = model.UserName;
@@ -198,8 +207,53 @@ namespace Helper.Controllers
 
 
 
+        private void returnViewDate()
+        {
+            ViewData["EditProfile"] = _localizer["EditProfile"];
+            ViewData["Dashboard"] = _localizer["Dashboard"];
 
-        #endregion
+
+            ViewData["from"] = _localizer["from"];
+            ViewData["to"] = _localizer["to"];
+            ViewData["Position"] = _localizer["Position"];
+            ViewData["BirthDate"] = _localizer["BirthDate"];
+
+            ViewData["LanguageKnowingPL"] = _localizer["LanguageKnowingPL"];
+            ViewData["LanguageKnowing"] = _localizer["LanguageKnowing"];
+
+
+
+            ViewData["Resume"] = _localizer["Resume"];
+            ViewData["OtherInfo"] = _localizer["OtherInfo"];
+            ViewData["AcademicRecords"] = _localizer["AcademicRecords"];
+
+
+            ViewData["NameAndLastNamePL"] = _localizer["NameAndLastNamePL"];
+            ViewData["UserNamePL"] = _localizer["UserNamePL"];
+            ViewData["EmailPL"] = _localizer["EmailPL"];
+            ViewData["CityPL"] = _localizer["CityPL"];
+            ViewData["MobileNumberPL"] = _localizer["MobileNumber"];
+            ViewData["OfficePL"] = _localizer["OfficePL"];
+            ViewData["PositionPL"] = _localizer["PositionPL"];
+            ViewData["fromPL"] = _localizer["fromPL"];
+            ViewData["toPL"] = _localizer["toPL"];
+            ViewData["DescriptionPL"] = _localizer["DescriptionPL"];
+            ViewData["GradePL"] = _localizer["GradePL"];
+            ViewData["UniverCityName"] = _localizer["UniverCityName"];
+            ViewData["Office"] = _localizer["Office"];
+
+            ViewData["BirthDatePL"] = _localizer["BirthDatePL"];
+            ViewData["GenderPL"] = _localizer["GenderPL"];
+            ViewData["SituationPL"] = _localizer["SituationPL"];
+
+
+
+            ViewData["SaveChanges"] = _localizer["SaveChanges"];
+
+
+        }
+
+
 
 
 

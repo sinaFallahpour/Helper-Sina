@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-           
+
             <input type="hidden" asp-for="Id" />
 
             <!-- input -->
@@ -42,14 +42,19 @@
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label asp-for="Description" for="validationCustom03"></label>
-                    <textarea asp-for="Description" type="" rows="4" class="form-control _min-height260" id="validationCustom03"
-                              placeholder="متن درباره ما">
-                    </textarea>
-                    <span asp-validation-for="Description" class="text-danger"> </span>
+                    <label asp-for="LanguageType" for="LanguageType" class="text-dark"></label>
 
+                    <select asp-for="LanguageType" class="custom-select custom-select-lg">
+                        @*<option selected>این انتخابگر را امتحان کنید</option>*@
+                        <option value="0">انگلیسی</option>
+                        <option value="1"> فارسی  </option>
+                    </select>
                 </div>
             </div>
+
+
+
+
 
             <input name="Photo" type="file" class="custom-file-input" onchange="readURL(this);" id="customFile">
             <!-- fileUpload checkBox && selectOption -->
@@ -70,6 +75,19 @@
                     <label asp-for="IsActive" class="custom-control-label" for="customCheck1"> ‌   آیا فعال است؟</label>
 
                     <span asp-validation-for="IsActive" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Description" for="Description"></label>
+                    <textarea asp-for="Description" type="" rows="4" class="form-control _min-height260" id="validationCustom03"
+                              placeholder="متن اسلاید">
+                    </textarea>
+                    <span asp-validation-for="Description" class="text-danger"> </span>
+
                 </div>
             </div>
 

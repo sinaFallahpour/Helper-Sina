@@ -21,13 +21,13 @@
             <div class="tabs">
                 @if (tabCondition)
                 {
-                    <h3 class="signup-tab"><a href="#signup-tab-content">ثبت نام </a></h3>
-                    <h3 class="login-tab"><a class="active" href="#login-tab-content">ورود</a></h3>
+                    <h3 class="signup-tab"><a href="#signup-tab-content">  @ViewData["Register"] </a></h3>
+                    <h3 class="login-tab"><a class="active" href="#login-tab-content">@ViewData["Login"]</a></h3>
                 }
                 else
                 {
-                    <h3 class="signup-tab"><a class="active" href="#signup-tab-content">ثبت نام </a></h3>
-                    <h3 class="login-tab"><a href="#login-tab-content">ورود</a></h3>
+                    <h3 class="signup-tab"><a class="active" href="#signup-tab-content"> @ViewData["Register"]   </a></h3>
+                    <h3 class="login-tab"><a href="#login-tab-content"> @ViewData["Login"]</a></h3>
                 }
 
 
@@ -55,6 +55,7 @@
                         @*......._Username....... *@
 
                         <input placeholder="نام کاربری"
+                               autocomplete="off"
                                class="input text-center  py-3 my-2 mx-auto d-block"
                                type="text" data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
                                data-val-maxlength-max="20" data-val-minlength="حداقل 3 کاراکتر وارد کنید"
@@ -66,6 +67,7 @@
 
                         @*......._Email....... *@
                         <input placeholder="ایمیل"
+                               autocomplete="off"
                                class="input text-center  py-3 my-2 mx-auto d-block"
                                type="email" data-val="true" data-val-email="به فرمت  ایمیل وارد کنید"
                                data-val-maxlength="حداکثر 30 کاراکتر وارد کنید"
@@ -78,6 +80,7 @@
 
                         @*......._password....... *@
                         <input placeholder="رمز عبور"
+                               autocomplete="off"
                                class="input text-center  py-3 my-2 mx-auto d-block"
                                type="password"
                                data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
@@ -96,27 +99,27 @@
                                id="AcceptRules"
                                value="true">
 
-                        <label for="AcceptRules" class="pr-4 my-3 ">  قوانین را میپذیرم  </label>
+                        <label for="AcceptRules" class="pr-4 my-3 ">      @ViewData["AcceptRole"]    </label>
 
 
 
 
-                        <input type="submit" class="button" value="ثبت نام ">
+                        <input type="submit" class="button" value="@ViewData["Register"]">
                     </form>
                     <!--.login-form-->
                     <div class="help-text">
-                        <p><a href="/account/login">  قبلا ثبت نام کرده ام !</a></p>
+                        <p><a href="/account/login">    @ViewData["ImLogin"]</a></p>
                     </div>
                     <!--.help-text-->
                     <hr />
                     <div class="row w-100 mx-auto text-center">
-                        <p class="w-100 text-center">می توانید از سرویس گوگل برای ثبت نام استفاده کنید </p>
+                        <p class="w-100 text-center">   @ViewData["UseGoogleText"]   </p>
 
                     </div>
                     <div class="row w-100 mx-auto text-center">
                         <a href="#" class="mx-auto">
                             <img src="~/hj/img/google-icon.png" class="text-center mx-auto img-fluid" /><br />
-                            <span class="text-center w-100">ثبت نام با گوگل</span>
+                            <span class="text-center w-100">   @ViewData["LogInWithGoogle"]  </span>
                         </a>
                     </div>
                 </div><!--.signup-tab-content-->
@@ -136,30 +139,33 @@
                             </div>
                         }
 
+
+
                         <input type="hidden" name="Id" value="0" />
                         <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input asp-for="Username" class="input text-center  py-3 my-2" id="user_login" autocomplete="off" placeholder="نام کاربری ">
+                        <input asp-for="Username" class="input text-center  py-3 my-2"  id="user_login" autocomplete="off" placeholder="@ViewData["UserName"]">
                         <span asp-validation-for="Username" class="text-danger w-10 d-block"> </span>
 
-                        <input asp-for="Password" class="input text-center  py-3 my-2" id="user_pass" autocomplete="off" placeholder="رمز عبور">
+                        <input asp-for="Password" class="input text-center py-3 my-2" id="user_pass" autocomplete="off" placeholder="@ViewData["Password"]">
                         <span asp-validation-for="Password" class="text-danger w-10 d-block"> </span>
 
                         <input asp-for="RememberMe" class="checkbox" id="remember_me">
 
-                        <label for="remember_me" class="pr-4 my-3 "> مرا به خاطر بسپار</label>
+                        <label for="remember_me" class="pr-4 my-3 "> @ViewData["RememberMe"]  </label>
 
-                        <input type="submit" class="button" value="ورود">
+                        <input type="submit" class="button" value="@ViewData["Login"]">
                     </form>
                     <!--.login-form-->
                     <div class="help-text mt-4">
-                        <p><a href="#">رمز عبور را فراموش کردید ؟  </a></p>
+                        <p><a href="#">     @ViewData["ForgotPassword"]  </a></p>
                     </div><!--.help-text-->
                 </div><!--.login-tab-content-->
             </div><!--.tabs-content-->
         </div>
     </div>
 </div>
+   
 
 
 

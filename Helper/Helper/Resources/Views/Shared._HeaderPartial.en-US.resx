@@ -120,20 +120,11 @@
   <data name="AboutUs" xml:space="preserve">
     <value>AboutUs</value>
   </data>
-  <data name="Articles" xml:space="preserve">
-    <value>Articles</value>
-  </data>
   <data name="ContactUs" xml:space="preserve">
     <value>ContactUs</value>
   </data>
-  <data name="EducationalVideos" xml:space="preserve">
-    <value>Educational Videos</value>
-  </data>
   <data name="Exports" xml:space="preserve">
     <value>Exports</value>
-  </data>
-  <data name="HelperNews" xml:space="preserve">
-    <value>Helper News</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
@@ -143,9 +134,6 @@
   </data>
   <data name="logOut" xml:space="preserve">
     <value>logOut</value>
-  </data>
-  <data name="New" xml:space="preserve">
-    <value>lates</value>
   </data>
   <data name="Newses" xml:space="preserve">
     <value>Newses</value>

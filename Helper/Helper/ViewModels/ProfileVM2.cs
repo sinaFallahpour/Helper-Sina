@@ -12,43 +12,43 @@ namespace Helper.ViewModels
     {
         public string Id { get; set; }
 
-        [Required(ErrorMessage = "این فیلد الزامیست")]
-        [MinLength(3, ErrorMessage = "حداقل 3 کاراکتر وارد کنید")]
-        [MaxLength(20, ErrorMessage = "حداکثر 20 کاراکتر وارد کنید")]
-        [Display(Name = "نام کاربری")]
+        [Required(ErrorMessage = "Required")]
+        [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(20, ErrorMessage = "Maximum length is {1} characters")]
+        [Display(Name = "UserName")]
         public string UserName { get; set; }
 
-        [EmailAddress(ErrorMessage = "به فرمت  ایمیل وارد کنید")]
-        [Required(ErrorMessage = "این فیلد الزامیست")]
-        [MaxLength(30, ErrorMessage = "حداکثر 30 کاراکتر وارد کنید")]
-        [Display(Name = "ایمیل")]
+        [EmailAddress(ErrorMessage = "InValidEmail")]
+        [Required(ErrorMessage = "Required")]
+        [MaxLength(30, ErrorMessage = "Maximum length is {1} characters")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
 
-        [MaxLength(200, ErrorMessage = "حداکثر 200 کاراکتر وارد کنید")]
-        [MinLength(3, ErrorMessage = "حداقل 3 کاراکتر وارد کنید")]
+        [MaxLength(200, ErrorMessage = "Maximum length is {1} characters")]
+        [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
         [Display(Name = "نام")]
         public string Nickname { get; set; }
 
 
         //[StringLength(8, MinimumLength = 1, ErrorMessage = "فقط 11 کاراکتر وارد کنید")]
-        [MinLength(8, ErrorMessage = "از 8 تا 11 کاراکتر وارد کنید")]
-        [MaxLength(11, ErrorMessage = "از 8 تا 11 کاراکتر وارد کنید")]
+        [MinLength(8, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(11, ErrorMessage = "Maximum length is {1} characters")]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "شماره تماس ")]
         public string Phone { get; set; }
 
 
-        [MaxLength(300, ErrorMessage = "حداکثر 300 کاراکتر وارد کنید")]
+        [MaxLength(300, ErrorMessage = "Maximum length is {1} characters")]
         public string Descriptions { get; set; }
 
 
-        [StringLength(maximumLength: 50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = " تاریخ تولد ")]
         public string Birthdate { get; set; }
 
 
-        [StringLength(maximumLength: 600, ErrorMessage = "حداکثر 600 کاراکتر وارد کنید")]
+        [StringLength(maximumLength: 600, ErrorMessage = "Maximum length is {1} characters")]
         public string LanguageKnowing { get; set; }
 
 
@@ -59,25 +59,25 @@ namespace Helper.ViewModels
         public UserMarriedType MarriedType { get; set; }
 
 
-        [StringLength(maximumLength: 100, ErrorMessage = "حداکثر 100 کاراکتر وارد کنید")]
+        [StringLength(maximumLength: 100, ErrorMessage = "Maximum length is {1} characters")]
         public string City { get; set; }
 
         //public UserVM CurrentUser { get; set; }
 
 
-        [StringLength(maximumLength: 100, ErrorMessage = "حداکثر 100 کاراکتر وارد کنید")]
+        [StringLength(maximumLength: 100, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "مقطع ")]
         public string MaghTa { get; set; }
 
-        [MaxLength(200, ErrorMessage = "حداکثر 200 کاراکتر وارد کنیید")]
+        [MaxLength(200, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "نام دانشگاه")]
         public string UnivercityName { get; set; }
 
-        [StringLength(maximumLength: 50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "  از تاریخ ")]
         public string EduEnterDate { get; set; }
 
-        [StringLength(maximumLength: 50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "تا تاریخ")]
         public string EduExitDate { get; set; }
         //public EducationHistoryDTO EducationHistryDTO { get; set; }
@@ -86,29 +86,28 @@ namespace Helper.ViewModels
 
 
 
-
-
-        [MinLength(3, ErrorMessage = "حداقل 3 کاراکتر وارد کنید")]
-        [MaxLength(50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(50, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = " شرکت")]
         public string CompanyName { get; set; }
 
-        [MinLength(3, ErrorMessage = "حداقل 3 کاراکتر وارد کنید")]
-        [MaxLength(50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(50, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "سمت")]
         public string Semat { get; set; }
 
-        [StringLength(maximumLength: 50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = " تاریخ ورود ")]
         public string WorkEnterDate { get; set; }
 
-        [StringLength(maximumLength: 50, ErrorMessage = "حداکثر 50 کاراکتر وارد کنید")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = " تاریخ خروج ")]
         public string WorkExitDate { get; set; }
 
 
-        [MaxLength(300, ErrorMessage = "حداکثر 300 کاراکتر وارد کنید")]
+        [MaxLength(300, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "توضیحات")]
+      
         public string WorkDescriptions { get; set; }
         //public WorkExperienceDTO WorkExperienceDTO { get; set; }
     }

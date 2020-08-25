@@ -7,6 +7,7 @@ using AutoMapper;
 using Helper.Data;
 using Helper.Models.Entities;
 using Helper.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Helper.Controllers
 {
+
+    [Authorize]
     public class ServicesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,6 +33,7 @@ namespace Helper.Controllers
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
         }
+
 
 
         public IActionResult Index()
@@ -57,8 +61,6 @@ namespace Helper.Controllers
         public async Task<IActionResult> CreateService(CreateServiceVM model)
         {
 
-
-
             if (ModelState.IsValid)
             {
 
@@ -77,7 +79,7 @@ namespace Helper.Controllers
                     {
                         if (userFromDb.PlanCount < 1 || userFromDb.PlanExpDate < DateTime.Now || userFromDb.PlanId == 0)
                         {
-                            return new JsonResult(new { Status = false, Message = "پلن فعالی برای شما  موجود نیست.  ابتدا خریداری کنید.",hasPlan=false });
+                            return new JsonResult(new { Status = false, Message = "پلن فعالی برای شما  موجود نیست.  ابتدا خریداری کنید.", hasPlan = false });
                         }
 
                         var TBL_Service = new TBL_Service
@@ -104,12 +106,13 @@ namespace Helper.Controllers
 
 
                         userFromDb.PlanCount--;
+                        userFromDb.Skils = userFromDb.Skils != null ? userFromDb.Skils + "," + model.Skills : model.Skills;
                         _context.Add(TBL_Service);
 
                         await _context.SaveChangesAsync();
 
                         return new JsonResult(new { Status = 1, Message = "ثبت موفقیت آمیز" });
-                     
+
                     }
                     return new JsonResult(new { Status = false, Message = " برای ثبت خدمت ابتدا وارد سایت شوید." });
 

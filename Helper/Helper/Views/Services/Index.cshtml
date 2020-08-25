@@ -127,7 +127,7 @@
 @section Styles{
     <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
     <link href="~/lib/jquery.tagsinput/jquery.tagsinput.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" />
 
 }
 
@@ -185,29 +185,33 @@
 
 
                         </div>
-                        <form asp-action="CreateService" id="donnerForm">
 
 
-                            <input type="hidden" name="Id" id="Id" value="0" />
+                        -@*------dashbord-----*@
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <form asp-action="CreateService" id="donnerForm">
 
-                            -@*------dashbord-----*@
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <div class="row w-100 mx-auto my-3 text-center service-form">
-                                    <input asp-for="Title" id="Title" placeholder='عنوان خدمت' class="text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+
+                                <input type="hidden" name="Id" id="Id" value="0" />
+                                <div class="row w-100 mx-auto my-3 text-center ">
+                                    <input asp-for="Title" id="Title" autocomplete="off" placeholder='عنوان خدمت' class="service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
                                     <span asp-validation-for="Title" class="text-center w-100 text-danger"> </span>
                                     @*<h5 class="text-center w-100 pt-2"> تایتل خدمت</h5>*@
                                 </div>
-                                <div class="row w-100 mx-auto my-3  text-center service-form service-form-detalis">
-
-                                    <textarea asp-for="Description" id="Description" placeholder='توضیحات خدمت' class="text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
+                                <div class="row w-100 mx-auto my-3  text-center  service-form-detalis">
+                                    <textarea asp-for="Description" autocomplete="off" id="Description" placeholder='توضیحات خدمت' class=" pt-2 pb-2 service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
                                 </textarea>
-                                    <span asp-validation-for="Description" class="text-center w-100 text-danger"> </span>
+                                    <span asp-validation-for="Description" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
 
                                     @*<input class="form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput"/>*@
                                     @*<h6 class="text-center w-100 pt-2 pb-5 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>*@
 
 
                                 </div>
+
+
+
+
 
                                 @*<div class="col-md-6 p-0 m-0 mb-4">
                                         <label asp-for="MarriedType" class="control-label"></label>
@@ -233,25 +237,27 @@
 
 
 
-                                <div className="form-group">
-                                    <h5 class="text-lg-right"> دسته بندی</h5>
+                                <div className="form-group  hj-height">
+                                    <h5 class="_text-position"> دسته بندی</h5>
                                     @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control my-3 service-form" })
-                                    <span asp-validation-for="CategoryId" class="text-center w-100 text-danger"></span>
+                                    <span asp-validation-for="CategoryId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
                                 </div>
 
 
 
 
-                                <div className="form-group">
-                                    <h5 class="text-right"> شهر </h5>
+                                <div className="form-group hj-height">
+                                    <h5 class="_text-position"> شهر </h5>
                                     @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control my-3 service-form" })
-                                    <span asp-validation-for="CategoryId" class="text-center w-100 text-danger"></span>
+                                    <span asp-validation-for="CityId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
                                 </div>
 
 
-                                <div class="row w-100 mx-auto my-3 text-center service-form">
-                                    <input asp-for="Skills" id="Skills" placeholder=' مهارت های مورد نظر' class="text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
-                                    <span asp-validation-for="Skills" class="text-center w-100 text-danger"> </span>
+                                <div class="row w-100 mx-auto my-3 text-center ">
+                                    <h5 class="_text-position"> مهارت </h5>
+
+                                    <input asp-for="Skills" id="Skills" placeholder=' مهارت های مورد نظر' class="service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                    <span asp-validation-for="Skills" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
                                 </div>
 
 
@@ -269,22 +275,23 @@
 
                                 <div class="row w-100 mx-auto">
                                     <div class="col-lg-10 col-md-8 col-6">
-                                        <h5 class="text-right Pricerange  ">بازه قیمت</h5>
+                                        <h5 class="_text-position Pricerange  ">بازه قیمت</h5>
                                     </div>
+
                                     <div class="col-lg-2 col-md-4 col-6 text-news">
                                         @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "form-control text-left currency" })
-                                        <span asp-validation-for="MonyUnitId" class="text-center w-100 text-danger"></span>
+                                        <span asp-validation-for="MonyUnitId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
                                         @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
                                     </div>
                                 </div>
                                 <div class="row w-100 mx-auto  pb-5 active">
                                     <div class="col-sm-6 py-2">
                                         <input asp-for="MinpRice" min="0" class="form-control text-center hj-input-service py-3" placeholder="از قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                                        <span asp-validation-for="MinpRice" class="text-center  text-danger d-block"></span>
+                                        <span asp-validation-for="MinpRice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                     <div class="col-sm-6 py-2">
                                         <input asp-for="MaxPrice" min="0" class="form-control text-center hj-input-service py-3 " placeholder="تا قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                                        <span asp-validation-for="MaxPrice" class="text-center  text-danger d-block"></span>
+                                        <span asp-validation-for="MaxPrice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                 </div>
                                 <div class="row w-100 mx-auto ">
@@ -295,13 +302,21 @@
 
 
 
-                                        <input class="checkbox-service" type="checkbox" data-val="true" data-val-required="The IsAgreement field is required." id="IsAgreement" name="IsAgreement" value="true">
+
+
+
+                                        <input class="checkbox-service"
+                                               type="checkbox"
+                                               data-val="true"
+                                               data-val-required="The IsAgreement field is required."
+                                               id="IsAgreement"
+                                               name="IsAgreement"
+                                               value="true">
 
                                         @*<input name="IsAgreement" id="IsAgreement" value="false" type="checkbox" class="checkbox-service">*@
                                         <label for="IsAgreement" class="label-chekbox"> توافقی</label>
                                     </div>
                                 </div>
-
 
                                 <div class="row w-100 p-0 m-0 mx-auto pt-md-3 pt-5 mt-3">
                                     <div class="col-12  text-right"><h5><b> نحوه ارسال به خدمات دهندگان</b></h5></div>
@@ -312,26 +327,59 @@
                                 </div>
 
 
+
+                                <input name="IsAgreementVal" type="hidden" id="IsAgreementVal" value="false">
+
+                                <input name="IsSendByEmailVal" type="hidden" id="IsSendByEmailVal" value="false">
+                                <input name="IsSendByNOtificationVal" type="hidden" id="IsSendByNOtificationVal" value="false">
+                                <input name="IsSendBySmsVal" type="hidden" id="IsSendBySmsVal" value="false">
+
                                 <div class="row w-100 mx-auto text-md-center text-right mt-3">
                                     <div class="col-md-4">
-                                        <input type="checkbox" id="IsSendByEmail" name="IsSendByEmail" class="checkbox-service">
-                                        @*<input name="IsSendByEmail" id="IsSendByEmail" type="checkbox" class="checkbox-service">*@
-                                        <label for="IsSendByEmail" class="label-chekbox"> ایمیل</label>
+
+
+                                        <input class="checkbox-service"
+                                               type="checkbox"
+                                               data-val="true"
+                                               data-val-required="The IsSendByEmail field is required."
+                                               id="IsSendByEmail"
+                                               name="IsSendByEmail"
+                                               value="true">
+                                        @*<input name="IsSendByEmailVal" type="hidden" id="IsSendByEmailVal" value="false">*@
+
+                                        @*<input type="checkbox" id="IsSendByEmail" name="IsSendByEmail" class="checkbox-service">*@
+                                        <label for="IsSendByEmail" class=" label-chekbox "> ایمیل</label>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <input name="IsSendByNOtification" type="checkbox" id="IsSendByNOtification" class="checkbox-service">
+
+                                        <input name="IsSendByNOtification"
+                                               data-val="true"
+                                               value="true"
+                                               type="checkbox"
+                                               id="IsSendByNOtification"
+                                               class="checkbox-service">
                                         <label for="IsSendByNOtification" class="label-chekbox"> نوتیفیکیشن</label>
                                     </div>
-                                    <div class="col-md-4">  <input name="IsSendBySms" type="checkbox" id="IsSendBySms" class="checkbox-service"><label for="IsSendBySms" class="label-chekbox"> اس ام اس</label></div>
+
+
+                                    <div class="col-md-4">
+                                        <input name="IsSendBySms"
+                                               data-val="true"
+                                               value="true"
+                                               type="checkbox"
+                                               id="IsSendBySms"
+                                               class="checkbox-service">
+                                        <label for="IsSendBySms" class="label-chekbox"> اس ام اس</label>
+                                    </div>
                                 </div>
                                 <div class="row w-100 mx-auto mt-4 pt-4">
                                     <input type="submit" id="createBtnSubmit" value="تایید" class="btn btn-success w-25 mx-auto Confirmation">
                                 </div>
+                            </form>
 
+                        </div>
 
-                            </div>
-                        </form>
 
                     </div>
 
@@ -351,17 +399,81 @@
     <script src="~/SinaCustom/js/main.js"></script>
     <script src="~/lib/jquery.tagsinput/jquery.tagsinput.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>
+
+
     <script>
 
+        $(document).ready(function () {
+            $('#Skills').tagsInput({
+                'interactive': true,
+                'defaultText': 'وارد کنید',
+            });
+            $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+
+
+            $("#CategoryId").select2({
+                dir: "rtl"
+            });
+            $("#CityId").select2({
+                dir: "rtl"
+            });
+            $("#MonyUnitId").select2({
+                dir: "rtl"
+            });
 
 
 
-        $('#Skills').tagsInput({
-            'interactive': true,
-            'defaultText': 'وارد کنید',
 
-        });
-        $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+
+
+            $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
+            $('#IsAgreement').change(function () {
+                $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
+            });
+
+
+
+            $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
+            $('#IsSendByEmail').change(function () {
+                $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
+
+            });
+
+
+            $('#IsSendByNOtificationVal').val($('#IsSendByNOtification').is(':checked'));
+            $('#IsSendByNOtification').change(function () {
+                $('#IsSendByNOtificationVal').val($('#IsSendByNOtification').is(':checked'));
+            });
+
+
+            $('#IsSendBySmsVal').val($('#IsSendBySms').is(':checked'));
+            $('#IsSendBySms').change(function () {
+                $('#IsSendBySmsVal').val($('#IsSendBySms').is(':checked'));
+            });
+
+        })
+
+
+       
+
+
+
+
+
+
+       
+
+
+
+        //<input name="IsSendByEmailVal" type="hidden" id="IsSendByEmailVal" value="false">
+        //    <input name="IsSendByNOtificationVal" type="hidden" id="IsSendByNOtificationVal" value="false">
+        //        <input name="IsSendBySmsVal" type="hidden" id="IsSendBySmsVal" value="false">
+
+
+
+
+
 
         //change Password
         $("#donnerForm").submit(function (e) {
@@ -384,10 +496,10 @@
             maxPrice = $("#MaxPrice").val()
             skills = $("#Skills").val();
 
-            isAgreement = $("#IsAgreement").val() == "on" ? true : false
-            emailVal = $("#IsSendByEmail").val() == "on" ? true : false
-            notifVal = $("#IsSendByNtification").val() == "on" ? true : false
-            smsVal = $("#IsSendBySms").val() == "on" ? true : false
+            isAgreement = $("#IsAgreementVal").val()
+            emailVal = $("#IsSendByEmailVal").val()
+            notifVal = $("#IsSendByNOtificationVal").val()
+            smsVal = $("#IsSendBySmsVal").val()
 
 
 

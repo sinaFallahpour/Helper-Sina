@@ -85,7 +85,7 @@ namespace Helper.Controllers
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                         model.Photo.CopyTo(stream);
+                        model.Photo.CopyTo(stream);
                     }
                     model.PhotoAddress = "/Upload/Slider/" + uniqueFileName;
                 }
@@ -139,7 +139,8 @@ namespace Helper.Controllers
                 Description = tBL_Slide.Description,
                 PhotoAddress = tBL_Slide.PhotoAddress,
                 Title = tBL_Slide.Title,
-                IsActive = tBL_Slide.IsActive
+                IsActive = tBL_Slide.IsActive,
+                LanguageType = tBL_Slide.LanguageType,
             };
 
             return View(model);
@@ -163,7 +164,7 @@ namespace Helper.Controllers
                     slideFromDb.Description = model.Description;
                     slideFromDb.Title = model.Title;
                     slideFromDb.IsActive = model.IsActive;
-
+                    slideFromDb.LanguageType = model.LanguageType;
                     #region file validation
                     if (model.Photo != null)
                     {
@@ -190,7 +191,7 @@ namespace Helper.Controllers
                             {
                                 model.Photo.CopyTo(stream);
                             }
-                      
+
                             if (!string.IsNullOrEmpty(slideFromDb.PhotoAddress))
                             {
                                 var LastImagePath = slideFromDb.PhotoAddress.Substring(1);

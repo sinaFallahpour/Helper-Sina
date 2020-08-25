@@ -26,7 +26,11 @@ namespace Helper.ViewModels
 
         public string Title { get; set; }
 
+        public string EnglishTitle { get; set; }
+
         public string Description { get; set; }
+
+        public string EnglishDescription { get; set; }
 
         public string CreateDate { get; set; }
 
@@ -38,7 +42,11 @@ namespace Helper.ViewModels
 
         public string ArticlePhotoAddress { get; set; }
 
+        public string EnglishArticlePhotoAddress { get; set; }
+
         public string VideoAddress { get; set; }
+
+        public string EnglishVideoAddress { get; set; }
 
         public bool isLiked { get; set; }
 

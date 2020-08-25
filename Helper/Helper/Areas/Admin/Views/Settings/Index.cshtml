@@ -63,7 +63,7 @@
                 </div>
             }
 
-            <!-- input -->
+            <!-- AboutUs -->
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label asp-for="Aboutus" for="validationCustom03"></label>
@@ -74,6 +74,20 @@
                 </div>
             </div>
 
+            <!-- EnglishAboutUs -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="EnglishAboutus" for="validationCustom03"></label>
+                    <textarea asp-for="EnglishAboutus" rows="4" class="form-control" id="EnglishAboutus"
+                              placeholder=" EnglishAboutus...">
+                    </textarea>
+                    <span asp-validation-for="EnglishAboutus" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+            <!-- ContactUs -->
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label asp-for="ContactUs" for="validationCustom03"></label>
@@ -84,6 +98,19 @@
                 </div>
             </div>
 
+            <!-- EnglishContactUs -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="EnglishContactUs" for="validationCustom03"></label>
+                    <textarea asp-for="EnglishContactUs" type="" rows="4" class="form-control" id="EnglishContactUs"
+                              placeholder="متن EnglishContactUs...">
+                    </textarea>
+                    <span asp-validation-for="EnglishContactUs" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <!-- SiteRules -->
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label asp-for="SiteRules" for="validationCustom03"></label>
@@ -91,6 +118,17 @@
                               placeholder="متن قوانین سایت...">
                     </textarea>
                     <span asp-validation-for="SiteRules" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <!-- EnglishSiteRules -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="EnglishSiteRules" for="validationCustom03"></label>
+                    <textarea asp-for="EnglishSiteRules" type="" rows="4" class="form-control" id="EnglishSiteRules"
+                              placeholder="متن EnglishSiteRules...">
+                    </textarea>
+                    <span asp-validation-for="EnglishSiteRules" class="text-danger"> </span>
                 </div>
             </div>
 
@@ -131,8 +169,13 @@
         //فعال سازی ckeditor
         $(function () {
             CKEDITOR.replace('AboutUs');
+            CKEDITOR.replace('EnglishAboutus');
+
             CKEDITOR.replace('ContactUs');
+            CKEDITOR.replace('EnglishContactUs');
+
              CKEDITOR.replace('SiteRules');
+            CKEDITOR.replace('EnglishSiteRules');
 
         });
 

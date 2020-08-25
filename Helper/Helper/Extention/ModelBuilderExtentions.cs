@@ -21,21 +21,24 @@ namespace Helper.Extention
                        Id = 1,
                        Key = PublicHelper.AboutUsKeyName,
                        CreatedAt = DateTime.Now,
-                       Value = ""
+                       Value = "",
+                       EnglishValue = ""
                    },
                    new TBL_Setting()
                    {
                        Id = 2,
                        Key =PublicHelper.ContactKeyName,
                        CreatedAt = DateTime.Now,
-                       Value = ""
+                       Value = "",
+                       EnglishValue=""
                    },
                     new TBL_Setting()
                     {
                         Id = 3,
                         Key = PublicHelper.SiteRulesKeyName,
                         CreatedAt = DateTime.Now,
-                        Value = ""
+                        Value = "",
+                        EnglishValue = ""
                     }
                  );
 

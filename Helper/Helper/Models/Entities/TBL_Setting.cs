@@ -9,6 +9,8 @@ namespace Helper.Models.Entities
     {
         public string Key { get; set; }
         public string Value { get; set; }
+        public string  EnglishValue { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

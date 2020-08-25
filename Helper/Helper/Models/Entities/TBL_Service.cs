@@ -21,15 +21,10 @@ namespace Helper.Models.Entities
 
 
 
-
-
         /// <summary>
         /// ليست مهارت هايش
         /// </summary>
         public string Skills { get; set; }
-
-
-
 
 
 
@@ -40,15 +35,7 @@ namespace Helper.Models.Entities
         public ServiceType ServiceType { get; set; }
 
 
-
-
-
-
-
-        /// <summary>
-        /// نحوه فرستادتن به خدمت گيرنده
-        /// </summary>
-        public SendType SendType { get; set; }
+      
 
         /// <summary>
         /// آيا توافقيست

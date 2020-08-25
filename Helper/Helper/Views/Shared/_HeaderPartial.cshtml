@@ -16,7 +16,6 @@
                             <option value="@PublicHelper.EngCultureName"> Ln EN  </option>
                         </select>
 
-
                     </form>
                 </div>
 
@@ -30,17 +29,13 @@
                 <div class="col-md-4  col-5 d-flex justify-content-center align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        @Html.ActionLink(Localizer["logOut"].Value, "LogOut", "Account", new { Area = "", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) }, new { @class = "btn btn-link hj-index-login" })
+                        @Html.ActionLink(Localizer["logOut"].Value , "LogOut", "Account", new { Area = "", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) }, new { @class = "btn btn-link hj-index-login" })
                         <a href="/profiles" class="btn btn-link hj-index-login"> @Localizer["Profile"]</a>
-
-
 
                     }
                     else
                     {
-                <a href="@Url.Action("Login","Account")" class="btn btn-link hj-index-login">  @Localizer["Login"] / @Localizer["SignIn"]</a>
-
-
+                        <a href="@Url.Action("Login","Account")" class="btn btn-link hj-index-login">  @Localizer["Login"] / @Localizer["SignIn"]</a>
                     }
 
                 </div>
@@ -115,7 +110,7 @@
     const changeLanguage = (culturName) => {
         $.get(`/Home/ChangeLanguage?culture=${culturName.value}`,
             function (res) {
-
+                //location.reload()
             });
     }
 

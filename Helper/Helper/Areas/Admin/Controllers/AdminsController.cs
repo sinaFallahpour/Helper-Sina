@@ -227,8 +227,12 @@ namespace Helper.Controllers
                
                     Birthdate = "",
                     Email = model.Email,
+                 
                     NormalizedEmail = "",
                     EmailConfirmed = true,
+
+                    //عدم استفاده از پلن رایگان
+                    IsUsedFree = false,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     //Gender = model.Gender.GetEnumDescription(),

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Helper.Models.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,6 +27,10 @@ namespace Helper.Models.Entities
 
      
         public string PhotoAddress { get; set; }
+
+
+        [Display(Name ="زبان")]
+        public LanguageType LanguageType { get; set; }
 
         [Required(ErrorMessage = "الزامیست")]
         [Display(Name = "عکس")]

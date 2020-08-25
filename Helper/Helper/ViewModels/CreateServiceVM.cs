@@ -35,7 +35,7 @@ namespace Helper.ViewModels
         /// ليست مهارت هايش
         /// </summary>
         [Required(ErrorMessage = " حداقل 1 مهارت الزامیست")]
-        [MaxLength(800,ErrorMessage ="حداکثر 800 کاراکتر وارد کنید")]
+        [MaxLength(600,ErrorMessage ="حداکثر 600 کاراکتر وارد کنید")]
         [Display(Name = "مهارت های مورد نظر")]
         public string Skills { get; set; }
 

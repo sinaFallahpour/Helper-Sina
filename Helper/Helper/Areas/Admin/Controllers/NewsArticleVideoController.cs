@@ -525,7 +525,7 @@ namespace Helper.Controllers
                 EnglishTitle = article.EnglishTitle,
                 NewsType = NewsType.Arrticle,
                 Description = article.Description,
-                EnglishDescription = article.Description,
+                EnglishDescription = article.EnglishDescription,
                 ArticlePhotoAddress = article.ArticlePhotoAddress,
                 EnglishArticlePhotoAddress = article.EnglishArticlePhotoAddress,
                 CreateDate = DateTime.Now.ToString(),
@@ -549,6 +549,7 @@ namespace Helper.Controllers
                 try
                 {
                     var articleFromDb = await _context.TBL_NewsArticleVideo.FirstOrDefaultAsync(c => c.Id == model.Id);
+                  
                     articleFromDb.Description = model.Description;
                     articleFromDb.EnglishDescription = model.EnglishDescription;
                     articleFromDb.EnglishTitle = model.EnglishTitle;
@@ -605,14 +606,14 @@ namespace Helper.Controllers
                     {
                         if (!string.IsNullOrEmpty(articleFromDb.EnglishArticlePhotoAddress))
                         {
-                            var LastImagePath = articleFromDb.EnglishVideoAddress.Substring(1);
+                            var LastImagePath = articleFromDb.EnglishArticlePhotoAddress.Substring(1);
                             LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
                             if (System.IO.File.Exists(LastImagePath))
                             {
                                 System.IO.File.Delete(LastImagePath);
                             }
                         }
-                        articleFromDb.EnglishVideoAddress = model.EnglishArticlePhotoAddress;
+                        articleFromDb.EnglishArticlePhotoAddress = model.EnglishArticlePhotoAddress;
                     }
 
 

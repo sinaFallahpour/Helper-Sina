@@ -40,8 +40,11 @@ namespace Helper.Controllers
             var model = new SettingsViewModel()
             {
                 ContactUs = context.Where(c => c.Key == PublicHelper.ContactKeyName).SingleOrDefault().Value,
+                EnglishContactUs=context.Where(c=>c.Key==PublicHelper.ContactKeyName).SingleOrDefault().EnglishValue,
                 Aboutus = context.Where(c => c.Key == PublicHelper.AboutUsKeyName).SingleOrDefault().Value,
+                EnglishAboutus = context.Where(c => c.Key == PublicHelper.AboutUsKeyName).SingleOrDefault().EnglishValue,
                 SiteRules = context.Where(c => c.Key == PublicHelper.SiteRulesKeyName).SingleOrDefault().Value,
+                EnglishSiteRules = context.Where(c => c.Key == PublicHelper.SiteRulesKeyName).SingleOrDefault().EnglishValue,
             };
             return View(model);
         }
@@ -66,6 +69,7 @@ namespace Helper.Controllers
                     if (contactUs != null)
                     {
                         contactUs.Value = model.ContactUs;
+                        contactUs.EnglishValue = model.EnglishContactUs;
                         contactUs.UpdatedAt = DateTime.Now;
                     }
 
@@ -73,6 +77,8 @@ namespace Helper.Controllers
                     if (aboutUs != null)
                     {
                         aboutUs.Value = model.Aboutus;
+                        aboutUs.EnglishValue = model.EnglishAboutus;
+
                         aboutUs.UpdatedAt = DateTime.Now;
                     }
 
@@ -80,6 +86,8 @@ namespace Helper.Controllers
                     if (siteRules != null)
                     {
                         siteRules.Value = model.SiteRules;
+                        siteRules.EnglishValue = model.EnglishSiteRules;
+
                         siteRules.UpdatedAt = DateTime.Now;
                     }
 

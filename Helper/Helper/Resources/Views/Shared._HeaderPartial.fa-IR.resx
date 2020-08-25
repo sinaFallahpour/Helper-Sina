@@ -120,20 +120,11 @@
   <data name="AboutUs" xml:space="preserve">
     <value>درباره ما</value>
   </data>
-  <data name="Articles" xml:space="preserve">
-    <value>مقالات آموزشی</value>
-  </data>
   <data name="ContactUs" xml:space="preserve">
     <value>تماس با ما</value>
   </data>
-  <data name="EducationalVideos" xml:space="preserve">
-    <value>ویدئو های آموزشی</value>
-  </data>
   <data name="Exports" xml:space="preserve">
     <value>کارشناسان</value>
-  </data>
-  <data name="HelperNews" xml:space="preserve">
-    <value>اخبار هلپر</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>صفحه اصلی</value>
@@ -143,9 +134,6 @@
   </data>
   <data name="logOut" xml:space="preserve">
     <value>خروج</value>
-  </data>
-  <data name="New" xml:space="preserve">
-    <value>جدید ترین ها</value>
   </data>
   <data name="Newses" xml:space="preserve">
     <value>اخبار</value>

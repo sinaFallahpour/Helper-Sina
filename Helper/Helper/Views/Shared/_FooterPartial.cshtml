@@ -1,10 +1,13 @@
-﻿﻿<div class="footer">
+﻿@using Helper
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+﻿<div class="footer">
     <div class="container-fluid p-0 m-0 ">
 
         <div class="container mb-5 hj-wallet-img ">
             <div class="row w-100 text-center hj-titr-wallet mt-5 mb-5">
                 <div class="col-12 ">
-                    <h3 class="hj-text-wallet">کیف پول هلپر</h3>
+                    <h3 class="hj-text-wallet">@Localizer["Walet"]</h3>
                 </div>
 
             </div>
@@ -15,7 +18,7 @@
             </div>
             <div class="row text-center mt-5">
                 <div class="col-12">
-                    <button type="button" class="btn btn-success hj-footer-wallet-button ">شارژ کیف پول  </button>
+                    <button type="button" class="btn btn-success hj-footer-wallet-button ">   @Localizer["ChangeWalet"]    </button>
                 </div>
             </div>
         </div>
@@ -24,7 +27,7 @@
                 <div class="col-md-5">
                     <div class="col-12 mb-3">
                         <h3 class="text-right">
-                            هلپر ، بستری مناسب برای
+                            @Localizer["Title1"]
 
                         </h3>
                     </div>
@@ -32,10 +35,10 @@
                         <img src="~/hj/img/border-bottom.png" class="img-fluid mr-4" />
                     </div>
                     <div class="col-12 pt-5">
-                        <p class="text-justify hj-footer-ditalis">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</p>
+                        <p class="text-justify hj-footer-ditalis">@Localizer["Text2"] </p>
                     </div>
                     <div class="col-12 text-md-right text-center mt-4">
-                        <button type="button" class="btn btn-success hj-service-index-button  ">  ورود / ثبت نام</button>
+                        <button type="button" class="btn btn-success hj-service-index-button  ">  @Localizer["Login"] / @Localizer["SignIn"] </button>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -43,13 +46,13 @@
                 </div>
                 <div class="col-md-4 mt-md-0 mt-4">
                     <div class="row">
-                        <div class="col-12 text-right mb-3 hj-join-news">عضویت در خبر </div>
+                        <div class="col-12 text-right mb-3 hj-join-news"> @Localizer["newseTitle"]  </div>
                         <div class="col-12">
 
                             <form>
-                                <input class="SubmitBox" type="email" placeholder="برای عضویت در خبرنامه ایمیل خود را وارد کنید" />
+                                <input class="SubmitBox" type="email" placeholder="@Localizer["newsletterText"]" />
                             </form>
-                            <button type="button" class="btn btn-success hj-Record">ثبت </button>
+                            <button type="button" class="btn btn-success hj-Record">@Localizer["Done"] </button>
 
                         </div>
                         <div class="row w-100 mt-4  text-center">
@@ -73,78 +76,58 @@
         <div class="row w-100 justify-content text-center width-90 mx-auto mt-3 pt-4">
             <div class="col-1"></div>
             <div class="col-lg-2  col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
+                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
                 <div class="row w-100">
                     <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
-
                 </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> سوالات متداول </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> مقالات آموزشی </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> دوره آموزشی</span></div>
-
-
-
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
 
             </div>
             <div class="col-lg-2  col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
+                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
                 <div class="row w-100">
                     <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
-
                 </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> سوالات متداول </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> مقالات آموزشی </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> دوره آموزشی</span></div>
-
-
-
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
 
             </div>
             <div class="col-lg-2  col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
+                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
                 <div class="row w-100">
                     <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
-
                 </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> سوالات متداول </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> مقالات آموزشی </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> دوره آموزشی</span></div>
-
-
-
-
-            </div>
-            <div class="col-lg-2 col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
-                <div class="row w-100">
-                    <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
-
-                </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> سوالات متداول </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> مقالات آموزشی </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> دوره آموزشی</span></div>
-
-
-
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
 
             </div>
             <div class="col-lg-2  col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6>بخش های سایت</h6></div>
+                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
                 <div class="row w-100">
                     <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
-
                 </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>قوانین و مقررات</span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> سوالات متداول </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> مقالات آموزشی </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> دوره آموزشی</span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
 
-
-
+            </div>
+            <div class="col-lg-2  col-12 text-right">
+                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
+                <div class="row w-100">
+                    <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
+                </div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
+                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
 
             </div>
             <div class="col-1"></div>
@@ -166,7 +149,7 @@
         @*-----End Electronic symbol----*@
 
         <div class="row w-100 hj-Endfooter p-0 m-0 mt-5 text-center">
-            <span class="text-center w-100 pt-2">تمامی حقوق مادی و معنوی متعلق به هلپر  میباشد</span>
+            <span class="text-center w-100 pt-2">@Localizer["materialAndIntellectual"]</span>
         </div>
 
 
