@@ -51,7 +51,7 @@ namespace Helper.Controllers
             {
                 try
                 {
-                    var catFromDb = await _context.TBL_Category.Where(c => c.Name == model.Name).FirstOrDefaultAsync();
+                    var catFromDb = await _context.TBL_Category.Where(c => c.Name == model.Name || c.EnglishName ==model.EnglishName).FirstOrDefaultAsync();
                     if (catFromDb != null)
                     {
                         ModelState.AddModelError("", "اين دسته بندي موجود است");
@@ -64,7 +64,7 @@ namespace Helper.Controllers
                     return View(model);
                     //return RedirectToAction(nameof(Index));
                 }
-                catch (Exception ex)
+                catch  
                 {
                     ModelState.AddModelError("", "خطا در ثبت   دسته بندی");
                     return View(model);
@@ -109,7 +109,7 @@ namespace Helper.Controllers
             {
                 try
                 {
-                    var ExistedCategory = await _context.TBL_Category.Where(c => c.Name == model.Name && c.Id != id)
+                    var ExistedCategory = await _context.TBL_Category.Where(c => (c.Name == model.Name || c.EnglishName==model.EnglishName) && c.Id != id)
                         .FirstOrDefaultAsync();
                     if (ExistedCategory != null)
                     {
@@ -123,6 +123,7 @@ namespace Helper.Controllers
                         return View(model);
                     }
                     catFromDb.Name = model.Name;
+                    catFromDb.EnglishName = model.EnglishName;
                     catFromDb.IsEnabled = model.IsEnabled;
                     await _context.SaveChangesAsync();
                     TempData["Success"] = "ثبت موفقیت آمیز";

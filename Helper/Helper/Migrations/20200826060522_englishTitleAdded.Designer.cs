@@ -4,14 +4,16 @@ using Helper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200826060522_englishTitleAdded")]
+    partial class englishTitleAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,10 +135,6 @@ namespace Helper.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Skils")
-                        .HasColumnType("nvarchar(600)")
-                        .HasMaxLength(600);
-
-                    b.Property<string>("SkilsRequest")
                         .HasColumnType("nvarchar(600)")
                         .HasMaxLength(600);
 
@@ -565,7 +563,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 26, 14, 35, 41, 412, DateTimeKind.Local).AddTicks(4771),
+                            CreatedAt = new DateTime(2020, 8, 26, 10, 35, 22, 171, DateTimeKind.Local).AddTicks(7113),
                             EnglishValue = "",
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -574,7 +572,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 26, 14, 35, 41, 417, DateTimeKind.Local).AddTicks(3737),
+                            CreatedAt = new DateTime(2020, 8, 26, 10, 35, 22, 174, DateTimeKind.Local).AddTicks(6332),
                             EnglishValue = "",
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -583,7 +581,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2020, 8, 26, 14, 35, 41, 417, DateTimeKind.Local).AddTicks(3866),
+                            CreatedAt = new DateTime(2020, 8, 26, 10, 35, 22, 174, DateTimeKind.Local).AddTicks(6397),
                             EnglishValue = "",
                             Key = "SiteRules",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),

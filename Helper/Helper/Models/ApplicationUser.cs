@@ -45,11 +45,20 @@ namespace Helper.Models
         public string LanguageKnowing { get; set; }
 
 
-        [StringLength(maximumLength: 600, ErrorMessage = "حداکثر 600 کاراکتر وارد کنید")]
         /// <summary>
         /// مهارت های کاربر
         /// </summary>
+        [StringLength(maximumLength: 600, ErrorMessage = "حداکثر 600 کاراکتر وارد کنید")]
         public string Skils { get; set; }
+
+
+
+        /// <summary>
+        ///  مهارت هایی که لازم دارد دیگران انجام بدهند  کاربر
+        /// </summary>
+        [StringLength(maximumLength: 600, ErrorMessage = "حداکثر 600 کاراکتر وارد کنید")]
+        public string SkilsRequest { get; set; }
+
 
 
 

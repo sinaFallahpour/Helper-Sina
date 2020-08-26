@@ -1,4 +1,5 @@
 ﻿@model Helper.ViewModels.CreateServiceVM
+@using System.Globalization
 
 @{
     ViewData["Title"] = "CreateService";
@@ -140,7 +141,7 @@
             <div class="row mx-auto">
                 <span class="text-justify size-33">
                     <b>
-                        ایجاد خدمت
+                        @ViewData["CreateService"]  
                     </b>
                 </span>
             </div>
@@ -148,7 +149,7 @@
                 <img src="~/hj/img/border-bottom.png" class="img-fluid" />
             </div>
             <div class="row mt-3 mx-auto">
-                <span class="text-justify hj-intro-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span>
+                <span class="text-justify hj-intro-text">  @ViewData["CreateServiceText"]    </span>
             </div>
 
         </div>
@@ -173,9 +174,8 @@
                     <nav>
 
                         <div class="nav nav-tabs nav-fill p-0 m-0 w-100" id="nav-tab" role="tablist">
-
-                            <a class="nav-item nav-link active w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">درخواست خدمت</a>
-                            <a class="nav-item nav-link w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">ارائه خدمت</a>
+                            <a class="nav-item nav-link active w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">  @ViewData["ServiceRequest"] </a>
+                            <a class="nav-item nav-link w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">  @ViewData["ServiceDelivery"]</a>
 
                         </div>
 
@@ -184,62 +184,36 @@
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
 
-                        </div>
+
+                            <form asp-action="CreateService" id="donnerForm1">
 
 
-                        -@*------dashbord-----*@
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form asp-action="CreateService" id="donnerForm">
-
-
-                                <input type="hidden" name="Id" id="Id" value="0" />
+                                <input type="hidden" name="Id1" id="Id1" value="0" />
                                 <div class="row w-100 mx-auto my-3 text-center ">
-                                    <input asp-for="Title" id="Title" autocomplete="off" placeholder='عنوان خدمت' class="service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                    <h5 class="_text-position">    @ViewData["Titles"]  </h5>
+
+                                    <input asp-for="Title" id="Title1" autocomplete="off" placeholder='@ViewData["Titles"] ' class="service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
                                     <span asp-validation-for="Title" class="text-center w-100 text-danger"> </span>
                                     @*<h5 class="text-center w-100 pt-2"> تایتل خدمت</h5>*@
                                 </div>
                                 <div class="row w-100 mx-auto my-3  text-center  service-form-detalis">
-                                    <textarea asp-for="Description" autocomplete="off" id="Description" placeholder='توضیحات خدمت' class=" pt-2 pb-2 service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
+                                    <h5 class="_text-position">        @ViewData["Descriptions"] </h5>
+
+                                    <textarea asp-for="Description" autocomplete="off" id="Description1" placeholder='@ViewData["Descriptions"]' class=" pt-2 pb-2 service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
                                 </textarea>
                                     <span asp-validation-for="Description" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
-
-                                    @*<input class="form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput"/>*@
-                                    @*<h6 class="text-center w-100 pt-2 pb-5 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>*@
-
 
                                 </div>
 
 
 
-
-
-                                @*<div class="col-md-6 p-0 m-0 mb-4">
-                                        <label asp-for="MarriedType" class="control-label"></label>
-                                        <select asp-for="MarriedType" placeholder="جنسیت" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserMarriedType>()"></select>
-                                        <span asp-validation-for="MarriedType" class="text-center d-block text-danger"></span>
-
-                                    </div>*@
-
-
-
-
-
-
-
-                                @*<div class="form-group">
-                                        @Html.LabelFor(model => model.PostCategoryID, "کاربر ارشد", htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.DropDownList("AdminID", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.AdminID, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
 
 
 
 
                                 <div className="form-group  hj-height">
-                                    <h5 class="_text-position"> دسته بندی</h5>
-                                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control my-3 service-form" })
+                                    <h5 class="_text-position">    @ViewData["Categories"]</h5>
+                                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form", @id = "CategoryId1" })
                                     <span asp-validation-for="CategoryId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
                                 </div>
 
@@ -247,16 +221,16 @@
 
 
                                 <div className="form-group hj-height">
-                                    <h5 class="_text-position"> شهر </h5>
-                                    @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control my-3 service-form" })
+                                    <h5 class="_text-position"> @ViewData["City"] </h5>
+                                    @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form", @id = "CityId1" })
                                     <span asp-validation-for="CityId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
                                 </div>
 
 
                                 <div class="row w-100 mx-auto my-3 text-center ">
-                                    <h5 class="_text-position"> مهارت </h5>
+                                    <h5 class="_text-position"> @ViewData["Skills"] </h5>
 
-                                    <input asp-for="Skills" id="Skills" placeholder=' مهارت های مورد نظر' class="service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                    <input asp-for="Skills" id="Skills1" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
                                     <span asp-validation-for="Skills" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
                                 </div>
 
@@ -275,34 +249,217 @@
 
                                 <div class="row w-100 mx-auto">
                                     <div class="col-lg-10 col-md-8 col-6">
-                                        <h5 class="_text-position Pricerange  ">بازه قیمت</h5>
+                                        <h5 class="_text-position Pricerange  ">@ViewData["PriceRange"]</h5>
                                     </div>
 
                                     <div class="col-lg-2 col-md-4 col-6 text-news">
-                                        @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "form-control text-left currency" })
+                                        @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency", @id = "MonyUnitId1" })
                                         <span asp-validation-for="MonyUnitId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
                                         @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
                                     </div>
                                 </div>
                                 <div class="row w-100 mx-auto  pb-5 active">
                                     <div class="col-sm-6 py-2">
-                                        <input asp-for="MinpRice" min="0" class="form-control text-center hj-input-service py-3" placeholder="از قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input asp-for="MinpRice" id="MinpRice1" min="0" autocomplete="off" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                         <span asp-validation-for="MinpRice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                     <div class="col-sm-6 py-2">
-                                        <input asp-for="MaxPrice" min="0" class="form-control text-center hj-input-service py-3 " placeholder="تا قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input asp-for="MaxPrice" id="MaxPrice1" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                         <span asp-validation-for="MaxPrice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                 </div>
                                 <div class="row w-100 mx-auto ">
                                     <div class="col-12 text-right">
-                                        @*<input asp-for="IsAgreement" />*@
-                                        @*<input asp-for="IsSendByEmail" />
-                                            <input asp-for="IsSendByNOtification" />*@
+
+
+                                        <input class="checkbox-service"
+                                               type="checkbox"
+                                               data-val="true"
+                                               data-val-required="The IsAgreement field is required."
+                                               id="IsAgree"
+                                               name="IsAgreement1"
+                                               value="true">
+
+                                        <label for="IsAgree" class="label-chekbox"> @ViewData["Agreed"]</label>
+                                    </div>
+                                </div>
 
 
 
 
+
+
+                                <input name="IsAgreementVal1" type="hidden" id="IsAgreementVal1" value="false">
+
+
+                                <div class="row w-100 mx-auto mt-4 pt-4">
+                                    <input type="submit" id="createBtnSubmit1" value="@ViewData["Submit"]" class="btn btn-success w-25 mx-auto Confirmation">
+                                </div>
+                            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+
+
+                        -@*------dashbord-----*@
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <form asp-action="CreateService" id="donnerForm">
+
+
+                                <input type="hidden" name="Id" id="Id" value="0" />
+                                <div class="row w-100 mx-auto my-3 text-center ">
+                                    <h5 class="_text-position">    @ViewData["Titles"]  </h5>
+
+                                    <input asp-for="Title" id="Title" autocomplete="off" placeholder='@ViewData["Titles"] ' class="service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                    <span asp-validation-for="Title" class="text-center w-100 text-danger"> </span>
+                                    @*<h5 class="text-center w-100 pt-2"> تایتل خدمت</h5>*@
+                                </div>
+                                <div class="row w-100 mx-auto my-3  text-center  service-form-detalis">
+                                    <h5 class="_text-position">        @ViewData["Descriptions"] </h5>
+
+                                    <textarea asp-for="Description" autocomplete="off" id="Description" placeholder='@ViewData["Descriptions"]' class=" pt-2 pb-2 service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
+                                </textarea>
+                                    <span asp-validation-for="Description" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
+
+                                    @*<input class="form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput"/>*@
+                                    @*<h6 class="text-center w-100 pt-2 pb-5 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>*@
+
+
+                                </div>
+
+
+
+
+
+
+
+
+                                <div className="form-group  hj-height">
+                                    <h5 class="_text-position">    @ViewData["Categories"]</h5>
+                                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form" })
+                                    <span asp-validation-for="CategoryId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                </div>
+
+
+
+
+                                <div className="form-group hj-height">
+                                    <h5 class="_text-position"> @ViewData["City"] </h5>
+                                    @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form" })
+                                    <span asp-validation-for="CityId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                </div>
+
+
+                                <div class="row w-100 mx-auto my-3 text-center ">
+                                    <h5 class="_text-position"> @ViewData["Skills"] </h5>
+
+                                    <input asp-for="Skills" id="Skills" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                    <span asp-validation-for="Skills" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
+                                </div>
+
+
+
+
+                                <div class="row w-100 mx-auto hj-select">
+                                    <div class="col-sm-2 col-12 py-2">
+                                        <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                    </div>
+                                    <div class="col-sm-2 col-12  py-2">
+                                        <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                    </div>
+
+                                </div>
+
+                                <div class="row w-100 mx-auto">
+                                    <div class="col-lg-10 col-md-8 col-6">
+                                        <h5 class="_text-position Pricerange  ">   @ViewData["PriceRange"]</h5>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-4 col-6 text-news">
+                                        @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency" })
+                                        <span asp-validation-for="MonyUnitId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                        @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
+                                    </div>
+                                </div>
+                                <div class="row w-100 mx-auto  pb-5 active">
+                                    <div class="col-sm-6 py-2">
+                                        <input asp-for="MinpRice" min="0" autocomplete="off" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <span asp-validation-for="MinpRice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
+                                    </div>
+                                    <div class="col-sm-6 py-2">
+                                        <input asp-for="MaxPrice" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <span asp-validation-for="MaxPrice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
+                                    </div>
+                                </div>
+                                <div class="row w-100 mx-auto ">
+                                    <div class="col-12 text-right">
 
 
                                         <input class="checkbox-service"
@@ -313,13 +470,12 @@
                                                name="IsAgreement"
                                                value="true">
 
-                                        @*<input name="IsAgreement" id="IsAgreement" value="false" type="checkbox" class="checkbox-service">*@
-                                        <label for="IsAgreement" class="label-chekbox"> توافقی</label>
+                                        <label for="IsAgreement" class="label-chekbox"> @ViewData["Agreed"]</label>
                                     </div>
                                 </div>
 
                                 <div class="row w-100 p-0 m-0 mx-auto pt-md-3 pt-5 mt-3">
-                                    <div class="col-12  text-right"><h5><b> نحوه ارسال به خدمات دهندگان</b></h5></div>
+                                    <div class="col-12  text-right"><h5><b>   @ViewData["HowToSendService"]  </b></h5></div>
 
                                 </div>
                                 <div class="row w-100 mx-auto">
@@ -345,10 +501,8 @@
                                                id="IsSendByEmail"
                                                name="IsSendByEmail"
                                                value="true">
-                                        @*<input name="IsSendByEmailVal" type="hidden" id="IsSendByEmailVal" value="false">*@
 
-                                        @*<input type="checkbox" id="IsSendByEmail" name="IsSendByEmail" class="checkbox-service">*@
-                                        <label for="IsSendByEmail" class=" label-chekbox "> ایمیل</label>
+                                        <label for="IsSendByEmail" class=" label-chekbox "> @ViewData["Email"]</label>
                                     </div>
 
                                     <div class="col-md-4">
@@ -359,7 +513,7 @@
                                                type="checkbox"
                                                id="IsSendByNOtification"
                                                class="checkbox-service">
-                                        <label for="IsSendByNOtification" class="label-chekbox"> نوتیفیکیشن</label>
+                                        <label for="IsSendByNOtification" class="label-chekbox"> @ViewData["Notification"]</label>
                                     </div>
 
 
@@ -370,11 +524,11 @@
                                                type="checkbox"
                                                id="IsSendBySms"
                                                class="checkbox-service">
-                                        <label for="IsSendBySms" class="label-chekbox"> اس ام اس</label>
+                                        <label for="IsSendBySms" class="label-chekbox">    @ViewData["Sms"]</label>
                                     </div>
                                 </div>
                                 <div class="row w-100 mx-auto mt-4 pt-4">
-                                    <input type="submit" id="createBtnSubmit" value="تایید" class="btn btn-success w-25 mx-auto Confirmation">
+                                    <input type="submit" id="createBtnSubmit" value="@ViewData["Submit"]" class="btn btn-success w-25 mx-auto Confirmation">
                                 </div>
                             </form>
 
@@ -404,21 +558,29 @@
 
     <script>
 
+
+
+
+        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+        {
+               <text>
+
         $(document).ready(function () {
-            $('#Skills').tagsInput({
+            $('.skill').tagsInput({
                 'interactive': true,
                 'defaultText': 'وارد کنید',
             });
             $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+            $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
 
 
-            $("#CategoryId").select2({
+            $(".catId").select2({
                 dir: "rtl"
             });
-            $("#CityId").select2({
+            $(".cityId").select2({
                 dir: "rtl"
             });
-            $("#MonyUnitId").select2({
+            $(".monyUnitid").select2({
                 dir: "rtl"
             });
 
@@ -430,6 +592,81 @@
             $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
             $('#IsAgreement').change(function () {
                 $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
+            });
+
+            $('#IsAgreementVal1').val($('#IsAgree').is(':checked'));
+            $('#IsAgree').change(function () {
+                $('#IsAgreementVal1').val($('#IsAgree').is(':checked'));
+            });
+
+
+
+            $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
+            $('#IsSendByEmail').change(function () {
+                $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
+            });
+
+
+            $('#IsSendByNOtificationVal').val($('#IsSendByNOtification').is(':checked'));
+            $('#IsSendByNOtification').change(function () {
+                $('#IsSendByNOtificationVal').val($('#IsSendByNOtification').is(':checked'));
+            });
+
+
+            $('#IsSendBySmsVal').val($('#IsSendBySms').is(':checked'));
+            $('#IsSendBySms').change(function () {
+                $('#IsSendBySmsVal').val($('#IsSendBySms').is(':checked'));
+            });
+
+
+
+
+
+
+
+
+
+
+
+        })
+
+
+             </text>
+
+
+        }
+        else {
+        <text>
+
+        $(document).ready(function () {
+            $('.skill').tagsInput({
+                'interactive': true,
+                'defaultText': 'Enter new',
+            });
+            $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+            $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+
+            $(".catId").select2();
+            $(".cityId").select2();
+            $(".monyUnitid").select2();
+
+
+
+            //$("#CategoryId1").select2();
+            //$("#CityId1").select2();
+            //$("#MonyUnitId1").select2();
+
+
+            $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
+            $('#IsAgreement').change(function () {
+                $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
+            });
+
+
+
+            $('#IsAgreementVal1').val($('#IsAgreement1').is(':checked'));
+            $('#IsAgreement1').change(function () {
+                $('#IsAgreementVal1').val($('#IsAgreement1').is(':checked'));
             });
 
 
@@ -455,14 +692,18 @@
         })
 
 
-       
+
+        </text>
+        }
 
 
 
 
 
 
-       
+
+
+
 
 
 
@@ -475,7 +716,7 @@
 
 
 
-        //change Password
+        //service Provider
         $("#donnerForm").submit(function (e) {
             e.preventDefault();
             if (!$(this).valid()) {
@@ -484,7 +725,7 @@
 
 
 
-            //data = $(this).serialize()
+              //data = $(this).serialize()
 
             id = $("#Id").val();
             title = $("#Title").val();
@@ -502,7 +743,7 @@
             smsVal = $("#IsSendBySmsVal").val()
 
 
-
+       
             var data = {
                 "Id": id,
                 "Title": title,
@@ -524,26 +765,119 @@
 
             $("#createBtnSubmit").prop('disabled', true);
             $.ajax({
+                       method: "POST",
+                url: "/Services/ServiceProviderCreate",
+                data: data,
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                             if (r.status) {
+                                   $("#createBtnSubmit").prop('disabled', false);
+                                 SuccessAlert(r.message)
+                                 resetForm(0);
+                             }
+                             else {
+                                $("#createBtnSubmit").prop('disabled', false);
+                                  FailedAlert(r.message);
+                             }
+                           },
+                 error: function () {
+                            $("#createBtnSubmit").prop('disabled', false);
+                               FailedAlert("خطا رخ داده است.");
+                           }
+                       });
+                   })
+
+
+
+
+        //request Service
+        $("#donnerForm1").submit(function (e) {
+            e.preventDefault();
+            if (!$(this).valid()) {
+                return;
+            }
+
+
+
+            //data = $(this).serialize()
+
+            id1 = $("#Id1").val();
+            title1 = $("#Title1").val();
+            description1 = $("#Description1").val()
+            catId1 = $("#CategoryId1").val()
+            cityId1 = $("#CityId1").val()
+            monyUnitId1 = $("#MonyUnitId1").val()
+            minpRice1 = $("#MinpRice1").val()
+            maxPrice1 = $("#MaxPrice1").val()
+            skills1 = $("#Skills1").val();
+
+            isAgreement1 = $("#IsAgreementVal1").val()
+
+
+
+
+            var data = {
+                "Id": id1,
+                "Title": title1,
+                "Description": description1,
+                "CategoryId": catId1,
+                "CityId": cityId1,
+                "MonyUnitId": monyUnitId1,
+                "MinpRice": minpRice1,
+                "MaxPrice": maxPrice1,
+                "IsAgreement": isAgreement1,
+                "IsSendByEmail": false,
+                "IsSendByNOtification": false,
+                "IsSendBySms": false,
+                "Skills": skills1,
+                "ServiceType": 1
+            };
+
+
+
+            $("#createBtnSubmit1").prop('disabled', true);
+            $.ajax({
                 method: "POST",
-                url: "/Services/CreateService",
+                url: "/Services/ServiceRequestCreate",
                 data: data,
                 //contentType: "application/json; charset=utf-8",
                 success: function (r) {
                     if (r.status) {
-                        $("#createBtnSubmit").prop('disabled', false);
+                        $("#createBtnSubmit1").prop('disabled', false);
                         SuccessAlert(r.message)
+                        resetForm(1);
                     }
                     else {
-                        $("#createBtnSubmit").prop('disabled', false);
+                        $("#createBtnSubmit1").prop('disabled', false);
                         FailedAlert(r.message);
+
                     }
                 },
                 error: function () {
-                    $("#createBtnSubmit").prop('disabled', false);
+                    $("#createBtnSubmit1").prop('disabled', false);
                     FailedAlert("خطا رخ داده است.");
                 }
             });
         })
+
+
+
+
+
+
+        function resetForm(value) {
+             $(`#Id${value}`).val();
+             $(`#Title${value}`).val("");
+             $(`#Description${value}`).val("")
+
+
+              $(`#MinpRice${value}`).val("")
+            $(`#MaxPrice${value}`).val("")
+            $(`#Skills${value}`).val("")
+
+
+        }
+
     </script>
 
 

@@ -12,6 +12,10 @@ namespace Helper.Models.Entities
         [Display(Name = "نام واحد پول")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "نام انگلیسی واحد پول الزامیست")]
+        [Display(Name = "نام انگلیسی واحد پول")]
+        public string EnglishName { get; set; }
+
         /// <summary>
         /// آیا این  واحد پول فعال است
         /// </summary>

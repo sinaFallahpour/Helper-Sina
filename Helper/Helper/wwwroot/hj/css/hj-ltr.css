@@ -2296,5 +2296,11 @@ h3, h1, h2, h4, h5, h6 {
 
 
 ._text-position {
-    text-align: right
+    text-align: left
+}
+
+  /*swit alert */
+
+.sweet-alert.showSweetAlert  h2{
+text-align:center !important;
 }

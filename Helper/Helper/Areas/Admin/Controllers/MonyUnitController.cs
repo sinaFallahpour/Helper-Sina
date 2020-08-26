@@ -52,7 +52,7 @@ namespace Helper.Controllers
                 {
                     var MonyFromDb = await _context
                         .TBL_MonyUnit
-                        .Where(c => c.Name == model.Name)
+                        .Where(c => c.Name == model.Name && c.EnglishName == model.EnglishName)
                         .FirstOrDefaultAsync();
 
 
@@ -84,6 +84,7 @@ namespace Helper.Controllers
                             {
                                 IsEnabled = model.IsEnabled,
                                 MonyName = model.Name,
+                                MonyEnglishName= model.EnglishName,
                                 MonyUnit = model
                             });
                         }
@@ -94,6 +95,7 @@ namespace Helper.Controllers
                                 {
                                     IsEnabled = model.IsEnabled,
                                     MonyName = model.Name,
+                                    MonyEnglishName = model.EnglishName,
                                     MonyUnit = model
                                 }
                             };
@@ -111,7 +113,7 @@ namespace Helper.Controllers
                     return View(model);
 
                 }
-                catch (Exception ex)
+                catch  
                 {
                     ModelState.AddModelError("", "خطا در ثبت واحد پول");
                     return View(model);
@@ -165,7 +167,7 @@ namespace Helper.Controllers
                 {
                     var ExistedMony = await _context
                         .TBL_MonyUnit
-                        .Where(c => c.Name == model.Name && c.Id != id)
+                        .Where(c => (c.Name == model.Name || c.EnglishName == model.EnglishName) && c.Id != id)
                         .FirstOrDefaultAsync();
                     if (ExistedMony != null)
                     {
@@ -179,6 +181,7 @@ namespace Helper.Controllers
                         return View(model);
                     }
                     MonyFromDB.Name = model.Name;
+                    MonyFromDB.EnglishName = model.EnglishName;
                     MonyFromDB.IsEnabled = model.IsEnabled;
 
                     var planMaony = await _context.TBL_Plane_MonyUnit.Where(c => c.MonyUnitId == model.Id).ToListAsync();
@@ -186,6 +189,7 @@ namespace Helper.Controllers
                     foreach (var item in planMaony)
                     {
                         item.MonyName = model.Name;
+                        item.MonyEnglishName = model.EnglishName;
                         item.IsEnabled = model.IsEnabled;
                     }
 
@@ -206,10 +210,8 @@ namespace Helper.Controllers
                         return View(model);
                     }
                 }
-
             }
             return View(model);
-
         }
 
         #endregion

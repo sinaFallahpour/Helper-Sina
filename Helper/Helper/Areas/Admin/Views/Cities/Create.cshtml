@@ -23,8 +23,8 @@
                         <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
                             <div asp-validation-summary="ModelOnly" class="text-danger">
                                 @*<strong>
-                                    @TempData["Success"]
-                                </strong>*@
+                                @TempData["Success"]
+                            </strong>*@
                             </div>
 
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -74,6 +74,14 @@
                 </div>
             </div>
 
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EnglishName" for="validationCustom03"></label>
+                    <input asp-for="EnglishName" class="form-control" id="validationCustom03s"
+                           placeholder="عنوان انگلیسی شهر">
+                    <span asp-validation-for="EnglishName" class="text-danger"> </span>
+                </div>
+            </div>
 
             <div class="form-row mb-4">
                 <div class="custom-control custom-checkbox custom-control-inline">
@@ -81,7 +89,6 @@
                     <label asp-for="IsEnabled" class="custom-control-label" for="customCheckBoxInline2">آیا فعال است؟</label>
                     <span asp-validation-for="IsEnabled" class="text-danger"> </span>
                 </div>
-
             </div>
 
 

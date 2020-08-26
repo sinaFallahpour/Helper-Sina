@@ -144,4 +144,10 @@
   <data name="Required" xml:space="preserve">
     <value>This Field is Required</value>
   </data>
+  <data name="Skills" xml:space="preserve">
+    <value>The desiret Skill</value>
+  </data>
+  <data name="{0} Is required." xml:space="preserve">
+    <value>{0} Is required.</value>
+  </data>
 </root>

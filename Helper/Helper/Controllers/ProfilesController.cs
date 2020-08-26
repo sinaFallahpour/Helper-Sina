@@ -51,13 +51,7 @@ namespace Helper.Controllers
         [Authorize]
         public async Task<ActionResult> Index()
         {
-
-
             returnViewDate();
-
-
-
-
 
             var UserId = User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var user = await _context
@@ -107,8 +101,6 @@ namespace Helper.Controllers
 
 
 
-
-
         #region UpdateProfile
 
         //  /api/Profile/UpdateProfile
@@ -139,13 +131,13 @@ namespace Helper.Controllers
                             TempData["Error"] = _localizer["ExistUserName"].Value.ToString();
                             return View(model);
                         }
- 
+
                         if (await _context.Users.Where(x => x.Email == model.Email && x.Email != userFromDb.Email).AnyAsync())
                         {
                             TempData["Error"] = _localizer["ExistEmail"].Value.ToString();
                             return View(model);
                         }
- 
+
 
                         userFromDb.Nickname = model.Nickname;
                         userFromDb.UserName = model.UserName;
@@ -203,6 +195,81 @@ namespace Helper.Controllers
         }
 
         #endregion
+
+
+
+
+
+
+        [Authorize]
+        public async Task<ActionResult> OtherUserProfile(string username)
+        {
+
+            var currentUsername = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+
+
+            var user = await _context
+                    .Users
+                    .Where(c => c.UserName == username)
+                    .Include(c => c.EducationHistry)
+                    .Include(c => c.WorkExperience)
+                    .Select(c => new OtherUserProfileVM
+                    {
+                        Id = c.Id,
+                        UserName = c.UserName,
+                        Nickname = c.Nickname,
+                        Birthdate = c.Birthdate,
+                        Descriptions = c.Descriptions,
+                        PhotoAddress = c.PhotoAddress,
+
+                        ////////////////////////////////////////Phone = c.Phone,
+                        LanguageKnowing = c.LanguageKnowing,
+                        City = c.City,
+                        Gender = c.Gender,
+                        MarriedType = c.MarriedType,
+
+
+
+                        EduEnterDate = c.EducationHistry != null ? c.EducationHistry.EnterDate : null,
+                        EduExitDate = c.EducationHistry != null ? c.EducationHistry.ExitDate : null,
+                        MaghTa = c.EducationHistry != null ? c.EducationHistry.MaghTa : null,
+                        UnivercityName = c.EducationHistry != null ? c.EducationHistry.UnivercityName : null,
+
+
+                        WorkEnterDate = c.WorkExperience != null ? c.WorkExperience.EnterDate : null,
+                        WorkExitDate = c.WorkExperience != null ? c.WorkExperience.ExitDate : null,
+                        WorkDescriptions = c.WorkExperience != null ? c.WorkExperience.Descriptions : null,
+                        Semat = c.WorkExperience != null ? c.WorkExperience.Semat : null,
+                        CompanyName = c.WorkExperience != null ? c.WorkExperience.CompanyName : null,
+
+                    })
+                    .FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                //var Profile = _mapper.Map<ApplicationUser, ProfileDTO>(user);
+
+                return View(user);
+            }
+            return NotFound();
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

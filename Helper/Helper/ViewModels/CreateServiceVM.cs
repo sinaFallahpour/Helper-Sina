@@ -1,9 +1,11 @@
-﻿using Helper.Models.Enums;
+﻿using Helper.Extention;
+using Helper.Models.Enums;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Threading.Tasks;
 
 namespace Helper.ViewModels
@@ -13,17 +15,17 @@ namespace Helper.ViewModels
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="عنوان خدمت الزامیست")]
-        [MinLength(3,ErrorMessage ="حدافل 3 کاراکتر وارد کنید")]
-        [MaxLength(80,ErrorMessage ="حداکثر 80 کاراکتر وارد کنید")]
-        [Display(Name ="عنوان خدمت")]
+        [Required(ErrorMessage = "Required")]
+        [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(80, ErrorMessage = "Maximum length is {1} characters")]
+        [Display(Name = "عنوان خدمت")]
         public string Title { get; set; }
 
 
 
-        [Required(ErrorMessage = "عنوان خدمت الزامیست")]
-        [MinLength(3, ErrorMessage = "حدافل 3 کاراکتر وارد کنید")]
-        [MaxLength(500, ErrorMessage = "حداکثر 500 کاراکتر وارد کنید")]
+        [Required(ErrorMessage = "Required")]
+        [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(500, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "توضیحات خدمت")]
         public string Description { get; set; }
 
@@ -34,11 +36,12 @@ namespace Helper.ViewModels
         /// <summary>
         /// ليست مهارت هايش
         /// </summary>
-        [Required(ErrorMessage = " حداقل 1 مهارت الزامیست")]
-        [MaxLength(600,ErrorMessage ="حداکثر 600 کاراکتر وارد کنید")]
-        [Display(Name = "مهارت های مورد نظر")]
-        public string Skills { get; set; }
+        [Required(ErrorMessage = "{0} Is required.")]
+        [MaxLength(600, ErrorMessage = "Maximum length is {1} characters")]
 
+
+        [Display(Name = "Skills")]
+        public string Skills { get; set; }
 
         /// <summary>
         /// سرويس گيرنده يادهنده
@@ -47,7 +50,7 @@ namespace Helper.ViewModels
 
 
 
-     
+
 
         /// <summary>
         /// آيا توافقيست
@@ -96,15 +99,15 @@ namespace Helper.ViewModels
         /// <summary>
         /// حداقل فيمت
         /// </summary>
-        [Required(ErrorMessage = " حداقل قیمت الزامیست")]
-        [Display(Name ="حداقل قیمت")]
+        [Required(ErrorMessage = "Required")]
+        [Display(Name = "حداقل قیمت")]
         public int MinpRice { get; set; }
 
 
         /// <summary>
         /// حداكثر قيمت
         /// </summary>
-        [Required(ErrorMessage = " حداکثر قیمت الزامیست")]
+        [Required(ErrorMessage = "Required")]
         [Display(Name = "حداقل قیمت")]
         public int MaxPrice { get; set; }
 

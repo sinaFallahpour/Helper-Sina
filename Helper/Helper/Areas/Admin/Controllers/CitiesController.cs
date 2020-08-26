@@ -9,6 +9,7 @@ using Helper.Data;
 using Helper.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Helper.Models.Utilities;
+using Microsoft.AspNetCore.Razor.Language;
 
 namespace Helper.Controllers
 {
@@ -51,7 +52,7 @@ namespace Helper.Controllers
             {
                 try
                 {
-                    var cityFromDb = await _context.TBL_City.Where(c => c.Name == model.Name).FirstOrDefaultAsync();
+                    var cityFromDb = await _context.TBL_City.Where(c => c.Name == model.Name || c.EnglishName == model.EnglishName).FirstOrDefaultAsync();
                     if (cityFromDb != null)
                     {
                         ModelState.AddModelError("", "اين  شهر موجود است");
@@ -112,7 +113,7 @@ namespace Helper.Controllers
             {
                 try
                 {
-                    var ExistedCity = await _context.TBL_City.Where(c => c.Name == model.Name && c.Id != id)
+                    var ExistedCity = await _context.TBL_City.Where(c => (c.Name == model.Name || c.EnglishName == model.EnglishName) && c.Id != id)
                         .FirstOrDefaultAsync();
                     if (ExistedCity != null)
                     {
@@ -126,6 +127,7 @@ namespace Helper.Controllers
                         return View(model);
                     }
                     cityFromDb.Name = model.Name;
+                    cityFromDb.EnglishName = model.EnglishName;
                     cityFromDb.IsEnabled = model.IsEnabled;
                     await _context.SaveChangesAsync();
 

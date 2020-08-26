@@ -2267,5 +2267,6 @@ input[type=checkbox]:checked + .label-chekbox:before {
 }
 
 ._text-position {
-    text-align:left;
+    text-align:right;
 }
+ 

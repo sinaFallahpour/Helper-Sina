@@ -12,6 +12,10 @@ namespace Helper.Models.Entities
         [Display(Name = "نام دسته بندی")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = " نام    انگلیسی دسته بندی الزامیست")]
+        [Display(Name = "نام انگلیسی    دسته بندی")]
+        public string EnglishName { get; set; }
+
         public DateTime CreateDate { get; set; }
 
         /// <summary>

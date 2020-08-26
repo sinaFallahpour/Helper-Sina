@@ -21,10 +21,13 @@ namespace Helper.Models.Entities
 
         [ForeignKey("MonyUnitId")]
         public TBL_MonyUnit MonyUnit { get; set; }
-
+       
         [Display(Name = "نام واحد پول")]
         public string MonyName { get; set; }
 
+
+        [Display(Name = "نام واحد پول")]
+        public string MonyEnglishName { get; set; }
 
         /// <summary>
         /// آیا این  واحد پول فعال است

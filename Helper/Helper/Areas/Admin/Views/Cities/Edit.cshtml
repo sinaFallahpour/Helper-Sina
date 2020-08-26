@@ -75,6 +75,16 @@
                 </div>
             </div>
 
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EnglishName" for="validationCustom03"></label>
+                    <input asp-for="EnglishName" class="form-control" id="validationCustom03"
+                           placeholder="عنوان انگلیسی شهر">
+                    <span asp-validation-for="EnglishName" class="text-danger"> </span>
+                </div>
+            </div>
+
+
 
             <div class="form-row mb-4">
                 <div class="custom-control custom-checkbox custom-control-inline">
@@ -83,7 +93,7 @@
                     <span asp-validation-for="IsEnabled" class="text-danger"> </span>
                 </div>
             </div>
-     
+
 
             <button type="submit" class="btn btn-success">ارسال</button>
             <a asp-action="Index" class="btn btn-warning">بازگشت به لیست</a>

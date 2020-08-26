@@ -46,6 +46,9 @@
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
                     <th class="text-right _noneBorder">
+                        @Html.DisplayNameFor(model => model.EnglishName)
+                    </th>
+                    <th class="text-right _noneBorder">
                         @Html.DisplayNameFor(model => model.IsEnabled)
                     </th>
                     <th class="_noneBorder"> </th>
@@ -54,22 +57,24 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td class="text-right"> @Html.DisplayFor(modelItem => item.Id) </td>
-                        <td class="text-right">  @Html.DisplayFor(modelItem => item.Name)</td>
-                        <td class="text-right">  @Html.DisplayFor(modelItem => item.IsEnabled)</td>
+                <tr>
+                    <td class="text-right"> @Html.DisplayFor(modelItem => item.Id) </td>
+                    <td class="text-right">  @Html.DisplayFor(modelItem => item.Name)</td>
+                    <td class="text-right">  @Html.DisplayFor(modelItem => item.EnglishName)</td>
 
-                        <td>
-                            <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
-                                    <i class="">تصحیح </i>
-                                </a>
-                                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
-                                    <i class="">حذف</i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    <td class="text-right">  @Html.DisplayFor(modelItem => item.IsEnabled)</td>
+
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                                <i class="">تصحیح </i>
+                            </a>
+                            <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                <i class="">حذف</i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbody>
             <tfoot class="bg-info text-white _table-corder-reduse">
@@ -77,6 +82,9 @@
                     <th class="text-center _noneBorder">#</th>
                     <th class="text-center _noneBorder">
                         @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th class="text-right _noneBorder">
+                        @Html.DisplayNameFor(model => model.EnglishName)
                     </th>
                     <th class="text-center _noneBorder">
                         @Html.DisplayNameFor(model => model.IsEnabled)
