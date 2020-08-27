@@ -172,7 +172,7 @@
     <value>نام ونام خانوادگی</value>
   </data>
   <data name="Office" xml:space="preserve">
-    <value>شرکت</value>
+    <value>نام شرکت</value>
   </data>
   <data name="OfficePL" xml:space="preserve">
     <value>نام شرکت را وارد کنید</value>
@@ -186,14 +186,29 @@
   <data name="PositionPL" xml:space="preserve">
     <value>سمت خود را وراد کنید</value>
   </data>
+  <data name="RequestService" xml:space="preserve">
+    <value>درخواست خدمت</value>
+  </data>
   <data name="Resume" xml:space="preserve">
     <value>سابقه کاری</value>
+  </data>
+  <data name="Resume2" xml:space="preserve">
+    <value>رزومه</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>ذخیره تغییرات</value>
   </data>
+  <data name="SendMsg" xml:space="preserve">
+    <value>ارسال پیام</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>خدمات</value>
+  </data>
   <data name="SituationPL" xml:space="preserve">
-    <value>وضعیت</value>
+    <value>وضعیت تاهل</value>
+  </data>
+  <data name="Skills" xml:space="preserve">
+    <value>تخصص ها</value>
   </data>
   <data name="to" xml:space="preserve">
     <value>تا تاریخ</value>

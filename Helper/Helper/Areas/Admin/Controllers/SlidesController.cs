@@ -12,6 +12,8 @@ using Helper.Models.Utilities;
 using System.IO;
 using Helper.Areas.Admin.Models.ViewModels.Slider;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 namespace Helper.Controllers
 {
@@ -23,13 +25,17 @@ namespace Helper.Controllers
         #region  ctor
         private readonly ApplicationDbContext _context;
 
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IConfiguration _configuration;
+        private readonly IConfigurationSection _settings;
 
         public SlidesController(ApplicationDbContext context,
-            IHostingEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment, IConfiguration iConfig)
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
+            _configuration = iConfig;
+            _settings = _configuration.GetSection("AppSettings");
         }
 
 
@@ -310,5 +316,33 @@ namespace Helper.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
+        public async Task<IActionResult> AddImage(IFormFile image)
+        {
+            if (image != null && image.Length > 0)
+            {
+                var host = _hostingEnvironment.WebRootPath;
+                var url = _settings.GetSection("SliderImages").Value;
+                var savePath = Path.Combine(host, url);
+                var uploadResult = FileUploader.UploadImage(image, savePath, compression: 70, width: 512, height: 512);
+                if (!uploadResult.succsseded)
+                {
+                    return Json(false);
+                }
+                else
+                {
+                    var img = uploadResult.result;
+                    return Json("/Uploads/ProductImages/" + img);
+                }
+            }
+            else
+            {
+                return Json(false);
+            }
+        }
+
     }
 }

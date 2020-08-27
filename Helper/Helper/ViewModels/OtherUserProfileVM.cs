@@ -45,6 +45,8 @@ namespace Helper.ViewModels
          public string LanguageKnowing { get; set; }
 
 
+
+
         [Display(Name = "جنسیت")]
         public UserGender Gender { get; set; } = UserGender.Man;
 
@@ -55,6 +57,8 @@ namespace Helper.ViewModels
          public string City { get; set; }
 
 
+
+        public string SKILLS { get; set; }
 
         /// <summary>
         /// آدرس عکس

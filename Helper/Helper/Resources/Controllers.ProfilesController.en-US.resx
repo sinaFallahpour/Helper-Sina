@@ -186,14 +186,29 @@
   <data name="PositionPL" xml:space="preserve">
     <value>Enter Your  position</value>
   </data>
+  <data name="RequestService" xml:space="preserve">
+    <value>Service request</value>
+  </data>
   <data name="Resume" xml:space="preserve">
+    <value>resume</value>
+  </data>
+  <data name="Resume2" xml:space="preserve">
     <value>resume</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
   </data>
+  <data name="SendMsg" xml:space="preserve">
+    <value>Send msg</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
   <data name="SituationPL" xml:space="preserve">
     <value>Situation</value>
+  </data>
+  <data name="Skills" xml:space="preserve">
+    <value>Specializations</value>
   </data>
   <data name="to" xml:space="preserve">
     <value>to date</value>

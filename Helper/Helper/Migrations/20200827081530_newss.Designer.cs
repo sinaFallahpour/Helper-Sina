@@ -4,14 +4,16 @@ using Helper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200827081530_newss")]
+    partial class newss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -568,7 +570,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 8, 27, 13, 4, 46, 201, DateTimeKind.Local).AddTicks(650),
+                            CreatedAt = new DateTime(2020, 8, 27, 12, 45, 29, 407, DateTimeKind.Local).AddTicks(8948),
                             EnglishValue = "",
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -577,7 +579,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 8, 27, 13, 4, 46, 203, DateTimeKind.Local).AddTicks(8643),
+                            CreatedAt = new DateTime(2020, 8, 27, 12, 45, 29, 411, DateTimeKind.Local).AddTicks(7239),
                             EnglishValue = "",
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -586,7 +588,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2020, 8, 27, 13, 4, 46, 203, DateTimeKind.Local).AddTicks(8708),
+                            CreatedAt = new DateTime(2020, 8, 27, 12, 45, 29, 411, DateTimeKind.Local).AddTicks(7427),
                             EnglishValue = "",
                             Key = "SiteRules",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -667,9 +669,6 @@ namespace Helper.Migrations
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

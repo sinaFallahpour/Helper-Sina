@@ -11,6 +11,9 @@ namespace Helper.Models.Entities
 
 
         #region   relation
+
+        public string  UserName { get; set; }
+
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]

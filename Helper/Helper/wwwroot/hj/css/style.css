@@ -2269,4 +2269,7 @@ input[type=checkbox]:checked + .label-chekbox:before {
 ._text-position {
     text-align:right;
 }
- 
+._flot-postion {
+float:right;
+
+}

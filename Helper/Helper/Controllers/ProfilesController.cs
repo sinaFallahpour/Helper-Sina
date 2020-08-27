@@ -202,9 +202,11 @@ namespace Helper.Controllers
 
 
         [Authorize]
+        [Route("Profiles/OtherUserProfile/{username}")]
         public async Task<ActionResult> OtherUserProfile(string username)
         {
 
+            returnViewDate();
             var currentUsername = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
 
@@ -227,7 +229,7 @@ namespace Helper.Controllers
                         City = c.City,
                         Gender = c.Gender,
                         MarriedType = c.MarriedType,
-
+                        SKILLS=c.Skils,
 
 
                         EduEnterDate = c.EducationHistry != null ? c.EducationHistry.EnterDate : null,
@@ -312,7 +314,12 @@ namespace Helper.Controllers
             ViewData["BirthDatePL"] = _localizer["BirthDatePL"];
             ViewData["GenderPL"] = _localizer["GenderPL"];
             ViewData["SituationPL"] = _localizer["SituationPL"];
+            ViewData["Skills"] = _localizer["Skills"];
 
+            ViewData["Services"] = _localizer["Services"];
+            ViewData["RequestService"] = _localizer["RequestService"];
+            ViewData["SendMsg"] = _localizer["SendMsg"];
+            ViewData["Resume2"] = _localizer["Resume2"];
 
 
             ViewData["SaveChanges"] = _localizer["SaveChanges"];

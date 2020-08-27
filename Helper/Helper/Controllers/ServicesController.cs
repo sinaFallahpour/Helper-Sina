@@ -85,10 +85,6 @@ namespace Helper.Controllers
 
 
 
-
-
-
-
         [HttpPost]
         public async Task<IActionResult> ServiceProviderCreate(CreateServiceVM model)
         {
@@ -130,10 +126,13 @@ namespace Helper.Controllers
                             Skills = model.Skills,
                             Description = model.Description,
                             ServiceType = model.ServiceType,
-                            UserId = userFromDb.Id,
+
                             CityId = model.CityId,
                             CategoryId = model.CategoryId,
                             MonyUnitId = model.MonyUnitId,
+
+                            UserId = userFromDb.Id,
+                            Username = userFromDb.UserName,
                         };
 
 
@@ -166,10 +165,8 @@ namespace Helper.Controllers
                 }
             }
             return new JsonResult(new { Status = false, Message = errors.First() });
- 
+
         }
-
-
 
 
 
@@ -208,7 +205,7 @@ namespace Helper.Controllers
                             SeenCount = 0,
                             CreateDate = DateTime.Now,
                             IsAgreement = model.IsAgreement,
-                            IsSendByEmail =false,
+                            IsSendByEmail = false,
                             IsSendByNOtification = false,
                             IsSendBySms = false,
                             MinpRice = model.MinpRice,
@@ -216,10 +213,12 @@ namespace Helper.Controllers
                             Skills = model.Skills,
                             Description = model.Description,
                             ServiceType = model.ServiceType,
-                            UserId = userFromDb.Id,
+
                             CityId = model.CityId,
                             CategoryId = model.CategoryId,
                             MonyUnitId = model.MonyUnitId,
+                            UserId = userFromDb.Id,
+                            Username = userFromDb.UserName,
                         };
 
 
@@ -252,6 +251,45 @@ namespace Helper.Controllers
                 }
             }
             return new JsonResult(new { Status = false, Message = errors.First() });
+
+        }
+
+
+
+
+
+        public async Task<IActionResult> UsersService(string username)
+        {
+
+
+            var services = await _context.TBL_Service
+                .Where(c => c.Username == username)
+                .Select(c => new ServiceListVM
+                {
+                    Id = c.Id,
+                    CreateDate = c.CreateDate,
+                    Description = c.Description,
+                    LikeCount = c.LikeCount,
+                    CommentCount = c.CommentCount,
+                    SeenCount = c.SeenCount,
+                    Title = c.Title,
+                    CategoryName = c.Category.Name,
+                    CategoryEnglishEnglishName = c.Category.EnglishName,
+                        //CategoryImageAddresc=c.Category.ImageAddress
+                        IsLiked = _context.TBL_UserLikeSerive.Any(d => d.UserName == username && d.ServiceId==c.Id),
+                })
+                .OrderByDescending(c => c.CreateDate)
+                .ThenBy(c => c.LikeCount)
+                .ToListAsync();
+
+            //.Where(c => c.NewsType == NewsType.Arrticle)
+            //.OrderByDescending(c => c.LikesCount)
+            //.ThenByDescending(c => c.CommentsCount)
+            //.Include(c => c.NewsLike)
+            //.ToListAsync();
+
+
+            return new JsonResult(new { Status = true, Message = "", data = services });
 
         }
 

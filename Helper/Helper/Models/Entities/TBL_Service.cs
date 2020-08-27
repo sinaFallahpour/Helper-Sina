@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
 namespace Helper.Models.Entities
@@ -94,6 +95,8 @@ namespace Helper.Models.Entities
 
         #region relatoin
 
+
+        public string  Username { get; set; }
         public string UserId { get; set; }
         
         [ForeignKey("UserId")]
