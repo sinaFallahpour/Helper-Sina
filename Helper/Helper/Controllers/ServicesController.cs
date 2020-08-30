@@ -256,14 +256,50 @@ namespace Helper.Controllers
 
 
 
+        //[AllowAnonymous]
+        //public async Task<JsonResult> List(int? limit, int? offset,
+        //         )
+        //{
+        //    var employies = await _userManager.List(limit, offset, searchedWord, Role, SalaryStatus);
+        //    if (employies == null)
+        //        throw new Exception("server error");
+        //    return Json(employies, JsonRequestBehavior.AllowGet);
+        //}
 
 
-        public async Task<IActionResult> UsersService(string username)
+
+
+
+
+        //var queryable = DataContext.TBL_Users
+        //      .OrderBy(x => x.FullName)
+        //      .ThenBy(x => x.Username)
+        //      .AsQueryable();
+
+
+
+
+
+        //var Count = queryable.Count();
+        //return await queryable
+        //         .Skip(offset ?? 0)
+        //         .Take(limit ?? 10)
+        //         .Select(c => new UserListViewModel
+        //         {
+        //             FullName = c.FullName,
+        //             Id = c.Id,
+        //             SalaryStatus = c.SalaryStatus,
+        //             Username = c.Username,
+        //             Count = Count
+        //         }).ToListAsync();
+
+        public async Task<IActionResult> UsersService(string username, int? limit, int? offset)
         {
-
 
             var services = await _context.TBL_Service
                 .Where(c => c.Username == username)
+                .Skip(offset ?? 0)
+                .Take(limit ?? 8)
                 .Select(c => new ServiceListVM
                 {
                     Id = c.Id,
@@ -273,24 +309,16 @@ namespace Helper.Controllers
                     CommentCount = c.CommentCount,
                     SeenCount = c.SeenCount,
                     Title = c.Title,
-                    CategoryName = c.Category.Name,
-                    CategoryEnglishEnglishName = c.Category.EnglishName,
-                        //CategoryImageAddresc=c.Category.ImageAddress
-                        IsLiked = _context.TBL_UserLikeSerive.Any(d => d.UserName == username && d.ServiceId==c.Id),
+                    CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
+
+                    //CategoryImageAddresc=c.Category.ImageAddress
+                    IsLiked = _context.TBL_UserLikeSerive.Any(d => d.UserName == username && d.ServiceId == c.Id),
                 })
                 .OrderByDescending(c => c.CreateDate)
                 .ThenBy(c => c.LikeCount)
                 .ToListAsync();
-
-            //.Where(c => c.NewsType == NewsType.Arrticle)
-            //.OrderByDescending(c => c.LikesCount)
-            //.ThenByDescending(c => c.CommentsCount)
-            //.Include(c => c.NewsLike)
-            //.ToListAsync();
-
-
-            return new JsonResult(new { Status = true, Message = "", data = services });
-
+            var response = new { Count = 0, services = services };
+            return new JsonResult(new { Status = true, Message = "", data = response });
         }
 
 

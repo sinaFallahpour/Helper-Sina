@@ -66,15 +66,23 @@ namespace Helper.Controllers
         public IActionResult Login(string returnUrl)
         {
             returnViewDate();
-           // returnUrl = string.IsNullOrEmpty(returnUrl) ? "/profiles" : returnUrl;
+            var UserReturnUrl = string.IsNullOrEmpty(returnUrl) ? "/profiles" : returnUrl;
+            var AdminReturnUrl = string.IsNullOrEmpty(returnUrl) ? "/admin/admins/Profile" : returnUrl;
 
+            // returnUrl = string.IsNullOrEmpty(returnUrl) ? "/profiles" : returnUrl;
+            //returnUrl = string.IsNullOrEmpty(returnUrl) ? "/" : returnUrl;
             if (_signInManager.IsSignedIn(User))
             {
                 if (User.IsInRole(Static.ADMINROLE))
-                    return Redirect("/admin/admins/Profile");
-                return Redirect(returnUrl);
+                    return Redirect(AdminReturnUrl);
+                return Redirect(UserReturnUrl);
             }
             ViewBag.ActiveTab = "Login";
+            ViewBag.UserReturnUrl = UserReturnUrl;
+            ViewBag.AdminReturnUrl = AdminReturnUrl;
+
+
+
             ViewBag.ReturnUrl = returnUrl;
             //return LocalRedirect(returnUrl);
             return View();
@@ -88,13 +96,14 @@ namespace Helper.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginVm model)
         {
-            var UserReturnUrl = model.ReturnUrl ?? "/profiles";
-            var AdminReturnUrl = model.ReturnUrl ?? "/admin/admins/Profile";
+            //var UserReturnUrl = model.ReturnUrl ?? "/profiles";
+            //var AdminReturnUrl = model.ReturnUrl ?? "/admin/admins/Profile";
 
-            model.ReturnUrl = UserReturnUrl;
+            //model.ReturnUrl = UserReturnUrl;
 
 
-
+            var UserReturnUrl = model.UserReturnUrl ?? "/profiles";
+            var AdminReturnUrl = model.AdminReturnUrl ?? "/admin/admins/Profile";
 
 
 
@@ -112,22 +121,22 @@ namespace Helper.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    var existingRole = await _userManager.GetRolesAsync(user);  
+                    var existingRole = await _userManager.GetRolesAsync(user);
                     var role = existingRole.SingleOrDefault();
 
                     if (role == Static.ADMINROLE)
                     {
-                        return LocalRedirect(AdminReturnUrl);
+                        //return Redirect(AdminReturnUrl);
+                        return Redirect(AdminReturnUrl);
                     }
                     //if (User.IsInRole(Static.ADMINROLE))
                     //{
                     //    return LocalRedirect(AdminReturnUrl);
                     //}
-                    return LocalRedirect(model.ReturnUrl);
+                    return Redirect(UserReturnUrl);
                 }
                 else
                 {
-
                     ViewBag.Error = "نام کاربری یا رمز عبور اشتباه است ";
                     return View(model);
                 }
@@ -164,11 +173,11 @@ namespace Helper.Controllers
             ViewBag.ActiveTab = "Register";
             if (ModelState.IsValid)
             {
-                if (await _context.Users.Where(x => x.UserName == model._Username).AnyAsync())
-                {
-                    ViewBag.RegisterError = "نام کاربری موجود است.";
-                    return View("Login");
-                }
+                //if (await _context.Users.Where(x => x.UserName == model._Username).AnyAsync())
+                //{
+                //    ViewBag.RegisterError = "نام کاربری موجود است.";
+                //    return View("Login");
+                //}
 
                 if (await _context.Users.Where(x => x.Email == model._Email).AnyAsync())
                 {
@@ -182,9 +191,9 @@ namespace Helper.Controllers
                     UserName = model._Username,
                     NormalizedUserName = model._Username.Normalize(),
                     AcceptRules = model.AcceptRules,
-                    
+
                     //عدم استفاده از پلن رایگان
-                    IsUsedFree=false,
+                    IsUsedFree = false,
                     //SerialNumber = SerialNumber,
                     WorkExperience = new TBL_WorkExperience(),
                     EducationHistry = new TBL_EducationalHistory(),
@@ -198,8 +207,10 @@ namespace Helper.Controllers
 
                     var loginResult = await _signInManager.PasswordSignInAsync(model._Username, model._Password, true, lockoutOnFailure: false);
                     if (loginResult.Succeeded)
-                        return LocalRedirect(model.ReturnUrl);
-                    return LocalRedirect(model.ReturnUrl);
+                        //    return LocalRedirect(model.ReturnUrl);
+                        //return LocalRedirect(model.ReturnUrl);
+                        return Redirect(model.ReturnUrl);
+                    return Redirect(model.ReturnUrl);
                 }
                 else
                 {
@@ -231,9 +242,6 @@ namespace Helper.Controllers
             ModelState.AddModelError("", errors.First());
             return View("Login");
         }
-
-
-
 
 
         #endregion

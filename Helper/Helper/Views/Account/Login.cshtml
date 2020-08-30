@@ -39,7 +39,7 @@
 
                 <div id="signup-tab-content" class="@RegisterActiveTabclassName text-center">
 
-                    <form asp-action="Register" class="ui error form signup-form">
+                    <form asp-action="Register" id="registerForm" class="ui error form signup-form">
                         @if (!string.IsNullOrEmpty(ViewBag.RegisterError))
                         {
                             <div class="alert alert-warning" role="alert">
@@ -50,6 +50,9 @@
 
                         <input type="hidden" name="Id" value="0" />
                         <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
+                        <input type="hidden" name="UserReturnUrl" value="@ViewBag.UserReturnUrl" />
+                        <input type="hidden" name="AdminReturnUrl" value="@ViewBag.AdminReturnUrl" />
+
 
 
                         @*......._Username....... *@
@@ -59,8 +62,11 @@
                                class="input text-center  py-3 my-2 mx-auto d-block"
                                type="text" data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
                                data-val-maxlength-max="20" data-val-minlength="حداقل 3 کاراکتر وارد کنید"
-                               data-val-minlength-min="3" data-val-required="این فیلد الزامیست" id="zUsername"
-                               maxlength="20" name="_Username" value="">
+                               data-val-minlength-min="3" data-val-required="این فیلد الزامیست"
+                               id="_Username"
+                               maxlength="20"
+                               name="_Username"
+                               value="">
 
                         <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Username" data-valmsg-replace="true"></span>
 
@@ -71,8 +77,11 @@
                                class="input text-center  py-3 my-2 mx-auto d-block"
                                type="email" data-val="true" data-val-email="به فرمت  ایمیل وارد کنید"
                                data-val-maxlength="حداکثر 30 کاراکتر وارد کنید"
-                               data-val-maxlength-max="30" data-val-required="این فیلد الزامیست" id="zEmail"
-                               maxlength="30" name="_Email" value="">
+                               data-val-maxlength-max="30" data-val-required="این فیلد الزامیست"
+                               id="_Email"
+                               maxlength="30"
+                               name="_Email"
+                               value="">
 
                         <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Email" data-valmsg-replace="true"></span>
 
@@ -86,7 +95,8 @@
                                data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
                                data-val-maxlength-max="20" data-val-minlength="حداقل 6 کاراکتر وارد کنید"
                                data-val-minlength-min="6" data-val-required="این فیلد الزامیست"
-                               id="zPassword" maxlength="20" name="_Password">
+                               id="_Password"
+                               maxlength="20" name="_Password">
 
                         <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Password" data-valmsg-replace="true"></span>
 
@@ -104,7 +114,7 @@
 
 
 
-                        <input type="submit" class="button" value="@ViewData["Register"]">
+                        <input type="submit" id="registerSubmitButton" class="button btn" value="@ViewData["Register"]">
                     </form>
                     <!--.login-form-->
                     <div class="help-text">
@@ -131,7 +141,7 @@
 
 
 
-                    <form asp-action="Login" class="login-form text-center">
+                    <form asp-action="Login" id="LoginForm" class="login-form text-center">
                         @if (!string.IsNullOrEmpty(ViewBag.Error))
                         {
                             <div class="alert alert-warning" role="alert">
@@ -144,7 +154,7 @@
                         <input type="hidden" name="Id" value="0" />
                         <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input asp-for="Username" class="input text-center  py-3 my-2"  id="user_login" autocomplete="off" placeholder="@ViewData["UserName"]">
+                        <input asp-for="Username" class="input text-center  py-3 my-2" id="user_login" autocomplete="off" placeholder="@ViewData["UserName"]">
                         <span asp-validation-for="Username" class="text-danger w-10 d-block"> </span>
 
                         <input asp-for="Password" class="input text-center py-3 my-2" id="user_pass" autocomplete="off" placeholder="@ViewData["Password"]">
@@ -154,7 +164,7 @@
 
                         <label for="remember_me" class="pr-4 my-3 "> @ViewData["RememberMe"]  </label>
 
-                        <input type="submit" class="button" value="@ViewData["Login"]">
+                        <input type="submit" class="button btn" value="@ViewData["Login"]">
                     </form>
                     <!--.login-form-->
                     <div class="help-text mt-4">
@@ -165,7 +175,7 @@
         </div>
     </div>
 </div>
-   
+
 
 
 
@@ -192,6 +202,23 @@
                 $(tab_content).addClass('active');
             });
         });
+
+
+
+
+
+        $("#registerForm").submit(function (e) {
+
+            if (!$(this).valid()) {
+                return;
+            }
+
+            $("#registerSubmitButton").prop('disabled', true);
+            //$("#_Username").prop('disabled', true);
+            //$("#_Email").prop('disabled', true);
+            //$("#_Password").prop('disabled', true);
+            //$("#AcceptRules").prop('disabled', true);
+        })
     </script>
 }
 

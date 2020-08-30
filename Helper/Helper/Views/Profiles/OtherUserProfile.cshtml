@@ -4,8 +4,23 @@
 @using  Helper.Models.Utilities
 
 @{
-    ViewData["Title"] = "OtherUserProfile";
+    ViewData["Title"] = "پروفایل کاربر-خدمات";
     Layout = "~/Views/Shared/_landing.cshtml";
+}
+
+
+
+
+
+@section Styles{
+    <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+
+
 }
 
 <div class="container mt-5">
@@ -34,25 +49,22 @@
         </div>
     </div>
     <div class="row w-100 mx-auto hj-skill mt-5 py-3">
-         @{
+        @{
 
             var skills = Model.SKILLS;
             if (!string.IsNullOrEmpty(skills))
             {
-
                 var listLanguage = skills.Split(',');
                 foreach (var item in listLanguage)
                 {
                     <div class="col-md-2 col-sm-3 col-12   py-1">
                         <button type="button" class="btn  w-100 button-Service">@item</button>
                     </div>
-
                 }
             }
-
         }
- 
-       
+
+
 
     </div>
 </div>
@@ -63,9 +75,8 @@
 
             <div class="row w-100 mx-auto">
                 <div class="col-xs-12 p-0 m-0 ">
-
+                    <input type="hidden" name="username" id="username" value="@Model.UserName" />
                     <nav>
-
                         <div class="nav nav-tabs nav-fill p-0 m-0 w-100" id="nav-tab" role="tablist">
 
                             <a class="nav-item nav-link  w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">  @ViewData["Services"]</a>
@@ -74,6 +85,7 @@
                         </div>
 
                     </nav>
+
                     <div class="tab-content py-3 px-sm-0 pt-md-5 mt-md-3" id="nav-tabContent">
                         <div class="tab-pane fade   " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             @*---------------------------*@
@@ -109,233 +121,141 @@
 
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
-                                    <div class=" hj-profile mx-auto">
-
-
-                                        <div class="row w-100 mx-auto  py-3">
-                                            <div class="col-12 pt-2">
-                                                <h3 class="text-center w-100"> رهن و اجار منزل</h3>
-                                            </div>
-                                            <div class="col-12 pt-2">
-                                                <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
-                                            </div>
-
-                                            <div class="col-12 pt-3">
-                                                <h4 class="text-center w-100">
-                                                    <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                                                </h4>
-                                            </div>
-                                            <div class="col-12 pt-4 pb-2 footer-titr">
-                                                <h5 class="text-center w-100 hj-work"> املاک </h5>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                                            <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
-                                    <div class=" hj-profile mx-auto">
-
-
-                                        <div class="row w-100 mx-auto  py-3">
-                                            <div class="col-12 pt-2">
-                                                <h3 class="text-center w-100"> رهن و اجار منزل</h3>
-                                            </div>
-                                            <div class="col-12 pt-2">
-                                                <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
-                                            </div>
-
-                                            <div class="col-12 pt-3">
-                                                <h4 class="text-center w-100">
-                                                    <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                                                </h4>
-                                            </div>
-                                            <div class="col-12 pt-4 pb-2 footer-titr">
-                                                <h5 class="text-center w-100 hj-work"> املاک </h5>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                                            <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
-                                    <div class=" hj-profile mx-auto">
-
-
-                                        <div class="row w-100 mx-auto  py-3">
-                                            <div class="col-12 pt-2">
-                                                <h3 class="text-center w-100"> رهن و اجار منزل</h3>
-                                            </div>
-                                            <div class="col-12 pt-2">
-                                                <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
-                                            </div>
-
-                                            <div class="col-12 pt-3">
-                                                <h4 class="text-center w-100">
-                                                    <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                                                </h4>
-                                            </div>
-                                            <div class="col-12 pt-4 pb-2 footer-titr">
-                                                <h5 class="text-center w-100 hj-work"> املاک </h5>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                                            <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                        </div>
-
-                                    </div>
-                                </div>
 
                             </div>
-                            <div class="row w-100 mx-auto mt-lg-3 pt-lg-3 ">
-                                <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
-                                    <div class=" hj-profile mx-auto">
+
+                            @*<div class="row w-100 mx-auto mt-lg-3 pt-lg-3 ">
+                                    <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
+                                        <div class=" hj-profile mx-auto">
 
 
-                                        <div class="row w-100 mx-auto  py-3">
-                                            <div class="col-12 pt-2">
-                                                <h3 class="text-center w-100"> رهن و اجار منزل</h3>
-                                            </div>
-                                            <div class="col-12 pt-2">
-                                                <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
+                                            <div class="row w-100 mx-auto  py-3">
+                                                <div class="col-12 pt-2">
+                                                    <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                                                </div>
+                                                <div class="col-12 pt-2">
+                                                    <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
+                                                </div>
+
+                                                <div class="col-12 pt-3">
+                                                    <h4 class="text-center w-100">
+                                                        <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                                                    </h4>
+                                                </div>
+                                                <div class="col-12 pt-4 pb-2 footer-titr">
+                                                    <h5 class="text-center w-100 hj-work"> املاک </h5>
+                                                </div>
+
                                             </div>
 
-                                            <div class="col-12 pt-3">
-                                                <h4 class="text-center w-100">
-                                                    <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                                                </h4>
-                                            </div>
-                                            <div class="col-12 pt-4 pb-2 footer-titr">
-                                                <h5 class="text-center w-100 hj-work"> املاک </h5>
+                                            <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                                                <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
                                             </div>
 
                                         </div>
-
-                                        <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                                            <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                        </div>
-
                                     </div>
-                                </div>
 
-                                <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
-                                    <div class=" hj-profile mx-auto">
+                                    <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
+                                        <div class=" hj-profile mx-auto">
 
 
-                                        <div class="row w-100 mx-auto  py-3">
-                                            <div class="col-12 pt-2">
-                                                <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                                            <div class="row w-100 mx-auto  py-3">
+                                                <div class="col-12 pt-2">
+                                                    <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                                                </div>
+                                                <div class="col-12 pt-2">
+                                                    <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
+                                                </div>
+
+                                                <div class="col-12 pt-3">
+                                                    <h4 class="text-center w-100">
+                                                        <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                                                    </h4>
+                                                </div>
+                                                <div class="col-12 pt-4 pb-2 footer-titr">
+                                                    <h5 class="text-center w-100 hj-work"> املاک </h5>
+                                                </div>
+
                                             </div>
-                                            <div class="col-12 pt-2">
-                                                <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
-                                            </div>
 
-                                            <div class="col-12 pt-3">
-                                                <h4 class="text-center w-100">
-                                                    <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                                                </h4>
-                                            </div>
-                                            <div class="col-12 pt-4 pb-2 footer-titr">
-                                                <h5 class="text-center w-100 hj-work"> املاک </h5>
+                                            <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                                                <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
                                             </div>
 
                                         </div>
-
-                                        <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                                            <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                        </div>
-
                                     </div>
-                                </div>
 
-                                <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
-                                    <div class=" hj-profile mx-auto">
+                                    <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
+                                        <div class=" hj-profile mx-auto">
 
 
-                                        <div class="row w-100 mx-auto  py-3">
-                                            <div class="col-12 pt-2">
-                                                <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                                            <div class="row w-100 mx-auto  py-3">
+                                                <div class="col-12 pt-2">
+                                                    <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                                                </div>
+                                                <div class="col-12 pt-2">
+                                                    <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
+                                                </div>
+
+                                                <div class="col-12 pt-3">
+                                                    <h4 class="text-center w-100">
+                                                        <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                                                    </h4>
+                                                </div>
+                                                <div class="col-12 pt-4 pb-2 footer-titr">
+                                                    <h5 class="text-center w-100 hj-work"> املاک </h5>
+                                                </div>
+
                                             </div>
-                                            <div class="col-12 pt-2">
-                                                <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
-                                            </div>
 
-                                            <div class="col-12 pt-3">
-                                                <h4 class="text-center w-100">
-                                                    <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                                                </h4>
-                                            </div>
-                                            <div class="col-12 pt-4 pb-2 footer-titr">
-                                                <h5 class="text-center w-100 hj-work"> املاک </h5>
+                                            <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                                                <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
                                             </div>
 
                                         </div>
-
-                                        <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                                            <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                        </div>
-
                                     </div>
-                                </div>
 
-                                <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
-                                    <div class=" hj-profile mx-auto">
+                                    <div class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
+                                        <div class=" hj-profile mx-auto">
 
 
-                                        <div class="row w-100 mx-auto  py-3">
-                                            <div class="col-12 pt-2">
-                                                <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                                            <div class="row w-100 mx-auto  py-3">
+                                                <div class="col-12 pt-2">
+                                                    <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                                                </div>
+                                                <div class="col-12 pt-2">
+                                                    <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
+                                                </div>
+
+                                                <div class="col-12 pt-3">
+                                                    <h4 class="text-center w-100">
+                                                        <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                                                    </h4>
+                                                </div>
+                                                <div class="col-12 pt-4 pb-2 footer-titr">
+                                                    <h5 class="text-center w-100 hj-work"> املاک </h5>
+                                                </div>
+
                                             </div>
-                                            <div class="col-12 pt-2">
-                                                <h6 class="text-center w-100 text-justify">  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است سطرآنچنان که لازم است </h6>
-                                            </div>
 
-                                            <div class="col-12 pt-3">
-                                                <h4 class="text-center w-100">
-                                                    <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                                                </h4>
-                                            </div>
-                                            <div class="col-12 pt-4 pb-2 footer-titr">
-                                                <h5 class="text-center w-100 hj-work"> املاک </h5>
+                                            <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                                                <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
                                             </div>
 
                                         </div>
-
-                                        <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                                            <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                                        </div>
-
                                     </div>
-                                </div>
 
-                            </div>
+                                </div>*@
+
+
                             @*--------pagination----*@
                             <div class="row w-100 mx-auto">
                                 <div class="pagination-wrapper mx-auto">
@@ -354,218 +274,208 @@
 
                         </div>
                         -@*------dashbord-----*@
-                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                        <div class="row w-100 mx-auto mt-5">
-                            <div class="col-12 text-right">
+                            <div class="row w-100 mx-auto mt-5">
+                                <div class="col-12 text-right">
 
-                                @if (!string.IsNullOrEmpty(Model.Nickname))
-                                {
-                                    <h3>@Model.Nickname</h3> ;
-                                }
-                                else
-                                {
-                                    <h3>@Model.UserName</h3>;
-                                }
-                            </div>
-                            <div class="col-12">
-                                <img src="/hj/img/borderbig green.png" class="img-fluid">
-                            </div>
-
-                        </div>
-                        <div class="row w-100 mx-auto mt-5">
-                            <h6 class="text-right pr-3">  @ViewData["Position"]  </h6>
-                        </div>
-                        <hr />
-                        <div class="row w-100 pt-3">
-                            <h5 class="pr-4">مشاور املاک؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟</h5>
-                        </div>
-                        <div class="row w-100 text-justify">
-                            <h6 class="line-27 pr-4">    ؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟ </h6>
-                        </div>
-                        <hr />
-                        <div class="row w-100 mx-auto mt-5">
-                            <h6 class="text-right pr-3">   @ViewData["Resume"] </h6>
-                        </div>
-                        <hr />
-                        <div class="row w-100 mx-auto text-right">
-                            <h5 class="pr-4">   @ViewData["Resume"]</h5>
-                        </div>
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-12"><h6><b>  @ViewData["Office"] </b></h6></div>
-                            <div class="col-md-4  col-0"></div>
-                        </div>
-
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-12"><h6><b>   @ViewData["from"]  </b></h6></div>
-                            <div class="col-md-2  col-3"> <h6> @Model.WorkEnterDate   </h6></div>
-                            <div class="col-md-4  col-0"></div>
-                        </div>
-
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-12"><h6><b>  @ViewData["to"]</b></h6></div>
-                            <div class="col-md-2  col-3"><h6> @Model.WorkExitDate </h6></div>
-                            <div class="col-md-4  col-0"></div>
-                        </div>
-
-
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-6"><h6><b> @ViewData["Position"]</b></h6></div>
-                            <div class="col-md-2 col-6"><h6>@Model.Semat</h6></div>
-                            <div class="col-md-8 col-0"></div>
-                        </div>
-                        <div class="row w-100 text-justify">
-                            <h6 class="line-27 pr-4"> @Model.WorkDescriptions  </h6>
-                        </div>
-                        <hr />
-                        <div class="row w-100 mx-auto mt-5">
-                            <h6 class="text-right pr-3">   @ViewData["AcademicRecords"] </h6>
-                        </div>
-                        <hr />
-                        <div class="row w-100 pt-3">
-                            <h5 class="pr-4">    @ViewData["AcademicRecords"]</h5>
-                        </div>
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-12"><h6><b>@ViewData["GradePL"]  </b></h6></div>
-                            <div class="col-md-2  col-3"> <h6>@Model.Semat</h6></div>
-                            @*<div class="col-md-2  col-3"><h6>   @Model.EduEnterDate </h6></div>
-            <div class="col-md-2  col-3"><h6>سال 2</h6></div>*@
-                            <div class="col-md-4  col-0"></div>
-                        </div>
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-6"><h6><b>  @ViewData["from"]</b></h6></div>
-                            <div class="col-md-2 col-6"><h6> @Model.EduEnterDate </h6></div>
-                            <div class="col-md-8 col-0"></div>
-                        </div>
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-6"><h6><b>@ViewData["to"]  </b></h6></div>
-                            <div class="col-md-2 col-6"><h6>     @Model.EduExitDate</h6></div>
-                            <div class="col-md-8 col-0"></div>
-                        </div>
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-6"><h6><b>   @ViewData["UniverCityName"]</b></h6></div>
-                            <div class="col-md-2 col-6"><h6>   @Model.UnivercityName</h6></div>
-                            <div class="col-md-8 col-0"></div>
-                        </div>
-                        <hr />
-                        <div class="row w-100 mx-auto mt-5">
-                            <h6 class="text-right pr-3">  @ViewData["Skills"] </h6>
-                        </div>
-                        <hr />
-                        <div class="row w-100 pt-3">
-                            <h5 class="pr-4">   @ViewData["Skills"]</h5>
-                        </div>
-                        <div class="row w-100 text-justify mx-auto hj-degree pt-5 _flot-postion">
-                            @{
-
-                                var skillss = Model.SKILLS;
-                                if (!string.IsNullOrEmpty(skillss))
-                                {
-
-                                    var listLanguage = skillss.Split(',');
-                                    foreach (var item in listLanguage)
+                                    @if (!string.IsNullOrEmpty(Model.Nickname))
                                     {
-                                        <div class="col-md-2 col-12 py-2"> <button type="button" class="btn  w-100 button-Service">@item</button></div>
-                                    }
-                                }
-
-                            }
-
-                        </div>
-                        <hr />
-                        <div class="row w-100 mx-auto mt-5">
-                            <h6 class="text-right pr-3 pt-4">     @ViewData["OtherInfo"] </h6>
-                        </div>
-                        <hr />
-                        <div class="row w-100 pt-3">
-                            <h5 class="pr-4">    @ViewData["OtherInfo"] </h5>
-                        </div>
-
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-6"><h6><b>    @ViewData["BirthDate"]</b></h6></div>
-                            <div class="col-md-2 col-6"><h6>    @Model.Birthdate </h6></div>
-                            <div class="col-md-8 col-0"></div>
-                        </div>
-                        <div class="row w-100 mx-auto text-right ">
-                            <div class="col-md-2 col-6"><h6><b> @ViewData["GenderPL"]</b></h6></div>
-                            <div class="col-md-2 col-6">
-                                <h6>
-                                    @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
-                                    {
-                                        <text> @Model.Gender.GetEnumDescription()</text>
+                                        <h3>@Model.Nickname</h3> ;
                                     }
                                     else
                                     {
-                                        if (Model.Gender == UserGender.Man)
+                                        <h3>@Model.UserName</h3>;
+                                    }
+                                </div>
+                                <div class="col-12">
+                                    <img src="/hj/img/borderbig green.png" class="img-fluid">
+                                </div>
+
+                            </div>
+                            <div class="row w-100 mx-auto mt-5">
+                                <h6 class="text-right pr-3">  @ViewData["Position"]  </h6>
+                            </div>
+                            <hr />
+                            <div class="row w-100 pt-3">
+                                <h5 class="pr-4">مشاور املاک؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟</h5>
+                            </div>
+                            <div class="row w-100 text-justify">
+                                <h6 class="line-27 pr-4">    ؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟ </h6>
+                            </div>
+                            <hr />
+                            <div class="row w-100 mx-auto mt-5">
+                                <h6 class="text-right pr-3">   @ViewData["Resume"] </h6>
+                            </div>
+                            <hr />
+                            <div class="row w-100 mx-auto text-right">
+                                <h5 class="pr-4">   @ViewData["Resume"]</h5>
+                            </div>
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-12"><h6><b>  @ViewData["Office"] </b></h6></div>
+                                <div class="col-md-4  col-0"></div>
+                            </div>
+
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-12"><h6><b>   @ViewData["from"]  </b></h6></div>
+                                <div class="col-md-2  col-3"> <h6> @Model.WorkEnterDate   </h6></div>
+                                <div class="col-md-4  col-0"></div>
+                            </div>
+
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-12"><h6><b>  @ViewData["to"]</b></h6></div>
+                                <div class="col-md-2  col-3"><h6> @Model.WorkExitDate </h6></div>
+                                <div class="col-md-4  col-0"></div>
+                            </div>
+
+
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-6"><h6><b> @ViewData["Position"]</b></h6></div>
+                                <div class="col-md-2 col-6"><h6>@Model.Semat</h6></div>
+                                <div class="col-md-8 col-0"></div>
+                            </div>
+                            <div class="row w-100 text-justify">
+                                <h6 class="line-27 pr-4"> @Model.WorkDescriptions  </h6>
+                            </div>
+                            <hr />
+                            <div class="row w-100 mx-auto mt-5">
+                                <h6 class="text-right pr-3">   @ViewData["AcademicRecords"] </h6>
+                            </div>
+                            <hr />
+                            <div class="row w-100 pt-3">
+                                <h5 class="pr-4">    @ViewData["AcademicRecords"]</h5>
+                            </div>
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-12"><h6><b>@ViewData["GradePL"]  </b></h6></div>
+                                <div class="col-md-2  col-3"> <h6>@Model.Semat</h6></div>
+                                @*<div class="col-md-2  col-3"><h6>   @Model.EduEnterDate </h6></div>
+                                    <div class="col-md-2  col-3"><h6>سال 2</h6></div>*@
+                                <div class="col-md-4  col-0"></div>
+                            </div>
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-6"><h6><b>  @ViewData["from"]</b></h6></div>
+                                <div class="col-md-2 col-6"><h6> @Model.EduEnterDate </h6></div>
+                                <div class="col-md-8 col-0"></div>
+                            </div>
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-6"><h6><b>@ViewData["to"]  </b></h6></div>
+                                <div class="col-md-2 col-6"><h6>     @Model.EduExitDate</h6></div>
+                                <div class="col-md-8 col-0"></div>
+                            </div>
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-6"><h6><b>   @ViewData["UniverCityName"]</b></h6></div>
+                                <div class="col-md-2 col-6"><h6>   @Model.UnivercityName</h6></div>
+                                <div class="col-md-8 col-0"></div>
+                            </div>
+                            <hr />
+                            <div class="row w-100 mx-auto mt-5">
+                                <h6 class="text-right pr-3">  @ViewData["Skills"] </h6>
+                            </div>
+                            <hr />
+                            <div class="row w-100 pt-3">
+                                <h5 class="pr-4">   @ViewData["Skills"]</h5>
+                            </div>
+                            <div class="row w-100 text-justify mx-auto hj-degree pt-5 _flot-postion">
+                                @{
+
+                                    var skillss = Model.SKILLS;
+                                    if (!string.IsNullOrEmpty(skillss))
+                                    {
+
+                                        var listLanguage = skillss.Split(',');
+                                        foreach (var item in listLanguage)
                                         {
-                                            <text>man</text>
+                                            <div class="col-md-2 col-12 py-2"> <button type="button" class="btn  w-100 button-Service">@item</button></div>
+                                        }
+                                    }
+
+                                }
+
+                            </div>
+                            <hr />
+                            <div class="row w-100 mx-auto mt-5">
+                                <h6 class="text-right pr-3 pt-4">     @ViewData["OtherInfo"] </h6>
+                            </div>
+                            <hr />
+                            <div class="row w-100 pt-3">
+                                <h5 class="pr-4">    @ViewData["OtherInfo"] </h5>
+                            </div>
+
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-6"><h6><b>    @ViewData["BirthDate"]</b></h6></div>
+                                <div class="col-md-2 col-6"><h6>    @Model.Birthdate </h6></div>
+                                <div class="col-md-8 col-0"></div>
+                            </div>
+                            <div class="row w-100 mx-auto text-right ">
+                                <div class="col-md-2 col-6"><h6><b> @ViewData["GenderPL"]</b></h6></div>
+                                <div class="col-md-2 col-6">
+                                    <h6>
+                                        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+                                        {
+                                            <text> @Model.Gender.GetEnumDescription()</text>
                                         }
                                         else
                                         {
-                                            <text>woman</text>
+                                            if (Model.Gender == UserGender.Man)
+                                            {
+                                                <text>man</text>
+                                            }
+                                            else
+                                            {
+                                                <text>woman</text>
+                                            }
                                         }
-                                    }
 
-                                </h6>
+                                    </h6>
 
+                                </div>
+                                <div class="col-md-8 col-0"></div>
                             </div>
-                            <div class="col-md-8 col-0"></div>
-                        </div>
-                        <div class="row w-100 mx-auto text-right">
-                            <div class="col-md-2 col-6"><h6><b>   @ViewData["SituationPL"] </b></h6></div>
-                            <div class="col-md-2 col-6">
-                                <h6>
-                                    @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
-                                    {
-                                        <text> @Model.MarriedType.GetEnumDescription()</text>
-                                    }
-                                    else
-                                    {
-                                        if (Model.MarriedType == UserMarriedType.Married)
+                            <div class="row w-100 mx-auto text-right">
+                                <div class="col-md-2 col-6"><h6><b>   @ViewData["SituationPL"] </b></h6></div>
+                                <div class="col-md-2 col-6">
+                                    <h6>
+                                        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
                                         {
-                                            <text> married</text>
-
+                                            <text> @Model.MarriedType.GetEnumDescription()</text>
                                         }
                                         else
                                         {
-                                            <text>single</text>
+                                            if (Model.MarriedType == UserMarriedType.Married)
+                                            {
+                                                <text> married</text>
 
+                                            }
+                                            else
+                                            {
+                                                <text>single</text>
+
+                                            }
                                         }
-                                    }
 
-                                </h6>
+                                    </h6>
+                                </div>
+                                <div class="col-md-8 col-0"></div>
                             </div>
-                            <div class="col-md-8 col-0"></div>
-                        </div>
-                        <div class="row w-100 mx-auto text-right">
-                            <h6><b>@ViewData["LanguageKnowing"]:    </b></h6>
-                        </div>
-                        <div class="row w-100 mt-4 mx-auto  _flot-postion ">
-                            @{
-                                var languages = Model.LanguageKnowing;
-                                if (!string.IsNullOrEmpty(languages))
-                                {
-
-                                    var listLanguage = languages.Split(',');
-                                    foreach (var item in listLanguage)
+                            <div class="row w-100 mx-auto text-right">
+                                <h6><b>@ViewData["LanguageKnowing"]:    </b></h6>
+                            </div>
+                            <div class="row w-100 mt-4 mx-auto  _flot-postion ">
+                                @{
+                                    var languages = Model.LanguageKnowing;
+                                    if (!string.IsNullOrEmpty(languages))
                                     {
-                                        <div class="col-md-2 col-12 py-2"> <button type="button" class="btn  w-100 button-Service">@item</button></div>
-
+                                        var listLanguage = languages.Split(',');
+                                        foreach (var item in listLanguage)
+                                        {
+                                            <div class="col-md-2 col-12 py-2"> <button type="button" class="btn  w-100 button-Service">@item</button></div>
+                                        }
                                     }
                                 }
 
-                            }
-                            @*<div class="col-md-3 col-12 py-2"> <button type="button" class="btn  w-100 button-Service">انگلیسی</button></div>
-            <div class="col-md-3 col-12 py-2"> <button type="button" class="btn  w-100 button-Service">ترکی</button></div>
-            <div class="col-md-3 col-12 py-2"> <button type="button" class="btn  w-100 button-Service">فرانسه</button></div>*@
-
+                            </div>
                         </div>
-
- 
                     </div>
-
-                    </div>
-
                 </div>
             </div>
 
@@ -574,4 +484,114 @@
     <!-- ./Tabs -->
 
 </div>
+
+
+
+
+
+
+@section Scripts{
+
+    <script src="~/lib/vuejs/vue.min.js"></script>
+    <script src="~/lib/axios/dist/axios.min.js"></script>
+    <script src="~/lib/swal-alert/sweetalert.min.js"></script>
+
+    <script src="~/SinaCustom/js/main.js"></script>
+    <script>
+        let username = $("#username").val();
+       
+        var vue = new Vue({
+            el: "#root",
+            data: {
+                services: null,
+                servicesLoading: true,
+                showList: false,
+
+                selectedService: null,
+
+                //data for pagination filter search ,...
+                serviceCount: 0,
+                //این تعداد ایتم های صفحس
+                limit: 10,
+                page: 0,
+
+            },
+
+            methods: {
+                toggleShowList: function () {
+                    this.showList = !this.showList;
+                },
+
+                getListemService: async function () {
+                    var vueInstance = this;
+                    this.servicesLoading = true;
+                    var params = this.axiosParams;
+
+                    axios.get("/Profiles/OtherUserProfile", { params: params })
+                        .then(function (response) {
+                            vueInstance.services = response.data.services;
+                            vueInstance.serviceCount = response.data.count;
+                        }).catch(function (er) {
+                            console.log(er)
+                            FailedAlert('خطا در نمایش سرویس')
+                        }).finally(function () {
+                            vueInstance.servicesLoading = false;
+                        });
+                },
+
+                setPage: function (value) {
+                    //this.page = value;
+                    if (this.page === value)
+                        return
+                    //fetch new data from sever
+                    this.page = value;
+                    this.getListemService();
+                },
+                setPrevPage: function () {
+                    if (this.page != 0) {
+                        this.page--;
+                        this.getListemService();
+                    }
+                },
+                setNextPage: function () {
+                    if (this.page + 1 != this.totalPages) {
+                        this.page++;
+                        this.getListemService();
+                    }
+                },
+                isLastPage: function () {
+                    if (this.page + 1 == this.totalPages)
+                        return true
+                    return false;
+                },
+
+            },
+            mounted: function () {
+                //fetch data from sever
+                this.getListemService();
+            },
+            computed: {
+                totalPages: function () {
+                    return Math.ceil(this.serviceCount / this.limit);
+                },
+                axiosParams: function () {
+                    var params = new URLSearchParams();
+                    params.append('username', String(username))
+                    params.append('limit', String(this.limit));
+                    params.append('offset', `${this.page ? this.page * this.limit : 0}`);
+                    return params;
+                }
+            },
+            watch: {
+                serviceCount: function () {
+                    this.totalPages();
+                }
+            }
+        })
+
+    </script>
+
+}
+
+
 

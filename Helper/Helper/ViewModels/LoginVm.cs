@@ -14,6 +14,13 @@ namespace Helper.ViewModels
         public string ReturnUrl { get; set; }
 
 
+        public string UserReturnUrl { get; set; }
+
+
+        public string AdminReturnUrl { get; set; }
+
+
+
         [Required(ErrorMessage = "این فیلد الزامیست")]
         [MinLength(3, ErrorMessage = "حداقل 3 کاراکتر وارد کنید")]
         [MaxLength(20, ErrorMessage = "حداکثر 20 کاراکتر وارد کنید")]

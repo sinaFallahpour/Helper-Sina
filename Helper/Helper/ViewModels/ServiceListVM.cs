@@ -38,17 +38,11 @@ namespace Helper.ViewModels
 
 
 
-
-
          /// <summary>
-         /// نام  دسته بندی 
+         /// چه انگلیسی  چه فارسی نام  دسته بندی 
          /// </summary>
         public string CategoryName { get; set; }
 
-        /// <summary>
-        /// نام انگکلیسی دسته بندی
-        /// </summary>
-        public string CategoryEnglishEnglishName { get; set; }
         
         /// <summary>
         /// عکس دسته بندی
