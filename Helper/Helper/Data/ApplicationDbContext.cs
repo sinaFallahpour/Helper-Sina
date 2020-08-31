@@ -185,6 +185,11 @@ namespace Helper.Data
         /// </summary>
         public DbSet<Helper.ViewModels.OtherUserProfileVM> OtherUserProfile { get; set; }
 
+        /// <summary>
+        /// پنل و واحد پول
+        /// </summary>
+        public DbSet<Helper.ViewModels.ServiceListVM> ServiceListVM { get; set; }
+
        
 
 

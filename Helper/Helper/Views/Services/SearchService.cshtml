@@ -1,0 +1,454 @@
+﻿@model IEnumerable<Helper.ViewModels.ServiceListVM>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "خدمات";
+    Layout = "~/Views/Shared/_landing.cshtml";
+}
+
+
+
+
+@section Styles{
+    <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
+    <link href="~/lib/jquery.tagsinput/jquery.tagsinput.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" />
+
+}
+
+
+
+<div class="container mx-auto p-0 m-0 mt-5">
+    <div class="row w-100 mx-auto text-md-right text-center d-block">
+        <h4>
+            <b>
+                خدمت مورد نظر خود را جستجو
+                کنید
+            </b>
+        </h4>
+    </div>
+    <div class="row w-100 p-0 m-0 mx-auto pt-md-3 pt-5">
+        <div class="col-md-10 col-8 text-right"><h3><b> خدمات</b></h3></div>
+        <div class="col-md-2 col-4 text-news"><span> جدید ترین ها</span></div>
+    </div>
+    <div class="row w-100 mx-auto">
+        <img src="~/hj/img/borderbig green.png" class="img-fluid mx-auto" />
+    </div>
+    <div class="row w-100 mx-auto">
+
+    </div>
+
+
+    <div class="row w-100 mx-auto">
+        <input type="text" placeholder="جستجو" class=" text-center w-100 mx-auto my-3 service-form px-3" />
+    </div>
+    <div class="row w-100 mx-auto my-3 service-form">
+        <div class="col-10  mx-auto text-right pt-2 pr-3">
+            <h5> دسته بندی</h5>
+        </div>
+        <div class="col-2  mx-auto">
+            <i class="fas fa-chevron-down pl-3 pt-3"></i>
+        </div>
+    </div>
+
+    <div className="form-group  hj-height">
+        <h5 class="_text-position">    @ViewData["Categories"]</h5>
+        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form", @id = "CategoryId1" })
+    </div>
+
+    <div className="form-group hj-height">
+        <h5 class="_text-position"> @ViewData["City"] </h5>
+        @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form", @id = "CityId1" })
+    </div>
+
+    <div class="row w-100 mx-auto my-3 service-form">
+        <div class="col-10  mx-auto text-right pt-2 pr-3">
+            <h5> شهر</h5>
+        </div>
+        <div class="col-2  mx-auto">
+            <i class="fas fa-chevron-down pl-3 pt-3"></i>
+        </div>
+    </div>
+    <div class="row w-100 mx-auto my-3 service-form">
+        <div class="col-10  mx-auto text-right pt-2 pr-3">
+            <h5>  مهارت مورد نظر</h5>
+        </div>
+        <div class="col-2  mx-auto">
+            <i class="fas fa-chevron-down pl-3 pt-3 " id="select-down"></i>
+        </div>
+    </div>
+    <div class="row w-100 mx-auto hj-select">
+        <div class="col-sm-2 col-12 py-2">
+            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+        </div>
+        <div class="col-sm-2 col-12  py-2">
+            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+        </div>
+        <div class="col-sm-2 col-12  py-2">
+            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+        </div>
+        <div class="col-sm-2 col-12  py-2">
+            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+        </div>
+        <div class="col-sm-2 col-12  py-2">
+            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+        </div>
+        <div class="col-sm-2 col-12  py-2">
+            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+        </div>
+    </div>
+
+    <div class="row w-100 mx-auto">
+        <div class="col-6">
+            <h5 class="text-right Pricerange ">بازه قیمت</h5>
+        </div>
+        <div class="col-6 text-news">
+            <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>
+        </div>
+    </div>
+    <div class="row w-100 mx-auto">
+        <div class="col-lg-10 col-md-8 col-6">
+            <h5 class="_text-position Pricerange  ">   @ViewData["PriceRange"]</h5>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6 text-news">
+            @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency" })
+            @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
+        </div>
+    </div>
+
+    <div class="row w-100 mx-auto hj-cost-service pb-5">
+        <div class="col-sm-6 py-2">  <input type="text" class="form-control text-center hj-input-service py-3" placeholder="از قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
+        <div class="col-sm-6 py-2"> <input type="text" class="form-control text-center hj-input-service py-3 " placeholder="تا قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
+    </div>
+    <div class="row w-100 mx-auto mt-4">
+        <button type="button" class="btn btn-success w-25 mx-auto Confirmation">تایید</button>
+    </div>
+    <br />
+    <hr />
+    @*---------------------------*@
+    <div class="row w-100 mx-auto mt-5 pt-5 ">
+        <div class="col-lg-3 col-sm-6 col-12 py-5 my-3 py-lg-0 my-lg-0">
+            <div class=" hj-profile mx-auto">
+                <div class="row  w-100 hj-img-profile mx-auto">
+                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                </div>
+
+                <div class="row w-100 mx-auto mt-5 pt-5">
+                    <div class="col-12">
+                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                        <h4 class="text-center w-100">
+                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                        </h4>
+                    </div>
+                    <div class="col-12 pt-4 pb-4 footer-titr">
+                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                    </div>
+
+                </div>
+
+                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
+            <div class=" hj-profile mx-auto">
+                <div class="row  w-100 hj-img-profile mx-auto">
+                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                </div>
+
+                <div class="row w-100 mx-auto mt-5 pt-5">
+                    <div class="col-12">
+                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                        <h4 class="text-center w-100">
+                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                        </h4>
+                    </div>
+                    <div class="col-12 pt-4 pb-4 footer-titr">
+                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                    </div>
+
+                </div>
+
+                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
+            <div class=" hj-profile mx-auto">
+                <div class="row  w-100 hj-img-profile mx-auto">
+                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                </div>
+
+                <div class="row w-100 mx-auto mt-5 pt-5">
+                    <div class="col-12">
+                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                        <h4 class="text-center w-100">
+                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                        </h4>
+                    </div>
+                    <div class="col-12 pt-4 pb-4 footer-titr">
+                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                    </div>
+
+                </div>
+
+                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-12 py-5 my-3 py-lg-0 my-lg-0">
+            <div class=" hj-profile mx-auto">
+                <div class="row  w-100 hj-img-profile mx-auto">
+                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                </div>
+
+                <div class="row w-100 mx-auto mt-5 pt-5">
+                    <div class="col-12">
+                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                        <h4 class="text-center w-100">
+                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                        </h4>
+                    </div>
+                    <div class="col-12 pt-4 pb-4 footer-titr">
+                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                    </div>
+
+                </div>
+
+                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row w-100 mx-auto mt-lg-5 pt-lg-5 ">
+        <div class="col-lg-3 col-sm-6 col-12  py-5 my-3 py-lg-0 my-lg-0">
+            <div class=" hj-profile mx-auto">
+                <div class="row  w-100 hj-img-profile mx-auto">
+                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                </div>
+
+                <div class="row w-100 mx-auto mt-5 pt-5">
+                    <div class="col-12">
+                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                        <h4 class="text-center w-100">
+                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                        </h4>
+                    </div>
+                    <div class="col-12 pt-4 pb-4 footer-titr">
+                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                    </div>
+
+                </div>
+
+                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
+            <div class=" hj-profile mx-auto">
+                <div class="row  w-100 hj-img-profile mx-auto">
+                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                </div>
+
+                <div class="row w-100 mx-auto mt-5 pt-5">
+                    <div class="col-12">
+                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                        <h4 class="text-center w-100">
+                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                        </h4>
+                    </div>
+                    <div class="col-12 pt-4 pb-4 footer-titr">
+                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                    </div>
+
+                </div>
+
+                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
+            <div class=" hj-profile mx-auto">
+                <div class="row  w-100 hj-img-profile mx-auto">
+                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                </div>
+
+                <div class="row w-100 mx-auto mt-5 pt-5">
+                    <div class="col-12">
+                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                        <h4 class="text-center w-100">
+                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                        </h4>
+                    </div>
+                    <div class="col-12 pt-4 pb-4 footer-titr">
+                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                    </div>
+
+                </div>
+
+                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
+            <div class=" hj-profile mx-auto">
+                <div class="row  w-100 hj-img-profile mx-auto">
+                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                </div>
+
+                <div class="row w-100 mx-auto mt-5 pt-5">
+                    <div class="col-12">
+                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                        <h4 class="text-center w-100">
+                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                        </h4>
+                    </div>
+                    <div class="col-12 pt-4 pb-4 footer-titr">
+                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                    </div>
+
+                </div>
+
+                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @*--------pagination----*@
+    <div class="row w-100 mx-auto">
+        <div class="pagination-wrapper mx-auto">
+            <div class="pagination2">
+                <a class="prev page-numbers" href="javascript:;">قبلی</a>
+                <span aria-current="page" class="page-numbers current">1</span>
+                <a class="page-numbers" href="javascript:;">2</a>
+                <a class="page-numbers" href="javascript:;">3</a>
+                <a class="page-numbers" href="javascript:;">4</a>
+                <a class="page-numbers" href="javascript:;">5</a>
+
+                <a class="next page-numbers" href="javascript:;">بعدی</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/swal-alert/sweetalert.min.js"></script>
+    <script src="~/SinaCustom/js/main.js"></script>
+    <script src="~/lib/jquery.tagsinput/jquery.tagsinput.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>
+    <script src="~/lib/vuejs/vue.min.js"></script>
+
+    <script>
+
+
+        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+        {
+            <text>
+
+                $(document).ready(function () {
+                    $('.skill').tagsInput({
+                        'interactive': true,
+                        'defaultText': 'وارد کنید',
+                    });
+                    $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+                    $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+
+
+                    $(".catId").select2({
+                        dir: "rtl"
+                    });
+                    $(".cityId").select2({
+                        dir: "rtl"
+                    });
+                    $(".monyUnitid").select2({
+                        dir: "rtl"
+                    });
+                })
+
+            </text>
+        }
+        else {
+            <text>
+                $(document).ready(function () {
+                    $('.skill').tagsInput({
+                        'interactive': true,
+                        'defaultText': 'Enter new',
+                    });
+                    $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+                    $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+
+                    $(".catId").select2();
+                    $(".cityId").select2();
+                    $(".monyUnitid").select2();
+                })
+
+            </text>
+        }
+
+    </script>
+
+}

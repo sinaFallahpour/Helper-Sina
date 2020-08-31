@@ -57,6 +57,7 @@ namespace Helper.Controllers
             var user = await _context
                     .Users
                     .Where(c => c.Id == UserId)
+                    .AsNoTracking()
                     .Include(c => c.EducationHistry)
                     .Include(c => c.WorkExperience)
                     .Select(c => new ProfileVM2
@@ -213,6 +214,7 @@ namespace Helper.Controllers
             var user = await _context
                     .Users
                     .Where(c => c.UserName == username)
+                    .AsNoTracking()
                     .Include(c => c.EducationHistry)
                     .Include(c => c.WorkExperience)
                     .Select(c => new OtherUserProfileVM
@@ -243,7 +245,6 @@ namespace Helper.Controllers
                         WorkDescriptions = c.WorkExperience != null ? c.WorkExperience.Descriptions : null,
                         Semat = c.WorkExperience != null ? c.WorkExperience.Semat : null,
                         CompanyName = c.WorkExperience != null ? c.WorkExperience.CompanyName : null,
-
                     })
                     .FirstOrDefaultAsync();
 
@@ -256,21 +257,7 @@ namespace Helper.Controllers
             return NotFound();
 
 
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -290,8 +277,6 @@ namespace Helper.Controllers
             ViewData["LanguageKnowingPL"] = _localizer["LanguageKnowingPL"];
             ViewData["LanguageKnowing"] = _localizer["LanguageKnowing"];
 
-
-
             ViewData["Resume"] = _localizer["Resume"];
             ViewData["OtherInfo"] = _localizer["OtherInfo"];
             ViewData["AcademicRecords"] = _localizer["AcademicRecords"];
@@ -301,7 +286,7 @@ namespace Helper.Controllers
             ViewData["UserNamePL"] = _localizer["UserNamePL"];
             ViewData["EmailPL"] = _localizer["EmailPL"];
             ViewData["CityPL"] = _localizer["CityPL"];
-            ViewData["MobileNumberPL"] = _localizer["MobileNumber"];
+            ViewData["MobileNumberPL"] = _localizer["MobileNumberPL"];
             ViewData["OfficePL"] = _localizer["OfficePL"];
             ViewData["PositionPL"] = _localizer["PositionPL"];
             ViewData["fromPL"] = _localizer["fromPL"];
@@ -314,6 +299,13 @@ namespace Helper.Controllers
             ViewData["BirthDatePL"] = _localizer["BirthDatePL"];
             ViewData["GenderPL"] = _localizer["GenderPL"];
             ViewData["SituationPL"] = _localizer["SituationPL"];
+
+
+            ViewData["UniverCityNamePL"] = _localizer["UniverCityNamePL"];
+            ViewData["StartEduDatePL"] = _localizer["StartEduDatePL"];
+            ViewData["EndEduDatePL"] = _localizer["EndEduDatePL"];
+
+
             ViewData["Skills"] = _localizer["Skills"];
 
             ViewData["Services"] = _localizer["Services"];
@@ -321,19 +313,12 @@ namespace Helper.Controllers
             ViewData["SendMsg"] = _localizer["SendMsg"];
             ViewData["Resume2"] = _localizer["Resume2"];
 
+            ViewData["Next"] = _localizer["Next"];
+            ViewData["Prev"] = _localizer["Prev"];
 
             ViewData["SaveChanges"] = _localizer["SaveChanges"];
 
-
         }
-
-
-
-
-
-
-
-
 
 
 

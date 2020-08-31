@@ -119,6 +119,9 @@ namespace Helper.Models.Entities
 
         [ForeignKey("MonyUnitId")]
         public virtual TBL_MonyUnit MonyUnit { get; set; }
+
+        public ICollection<TBL_User_Like_Service> UserLikeServices { get; set; }
+        
         #endregion
 
     }

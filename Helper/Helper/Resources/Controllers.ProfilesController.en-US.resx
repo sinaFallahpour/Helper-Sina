@@ -141,6 +141,9 @@
   <data name="EmailPL" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EndEduDatePL" xml:space="preserve">
+    <value>fnished date of graduation</value>
+  </data>
   <data name="ExistEmail" xml:space="preserve">
     <value>Email  has already been taken</value>
   </data>
@@ -171,6 +174,9 @@
   <data name="NameAndLastNamePL" xml:space="preserve">
     <value>Profle Name</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="Office" xml:space="preserve">
     <value>Company Name</value>
   </data>
@@ -185,6 +191,9 @@
   </data>
   <data name="PositionPL" xml:space="preserve">
     <value>Enter Your  position</value>
+  </data>
+  <data name="Prev" xml:space="preserve">
+    <value>Prev</value>
   </data>
   <data name="RequestService" xml:space="preserve">
     <value>Service request</value>
@@ -210,6 +219,9 @@
   <data name="Skills" xml:space="preserve">
     <value>Specializations</value>
   </data>
+  <data name="StartEduDatePL" xml:space="preserve">
+    <value>Start date of study</value>
+  </data>
   <data name="to" xml:space="preserve">
     <value>to date</value>
   </data>
@@ -218,6 +230,9 @@
   </data>
   <data name="UniverCityName" xml:space="preserve">
     <value>Univer CityName</value>
+  </data>
+  <data name="UniverCityNamePL" xml:space="preserve">
+    <value>Enter Unvercity Name</value>
   </data>
   <data name="UserNamePL" xml:space="preserve">
     <value>User Name</value>

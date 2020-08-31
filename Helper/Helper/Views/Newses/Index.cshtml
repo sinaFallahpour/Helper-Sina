@@ -324,7 +324,7 @@
                 "newsID": NewsId
             };
             $(tagId).remove();
-            var el = `<i id="loading-${newsId}" class="fa fa-spinner fa-spin fa-2x fa-fw pl-2"></i>`
+            var el = `<i id="loading-${newsId}" class="fa fa-spinner fa-spin  fa-fw pl-2"></i>`
             $(`#likeConta-${newsId}`).prepend(el)
             $.ajax({
                 method: "POST",

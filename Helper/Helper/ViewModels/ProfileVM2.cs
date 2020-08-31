@@ -15,11 +15,13 @@ namespace Helper.ViewModels
         [Required(ErrorMessage = "Required")]
         [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
         [MaxLength(20, ErrorMessage = "Maximum length is {1} characters")]
+        //[RegularExpression(@"^\S*$", ErrorMessage = "no space")]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
         [EmailAddress(ErrorMessage = "InValidEmail")]
         [Required(ErrorMessage = "Required")]
+        //[RegularExpression(@"^\S*$", ErrorMessage = "no space")]
         [MaxLength(30, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "Email")]
         public string Email { get; set; }

@@ -917,6 +917,11 @@ a {
     background: #F6F0F8;
     box-shadow: 1px 1px 9px #46454661;
     color: #8D24B3;
+
+
+}
+.height-120 {
+    height: 120px;
 }
 
 .hj-img-profile {
@@ -969,7 +974,7 @@ a {
 
     .page-numbers:hover, .page-numbers.current {
         background-color: #86c023;
-        color: #fff;
+        color: #fff !important;
     }
 
     .page-numbers.prev:hover, .page-numbers.next:hover {
@@ -2301,6 +2306,10 @@ h3, h1, h2, h4, h5, h6 {
 
 ._flot-postion {
     float: left;
+}
+
+._direction {
+    direction: ltr;
 }
 
   /*swit alert */

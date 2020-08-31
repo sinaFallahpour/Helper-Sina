@@ -66,6 +66,7 @@
     <None Include="wwwroot\lib\swal-alert\sweetalert.js" />
     <None Include="wwwroot\lib\swal-alert\sweetalert.min.js" />
     <None Include="wwwroot\lib\tagsinput\bootstrap-tagsinput.js" />
+    <None Include="wwwroot\StyleSheet.css" />
   </ItemGroup>
 
 </Project>

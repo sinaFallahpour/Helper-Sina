@@ -65,7 +65,7 @@ namespace Helper.Controllers
                     return View(model);
                     //return RedirectToAction(nameof(Index));
                 }
-                catch (Exception ex)
+                catch  
                 {
                     ModelState.AddModelError("", "خطا در ثبت شهر");
                     return View(model);

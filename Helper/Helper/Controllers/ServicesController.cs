@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Helper.Data;
 using Helper.Models.Entities;
+using Helper.Models.Enums;
 using Helper.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -44,8 +45,6 @@ namespace Helper.Controllers
 
         public async Task<IActionResult> Index()
         {
-
-
             returnViewDate();
 
 
@@ -80,9 +79,6 @@ namespace Helper.Controllers
 
             return View();
         }
-
-
-
 
 
         [HttpPost]
@@ -169,9 +165,6 @@ namespace Helper.Controllers
         }
 
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> ServiceRequestCreate(CreateServiceVM model)
         {
@@ -256,50 +249,23 @@ namespace Helper.Controllers
 
 
 
-        //[AllowAnonymous]
-        //public async Task<JsonResult> List(int? limit, int? offset,
-        //         )
-        //{
-        //    var employies = await _userManager.List(limit, offset, searchedWord, Role, SalaryStatus);
-        //    if (employies == null)
-        //        throw new Exception("server error");
-        //    return Json(employies, JsonRequestBehavior.AllowGet);
-        //}
-
-
-
-
-
-
-        //var queryable = DataContext.TBL_Users
-        //      .OrderBy(x => x.FullName)
-        //      .ThenBy(x => x.Username)
-        //      .AsQueryable();
-
-
-
-
-
-        //var Count = queryable.Count();
-        //return await queryable
-        //         .Skip(offset ?? 0)
-        //         .Take(limit ?? 10)
-        //         .Select(c => new UserListViewModel
-        //         {
-        //             FullName = c.FullName,
-        //             Id = c.Id,
-        //             SalaryStatus = c.SalaryStatus,
-        //             Username = c.Username,
-        //             Count = Count
-        //         }).ToListAsync();
-
+        [Route("Services/UsersService/{username}")]
         public async Task<IActionResult> UsersService(string username, int? limit, int? offset)
         {
+            var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _context.Users.Where(c => c.Id == currentUserId).Select(c => new { c.Id, c.UserName }).FirstOrDefaultAsync();
+
+
+
+            var query = _context.TBL_Service.AsQueryable();
+            var count = query.Where(c => c.Username == username && c.ServiceType == ServiceType.GiverService).Count();
 
             var services = await _context.TBL_Service
-                .Where(c => c.Username == username)
+                 .AsNoTracking()
+                .Where(m => m.Username == username && m.ServiceType == ServiceType.GiverService)
                 .Skip(offset ?? 0)
                 .Take(limit ?? 8)
+                 .Include(c => c.UserLikeServices)
                 .Select(c => new ServiceListVM
                 {
                     Id = c.Id,
@@ -312,16 +278,152 @@ namespace Helper.Controllers
                     CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
 
                     //CategoryImageAddresc=c.Category.ImageAddress
-                    IsLiked = _context.TBL_UserLikeSerive.Any(d => d.UserName == username && d.ServiceId == c.Id),
+                    IsLiked = c.UserLikeServices.Any(p => p.UserName == user.UserName && p.ServiceId == c.Id),
                 })
                 .OrderByDescending(c => c.CreateDate)
                 .ThenBy(c => c.LikeCount)
                 .ToListAsync();
-            var response = new { Count = 0, services = services };
+            var response = new { Count = count, services = services };
             return new JsonResult(new { Status = true, Message = "", data = response });
         }
 
 
+        [Route("Services/SearchService")]
+        public async Task<IActionResult> SearchService(int? limit, int? offset)
+        {
+
+            returnViewDate();
+
+
+            List<TBL_Category> cats;
+            List<TBL_City> cities;
+            List<TBL_MonyUnit> monyUnits;
+
+            if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+                cats = await _context.TBL_Category.Where(c => c.IsEnabled).ToListAsync();
+                cities = await _context.TBL_City.Where(c => c.IsEnabled).ToListAsync();
+                monyUnits = await _context.TBL_MonyUnit.Where(c => c.IsEnabled).ToListAsync();
+
+                ViewBag.CategoryId = new SelectList(cats, "Id", "Name");
+                ViewBag.CityId = new SelectList(cities, "Id", "Name");
+                ViewBag.MonyUnitId = new SelectList(monyUnits, "Id", "Name");
+            }
+            else
+            {
+                cats = await _context.TBL_Category.Where(c => c.IsEnabled).ToListAsync();
+                cities = await _context.TBL_City.Where(c => c.IsEnabled).ToListAsync();
+                monyUnits = await _context.TBL_MonyUnit.Where(c => c.IsEnabled).ToListAsync();
+
+                ViewBag.CategoryId = new SelectList(cats, "Id", "EnglishName");
+                ViewBag.CityId = new SelectList(cities, "Id", "EnglishName");
+                ViewBag.MonyUnitId = new SelectList(monyUnits, "Id", "EnglishName");
+            }
+
+
+
+            return View();
+
+
+
+
+
+
+
+
+
+            //var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            ////var user = await _context.Users.Where(c => c.Id == currentUserId).Select(c => new { c.Id, c.UserName }).FirstOrDefaultAsync();
+
+
+
+            ////var query = _context.TBL_Service.AsQueryable();
+            ////var count = query.AsNoTracking().Where(c => c.ServiceType == ServiceType.GiverService).Count();
+
+            //var services = await _context.TBL_Service
+            //    .AsNoTracking()
+            //    .Where(m => m.ServiceType == ServiceType.GiverService)
+            //    .Skip(offset ?? 0)
+            //    .Take(limit ?? 8)
+            //    .Include(c => c.UserLikeServices)
+            //    .Select(c => new ServiceListVM
+            //    {
+            //        Id = c.Id,
+            //        CreateDate = c.CreateDate,
+            //        Description = c.Description,
+            //        LikeCount = c.LikeCount,
+            //        CommentCount = c.CommentCount,
+            //        SeenCount = c.SeenCount,
+            //        Title = c.Title,
+            //        CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
+
+            //        //CategoryImageAddresc=c.Category.ImageAddress
+            //        IsLiked = c.UserLikeServices.Any(p => p.UserId == currentUserId),
+            //    })
+            //    .OrderByDescending(c => c.LikeCount)
+            //    .ThenByDescending(c => c.SeenCount)
+            //    .ThenByDescending(c => c.CommentCount)
+            //    .ThenByDescending(c => c.CreateDate)
+            //    .ToListAsync();
+
+            //return View(services);
+            ////var response = new { Count = count, services = services };
+            ////return new JsonResult(new { Status = true, Message = "", data = response });
+        }
+
+
+        public async Task<IActionResult> ToggleLike(int? serviceId)
+        {
+            var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _context.Users.Where(c => c.Id == currentUserId).Select(c => new { c.Id, c.UserName }).FirstOrDefaultAsync();
+
+            if (string.IsNullOrEmpty(user?.Id))
+                return new JsonResult(new { Status = false, Message = "برای لایک  ابتدا لاگین کنید." });
+            if (serviceId == null)
+                return new JsonResult(new { Status = false, Message = "   این سرویس موجود نیست." });
+
+
+
+            //if (User.Identity.IsAuthenticated) {
+            //    return new JsonResult(new { Status = 0, Message = "ابتدا وارد حساب خود شوید" });
+            //}
+            var serviceFromDb = _context.TBL_Service.Find(serviceId);
+            if (serviceFromDb == null)
+                return new JsonResult(new { Status = false, Message = "این  سرویس موجود نیست" });
+
+            var IsLiked = false;
+            var oldLike = _context.TBL_UserLikeSerive.Where(c => c.UserId == user.Id && c.ServiceId == serviceFromDb.Id).FirstOrDefault();
+            if (oldLike != null)
+            {
+                _context.TBL_UserLikeSerive.Remove(oldLike);
+                IsLiked = false;
+                serviceFromDb.LikeCount--;
+            }
+            else
+            {
+                var serviceLike = new TBL_User_Like_Service()
+                {
+                    UserId = user.Id,
+                    ServiceId = serviceFromDb.Id,
+                    CrateDate = DateTime.Now,
+                    UserName = user.UserName,
+                };
+                _context.TBL_UserLikeSerive.Add(serviceLike);
+                serviceFromDb.LikeCount++;
+                IsLiked = true;
+            }
+
+            try
+            {
+                _context.SaveChanges();
+                //return new { Status = true, LikeCount = Res.LikeCount, IsLiked = Res.IsLiked };
+                return new JsonResult(new { Status = true, LikeCount = serviceFromDb.LikeCount, IsLiked = IsLiked });
+            }
+            catch
+            {
+                return new JsonResult(new { Status = false, Message = "خطا  در ثبت" });
+            }
+        }
 
 
 

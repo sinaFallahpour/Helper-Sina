@@ -287,8 +287,6 @@
 
 
 
-
-
                                 <input name="IsAgreementVal1" type="hidden" id="IsAgreementVal1" value="false">
 
 
@@ -296,66 +294,6 @@
                                     <input type="submit" id="createBtnSubmit1" value="@ViewData["Submit"]" class="btn btn-success w-25 mx-auto Confirmation">
                                 </div>
                             </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                         </div>
@@ -765,7 +703,7 @@
 
             $("#createBtnSubmit").prop('disabled', true);
             $.ajax({
-                       method: "POST",
+                method: "POST",
                 url: "/Services/ServiceProviderCreate",
                 data: data,
                 //contentType: "application/json; charset=utf-8",
@@ -773,11 +711,12 @@
                              if (r.status) {
                                    $("#createBtnSubmit").prop('disabled', false);
                                  SuccessAlert(r.message)
-                                 resetForm(0);
+                                 resetForm("");
                              }
                              else {
                                 $("#createBtnSubmit").prop('disabled', false);
-                                  FailedAlert(r.message);
+                                 FailedAlert(r.message);
+                                
                              }
                            },
                  error: function () {
@@ -875,19 +814,9 @@
             $(`#MaxPrice${value}`).val("")
             $(`#Skills${value}`).val("")
 
-
         }
 
+
     </script>
-
-
-
-
-
-
-
-
-
-
 
 }

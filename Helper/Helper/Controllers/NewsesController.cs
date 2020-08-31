@@ -45,9 +45,6 @@ namespace Helper.Controllers
 
 
 
-
-
-
             var model = new NewsesVM();
             //var queryable = _context.TBL_NewsArticleVideo.asquer();
 

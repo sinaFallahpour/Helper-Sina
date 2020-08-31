@@ -10,9 +10,11 @@ namespace Helper.Models.Entities
     {
 
 
+        public DateTime CrateDate { get; set; }
+
         #region   relation
 
-        public string  UserName { get; set; }
+        public string UserName { get; set; }
 
         public string UserId { get; set; }
 
