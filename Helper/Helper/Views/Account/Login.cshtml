@@ -52,7 +52,7 @@
                         <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
                         <input type="hidden" name="UserReturnUrl" value="@ViewBag.UserReturnUrl" />
                         <input type="hidden" name="AdminReturnUrl" value="@ViewBag.AdminReturnUrl" />
-
+                        
 
 
                         @*......._Username....... *@
@@ -153,6 +153,11 @@
 
                         <input type="hidden" name="Id" value="0" />
                         <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
+
+                         <input type="hidden" name="UserReturnUrl" value="@ViewBag.UserReturnUrl" />
+                        <input type="hidden" name="AdminReturnUrl" value="@ViewBag.AdminReturnUrl" />
+
+
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input asp-for="Username" class="input text-center  py-3 my-2" id="user_login" autocomplete="off" placeholder="@ViewData["UserName"]">
                         <span asp-validation-for="Username" class="text-danger w-10 d-block"> </span>
@@ -164,7 +169,7 @@
 
                         <label for="remember_me" class="pr-4 my-3 "> @ViewData["RememberMe"]  </label>
 
-                        <input type="submit" class="button btn" value="@ViewData["Login"]">
+                        <input type="submit" id="loginSubmitButton" class="button btn" value="@ViewData["Login"]">
                     </form>
                     <!--.login-form-->
                     <div class="help-text mt-4">
@@ -219,6 +224,23 @@
             //$("#_Password").prop('disabled', true);
             //$("#AcceptRules").prop('disabled', true);
         })
+
+
+
+
+        $("#LoginForm").submit(function (e) {
+
+            if (!$(this).valid()) {
+                return;
+            }
+
+            $("#loginSubmitButton").prop('disabled', true);
+            //$("#_Username").prop('disabled', true);
+            //$("#_Email").prop('disabled', true);
+            //$("#_Password").prop('disabled', true);
+            //$("#AcceptRules").prop('disabled', true);
+        })
+
     </script>
 }
 
