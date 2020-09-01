@@ -38,16 +38,21 @@ namespace Helper.ViewModels
 
 
 
-         /// <summary>
-         /// چه انگلیسی  چه فارسی نام  دسته بندی 
-         /// </summary>
+        /// <summary>
+        /// چه انگلیسی  چه فارسی نام  دسته بندی 
+        /// </summary>
         public string CategoryName { get; set; }
 
-        
+
         /// <summary>
         /// عکس دسته بندی
         /// </summary>
         public string CategoryImageAddres { get; set; }
 
+
+        /// <summary>
+        /// عکس کاربر
+        /// </summary>
+        public string UserImageAddress { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Helper.ViewModels.ServiceListVM>
 @using System.Globalization
+@using System.Security.Claims;
 
 @{
     ViewData["Title"] = "خدمات";
@@ -12,15 +13,21 @@
 @section Styles{
     <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
     <link href="~/lib/jquery.tagsinput/jquery.tagsinput.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" />
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" />*@
+    <link href="~/lib/vue-select/vue-select.css" rel="stylesheet" />
 
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
 }
 
 
 
-<div class="container mx-auto p-0 m-0 mt-5">
+<div class="container mx-auto p-0 m-0 mt-5" id="root" v-cloak>
     <div class="row w-100 mx-auto text-md-right text-center d-block">
-        <h4>
+        <h4 class="text-center">
             <b>
                 خدمت مورد نظر خود را جستجو
                 کنید
@@ -39,354 +46,239 @@
     </div>
 
 
-    <div class="row w-100 mx-auto">
-        <input type="text" placeholder="جستجو" class=" text-center w-100 mx-auto my-3 service-form px-3" />
+    <div class="row w-100 mx-auto mt-4">
+        <h5 class="_text-position">  @ViewData["Titles"]   </h5>
+
+        <input type="text" v-model="searchedWord" placeholder="جستجو" class=" text-center w-100 mx-auto my-3 service-form px-3" />
     </div>
-    <div class="row w-100 mx-auto my-3 service-form">
-        <div class="col-10  mx-auto text-right pt-2 pr-3">
-            <h5> دسته بندی</h5>
-        </div>
-        <div class="col-2  mx-auto">
-            <i class="fas fa-chevron-down pl-3 pt-3"></i>
-        </div>
-    </div>
+    @*<div class="row w-100 mx-auto my-3 service-form">
+            <div class="col-10  mx-auto text-right pt-2 pr-3">
+                <h5> دسته بندی</h5>
+            </div>
+            <div class="col-2  mx-auto">
+                <i class="fas fa-chevron-down pl-3 pt-3"></i>
+            </div>
+        </div>*@
 
     <div className="form-group  hj-height">
+
         <h5 class="_text-position">    @ViewData["Categories"]</h5>
-        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form", @id = "CategoryId1" })
+        @* @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form", @id = "CategoryId", @v_model = "categoryId" })*@
+
+
+        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+        {
+            <v-select label="name" v-model="categoryId" dir="rtl" v-bind:items="categories" :options="categories" :reduce="c => c.id" class="form-control my-3 service-form">
+                <span slot="no-options">
+                    دسته بندی یافت نشد!
+                </span>
+            </v-select>
+        }
+        else
+        {
+            <v-select label="name" v-model="categoryId" dir="ltr" v-bind:items="categories" :options="categories" :reduce="c => c.id" class="form-control my-3 service-form">
+                <span slot="no-options">
+                    No category  Found!
+                </span>
+            </v-select>
+        }
     </div>
 
     <div className="form-group hj-height">
         <h5 class="_text-position"> @ViewData["City"] </h5>
-        @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form", @id = "CityId1" })
+        @* @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form", @id = "CityId", @v_model = "cityId" })*@
+        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+        {
+            <v-select label="name" v-model="cityId" v-bind:items="cities" :options="cities" :reduce="c => c.id" class="  form-control my-3 service-form">
+                <span slot="no-options">
+                    شهر یافت نشد!
+                </span>
+            </v-select>
+        }
+        else
+        {
+            <v-select label="name" v-model="cityId" v-bind:items="cities" :options="cities" :reduce="c => c.id" class="  form-control my-3 service-form">
+                <span slot="no-options">
+                    No City  Found!
+                </span>
+            </v-select>
+        }
     </div>
 
-    <div class="row w-100 mx-auto my-3 service-form">
-        <div class="col-10  mx-auto text-right pt-2 pr-3">
-            <h5> شهر</h5>
-        </div>
-        <div class="col-2  mx-auto">
-            <i class="fas fa-chevron-down pl-3 pt-3"></i>
-        </div>
-    </div>
-    <div class="row w-100 mx-auto my-3 service-form">
-        <div class="col-10  mx-auto text-right pt-2 pr-3">
-            <h5>  مهارت مورد نظر</h5>
-        </div>
-        <div class="col-2  mx-auto">
-            <i class="fas fa-chevron-down pl-3 pt-3 " id="select-down"></i>
-        </div>
-    </div>
-    <div class="row w-100 mx-auto hj-select">
-        <div class="col-sm-2 col-12 py-2">
-            <button type="button" class="btn  w-100 button-Service">مهارت</button>
-        </div>
-        <div class="col-sm-2 col-12  py-2">
-            <button type="button" class="btn  w-100 button-Service">مهارت</button>
-        </div>
-        <div class="col-sm-2 col-12  py-2">
-            <button type="button" class="btn  w-100 button-Service">مهارت</button>
-        </div>
-        <div class="col-sm-2 col-12  py-2">
-            <button type="button" class="btn  w-100 button-Service">مهارت</button>
-        </div>
-        <div class="col-sm-2 col-12  py-2">
-            <button type="button" class="btn  w-100 button-Service">مهارت</button>
-        </div>
-        <div class="col-sm-2 col-12  py-2">
-            <button type="button" class="btn  w-100 button-Service">مهارت</button>
-        </div>
+
+    <div class="row w-100 mx-auto my-3 text-center ">
+        <h5 class="_text-position"> @ViewData["Skills"] </h5>
+
+        <input name="Skills" id="Skills" v-model="skills" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
     </div>
 
-    <div class="row w-100 mx-auto">
-        <div class="col-6">
-            <h5 class="text-right Pricerange ">بازه قیمت</h5>
-        </div>
-        <div class="col-6 text-news">
-            <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>
-        </div>
-    </div>
     <div class="row w-100 mx-auto">
         <div class="col-lg-10 col-md-8 col-6">
-            <h5 class="_text-position Pricerange  ">   @ViewData["PriceRange"]</h5>
+            <h5 class="_text-position Pricerange"> @ViewData["PriceRange"]</h5>
         </div>
 
         <div class="col-lg-2 col-md-4 col-6 text-news">
-            @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency" })
-            @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
+            @*@Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency", @v_model = "monyUnitid" })*@
+            @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+                <v-select label="name" v-model="monyUnitid" v-bind:items="monyUnits" :options="monyUnits" :reduce="c => c.id" class="form-control text-left currency">
+                    <span slot="no-options">
+                        واحد پول یافت نشد!
+                    </span>
+                </v-select>
+            }
+            else
+            {
+                <v-select label="name" v-model="monyUnitid" v-bind:items="monyUnits" :options="monyUnits" :reduce="c => c.id" class="form-control text-left currency">
+                    <span slot="no-options">
+                        No MonyUnit  Found!
+                    </span>
+                </v-select>
+            }
         </div>
+
     </div>
 
-    <div class="row w-100 mx-auto hj-cost-service pb-5">
-        <div class="col-sm-6 py-2">  <input type="text" class="form-control text-center hj-input-service py-3" placeholder="از قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
-        <div class="col-sm-6 py-2"> <input type="text" class="form-control text-center hj-input-service py-3 " placeholder="تا قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
+    <div class="row w-100 mx-auto pb-5">
+        <div class="col-sm-6 py-2">  <input v-model="minPrice" type="number" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3" placeholder="از قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
+        <div class="col-sm-6 py-2"> <input v-model="maxPrice" type="number" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3 " placeholder="تا قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
     </div>
     <div class="row w-100 mx-auto mt-4">
-        <button type="button" class="btn btn-success w-25 mx-auto Confirmation">تایید</button>
+        <button v-on:click="getListemService()" type="button" class="btn btn-success w-25 mx-auto Confirmation">تایید</button>
     </div>
     <br />
     <hr />
+
+
     @*---------------------------*@
-    <div class="row w-100 mx-auto mt-5 pt-5 ">
-        <div class="col-lg-3 col-sm-6 col-12 py-5 my-3 py-lg-0 my-lg-0">
+    <div class="row w-100 mx-auto mt-5 pt-5 " v-if="services">
+        <div v-for="service in services" :key="service.Id" class="col-lg-3 col-sm-6 col-12 py-5 my-3 py-lg-0 my-lg-0">
             <div class=" hj-profile mx-auto">
                 <div class="row  w-100 hj-img-profile mx-auto">
-                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                    @*<img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">*@
+                    <img v-bind:src="service?.userImageAddress" class="img-fluid image-profile-desi mx-auto" alt="Responsive image"/>
                 </div>
 
                 <div class="row w-100 mx-auto mt-5 pt-5">
                     <div class="col-12">
-                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                        <h3 class="text-center w-100"> {{service?.title}} </h3>
                     </div>
 
                     <div class="col-12 pt-3">
                         <h4 class="text-center w-100">
                             <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                        
+
                         </h4>
                     </div>
                     <div class="col-12 pt-4 pb-4 footer-titr">
-                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                        <h5 class="text-center w-100 hj-work"> {{service?.categoryName}} </h5>
                     </div>
 
                 </div>
 
                 <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                    @* <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>*@
+
+
+                    <div class="col-4 p-0 m-0">
+
+
+                        <i v-if="likeLoading && selectedService?.id === service.id"
+                           class="fa fa-spinner fa-spin  fa-fw pl-2">
+                        </i>
+                        <i v-else v-bind:class="[ service.isLiked  == true ? 'far fa-heart pl-2 fas' : 'far fa-heart pl-2 ']"
+                           @@click="toggleLike(service.id)">
+                        </i>
+                        <span class="hj-like">
+                            <br />
+                            {{getPriceFormat(service.likeCount.toString())}}
+                        </span>
+                    </div>
+
+                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />{{getPriceFormat(service.commentCount.toString())}}</span></div>
+                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />{{getPriceFormat( service.seenCount.toString())}}  </span></div>
                 </div>
 
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
-            <div class=" hj-profile mx-auto">
-                <div class="row  w-100 hj-img-profile mx-auto">
-                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                </div>
 
-                <div class="row w-100 mx-auto mt-5 pt-5">
-                    <div class="col-12">
-                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+        @*<div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
+                <div class=" hj-profile mx-auto">
+                    <div class="row  w-100 hj-img-profile mx-auto">
+                        <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
                     </div>
 
-                    <div class="col-12 pt-3">
-                        <h4 class="text-center w-100">
-                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                        </h4>
-                    </div>
-                    <div class="col-12 pt-4 pb-4 footer-titr">
-                        <h5 class="text-center w-100 hj-work"> املاک </h5>
-                    </div>
+                    <div class="row w-100 mx-auto mt-5 pt-5">
+                        <div class="col-12">
+                            <h3 class="text-center w-100"> رهن و اجار منزل</h3>
+                        </div>
 
-                </div>
+                        <div class="col-12 pt-3">
+                            <h4 class="text-center w-100">
+                                <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                            </h4>
+                        </div>
+                        <div class="col-12 pt-4 pb-4 footer-titr">
+                            <h5 class="text-center w-100 hj-work"> املاک </h5>
+                        </div>
 
-                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
-            <div class=" hj-profile mx-auto">
-                <div class="row  w-100 hj-img-profile mx-auto">
-                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                </div>
-
-                <div class="row w-100 mx-auto mt-5 pt-5">
-                    <div class="col-12">
-                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
                     </div>
 
-                    <div class="col-12 pt-3">
-                        <h4 class="text-center w-100">
-                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                        </h4>
-                    </div>
-                    <div class="col-12 pt-4 pb-4 footer-titr">
-                        <h5 class="text-center w-100 hj-work"> املاک </h5>
+                    <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
+                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
+                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
                     </div>
 
                 </div>
+            </div>*@
 
-                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 col-12 py-5 my-3 py-lg-0 my-lg-0">
-            <div class=" hj-profile mx-auto">
-                <div class="row  w-100 hj-img-profile mx-auto">
-                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                </div>
-
-                <div class="row w-100 mx-auto mt-5 pt-5">
-                    <div class="col-12">
-                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
-                    </div>
-
-                    <div class="col-12 pt-3">
-                        <h4 class="text-center w-100">
-                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                        </h4>
-                    </div>
-                    <div class="col-12 pt-4 pb-4 footer-titr">
-                        <h5 class="text-center w-100 hj-work"> املاک </h5>
-                    </div>
-
-                </div>
-
-                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                </div>
-
-            </div>
-        </div>
     </div>
-    <div class="row w-100 mx-auto mt-lg-5 pt-lg-5 ">
-        <div class="col-lg-3 col-sm-6 col-12  py-5 my-3 py-lg-0 my-lg-0">
-            <div class=" hj-profile mx-auto">
-                <div class="row  w-100 hj-img-profile mx-auto">
-                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+
+    @*<div v-else class="row w-100 mx-auto d-block text-center">loading...</div>*@
+
+
+
+
+
+    @*--------pagination----*@
+    @*<div class="row w-100 mx-auto">
+            <div class="pagination-wrapper mx-auto">
+                <div class="pagination2">
+                    <a class="prev page-numbers" href="javascript:;">قبلی</a>
+                    <span aria-current="page" class="page-numbers current">1</span>
+                    <a class="page-numbers" href="javascript:;">2</a>
+                    <a class="page-numbers" href="javascript:;">3</a>
+                    <a class="page-numbers" href="javascript:;">4</a>
+                    <a class="page-numbers" href="javascript:;">5</a>
+
+                    <a class="next page-numbers" href="javascript:;">بعدی</a>
                 </div>
-
-                <div class="row w-100 mx-auto mt-5 pt-5">
-                    <div class="col-12">
-                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
-                    </div>
-
-                    <div class="col-12 pt-3">
-                        <h4 class="text-center w-100">
-                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                        </h4>
-                    </div>
-                    <div class="col-12 pt-4 pb-4 footer-titr">
-                        <h5 class="text-center w-100 hj-work"> املاک </h5>
-                    </div>
-
-                </div>
-
-                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                </div>
-
             </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
-            <div class=" hj-profile mx-auto">
-                <div class="row  w-100 hj-img-profile mx-auto">
-                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                </div>
+        </div>*@
 
-                <div class="row w-100 mx-auto mt-5 pt-5">
-                    <div class="col-12">
-                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
-                    </div>
 
-                    <div class="col-12 pt-3">
-                        <h4 class="text-center w-100">
-                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                        </h4>
-                    </div>
-                    <div class="col-12 pt-4 pb-4 footer-titr">
-                        <h5 class="text-center w-100 hj-work"> املاک </h5>
-                    </div>
 
-                </div>
 
-                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
-            <div class=" hj-profile mx-auto">
-                <div class="row  w-100 hj-img-profile mx-auto">
-                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                </div>
-
-                <div class="row w-100 mx-auto mt-5 pt-5">
-                    <div class="col-12">
-                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
-                    </div>
-
-                    <div class="col-12 pt-3">
-                        <h4 class="text-center w-100">
-                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                        </h4>
-                    </div>
-                    <div class="col-12 pt-4 pb-4 footer-titr">
-                        <h5 class="text-center w-100 hj-work"> املاک </h5>
-                    </div>
-
-                </div>
-
-                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 col-12 py-5  my-3 py-lg-0 my-lg-0">
-            <div class=" hj-profile mx-auto">
-                <div class="row  w-100 hj-img-profile mx-auto">
-                    <img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                </div>
-
-                <div class="row w-100 mx-auto mt-5 pt-5">
-                    <div class="col-12">
-                        <h3 class="text-center w-100"> رهن و اجار منزل</h3>
-                    </div>
-
-                    <div class="col-12 pt-3">
-                        <h4 class="text-center w-100">
-                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                        </h4>
-                    </div>
-                    <div class="col-12 pt-4 pb-4 footer-titr">
-                        <h5 class="text-center w-100 hj-work"> املاک </h5>
-                    </div>
-
-                </div>
-
-                <div class="row w-100 p-0 m-0 hj-option-card text-center pb-4">
-                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br />350.000</span></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     @*--------pagination----*@
     <div class="row w-100 mx-auto">
         <div class="pagination-wrapper mx-auto">
-            <div class="pagination2">
-                <a class="prev page-numbers" href="javascript:;">قبلی</a>
-                <span aria-current="page" class="page-numbers current">1</span>
-                <a class="page-numbers" href="javascript:;">2</a>
-                <a class="page-numbers" href="javascript:;">3</a>
-                <a class="page-numbers" href="javascript:;">4</a>
-                <a class="page-numbers" href="javascript:;">5</a>
-
-                <a class="next page-numbers" href="javascript:;">بعدی</a>
+            <div class="pagination2 _direction">
+                <a @@click="setPrevPage()" class="prev page-numbers">@ViewData["Prev"]</a>
+                @*<span aria-current="page" class="page-numbers current">1</span>*@
+                <a v-for="(item ,index) in countForLoopPAgination"
+                   :key="index"
+                   @@click="setPage(item - 1)"
+                   v-bind:class="[index === page ? 'page-numbers current' : 'page-numbers']">
+                    {{item }}
+                </a>
+                <a @@click="setNextPage()" class="next page-numbers"> @ViewData["Next"] </a>
             </div>
         </div>
     </div>
+    <input type="hidden" name="userId" id="userId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
 </div>
 
 
@@ -398,11 +290,20 @@
     <script src="~/lib/swal-alert/sweetalert.min.js"></script>
     <script src="~/SinaCustom/js/main.js"></script>
     <script src="~/lib/jquery.tagsinput/jquery.tagsinput.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>*@
     <script src="~/lib/vuejs/vue.min.js"></script>
+    <script src="~/lib/vue-select/vue-select.js"></script>
+    <script src="~/lib/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
+
+
+
+
+
 
     <script>
+
+
 
 
         @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
@@ -418,15 +319,15 @@
                     $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
 
 
-                    $(".catId").select2({
-                        dir: "rtl"
-                    });
-                    $(".cityId").select2({
-                        dir: "rtl"
-                    });
-                    $(".monyUnitid").select2({
-                        dir: "rtl"
-                    });
+                    //$(".catId").select2({
+                    //    dir: "rtl"
+                    //});
+                    //$(".cityId").select2({
+                    //    dir: "rtl"
+                    //});
+                    //$(".monyUnitid").select2({
+                    //    dir: "rtl"
+                    //});
                 })
 
             </text>
@@ -441,14 +342,214 @@
                     $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
                     $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
 
-                    $(".catId").select2();
-                    $(".cityId").select2();
-                    $(".monyUnitid").select2();
+                    //$(".catId").select2();
+                    //$(".cityId").select2();
+                    //$(".monyUnitid").select2();
                 })
 
             </text>
         }
 
     </script>
+
+
+
+    <script>
+        Vue.component('v-select', VueSelect.VueSelect)
+
+        var vue = new Vue({
+            el: "#root",
+            data: {
+                //employies: [{ Id: 1, FullName: 12, Username: 121, SalaryStatus: 23 }],
+                services: null,
+                servicesLoading: true,
+                showList: true,
+
+                likeLoading: false,
+                selectedService: null,
+
+
+                cities: [],
+                categories: [],
+                monyUnits: [],
+
+
+                //data for pagination filter search ,...
+                serviceCount: 0,
+
+                //این تعداد ایتم های صفحس
+                limit: 8,
+                page: 0,
+                searchedWord: '',
+                skills: '',
+                cityId: '',
+                categoryId: '',
+                monyUnitid: '',
+                minPrice: '',
+                maxPrice: '',
+            },
+
+            methods: {
+
+                getCityCategoryMonyUnits: async function () {
+                    var vueInstance = this;
+                    axios.get("/Services/GetallCityCategoryMonuUnit")
+                        .then(function (response) {
+                            console.log(response.data)
+                            vueInstance.cities = response.data.data.cities
+                            vueInstance.categories = response.data.data.cats
+                            vueInstance.monyUnits = response.data.data.monyUnits
+                        }).catch(function (er) {
+                            FailedAlert('خطا در نمایش  اطلاعات ...  ')
+                        })
+                },
+
+                getListemService: async function () {
+                    var vueInstance = this;
+                    this.servicesLoading = true;
+                    var params = this.axiosParams;
+
+
+                    $.blockUI({ message: '<h3> صبر کنید...</h3>' });
+
+                    axios.get("/Services/SearchAllService", { params: params })
+                        .then(function (response) {
+                            if (response.data.status === true) {
+                                vueInstance.services = response.data.data.services;
+                                vueInstance.serviceCount = response.data.data.count;
+                            }
+                            else {
+                                FailedAlert(response.data.message)
+                            }
+                        }).catch(function (er) {
+                            console.log(er)
+                            FailedAlert('خطا در نمایش سرویس')
+                        }).finally(function () {
+                            vueInstance.servicesLoading = false;
+                            //vueInstance.cleaningData();
+                            $.unblockUI();
+                        });
+                },
+
+                toggleLike: function (serviceId) {
+
+                    var UserId = $("#userId").val();
+
+                    if (!UserId) {
+                        FailedAlert("برای لایک کردن محصولات ابتدا لاگین کنید.");
+                        return
+                    }
+
+                    this.likeLoading = true;
+                    this.selectedService = this.services.find(c => c.id == serviceId)
+                    var vueInstance = this;
+
+
+                    axios.get(`/services/ToggleLike?serviceId=${serviceId}`)
+                        .then(function (response) {
+                            console.log(response)
+
+                            ///////////////////    ائو ایتم  خواص را برو تغییر بده لایک را   ////////////
+                            //vueInstance.services = response.data.Status;
+                            if (response.data.status) {
+                                console.log(vueInstance)
+                                var currentService = vueInstance.services.find(c => c.id == serviceId)
+                                currentService.isLiked = response.data.isLiked;
+                                currentService.likeCount = response.data.likeCount;
+                            }
+                            else {
+                                FailedAlert(response.data.message)
+                            }
+                            //vueInstance.serviceCount = response.data.data.count;
+                        }).catch(function (er) {
+                            console.log(er)
+                            FailedAlert('خطا در لایک')
+                        }).finally(function () {
+                            vueInstance.servicesLoading = false;
+                            vueInstance.likeLoading = false;
+                        });
+                },
+
+
+
+                searching: function () {
+                    this.getListemService();
+                },
+                setPage: function (value) {
+                    //this.page = value;
+                    if (this.page === value)
+                        return
+                    //fetch new data from sever
+                    this.page = value;
+                    this.getListemService();
+                },
+                setPrevPage: function () {
+
+                    if (this.totalPages === 0)
+                        return
+                    if (this.page != 0) {
+                        this.page--;
+                        this.getListemService();
+                    }
+                },
+                setNextPage: function () {
+                    if (this.page + 1 != this.totalPages) {
+                        this.page++;
+                        this.getListemService();
+                    }
+                },
+                isLastPage: function () {
+                    if (this.page + 1 == this.totalPages) {
+                        return true
+                    }
+                    return false;
+                },
+
+                cleaningData: function () {
+                    this.searchedWord = '';
+                    this.minPrice = '';
+                    this.maxPrice = '';
+                    this.skills = '';
+                    this.cityId = '';
+                    this.monyUnitid = '';
+                    this.categoryId = '';
+                }
+            },
+            mounted: function () {
+                //fetch data from sever
+                this.getListemService();
+                this.getCityCategoryMonyUnits();
+            },
+            computed: {
+                totalPages: function () {
+                    return Math.ceil(this.serviceCount / this.limit);
+                },
+                countForLoopPAgination: function () {
+                    return this.totalPages == 0 ? 1 : this.totalPages;
+                },
+                axiosParams: function () {
+                
+                    var params = new URLSearchParams();
+                    params.append('limit', String(this.limit));
+                    params.append('offset', `${this.page ? this.page * this.limit : 0}`);
+                    params.append('searchedWord', `${this.searchedWord}`);
+                    params.append('minPrice', `${this.minPrice}`);
+                    params.append('maxPrice', `${this.maxPrice}`);
+                    params.append('skills', $("#Skills").val().toString());
+                    params.append('monyUnitid', `${this.monyUnitid === '' ? null : this.monyUnitid}`);
+                    params.append('categoryId', `${this.categoryId === '' ? null : this.categoryId}`);
+                    params.append('cityId', `${this.cityId === '' ? null : this.cityId}`);
+
+
+                    return params;
+                }
+            },
+            watch: {
+
+            }
+        })
+
+    </script>
+
 
 }

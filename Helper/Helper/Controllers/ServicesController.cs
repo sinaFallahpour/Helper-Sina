@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Helper.Data;
 using Helper.Models.Entities;
 using Helper.Models.Enums;
@@ -15,6 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Helper.Controllers
 {
@@ -43,6 +43,8 @@ namespace Helper.Controllers
 
 
 
+
+        #region index Create page
         public async Task<IActionResult> Index()
         {
             returnViewDate();
@@ -80,6 +82,9 @@ namespace Helper.Controllers
             return View();
         }
 
+        #endregion
+
+        #region create provider service
 
         [HttpPost]
         public async Task<IActionResult> ServiceProviderCreate(CreateServiceVM model)
@@ -94,6 +99,11 @@ namespace Helper.Controllers
                 }
                 try
                 {
+
+                    if (model.MinpRice > model.MaxPrice)
+                    {
+                        return new JsonResult(new { Status = false, Message = _localizer["MinPriceMoreThanMaXPriceMessage"].Value.ToString() });
+                    }
                     var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
                     var userFromDb = await _context.Users.Where(c => c.Id == currentUserId)
@@ -165,6 +175,12 @@ namespace Helper.Controllers
         }
 
 
+        #endregion
+
+
+
+
+        #region Create Giver service 
         [HttpPost]
         public async Task<IActionResult> ServiceRequestCreate(CreateServiceVM model)
         {
@@ -178,6 +194,11 @@ namespace Helper.Controllers
                 }
                 try
                 {
+                    if (model.MinpRice > model.MaxPrice)
+                    {
+                        return new JsonResult(new { Status = false, Message = _localizer["MinPriceMoreThanMaXPriceMessage"].Value.ToString() });
+                    }
+
                     var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
                     var userFromDb = await _context.Users.Where(c => c.Id == currentUserId)
@@ -247,6 +268,9 @@ namespace Helper.Controllers
 
         }
 
+        #endregion
+
+
 
 
         [Route("Services/UsersService/{username}")]
@@ -289,86 +313,10 @@ namespace Helper.Controllers
 
 
         [Route("Services/SearchService")]
-        public async Task<IActionResult> SearchService(int? limit, int? offset)
+        public IActionResult SearchService()
         {
-
             returnViewDate();
-
-
-            List<TBL_Category> cats;
-            List<TBL_City> cities;
-            List<TBL_MonyUnit> monyUnits;
-
-            if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
-            {
-                cats = await _context.TBL_Category.Where(c => c.IsEnabled).ToListAsync();
-                cities = await _context.TBL_City.Where(c => c.IsEnabled).ToListAsync();
-                monyUnits = await _context.TBL_MonyUnit.Where(c => c.IsEnabled).ToListAsync();
-
-                ViewBag.CategoryId = new SelectList(cats, "Id", "Name");
-                ViewBag.CityId = new SelectList(cities, "Id", "Name");
-                ViewBag.MonyUnitId = new SelectList(monyUnits, "Id", "Name");
-            }
-            else
-            {
-                cats = await _context.TBL_Category.Where(c => c.IsEnabled).ToListAsync();
-                cities = await _context.TBL_City.Where(c => c.IsEnabled).ToListAsync();
-                monyUnits = await _context.TBL_MonyUnit.Where(c => c.IsEnabled).ToListAsync();
-
-                ViewBag.CategoryId = new SelectList(cats, "Id", "EnglishName");
-                ViewBag.CityId = new SelectList(cities, "Id", "EnglishName");
-                ViewBag.MonyUnitId = new SelectList(monyUnits, "Id", "EnglishName");
-            }
-
-
-
             return View();
-
-
-
-
-
-
-
-
-
-            //var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            ////var user = await _context.Users.Where(c => c.Id == currentUserId).Select(c => new { c.Id, c.UserName }).FirstOrDefaultAsync();
-
-
-
-            ////var query = _context.TBL_Service.AsQueryable();
-            ////var count = query.AsNoTracking().Where(c => c.ServiceType == ServiceType.GiverService).Count();
-
-            //var services = await _context.TBL_Service
-            //    .AsNoTracking()
-            //    .Where(m => m.ServiceType == ServiceType.GiverService)
-            //    .Skip(offset ?? 0)
-            //    .Take(limit ?? 8)
-            //    .Include(c => c.UserLikeServices)
-            //    .Select(c => new ServiceListVM
-            //    {
-            //        Id = c.Id,
-            //        CreateDate = c.CreateDate,
-            //        Description = c.Description,
-            //        LikeCount = c.LikeCount,
-            //        CommentCount = c.CommentCount,
-            //        SeenCount = c.SeenCount,
-            //        Title = c.Title,
-            //        CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
-
-            //        //CategoryImageAddresc=c.Category.ImageAddress
-            //        IsLiked = c.UserLikeServices.Any(p => p.UserId == currentUserId),
-            //    })
-            //    .OrderByDescending(c => c.LikeCount)
-            //    .ThenByDescending(c => c.SeenCount)
-            //    .ThenByDescending(c => c.CommentCount)
-            //    .ThenByDescending(c => c.CreateDate)
-            //    .ToListAsync();
-
-            //return View(services);
-            ////var response = new { Count = count, services = services };
-            ////return new JsonResult(new { Status = true, Message = "", data = response });
         }
 
 
@@ -429,6 +377,180 @@ namespace Helper.Controllers
 
 
 
+
+        public async Task<IActionResult> SearchAllService(int? limit, int? offset,
+                   string searchedWord, string skills, int? cityId, int? categoryId, int? monyUnitid
+            , int? minPrice, int? maxPrice)
+        {
+            if (searchedWord?.Length > 100)
+            {
+                return new JsonResult(new { Status = false, Message = _localizer["Morthan100Char"].Value.ToString() });
+            }
+            if (skills?.Length > 2000)
+            {
+                return new JsonResult(new { Status = false, Message = _localizer["Morthan2000Char"].Value.ToString() });
+            }
+
+            if ((minPrice != null || maxPrice != null) && monyUnitid == null)
+            {
+                return new JsonResult(new { Status = false, Message = _localizer["SelectMonyUnitErrorMessage"].Value.ToString() });
+            }
+            if (minPrice > maxPrice)
+            {
+                return new JsonResult(new { Status = false, Message = _localizer["MinPriceMoreThanMaXPriceMessage"].Value.ToString() });
+            }
+
+            var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            //var user = await _context.Users.Where(c => c.Id == currentUserId).Select(c => new { c.Id, c.UserName }).FirstOrDefaultAsync();
+
+
+            var service = _context.TBL_Service.AsNoTracking()
+                .Where(c => c.ServiceType == ServiceType.GiverService).AsQueryable();
+            var query = _context.TBL_Service.AsQueryable();
+            //var count = query.AsNoTracking().Where(c => c.ServiceType == ServiceType.GiverService).Count();
+
+
+            if (cityId != null)
+                service = service.Where(c => c.CityId == cityId);
+            if (categoryId != null)
+                service = service.Where(c => c.CategoryId == categoryId);
+            if (monyUnitid != null)
+                service = service.Where(c => c.MonyUnitId == monyUnitid);
+            if (!string.IsNullOrEmpty(searchedWord))
+                service = service.Where(c => c.Title.ToLower().Trim().Contains(searchedWord.ToLower().Trim()));
+            if (minPrice != null)
+                service = service.Where(c => c.MinpRice >= minPrice);
+            if (maxPrice != null)
+                service = service.Where(c => c.MaxPrice <= maxPrice);
+            if (!string.IsNullOrEmpty(skills))
+            {
+                //  do your logic
+            }
+            var count = service.Count();
+
+            var services = await service
+                .AsNoTracking()
+                .Skip(offset ?? 0)
+                .Take(limit ?? 8)
+                .Include(c => c.Category)
+                .Include(c=>c.User)
+                .Include(c => c.UserLikeServices)
+                .Select(c => new ServiceListVM
+                {
+                    Id = c.Id,
+                    CreateDate = c.CreateDate,
+                    Description = c.Description,
+                    LikeCount = c.LikeCount,
+                    CommentCount = c.CommentCount,
+                    SeenCount = c.SeenCount,
+                    Title = c.Title,
+                    CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
+                    //CategoryImageAddres=c.Category.ImageAddress,
+                    UserImageAddress = c.User.PhotoAddress,
+                    IsLiked = c.UserLikeServices.Any(p => p.UserId == currentUserId),
+                })
+                .OrderByDescending(c => c.LikeCount)
+                .ThenByDescending(c => c.SeenCount)
+                .ThenByDescending(c => c.CommentCount)
+                .ThenByDescending(c => c.CreateDate)
+                .ToListAsync();
+
+            //var count = services.Count();
+
+
+            var response = new { Count = count, services = services };
+            return new JsonResult(new { Status = true, Message = "", data = response });
+            //return new JsonResult(new { Status = true, Message = "", data = response });
+        }
+
+
+
+        public async Task<IActionResult> GetallCityCategoryMonuUnit()
+        {
+
+            if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+                var catses = await _context.TBL_Category.AsNoTracking().Where(c => c.IsEnabled)
+                     .Select(c => new
+                     {
+                         Id = c.Id,
+                         Name = c.Name
+                     }).ToListAsync();
+
+                var citieses = await _context.TBL_City.AsNoTracking()
+                     .Where(c => c.IsEnabled)
+                   .Select(c => new
+                   {
+                       Id = c.Id,
+                       Name = c.Name
+                   }).ToListAsync();
+
+                var monyUnitses = await _context.TBL_MonyUnit.AsNoTracking()
+                      .Where(c => c.IsEnabled)
+                      .Select(c => new
+                      {
+                          Id = c.Id,
+                          Name = c.Name
+                      }).ToListAsync();
+
+                var d = new { cats = catses, cities = citieses, monyUnits = monyUnitses };
+                return new JsonResult(new { Status = true, Message = "", data = d });
+
+            }
+            else
+            {
+                var catses = await _context.TBL_Category.AsNoTracking().Where(c => c.IsEnabled)
+                    .Select(c => new
+                    {
+                        Id = c.Id,
+                        Name = c.EnglishName
+                    }).ToListAsync();
+
+                var citieses = await _context.TBL_City.AsNoTracking()
+                     .Where(c => c.IsEnabled)
+                   .Select(c => new
+                   {
+                       Id = c.Id,
+                       Name = c.EnglishName
+                   }).ToListAsync();
+
+                var monyUnitses = await _context.TBL_MonyUnit.AsNoTracking()
+                      .Where(c => c.IsEnabled)
+                      .Select(c => new
+                      {
+                          Id = c.Id,
+                          Name = c.EnglishName
+                      }).ToListAsync();
+
+
+                var d = new { cats = catses, cities = citieses, monyUnits = monyUnitses };
+                return new JsonResult(new { Status = true, Message = "", data = d });
+
+
+
+
+
+
+                //cats = await _context.TBL_Category.Where(c => c.IsEnabled).ToListAsync();
+                //cities = await _context.TBL_City.Where(c => c.IsEnabled).ToListAsync();
+                //monyUnits = await _context.TBL_MonyUnit.Where(c => c.IsEnabled).ToListAsync();
+
+                //ViewBag.CategoryId = new SelectList(cats, "Id", "EnglishName");
+                //ViewBag.CityId = new SelectList(cities, "Id", "EnglishName");
+                //ViewBag.MonyUnitId = new SelectList(monyUnits, "Id", "EnglishName");
+            }
+
+
+
+            //return View();
+
+
+        }
+
+
+
+
+
         private void returnViewDate()
         {
             ViewData["Titles"] = _localizer["Titles"];
@@ -449,6 +571,8 @@ namespace Helper.Controllers
             ViewData["ServiceDelivery"] = _localizer["ServiceDelivery"];
             ViewData["CreateService"] = _localizer["CreateService"];
             ViewData["CreateServiceText"] = _localizer["CreateServiceText"];
+            ViewData["Prev"] = _localizer["Prev"];
+            ViewData["Next"] = _localizer["Next"];
 
         }
 

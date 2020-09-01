@@ -524,7 +524,16 @@
 
 
 
-
+            //عدم اجازه یراس وارد کردن  اسپیس
+            $('#donnerForm1 input[type=text]').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+            //عدم اجازه یراس وارد کردن  اسپیس
+            $('#donnerForm input[type=text]').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
 
 
             $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
@@ -557,15 +566,6 @@
             });
 
 
-
-
-
-
-
-
-
-
-
         })
 
 
@@ -590,9 +590,17 @@
 
 
 
-            //$("#CategoryId1").select2();
-            //$("#CityId1").select2();
-            //$("#MonyUnitId1").select2();
+            //عدم اجازه یراس وارد کردن  اسپیس
+            $('#donnerForm1 input[type=text]').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+            //عدم اجازه یراس وارد کردن  اسپیس
+            $('#donnerForm input[type=text]').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+
 
 
             $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
@@ -716,7 +724,7 @@
                              else {
                                 $("#createBtnSubmit").prop('disabled', false);
                                  FailedAlert(r.message);
-                                
+
                              }
                            },
                  error: function () {
@@ -812,8 +820,31 @@
 
               $(`#MinpRice${value}`).val("")
             $(`#MaxPrice${value}`).val("")
-            $(`#Skills${value}`).val("")
+            //$(`#Skills${value}`).val("")
+            //$(`#Skills${value}`).tagsinput('removeAll');
 
+
+
+            
+
+            //var tags = $(`#Skills${value}`).val()?.split(',');
+
+            //tags.each(function (item, index) {
+            //    $(`#Skills${value}`).removeTag(item);
+            //    //console.log(index + ": " + $(this).text());
+            //})
+            //for (var i = 0; i < tags.length; i++) {
+            //    .removeTag()
+            //}
+
+            //var tagData = $(`#Skills${value}`).tags().tagData;
+            //if (tagData.length > 0) {
+            //    $.each(tagData, function (index, value) {
+            //        for (var tItem = 0; tItem < tagData.length;) {
+            //            $(`#Skills${value}`).tags().removeTag(tagData[tItem]);
+            //        }
+            //    });
+            //}
         }
 
 

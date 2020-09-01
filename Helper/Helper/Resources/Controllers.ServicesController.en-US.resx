@@ -147,6 +147,18 @@
   <data name="HowToSendService" xml:space="preserve">
     <value>How to send to ServiceProvider</value>
   </data>
+  <data name="MinPriceMoreThanMaXPriceMessage" xml:space="preserve">
+    <value>The minimum price must be less than the maximum price</value>
+  </data>
+  <data name="Morthan100Char" xml:space="preserve">
+    <value>Up to 100 characters are allowed for title</value>
+  </data>
+  <data name="Morthan2000Char" xml:space="preserve">
+    <value>Up to 2000 characters are allowed for skill</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="NoActivePlanMessage" xml:space="preserve">
     <value>There is no active Plan for you . please buy one</value>
   </data>
@@ -156,8 +168,14 @@
   <data name="NotLogeInMessage" xml:space="preserve">
     <value>You Are not Loged In the site</value>
   </data>
+  <data name="Prev" xml:space="preserve">
+    <value>Prev</value>
+  </data>
   <data name="PriceRange" xml:space="preserve">
     <value>Price Range</value>
+  </data>
+  <data name="SelectMonyUnitErrorMessage" xml:space="preserve">
+    <value>Please Enter the currency</value>
   </data>
   <data name="ServiceDelivery" xml:space="preserve">
     <value>Service delivery</value>
