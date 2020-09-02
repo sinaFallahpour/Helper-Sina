@@ -147,6 +147,9 @@
   <data name="HowToSendService" xml:space="preserve">
     <value>How to send to ServiceProvider</value>
   </data>
+  <data name="LoadingText" xml:space="preserve">
+    <value>loading...</value>
+  </data>
   <data name="MinPriceMoreThanMaXPriceMessage" xml:space="preserve">
     <value>The minimum price must be less than the maximum price</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="Morthan2000Char" xml:space="preserve">
     <value>Up to 2000 characters are allowed for skill</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>latest</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
@@ -174,6 +180,13 @@
   <data name="PriceRange" xml:space="preserve">
     <value>Price Range</value>
   </data>
+  <data name="searchingText" xml:space="preserve">
+    <value>search</value>
+  </data>
+  <data name="searchServiceText" xml:space="preserve">
+    <value>Search for your desired
+service</value>
+  </data>
   <data name="SelectMonyUnitErrorMessage" xml:space="preserve">
     <value>Please Enter the currency</value>
   </data>
@@ -183,6 +196,9 @@
   <data name="ServiceRequest" xml:space="preserve">
     <value>Service request</value>
   </data>
+  <data name="services" xml:space="preserve">
+    <value>Service</value>
+  </data>
   <data name="Skills" xml:space="preserve">
     <value>Skills</value>
   </data>
@@ -190,6 +206,9 @@
     <value>Sms</value>
   </data>
   <data name="Submit" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="submitText" xml:space="preserve">
     <value>Accept</value>
   </data>
   <data name="SuccessFullRegisterMessage" xml:space="preserve">

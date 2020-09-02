@@ -9,11 +9,12 @@ namespace Helper.Models.Enums
 {
     public enum UserMarriedType
     {
-        [Display(Name = "مجرد ")]
-        [Description("مجرد")]
+        [Display(Name = "Single")]
+        [Description("Single")]
         single,
-        [Display(Name = "متاهل")]
-        [Description("متاهل")]
+        [Display(Name = "Married")]
+        [Description("Married")]
         Married
     }
 }
+

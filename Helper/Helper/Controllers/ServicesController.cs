@@ -410,6 +410,9 @@ namespace Helper.Controllers
             //var count = query.AsNoTracking().Where(c => c.ServiceType == ServiceType.GiverService).Count();
 
 
+           
+
+
             if (cityId != null)
                 service = service.Where(c => c.CityId == cityId);
             if (categoryId != null)
@@ -433,7 +436,7 @@ namespace Helper.Controllers
                 .Skip(offset ?? 0)
                 .Take(limit ?? 8)
                 .Include(c => c.Category)
-                .Include(c=>c.User)
+                //.Include(c => c.User.PhotoAddress)
                 .Include(c => c.UserLikeServices)
                 .Select(c => new ServiceListVM
                 {
@@ -522,7 +525,7 @@ namespace Helper.Controllers
                           Name = c.EnglishName
                       }).ToListAsync();
 
-
+               
                 var d = new { cats = catses, cities = citieses, monyUnits = monyUnitses };
                 return new JsonResult(new { Status = true, Message = "", data = d });
 
@@ -566,6 +569,14 @@ namespace Helper.Controllers
             ViewData["Submit"] = _localizer["Submit"];
             ViewData["FromPrice"] = _localizer["FromPrice"];
             ViewData["ToPrice"] = _localizer["ToPrice"];
+            ViewData["submitText"] = _localizer["submitText"];
+            ViewData["services"] = _localizer["services"];
+            ViewData["New"] = _localizer["New"];
+            ViewData["searchServiceText"] = _localizer["searchServiceText"];
+            ViewData["searchingText"] = _localizer["searchingText"];
+            ViewData["LoadingText"] = _localizer["LoadingText"];
+
+
             ViewData["HowToSendService"] = _localizer["HowToSendService"];
             ViewData["ServiceRequest"] = _localizer["ServiceRequest"];
             ViewData["ServiceDelivery"] = _localizer["ServiceDelivery"];

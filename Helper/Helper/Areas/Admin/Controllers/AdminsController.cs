@@ -230,7 +230,7 @@ namespace Helper.Controllers
                  
                     NormalizedEmail = "",
                     EmailConfirmed = true,
-
+                   
                     //عدم استفاده از پلن رایگان
                     IsUsedFree = false,
                     FirstName = model.FirstName,
@@ -241,7 +241,8 @@ namespace Helper.Controllers
                     RegistrationDateTime = DateTime.Now,
                     UserName = model.Username,
                     Phone = "",
-                    PhotoAddress = "/Upload/User/user.jpg",
+                    //PhotoAddress = "/Upload/User/user.jpg",
+                    PhotoAddress = "/Upload/User/default2.png",
                     PhoneNumber = "",
                     CreatedAdminId = User.FindFirstValue(ClaimTypes.NameIdentifier)
                 };

@@ -117,107 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Agreed" xml:space="preserve">
-    <value>توافقی</value>
+  <data name="AccountOwner" xml:space="preserve">
+    <value>نام صاحب حساب  </value>
   </data>
-  <data name="Categories" xml:space="preserve">
-    <value>دسته بندی</value>
+  <data name="BankAccount" xml:space="preserve">
+    <value>حساب بانکی</value>
   </data>
-  <data name="City" xml:space="preserve">
-    <value>شهر</value>
+  <data name="BankName" xml:space="preserve">
+    <value>نام بانک</value>
   </data>
-  <data name="CreateService" xml:space="preserve">
-    <value>ایجاد خدمت</value>
-  </data>
-  <data name="CreateServiceText" xml:space="preserve">
+  <data name="CreateServiceDescriptions" xml:space="preserve">
     <value>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</value>
   </data>
-  <data name="Descriptions" xml:space="preserve">
-    <value>توضیحات خدمت</value>
+  <data name="CreateServiceText" xml:space="preserve">
+    <value>ایجاد خدمت</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>ایمیل</value>
   </data>
-  <data name="ErrorMessage" xml:space="preserve">
-    <value>خطا در ثبت</value>
+  <data name="EmailPL" xml:space="preserve">
+    <value>test@gmail.com</value>
   </data>
-  <data name="FromPrice" xml:space="preserve">
-    <value>از قیمت</value>
+  <data name="EnglishLanguage" xml:space="preserve">
+    <value>انگلیسی</value>
   </data>
-  <data name="HowToSendService" xml:space="preserve">
-    <value>نحوه ارسال به خدمات دهندگان</value>
+  <data name="MobileNumber" xml:space="preserve">
+    <value>شماره موبایل</value>
   </data>
-  <data name="LoadingText" xml:space="preserve">
-    <value>صبر کنید...</value>
+  <data name="NewPass" xml:space="preserve">
+    <value>رمز عبور جدید</value>
   </data>
-  <data name="MinPriceMoreThanMaXPriceMessage" xml:space="preserve">
-    <value>حداقل قیمت باید کمتر از حداکثر قیمت باشد</value>
+  <data name="NewPassRepeat" xml:space="preserve">
+    <value>تکرار رمز عبور جدید</value>
   </data>
-  <data name="Morthan100Char" xml:space="preserve">
-    <value>حداکثر 100کاراکتر برای  عنوان  مجاز است</value>
+  <data name="OldPass" xml:space="preserve">
+    <value>رمز عبور فعلی</value>
   </data>
-  <data name="Morthan2000Char" xml:space="preserve">
-    <value>حداکثر 2000 کاراکتر برای مهارت مجاز است</value>
+  <data name="Password" xml:space="preserve">
+    <value>رمز عبور</value>
   </data>
-  <data name="New" xml:space="preserve">
-    <value>جدیدترین ها</value>
+  <data name="PersianLanguage" xml:space="preserve">
+    <value>فارسی</value>
   </data>
-  <data name="Next" xml:space="preserve">
-    <value>بعدی</value>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>اطلاعات شخصی</value>
   </data>
-  <data name="NoActivePlanMessage" xml:space="preserve">
-    <value>پلن فعالی برای شما  موجود نیست.  ابتدا خریداری کنید.</value>
+  <data name="SaveSettings" xml:space="preserve">
+    <value>ذخیره تنظیمات</value>
   </data>
-  <data name="Notification" xml:space="preserve">
-    <value>نوتیفیکیشن</value>
+  <data name="ShabaNumber" xml:space="preserve">
+    <value>شماره شبا</value>
   </data>
-  <data name="NotLogeInMessage" xml:space="preserve">
-    <value>برای ثبت خدمت ابتدا وارد سایت شوید.</value>
+  <data name="SiteLanguages" xml:space="preserve">
+    <value>زبان وبسایت و اعلامه های رسمی</value>
   </data>
-  <data name="Prev" xml:space="preserve">
-    <value>قبلی</value>
+  <data name="UserName" xml:space="preserve">
+    <value>نام کاربری</value>
   </data>
-  <data name="PriceRange" xml:space="preserve">
-    <value>بازه قیمت</value>
-  </data>
-  <data name="searchingText" xml:space="preserve">
-    <value>جستجو</value>
-  </data>
-  <data name="searchServiceText" xml:space="preserve">
-    <value>خدمت مورد نظر خود را جستجو
-                کنید</value>
-  </data>
-  <data name="SelectMonyUnitErrorMessage" xml:space="preserve">
-    <value>واحد پول را انتخاب کنید</value>
-  </data>
-  <data name="ServiceDelivery" xml:space="preserve">
-    <value>ارائه خدمت</value>
-  </data>
-  <data name="ServiceRequest" xml:space="preserve">
-    <value>درخواست خدمت</value>
-  </data>
-  <data name="services" xml:space="preserve">
-    <value>خدمات</value>
-  </data>
-  <data name="Skills" xml:space="preserve">
-    <value>مهارت ها</value>
-  </data>
-  <data name="Sms" xml:space="preserve">
-    <value>اس ام اس</value>
-  </data>
-  <data name="Submit" xml:space="preserve">
-    <value>تایید</value>
-  </data>
-  <data name="submitText" xml:space="preserve">
-    <value>تایید</value>
-  </data>
-  <data name="SuccessFullRegisterMessage" xml:space="preserve">
-    <value>ثبت موفقیت آمیز خدمت</value>
-  </data>
-  <data name="Titles" xml:space="preserve">
-    <value>عنوان خدمت</value>
-  </data>
-  <data name="ToPrice" xml:space="preserve">
-    <value>تا قیمت</value>
+  <data name="VisaOrMasterCardNumber" xml:space="preserve">
+    <value>شماره ویزا یا مستر کارت</value>
   </data>
 </root>

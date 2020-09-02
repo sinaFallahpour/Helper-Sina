@@ -192,6 +192,7 @@ namespace Helper.Controllers
                     NormalizedUserName = model._Username.Normalize(),
                     AcceptRules = model.AcceptRules,
 
+                    PhotoAddress = "/Upload/User/default2.png",
                     //عدم استفاده از پلن رایگان
                     IsUsedFree = false,
                     //SerialNumber = SerialNumber,

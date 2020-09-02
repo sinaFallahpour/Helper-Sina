@@ -918,12 +918,12 @@ a {
     background: #F6F0F8;
     box-shadow: 1px 1px 9px #46454661;
     color: #8D24B3;
-    
+}
 
+.height-120 {
+    height: 120px;
 }
-.height-120{
-    height:120px;
-}
+
 .hj-img-profile {
     position: absolute;
     top: -59px;
@@ -2281,3 +2281,57 @@ input[type=checkbox]:checked + .label-chekbox:before {
 ._direction {
     direction: rtl;
 }
+
+
+._selectDir > option {
+    direction: rtl;
+}
+/* block ui */
+.blockUI.blockMsg.blockPage {
+    outline: none !important;
+    z-index: unset !important;
+    position: fixed !important;
+    padding: 0px;
+    margin: 0px;
+    width: 30%;
+    top: 40%;
+    left: 35%;
+    text-align: center;
+    color: unset !important;
+    border: unset !important;
+    background-color: unset !important;
+    cursor: wait;
+}
+
+
+
+
+/* vue-selest   */
+
+.vs__dropdown-toggle {
+    border: 0 none !important;
+}
+
+/*.vs__actions {
+    padding:   6px 6px 0 3px !important;*/
+/*display:flex;
+align-items:center*/
+/*}*/
+
+
+
+
+
+
+/*custom btn  class*/
+
+._btnActive {
+    color: #fff;
+    background: #9BC93A;
+    border: 0;
+    transition: .3s;
+}
+
+
+
+

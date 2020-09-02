@@ -64,6 +64,14 @@ namespace Helper.ViewModels
         [StringLength(maximumLength: 100, ErrorMessage = "Maximum length is {1} characters")]
         public string City { get; set; }
 
+
+
+        /// <summary>
+        /// Image Address  
+        /// </summary>
+        public string PhotoAddress { get; set; }
+
+
         //public UserVM CurrentUser { get; set; }
 
 
@@ -109,7 +117,7 @@ namespace Helper.ViewModels
 
         [MaxLength(300, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "توضیحات")]
-      
+
         public string WorkDescriptions { get; set; }
         //public WorkExperienceDTO WorkExperienceDTO { get; set; }
     }

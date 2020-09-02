@@ -9,19 +9,27 @@
     <Compile Remove="Areas\Admin\Data\**" />
     <Compile Remove="Controllers\Api\**" />
     <Compile Remove="Models\ViewModels\**" />
+    <Compile Remove="Resources\Controllers\Controllers\**" />
     <Content Remove="Areas\Admin\Data\**" />
     <Content Remove="Controllers\Api\**" />
     <Content Remove="Models\ViewModels\**" />
+    <Content Remove="Resources\Controllers\Controllers\**" />
     <EmbeddedResource Remove="Areas\Admin\Data\**" />
     <EmbeddedResource Remove="Controllers\Api\**" />
     <EmbeddedResource Remove="Models\ViewModels\**" />
+    <EmbeddedResource Remove="Resources\Controllers\Controllers\**" />
     <None Remove="Areas\Admin\Data\**" />
     <None Remove="Controllers\Api\**" />
     <None Remove="Models\ViewModels\**" />
+    <None Remove="Resources\Controllers\Controllers\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="ViewModels\ProfileVM.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\Models\Enums\UserMarriedType.en-US.resx" />
   </ItemGroup>
 
 
@@ -59,6 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Resources\Models\Enums\UserMarriedType.en-US.resx" />
     <None Include="wwwroot\lib\ckeditor\build-config.js" />
     <None Include="wwwroot\lib\ckeditor\ckeditor.js" />
     <None Include="wwwroot\lib\ckeditor\config.js" />
@@ -67,6 +76,40 @@
     <None Include="wwwroot\lib\swal-alert\sweetalert.min.js" />
     <None Include="wwwroot\lib\tagsinput\bootstrap-tagsinput.js" />
     <None Include="wwwroot\StyleSheet.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Models\Enums\UserMarriedType.fa-IR.Designer.cs">
+      <DependentUpon>UserMarriedType.fa-IR.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Models\Enums\UserGender.en-US.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\Enums\UserGender.fa-IR.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\Enums\UserMarriedType.en-US.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\Enums\UserMarriedType.fa-IR.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>UserMarriedType.fa-IR.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\ShareResource.en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\ShareResource.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

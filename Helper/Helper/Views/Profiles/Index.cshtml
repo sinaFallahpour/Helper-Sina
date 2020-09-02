@@ -1,5 +1,6 @@
 ﻿@model Helper.ViewModels.ProfileVM2
 @using System.Globalization
+@using Helper.Models.Enums;
 
 @{
     ViewData["Title"] = "Index";
@@ -33,7 +34,11 @@
 <div class="container-fluid w-75 mx-auto mt-5 p-0 m-0">
     <div class="row w-100 mx-auto text-center">
         <div class="col-12">
-            <img src="~/hj/img/img profile.png" class="img-fluid mx-auto text-center" />
+            @*<img src="~/hj/img/img profile.png" class="img-fluid mx-auto text-center" />
+                <img src="/Upload/User/defaout.jpg" class="img-fluid mx-auto text-center" />*@
+
+            @*<img src="/Upload/User/default2.png" />*@
+            <img src="@Model.PhotoAddress" class="img-fluid mx-auto text-center" />
         </div>
         <div class="col-12 pt-4">
             <h3 class="text-center"> @Model.UserName </h3>
@@ -164,7 +169,7 @@
 
                                         <div class="form-group w-100 text-right">
                                             <label for="exampleInputDetalis" class="mt-md-3">@ViewData["DescriptionPL"] </label>
-                                            <textarea asp-for="WorkDescriptions"  autocomplete="off"class="_text-position form-control hj-form-profile " id="exampleInputDetalis" rows="3" placeholder="@ViewData["DescriptionPL"] ..."></textarea>
+                                            <textarea asp-for="WorkDescriptions" autocomplete="off" class="_text-position form-control hj-form-profile " id="exampleInputDetalis" rows="3" placeholder="@ViewData["DescriptionPL"] ..."></textarea>
                                             <span asp-validation-for="WorkDescriptions" class="text-center d-block text-danger"></span>
                                         </div>
 
@@ -196,7 +201,7 @@
                                         <div class="form-group w-100 text-right">
                                             <div class="col-md-6 p-0 m-0 mb-4">
                                                 <label for="exampleInputOfDate">@ViewData["from"]  </label>
-                                                <input asp-for="EduEnterDate"  autocomplete="off" class="_text-position form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="EduEnterDate" placeholder="@ViewData["StartEduDatePL"]">
+                                                <input asp-for="EduEnterDate" autocomplete="off" class="_text-position form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="EduEnterDate" placeholder="@ViewData["StartEduDatePL"]">
                                                 <span asp-validation-for="EduEnterDate" class="text-center d-block text-danger"></span>
 
                                             </div>
@@ -252,13 +257,13 @@
 
                                         <div class="form-group w-100 text-right">
                                             <div class="col-md-6 p-0 m-0 mb-4">
-                                                <label asp-for="MarriedType" class="control-label">@ViewData["genderPL"]</label>
-                                                <select asp-for="MarriedType" placeholder="@ViewData["genderPL"]" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserMarriedType>()"></select>
+                                                <label asp-for="MarriedType" class="control-label">@ViewData["SituationPL"]  </label>
+                                                <select asp-for="MarriedType" placeholder="@ViewData["genderPL"]" class="_selectDir form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserMarriedType>()"></select>
                                                 <span asp-validation-for="MarriedType" class="text-center d-block text-danger"></span>
                                             </div>
                                             <div class="col-md-6 p-0 m-0 mb-4">
-                                                <label asp-for="Gender" class="control-label">@ViewData["SituationPL"]</label>
-                                                <select asp-for="Gender" placeholder=" @ViewData["SituationPL"]" class="form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()"> </select>
+                                                <label asp-for="Gender" class="control-label">@ViewData["genderPL"]</label>
+                                                <select asp-for="Gender" placeholder=" @ViewData["SituationPL"]" class="_selectDir form-control hj-form-profile w-100 py-3 pr-3 text-dark" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()"> </select>
                                                 <span asp-validation-for="Gender" class="text-center d-block text-danger"></span>
                                             </div>
                                             <label className="text-right w-100 pr-3 mt-md-3">   </label>

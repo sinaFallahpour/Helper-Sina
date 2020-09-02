@@ -74,13 +74,13 @@ namespace Helper.Controllers
                         City = c.City,
                         Gender = c.Gender,
                         MarriedType = c.MarriedType,
+                        PhotoAddress = c.PhotoAddress,
 
 
                         EduEnterDate = c.EducationHistry.EnterDate,
                         EduExitDate = c.EducationHistry.ExitDate,
                         MaghTa = c.EducationHistry.MaghTa,
                         UnivercityName = c.EducationHistry.UnivercityName,
-
 
                         WorkEnterDate = c.WorkExperience.EnterDate,
                         WorkExitDate = c.WorkExperience.ExitDate,

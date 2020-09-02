@@ -120,6 +120,9 @@
   <data name="Back" xml:space="preserve">
     <value>بازگشت به لیست</value>
   </data>
+  <data name="ComparePassWordErrorMessage" xml:space="preserve">
+    <value>تکرار پسورد صحیح نمیباشد</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>افرودن جدید</value>
   </data>
@@ -132,8 +135,14 @@
   <data name="Edit" xml:space="preserve">
     <value>ویرایش</value>
   </data>
+  <data name="Enter just {1} character" xml:space="preserve">
+    <value>فقط {1} کاراکتر وارد کنید</value>
+  </data>
   <data name="InValidEmail" xml:space="preserve">
     <value>ایمیل نا معتبر است</value>
+  </data>
+  <data name="LoadingText" xml:space="preserve">
+    <value>صبر کنید...</value>
   </data>
   <data name="Maximum length is {1} characters" xml:space="preserve">
     <value>حداکثر  {1} کاراکتر وارد کنید</value>
@@ -141,8 +150,14 @@
   <data name="Minimum length is {1} characters" xml:space="preserve">
     <value>حداقل {1} کاراکتر وارد کنید</value>
   </data>
+  <data name="MobileFormat" xml:space="preserve">
+    <value>به فرمت موبایل وارد کنید</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>این فیلد اجباری است</value>
+  </data>
+  <data name="ShebaFormat" xml:space="preserve">
+    <value>شماره شبا نا معتبر</value>
   </data>
   <data name="Skills" xml:space="preserve">
     <value>مهارت های مورد نظر</value>

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Helper.ViewModels.ServiceListVM>
 @using System.Globalization
 @using System.Security.Claims;
+@using Newtonsoft.Json;
 
 @{
     ViewData["Title"] = "خدمات";
@@ -29,14 +30,13 @@
     <div class="row w-100 mx-auto text-md-right text-center d-block">
         <h4 class="text-center">
             <b>
-                خدمت مورد نظر خود را جستجو
-                کنید
+                @ViewData["searchServiceText"]
             </b>
         </h4>
     </div>
     <div class="row w-100 p-0 m-0 mx-auto pt-md-3 pt-5">
-        <div class="col-md-10 col-8 text-right"><h3><b> خدمات</b></h3></div>
-        <div class="col-md-2 col-4 text-news"><span> جدید ترین ها</span></div>
+        <div class="col-md-10 col-8 text-right"><h3><b> @ViewData["services"]</b></h3></div>
+        <div class="col-md-2 col-4 text-news"><span> @ViewData["New"] </span></div>
     </div>
     <div class="row w-100 mx-auto">
         <img src="~/hj/img/borderbig green.png" class="img-fluid mx-auto" />
@@ -49,7 +49,7 @@
     <div class="row w-100 mx-auto mt-4">
         <h5 class="_text-position">  @ViewData["Titles"]   </h5>
 
-        <input type="text" v-model="searchedWord" placeholder="جستجو" class=" text-center w-100 mx-auto my-3 service-form px-3" />
+        <input type="text" v-model="searchedWord" placeholder="@ViewData["searchingText"]" class=" text-center w-100 mx-auto my-3 service-form px-3" />
     </div>
     @*<div class="row w-100 mx-auto my-3 service-form">
             <div class="col-10  mx-auto text-right pt-2 pr-3">
@@ -140,11 +140,11 @@
     </div>
 
     <div class="row w-100 mx-auto pb-5">
-        <div class="col-sm-6 py-2">  <input v-model="minPrice" type="number" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3" placeholder="از قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
-        <div class="col-sm-6 py-2"> <input v-model="maxPrice" type="number" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3 " placeholder="تا قیمت" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
+        <div class="col-sm-6 py-2">  <input v-model="minPrice" type="number" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
+        <div class="col-sm-6 py-2"> <input v-model="maxPrice" type="number" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></div>
     </div>
     <div class="row w-100 mx-auto mt-4">
-        <button v-on:click="getListemService()" type="button" class="btn btn-success w-25 mx-auto Confirmation">تایید</button>
+        <button v-on:click="getListemService()" type="button" class="btn btn-success w-25 mx-auto Confirmation">@ViewData["submitText"]</button>
     </div>
     <br />
     <hr />
@@ -156,7 +156,7 @@
             <div class=" hj-profile mx-auto">
                 <div class="row  w-100 hj-img-profile mx-auto">
                     @*<img src="~/hj/img/OTSOUE0.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">*@
-                    <img v-bind:src="service?.userImageAddress" class="img-fluid image-profile-desi mx-auto" alt="Responsive image"/>
+                    <img v-bind:src="service?.userImageAddress" class="img-fluid image-profile-desi mx-auto" alt="Responsive image" />
                 </div>
 
                 <div class="row w-100 mx-auto mt-5 pt-5">
@@ -167,7 +167,7 @@
                     <div class="col-12 pt-3">
                         <h4 class="text-center w-100">
                             <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
-                        
+
 
                         </h4>
                     </div>
@@ -259,8 +259,7 @@
         </div>*@
 
 
-
-
+ 
 
     @*--------pagination----*@
     <div class="row w-100 mx-auto">
@@ -283,7 +282,6 @@
 
 
 
-
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
@@ -297,15 +295,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
 
 
-
-
+ 
 
 
     <script>
 
+         
+       
 
+        
 
-
+       
         @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
         {
             <text>
@@ -329,7 +329,7 @@
                     //    dir: "rtl"
                     //});
                 })
-
+          
             </text>
         }
         else {
@@ -408,9 +408,9 @@
                     var vueInstance = this;
                     this.servicesLoading = true;
                     var params = this.axiosParams;
+                   
+                    $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>'});
 
-
-                    $.blockUI({ message: '<h3> صبر کنید...</h3>' });
 
                     axios.get("/Services/SearchAllService", { params: params })
                         .then(function (response) {
@@ -439,7 +439,7 @@
                         FailedAlert("برای لایک کردن محصولات ابتدا لاگین کنید.");
                         return
                     }
-
+                    
                     this.likeLoading = true;
                     this.selectedService = this.services.find(c => c.id == serviceId)
                     var vueInstance = this;
@@ -528,7 +528,7 @@
                     return this.totalPages == 0 ? 1 : this.totalPages;
                 },
                 axiosParams: function () {
-                
+
                     var params = new URLSearchParams();
                     params.append('limit', String(this.limit));
                     params.append('offset', `${this.page ? this.page * this.limit : 0}`);

@@ -4,13 +4,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_landing.cshtml";
 
-
-
 }
-
-
-
-
 
 
 
@@ -19,17 +13,13 @@
 }
 
 
-
-
-
-
 <div class="container">
     <div class="row mt-md-5 pt-md-5">
         <div class="col-md-5 col-12 ml-lg-5 order-md-0 order-1 hj-intro-h">
             <div class="row mx-auto">
                 <span class="text-justify size-33">
                     <b>
-                        ایجاد خدمت
+                        @ViewData["CreateServiceText"]
                     </b>
                 </span>
             </div>
@@ -37,7 +27,7 @@
                 <img src="/hj/img/border-bottom.png" class="img-fluid">
             </div>
             <div class="row mt-3 mx-auto">
-                <span class="text-justify hj-intro-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span>
+                <span class="text-justify hj-intro-text">@ViewData["CreateServiceDescriptions"]</span>
             </div>
 
         </div>
@@ -65,20 +55,18 @@
                         <div class="nav nav-tabs nav-fill p-0 m-0 w-100" id="nav-tab" role="tablist">
 
 
-                            <a class="nav-item nav-link w-25 active" id="nav-Personal-tab" data-toggle="tab" href="#nav-Personal" role="tab" aria-controls="nav-profile" aria-selected="false"> اطلاعات شخصی</a>
-                            <a class="nav-item nav-link w-25" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> حساب بانکی</a>
-                            <a class="nav-item nav-link  w-25" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="true"> رمز عبور</a>
-
-
+                            <a class="nav-item nav-link w-25 active" id="nav-Personal-tab" data-toggle="tab" href="#nav-Personal" role="tab" aria-controls="nav-profile" aria-selected="false">    @ViewData["PersonalInformation"]</a>
+                            <a class="nav-item nav-link w-25" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">   @ViewData["BankAccount"]</a>
+                            <a class="nav-item nav-link  w-25" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="true">   @ViewData["Password"]</a>
 
                         </div>
-
                     </nav>
                     <div class="tab-content py-3 px-sm-0 mt-5" id="nav-tabContent">
 
+
                         @*---------tab1--------------*@
                         <div class=" tab-pane fade show active" id="nav-Personal" role="tabpanel" aria-labelledby="nav-Personal-tab">
-                            <form asp-action="ChangePeronalInfo"  id="chnageInfoSubmit" >
+                            <form asp-action="ChangePeronalInfo" id="chnageInfoSubmit">
 
 
                                 <input asp-for="Id" id="infoId" type="hidden" />
@@ -86,47 +74,44 @@
                                 <div class="row hj-form  mx-auto">
 
                                     <div class="form-group w-100">
-                                        <label asp-for="UserName" class="text-right w-100 pr-3" for="name"> </label>
-                                        <input asp-for="UserName" autocomplete="off" class="form-control text-center hj-form-profile w-100 py-3  text-dark" id="name" placeholder="نام کاربری">
+                                        <label asp-for="UserName" class="_text-position  w-100 pr-3" for="name">@ViewData["UserName"] </label>
+                                        <input asp-for="UserName" autocomplete="off" class="form-control text-center hj-form-profile w-100 py-3  text-dark" id="name" placeholder="@ViewData["UserName"]">
                                         <span asp-validation-for="UserName" class="text-center d-block text-danger"></span>
-
                                     </div>
                                     <div class="form-group w-100">
-                                        <label asp-for="Email" class="text-right w-100 pr-3" for="email"></label>
-                                        <input asp-for="Email" type="email" autocomplete="off" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="email" placeholder="test.gmail.com">
+                                        <label asp-for="Email" class="_text-position  w-100 pr-3" for="email">@ViewData["Email"]</label>
+                                        <input asp-for="Email" type="email" autocomplete="off" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="email" placeholder="@ViewData["EmailPL"]">
                                         <span asp-validation-for="Email" class="text-center d-block text-danger"></span>
-
                                     </div>
                                     <div class="form-group w-100 position-relative">
-                                        <label asp-for="Phone" class="text-right w-100 pr-3" for="number-Phone"> </label>
-                                        <input asp-for="Phone" autocomplete="off" type="number" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="number-Phone" placeholder=" 00000000_98+">
+                                        <label asp-for="Phone" class="_text-position  w-100 pr-3" for="number-Phone">@ViewData["MobileNumber"] </label>
+                                        <input asp-for="Phone" autocomplete="off" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="number-Phone" placeholder=" 00000000_98+">
                                         <img src="~/hj/img/Edit - Alt 2.png" class="img-fluid hj-pen" />
                                         <span asp-validation-for="Phone" class="text-center d-block text-danger"></span>
                                     </div>
 
-                                    <label class="text-right w-100 pr-3 mt-2" for="">زبان وبسایت و اعلامه های رسمی </label>
+                                    <label class="_text-position  w-100 pr-3 mt-2" for="">@ViewData["SiteLanguages"]</label>
                                     <div class="row w-100 mx-auto my-2 hj-form-profile hj-maharat ">
-
                                         <div class="col-md-7 col-8  mx-auto text-left py-2 ">
-                                            <h6 class="pt-1 pl-4">فارسی</h6>
+                                            <h6 class="_text-position pt-1 pl-4" id="siteText">فارسی</h6>
                                         </div>
                                         <div class="col-md-5 col-4  mx-auto">
                                             <i class="fas fa-chevron-down pl-3 pt-3" id="select-down"></i>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="SiteLanguage" id="SiteLanguage" value="@((int) Model.SiteLanguage )" />
                                     <div class="row w-100 mx-auto hj-select  ">
 
-
                                         <div class="col-sm-2 col-12  py-2">
-                                            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                            <button type="button" id="persianLan" class="btn  w-100 button-Service">@ViewData["PersianLanguage"]</button>
                                         </div>
                                         <div class="col-sm-2 col-12  py-2">
-                                            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                            <button type="button" id="englishLan" class="btn  w-100 button-Service">@ViewData["EnglishLanguage"]</button>
                                         </div>
                                     </div>
 
                                     <div class="row w-100 mx-auto mt-4 pt-4">
-                                        <input type="submit" id="changeInfoSubmit" class="btn btn-success w-25 mx-auto Confirmation" value="ذخیره تنطیمات" />
+                                        <input type="submit" id="changeInfoSubmit" class="btn btn-success w-25 mx-auto Confirmation" value="@ViewData["SaveSettings"]" />
                                     </div>
 
                                 </div>
@@ -138,8 +123,6 @@
                         @*-----------tab2------------------*@
                         <div class=" tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <form asp-action="ChangeAccountBank" id="changeBankSubmit">
-
-
 
 
 
@@ -181,83 +164,61 @@
                                     }
 
 
-
-
                                     <div class="form-group w-100">
-                                        <label asp-for="AccountOwner" class="text-right w-100 pr-3" for="Owner-name">  </label>
-                                        <input asp-for="AccountOwner" type="text" class="form-control text-center hj-form-profile w-100 py-3  text-dark" id="Owner-name" placeholder="نام صاحب حساب">
+                                        <label asp-for="AccountOwner" class="_text-position  w-100 pr-3" for="Owner-name"> @ViewData["AccountOwner"] </label>
+                                        <input asp-for="AccountOwner" type="text" class="form-control text-center hj-form-profile w-100 py-3  text-dark" id="Owner-name" placeholder="@ViewData["AccountOwner"]">
                                         <span asp-validation-for="AccountOwner" class="text-center d-block text-danger"></span>
                                     </div>
 
                                     <div class="form-group w-100">
-                                        <label asp-for="BankName" class="text-right w-100 pr-3" for="Bank-name">نام بانک</label>
-                                        <input asp-for="BankName" type="text" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="Bank-name" placeholder="نام بانک">
+                                        <label asp-for="BankName" class="_text-position  w-100 pr-3" for="Bank-name"> @ViewData["BankName"]  </label>
+                                        <input asp-for="BankName" type="text" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="Bank-name" placeholder="@ViewData["BankName"]">
                                         <span asp-validation-for="BankName" class="text-center d-block text-danger"></span>
                                     </div>
 
                                     <div class="form-group w-100">
-                                        <label asp-for="CardNumber" class="text-right w-100 pr-3" for="card-number"> شماره کارت</label>
-                                        <input asp-for="CardNumber" type="text" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="card-number" placeholder=" 6123 5419 8165 6498">
+                                        <label asp-for="CardNumber" class="_text-position  w-100 pr-3" for="card-number">    @ViewData["CardNumber"]</label>
+                                        <input asp-for="CardNumber" type="text" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="card-number" placeholder="6123-5419-8165-6498">
                                         <span asp-validation-for="CardNumber" class="text-center d-block text-danger"></span>
                                     </div>
 
                                     <div class="form-group w-100 position-relative">
-                                        <label asp-for="ShabaNumber" class="text-right w-100 pr-3" for="shaba-number"> شماره شبا</label>
+                                        <label asp-for="ShabaNumber" class="_text-position  w-100 pr-3" for="shaba-number"> @ViewData["ShabaNumber"]</label>
                                         <input asp-for="ShabaNumber" type="text" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="shaba-number" placeholder=" 6541 9816 5649 3228">
                                         <img src="~/hj/img/ss.png" class="img-fluid hj-shaba" />
                                         <span asp-validation-for="ShabaNumber" class="text-center d-block text-danger"></span>
-
                                     </div>
                                     <div class="form-group w-100 position-relative">
-                                        <label asp-for="VisaNumber" class="text-right w-100 pr-3" for="visa-number">  شماره ویزا یا مستر کارت</label>
+                                        <label asp-for="VisaNumber" class="_text-position  w-100 pr-3" for="visa-number">  @ViewData["VisaOrMasterCardNumber"]</label>
                                         <input asp-for="VisaNumber" type="text" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="visa-number" placeholder=" 6121 5419 8165 6498">
                                         <img src="~/hj/img/visa.png" class="img-fluid hj-visa" />
                                         <span asp-validation-for="VisaNumber" class="text-center d-block text-danger"></span>
                                     </div>
 
                                     <div class="row w-100 mx-auto mt-4 pt-4">
-                                        <input type="submit" id="chnageBankSubmit" class="btn btn-success w-25 mx-auto Confirmation" value="ذخیره تنظیمات" />
+                                        <input type="submit" id="chnageBankSubmit" class="btn btn-success w-25 mx-auto Confirmation" value="@ViewData["SaveSettings"]" />
                                     </div>
 
                                 </div>
                             </form>
-
 
                         </div>
                         @*--------tab3--------*@
                         <div class=" tab-pane fade " id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
                             <form asp-action="ChangePassword" id="changePassForm">
 
-
-
                                 <input asp-for="Id" id="passId" type="hidden" />
                                 <div class="row w-100 mx-auto">
 
 
-
-
                                     <div class="col-md-8 col-12 mx-auto">
-                                    
 
-                                     
                                         <div class="form-group w-100 position-relative">
-                                            <label class="text-right w-100 pr-3" for="password1"> رمز عبور فعلی</label>
 
-                                            <input class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark password"
-                                                   type="password"
-                                                   data-val="true"
-                                                   data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
-                                                   data-val-maxlength-max="20"
-                                                   data-val-minlength="حداقل 6 کاراکتر وارد کنید"
-                                                   data-val-minlength-min="6"
-                                                   data-val-required="این فیلد الزامیست"
-                                                   id="password1"
-                                                   maxlength="20"
-                                                   name="OldPassword"
-                                                   placeholder=" ***************">
-
+                                            <label asp-for="OldPassword" class="_text-position  w-100 pr-3" for="visa-number">@ViewData["OldPass"]</label>
+                                            <input asp-for="OldPassword" type="text" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="password1" placeholder="************">
                                             <img src="~/hj/img/View - Alt 1.svg" class="img-fluid hj-pen" onclick="showpass1()" />
-                                            <span class="text-center d-block text-danger field-validation-valid" data-valmsg-for="OldPassword" data-valmsg-replace="true"></span>
+                                            <span asp-validation-for="OldPassword" class="text-center d-block text-danger"></span>
                                         </div>
 
 
@@ -265,40 +226,21 @@
 
 
                                         <div class="form-group w-100 position-relative">
-                                            <label class="text-right w-100 pr-3" for="password2">رمز عبور جدید </label>
-                                            <input class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark password"
-                                                   type="password"
-                                                   data-val="true"
-                                                   data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
-                                                   data-val-maxlength-max="20"
-                                                   data-val-minlength="حداقل 6 کاراکتر وارد کنید"
-                                                   data-val-minlength-min="6"
-                                                   data-val-required="این فیلد الزامیست"
-                                                   id="password2"
-                                                   maxlength="20"
-                                                   name="NewPassword"
-                                                   placeholder=" ***************">
-
+                                            <label asp-for="NewPassword" class="_text-position  w-100 pr-3" for="visa-number">@ViewData["NewPass"]</label>
+                                            <input asp-for="NewPassword" type="text" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="password2" placeholder="************">
                                             <img src="~/hj/img/View - Alt 1.svg" class="img-fluid hj-pen" onclick="showpass2()" />
-                                            <span class="text-center d-block text-danger field-validation-valid" data-valmsg-for="NewPassword" data-valmsg-replace="true"></span>
+                                            <span asp-validation-for="NewPassword" class="text-center d-block text-danger"></span>
                                         </div>
 
                                         <div class="form-group w-100 position-relative">
-                                            <label class="text-right w-100 pr-3" for="password3"> تکرار رمز عبور جدید</label>
-                                            <input class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark password"
-                                                   type="password"
-                                                   data-val="true"
-                                                   data-val-equalto="تکرار پسورد صحیح نمیباشد"
-                                                   data-val-equalto-other="*.NewPassword"
-                                                   data-val-required="این فیلد الزامیست"
-                                                   id="password3"
-                                                   name="NewPasswordConfirm"
-                                                   placeholder=" ***************">
+                                            <label asp-for="NewPasswordConfirm" class="_text-position  w-100 pr-3" for="visa-number">@ViewData["NewPassRepeat"]</label>
+                                            <input asp-for="NewPasswordConfirm" type="text" class="form-control text-center hj-form-profile w-100 py-3 pr-3 text-dark" id="password3" placeholder="************">
                                             <img src="~/hj/img/View - Alt 1.svg" class="img-fluid hj-pen" onclick="showpass3()" />
-                                            <span class="text-center d-block text-danger field-validation-valid" data-valmsg-for="NewPasswordConfirm" data-valmsg-replace="true"></span>
+                                            <span asp-validation-for="NewPasswordConfirm" class="text-center d-block text-danger"></span>
+
                                         </div>
                                         <div class="row w-100 mx-auto mt-4 pt-4">
-                                            <input type="submit" id="chnagePassSubmit" value="ذخیره تنظیمات" class="btn btn-success w-25 mx-auto Confirmation" />
+                                            <input type="submit" id="chnagePassSubmit" value="@ViewData["SaveSettings"]" class="btn btn-success w-25 mx-auto Confirmation" />
                                         </div>
 
 
@@ -333,9 +275,74 @@
 
     <script>
 
-     
 
-        
+        $(document).ready(function () {
+            //عدم اجازه یراس وارد کردن  اسپیس
+            $('input').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+
+
+
+           
+            if ($("#SiteLanguage").val() == 1) {
+                $("#siteText").text($("#persianLan").text())
+                $("#persianLan").addClass('_btnActive')
+            }
+            else {
+                
+
+
+
+                  $("#siteText").text($("#englishLan").text())
+                $("#englishLan").addClass('_btnActive')
+            }
+
+
+
+
+            ////persianLan- englishLan
+            //var languageId;
+
+            $("#persianLan").on('click', function () {
+                //var persianVal = $("#SiteLanguage").val(1);
+
+                $("#SiteLanguage").val(1);
+                $(this).addClass('_btnActive ')
+                $("#englishLan").removeClass('_btnActive')
+
+                $("#siteText").text($("#persianLan").text())
+            })
+
+            $("#englishLan").on('click', function () {
+
+                //var englidhVal = $("#SiteLanguage").val(0);
+
+                $("#SiteLanguage").val(0);
+                $(this).addClass('_btnActive ')
+                $("#persianLan").removeClass('_btnActive')
+
+                $("#siteText").text($("#englishLan").text())
+
+
+            })
+
+
+
+
+
+
+
+
+        })
+
+
+
+
+
+
+
         //chnage account settings
         $("#chnageInfoSubmit").submit(function (e) {
             e.preventDefault();
@@ -344,8 +351,8 @@
             }
             var username = $("#name").val();
             var email = $("#email").val();
-            var phone= $("#number-Phone").val();
-            var siteLanguage = 1;
+            var phone = $("#number-Phone").val();
+            var siteLanguage = $("#SiteLanguage").val();
             var Id = $("#infoId").val()
 
             var data = {

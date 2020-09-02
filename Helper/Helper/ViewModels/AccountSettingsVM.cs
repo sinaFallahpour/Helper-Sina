@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using DNTPersianUtils.Core;
 
 namespace Helper.ViewModels
 {
@@ -13,24 +14,25 @@ namespace Helper.ViewModels
         public string Id { get; set; }
 
 
-        [Required(ErrorMessage = "این فیلد الزامیست")]
-        [MinLength(3, ErrorMessage = "حداقل 3 کاراکتر وارد کنید")]
-        [MaxLength(20, ErrorMessage = "حداکثر 20 کاراکتر وارد کنید")]
+        [Required(ErrorMessage = "Required")]
+        [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(20, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "نام کاربری")]
         public string UserName { get; set; }
 
 
-        [EmailAddress(ErrorMessage = "به فرمت  ایمیل وارد کنید")]
-        [Required(ErrorMessage = "این فیلد الزامیست")]
-        [MaxLength(30, ErrorMessage = "حداکثر 30 کاراکتر وارد کنید")]
+        [EmailAddress(ErrorMessage = "InValidEmail")]
+        [Required(ErrorMessage = "Required")]
+        [MaxLength(30, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "ایمیل")]
         public string Email { get; set; }
 
 
-        [MinLength(8, ErrorMessage = "از 8 تا 11 کاراکتر وارد کنید")]
-        [MaxLength(11, ErrorMessage = "از 8 تا 11 کاراکتر وارد کنید")]
+        //[MinLength(8, ErrorMessage = "Minimum length is {1} characters ")]
+        //[MaxLength(11, ErrorMessage = "Maximum length is {1} characters")]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "شماره موبایل ")]
+        [ValidIranianMobileNumber(ErrorMessage = "MobileFormat")]
         public string Phone { get; set; }
 
 
@@ -47,14 +49,14 @@ namespace Helper.ViewModels
         /// <summary>
         ///نام بانک
         /// </summary>
-        [MaxLength(150, ErrorMessage = "حداکثر 150 کاراکتر ")]
+        [MaxLength(150, ErrorMessage = "Maximum length is {1} characters")]
         public string BankName { get; set; }
 
 
         /// <summary>
         /// نام صاحب حساب بانک
         /// </summary>
-        [MaxLength(60, ErrorMessage = "حداکثر 60 کاراکتر ")]
+        [MaxLength(60, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = " نام صاحب حساب بانک")]
         public string AccountOwner { get; set; }
 
@@ -63,7 +65,7 @@ namespace Helper.ViewModels
         /// شماره کارت
         /// </summary>
         //[StringLength(16, MinimumLength = 16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
-        [MaxLength(16,ErrorMessage ="فقط 16 کاراکتر وارد کنید")]
+        [MaxLength(16, ErrorMessage = "Maximum length is {1} characters")]
         [MinLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
         [Display(Name = " شماره کارت")]
         public string CardNumber { get; set; }
@@ -71,8 +73,9 @@ namespace Helper.ViewModels
         /// <summary>
         /// شماره شبا
         /// </summary>
-        [MaxLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
-        [MinLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
+        //[MaxLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
+        //[MinLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
+        [ValidIranShebaNumber(ErrorMessage ="sdsd")]
         [Display(Name = "شماره شبا")]
         public string ShabaNumber { get; set; }
 
@@ -87,5 +90,37 @@ namespace Helper.ViewModels
 
 
 
+
+
+
+
+
+
+        
+
+        [Required(ErrorMessage = "Required")]
+        [MinLength(6, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(20, ErrorMessage = "Maximum length is {1} characters")]
+        [DataType(DataType.Password)]
+        [Display(Name = "رمز عبور")]
+        public string OldPassword { get; set; }
+
+
+
+
+        [Required(ErrorMessage = "Required")]
+        [MinLength(6, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(20, ErrorMessage = "Maximum length is {1} characters")]
+        [DataType(DataType.Password)]
+        [Display(Name = "رمز عبور")]
+        public string NewPassword { get; set; }
+
+
+
+        [Required(ErrorMessage = "Required")]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage = "ComparePassWordErrorMessage")]
+        [Display(Name = "تکرار رمز عبور")]
+        public string NewPasswordConfirm { get; set; }
     }
 }

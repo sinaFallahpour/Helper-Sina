@@ -120,6 +120,9 @@
   <data name="Back" xml:space="preserve">
     <value>Back To List</value>
   </data>
+  <data name="ComparePassWordErrorMessage" xml:space="preserve">
+    <value>Repeat password is incorrect</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create New</value>
   </data>
@@ -132,8 +135,14 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="Enter just {1} character" xml:space="preserve">
+    <value>Enter just {1} character</value>
+  </data>
   <data name="InValidEmail" xml:space="preserve">
     <value>Please provide a valid email address.</value>
+  </data>
+  <data name="LoadingText" xml:space="preserve">
+    <value>loading...</value>
   </data>
   <data name="Maximum length is {1} characters" xml:space="preserve">
     <value>Maximum length is {1} characters</value>
@@ -141,8 +150,14 @@
   <data name="Minimum length is {1} characters" xml:space="preserve">
     <value>Minimum length is {1} characters</value>
   </data>
+  <data name="MobileFormat" xml:space="preserve">
+    <value>Enter in mobile format.</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>This Field is Required</value>
+  </data>
+  <data name="ShebaFormat" xml:space="preserve">
+    <value>Enter in Sheba number format</value>
   </data>
   <data name="Skills" xml:space="preserve">
     <value>The desiret Skill</value>

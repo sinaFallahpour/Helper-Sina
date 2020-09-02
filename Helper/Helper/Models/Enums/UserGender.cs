@@ -9,11 +9,11 @@ namespace Helper.Models.Enums
 {
     public enum UserGender
     {
-        [Display(Name = "مرد")]
-        [Description("مرد")]
+        [Display(Name = "Man")]
+        [Description("Man")]
         Man,
-        [Display(Name = "زن")]
-        [Description("زن")]
+        [Display(Name = "Woman")]
+        [Description("Woman")]
         Woman
     }
 }
