@@ -1,4 +1,7 @@
-﻿@model Helper.ViewModels.LoginVm
+﻿@*@model Helper.ViewModels.LoginVm*@
+
+@model Helper.ViewModels.LoginRegistereVM
+@using System.Globalization
 
 @{
     ViewData["Title"] = "Login";
@@ -12,7 +15,9 @@
 
 
 @section Styles {
+
     <link rel="stylesheet" href="~/hj/css/login.css" />
+    <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
 }
 
 <div class="container w-100 mx-auto">
@@ -37,76 +42,90 @@
             <div class="tabs-content mt-4">
 
 
-                <div id="signup-tab-content" class="@RegisterActiveTabclassName text-center">
+                <div id="signup-tab-content" class=" text-center">
 
                     <form asp-action="Register" id="registerForm" class="ui error form signup-form">
-                        @if (!string.IsNullOrEmpty(ViewBag.RegisterError))
-                        {
-                            <div class="alert alert-warning" role="alert">
-                                @ViewBag.RegisterError
-                            </div>
-                        }
+                        @*@if (!string.IsNullOrEmpty(ViewBag.RegisterError))
+                            {
+                                <div class="alert alert-warning" role="alert">
+                                    @ViewBag.RegisterError
+                                </div>
+                            }*@
 
 
                         <input type="hidden" name="Id" value="0" />
                         <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
                         <input type="hidden" name="UserReturnUrl" value="@ViewBag.UserReturnUrl" />
                         <input type="hidden" name="AdminReturnUrl" value="@ViewBag.AdminReturnUrl" />
-                        
+
 
 
                         @*......._Username....... *@
 
-                        <input placeholder="نام کاربری"
-                               autocomplete="off"
-                               class="input text-center  py-3 my-2 mx-auto d-block"
-                               type="text" data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
-                               data-val-maxlength-max="20" data-val-minlength="حداقل 3 کاراکتر وارد کنید"
-                               data-val-minlength-min="3" data-val-required="این فیلد الزامیست"
-                               id="_Username"
-                               maxlength="20"
-                               name="_Username"
-                               value="">
+                        @*<input asp-for="Username" oninput="validate(this)" class="input text-center  py-3 my-2 mx-auto d-block" id="_Username" autocomplete="off" placeholder="@ViewData["UserName"]">
+                            <span asp-validation-for="Username" class="text-danger w-10 d-block"> </span>*@
 
-                        <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Username" data-valmsg-replace="true"></span>
+
+                        @*<input placeholder="نام کاربری"
+                                   autocomplete="off"
+                                   class="input text-center  py-3 my-2 mx-auto d-block"
+                                   type="text" data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
+                                   data-val-maxlength-max="20" data-val-minlength="حداقل 3 کاراکتر وارد کنید"
+                                   data-val-minlength-min="3" data-val-required="این فیلد الزامیست"
+                                   id="_Username"
+                                   maxlength="20"
+                                   name="_Username"
+                                   value="">
+
+                            <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Username" data-valmsg-replace="true"></span>*@
 
 
                         @*......._Email....... *@
-                        <input placeholder="ایمیل"
-                               autocomplete="off"
-                               class="input text-center  py-3 my-2 mx-auto d-block"
-                               type="email" data-val="true" data-val-email="به فرمت  ایمیل وارد کنید"
-                               data-val-maxlength="حداکثر 30 کاراکتر وارد کنید"
-                               data-val-maxlength-max="30" data-val-required="این فیلد الزامیست"
-                               id="_Email"
-                               maxlength="30"
-                               name="_Email"
-                               value="">
 
-                        <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Email" data-valmsg-replace="true"></span>
+
+                        <input asp-for="Username" oninput="validate(this)" class="input text-center  py-3 my-2 mx-auto d-block" id="_Username" autocomplete="off" placeholder="@ViewData["UserName"]">
+                        <span asp-validation-for="Username" class="text-danger w-10 d-block"> </span>
+
+                        @*<input placeholder="ایمیل"
+                                   autocomplete="off"
+                                   class="input text-center  py-3 my-2 mx-auto d-block"
+                                   type="email" data-val="true" data-val-email="به فرمت  ایمیل وارد کنید"
+                                   data-val-maxlength="حداکثر 30 کاراکتر وارد کنید"
+                                   data-val-maxlength-max="30" data-val-required="این فیلد الزامیست"
+                                   id="_Email"
+                                   maxlength="30"
+                                   name="_Email"
+                                   value="">
+
+                            <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Email" data-valmsg-replace="true"></span>*@
+
+                        <input asp-for="Email" oninput="validate(this)" class="input text-center  py-3 my-2 mx-auto d-block" id="_Email" autocomplete="off" placeholder="@ViewData["EmailPl"]">
+                        <span asp-validation-for="Email" class="text-danger w-10 d-block"> </span>
+
+
 
 
 
                         @*......._password....... *@
-                        <input placeholder="رمز عبور"
-                               autocomplete="off"
-                               class="input text-center  py-3 my-2 mx-auto d-block"
-                               type="password"
-                               data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
-                               data-val-maxlength-max="20" data-val-minlength="حداقل 6 کاراکتر وارد کنید"
-                               data-val-minlength-min="6" data-val-required="این فیلد الزامیست"
-                               id="_Password"
-                               maxlength="20" name="_Password">
 
-                        <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Password" data-valmsg-replace="true"></span>
+                        <input asp-for="Password" oninput="validate(this)" class="input text-center  py-3 my-2 mx-auto d-block" id="_Password" autocomplete="off" placeholder="@ViewData["Password"]">
+                        <span asp-validation-for="Password" class="text-danger w-10 d-block"> </span>
 
+                        @*<input placeholder="رمز عبور"
+                                   autocomplete="off"
+                                   class="input text-center  py-3 my-2 mx-auto d-block"
+                                   type="password"
+                                   data-val="true" data-val-maxlength="حداکثر 20 کاراکتر وارد کنید"
+                                   data-val-maxlength-max="20" data-val-minlength="حداقل 6 کاراکتر وارد کنید"
+                                   data-val-minlength-min="6" data-val-required="این فیلد الزامیست"
+                                   id="_Password"
+                                   maxlength="20" name="_Password">
 
-                        <input class="checkbox"
+                            <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Password" data-valmsg-replace="true"></span>*@
+
+                        @*<input asp-for="RememberMe" />*@
+                        <input asp-for="AcceptRules" class="checkbox"
                                type="checkbox"
-                               data-val="true"
-                               data-val-required="این فیلد الزامیست"
-                               name="AcceptRules"
-                               id="AcceptRules"
                                value="true">
 
                         <label for="AcceptRules" class="pr-4 my-3 ">      @ViewData["AcceptRole"]    </label>
@@ -137,32 +156,32 @@
 
 
 
-                <div id="login-tab-content" class="@LoginActiveTabclassName">
+                <div id="login-tab-content" class="active">
 
 
 
                     <form asp-action="Login" id="LoginForm" class="login-form text-center">
-                        @if (!string.IsNullOrEmpty(ViewBag.Error))
-                        {
-                            <div class="alert alert-warning" role="alert">
-                                @ViewBag.Error
-                            </div>
-                        }
+                        @*@if (!string.IsNullOrEmpty(ViewBag.Error))
+                            {
+                                <div class="alert alert-warning" role="alert">
+                                    @ViewBag.Error
+                                </div>
+                            }*@
 
 
 
                         <input type="hidden" name="Id" value="0" />
                         <input type="hidden" name="ReturnUrl" value="@ViewBag.returnUrl" />
 
-                         <input type="hidden" name="UserReturnUrl" value="@ViewBag.UserReturnUrl" />
+                        <input type="hidden" name="UserReturnUrl" value="@ViewBag.UserReturnUrl" />
                         <input type="hidden" name="AdminReturnUrl" value="@ViewBag.AdminReturnUrl" />
 
 
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input asp-for="Username" class="input text-center  py-3 my-2" id="user_login" autocomplete="off" placeholder="@ViewData["UserName"]">
+                        <input asp-for="Username" oninput="validate(this)" class="input text-center  py-3 my-2" id="user_login" autocomplete="off" placeholder="@ViewData["UserName"]">
                         <span asp-validation-for="Username" class="text-danger w-10 d-block"> </span>
 
-                        <input asp-for="Password" class="input text-center py-3 my-2" id="user_pass" autocomplete="off" placeholder="@ViewData["Password"]">
+                        <input asp-for="Password" oninput="validate(this)" class="input text-center py-3 my-2" id="user_pass" autocomplete="off" placeholder="@ViewData["Password"]">
                         <span asp-validation-for="Password" class="text-danger w-10 d-block"> </span>
 
                         <input asp-for="RememberMe" class="checkbox" id="remember_me">
@@ -189,8 +208,103 @@
 
 
 
+@*@section Scripts{
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+        <script>
+            jQuery(document).ready(function ($) {
+                tab = $('.tabs h3 a');
+
+                tab.on('click', function (event) {
+                    event.preventDefault();
+                    tab.removeClass('active');
+                    $(this).addClass('active');
+
+                    tab_content = $(this).attr('href');
+                    $('div[id$="tab-content"]').removeClass('active');
+                    $(tab_content).addClass('active');
+                });
+            });
+
+
+
+
+
+            $("#registerForm").submit(function (e) {
+
+                if (!$(this).valid()) {
+                    return;
+                }
+
+                $("#registerSubmitButton").prop('disabled', true);
+                //$("#_Username").prop('disabled', true);
+                //$("#_Email").prop('disabled', true);
+                //$("#_Password").prop('disabled', true);
+                //$("#AcceptRules").prop('disabled', true);
+            })
+
+
+
+
+            $("#LoginForm").submit(function (e) {
+
+                if (!$(this).valid()) {
+                    return;
+                }
+
+                $("#loginSubmitButton").prop('disabled', true);
+                //$("#_Username").prop('disabled', true);
+                //$("#_Email").prop('disabled', true);
+                //$("#_Password").prop('disabled', true);
+                //$("#AcceptRules").prop('disabled', true);
+            })
+
+        </script>
+    }*@
+
+
+
+
+
+
+
+
+
+
+
+
+
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/swal-alert/sweetalert.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
+    <script src="~/SinaCustom/js/main.js"></script>
+    <script>
+        var error = "";
+        var  titleSuitAlert=""
+        var submiSuitAlertText =""
+            @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+
+                <text>
+                    error = "خطا رخ داده است."
+                    titleSuitAlert = "خطا"
+                    submiSuitAlertText="باشه"
+                </text>
+            }
+            else
+            {
+               <text>
+                error = "An error has occurred."
+                titleSuitAlert = "error"
+                submiSuitAlertText="ok"
+
+
+             </text>
+            }
+    </script>
 
 
     <script>
@@ -210,39 +324,155 @@
 
 
 
+        $(document).ready(function () {
+            $(' input').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+        })
+        //$("#registerForm").submit(function (e) {
+
+        //    if (!$(this).valid()) {
+        //        return;
+        //    }
+        //    $("#registerSubmitButton").prop('disabled', true);
+        //    //$("#_Username").prop('disabled', true);
+        //    //$("#_Email").prop('disabled', true);
+        //    //$("#_Password").prop('disabled', true);
+        //    //$("#AcceptRules").prop('disabled', true);
+        //})
 
 
-        $("#registerForm").submit(function (e) {
 
+
+        //$("#LoginForm").submit(function (e) {
+
+        //    if (!$(this).valid()) {
+        //        return;
+        //    }
+
+        //    $("#loginSubmitButton").prop('disabled', true);
+        //    //$("#_Username").prop('disabled', true);
+        //    //$("#_Email").prop('disabled', true);
+        //    //$("#_Password").prop('disabled', true);
+        //    //$("#AcceptRules").prop('disabled', true);
+        //})
+
+
+
+
+
+
+        //login
+        $("#LoginForm").submit(function (e) {
+            e.preventDefault();
             if (!$(this).valid()) {
                 return;
             }
+            //var username = $("#name").val();
+            //var email = $("#email").val();
+            //var phone = $("#number-Phone").val();
+            //var siteLanguage = $("#SiteLanguage").val();
+            //var Id = $("#infoId").val()
 
-            $("#registerSubmitButton").prop('disabled', true);
-            //$("#_Username").prop('disabled', true);
-            //$("#_Email").prop('disabled', true);
-            //$("#_Password").prop('disabled', true);
-            //$("#AcceptRules").prop('disabled', true);
+            //var data = {
+            //    "UserName": username,
+            //    "Email": email,
+            //    "Phone": phone,
+            //    "SiteLanguage": siteLanguage,
+
+            //    "Id": Id
+            //};
+            $("#loginSubmitButton").prop('disabled', true);
+            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
+
+            $.ajax({
+                method: "POST",
+                url: '/Account/Login',
+                data: $('#LoginForm').serialize(),
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                    if (r.status) {
+                        $("#loginSubmitButton").prop('disabled', false);
+                        $.unblockUI();
+                        window.location.href = `${r.data}`;
+                        //SuccessAlert(r.message)
+                    }
+                    else {
+                        $("#loginSubmitButton").prop('disabled', false);
+                        $.unblockUI();
+                        //FailedAlert(r.message);
+                        FailedAlert2(r.message, titleSuitAlert, submiSuitAlertText);
+                    }
+                },
+                error: function () {
+                    $("#loginSubmitButton").prop('disabled', false);
+                    $.unblockUI();
+                    FailedAlert2(error, titleSuitAlert, submiSuitAlertText);
+
+
+                }
+            });
         })
 
 
 
 
-        $("#LoginForm").submit(function (e) {
 
+
+
+
+        //regisater
+        $("#registerForm").submit(function (e) {
+            e.preventDefault();
             if (!$(this).valid()) {
                 return;
             }
+            //var username = $("#name").val();
+            //var email = $("#email").val();
+            //var phone = $("#number-Phone").val();
+            //var siteLanguage = $("#SiteLanguage").val();
+            //var Id = $("#infoId").val()
 
-            $("#loginSubmitButton").prop('disabled', true);
-            //$("#_Username").prop('disabled', true);
-            //$("#_Email").prop('disabled', true);
-            //$("#_Password").prop('disabled', true);
-            //$("#AcceptRules").prop('disabled', true);
+            //var data = {
+            //    "UserName": username,
+            //    "Email": email,
+            //    "Phone": phone,
+            //    "SiteLanguage": siteLanguage,
+
+            //    "Id": Id
+            //};
+            $("#registerSubmitButton").prop('disabled', true);
+            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
+
+            $.ajax({
+                method: "POST",
+                url: '/Account/Register',
+                data: $('#registerForm').serialize(),
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                    if (r.status) {
+                        $("#registerSubmitButton").prop('disabled', false);
+                        $.unblockUI();
+                        window.location.href = `${r.data}`;
+                        //SuccessAlert(r.message)
+                    }
+                    else {
+                        $("#registerSubmitButton").prop('disabled', false);
+                        $.unblockUI();
+                        //FailedAlert(r.message);
+                        FailedAlert2(r.message, titleSuitAlert, submiSuitAlertText);
+                    }
+                },
+                error: function () {
+                    $("#registerSubmitButton").prop('disabled', false);
+                    $.unblockUI();
+                    FailedAlert2(error, titleSuitAlert, submiSuitAlertText);
+                }
+            });
         })
 
     </script>
 }
-
 
 

@@ -32,7 +32,7 @@ namespace Helper.ViewModels
         //[MaxLength(11, ErrorMessage = "Maximum length is {1} characters")]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "شماره موبایل ")]
-        [ValidIranianMobileNumber(ErrorMessage = "MobileFormat")]
+        [ValidIranianMobileNumber(ErrorMessage = "ysatsytatsautsattsaysu")]
         public string Phone { get; set; }
 
 
@@ -65,8 +65,9 @@ namespace Helper.ViewModels
         /// شماره کارت
         /// </summary>
         //[StringLength(16, MinimumLength = 16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
-        [MaxLength(16, ErrorMessage = "Maximum length is {1} characters")]
-        [MinLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
+        //[MaxLength(16, ErrorMessage = "Maximum length is {1} characters")]
+        [MaxLength(16, ErrorMessage = "Enter just {1} character")]
+        [MinLength(16, ErrorMessage = "Enter just {1} character")]
         [Display(Name = " شماره کارت")]
         public string CardNumber { get; set; }
 
@@ -75,8 +76,9 @@ namespace Helper.ViewModels
         /// </summary>
         //[MaxLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
         //[MinLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
-        [ValidIranShebaNumber(ErrorMessage ="sdsd")]
-        [Display(Name = "شماره شبا")]
+        [Required(ErrorMessage = "Required")]
+        [ValidIranShebaNumber(ErrorMessage = "Required")]
+        [Display(Name = "شماره شبا" )]
         public string ShabaNumber { get; set; }
 
 

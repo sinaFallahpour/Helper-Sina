@@ -129,6 +129,9 @@
   <data name="ForProfessionals" xml:space="preserve">
     <value>برای متخصصین</value>
   </data>
+  <data name="ForProfessionalsText" xml:space="preserve">
+    <value>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</value>
+  </data>
   <data name="ForUsers" xml:space="preserve">
     <value>برای کاربران</value>
   </data>
@@ -139,7 +142,7 @@
     <value>چطور کار میکنه</value>
   </data>
   <data name="NumberOfServiceProviders" xml:space="preserve">
-    <value>شهر های تحت پوشش</value>
+    <value>تعداد خدمات دهندگان</value>
   </data>
   <data name="SeeAll" xml:space="preserve">
     <value>مشاهده همه</value>

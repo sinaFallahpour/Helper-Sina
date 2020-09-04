@@ -12,11 +12,11 @@ namespace Helper.ViewModels
         public string Id { get; set; }
 
 
-        [Required(ErrorMessage = "این فیلد الزامیست")]
-        [MinLength(3, ErrorMessage = "حداقل 3 کاراکتر وارد کنید")]
-        [MaxLength(20, ErrorMessage = "حداکثر 20 کاراکتر وارد کنید")]
-        [Display(Name = "نام کاربری")]
-        public string UserName { get; set; }
+        //[Required(ErrorMessage = "این فیلد الزامیست")]
+        //[MinLength(3, ErrorMessage = "حداقل 3 کاراکتر وارد کنید")]
+        //[MaxLength(20, ErrorMessage = "حداکثر 20 کاراکتر وارد کنید")]
+        //[Display(Name = "نام کاربری")]
+        //public string UserName { get; set; }
 
 
         [Required(ErrorMessage = "این فیلد الزامیست")]

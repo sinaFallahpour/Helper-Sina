@@ -120,11 +120,23 @@
   <data name="AcceptRole" xml:space="preserve">
     <value>قوانین را میپذیرم</value>
   </data>
+  <data name="EmailExistMessage" xml:space="preserve">
+    <value>ایمیل موجود است.</value>
+  </data>
+  <data name="EmailPl" xml:space="preserve">
+    <value>ایمیل</value>
+  </data>
+  <data name="Fail" xml:space="preserve">
+    <value>خطا در ثبت</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>رمز عبور را فراموش کردید ؟</value>
   </data>
   <data name="ImLogin" xml:space="preserve">
     <value>قبلا ثبت نام کرده ام!</value>
+  </data>
+  <data name="InValidUsernameOrEmail" xml:space="preserve">
+    <value>رمز عبور یا نام کاربری صحیح نمی باشد.</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>ورود</value>
@@ -146,5 +158,8 @@
   </data>
   <data name="UserName" xml:space="preserve">
     <value>نام کاربری</value>
+  </data>
+  <data name="username  {0} Already Registered" xml:space="preserve">
+    <value>نام کاربری {0} از قبل ثبت شده است</value>
   </data>
 </root>

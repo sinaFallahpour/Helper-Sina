@@ -13,6 +13,19 @@ var FailedAlert = function (msg) {
 }
 
 
+var FailedAlert2 = function (msg,title, confirmButtonText) {
+    swal({
+        title: `${title}!`,
+        text: msg,
+        type: "error",
+        showCancelButton: false,
+        confirmButtonClass: "btn btn-danger",
+        confirmButtonText: confirmButtonText,
+        buttonsStyling: false
+    });
+}
+
+
 
 //نمایش پیغام موفقیت آمیز
 var SuccessAlert = function (msg) {
@@ -27,6 +40,17 @@ var SuccessAlert = function (msg) {
     });
 }
 
+var SuccessAlert2 = function (msg, title, confirmButtonText) {
+    swal({
+        title: title,
+        text: msg,
+        type: "success",
+        showCancelButton: false,
+        confirmButtonClass: "btn btn-success",
+        confirmButtonText: confirmButtonText,
+        buttonsStyling: false
+    });
+}
 
 
 var toShortString = function (text, count)  {
@@ -50,4 +74,14 @@ var getPriceFormat = function (price)  {
     while (rgx.test(y))
         y = y.replace(rgx, '$1' + ',' + '$2');
     return y + z;
+}
+
+
+
+
+/*   اینپوتاها نتوانن اسپیس وارد کنند برای حرف اولشان   */
+// <input  oninput="validate(this)" >
+function validate(input) {
+    if (/^\s/.test(input.value))
+        input.value = '';
 }

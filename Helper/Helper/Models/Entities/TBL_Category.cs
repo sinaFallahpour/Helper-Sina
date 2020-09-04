@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,6 +27,14 @@ namespace Helper.Models.Entities
         [Display(Name = "  آیا فعال است؟")]
         public bool IsEnabled { get; set; }
 
+
+
+        public string PhotoAddress { get; set; }
+
+        [Required(ErrorMessage = "الزامیست")]
+        [Display(Name = "عکس")]
+        [NotMapped]
+        public IFormFile Photo { get; set; }
     }
 
 

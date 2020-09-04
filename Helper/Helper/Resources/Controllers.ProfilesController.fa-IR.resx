@@ -150,6 +150,9 @@
   <data name="ExistUserName" xml:space="preserve">
     <value>نام کاربری موجود است</value>
   </data>
+  <data name="FailMessage" xml:space="preserve">
+    <value>خطا در ثبت</value>
+  </data>
   <data name="from" xml:space="preserve">
     <value>از تاریخ</value>
   </data>
@@ -222,6 +225,9 @@
   <data name="StartEduDatePL" xml:space="preserve">
     <value>تاریخ شروع تحصیل  </value>
   </data>
+  <data name="SuccessMessage" xml:space="preserve">
+    <value>ثبت موفقیت آمیز</value>
+  </data>
   <data name="to" xml:space="preserve">
     <value>تا تاریخ</value>
   </data>
@@ -236,5 +242,8 @@
   </data>
   <data name="UserNamePL" xml:space="preserve">
     <value>نام کاربری</value>
+  </data>
+  <data name="UserNotFoundMessage" xml:space="preserve">
+    <value>کاربر یافت نشد</value>
   </data>
 </root>

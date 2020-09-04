@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Helper.ViewModels
 {
-    public class LoginVm
+    public class LoginRegistereVM
     {
         [Key]
         public int Id { get; set; }
@@ -26,6 +26,17 @@ namespace Helper.ViewModels
         public string Username { get; set; }
 
 
+        [Required(ErrorMessage = "Required")]
+        [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
+        [MaxLength(30, ErrorMessage = "Maximum length is {1} characters")]
+        [EmailAddress(ErrorMessage = "InValidEmail")]
+        [Display(Name = "ایمیل")]
+        public string Email { get; set; }
+
+
+
+
+
 
         [Required(ErrorMessage = "Required")]
         [MinLength(6, ErrorMessage = "Minimum length is {1} characters")]
@@ -38,6 +49,10 @@ namespace Helper.ViewModels
         [Display(Name = " مرا به خاطر بسپار?")]
         public bool RememberMe { get; set; }
 
-      
+
+        /// <summary>
+        /// قوانین را مپذیرم؟
+        /// </summary>
+        public bool AcceptRules { get; set; }
     }
 }

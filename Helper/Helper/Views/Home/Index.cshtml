@@ -1,11 +1,17 @@
 ﻿@model Helper.ViewModels.HomePageVM
 
 @using System.Globalization
-
+@using Helper.Models.Entities
 @{
     ViewData["Title"] = "Home Page";
     Layout = "_landing";
 
+
+
+    //var top4Category = Model.Categories.GetRange(0, 3);
+    //var endCategory = Model.Categories.GetRange(4, (Model.Categories.Count - 1));
+    var cats = new List<TBL_Category>();
+    var counter = 0;
 }
 
 
@@ -59,17 +65,17 @@
                 <div class="col-md-4  mb-5">
                     <img src="~/hj/img/1.png" class="img-fluid " alt="Responsive image">
                     <h4 class="pt-4 text-center"> @ViewData["NumberOfServiceProviders"]    </h4>
-                    <span class="timer" data-to="3556" data-speed="8000"></span>
+                    <span class="timer" data-to="@Model.ServiceProviderCount" data-speed="8000"></span>
                 </div>
                 <div class="col-md-4  mb-5">
                     <img src="~/hj/img/2.png" class="img-fluid" alt="Responsive image">
-                    <h4 class="pt-4 text-center">     @ViewData["ServicesProvided"]</h4>
-                    <span class="timer" data-to="3556" data-speed="8000"></span>
+                    <h4 class="pt-4 text-center">@ViewData["ServicesProvided"]</h4>
+                    <span class="timer" data-to="@Model.DoneServiceCount" data-speed="8000"></span>
                 </div>
                 <div class="col-md-4  mb-5">
                     <img src="~/hj/img/3.png" class="img-fluid" alt="Responsive image">
                     <h4 class="pt-4 text-center">@ViewData["citiesOfCovered"] </h4>
-                    <span class="timer" data-to="3556" data-speed="8000"></span>
+                    <span class="timer" data-to="@Model.CityCount" data-speed="8000"></span>
                 </div>
             </div>
             @*........................service....................*@
@@ -84,30 +90,63 @@
 
             </div>
             <div class="row text-center mt-5 ">
-                <div class="col-md-3 col-6 py-3">
-                    <img src="~/hj/img/service1.png" class="img-fluid " alt="Responsive image">
-                    <br />
-                    <br />
-                    <span class=" hj-text-service pt-4">ماشین</span>
-                </div>
-                <div class="col-md-3 col-6 py-3">
-                    <img src="~/hj/img/service2.png" class="img-fluid " alt="Responsive image">
-                    <br />
-                    <br />
-                    <span class=" hj-text-service pt-4">شارژ و قبض</span>
-                </div>
-                <div class="col-md-3 col-6 py-3">
-                    <img src="~/hj/img/service3.png" class="img-fluid " alt="Responsive image">
-                    <br />
-                    <br />
-                    <span class=" hj-text-service pt-4">بلیط</span>
-                </div>
-                <div class="col-md-3 col-6 py-3">
-                    <img src="~/hj/img/service4.png" class="img-fluid " alt="Responsive image">
-                    <br />
-                    <br />
-                    <span class=" hj-text-service pt-4"> مسکن</span>
-                </div>
+
+                @foreach (var item in Model.Categories)
+                {
+                    @if (counter != 4)
+                    {
+
+
+                        <div class="col-md-3 col-6 py-3">
+                            <img class="categoryImage img-fluid " src="~/Upload/User/cd29605d-bdca-4975-83e9-db1921487b5b_consullingIcon.svg" />
+                            <br />
+                            <br />
+                            @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+                            {
+                                <span class=" hj-text-service pt-4">@item.Name</span>
+                                counter++;
+                            }
+                            else
+                            {
+                                <span class=" hj-text-service pt-4">@item.EnglishName</span>
+                                counter++;
+                            }
+
+                        </div>
+                    }
+                    else
+                    {
+                        cats.Add(item);
+                    }
+                }
+
+
+
+
+                @*<div class="col-md-3 col-6 py-3">
+                         <img class="categoryImage img-fluid" src="~/hj/img/service1.png" alt="Responsive image">
+                        <br />
+                        <br />
+                        <span class=" hj-text-service pt-4">ماشین</span>
+                    </div>
+                    <div class="col-md-3 col-6 py-3">
+                        <img class="categoryImage img-fluid " src="~/hj/img/service2.png" class="img-fluid " alt="Responsive image">
+                        <br />
+                        <br />
+                        <span class=" hj-text-service pt-4">شارژ و قبض</span>
+                    </div>
+                    <div class="col-md-3 col-6 py-3">
+                        <img class="categoryImage img-fluid " src="~/hj/img/service3.png" class="img-fluid " alt="Responsive image">
+                        <br />
+                        <br />
+                        <span class=" hj-text-service pt-4">بلیط</span>
+                    </div>
+                    <div class="col-md-3 col-6 py-3">
+                        <img class="categoryImage img-fluid " src="~/hj/img/service4.png" alt="Responsive image">
+                        <br />
+                        <br />
+                        <span class=" hj-text-service pt-4"> مسکن</span>
+                    </div>*@
             </div>
             <div class="row text-center  ">
                 <div class="col-md-3 col-6 py-3 pt-5 order-md-0 order-3">
@@ -121,24 +160,43 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-6  py-3 order-md-1 order-2">
-                    <img src="~/hj/img/service7.png" class="img-fluid " alt="Responsive image">
-                    <br />
-                    <br />
-                    <span class=" hj-text-service pt-4">مترجم</span>
-                </div>
-                <div class="col-md-3 col-6  py-3  order-md-2 order-1 ">
-                    <img src="~/hj/img/service6.png" class="img-fluid " alt="Responsive image">
-                    <br />
-                    <br />
-                    <span class=" hj-text-service pt-4">خدمات شهروندی</span>
-                </div>
-                <div class="col-md-3 col-6 py-3  order-md-3 order-0">
-                    <img src="~/hj/img/service5.png" class="img-fluid " alt="Responsive image">
-                    <br />
-                    <br />
-                    <span class=" hj-text-service pt-4  "> صرافی</span>
-                </div>
+
+                @foreach (var item in cats)
+                {
+                    <div class="col-md-3 col-6  py-3 order-md-1 order-2">
+                        <img class="categoryImage img-fluid " src="~/hj/img/service7.png" alt="Responsive image">
+                        <br />
+                        <br />
+                        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+                        {
+                            <span class=" hj-text-service pt-4">@item.Name</span>
+                        }
+                        else
+                        {
+                            <span class=" hj-text-service pt-4">@item.EnglishName</span>
+                        }
+                    </div>
+                }
+
+
+                @*<div class="col-md-3 col-6  py-3 order-md-1 order-2">
+                        <img class="categoryImage img-fluid " src="~/hj/img/service7.png" alt="Responsive image">
+                        <br />
+                        <br />
+                        <span class=" hj-text-service pt-4">مترجم</span>
+                    </div>
+                    <div class="col-md-3 col-6  py-3  order-md-2 order-1 ">
+                        <img class="categoryImage img-fluid " src="~/hj/img/service6.png" alt="Responsive image">
+                        <br />
+                        <br />
+                        <span class=" hj-text-service pt-4">خدمات شهروندی</span>
+                    </div>
+                    <div class="col-md-3 col-6 py-3  order-md-3 order-0">
+                        <img class="categoryImage img-fluid " src="~/hj/img/service5.png" alt="Responsive image">
+                        <br />
+                        <br />
+                        <span class=" hj-text-service pt-4  "> صرافی</span>
+                    </div>*@
             </div>
             <div class="row text-center mt-5">
                 <div class="col-12">

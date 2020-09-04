@@ -200,7 +200,7 @@ namespace Helper
             services.AddAutoMapper(typeof(TBL_NewsArticleVideo).Assembly);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<JwtGenerator>();
+            //services.AddScoped<JwtGenerator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

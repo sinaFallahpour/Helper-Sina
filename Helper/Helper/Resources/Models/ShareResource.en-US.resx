@@ -154,15 +154,12 @@
     <value>Enter in mobile format.</value>
   </data>
   <data name="Required" xml:space="preserve">
-    <value>This Field is Required</value>
+    <value>this fiel is required</value>
   </data>
   <data name="ShebaFormat" xml:space="preserve">
     <value>Enter in Sheba number format</value>
   </data>
   <data name="Skills" xml:space="preserve">
     <value>The desiret Skill</value>
-  </data>
-  <data name="{0} Is required." xml:space="preserve">
-    <value>{0} Is required.</value>
   </data>
 </root>

@@ -67,7 +67,7 @@ namespace Helper.Controllers
         {
             if (Id != model.Id)
             {
-                return new JsonResult(new { Status = false, Message = "خطا در ثبت" });
+                return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
             }
             if (ModelState.IsValid)
             {
@@ -78,17 +78,17 @@ namespace Helper.Controllers
 
                     if (userFromDb != null)
                     {
-                        if (await _context.Users.Where(x => x.UserName == model.UserName && x.UserName != userFromDb.UserName).AnyAsync())
-                        {
-                            return new JsonResult(new { Status = false, Message = "نام کاربری موجود است." });
-                        }
+                        //if (await _context.Users.Where(x => x.UserName == model.UserName && x.UserName != userFromDb.UserName).AnyAsync())
+                        //{
+                        //    return new JsonResult(new { Status = false, Message = _localizer["UserNameExistMessage"].Value.ToString() });
+                        //}
 
                         if (await _context.Users.Where(x => x.Email == model.Email && x.Email != userFromDb.Email).AnyAsync())
                         {
-                            return new JsonResult(new { Status = false, Message = " ایمیل موجود است." });
+                            return new JsonResult(new { Status = false, Message = _localizer["EmailExistMessage"].Value.ToString() });
                         }
 
-                        userFromDb.UserName = model.UserName;
+                        //userFromDb.UserName = model.UserName;
                         userFromDb.Email = model.Email;
                         userFromDb.Phone = model.Phone;
                         userFromDb.SiteLanguage = model.SiteLanguage;
@@ -96,16 +96,15 @@ namespace Helper.Controllers
                         var result = _context.SaveChanges();
 
                         await HttpContext.RefreshLoginAsync();
-                        return new JsonResult(new { Status = true, Message = "ثبت موفقیت آمیز" });
+                        return new JsonResult(new { Status = true, Message =_localizer["SuccessMessage"].Value.ToString() });
 
                     }
-                    return new JsonResult(new { Status = false, Message = "کاربر یافت نشد" });
+                    return new JsonResult(new { Status = false, Message = _localizer["UserNotFoundMessage"].Value.ToString() });
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    return new JsonResult(new { Status = false, Message = "خطا در ثبت" });
-
+                    return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
                 }
             }
             var errors = new List<string>();
@@ -117,9 +116,6 @@ namespace Helper.Controllers
                 }
             }
             return new JsonResult(new { Status = false, Message = errors.First() });
-
-            //return new JsonResult(new { Status = false, Message = "خطا در ثبت" });
-
         }
 
         #endregion
@@ -130,10 +126,9 @@ namespace Helper.Controllers
         public async Task<ActionResult> ChangePassword(string Id, ChangePasswordVM model)
         {
 
-
             if (Id != model.Id)
             {
-                return new JsonResult(new { Status = false, Message = "خطا در ثبت" });
+                return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
             }
             if (ModelState.IsValid)
             {
@@ -149,37 +144,22 @@ namespace Helper.Controllers
                         {
                             if (result.Errors.First().Description == "Incorrect password.")
                             {
-                                return new JsonResult(new { Status = false, Message = "پسورد اشتباه است" });
-
-                                //TempData["PassError"] = "پسورد اشتباه است";
-                                //return RedirectToAction("Index");
+                                return new JsonResult(new { Status = false, Message = _localizer["CurrentPasswordIsWrongMessage"].Value.ToString() });
                             }
                         }
-
                         _context.SaveChanges();
-
                         await HttpContext.RefreshLoginAsync();
-                        return new JsonResult(new { Status = true, Message = "ثبت موفقیت آمیز" });
+                        return new JsonResult(new { Status = true, Message = _localizer["SuccessMessage"].Value.ToString() });
 
-                        //TempData["PassSuccess"] = "ثبت موفقیت آمیز";
-                        //return RedirectToAction("Index");
+                     
                     }
-                    return new JsonResult(new { Status = false, Message = "کاربر یافت نشد" });
-
-
-                    //TempData["PassError"] = "کاربر یافت نشد";
-                    //return RedirectToAction("Index");
+                    return new JsonResult(new { Status = false, Message = _localizer["UserNotFoundMessage"].Value.ToString() });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    return new JsonResult(new { Status = false, Message = "خطا در ثبت" });
-
-                    //TempData["PassError"] = "خطا در ثبت";
-                    //return RedirectToAction("Index");
+                    return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
                 }
             }
-            //return RedirectToAction("Index");
-
 
 
             var errors = new List<string>();
@@ -191,8 +171,6 @@ namespace Helper.Controllers
                 }
             }
             return new JsonResult(new { Status = false, Message = errors.First() });
-            //return new JsonResult(new { Status = false, Message = "خطا در ثبت" });
-
         }
  
         #endregion
@@ -207,7 +185,7 @@ namespace Helper.Controllers
 
             if (Id != model.Id)
             {
-                return new JsonResult(new { Status = false, Message = "خطا در ثبت" });
+                return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
             }
             if (ModelState.IsValid)
             {
@@ -228,23 +206,15 @@ namespace Helper.Controllers
                             userFromDb.BankInfo.VisaNumber = model.VisaNumber;
                         }
                         _context.SaveChanges();
-                        return new JsonResult(new { Status = true, Message = "ثبت موفقیت آمیز" });
-
-                        //TempData["BankSuccess"] = "ثبت موفقیت آمیز";
-                        //return RedirectToAction("Index");
+                        return new JsonResult(new { Status = true, Message = _localizer["SuccessMessage"].Value.ToString() });
                     }
-                    return new JsonResult(new { Status = false, Message = "کاربر یافت نشد" });
-                    //TempData["BankError"] = "کاربر یافت نشد";
-                    //return RedirectToAction("Index");
+                    return new JsonResult(new { Status = false, Message = _localizer["UserNotFoundMessage"].Value.ToString() });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    return new JsonResult(new { Status = false, Message = "خطا در ثبت" });
+                    return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
                 }
             }
-            //return RedirectToAction("Index");
-
-
 
             var errors = new List<string>();
             foreach (var item in ModelState.Values)
@@ -256,66 +226,8 @@ namespace Helper.Controllers
             }
             return new JsonResult(new { Status = false, Message = errors.First() });
 
-
-            //return new JsonResult(new { Status = false, Message = "خطا در ثبت" });
-
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //[HttpPost]
-        //public async Task<ActionResult> ChangeAccountBank(string Id, ChangeBanckInfoVM model)
-        //{
-        //    TempData["ActiveTab"] = "account";
-
-        //    if (Id != model.Id)
-        //    {
-        //        return NotFound();
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            var userFromDb = await _context.Users.Where(c => c.Id == model.Id)
-        //                .Include(c => c.BankInfo)
-        //                   .FirstOrDefaultAsync();
-
-        //            if (userFromDb != null)
-        //            {
-        //                if (userFromDb.BankInfo != null)
-        //                {
-        //                    userFromDb.BankInfo.AccountOwner = model.BankName;
-        //                    userFromDb.BankInfo.CardNumber = model.CardNumber;
-        //                    userFromDb.BankInfo.BankName = model.BankName;
-        //                    userFromDb.BankInfo.ShabaNumber = model.ShabaNumber;
-        //                    userFromDb.BankInfo.VisaNumber = model.VisaNumber;
-        //                }
-        //                _context.SaveChanges();
-        //                TempData["BankSuccess"] = "ثبت موفقیت آمیز";
-        //                return RedirectToAction("Index");
-        //            }
-        //            TempData["BankError"] = "کاربر یافت نشد";
-        //            return RedirectToAction("Index");
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            TempData["BankError"] = "خطا در ثبت";
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    return RedirectToAction("Index");
-        //}
         #endregion
 
 

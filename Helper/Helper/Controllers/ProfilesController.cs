@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-
+using Helper.Models.Utilities;
 namespace Helper.Controllers
 {
     public class ProfilesController : Controller
@@ -102,6 +103,103 @@ namespace Helper.Controllers
 
 
 
+        //#region UpdateProfile
+
+        ////  /api/Profile/UpdateProfile
+        //[HttpPost]
+        //[Authorize]
+        //public async Task<ActionResult> Index(string Id, ProfileVM2 model)
+        //{
+        //    returnViewDate();
+
+
+        //    if (Id != model.Id)
+        //    {
+        //        return NotFound();
+        //    }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            var userFromDb = await _context.Users.Where(c => c.Id == model.Id)
+        //                  .Include(c => c.EducationHistry)
+        //                  .Include(c => c.WorkExperience)
+        //                   .FirstOrDefaultAsync();
+
+        //            if (userFromDb != null)
+        //            {
+        //                //if (await _context.Users.Where(x => x.UserName == model.UserName && x.UserName != userFromDb.UserName).AnyAsync())
+        //                //{
+        //                //    TempData["Error"] = _localizer["ExistUserName"].Value.ToString();
+        //                //    return View(model);
+        //                //}
+
+        //                if (await _context.Users.Where(x => x.Email == model.Email && x.Email != userFromDb.Email).AnyAsync())
+        //                {
+        //                    TempData["Error"] = _localizer["ExistEmail"].Value.ToString();
+        //                    return View(model);
+        //                }
+
+
+        //                userFromDb.Nickname = model.Nickname;
+        //                //userFromDb.UserName = model.UserName;
+        //                userFromDb.Email = model.Email;
+        //                userFromDb.City = model.City;
+        //                userFromDb.Phone = model.Phone;
+
+        //                //اطلاعات کاری
+        //                if (userFromDb.WorkExperience != null)
+        //                {
+        //                    userFromDb.WorkExperience.CompanyName = model.CompanyName;
+        //                    userFromDb.WorkExperience.Descriptions = model.Descriptions;
+        //                    userFromDb.WorkExperience.EnterDate = model.WorkEnterDate;
+        //                    userFromDb.WorkExperience.ExitDate = model.WorkExitDate;
+        //                    userFromDb.WorkExperience.Semat = model.Semat;
+        //                }
+
+        //                //اطلاهات درسی
+        //                if (userFromDb.EducationHistry != null)
+        //                {
+        //                    userFromDb.EducationHistry.EnterDate = model.EduEnterDate;
+        //                    userFromDb.EducationHistry.ExitDate = model.EduExitDate;
+        //                    userFromDb.EducationHistry.MaghTa = model.MaghTa;
+        //                    userFromDb.EducationHistry.UnivercityName = model.UnivercityName;
+        //                }
+
+        //                //اطلاعات ديگر
+        //                userFromDb.Birthdate = model.Birthdate;
+        //                userFromDb.Gender = model.Gender;
+        //                userFromDb.MarriedType = model.MarriedType;
+        //                userFromDb.LanguageKnowing = model.LanguageKnowing;
+
+        //                var result = _context.SaveChanges();
+
+        //                await HttpContext.RefreshLoginAsync();
+        //                TempData["Success"] = "ثبت موفقیت آمیز";
+        //                return View(model);
+        //                //return RedirectToAction(nameof(Index));
+        //            }
+
+        //            TempData["Error"] = "کاربر یافت نشد";
+        //            return View(model);
+
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            TempData["Error"] = "خطا در ثبت";
+        //            return View(model);
+        //        }
+
+        //    }
+        //    return View(model);
+
+
+        //}
+
+        //#endregion
+
+
+
         #region UpdateProfile
 
         //  /api/Profile/UpdateProfile
@@ -127,24 +225,27 @@ namespace Helper.Controllers
 
                     if (userFromDb != null)
                     {
-                        if (await _context.Users.Where(x => x.UserName == model.UserName && x.UserName != userFromDb.UserName).AnyAsync())
-                        {
-                            TempData["Error"] = _localizer["ExistUserName"].Value.ToString();
-                            return View(model);
-                        }
+                        //if (await _context.Users.Where(x => x.UserName == model.UserName && x.UserName != userFromDb.UserName).AnyAsync())
+                        //{
+                        //    TempData["Error"] = _localizer["ExistUserName"].Value.ToString();
+                        //    return View(model);
+                        //}
 
                         if (await _context.Users.Where(x => x.Email == model.Email && x.Email != userFromDb.Email).AnyAsync())
                         {
-                            TempData["Error"] = _localizer["ExistEmail"].Value.ToString();
-                            return View(model);
+                            return new JsonResult(new { Status = false, Message = _localizer["ExistEmail"].Value.ToString() });
+
+                            //TempData["Error"] = _localizer["ExistEmail"].Value.ToString();
+                            //return View(model);
                         }
 
-
                         userFromDb.Nickname = model.Nickname;
-                        userFromDb.UserName = model.UserName;
+                        //userFromDb.UserName = model.UserName;
                         userFromDb.Email = model.Email;
                         userFromDb.City = model.City;
                         userFromDb.Phone = model.Phone;
+
+                        //Helper.Models.Utilities.FileUploader()
 
                         //اطلاعات کاری
                         if (userFromDb.WorkExperience != null)
@@ -174,19 +275,21 @@ namespace Helper.Controllers
                         var result = _context.SaveChanges();
 
                         await HttpContext.RefreshLoginAsync();
-                        TempData["Success"] = "ثبت موفقیت آمیز";
-                        return View(model);
+                        return new JsonResult(new { Status = true, Message = _localizer["SuccessMessage"].Value.ToString() });
+
+                        //TempData["Success"] = "ثبت موفقیت آمیز";
+                        //return View(model);
                         //return RedirectToAction(nameof(Index));
                     }
+                    return new JsonResult(new { Status = false, Message = _localizer["UserNotFoundMessage"].Value.ToString() });
 
-                    TempData["Error"] = "کاربر یافت نشد";
-                    return View(model);
+                    //TempData["Error"] = "کاربر یافت نشد";
+                    //return View(model);
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    TempData["Error"] = "خطا در ثبت";
-                    return View(model);
+                    return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
                 }
 
             }
@@ -202,6 +305,15 @@ namespace Helper.Controllers
 
 
 
+
+
+
+
+
+
+
+
+
         [Authorize]
         [Route("Profiles/OtherUserProfile/{username}")]
         public async Task<ActionResult> OtherUserProfile(string username)
@@ -209,44 +321,48 @@ namespace Helper.Controllers
 
             returnViewDate();
             var currentUsername = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-
+            var isEnglish = true;
+            if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+                isEnglish = false;
+            }
 
             var user = await _context
-                    .Users
-                    .Where(c => c.UserName == username)
-                    .AsNoTracking()
-                    .Include(c => c.EducationHistry)
-                    .Include(c => c.WorkExperience)
-                    .Select(c => new OtherUserProfileVM
-                    {
-                        Id = c.Id,
-                        UserName = c.UserName,
-                        Nickname = c.Nickname,
-                        Birthdate = c.Birthdate,
-                        Descriptions = c.Descriptions,
-                        PhotoAddress = c.PhotoAddress,
+                .Users
+                .Where(c => c.UserName == username)
+                .AsNoTracking()
+                .Include(c => c.EducationHistry)
+                .Include(c => c.WorkExperience)
+                .Select(c => new OtherUserProfileVM
+                {
+                    Id = c.Id,
+                    UserName = c.UserName,
+                    Nickname = c.Nickname,
+                    Birthdate = isEnglish ? c.Birthdate.GetToomanPriceFormat().ToString() : c.Birthdate,
+                    Descriptions = c.Descriptions,
+                    PhotoAddress = c.PhotoAddress,
 
-                        ////////////////////////////////////////Phone = c.Phone,
-                        LanguageKnowing = c.LanguageKnowing,
-                        City = c.City,
-                        Gender = c.Gender,
-                        MarriedType = c.MarriedType,
-                        SKILLS=c.Skils,
-
-
-                        EduEnterDate = c.EducationHistry != null ? c.EducationHistry.EnterDate : null,
-                        EduExitDate = c.EducationHistry != null ? c.EducationHistry.ExitDate : null,
-                        MaghTa = c.EducationHistry != null ? c.EducationHistry.MaghTa : null,
-                        UnivercityName = c.EducationHistry != null ? c.EducationHistry.UnivercityName : null,
+                    ////////////////////////////////////////Phone = c.Phone,
+                    LanguageKnowing = c.LanguageKnowing,
+                    City = c.City,
+                    Gender = c.Gender,
+                    MarriedType = c.MarriedType,
+                    SKILLS = c.Skils,
 
 
-                        WorkEnterDate = c.WorkExperience != null ? c.WorkExperience.EnterDate : null,
-                        WorkExitDate = c.WorkExperience != null ? c.WorkExperience.ExitDate : null,
-                        WorkDescriptions = c.WorkExperience != null ? c.WorkExperience.Descriptions : null,
-                        Semat = c.WorkExperience != null ? c.WorkExperience.Semat : null,
-                        CompanyName = c.WorkExperience != null ? c.WorkExperience.CompanyName : null,
-                    })
-                    .FirstOrDefaultAsync();
+                    EduEnterDate = c.EducationHistry != null ? isEnglish == true ? c.EducationHistry.EnterDate.ToGeorgianDateTime().ToString() : c.EducationHistry.EnterDate : null,
+                    EduExitDate = c.EducationHistry != null ? isEnglish == true ? c.EducationHistry.ExitDate.ToGeorgianDateTime().ToString() : c.EducationHistry.ExitDate : null,
+                    MaghTa = c.EducationHistry != null ? c.EducationHistry.MaghTa : null,
+                    UnivercityName = c.EducationHistry != null ? c.EducationHistry.UnivercityName : null,
+
+
+                    WorkEnterDate = c.WorkExperience != null ? isEnglish == true ? c.WorkExperience.EnterDate.GetToomanPriceFormat().ToString() : c.WorkExperience.EnterDate : null,
+                    WorkExitDate = c.WorkExperience != null ? isEnglish == true ? c.WorkExperience.ExitDate.GetToomanPriceFormat().ToString() : c.WorkExperience.ExitDate : null,
+                    WorkDescriptions = c.WorkExperience != null ? c.WorkExperience.Descriptions : null,
+                    Semat = c.WorkExperience != null ? c.WorkExperience.Semat : null,
+                    CompanyName = c.WorkExperience != null ? c.WorkExperience.CompanyName : null,
+                })
+                .FirstOrDefaultAsync();
 
             if (user != null)
             {

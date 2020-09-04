@@ -91,6 +91,82 @@ namespace Helper.Controllers
 
 
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Login(LoginVm model)
+        //{
+        //    //var UserReturnUrl = model.ReturnUrl ?? "/profiles";
+        //    //var AdminReturnUrl = model.ReturnUrl ?? "/admin/admins/Profile";
+
+        //    //model.ReturnUrl = UserReturnUrl;
+
+
+        //    var UserReturnUrl = model.UserReturnUrl ?? "/profiles";
+        //    var AdminReturnUrl = model.AdminReturnUrl ?? "/admin/admins/Profile";
+
+
+
+        //    ViewBag.ActiveTab = "Login";
+        //    returnViewDate();
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await _userManager.FindByNameAsync(model.Username);
+        //        if (user == null)
+        //        {
+        //            ViewBag.Error = "نام کاربری یا رمز عبور غلط میباشد";
+        //            return View(model);
+        //        }
+
+        //        var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
+        //        if (result.Succeeded)
+        //        {
+        //            var existingRole = await _userManager.GetRolesAsync(user);
+        //            var role = existingRole.SingleOrDefault();
+
+        //            if (role == Static.ADMINROLE)
+        //            {
+        //                //return Redirect(AdminReturnUrl);
+        //                return Redirect(AdminReturnUrl);
+        //            }
+        //            //if (User.IsInRole(Static.ADMINROLE))
+        //            //{
+        //            //    return LocalRedirect(AdminReturnUrl);
+        //            //}
+        //            return Redirect(UserReturnUrl);
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Error = "نام کاربری یا رمز عبور اشتباه است ";
+        //            return View(model);
+        //        }
+        //    }
+
+        //    var errors = new List<string>();
+        //    foreach (var item in ModelState.Values)
+        //    {
+        //        foreach (var err in item.Errors)
+        //        {
+        //            errors.Add(err.ErrorMessage);
+        //        }
+        //    }
+        //    ModelState.AddModelError("", errors.First());
+        //    return View(model);
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -107,15 +183,17 @@ namespace Helper.Controllers
 
 
 
-            ViewBag.ActiveTab = "Login";
-            returnViewDate();
+            //ViewBag.ActiveTab = "Login";
+            //returnViewDate();
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(model.Username);
                 if (user == null)
                 {
-                    ViewBag.Error = "نام کاربری یا رمز عبور غلط میباشد";
-                    return View(model);
+                    //ViewBag.Error = _localizer["InValidUsernameOrEmail"].Value.ToString();
+                    return new JsonResult(new { Status = false, Message = _localizer["InValidUsernameOrEmail"].Value.ToString() });
+
+                    //return View(model);
                 }
 
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -126,19 +204,19 @@ namespace Helper.Controllers
 
                     if (role == Static.ADMINROLE)
                     {
+                        return new JsonResult(new { Status = true, Message = "", data = AdminReturnUrl });
+
                         //return Redirect(AdminReturnUrl);
-                        return Redirect(AdminReturnUrl);
+                        //return Redirect(AdminReturnUrl);
                     }
-                    //if (User.IsInRole(Static.ADMINROLE))
-                    //{
-                    //    return LocalRedirect(AdminReturnUrl);
-                    //}
-                    return Redirect(UserReturnUrl);
+                    return new JsonResult(new { Status = true, Message = "", data = UserReturnUrl });
+                    //return Redirect(UserReturnUrl);
                 }
                 else
                 {
-                    ViewBag.Error = "نام کاربری یا رمز عبور اشتباه است ";
-                    return View(model);
+                    return new JsonResult(new { Status = false, Message = _localizer["InValidUsernameOrEmail"].Value.ToString() });
+                    //ViewBag.Error = "نام کاربری یا رمز عبور اشتباه است ";
+                    //return View(model);
                 }
             }
 
@@ -150,9 +228,14 @@ namespace Helper.Controllers
                     errors.Add(err.ErrorMessage);
                 }
             }
-            ModelState.AddModelError("", errors.First());
-            return View(model);
+            return new JsonResult(new { Status = false, Message = errors.First() });
+
+            //ModelState.AddModelError("", errors.First());
+            //return View(model);
         }
+
+
+
 
         #endregion
 
@@ -170,7 +253,7 @@ namespace Helper.Controllers
         {
             returnViewDate();
             model.ReturnUrl = model.ReturnUrl ?? "/profiles";
-            ViewBag.ActiveTab = "Register";
+            //ViewBag.ActiveTab = "Register";
             if (ModelState.IsValid)
             {
                 //if (await _context.Users.Where(x => x.UserName == model._Username).AnyAsync())
@@ -179,17 +262,18 @@ namespace Helper.Controllers
                 //    return View("Login");
                 //}
 
-                if (await _context.Users.Where(x => x.Email == model._Email).AnyAsync())
+                if (await _context.Users.Where(x => x.Email == model.Email).AnyAsync())
                 {
-                    ViewBag.RegisterError = " ایمیل موجود است.";
-                    return View("Login");
+                    //ViewBag.RegisterError = _localizer["EmailExistMessage"].Value.ToString();
+                    return new JsonResult(new { Status = false, Message = _localizer["EmailExistMessage"].Value.ToString() });
+                    //return View("Login");
                 }
                 var user = new ApplicationUser
                 {
-                    Email = model._Email,
-                    NormalizedEmail = model._Email.Normalize(),
-                    UserName = model._Username,
-                    NormalizedUserName = model._Username.Normalize(),
+                    Email = model.Email,
+                    NormalizedEmail = model.Email.Normalize(),
+                    UserName = model.Username,
+                    NormalizedUserName = model.Username.Normalize(),
                     AcceptRules = model.AcceptRules,
 
                     PhotoAddress = "/Upload/User/default2.png",
@@ -200,33 +284,36 @@ namespace Helper.Controllers
                     EducationHistry = new TBL_EducationalHistory(),
                     BankInfo = new TBL_BankInfo(),
                 };
-                var result = await _userManager.CreateAsync(user, model._Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, Static.USERROLE);
 
-                    var loginResult = await _signInManager.PasswordSignInAsync(model._Username, model._Password, true, lockoutOnFailure: false);
+                    var loginResult = await _signInManager.PasswordSignInAsync(model.Username, model.Password, true, lockoutOnFailure: false);
                     if (loginResult.Succeeded)
                         //    return LocalRedirect(model.ReturnUrl);
                         //return LocalRedirect(model.ReturnUrl);
-                        return Redirect(model.ReturnUrl);
-                    return Redirect(model.ReturnUrl);
+                        return new JsonResult(new { Status = true, Message = "", data = model.ReturnUrl });
+
+                    //return Redirect(model.ReturnUrl);
+                    return new JsonResult(new { Status = true, Message = "", data = model.ReturnUrl });
+                    //return Redirect(model.ReturnUrl);
                 }
                 else
                 {
                     if (result.Errors.Where(i => i.Code == "DuplicateUserName").Any())
                     {
-                        ViewBag.RegisterError = string.Format("نام کاربری {0} از قبل ثبت شده است", model._Username);
-                        return View("Login");
+                        return new JsonResult(new { Status = false, Message = _localizer[string.Format("username  {0} Already Registered", model.Username)].Value.ToString() });
+
+                        //ViewBag.RegisterError = string.Format("نام کاربری {0} از قبل ثبت شده است", model._Username);
+                        //return View("Login");
                     }
-                    if (result.Errors.Where(i => i.Code == "DuplicateEmail").Any())
-                    {
-                        ViewBag.RegisterError = string.Format(" ایمیل {0} از قبل ثبت شده است", model._Email);
-                        return View("Login");
-                    }
-                    ViewBag.RegisterError = "خطا در ثبت";
-                    return View("Login");
+
+                    return new JsonResult(new { Status = false, Message = _localizer["Fail"].Value.ToString() });
+
+                    //ViewBag.RegisterError = "  ";
+                    //return View("Login");
                 }
 
             }
@@ -240,8 +327,10 @@ namespace Helper.Controllers
                     errors.Add(err.ErrorMessage);
                 }
             }
-            ModelState.AddModelError("", errors.First());
-            return View("Login");
+            return new JsonResult(new { Status = false, Message = errors.First() });
+
+            //ModelState.AddModelError("", errors.First());
+            //return View("Login");
         }
 
 
@@ -289,6 +378,7 @@ namespace Helper.Controllers
             ViewData["UserName"] = _localizer["UserName"];
             ViewData["Password"] = _localizer["Password"];
             ViewData["ImLogin"] = _localizer["ImLogin"];
+            ViewData["EmailPl"] = _localizer["EmailPl"];
 
         }
 

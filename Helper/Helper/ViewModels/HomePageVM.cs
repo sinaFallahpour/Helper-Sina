@@ -9,5 +9,15 @@ namespace Helper.ViewModels
     public class HomePageVM
     {
         public List<TBL_Slide> Slides { get; set; }
+
+
+        public int  CityCount { get; set; }
+
+        public int ServiceProviderCount { get; set; }
+
+        public int DoneServiceCount { get; set; }
+
+        public List<TBL_Category> Categories { get; set; }
+
     }
 }

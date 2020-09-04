@@ -93,7 +93,7 @@
                                     <label class="_text-position  w-100 pr-3 mt-2" for="">@ViewData["SiteLanguages"]</label>
                                     <div class="row w-100 mx-auto my-2 hj-form-profile hj-maharat ">
                                         <div class="col-md-7 col-8  mx-auto text-left py-2 ">
-                                            <h6 class="_text-position pt-1 pl-4" id="siteText">فارسی</h6>
+                                            <h6 class="_text-position pt-1 pl-4" id="siteText"></h6>
                                         </div>
                                         <div class="col-md-5 col-4  mx-auto">
                                             <i class="fas fa-chevron-down pl-3 pt-3" id="select-down"></i>
@@ -271,6 +271,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/lib/swal-alert/sweetalert.min.js"></script>
     <script src="~/SinaCustom/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
 
 
     <script>
@@ -285,17 +286,17 @@
 
 
 
-           
+
             if ($("#SiteLanguage").val() == 1) {
                 $("#siteText").text($("#persianLan").text())
                 $("#persianLan").addClass('_btnActive')
             }
             else {
-                
 
 
 
-                  $("#siteText").text($("#englishLan").text())
+
+                $("#siteText").text($("#englishLan").text())
                 $("#englishLan").addClass('_btnActive')
             }
 
@@ -329,12 +330,6 @@
             })
 
 
-
-
-
-
-
-
         })
 
 
@@ -364,6 +359,8 @@
                 "Id": Id
             };
             $("#changeInfoSubmit").prop('disabled', true);
+            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
+
             $.ajax({
                 method: "POST",
                 url: '/AccountSettings/ChangePeronalInfo',
@@ -372,16 +369,19 @@
                 success: function (r) {
                     if (r.status) {
                         $("#changeInfoSubmit").prop('disabled', false);
+                        $.unblockUI();
                         SuccessAlert(r.message)
                     }
                     else {
                         $("#changeInfoSubmit").prop('disabled', false);
+                        $.unblockUI();
                         FailedAlert(r.message);
                     }
                 },
                 error: function () {
                     $("#changeInfoSubmit").prop('disabled', false);
                     FailedAlert("خطا رخ داده است.");
+                    $.unblockUI();
                 }
             });
         })
@@ -415,6 +415,7 @@
                 "Id": Id
             };
             $("#chnageBankSubmit").prop('disabled', true);
+            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
             $.ajax({
                 method: "POST",
                 url: '/AccountSettings/ChangeAccountBank',
@@ -423,15 +424,18 @@
                 success: function (r) {
                     if (r.status) {
                         $("#chnageBankSubmit").prop('disabled', false);
+                        $.unblockUI();
                         SuccessAlert(r.message)
                     }
                     else {
                         $("#chnageBankSubmit").prop('disabled', false);
+                        $.unblockUI();
                         FailedAlert(r.message);
                     }
                 },
                 error: function () {
                     $("#chnageBankSubmit").prop('disabled', false);
+                    $.unblockUI();
                     FailedAlert("خطا رخ داده است.");
                 }
             });
@@ -460,6 +464,7 @@
                 "Id": Id
             };
             $("#chnagePassSubmit").prop('disabled', true);
+            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
             $.ajax({
                 method: "POST",
                 url: '/AccountSettings/ChangePassword',
@@ -468,15 +473,18 @@
                 success: function (r) {
                     if (r.status) {
                         $("#chnagePassSubmit").prop('disabled', false);
+                        $.unblockUI();
                         SuccessAlert(r.message)
                     }
                     else {
                         $("#chnagePassSubmit").prop('disabled', false);
+                        $.unblockUI();
                         FailedAlert(r.message);
                     }
                 },
                 error: function () {
                     $("#chnagePassSubmit").prop('disabled', false);
+                    $.unblockUI();
                     FailedAlert("خطا رخ داده است.");
                 }
             });

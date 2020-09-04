@@ -92,6 +92,7 @@ namespace Helper.Models.Entities
         public int MaxPrice { get; set; }
 
 
+        public ConfirmServiceType ConfirmServiceType { get; set; }
 
         #region relatoin
 

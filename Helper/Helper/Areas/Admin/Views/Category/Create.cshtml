@@ -18,7 +18,7 @@
 
         <form asp-action="Create" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
-           
+
 
             @if (!ViewData.ModelState.IsValid)
             {
@@ -66,13 +66,25 @@
                     </div>
                 </div>
             }
+
+
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <img class="d-block " id="UploadedImage" />
+                </div>
+            </div>
+
+
+
             <input type="hidden" name="Id" id="Id" value="0" />
             <!-- input -->
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="Name" for="validationCustom03"></label>
                     <input asp-for="Name" class="form-control" id="validationCustom03s"
-                           placeholder="عنوان دسته بندی">
+                           placeholder="عنوان دسته بندی"/>
                     <span asp-validation-for="Name" class="text-danger"> </span>
                 </div>
             </div>
@@ -81,8 +93,22 @@
                 <div class="col-md-6 mb-3">
                     <label asp-for="EnglishName" for="validationCustom03"></label>
                     <input asp-for="EnglishName" class="form-control" id="validationCustom03s"
-                           placeholder="عنوان انگلیسی دسته بندی">
+                           placeholder="عنوان انگلیسی دسته بندی"/>
                     <span asp-validation-for="EnglishName" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">
+            <!-- fileUpload checkBox && selectOption -->
+            <div class="form-row">
+
+                <div class="col-md-6 mb-3">
+                    <div class="custom-file">
+                        @*<input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">*@
+                        <label class="form-contro custom-file-label" for="customFile">انتخاب فایل </label>
+                    </div>
+                    <span asp-validation-for="Photo" class="text-danger"> </span>
+
                 </div>
             </div>
 
@@ -109,6 +135,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+
         //  اعتبارسنجی فرم
         window.addEventListener('load', function () {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -124,6 +151,28 @@
                 }, false);
             });
         }, false);
+
+
+
+
+         function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#UploadedImage')
+                        .attr('src', e.target.result)
+                        .width("100%")
+                        .height(240);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+     
+
 
     </script>
 

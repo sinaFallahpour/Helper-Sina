@@ -91,10 +91,10 @@ namespace Helper.Models
 
 
 
-        /// <summary>
-        /// این همان توکنی که در دیتا بیس ذخیره میکنیم
-        /// </summary>
-        public string SerialNumber { get; set; }
+        ///// <summary>
+        ///// این همان توکنی که در دیتا بیس ذخیره میکنیم
+        ///// </summary>
+        //public string SerialNumber { get; set; }
 
 
 
@@ -184,6 +184,12 @@ namespace Helper.Models
         /// </summary>
         public bool IsUsedFree { get; set; }
 
+
+
+        /// <summary>
+        ///؟ آیا تا به حال سرویس ارایه داده
+        /// </summary>
+        public bool HasProviderService { get; set; }
 
         #endregion  Relation
 

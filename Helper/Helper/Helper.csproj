@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Service\JwtGenerator.cs" />
     <Compile Remove="ViewModels\ProfileVM.cs" />
   </ItemGroup>
 
@@ -72,6 +73,8 @@
     <None Include="wwwroot\lib\ckeditor\ckeditor.js" />
     <None Include="wwwroot\lib\ckeditor\config.js" />
     <None Include="wwwroot\lib\ckeditor\styles.js" />
+    <None Include="wwwroot\lib\DataTable\datatables.min.js" />
+    <None Include="wwwroot\lib\DataTable\dataTables.responsive.min.js" />
     <None Include="wwwroot\lib\swal-alert\sweetalert.js" />
     <None Include="wwwroot\lib\swal-alert\sweetalert.min.js" />
     <None Include="wwwroot\lib\tagsinput\bootstrap-tagsinput.js" />

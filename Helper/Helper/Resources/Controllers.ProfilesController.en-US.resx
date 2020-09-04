@@ -150,6 +150,9 @@
   <data name="ExistUserName" xml:space="preserve">
     <value>Username has already been taken</value>
   </data>
+  <data name="FailMessage" xml:space="preserve">
+    <value>Registration error.</value>
+  </data>
   <data name="from" xml:space="preserve">
     <value>from date</value>
   </data>
@@ -222,6 +225,9 @@
   <data name="StartEduDatePL" xml:space="preserve">
     <value>Start date of study</value>
   </data>
+  <data name="SuccessMessage" xml:space="preserve">
+    <value>Successful registration.</value>
+  </data>
   <data name="to" xml:space="preserve">
     <value>to date</value>
   </data>
@@ -236,5 +242,8 @@
   </data>
   <data name="UserNamePL" xml:space="preserve">
     <value>User Name</value>
+  </data>
+  <data name="UserNotFoundMessage" xml:space="preserve">
+    <value>User NotFound</value>
   </data>
 </root>

@@ -1,4 +1,4 @@
-* {
+﻿* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -2361,3 +2361,39 @@ text-align:center !important;
     transition: .3s;
 }
 
+
+
+/*-----------------------input file-----------------------
+*/
+#largeFile:after {
+    position: absolute;
+  
+    content: "انتخاب عکس";
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* margin: 50px auto; */
+    padding: 2px 0px;
+    text-align: center;
+    /* padding: 24px 0px; */
+    border-radius: 10px;
+    border: 5px dashed #ccc;
+    color: #ccc;
+    font-family: "Helvetica Neue", Helvetica, Arial;
+    font-size: 30px;
+}
+    #largeFile:hover:after {
+    background: #ccc;
+    color: #fff;
+    cursor: pointer;
+}
+
+#largeFile input#file {
+    width: 0px;
+    height: 0px;
+}
+
+.categoryImage {
+    height: 79%;
+    width: 100%
+}

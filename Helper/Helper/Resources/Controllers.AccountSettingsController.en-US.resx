@@ -135,14 +135,23 @@
   <data name="CreateServiceText" xml:space="preserve">
     <value>Create Service</value>
   </data>
+  <data name="CurrentPasswordIsWrongMessage" xml:space="preserve">
+    <value>The current password is incorrect.</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>email</value>
+  </data>
+  <data name="EmailExistMessage" xml:space="preserve">
+    <value>email already exist.</value>
   </data>
   <data name="EmailPL" xml:space="preserve">
     <value>test@gmail.com</value>
   </data>
   <data name="EnglishLanguage" xml:space="preserve">
     <value>english</value>
+  </data>
+  <data name="FailMessage" xml:space="preserve">
+    <value>Registration error.</value>
   </data>
   <data name="MobileNumber" xml:space="preserve">
     <value>mobile number</value>
@@ -174,8 +183,17 @@
   <data name="SiteLanguages" xml:space="preserve">
     <value>site language</value>
   </data>
+  <data name="SuccessMessage" xml:space="preserve">
+    <value>Successful registration.</value>
+  </data>
   <data name="UserName" xml:space="preserve">
     <value>user name</value>
+  </data>
+  <data name="UserNameExistMessage" xml:space="preserve">
+    <value>username already  exist.</value>
+  </data>
+  <data name="UserNotFoundMessage" xml:space="preserve">
+    <value>User NotFound</value>
   </data>
   <data name="VisaOrMasterCardNumber" xml:space="preserve">
     <value>visa or masterCard number</value>

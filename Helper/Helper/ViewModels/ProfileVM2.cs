@@ -12,10 +12,10 @@ namespace Helper.ViewModels
     {
         public string Id { get; set; }
 
-        [Required(ErrorMessage = "Required")]
-        [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
-        [MaxLength(20, ErrorMessage = "Maximum length is {1} characters")]
-        //[RegularExpression(@"^\S*$", ErrorMessage = "no space")]
+        //[Required(ErrorMessage = "Required")]
+        //[MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
+        //[MaxLength(20, ErrorMessage = "Maximum length is {1} characters")]
+        ////[RegularExpression(@"^\S*$", ErrorMessage = "no space")]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 

@@ -67,25 +67,38 @@ namespace Helper.Controllers
 
 
 
+            var citiesCount = await _context.TBL_City.CountAsync(c => c.IsEnabled == true);
+
+            var ServiceProviderCount = await _context.Users.CountAsync(c => c.HasProviderService);
+
+            var doneServiceCount = -12;
+
+            var categories = await _context.TBL_Category.Where(c => c.IsEnabled == true)
+                     .OrderByDescending(c => c.CreateDate).Take(7).ToListAsync();
+
 
 
             List<TBL_Slide> slides;
             if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
             {
                 slides = await _context.TBL_Sliders
-                    .Where(c => c.IsActive == true && c.LanguageType==LanguageType.Persian)
+                    .Where(c => c.IsActive == true && c.LanguageType == LanguageType.Persian)
                     .ToListAsync();
             }
             else
             {
                 slides = await _context.TBL_Sliders
-                    .Where(c => c.IsActive == true && c.LanguageType==LanguageType.English)
+                    .Where(c => c.IsActive == true && c.LanguageType == LanguageType.English)
                     .ToListAsync();
             }
-           
+
             var model = new HomePageVM
             {
                 Slides = slides,
+                ServiceProviderCount = ServiceProviderCount,
+                DoneServiceCount = doneServiceCount,
+                CityCount = citiesCount,
+                Categories = categories
             };
             return View(model);
         }

@@ -132,14 +132,23 @@
   <data name="CreateServiceText" xml:space="preserve">
     <value>ایجاد خدمت</value>
   </data>
+  <data name="CurrentPasswordIsWrongMessage" xml:space="preserve">
+    <value>رمز عبور فعلی اشتیاه است.</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>ایمیل</value>
+  </data>
+  <data name="EmailExistMessage" xml:space="preserve">
+    <value>ایمیل موجود است.</value>
   </data>
   <data name="EmailPL" xml:space="preserve">
     <value>test@gmail.com</value>
   </data>
   <data name="EnglishLanguage" xml:space="preserve">
     <value>انگلیسی</value>
+  </data>
+  <data name="FailMessage" xml:space="preserve">
+    <value>خطا در ثبت</value>
   </data>
   <data name="MobileNumber" xml:space="preserve">
     <value>شماره موبایل</value>
@@ -171,8 +180,17 @@
   <data name="SiteLanguages" xml:space="preserve">
     <value>زبان وبسایت و اعلامه های رسمی</value>
   </data>
+  <data name="SuccessMessage" xml:space="preserve">
+    <value>ثبت موفقیت آمیز</value>
+  </data>
   <data name="UserName" xml:space="preserve">
     <value>نام کاربری</value>
+  </data>
+  <data name="UserNameExistMessage" xml:space="preserve">
+    <value>نام کاربری موجود است.</value>
+  </data>
+  <data name="UserNotFoundMessage" xml:space="preserve">
+    <value>کاربر یافت نشد</value>
   </data>
   <data name="VisaOrMasterCardNumber" xml:space="preserve">
     <value>شماره ویزا یا مستر کارت</value>

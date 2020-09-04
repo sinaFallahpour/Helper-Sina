@@ -120,11 +120,23 @@
   <data name="AcceptRole" xml:space="preserve">
     <value>I Agree Helpers Roles</value>
   </data>
+  <data name="EmailExistMessage" xml:space="preserve">
+    <value>email already exist.</value>
+  </data>
+  <data name="EmailPl" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Fail" xml:space="preserve">
+    <value>faile To register</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot password?</value>
   </data>
   <data name="ImLogin" xml:space="preserve">
     <value>I have already registered !</value>
+  </data>
+  <data name="InValidUsernameOrEmail" xml:space="preserve">
+    <value>Invalid Login or password.          </value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -146,5 +158,8 @@
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User Name</value>
+  </data>
+  <data name="username  {0} Already Registered" xml:space="preserve">
+    <value>{0} username is already registered</value>
   </data>
 </root>
