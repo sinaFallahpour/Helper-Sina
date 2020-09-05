@@ -17,10 +17,6 @@
 
 
 
-
-
-
-
 @*...............intro..................*@
 <div class="container">
     <div class="row mt-md-5 pt-md-5">
@@ -98,7 +94,9 @@
 
 
                         <div class="col-md-3 col-6 py-3">
-                            <img class="categoryImage img-fluid " src="~/Upload/User/cd29605d-bdca-4975-83e9-db1921487b5b_consullingIcon.svg" />
+                            @*<img class="categoryImage img-fluid " src="~/Upload/User/cd29605d-bdca-4975-83e9-db1921487b5b_consullingIcon.svg" />*@
+                            <img class="_imageRadius categoryImage img-fluid " src="@item.PhotoAddress" />
+
                             <br />
                             <br />
                             @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
@@ -164,7 +162,9 @@
                 @foreach (var item in cats)
                 {
                     <div class="col-md-3 col-6  py-3 order-md-1 order-2">
-                        <img class="categoryImage img-fluid " src="~/hj/img/service7.png" alt="Responsive image">
+                        @*<img class="categoryImage img-fluid " src="~/hj/img/service7.png" alt="Responsive image">*@
+                        <img class="_imageRadius categoryImage img-fluid " src="@item.PhotoAddress" alt="Responsive image">
+
                         <br />
                         <br />
                         @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
@@ -250,7 +250,7 @@
                 </div>
                 <div class="col-md-6 col-12  mt-3 pr-md-5">
                     <div class="row  position-relative">
-                        <span class="text-justify hj-intro-titr pb-1">
+                        <span class="_text-position hj-intro-titr pb-1">
                             @ViewData["ForProfessionals"]
                         </span>
                     </div>
@@ -258,7 +258,7 @@
                         <img src="~/hj/img/border-bottom.png" class="img-fluid" />
                     </div>
                     <div class="row pt-3">
-                        <span class="text-justify hj-intro-text"> @ViewData["ForProfessionalsText"]  </span>
+                        <span class="_text-position hj-intro-text"> @ViewData["ForProfessionalsText"]  </span>
                     </div>
                     <div class="row text-right mt-5">
                         <div class="col-12 text-md-right text-center">

@@ -17,6 +17,13 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3  ">
+                    <img src="@Model.PhotoAddress" class="d-block _editimageContainer" id="UploadedImage" />
+                </div>
+            </div>
+
             <input type="hidden" asp-for="Id" />
             <!-- input -->
             <div class="form-row">

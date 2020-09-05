@@ -338,7 +338,7 @@ namespace Helper.Controllers
                     Id = c.Id,
                     UserName = c.UserName,
                     Nickname = c.Nickname,
-                    Birthdate = isEnglish ? c.Birthdate.GetToomanPriceFormat().ToString() : c.Birthdate,
+                    Birthdate = c.Birthdate,
                     Descriptions = c.Descriptions,
                     PhotoAddress = c.PhotoAddress,
 
@@ -350,14 +350,14 @@ namespace Helper.Controllers
                     SKILLS = c.Skils,
 
 
-                    EduEnterDate = c.EducationHistry != null ? isEnglish == true ? c.EducationHistry.EnterDate.ToGeorgianDateTime().ToString() : c.EducationHistry.EnterDate : null,
-                    EduExitDate = c.EducationHistry != null ? isEnglish == true ? c.EducationHistry.ExitDate.ToGeorgianDateTime().ToString() : c.EducationHistry.ExitDate : null,
+                    EduEnterDate = c.EducationHistry != null ? c.EducationHistry.EnterDate : null,
+                    EduExitDate = c.EducationHistry != null ? c.EducationHistry.ExitDate : null,
                     MaghTa = c.EducationHistry != null ? c.EducationHistry.MaghTa : null,
                     UnivercityName = c.EducationHistry != null ? c.EducationHistry.UnivercityName : null,
 
 
-                    WorkEnterDate = c.WorkExperience != null ? isEnglish == true ? c.WorkExperience.EnterDate.GetToomanPriceFormat().ToString() : c.WorkExperience.EnterDate : null,
-                    WorkExitDate = c.WorkExperience != null ? isEnglish == true ? c.WorkExperience.ExitDate.GetToomanPriceFormat().ToString() : c.WorkExperience.ExitDate : null,
+                    WorkEnterDate = c.WorkExperience != null ? c.WorkExperience.EnterDate : null,
+                    WorkExitDate = c.WorkExperience != null ? c.WorkExperience.ExitDate : null,
                     WorkDescriptions = c.WorkExperience != null ? c.WorkExperience.Descriptions : null,
                     Semat = c.WorkExperience != null ? c.WorkExperience.Semat : null,
                     CompanyName = c.WorkExperience != null ? c.WorkExperience.CompanyName : null,

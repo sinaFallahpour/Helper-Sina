@@ -1,4 +1,4 @@
-﻿@model Helper.Models.Entities.TBL_Category
+﻿@model Helper.Areas.Admin.Models.ViewModels.Category.EditCategoryViewModel;
 
 @{
     ViewData["Title"] = "Edit";
@@ -36,32 +36,43 @@
             }
 
 
-            @if (!string.IsNullOrEmpty(TempData["Success"] as string))
-            {
-                <div class="form-row">
-                    <div class="col-md-9 mb-3">
-                        <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
-                            <strong>  @TempData["Success"]</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+            @*@if (!string.IsNullOrEmpty(TempData["Success"] as string))
+                {
+                    <div class="form-row">
+                        <div class="col-md-9 mb-3">
+                            <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
+                                <strong>  @TempData["Success"]</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
 
-            @if (!string.IsNullOrEmpty(TempData["Error"] as string))
-            {<div class="form-row">
-                    <div class="col-md-9 mb-3">
-                        <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
-                            <strong>  @TempData["Error"] </strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                @if (!string.IsNullOrEmpty(TempData["Error"] as string))
+                {<div class="form-row">
+                        <div class="col-md-9 mb-3">
+                            <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
+                                <strong>  @TempData["Error"] </strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
+                }*@
+
+
+
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3  ">
+                    <img src="@Model.PhotoAddress" class="d-block _editimageContainer" id="UploadedImage" />
                 </div>
-            }
+            </div>
+
 
 
             <input type="hidden" asp-for="Id" />
@@ -83,6 +94,41 @@
                     <span asp-validation-for="EnglishName" class="text-danger"> </span>
                 </div>
             </div>
+
+
+
+
+
+
+            @*<input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">*@
+            @*    <input name="Photo" type="file" class="custom-file-input" onchange="readURL(this);" id="customFile">*@
+
+
+            <input class="custom-file-input input-validation-error"
+                   onchange="readURL(this);"
+                   id="customFile"
+                   type="file"
+                   data-val="true"
+                   name="Photo"
+                   aria-describedby="customFile-error"
+                   aria-invalid="true">
+            
+    <!-- fileUpload checkBox && selectOption -->
+            <div class="form-row">
+
+                <div class="col-md-6 mb-3">
+                    <div class="custom-file">
+                        @*<input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">*@
+                        <label class="form-contro custom-file-label" for="customFile">انتخاب فایل </label>
+                    </div>
+                    <span asp-validation-for="Photo" class="text-danger"> </span>
+
+                </div>
+            </div>
+
+
+
+
 
 
             <div class="form-row mb-4">
@@ -128,6 +174,24 @@
             });
         }, false);
 
+
+
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#UploadedImage')
+                        .attr('src', e.target.result)
+                        .width("100%")
+                        .height(240);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
     </script>
 }

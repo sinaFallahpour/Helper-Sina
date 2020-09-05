@@ -48,9 +48,11 @@
             <div class="form-row">
                 <div class="  col-md-6 mb-3">
                     <img src="@photoAddress"
-                         class="d-block _editimageContainer" id="UploadedImage" />
+                      style="width:330px"   class="d-block _editimageContainer" id="UploadedImage" />
                 </div>
             </div>
+
+
             @if (!string.IsNullOrEmpty(ViewBag.IsSuccess))
             {
                 <span class="text-success d-block text-center"> @ViewBag.IsSuccess   </span>
@@ -63,11 +65,7 @@
             }
 
 
-            <div class="form-row">
-                <div class="col-md-8 mb-3">
-                    <img class="d-block " id="UploadedImage" />
-                </div>
-            </div>
+            
 
 
             <input type="hidden" asp-for="Id" />
@@ -261,7 +259,7 @@
                 reader.onload = function (e) {
                     $('#UploadedImage')
                         .attr('src', e.target.result)
-                        .width("100%")
+                        //.width("65%")
                         .height(300);
                 };
 

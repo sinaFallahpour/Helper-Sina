@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Helper.Models.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,10 +7,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Helper.Models.Entities
+namespace Helper.Areas.Admin.Models.ViewModels.Category
 {
-    public class TBL_Category : BaseEntity<int>
+    public class EditCategoryViewModel
     {
+        public int Id { get; set; }
+
+
         [Required(ErrorMessage = "نام دسته بندی الزامیست ")]
         [Display(Name = "نام دسته بندی")]
         public string Name { get; set; }
@@ -23,19 +27,18 @@ namespace Helper.Models.Entities
         /// <summary>
         /// آیا این دسته بندی فعال است
         /// </summary>
-        /// 
         [Display(Name = "  آیا فعال است؟")]
         public bool IsEnabled { get; set; }
 
 
-        [Display(Name="عکس")]
         public string PhotoAddress { get; set; }
 
-        [Required(ErrorMessage = "الزامیست")]
+
         [Display(Name = "عکس")]
         [NotMapped]
         public IFormFile Photo { get; set; }
+
+
+
     }
-
-
 }

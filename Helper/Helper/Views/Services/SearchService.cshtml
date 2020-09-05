@@ -13,7 +13,15 @@
 
 @section Styles{
     <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
-    <link href="~/lib/jquery.tagsinput/jquery.tagsinput.min.css" rel="stylesheet" />
+    @*<link href="~/lib/jquery.tagsinput/jquery.tagsinput.min.css" rel="stylesheet" />*@
+
+
+
+    @*<link href="~/Admin/vendors/tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />*@
+    <link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-tagsinput/custom.css" rel="stylesheet" />
+
+
     @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" />*@
     <link href="~/lib/vue-select/vue-select.css" rel="stylesheet" />
 
@@ -108,8 +116,7 @@
 
     <div class="row w-100 mx-auto my-3 text-center ">
         <h5 class="_text-position"> @ViewData["Skills"] </h5>
-
-        <input name="Skills" id="Skills" v-model="skills" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+        <input name="Skills" id="Skills" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
     </div>
 
     <div class="row w-100 mx-auto">
@@ -164,9 +171,12 @@
                         <h3 class="text-center w-100"> {{service?.title}} </h3>
                     </div>
 
-                    <div class="col-12 pt-3">
+                    <div class="col-12 pt-3" style=" height: 80px; ">
                         <h4 class="text-center w-100">
-                            <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                            @*<img src="~/hj/img/home-alt-3.png" class="img-fluid" style="height:70px" />*@
+                            <img v-bind:src="service?.categoryImageAddres" style="height:70px;border-radius:6px" class="img-fluid" />
+
+
 
 
                         </h4>
@@ -259,7 +269,7 @@
         </div>*@
 
 
- 
+
 
     @*--------pagination----*@
     <div class="row w-100 mx-auto">
@@ -287,7 +297,6 @@
 
     <script src="~/lib/swal-alert/sweetalert.min.js"></script>
     <script src="~/SinaCustom/js/main.js"></script>
-    <script src="~/lib/jquery.tagsinput/jquery.tagsinput.min.js"></script>
     @*<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>*@
     <script src="~/lib/vuejs/vue.min.js"></script>
     <script src="~/lib/vue-select/vue-select.js"></script>
@@ -295,66 +304,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
 
 
- 
+    <script src="~/lib//bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
 
 
     <script>
-
-         
-       
-
-        
-
-       
-        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
-        {
-            <text>
-
-                $(document).ready(function () {
-                    $('.skill').tagsInput({
-                        'interactive': true,
-                        'defaultText': 'وارد کنید',
-                    });
-                    $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
-                    $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
-
-
-                    //$(".catId").select2({
-                    //    dir: "rtl"
-                    //});
-                    //$(".cityId").select2({
-                    //    dir: "rtl"
-                    //});
-                    //$(".monyUnitid").select2({
-                    //    dir: "rtl"
-                    //});
-                })
-          
-            </text>
-        }
-        else {
-            <text>
-                $(document).ready(function () {
-                    $('.skill').tagsInput({
-                        'interactive': true,
-                        'defaultText': 'Enter new',
-                    });
-                    $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
-                    $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
-
-                    //$(".catId").select2();
-                    //$(".cityId").select2();
-                    //$(".monyUnitid").select2();
-                })
-
-            </text>
-        }
-
+        var error = "";
+        var  titleSuitAlert=""
+        var submiSuitAlertText =""
+            @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+                <text>
+                    error = "خطا رخ داده است."
+                    titleSuitAlert = "خطا"
+                    submiSuitAlertText="باشه"
+                </text>
+            }
+            else
+            {
+               <text>
+                error = "An error has occurred."
+                titleSuitAlert = "error"
+                submiSuitAlertText="ok"
+             </text>
+            }
     </script>
 
 
 
+
+
+
+
     <script>
+
+        //$("#Skills").tagsinput('items')
+        $(document).ready(function () {
+            $("#Skills").tagsinput("items");
+            $('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
+
+
+            $("#Skills").on('change', function () {
+
+                vue.skillChanger = !vue.skillChanger;
+            })
+        });
+
+
+
         Vue.component('v-select', VueSelect.VueSelect)
 
         var vue = new Vue({
@@ -376,6 +372,8 @@
 
                 //data for pagination filter search ,...
                 serviceCount: 0,
+
+                skillChanger: false,
 
                 //این تعداد ایتم های صفحس
                 limit: 8,
@@ -400,7 +398,10 @@
                             vueInstance.categories = response.data.data.cats
                             vueInstance.monyUnits = response.data.data.monyUnits
                         }).catch(function (er) {
-                            FailedAlert('خطا در نمایش  اطلاعات ...  ')
+
+                            FailedAlert2(error, titleSuitAlert, submiSuitAlertText);
+
+                            //FailedAlert2('خطا در نمایش  اطلاعات ...  ')
                         })
                 },
 
@@ -408,8 +409,8 @@
                     var vueInstance = this;
                     this.servicesLoading = true;
                     var params = this.axiosParams;
-                   
-                    $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>'});
+
+                    $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
 
 
                     axios.get("/Services/SearchAllService", { params: params })
@@ -423,12 +424,16 @@
                             }
                         }).catch(function (er) {
                             console.log(er)
-                            FailedAlert('خطا در نمایش سرویس')
+                            //FailedAlert('خطا در نمایش سرویس')
+                            FailedAlert2(error, titleSuitAlert, submiSuitAlertText);
+
                         }).finally(function () {
                             vueInstance.servicesLoading = false;
                             //vueInstance.cleaningData();
                             $.unblockUI();
                         });
+
+                    console.log(vueInstance.services)
                 },
 
                 toggleLike: function (serviceId) {
@@ -439,7 +444,7 @@
                         FailedAlert("برای لایک کردن محصولات ابتدا لاگین کنید.");
                         return
                     }
-                    
+
                     this.likeLoading = true;
                     this.selectedService = this.services.find(c => c.id == serviceId)
                     var vueInstance = this;
@@ -447,12 +452,12 @@
 
                     axios.get(`/services/ToggleLike?serviceId=${serviceId}`)
                         .then(function (response) {
-                            console.log(response)
+
 
                             ///////////////////    ائو ایتم  خواص را برو تغییر بده لایک را   ////////////
                             //vueInstance.services = response.data.Status;
                             if (response.data.status) {
-                                console.log(vueInstance)
+
                                 var currentService = vueInstance.services.find(c => c.id == serviceId)
                                 currentService.isLiked = response.data.isLiked;
                                 currentService.likeCount = response.data.likeCount;
@@ -463,7 +468,9 @@
                             //vueInstance.serviceCount = response.data.data.count;
                         }).catch(function (er) {
                             console.log(er)
-                            FailedAlert('خطا در لایک')
+                            FailedAlert2(error, titleSuitAlert, submiSuitAlertText);
+
+                            //FailedAlert('خطا در لایک')
                         }).finally(function () {
                             vueInstance.servicesLoading = false;
                             vueInstance.likeLoading = false;
@@ -529,6 +536,7 @@
                 },
                 axiosParams: function () {
 
+                    var s = this.skillChanger
                     var params = new URLSearchParams();
                     params.append('limit', String(this.limit));
                     params.append('offset', `${this.page ? this.page * this.limit : 0}`);

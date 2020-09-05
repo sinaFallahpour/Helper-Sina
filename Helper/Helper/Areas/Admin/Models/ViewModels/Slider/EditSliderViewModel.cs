@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Helper.Areas.Admin.Models.ViewModels.Slider
 {
-    public class EditSliderViewModel
+    public class EditCategoryViewModel
     {
 
         public int Id { get; set; }

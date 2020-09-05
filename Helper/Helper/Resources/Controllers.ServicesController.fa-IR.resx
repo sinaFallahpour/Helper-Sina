@@ -141,6 +141,9 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>خطا در ثبت</value>
   </data>
+  <data name="FailMessage" xml:space="preserve">
+    <value>خطا در ثبت</value>
+  </data>
   <data name="FromPrice" xml:space="preserve">
     <value>از قیمت</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="LoadingText" xml:space="preserve">
     <value>صبر کنید...</value>
+  </data>
+  <data name="LoginForLikeMessage" xml:space="preserve">
+    <value>برای پسندیدن  ابتدا لاگین کنید.</value>
   </data>
   <data name="MinPriceMoreThanMaXPriceMessage" xml:space="preserve">
     <value>حداقل قیمت باید کمتر از حداکثر قیمت باشد</value>
@@ -192,6 +198,9 @@
   </data>
   <data name="ServiceDelivery" xml:space="preserve">
     <value>ارائه خدمت</value>
+  </data>
+  <data name="ServiceNotFoundMessage" xml:space="preserve">
+    <value>این سرویس موجود نیست.</value>
   </data>
   <data name="ServiceRequest" xml:space="preserve">
     <value>درخواست خدمت</value>

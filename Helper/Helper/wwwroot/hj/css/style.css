@@ -2371,3 +2371,9 @@ align-items:center*/
     height: 79%;
     width: 100%
 }
+
+
+
+._imageRadius {
+    border-radius:12px;
+}

@@ -4,14 +4,16 @@ using Helper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200905111854_new added")]
+    partial class newadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -574,7 +576,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 9, 5, 15, 57, 39, 635, DateTimeKind.Local).AddTicks(5452),
+                            CreatedAt = new DateTime(2020, 9, 5, 15, 48, 54, 8, DateTimeKind.Local).AddTicks(344),
                             EnglishValue = "",
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -583,7 +585,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 9, 5, 15, 57, 39, 639, DateTimeKind.Local).AddTicks(3028),
+                            CreatedAt = new DateTime(2020, 9, 5, 15, 48, 54, 12, DateTimeKind.Local).AddTicks(576),
                             EnglishValue = "",
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -592,7 +594,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2020, 9, 5, 15, 57, 39, 639, DateTimeKind.Local).AddTicks(3119),
+                            CreatedAt = new DateTime(2020, 9, 5, 15, 48, 54, 12, DateTimeKind.Local).AddTicks(667),
                             EnglishValue = "",
                             Key = "SiteRules",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),

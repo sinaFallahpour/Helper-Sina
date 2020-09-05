@@ -107,9 +107,11 @@
                                                 </h6>
                                             </div>
 
-                                            <div class="col-12 pt-3">
+                                            <div class="col-12 pt-3" style="height:80px">
                                                 <h4 class="text-center w-100">
-                                                    <img src="~/hj/img/home-alt-3.png" class="img-fluid" />
+                                                    @*<img src="~/hj/img/home-alt-3.png" class="img-fluid" />*@
+                                                    <img v-bind:src="service?.categoryImageAddres" style="height:80px" class="img-fluid" />
+
                                                 </h4>
                                             </div>
                                             <div class="col-12 pt-4 pb-2 footer-titr">

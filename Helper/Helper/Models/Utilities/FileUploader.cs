@@ -77,9 +77,9 @@ namespace Helper.Models.Utilities
 
                 return (true, fileName);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                return (false,e.Message);
+                return (false, e.Message);
             }
 
         }
@@ -104,7 +104,8 @@ namespace Helper.Models.Utilities
                  mimeType != "image/pjpeg" &&
                  mimeType != "image/gif" &&
                  mimeType != "image/x-png" &&
-                 mimeType != "image/png")
+                 mimeType != "image/png"
+                 )
             {
                 return false;
             }
@@ -123,7 +124,8 @@ namespace Helper.Models.Utilities
             if (extention != ".jpg"
                 && extention != ".png"
                 && extention != ".gif"
-                && extention != ".jpeg")
+                && extention != ".jpeg"
+                )
             {
                 return false;
             }

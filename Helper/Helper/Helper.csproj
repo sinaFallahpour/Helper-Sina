@@ -62,6 +62,7 @@
     <Folder Include="Resources\ViewModels\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\clipboard\dialogs\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\plugins\" />
+    <Folder Include="wwwroot\Upload\Category\" />
     <Folder Include="wwwroot\Upload\News\" />
     <Folder Include="wwwroot\Upload\Slider\" />
    
@@ -69,6 +70,7 @@
 
   <ItemGroup>
     <None Include="Resources\Models\Enums\UserMarriedType.en-US.resx" />
+    <None Include="wwwroot\lib\bootstrap-tagsinput\bootstrap-tagsinput.js" />
     <None Include="wwwroot\lib\ckeditor\build-config.js" />
     <None Include="wwwroot\lib\ckeditor\ckeditor.js" />
     <None Include="wwwroot\lib\ckeditor\config.js" />

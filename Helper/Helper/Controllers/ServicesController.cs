@@ -251,7 +251,6 @@ namespace Helper.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     return new JsonResult(new { Status = false, Message = _localizer["ErrorMessage"].Value.ToString() });
-
                 }
 
             }
@@ -300,8 +299,7 @@ namespace Helper.Controllers
                     SeenCount = c.SeenCount,
                     Title = c.Title,
                     CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
-
-                    //CategoryImageAddresc=c.Category.ImageAddress
+                    CategoryImageAddres = c.Category.PhotoAddress,
                     IsLiked = c.UserLikeServices.Any(p => p.UserName == user.UserName && p.ServiceId == c.Id),
                 })
                 .OrderByDescending(c => c.CreateDate)
@@ -326,9 +324,9 @@ namespace Helper.Controllers
             var user = await _context.Users.Where(c => c.Id == currentUserId).Select(c => new { c.Id, c.UserName }).FirstOrDefaultAsync();
 
             if (string.IsNullOrEmpty(user?.Id))
-                return new JsonResult(new { Status = false, Message = "برای لایک  ابتدا لاگین کنید." });
+                return new JsonResult(new { Status = false, Message = _localizer["LoginForLikeMessage"].Value.ToString() });
             if (serviceId == null)
-                return new JsonResult(new { Status = false, Message = "   این سرویس موجود نیست." });
+                return new JsonResult(new { Status = false, Message = _localizer["ServiceNotFoundMessage"].Value.ToString() });
 
 
 
@@ -337,7 +335,7 @@ namespace Helper.Controllers
             //}
             var serviceFromDb = _context.TBL_Service.Find(serviceId);
             if (serviceFromDb == null)
-                return new JsonResult(new { Status = false, Message = "این  سرویس موجود نیست" });
+                return new JsonResult(new { Status = false, Message = _localizer["ServiceNotFoundMessage"].Value.ToString() });
 
             var IsLiked = false;
             var oldLike = _context.TBL_UserLikeSerive.Where(c => c.UserId == user.Id && c.ServiceId == serviceFromDb.Id).FirstOrDefault();
@@ -369,7 +367,7 @@ namespace Helper.Controllers
             }
             catch
             {
-                return new JsonResult(new { Status = false, Message = "خطا  در ثبت" });
+                return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
             }
         }
 
@@ -377,7 +375,19 @@ namespace Helper.Controllers
 
 
 
-
+        /// <summary>
+        /// search for service
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
+        /// <param name="searchedWord"></param>
+        /// <param name="skills"></param>
+        /// <param name="cityId"></param>
+        /// <param name="categoryId"></param>
+        /// <param name="monyUnitid"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <returns></returns>
         public async Task<IActionResult> SearchAllService(int? limit, int? offset,
                    string searchedWord, string skills, int? cityId, int? categoryId, int? monyUnitid
             , int? minPrice, int? maxPrice)
@@ -406,11 +416,11 @@ namespace Helper.Controllers
 
             var service = _context.TBL_Service.AsNoTracking()
                 .Where(c => c.ServiceType == ServiceType.GiverService).AsQueryable();
-            var query = _context.TBL_Service.AsQueryable();
+            //var query = _context.TBL_Service.AsQueryable();
             //var count = query.AsNoTracking().Where(c => c.ServiceType == ServiceType.GiverService).Count();
 
 
-           
+
 
 
             if (cityId != null)
@@ -427,10 +437,24 @@ namespace Helper.Controllers
                 service = service.Where(c => c.MaxPrice <= maxPrice);
             if (!string.IsNullOrEmpty(skills))
             {
+                var listSkill = skills.Split(",").ToList();
+                //service = service.Where(c => IscontainSkills(c, listSkill));
                 //  do your logic
-            }
-            var count = service.Count();
 
+                //service = service.Where((c,i)=> {
+                //    if (i % 2 == 0) // if it is even element
+                //        return true;
+
+                //    return false;
+                //});
+
+            }
+
+
+
+           
+               var count = service.Count();
+           
             var services = await service
                 .AsNoTracking()
                 .Skip(offset ?? 0)
@@ -448,7 +472,7 @@ namespace Helper.Controllers
                     SeenCount = c.SeenCount,
                     Title = c.Title,
                     CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
-                    //CategoryImageAddres=c.Category.ImageAddress,
+                    CategoryImageAddres = c.Category.PhotoAddress,
                     UserImageAddress = c.User.PhotoAddress,
                     IsLiked = c.UserLikeServices.Any(p => p.UserId == currentUserId),
                 })
@@ -465,6 +489,25 @@ namespace Helper.Controllers
             return new JsonResult(new { Status = true, Message = "", data = response });
             //return new JsonResult(new { Status = true, Message = "", data = response });
         }
+
+
+        private bool IscontainSkills(TBL_Service service, List<string> skills)
+        {
+            if (service.Skills != null)
+            {
+                var listSkill = service.Skills.Split(",");
+                foreach (var skill in skills)
+                {
+                    if (listSkill.Contains(skill.Trim()))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            else return false;
+        }
+
 
 
 
@@ -525,7 +568,7 @@ namespace Helper.Controllers
                           Name = c.EnglishName
                       }).ToListAsync();
 
-               
+
                 var d = new { cats = catses, cities = citieses, monyUnits = monyUnitses };
                 return new JsonResult(new { Status = true, Message = "", data = d });
 
@@ -533,14 +576,6 @@ namespace Helper.Controllers
 
 
 
-
-                //cats = await _context.TBL_Category.Where(c => c.IsEnabled).ToListAsync();
-                //cities = await _context.TBL_City.Where(c => c.IsEnabled).ToListAsync();
-                //monyUnits = await _context.TBL_MonyUnit.Where(c => c.IsEnabled).ToListAsync();
-
-                //ViewBag.CategoryId = new SelectList(cats, "Id", "EnglishName");
-                //ViewBag.CityId = new SelectList(cities, "Id", "EnglishName");
-                //ViewBag.MonyUnitId = new SelectList(monyUnits, "Id", "EnglishName");
             }
 
 

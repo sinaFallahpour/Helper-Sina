@@ -139,7 +139,7 @@ namespace Helper.Controllers
             {
                 return NotFound();
             }
-            var model = new EditSliderViewModel()
+            var model = new EditCategoryViewModel()
             {
                 Id = tBL_Slide.Id,
                 Description = tBL_Slide.Description,
@@ -156,7 +156,7 @@ namespace Helper.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, EditSliderViewModel model)
+        public IActionResult Edit(int id, EditCategoryViewModel model)
         {
             if (id != model.Id)
             {

@@ -48,6 +48,9 @@
             <thead class="bg-info text-white _table-corder-reduse">
                 <tr>
                     <th class="text-center _noneBorder">#</th>
+                    <th class="text-center  _noneBorder">
+                        @Html.DisplayNameFor(model => model.PhotoAddress)
+                    </th>
                     <th class="text-center _noneBorder">
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
@@ -63,29 +66,38 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td class="text-center"> @Html.DisplayFor(modelItem => item.Id) </td>
-                        <td class="text-center">  @Html.DisplayFor(modelItem => item.Name)</td>
-                        <td class="text-center">  @Html.DisplayFor(modelItem => item.EnglishName)</td>
+                <tr>
+                    <td class="text-center"> @Html.DisplayFor(modelItem => item.Id) </td>
 
-                        <td class="text-center">  @Html.DisplayFor(modelItem => item.IsEnabled)</td>
+                    @*<td class="text-center"> <a href="@item.PhotoAddress">عکس </a>  </td>*@
+                    <td>
+                        <img class="_dataTableImage" src="@item.PhotoAddress" />
+                    </td>
 
-                        <td>
-                            <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">
-                                    <i class="">تصحیح </i>
-                                </a>
-                                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
-                                    <i class="">حذف</i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    <td class="text-center">  @Html.DisplayFor(modelItem => item.Name)</td>
+                    <td class="text-center">  @Html.DisplayFor(modelItem => item.EnglishName)</td>
+
+                    <td class="text-center">  @Html.DisplayFor(modelItem => item.IsEnabled)</td>
+
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">
+                                <i class="">تصحیح </i>
+                            </a>
+                            <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                <i class="">حذف</i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbody>
             <tfoot class="bg-info text-white _table-corder-reduse">
                 <tr>
                     <th class="text-center _noneBorder">#</th>
+                    <th class="text-center  _noneBorder">
+                        @Html.DisplayNameFor(model => model.PhotoAddress)
+                    </th>
                     <th class="text-center  _noneBorder">
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
@@ -113,8 +125,7 @@
 
     <script src="~/lib//DataTable/datatables.min.js"></script>
     <script src="~/lib//DataTable/dataTables.responsive.min.js"></script>
-
-    <script>
+     <script>
 
         //$(document).ready(function () {
         //    $('#example1').DataTable();
@@ -122,16 +133,16 @@
 
         $(document).ready(function () {
             $('#example1').DataTable({
-                //language: {
-                //    url: "/lib/DataTable/fa-lang.json"
-                //},
+                language: {
+                    url: "/lib/DataTable/fa-lang.json"
+                },
                 "pagingType": "full_numbers",
                 "lengthMenu": [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
                 "columnDefs": [
-                    { "orderable": false, "targets": 4 }
+                    { "orderable": false, "targets": 5 }
                 ],
                 "order": [[0, "desc"]],
                 "responsive": true
