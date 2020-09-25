@@ -2270,6 +2270,12 @@ input[type=checkbox]:checked + .label-chekbox:before {
     margin-top: 20px;
 }
 
+
+._fuck {
+    text-align: left;
+}
+
+
 ._text-position {
     text-align: right;
 }

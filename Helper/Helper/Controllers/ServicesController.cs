@@ -281,6 +281,191 @@ namespace Helper.Controllers
 
 
 
+
+
+
+
+        #region Edit
+        // GET: Admin/Slides/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            returnViewDate();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var service = await _context.TBL_Service.FindAsync(id);
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+
+            List<TBL_Category> cats;
+            List<TBL_City> cities;
+            List<TBL_MonyUnit> monyUnits;
+
+            if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+                cats = await _context.TBL_Category.Where(c => c.IsEnabled).ToListAsync();
+                cities = await _context.TBL_City.Where(c => c.IsEnabled).ToListAsync();
+                monyUnits = await _context.TBL_MonyUnit.Where(c => c.IsEnabled).ToListAsync();
+
+                ViewBag.CategoryId = new SelectList(cats, "Id", "Name");
+                ViewBag.CityId = new SelectList(cities, "Id", "Name");
+                ViewBag.MonyUnitId = new SelectList(monyUnits, "Id", "Name");
+            }
+            else
+            {
+                cats = await _context.TBL_Category.Where(c => c.IsEnabled).ToListAsync();
+                cities = await _context.TBL_City.Where(c => c.IsEnabled).ToListAsync();
+                monyUnits = await _context.TBL_MonyUnit.Where(c => c.IsEnabled).ToListAsync();
+
+                ViewBag.CategoryId = new SelectList(cats, "Id", "EnglishName");
+                ViewBag.CityId = new SelectList(cities, "Id", "EnglishName");
+                ViewBag.MonyUnitId = new SelectList(monyUnits, "Id", "EnglishName");
+            }
+
+            var model = new CreateServiceVM()
+            {
+                Id = service.Id,
+                Title = service.Title,
+                Description = service.Description,
+                CategoryId = service.CategoryId,
+                CityId = service.CityId,
+                CreateDate = service.CreateDate,
+                IsAgreement = service.IsAgreement,
+                IsSendByEmail = service.IsSendByEmail,
+                IsSendByNOtification = service.IsSendByNOtification,
+                IsSendBySms = service.IsSendBySms,
+                LikeCount = service.LikeCount,
+                CommentCount = service.CommentCount,
+                SeenCount = service.SeenCount,
+                MaxPrice = service.MaxPrice,
+                MinpRice = service.MinpRice,
+                MonyUnitId = service.MonyUnitId,
+                ServiceType = service.ServiceType,
+                Skills = service.Skills,
+            };
+
+            return View(model);
+        }
+
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Edit(int id, EditCategoryViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            var slideFromDb = _context.TBL_Sliders.SingleOrDefault(c => c.Id == model.Id);
+        //            slideFromDb.Description = model.Description;
+        //            slideFromDb.Title = model.Title;
+        //            slideFromDb.IsActive = model.IsActive;
+        //            slideFromDb.LanguageType = model.LanguageType;
+        //            #region file validation
+        //            if (model.Photo != null)
+        //            {
+        //                string uniqueFileName = null;
+        //                if (!model.Photo.IsImage())
+        //                {
+        //                    ModelState.AddModelError("", "به فرمت عکس وارد کنید");
+        //                    return View(model);
+        //                }
+        //                if (model.Photo.Length > 15000000)
+        //                {
+        //                    ModelState.AddModelError("", "حجم فایل زیاد است");
+        //                    return View(model);
+        //                }
+        //                if (model.Photo != null && model.Photo.Length > 0 && model.Photo.IsImage())
+        //                {
+        //                    var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/Slider");
+        //                    uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
+        //                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+        //                    //model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+
+
+        //                    using (var stream = new FileStream(filePath, FileMode.Create))
+        //                    {
+        //                        model.Photo.CopyTo(stream);
+        //                    }
+
+        //                    if (!string.IsNullOrEmpty(slideFromDb.PhotoAddress))
+        //                    {
+        //                        var LastImagePath = slideFromDb.PhotoAddress.Substring(1);
+        //                        LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+        //                        if (System.IO.File.Exists(LastImagePath))
+        //                        {
+        //                            System.IO.File.Delete(LastImagePath);
+        //                        }
+
+        //                        //System.IO.File.Delete(LastImagePath);
+        //                    }
+
+        //                    //update Newe Pic Address To database
+        //                    slideFromDb.PhotoAddress = "/Upload/Slider/" + uniqueFileName;
+        //                }
+        //            }
+        //            #endregion file validation
+
+
+        //            var result = _context.SaveChanges();
+        //            return RedirectToAction(nameof(Index));
+
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            ModelState.AddModelError("", "خطا در ثبت");
+        //            return View(model);
+        //        }
+
+        //    }
+        //    return View(model);
+        //}
+
+        #endregion Edit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [Route("Services/UsersService/{username}")]
         public async Task<IActionResult> UsersService(string username, int? limit, int? offset)
         {
@@ -618,6 +803,19 @@ namespace Helper.Controllers
                 return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
