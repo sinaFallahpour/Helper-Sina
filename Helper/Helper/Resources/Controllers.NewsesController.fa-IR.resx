@@ -126,6 +126,9 @@
   <data name="HelperNews" xml:space="preserve">
     <value>اخبار هلپر</value>
   </data>
+  <data name="LoginForLikeArticleMessage" xml:space="preserve">
+    <value>برای لایک  کردن ابتدا لاگین کنید</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>جدیدترین ها</value>
   </data>

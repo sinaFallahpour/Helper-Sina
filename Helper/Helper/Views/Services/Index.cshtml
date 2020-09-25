@@ -1,125 +1,28 @@
 ﻿@model Helper.ViewModels.CreateServiceVM
+@using Helper.Data
 @using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@inject ApplicationDbContext _context;
 
 @{
     ViewData["Title"] = "CreateService";
     Layout = "~/Views/Shared/_landing.cshtml";
 
+    var HasActivePlan = ViewBag.HasActivePlan;
 
+
+    string CreateServiceText;
+    @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+    {
+        CreateServiceText = _context.TBL_Settings.Where(c => c.Key == PublicHelper.CreateServiceText).SingleOrDefault().Value;
+    }
+    else
+    {
+        CreateServiceText = _context.TBL_Settings.Where(c => c.Key == PublicHelper.CreateServiceText).SingleOrDefault().EnglishValue;
+    }
 }
-
-@*<h1>CreateService</h1>
-
-    <h4>CreateServiceVM</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="CreateService">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Title" class="control-label"></label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CreateDate" class="control-label"></label>
-                    <input asp-for="CreateDate" class="form-control" />
-                    <span asp-validation-for="CreateDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Skills" class="control-label"></label>
-                    <input asp-for="Skills" class="form-control" />
-                    <span asp-validation-for="Skills" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ServiceType" class="control-label"></label>
-                    <select asp-for="ServiceType" class="form-control"></select>
-                    <span asp-validation-for="ServiceType" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="SendType" class="control-label"></label>
-                    <select asp-for="SendType" class="form-control"></select>
-                    <span asp-validation-for="SendType" class="text-danger"></span>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IsAgreement" /> @Html.DisplayNameFor(model => model.IsAgreement)
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LikeCount" class="control-label"></label>
-                    <input asp-for="LikeCount" class="form-control" />
-                    <span asp-validation-for="LikeCount" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CommentCount" class="control-label"></label>
-                    <input asp-for="CommentCount" class="form-control" />
-                    <span asp-validation-for="CommentCount" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="SeenCount" class="control-label"></label>
-                    <input asp-for="SeenCount" class="form-control" />
-                    <span asp-validation-for="SeenCount" class="text-danger"></span>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IsSendByEmail" /> @Html.DisplayNameFor(model => model.IsSendByEmail)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IsSendByNOtification" /> @Html.DisplayNameFor(model => model.IsSendByNOtification)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IsSendBySms" /> @Html.DisplayNameFor(model => model.IsSendBySms)
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label asp-for="MinpRice" class="control-label"></label>
-                    <input asp-for="MinpRice" class="form-control" />
-                    <span asp-validation-for="MinpRice" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="MaxPrice" class="control-label"></label>
-                    <input asp-for="MaxPrice" class="form-control" />
-                    <span asp-validation-for="MaxPrice" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                        <label asp-for="UserId" class="control-label"></label>
-                        <input asp-for="UserId" class="form-control" />
-                        <span asp-validation-for="UserId" class="text-danger"></span>
-                    </div>
-                <div class="form-group">
-                    <label asp-for="CategoryId" class="control-label"></label>
-                    <input asp-for="CategoryId" class="form-control" />
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="MonyUnitId" class="control-label"></label>
-                    <input asp-for="MonyUnitId" class="form-control" />
-                    <span asp-validation-for="MonyUnitId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
-
-
-
-
 
 
 
@@ -127,9 +30,12 @@
 
 @section Styles{
     <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
-    <link href="~/lib/jquery.tagsinput/jquery.tagsinput.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" />
+    @*<link href="~/lib/jquery.tagsinput/jquery.tagsinput.min.css" rel="stylesheet" />*@
 
+    <link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-tagsinput/custom.css" rel="stylesheet" />
+    <link href="~/lib/LibStyles/LibStyles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" />
 }
 
 
@@ -149,7 +55,7 @@
                 <img src="~/hj/img/border-bottom.png" class="img-fluid" />
             </div>
             <div class="row mt-3 mx-auto">
-                <span class="text-justify hj-intro-text">  @ViewData["CreateServiceText"]    </span>
+                <span class="text-justify hj-intro-text">  @Html.Raw(CreateServiceText)   </span>
             </div>
 
         </div>
@@ -182,7 +88,6 @@
                     </nav>
                     <div class="tab-content py-3 px-sm-0 mt-5" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-
 
 
                             <form asp-action="CreateService" id="donnerForm1">
@@ -237,15 +142,7 @@
 
 
 
-                                <div class="row w-100 mx-auto hj-select">
-                                    <div class="col-sm-2 col-12 py-2">
-                                        <button type="button" class="btn  w-100 button-Service">مهارت</button>
-                                    </div>
-                                    <div class="col-sm-2 col-12  py-2">
-                                        <button type="button" class="btn  w-100 button-Service">مهارت</button>
-                                    </div>
 
-                                </div>
 
                                 <div class="row w-100 mx-auto">
                                     <div class="col-lg-10 col-md-8 col-6">
@@ -260,18 +157,16 @@
                                 </div>
                                 <div class="row w-100 mx-auto  pb-5 active">
                                     <div class="col-sm-6 py-2">
-                                        <input asp-for="MinpRice" id="MinpRice1" min="0" autocomplete="off" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input asp-for="MinpRice" id="MinpRice1" min="0" max="9999999999999999999" autocomplete="off" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                         <span asp-validation-for="MinpRice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                     <div class="col-sm-6 py-2">
-                                        <input asp-for="MaxPrice" id="MaxPrice1" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input asp-for="MaxPrice" id="MaxPrice1" autocomplete="off" min="0" max="9999999999999999999" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                         <span asp-validation-for="MaxPrice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                 </div>
                                 <div class="row w-100 mx-auto ">
                                     <div class="col-12 text-right">
-
-
                                         <input class="checkbox-service"
                                                type="checkbox"
                                                data-val="true"
@@ -279,7 +174,6 @@
                                                id="IsAgree"
                                                name="IsAgreement1"
                                                value="true">
-
                                         <label for="IsAgree" class="label-chekbox"> @ViewData["Agreed"]</label>
                                     </div>
                                 </div>
@@ -294,35 +188,50 @@
                                     <input type="submit" id="createBtnSubmit1" value="@ViewData["Submit"]" class="btn btn-success w-25 mx-auto Confirmation">
                                 </div>
                             </form>
-
-
                         </div>
-
-
-
-
-
 
 
 
 
                         -@*------dashbord-----*@
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form asp-action="CreateService" id="donnerForm">
 
+
+
+                            @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+                            {
+                                if (!HasActivePlan)
+                                {
+                                    <div class="alert alert-success text-center" role="alert">
+                                        You dont Have Active an active  Plan! <a href="/plan/index"> I will buy it now </a>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                if (!HasActivePlan)
+                                {
+                                    <div class="alert alert-success text-center" role="alert">
+                                        پلن فعالی برای شما موجودنیست <a href="/plan/index">   همین حالا میخرم        </a>
+                                    </div>
+                                }
+                            }
+
+                            <form asp-action="CreateService" id="donnerForm">
 
                                 <input type="hidden" name="Id" id="Id" value="0" />
                                 <div class="row w-100 mx-auto my-3 text-center ">
                                     <h5 class="_text-position">    @ViewData["Titles"]  </h5>
 
-                                    <input asp-for="Title" id="Title" autocomplete="off" placeholder='@ViewData["Titles"] ' class="service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                    @{var IsDisabled = HasActivePlan ? false : true; }
+                                    <input asp-for="Title" id="Title" disabled="@IsDisabled" autocomplete="off" placeholder='@ViewData["Titles"] ' class="service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
                                     <span asp-validation-for="Title" class="text-center w-100 text-danger"> </span>
                                     @*<h5 class="text-center w-100 pt-2"> تایتل خدمت</h5>*@
                                 </div>
                                 <div class="row w-100 mx-auto my-3  text-center  service-form-detalis">
                                     <h5 class="_text-position">        @ViewData["Descriptions"] </h5>
 
-                                    <textarea asp-for="Description" autocomplete="off" id="Description" placeholder='@ViewData["Descriptions"]' class=" pt-2 pb-2 service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
+                                    <textarea asp-for="Description" disabled="@IsDisabled" autocomplete="off" id="Description" placeholder='@ViewData["Descriptions"]' class=" pt-2 pb-2 service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
                                 </textarea>
                                     <span asp-validation-for="Description" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
 
@@ -337,62 +246,100 @@
 
 
 
-
-
-                                <div className="form-group  hj-height">
-                                    <h5 class="_text-position">    @ViewData["Categories"]</h5>
-                                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form" })
-                                    <span asp-validation-for="CategoryId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
-                                </div>
-
-
-
-
-                                <div className="form-group hj-height">
-                                    <h5 class="_text-position"> @ViewData["City"] </h5>
-                                    @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form" })
-                                    <span asp-validation-for="CityId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
-                                </div>
-
-
-                                <div class="row w-100 mx-auto my-3 text-center ">
-                                    <h5 class="_text-position"> @ViewData["Skills"] </h5>
-
-                                    <input asp-for="Skills" id="Skills" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
-                                    <span asp-validation-for="Skills" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
-                                </div>
-
-
-
-
-                                <div class="row w-100 mx-auto hj-select">
-                                    <div class="col-sm-2 col-12 py-2">
-                                        <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                @if (IsDisabled)
+                                {
+                                    <div className="form-group  hj-height">
+                                        <h5 class="_text-position">    @ViewData["Categories"]</h5>
+                                        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form", disabled = true })
+                                        <span asp-validation-for="CategoryId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
                                     </div>
-                                    <div class="col-sm-2 col-12  py-2">
-                                        <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                }
+                                else
+                                {
+                                    <div className="form-group  hj-height">
+                                        <h5 class="_text-position">    @ViewData["Categories"]</h5>
+                                        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form" })
+                                        <span asp-validation-for="CategoryId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                    </div>
+                                }
+
+
+
+                                @if (IsDisabled)
+                                {
+
+                                    <div className="form-group hj-height">
+                                        <h5 class="_text-position"> @ViewData["City"] </h5>
+                                        @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form", disabled = true })
+                                        <span asp-validation-for="CityId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div className="form-group hj-height">
+                                        <h5 class="_text-position"> @ViewData["City"] </h5>
+                                        @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form" })
+                                        <span asp-validation-for="CityId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                    </div>
+                                }
+
+
+
+
+
+
+                                @if (HasActivePlan)
+                                {
+                                    <div class="row w-100 mx-auto my-3 text-center ">
+                                        <h5 class="_text-position"> @ViewData["Skills"] </h5>
+
+                                        <input asp-for="Skills" disabled="@IsDisabled" id="Skills" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                        <span asp-validation-for="Skills" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
                                     </div>
 
-                                </div>
+                                }
 
-                                <div class="row w-100 mx-auto">
+
+                                @*<div class="row w-100 mx-auto hj-select">
+                                        <div class="col-sm-2 col-12 py-2">
+                                            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                        </div>
+                                        <div class="col-sm-2 col-12  py-2">
+                                            <button type="button" class="btn  w-100 button-Service">مهارت</button>
+                                        </div>
+
+                                    </div>*@
+
+                                <div class="row w-100 mx-auto mt-4 mb-4">
                                     <div class="col-lg-10 col-md-8 col-6">
                                         <h5 class="_text-position Pricerange  ">   @ViewData["PriceRange"]</h5>
                                     </div>
 
-                                    <div class="col-lg-2 col-md-4 col-6 text-news">
-                                        @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency" })
-                                        <span asp-validation-for="MonyUnitId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
-                                        @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
-                                    </div>
+                                    @if (IsDisabled)
+                                    {
+                                        <div class="col-lg-2 col-md-4 col-6 text-news">
+                                            @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency", disabled = true })
+                                            <span asp-validation-for="MonyUnitId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                            @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-2 col-md-4 col-6 text-news">
+                                            @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency" })
+                                            <span asp-validation-for="MonyUnitId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                            @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
+                                        </div>
+                                    }
+
                                 </div>
                                 <div class="row w-100 mx-auto  pb-5 active">
                                     <div class="col-sm-6 py-2">
-                                        <input asp-for="MinpRice" min="0" autocomplete="off" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input asp-for="MinpRice" disabled="@IsDisabled" min="0" max="9999999999999999999" autocomplete="off" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                         <span asp-validation-for="MinpRice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                     <div class="col-sm-6 py-2">
-                                        <input asp-for="MaxPrice" autocomplete="off" min="0" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input asp-for="MaxPrice" disabled="@IsDisabled" autocomplete="off" min="0" max="9999999999999999999" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                         <span asp-validation-for="MaxPrice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                 </div>
@@ -400,7 +347,7 @@
                                     <div class="col-12 text-right">
 
 
-                                        <input class="checkbox-service"
+                                        <input disabled="@IsDisabled" class="checkbox-service"
                                                type="checkbox"
                                                data-val="true"
                                                data-val-required="The IsAgreement field is required."
@@ -422,17 +369,17 @@
 
 
 
-                                <input name="IsAgreementVal" type="hidden" id="IsAgreementVal" value="false">
+                                <input name="IsAgreementVal" disabled="@IsDisabled" type="hidden" id="IsAgreementVal" value="false">
 
-                                <input name="IsSendByEmailVal" type="hidden" id="IsSendByEmailVal" value="false">
-                                <input name="IsSendByNOtificationVal" type="hidden" id="IsSendByNOtificationVal" value="false">
-                                <input name="IsSendBySmsVal" type="hidden" id="IsSendBySmsVal" value="false">
+                                <input name="IsSendByEmailVal" disabled="@IsDisabled" type="hidden" id="IsSendByEmailVal" value="false">
+                                <input name="IsSendByNOtificationVal" disabled="@IsDisabled" type="hidden" id="IsSendByNOtificationVal" value="false">
+                                <input name="IsSendBySmsVal" disabled="@IsDisabled" type="hidden" id="IsSendBySmsVal" value="false">
 
                                 <div class="row w-100 mx-auto text-md-center text-right mt-3">
                                     <div class="col-md-4">
 
 
-                                        <input class="checkbox-service"
+                                        <input disabled="@IsDisabled" class="checkbox-service"
                                                type="checkbox"
                                                data-val="true"
                                                data-val-required="The IsSendByEmail field is required."
@@ -445,7 +392,7 @@
 
                                     <div class="col-md-4">
 
-                                        <input name="IsSendByNOtification"
+                                        <input disabled="@IsDisabled" name="IsSendByNOtification"
                                                data-val="true"
                                                value="true"
                                                type="checkbox"
@@ -456,7 +403,7 @@
 
 
                                     <div class="col-md-4">
-                                        <input name="IsSendBySms"
+                                        <input disabled="@IsDisabled" name="IsSendBySms"
                                                data-val="true"
                                                value="true"
                                                type="checkbox"
@@ -466,7 +413,7 @@
                                     </div>
                                 </div>
                                 <div class="row w-100 mx-auto mt-4 pt-4">
-                                    <input type="submit" id="createBtnSubmit" value="@ViewData["Submit"]" class="btn btn-success w-25 mx-auto Confirmation">
+                                    <input type="submit" disabled="@IsDisabled" id="createBtnSubmit" value="@ViewData["Submit"]" class="btn btn-success w-25 mx-auto Confirmation">
                                 </div>
                             </form>
 
@@ -489,12 +436,18 @@
 
     <script src="~/lib/swal-alert/sweetalert.min.js"></script>
     <script src="~/SinaCustom/js/main.js"></script>
-    <script src="~/lib/jquery.tagsinput/jquery.tagsinput.min.js"></script>
-
+    @*<script src="~/lib/jquery.tagsinput/jquery.tagsinput.min.js"></script>*@
+    <script src="~/lib//bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>
     <script src="~/lib/vuejs/vue.min.js"></script>
 
     <script>
+
+
+
+
+
 
 
 
@@ -504,12 +457,35 @@
                <text>
 
         $(document).ready(function () {
-            $('.skill').tagsInput({
-                'interactive': true,
-                'defaultText': 'وارد کنید',
+
+
+
+
+
+
+
+            //$('.skill').tagsInput({
+            //    'interactive': true,
+            //    'defaultText': 'وارد کنید',
+            //});
+            //$("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+            //$("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+            $("#Skills").tagsinput({
+                maxChars: 50,
+                trimValue: true,
+                maxTags: 10,
             });
-            $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
-            $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+            $("#Skills1").tagsinput({
+                maxChars: 50,
+                trimValue: true,
+                maxTags: 10,
+            });
+
+            //$('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
+            $('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
+            $('.bootstrap-tagsinput').css({ "min-height": "60px", "height": "auto " })
+            //$("#Skills").closest('.bootstrap-tagsinput').css({ background: "#eee" })
+
 
 
             $(".catId").select2({
@@ -523,6 +499,22 @@
             });
 
 
+
+         @*@if (IsDisabled)
+            {
+
+                $(".catId").prop("disabled", false)
+                $(".cityId").prop("disabled", false)
+                $(".monyUnitid").prop("disabled", false)
+
+            }
+            else {
+
+                $(".catId").prop("disabled", true)
+                $(".cityId").prop("disabled", true)
+                 $(".monyUnitid").prop("disabled", true)*@
+
+            }
 
             //عدم اجازه یراس وارد کردن  اسپیس
             $('#donnerForm1 input[type=text]').on('keypress', function (e) {
@@ -577,16 +569,36 @@
         <text>
 
         $(document).ready(function () {
-            $('.skill').tagsInput({
-                'interactive': true,
-                'defaultText': 'Enter new',
+
+
+
+
+            $("#Skills").tagsinput({
+                maxChars: 50,
+                trimValue: true,
+                maxTags: 10,
             });
-            $("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
-            $("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+            $("#Skills1").tagsinput({
+                maxChars: 50,
+                trimValue: true,
+                maxTags: 10,
+            });
+            //$('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
+            $('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
+            $('.bootstrap-tagsinput').css({ "min-height": "60px", "height": "auto " })
+            //$("#Skills").closest('.bootstrap-tagsinput').css({   background: "#eee" })
+
+            //$('.skill').tagsInput({
+            //    'interactive': true,
+            //    'defaultText': 'Enter new',
+            //});
+            //$("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
+            //$("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
 
             $(".catId").select2();
             $(".cityId").select2();
             $(".monyUnitid").select2();
+
 
 
 
@@ -710,6 +722,7 @@
 
 
             $("#createBtnSubmit").prop('disabled', true);
+            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
             $.ajax({
                 method: "POST",
                 url: "/Services/ServiceProviderCreate",
@@ -717,19 +730,23 @@
                 //contentType: "application/json; charset=utf-8",
                 success: function (r) {
                              if (r.status) {
-                                   $("#createBtnSubmit").prop('disabled', false);
+                                 $("#createBtnSubmit").prop('disabled', false);
+                                 $.unblockUI();
                                  SuccessAlert(r.message)
+                                 $('#Skills').tagsinput('removeAll');
+
                                  resetForm("");
                              }
                              else {
-                                $("#createBtnSubmit").prop('disabled', false);
+                                 $("#createBtnSubmit").prop('disabled', false);
+                                 $.unblockUI();
                                  FailedAlert(r.message);
-
                              }
                            },
-                 error: function () {
-                            $("#createBtnSubmit").prop('disabled', false);
-                               FailedAlert("خطا رخ داده است.");
+                error: function () {
+                             $("#createBtnSubmit").prop('disabled', false);
+                             $.unblockUI();
+                             FailedAlert("خطا رخ داده است.");
                            }
                        });
                    })
@@ -757,7 +774,6 @@
             minpRice1 = $("#MinpRice1").val()
             maxPrice1 = $("#MaxPrice1").val()
             skills1 = $("#Skills1").val();
-
             isAgreement1 = $("#IsAgreementVal1").val()
 
 
@@ -783,6 +799,7 @@
 
 
             $("#createBtnSubmit1").prop('disabled', true);
+            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
             $.ajax({
                 method: "POST",
                 url: "/Services/ServiceRequestCreate",
@@ -791,17 +808,20 @@
                 success: function (r) {
                     if (r.status) {
                         $("#createBtnSubmit1").prop('disabled', false);
+                        $.unblockUI();
                         SuccessAlert(r.message)
+                        $('#Skills1').tagsinput('removeAll');
                         resetForm(1);
                     }
                     else {
                         $("#createBtnSubmit1").prop('disabled', false);
+                        $.unblockUI();
                         FailedAlert(r.message);
-
                     }
                 },
                 error: function () {
                     $("#createBtnSubmit1").prop('disabled', false);
+                    $.unblockUI();
                     FailedAlert("خطا رخ داده است.");
                 }
             });
@@ -825,7 +845,7 @@
 
 
 
-            
+
 
             //var tags = $(`#Skills${value}`).val()?.split(',');
 

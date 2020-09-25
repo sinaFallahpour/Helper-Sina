@@ -23,14 +23,14 @@ namespace Helper.Controllers
     public class SettingsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public SettingsController(ApplicationDbContext context,
-            IHostingEnvironment hostingEnvironment)
+        public SettingsController(ApplicationDbContext context)
         {
             _context = context;
-            _hostingEnvironment = hostingEnvironment;
         }
+
+
+
 
         // GET: Admin/Settings
         public IActionResult Index()
@@ -40,11 +40,25 @@ namespace Helper.Controllers
             var model = new SettingsViewModel()
             {
                 ContactUs = context.Where(c => c.Key == PublicHelper.ContactKeyName).SingleOrDefault().Value,
-                EnglishContactUs=context.Where(c=>c.Key==PublicHelper.ContactKeyName).SingleOrDefault().EnglishValue,
+                EnglishContactUs = context.Where(c => c.Key == PublicHelper.ContactKeyName).SingleOrDefault().EnglishValue,
                 Aboutus = context.Where(c => c.Key == PublicHelper.AboutUsKeyName).SingleOrDefault().Value,
                 EnglishAboutus = context.Where(c => c.Key == PublicHelper.AboutUsKeyName).SingleOrDefault().EnglishValue,
                 SiteRules = context.Where(c => c.Key == PublicHelper.SiteRulesKeyName).SingleOrDefault().Value,
                 EnglishSiteRules = context.Where(c => c.Key == PublicHelper.SiteRulesKeyName).SingleOrDefault().EnglishValue,
+
+                LandingHelperText = context.Where(c => c.Key == PublicHelper.landingHelperText).SingleOrDefault().Value,
+                EnglishlandingHelperText = context.Where(c => c.Key == PublicHelper.landingHelperText).SingleOrDefault().EnglishValue,
+
+
+                ForUserText = context.Where(c => c.Key == PublicHelper.ForUserText).SingleOrDefault().Value,
+                EnglishForUserText = context.Where(c => c.Key == PublicHelper.ForUserText).SingleOrDefault().EnglishValue,
+
+                ForProfessionalText = context.Where(c => c.Key == PublicHelper.ForProfessionalText).SingleOrDefault().Value,
+                EnglishForProfessionalText = context.Where(c => c.Key == PublicHelper.ForProfessionalText).SingleOrDefault().EnglishValue,
+
+                CreateServiceText = context.Where(c => c.Key == PublicHelper.CreateServiceText).SingleOrDefault().Value,
+                EnglishCreateServiceText = context.Where(c => c.Key == PublicHelper.CreateServiceText).SingleOrDefault().EnglishValue,
+
             };
             return View(model);
         }
@@ -92,6 +106,45 @@ namespace Helper.Controllers
                     }
 
 
+                    var landingHelperText = _context.TBL_Settings.SingleOrDefault(c => c.Key == PublicHelper.landingHelperText);
+                    if (landingHelperText != null)
+                    {
+                        landingHelperText.Value = model.LandingHelperText;
+                        landingHelperText.EnglishValue = model.EnglishlandingHelperText;
+
+                        landingHelperText.UpdatedAt = DateTime.Now;
+                    }
+
+
+                    var ForUser = _context.TBL_Settings.SingleOrDefault(c => c.Key == PublicHelper.ForUserText);
+                    if (ForUser != null)
+                    {
+                        ForUser.Value = model.ForUserText;
+                        ForUser.EnglishValue = model.EnglishForUserText;
+
+                        ForUser.UpdatedAt = DateTime.Now;
+                    }
+
+
+                    var ForUserProfesional = _context.TBL_Settings.SingleOrDefault(c => c.Key == PublicHelper.ForProfessionalText);
+                    if (ForUserProfesional != null)
+                    {
+                        ForUserProfesional.Value = model.ForProfessionalText;
+                        ForUserProfesional.EnglishValue = model.EnglishForProfessionalText;
+
+                        ForUserProfesional.UpdatedAt = DateTime.Now;
+                    }
+
+
+                    var CreateServiceText = _context.TBL_Settings.SingleOrDefault(c => c.Key == PublicHelper.CreateServiceText);
+                    if (CreateServiceText != null)
+                    {
+                        CreateServiceText.Value = model.CreateServiceText;
+                        CreateServiceText.EnglishValue = model.EnglishCreateServiceText;
+
+                        CreateServiceText.UpdatedAt = DateTime.Now;
+                    }
+
                     var result = _context.SaveChanges();
                     if (result > 0)
                     {
@@ -111,11 +164,6 @@ namespace Helper.Controllers
         }
 
         #endregion
-
-
-
-
-
 
 
 

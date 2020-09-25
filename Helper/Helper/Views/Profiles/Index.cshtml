@@ -40,7 +40,8 @@
                 <img src="/Upload/User/defaout.jpg" class="img-fluid mx-auto text-center" />*@
 
             @*<img src="/Upload/User/default2.png" />*@
-            <img src="@Model.PhotoAddress" id="UploadedImage" class="img-fluid mx-auto text-center rounded-circle" style="height:282px" />
+            <input hidden="hidden" id="ProfleImageAddress" value="@Model.PhotoAddress" />
+            <img src="@Model.PhotoAddress" id="UploadedImage" class="img-fluid mx-auto text-center rounded-circle" style="height:282px;width:282px" />
         </div>
         <div class="col-12 pt-4">
             <h3 class="text-center"> @Model.UserName </h3>
@@ -63,7 +64,7 @@
                     <div class="tab-content py-3 px-sm-0 mt-5" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                            <form asp-action="Index" id="profileForm">
+                            <form asp-action="Index" id="profileForm" enctype="multipart/form-data">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
@@ -107,9 +108,9 @@
 
                                         <div class="form-row my-4">
                                             <div class="col-md-6 mx-auto mb-3">
-                                                <i class="fas fa-check" style=" color: green; position: absolute; left: 17px; top: 20px; }"></i>
+                                                <i class="fas  " id="fileIcon" style=" color: green; position: absolute; left: 17px; top: 20px; }"></i>
                                                 <label id="largeFile" for="file">
-                                                    <input type="file" onchange="readURL(this);" id="file" />
+                                                    <input type="file" name="file" onchange="readURL(this);" id="file" />
                                                 </label>
                                             </div>
                                         </div>
@@ -135,7 +136,7 @@
                                     </div>
 
                                     <div class="form-group w-100">
-                                        <input asp-for="City" autocomplete="off" class="_text-position form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="" placeholder="@ViewData["CityPL"]">
+                                        <input asp-for="City" autocomplete="off" class="_text-position form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="City" placeholder="@ViewData["CityPL"]">
                                         <span asp-validation-for="City" class="text-center d-block text-danger"></span>
                                     </div>
 
@@ -179,8 +180,8 @@
                                         </div>
 
                                         <div class="form-group w-100 text-right">
-                                            <label for="exampleInputDetalis" class="mt-md-3">@ViewData["DescriptionPL"] </label>
-                                            <textarea asp-for="WorkDescriptions" autocomplete="off" class="_text-position form-control hj-form-profile " id="exampleInputDetalis" rows="3" placeholder="@ViewData["DescriptionPL"] ..."></textarea>
+                                            <label for="WorkDescriptions" class="mt-md-3">@ViewData["DescriptionPL"] </label>
+                                            <textarea asp-for="WorkDescriptions" autocomplete="off" class="_text-position form-control hj-form-profile " id="WorkDescriptions" rows="3" placeholder="@ViewData["DescriptionPL"] ..."></textarea>
                                             <span asp-validation-for="WorkDescriptions" class="text-center d-block text-danger"></span>
                                         </div>
 
@@ -334,1120 +335,1139 @@
 
 
                         -@*------dashbord-----*@
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div class="row w-100 mx-auto">
-                                <div class="col-12 text-right">
-                                    <h3>فعالیت من (خدمات دهنده)</h3>
-                                </div>
-                                <div class="col-12">
-                                    <img src="~/hj/img/borderbig.png" class="img-fluid" />
-                                </div>
-
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="row w-100 mx-auto mt-5 py-3">
+                            <div class="col-md-8 col-12 text-right">
+                                <h3>فعالیت من (خدمات دهنده)</h3>
                             </div>
-                            <div class="row w-100 mx-auto text-center hj-dashbord-service">
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/dashbord1.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-blue">  <b>  درامد در ماه</b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto ">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/dashbord2.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-blue">  <b> مهارت های ثبت شده</b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0 ">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto ">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/dashbord3.png.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-blue">  <b>  خدمات  مرتبط با تخصص</b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/dashbord4.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-blue">  <b>   در دست اقدام  </b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="www.com">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/dashbord5.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-blue">  <b>  درامد در ماه</b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/dashbord6.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-blue">  <b> موجودی کیف پول شما </b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-green b-dashbord ">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-md-4 col-12 text-left pt-2">
+                                <h6 class="text-helper"> <a href="services">ارائه خدمت </a> </h6>
                             </div>
-                            <br />
-                            <br />
-                            @*----*@
-                            <div class="row w-100 mx-auto mt-5">
-                                <div class="col-12 text-right">
-                                    <h3>فعالیت من (خدمات دهنده)</h3>
-                                </div>
-                                <div class="col-12">
-                                    <img src="~/hj/img/borderbig green.png" class="img-fluid" />
-                                </div>
-
+                            <div class="col-12">
+                                <img src="/hj/img/borderbig.png" class="img-fluid">
                             </div>
-                            <div class="row w-100 mx-auto text-center hj-dashbord-service">
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0  px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/11.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                        </div>
+
+                        <div class="row w-100 mx-auto text-center hj-dashbord-service">
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/dashbord1.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-blue">  <b>  درامد در ماه</b></h5>
                                             </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-green">  <b>  درامد در ماه</b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
-                                                </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
                                             </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0  px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto ">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/22.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-green">  <b> مهارت های ثبت شده</b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto ">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/33.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-green">  <b>  خدمات  مرتبط با تخصص</b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord ">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/44.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-green">  <b>   در دست اقدام  </b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/55.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-green">  <b>  درامد در ماه</b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12 py-4 my-4 mx-auto p-md-0 px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto ">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/66.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-green">  <b> موجودی کیف پول شما </b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord ">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <br />
-                            <div class="row w-100 mx-auto text-center">
-                                <div class="col-12 text-md-right text-center">
-                                    <h3>آمـــــــــــــار</h3>
-                                </div>
-                                <div class="col-12 p-0">
-                                    <img src="~/hj/img/borderbig green.png" class="img-fluid" />
-                                </div>
-                            </div>
-                            <div class="row w-100 mx-auto mt-5">
-                                <div class="col-lg-6 col-12 p-0">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-3 py-3 p-0 mx-auto text-center hj-number-amar">
-                                            <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper timer mx-auto" data-to="3556" data-speed="8000"></h6></div>
-                                            <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper mx-auto pt-3"> پسندیده شده ها</h6></div>
-                                        </div>
-
-                                        <div class="col-3 py-3 p-0 mx-auto text-center hj-number-amar">
-                                            <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper timer mx-auto" data-to="3556" data-speed="8000"></h6></div>
-                                            <div class="row w-100 mx-auto"><h6 class="text-center  hj-size text-helper mx-auto pt-3"> پسندیده شده ها</h6></div>
-                                        </div>
-                                        <div class="col-3 py-3 p-0  mx-auto text-center hj-number-amar">
-                                            <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper timer mx-auto" data-to="3556" data-speed="8000"></h6></div>
-                                            <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper mx-auto pt-3"> پسندیده شده ها</h6></div>
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 mx-auto sum-amar mt-5 py-4">
-                                        <div class="col-6 text-center amar-daramad">
-                                            <div class="col-12 py-3 py-md-0"><h6>درآمد کسب شده</h6></div>
-                                            <div class="col-12"><h6>در سه ماه گذشته</h6></div>
-                                        </div>
-                                        <div class="col-6 text-center"><div class="col-12 py-4 py-md-0"><h6>150.000.000</h6></div><div class="col-12 py-4 py-md-0"><h6>ریال</h6></div></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12 hj-charts mt-lg-0 mt-5">     <canvas id="myChart"></canvas></div>
-
-
-                            </div>
-
-
-                            @*-----------------*@
-                            <div class="row w-100 mx-auto mt-5 text-center">
-                                <div class="col-md-4 col-12 py-3 mx-auto">
-                                    <img src="/hj/img/111.png" class="img-fluid " alt="Responsive image">
-                                    <br>
-                                    <br>
-                                    <span class=" hj-text-service pt-4 text-center"> تعداد خدمات دهندگان</span><br />
-                                    <span class="timer text-helper" data-to="3556" data-speed="8000">3556</span>
-                                </div>
-                                <div class="col-md-4 col-12 py-3 mx-auto">
-                                    <img src="/hj/img/222.png" class="img-fluid " alt="Responsive image">
-                                    <br>
-                                    <br>
-                                    <span class=" hj-text-service pt-4 text-center"> خدمات انجام شده</span><br />
-                                    <span class="timer text-helper" data-to="3556" data-speed="8000">3556</span>
-                                </div>
-                                <div class="col-md-4 col-12 py-3 mx-auto">
-                                    <img src="/hj/img/333.png" class="img-fluid " alt="Responsive image">
-                                    <br>
-                                    <br>
-                                    <span class=" hj-text-service pt-4 text-center"> شهر های تحت پوشش</span><br />
-                                    <span class="timer text-helper" data-to="3556" data-speed="8000">3556</span>
-                                </div>
-                            </div>
-                            @*--------------*@
-                            <div class="row w-100 mx-auto mt-5">
-                                <div class="col-12 text-right">
-                                    <h3>فعالیت من (خدمات گیرنده)</h3>
-                                </div>
-                                <div class="col-12">
-                                    <img src="/hj/img/borderbig.png" class="img-fluid">
-                                </div>
-
-                            </div>
-                            <div class="row w-100 mx-auto mt-4">
-                                <div class="col-lg-3 col-12 py-3 hj-Property  mx-auto my-2 text-Purple">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-md-4 p-0">
-                                            <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                        </div>
-                                        <div class="col-md-8 p-0 pt-2">
-                                            <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
-                                            <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-md-4 p-0">
-                                            <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                        </div>
-                                        <div class="col-md-8 p-0 pt-2">
-                                            <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
-                                            <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-md-4 p-0">
-                                            <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                        </div>
-                                        <div class="col-md-8 p-0 pt-2">
-                                            <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
-                                            <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row w-100 mx-auto mt-4">
-                                <div class="col-lg-3 col-12 py-3 hj-Property  mx-auto my-2 text-Purple">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-md-4 p-0">
-                                            <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                        </div>
-                                        <div class="col-md-8 p-0 pt-2">
-                                            <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
-                                            <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-md-4 p-0">
-                                            <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                        </div>
-                                        <div class="col-md-8 p-0 pt-2">
-                                            <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
-                                            <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-md-4 p-0">
-                                            <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                        </div>
-                                        <div class="col-md-8 p-0 pt-2">
-                                            <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
-                                            <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @*-------------------*@
-                            <div class="row w-100 mx-auto mt-5 py-3">
-                                <div class="col-md-8 col-12 text-right">
-                                    <h3>آمار بازدید از پروفایل شما</h3>
-                                </div>
-                                <div class="col-md-4 col-12 text-left pt-2">
-                                    <h6 class="text-helper">250 نفر ماه گذشنه</h6>
-                                </div>
-                                <div class="col-12">
-                                    <img src="/hj/img/borderbig.png" class="img-fluid">
-                                </div>
-
-                            </div>
-                            <div class="row w-100 mx-auto">
-                                <div class="col-md-4 col-6 py-3">
-                                    <div class="row w-100 mx-auto">
-                                        <img src="~/hj/img/Ellipse 46.png" class="img-fluid  mx-auto w-50" />
-                                    </div>
-                                    <div class="row w-100 mx-auto text-center">
-                                        <h6 class="text-center mx-auto">نیما کفش آرا</h6>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-6 py-3">
-                                    <div class="row w-100 mx-auto">
-                                        <img src="~/hj/img/img1.png" class="img-fluid  mx-auto w-50" />
-                                    </div>
-                                    <div class="row w-100 mx-auto text-center">
-                                        <h6 class="text-center mx-auto">نیما کفش آرا</h6>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-6 py-3">
-                                    <div class="row w-100 mx-auto">
-                                        <img src="~/hj/img/Ellipse 46.png" class="img-fluid  mx-auto w-50" />
-                                    </div>
-                                    <div class="row w-100 mx-auto text-center">
-                                        <h6 class="text-center mx-auto">نیما کفش آرا</h6>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-4 col-6 py-3">
-                                    <div class="row w-100 mx-auto">
-                                        <img src="~/hj/img/Ellipse 46.png" class="img-fluid  mx-auto w-50" />
-                                    </div>
-                                    <div class="row w-100 mx-auto text-center">
-                                        <h6 class="text-center mx-auto">نیما کفش آرا</h6>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-6 py-3">
-                                    <div class="row w-100 mx-auto">
-                                        <img src="~/hj/img/img1.png" class="img-fluid  mx-auto w-50" />
-                                    </div>
-                                    <div class="row w-100 mx-auto text-center">
-                                        <h6 class="text-center mx-auto">نیما کفش آرا</h6>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-6 py-3">
-                                    <div class="row w-100 mx-auto">
-                                        <img src="~/hj/img/Ellipse 46.png" class="img-fluid  mx-auto w-50" />
-                                    </div>
-                                    <div class="row w-100 mx-auto text-center">
-                                        <h6 class="text-center mx-auto">نیما کفش آرا</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            @*--------------*@
-                            <div class="row w-100 mx-auto text-center mt-5">
-                                <div class="col-12 text-md-right text-center">
-                                    <h3>فعالیت های خدماتی من</h3>
-                                </div>
-                                <div class="col-12 p-0">
-                                    <img src="~/hj/img/borderbig green.png" class="img-fluid" />
-                                </div>
-                            </div>
-                            <div class="row w-100 mx-auto mt-5 mb-3">
-
-
-                                <!-- Actual search box -->
-                                <div class="form-group has-search w-100">
-                                    <i class="fas fa-search form-control-feedback pl-3"></i>
-                                    <input type="text" class="form-control searchbox text-center" placeholder="جستجو">
-                                </div>
-
-
-
-                            </div>
-                            <div class="table-responsive text-nowrap">
-                                <table class="table text-center p-0 m-0  ">
-                                    <thead>
-                                        <tr class="titr-table">
-                                            <th scope="col" class="text-center">نام پروژه</th>
-                                            <th scope="col" class="text-center">مبلغ</th>
-                                            <th scope="col" class="text-center">واحد</th>
-                                            <th scope="col" class="text-center">نام کارفرما</th>
-                                            <th scope="col" class="text-center">نام خدمات دهنده</th>
-                                            <th scope="col" class="text-center"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-content">
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                            <div class="row w-100 mx-auto mt-5">
-                                <nav aria-label="Page navigation example " class="mx-auto">
-                                    <ul class="pagination">
-                                        <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">قبلی</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper" href="#">1</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper" href="#">2</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper" href="#">3</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">بعدی</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            @*------*@
-                            <div class="row w-100 mx-auto text-center mt-5">
-                                <div class="col-12 text-md-right text-center">
-                                    <h3>فعالیت های درخواستی  من</h3>
-                                </div>
-                                <div class="col-12 p-0">
-                                    <img src="~/hj/img/borderbig green.png" class="img-fluid" />
-                                </div>
-                            </div>
-                            <div class="row w-100 mx-auto mt-5 mb-3">
-
-
-                                <!-- Actual search box -->
-                                <div class="form-group has-search w-100">
-                                    <i class="fas fa-search form-control-feedback pl-3"></i>
-                                    <input type="text" class="form-control searchbox text-center" placeholder="جستجو">
-                                </div>
-
-
-
-                            </div>
-                            <div class="table-responsive text-nowrap">
-                                <table class="table text-center p-0 m-0  ">
-                                    <thead>
-                                        <tr class="titr-table">
-                                            <th scope="col" class="text-center">نام پروژه</th>
-                                            <th scope="col" class="text-center">مبلغ</th>
-                                            <th scope="col" class="text-center">واحد</th>
-                                            <th scope="col" class="text-center">نام کارفرما</th>
-                                            <th scope="col" class="text-center">نام خدمات دهنده</th>
-                                            <th scope="col" class="text-center"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-content">
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                            <div class="row w-100 mx-auto mt-5">
-                                <nav aria-label="Page navigation example " class="mx-auto">
-                                    <ul class="pagination">
-                                        <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">قبلی</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper" href="#">1</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper" href="#">2</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper" href="#">3</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">بعدی</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div class="row w-100 mx-auto text-center mt-5 mb-4 hj-hiden">
-                                <div class="col-12 text-md-right text-center">
-                                    <h3> پیامهای من   </h3>
-                                </div>
-                                <div class="col-12 p-0">
-                                    <img src="/hj/img/borderbig green.png" class="img-fluid">
-                                </div>
-                            </div>
-                            @*--chat--*@
-                            <div class="row w-100 mx-auto hj-hiden">
-                                <div id="frame">
-                                    <div id="sidepanel">
-                                        <div id="profile">
-                                            <div class="wrap">
-                                                <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-                                                <p>Mike Ross</p>
-                                                <i class="fas fa-chevron-down expand-button" aria-hidden="true"></i>
-                                                <div id="status-options">
-                                                    <ul>
-                                                        <li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
-                                                        <li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-                                                        <li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
-                                                        <li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
-                                                    </ul>
-                                                </div>
-                                                <div id="expanded">
-                                                    <label for="twitter"><i class="fab fa-facebook fa-fw" aria-hidden="true"></i></label>
-                                                    <input name="twitter" type="text" value="mikeross" />
-                                                    <label for="twitter"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></label>
-                                                    <input name="twitter" type="text" value="ross81" />
-                                                    <label for="twitter"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></label>
-                                                    <input name="twitter" type="text" value="mike.ross" />
-                                                </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
                                             </div>
                                         </div>
-                                        <div id="search">
-                                            <label for=""><i class="fas fa-search" aria-hidden="true"></i></label>
-                                            <input type="text" placeholder="Search contacts..." />
-                                        </div>
-                                        <div id="contacts">
-                                            <ul>
-                                                <li class="contact">
-                                                    <div class="wrap">
-                                                        <span class="contact-status online"></span>
-                                                        <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Louis Litt</p>
-                                                            <p class="preview">You just got LITT up, Mike.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="contact active">
-                                                    <div class="wrap">
-                                                        <span class="contact-status busy"></span>
-                                                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Harvey Specter</p>
-                                                            <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="contact">
-                                                    <div class="wrap">
-                                                        <span class="contact-status away"></span>
-                                                        <img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Rachel Zane</p>
-                                                            <p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="contact">
-                                                    <div class="wrap">
-                                                        <span class="contact-status online"></span>
-                                                        <img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Donna Paulsen</p>
-                                                            <p class="preview">Mike, I know everything! I'm Donna..</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="contact">
-                                                    <div class="wrap">
-                                                        <span class="contact-status busy"></span>
-                                                        <img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Jessica Pearson</p>
-                                                            <p class="preview">Have you finished the draft on the Hinsenburg deal?</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="contact">
-                                                    <div class="wrap">
-                                                        <span class="contact-status"></span>
-                                                        <img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Harold Gunderson</p>
-                                                            <p class="preview">Thanks Mike! :)</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="contact">
-                                                    <div class="wrap">
-                                                        <span class="contact-status"></span>
-                                                        <img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Daniel Hardman</p>
-                                                            <p class="preview">We'll meet again, Mike. Tell Jessica I said 'Hi'.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="contact">
-                                                    <div class="wrap">
-                                                        <span class="contact-status busy"></span>
-                                                        <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Katrina Bennett</p>
-                                                            <p class="preview">I've sent you the files for the Garrett trial.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="contact">
-                                                    <div class="wrap">
-                                                        <span class="contact-status"></span>
-                                                        <img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Charles Forstman</p>
-                                                            <p class="preview">Mike, this isn't over.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="contact">
-                                                    <div class="wrap">
-                                                        <span class="contact-status"></span>
-                                                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                                                        <div class="meta">
-                                                            <p class="name">Jonathan Sidwell</p>
-                                                            <p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div id="bottom-bar">
-                                            <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
-                                            <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
-                                        </div>
+
                                     </div>
-                                    <div class="content">
-                                        <div class="contact-profile">
-                                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                                            <p>Harvey Specter</p>
-                                            <div class="social-media pr-3">
-                                                <i class="fab fa-facebook" aria-hidden="true"></i>
-                                                <i class="fab fa-twitter" aria-hidden="true"></i>
-                                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto ">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/dashbord2.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-blue">  <b> مهارت های ثبت شده</b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
                                             </div>
                                         </div>
-                                        <div class="messages">
-                                            <ul>
-                                                <li class="sent">
-                                                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                                                    <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
-                                                </li>
-                                                <li class="replies">
-                                                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                                                    <p>When you're backed against the wall, break the god damn thing down.</p>
-                                                </li>
-                                                <li class="replies">
-                                                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                                                    <p>Excuses don't win championships.</p>
-                                                </li>
-                                                <li class="sent">
-                                                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                                                    <p>Oh yeah, did Michael Jordan tell you that?</p>
-                                                </li>
-                                                <li class="replies">
-                                                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                                                    <p>No, I told him that.</p>
-                                                </li>
-                                                <li class="replies">
-                                                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                                                    <p>What are your choices when someone puts a gun to your head?</p>
-                                                </li>
-                                                <li class="sent">
-                                                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                                                    <p>What are you talking about? You do what they say or they shoot you.</p>
-                                                </li>
-                                                <li class="replies">
-                                                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                                                    <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-                                                </li>
-                                            </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0 ">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto ">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/dashbord3.png.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
                                         </div>
-                                        <div class="message-input">
-                                            <div class="wrap">
-                                                <input type="text" placeholder="Write your message..." />
-                                                <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-                                                <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-blue">  <b>  خدمات  مرتبط با تخصص</b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/dashbord4.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-blue">  <b>   در دست اقدام  </b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="www.com">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
 
+                                            </div>
+                                        </div>
 
-
-
-
-
-
-                            @*---end chat--*@
-
-                            @*----announcement----*@
-                            <div class="row w-100 mx-auto text-center mt-5 mb-4">
-                                <div class="col-12 text-md-right text-center">
-                                    <h3>اطلاعیه های من</h3>
-                                </div>
-                                <div class="col-12 p-0">
-                                    <img src="/hj/img/borderbig green.png" class="img-fluid">
-                                </div>
-                            </div>
-                            <div class="row w-75 mx-auto hj-serachW-100 ">
-                                <div class="form-group has-search w-100 position-relative">
-                                    <i class="fas fa-search form-control-feedback pl-3"></i>
-                                    <input type="text" class="form-control searchbox text-center" placeholder="جستجو">
-                                </div>
-
-                            </div>
-                            <div class="row w-100 mx-auto mt-2">
-                                <div class="col-md-2 col-12 text-center">
-                                    <img src="~/hj/img/h.png" class="img-fluid" />
-                                </div>
-                                <div class="col-md-10 col-12">
-                                    <div class="row w-100 py-3">
-                                        <div class="col-10 text-right">نیما کفش آرا</div>
-                                        <div class="col-2 text-helper">27/2/1396</div>
-                                    </div>
-                                    <div class="row w-100">
-                                        <h6 class="text-helper text-md-right text-center pr-md-3">نام پروژه</h6>
-                                    </div>
-                                    <div class="col-12 p-0">
-                                        <h6 class="text-justify">مختصری از آخرین پیام  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/dashbord5.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-blue">  <b>  درامد در ماه</b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-green b-dashbord">  مشاهده همه </h5></a>
+                                            </div>
+                                        </div>
 
-                            <hr />
-                            <div class="row w-100 mx-auto mt-2">
-                                <div class="col-md-2 col-12 text-center">
-                                    <img src="~/hj/img/h.png" class="img-fluid" />
-                                </div>
-                                <div class="col-md-10 col-12">
-                                    <div class="row w-100 py-3">
-                                        <div class="col-10 text-right">نیما کفش آرا</div>
-                                        <div class="col-2 text-helper">27/2/1396</div>
-                                    </div>
-                                    <div class="row w-100">
-                                        <h6 class="text-helper text-md-right text-center pr-md-3">نام پروژه</h6>
-                                    </div>
-                                    <div class="col-12 p-0">
-                                        <h6 class="text-justify">مختصری از آخرین پیام  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr />
-
-                            <div class="row w-100 mx-auto mt-2">
-                                <div class="col-md-2 col-12 text-center">
-                                    <img src="~/hj/img/h.png" class="img-fluid" />
-                                </div>
-                                <div class="col-md-10 col-12">
-                                    <div class="row w-100 py-3">
-                                        <div class="col-10 text-right">نیما کفش آرا</div>
-                                        <div class="col-2 text-helper">27/2/1396</div>
-                                    </div>
-                                    <div class="row w-100">
-                                        <h6 class="text-helper text-md-right text-center pr-md-3">نام پروژه</h6>
-                                    </div>
-                                    <div class="col-12 p-0">
-                                        <h6 class="text-justify">مختصری از آخرین پیام  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/dashbord6.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-blue">  <b> موجودی کیف پول شما </b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-blue size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-green b-dashbord ">  مشاهده همه </h5></a>
+                                            </div>
+                                        </div>
 
-                            <hr />
-                            <div class="row w-100 mx-auto mt-2">
-                                <div class="col-md-2 col-12 text-center">
-                                    <img src="~/hj/img/h.png" class="img-fluid" />
-                                </div>
-                                <div class="col-md-10 col-12">
-                                    <div class="row w-100 py-3">
-                                        <div class="col-10 text-right">نیما کفش آرا</div>
-                                        <div class="col-2 text-helper">27/2/1396</div>
                                     </div>
-                                    <div class="row w-100">
-                                        <h6 class="text-helper text-md-right text-center pr-md-3">نام پروژه</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        @*----*@
+                        <div class="row w-100 mx-auto mt-5 py-3">
+                            <div class="col-md-8 col-12 text-right">
+                                <h3>فعالیت من (خدمات گیرنده)</h3>
+                            </div>
+                            <div class="col-md-4 col-12 text-left pt-2">
+                                <h6 class="text-helper"> <a href="services">  درخواست خدمت </a>    </h6>
+                            </div>
+                            <div class="col-12">
+                                <img src="~/hj/img/borderbig green.png" class="img-fluid" />
+                            </div>
+                        </div>
+
+
+                        @*<div class="row w-100 mx-auto mt-5">
+                            <div class="col-12 text-right">
+                                <h3>فعالیت من (خدمات دهنده)</h3>
+                            </div>
+                            <div class="col-md-4 col-12 text-left pt-2">
+                                <h6 class="text-helper"> <a href="services#nav-home">     ارائه خدمت  </a>    </h6>
+                            </div>
+                            <div class="col-12">
+                                <img src="~/hj/img/borderbig green.png" class="img-fluid" />
+                            </div>
+
+                        </div>*@
+                        <div class="row w-100 mx-auto text-center hj-dashbord-service">
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0  px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/11.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-green">  <b>  درامد در ماه</b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="col-12 p-0">
-                                        <h6 class="text-justify">مختصری از آخرین پیام  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0  px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto ">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/22.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-green">  <b> مهارت های ثبت شده</b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto ">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/33.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-green">  <b>  خدمات  مرتبط با تخصص</b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord ">  مشاهده همه </h5></a>
+                                            </div>
+                                        </div>
 
-                            <hr />
-
-
-
-                            @*----end announcement----*@
-
-                            @*---table--*@
-                            <div class="row w-100 mx-auto text-center mt-5">
-                                <div class="col-12 text-md-right text-center">
-                                    <h3>اختلافات من</h3>
+                                    </div>
                                 </div>
-                                <div class="col-12 p-0">
-                                    <img src="/hj/img/borderbig green.png" class="img-fluid">
+                            </div>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/44.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-green">  <b>   در دست اقدام  </b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0 px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/55.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-green">  <b>  درامد در ماه</b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
+                                            </div>
+                                        </div>
 
-
-                            <div class="row w-100 mx-auto mt-5 mb-3">
-
-
-                                <!-- Actual search box -->
-                                <div class="form-group has-search w-100">
-                                    <i class="fas fa-search form-control-feedback pl-3"></i>
-                                    <input type="text" class="form-control searchbox text-center" placeholder="جستجو">
+                                    </div>
                                 </div>
-
-
-
                             </div>
-                            <div class="table-responsive text-nowrap">
-                                <table class="table text-center p-0 m-0  ">
-                                    <thead>
-                                        <tr class="titr-table">
-                                            <th scope="col" class="text-center">نام پروژه</th>
-                                            <th scope="col" class="text-center">مبلغ</th>
-                                            <th scope="col" class="text-center">واحد</th>
-                                            <th scope="col" class="text-center">نام کارفرما</th>
-                                            <th scope="col" class="text-center">نام خدمات دهنده</th>
-                                            <th scope="col" class="text-center"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-content">
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">نام پروژه</td>
-                                            <td>250.000</td>
-                                            <td>ریال </td>
-                                            <td>نام کارفرما</td>
-                                            <td>نام خدمات دهنده</td>
-                                            <td><a href="#" class="color-helper">مشاهده</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="col-md-4 col-12 py-4 my-4 mx-auto p-md-0 px-0">
+                                <div href="#">
+                                    <div class="hj-card-dashbord mx-auto ">
+                                        <div class="row  w-100 hj-img-dashbord mx-auto">
+                                            <img src="~/hj/img/66.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                        </div>
+                                        <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                            <div class="col-12 pt-5 ">
+                                                <h5 class="text-center w-100 color-green">  <b> موجودی کیف پول شما </b></h5>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto ">
+                                                <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
+                                            </div>
+                                            <div class="col-12 pt-5 text-center mx-auto">
+                                                <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord ">  مشاهده همه </h5></a>
+                                            </div>
+                                        </div>
 
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row w-100 mx-auto mt-5">
-                                <nav aria-label="Page navigation example " class="mx-auto">
-                                    <ul class="pagination">
-                                        <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">قبلی</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper" href="#">1</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper" href="#">2</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper" href="#">3</a></li>
-                                        <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">بعدی</a></li>
-                                    </ul>
-                                </nav>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="row w-100 mx-auto text-center">
+                            <div class="col-12 text-md-right text-center">
+                                <h3>آمـــــــــــــار</h3>
                             </div>
-                            @*-----end table --*@
+                            <div class="col-12 p-0">
+                                <img src="~/hj/img/borderbig green.png" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="row w-100 mx-auto mt-5">
+                            <div class="col-lg-6 col-12 p-0">
+                                <div class="row w-100 mx-auto">
+                                    <div class="col-3 py-3 p-0 mx-auto text-center hj-number-amar">
+                                        <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper timer mx-auto" data-to="3556" data-speed="8000"></h6></div>
+                                        <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper mx-auto pt-3"> پسندیده شده ها</h6></div>
+                                    </div>
+
+                                    <div class="col-3 py-3 p-0 mx-auto text-center hj-number-amar">
+                                        <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper timer mx-auto" data-to="3556" data-speed="8000"></h6></div>
+                                        <div class="row w-100 mx-auto"><h6 class="text-center  hj-size text-helper mx-auto pt-3"> پسندیده شده ها</h6></div>
+                                    </div>
+                                    <div class="col-3 py-3 p-0  mx-auto text-center hj-number-amar">
+                                        <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper timer mx-auto" data-to="3556" data-speed="8000"></h6></div>
+                                        <div class="row w-100 mx-auto"><h6 class="text-center hj-size text-helper mx-auto pt-3"> پسندیده شده ها</h6></div>
+                                    </div>
+                                </div>
+                                <div class="row w-100 mx-auto sum-amar mt-5 py-4">
+                                    <div class="col-6 text-center amar-daramad">
+                                        <div class="col-12 py-3 py-md-0"><h6>درآمد کسب شده</h6></div>
+                                        <div class="col-12"><h6>در سه ماه گذشته</h6></div>
+                                    </div>
+                                    <div class="col-6 text-center"><div class="col-12 py-4 py-md-0"><h6>150.000.000</h6></div><div class="col-12 py-4 py-md-0"><h6>ریال</h6></div></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 hj-charts mt-lg-0 mt-5">     <canvas id="myChart"></canvas></div>
 
 
                         </div>
+
+
+                        @*-----------------*@
+                        <div class="row w-100 mx-auto mt-5 text-center">
+                            <div class="col-md-4 col-12 py-3 mx-auto">
+                                <img src="/hj/img/111.png" class="img-fluid " alt="Responsive image">
+                                <br>
+                                <br>
+                                <span class=" hj-text-service pt-4 text-center"> تعداد خدمات دهندگان</span><br />
+                                <span class="timer text-helper" data-to="3556" data-speed="8000">3556</span>
+                            </div>
+                            <div class="col-md-4 col-12 py-3 mx-auto">
+                                <img src="/hj/img/222.png" class="img-fluid " alt="Responsive image">
+                                <br>
+                                <br>
+                                <span class=" hj-text-service pt-4 text-center"> خدمات انجام شده</span><br />
+                                <span class="timer text-helper" data-to="3556" data-speed="8000">3556</span>
+                            </div>
+                            <div class="col-md-4 col-12 py-3 mx-auto">
+                                <img src="/hj/img/333.png" class="img-fluid " alt="Responsive image">
+                                <br>
+                                <br>
+                                <span class=" hj-text-service pt-4 text-center"> شهر های تحت پوشش</span><br />
+                                <span class="timer text-helper" data-to="3556" data-speed="8000">3556</span>
+                            </div>
+                        </div>
+                        @*--------------*@
+                        <div class="row w-100 mx-auto mt-5">
+                            <div class="col-12 text-right">
+                                <h3>فعالیت من (خدمات گیرنده)</h3>
+                            </div>
+                            <div class="col-12">
+                                <img src="/hj/img/borderbig.png" class="img-fluid">
+                            </div>
+
+                        </div>
+                        <div class="row w-100 mx-auto mt-4">
+                            <div class="col-lg-3 col-12 py-3 hj-Property  mx-auto my-2 text-Purple">
+                                <div class="row w-100 mx-auto">
+                                    <div class="col-md-4 p-0">
+                                        <img src="~/hj/img/home.png" class="img-fluid w-100" />
+                                    </div>
+                                    <div class="col-md-8 p-0 pt-2">
+                                        <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
+                                        <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
+
+                                    </div>
+                                </div>
+                                <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
+                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
+                                <div class="row w-100 mx-auto">
+                                    <div class="col-md-4 p-0">
+                                        <img src="~/hj/img/home.png" class="img-fluid w-100" />
+                                    </div>
+                                    <div class="col-md-8 p-0 pt-2">
+                                        <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
+                                        <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
+
+                                    </div>
+                                </div>
+                                <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
+                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
+                                <div class="row w-100 mx-auto">
+                                    <div class="col-md-4 p-0">
+                                        <img src="~/hj/img/home.png" class="img-fluid w-100" />
+                                    </div>
+                                    <div class="col-md-8 p-0 pt-2">
+                                        <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
+                                        <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
+
+                                    </div>
+                                </div>
+                                <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
+                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row w-100 mx-auto mt-4">
+                            <div class="col-lg-3 col-12 py-3 hj-Property  mx-auto my-2 text-Purple">
+                                <div class="row w-100 mx-auto">
+                                    <div class="col-md-4 p-0">
+                                        <img src="~/hj/img/home.png" class="img-fluid w-100" />
+                                    </div>
+                                    <div class="col-md-8 p-0 pt-2">
+                                        <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
+                                        <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
+
+                                    </div>
+                                </div>
+                                <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
+                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
+                                <div class="row w-100 mx-auto">
+                                    <div class="col-md-4 p-0">
+                                        <img src="~/hj/img/home.png" class="img-fluid w-100" />
+                                    </div>
+                                    <div class="col-md-8 p-0 pt-2">
+                                        <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
+                                        <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
+
+                                    </div>
+                                </div>
+                                <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
+                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
+                                <div class="row w-100 mx-auto">
+                                    <div class="col-md-4 p-0">
+                                        <img src="~/hj/img/home.png" class="img-fluid w-100" />
+                                    </div>
+                                    <div class="col-md-8 p-0 pt-2">
+                                        <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
+                                        <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
+
+                                    </div>
+                                </div>
+                                <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
+                                    <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                    <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*-------------------*@
+                        <div class="row w-100 mx-auto mt-5 py-3">
+                            <div class="col-md-8 col-12 text-right">
+                                <h3>آمار بازدید از پروفایل شما</h3>
+                            </div>
+                            <div class="col-md-4 col-12 text-left pt-2">
+                                <h6 class="text-helper">250 نفر ماه گذشنه</h6>
+                            </div>
+                            <div class="col-12">
+                                <img src="/hj/img/borderbig.png" class="img-fluid">
+                            </div>
+
+                        </div>
+                        <div class="row w-100 mx-auto">
+                            <div class="col-md-4 col-6 py-3">
+                                <div class="row w-100 mx-auto">
+                                    <img src="~/hj/img/Ellipse 46.png" class="img-fluid  mx-auto w-50" />
+                                </div>
+                                <div class="row w-100 mx-auto text-center">
+                                    <h6 class="text-center mx-auto">نیما کفش آرا</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6 py-3">
+                                <div class="row w-100 mx-auto">
+                                    <img src="~/hj/img/img1.png" class="img-fluid  mx-auto w-50" />
+                                </div>
+                                <div class="row w-100 mx-auto text-center">
+                                    <h6 class="text-center mx-auto">نیما کفش آرا</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6 py-3">
+                                <div class="row w-100 mx-auto">
+                                    <img src="~/hj/img/Ellipse 46.png" class="img-fluid  mx-auto w-50" />
+                                </div>
+                                <div class="row w-100 mx-auto text-center">
+                                    <h6 class="text-center mx-auto">نیما کفش آرا</h6>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-6 py-3">
+                                <div class="row w-100 mx-auto">
+                                    <img src="~/hj/img/Ellipse 46.png" class="img-fluid  mx-auto w-50" />
+                                </div>
+                                <div class="row w-100 mx-auto text-center">
+                                    <h6 class="text-center mx-auto">نیما کفش آرا</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6 py-3">
+                                <div class="row w-100 mx-auto">
+                                    <img src="~/hj/img/img1.png" class="img-fluid  mx-auto w-50" />
+                                </div>
+                                <div class="row w-100 mx-auto text-center">
+                                    <h6 class="text-center mx-auto">نیما کفش آرا</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6 py-3">
+                                <div class="row w-100 mx-auto">
+                                    <img src="~/hj/img/Ellipse 46.png" class="img-fluid  mx-auto w-50" />
+                                </div>
+                                <div class="row w-100 mx-auto text-center">
+                                    <h6 class="text-center mx-auto">نیما کفش آرا</h6>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        @*--------------*@
+                        <div class="row w-100 mx-auto text-center mt-5">
+                            <div class="col-12 text-md-right text-center">
+                                <h3>فعالیت های خدماتی من</h3>
+                            </div>
+                            <div class="col-12 p-0">
+                                <img src="~/hj/img/borderbig green.png" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="row w-100 mx-auto mt-5 mb-3">
+
+
+                            <!-- Actual search box -->
+                            <div class="form-group has-search w-100">
+                                <i class="fas fa-search form-control-feedback pl-3"></i>
+                                <input type="text" class="form-control searchbox text-center" placeholder="جستجو">
+                            </div>
+
+
+
+                        </div>
+                        <div class="table-responsive text-nowrap">
+                            <table class="table text-center p-0 m-0  ">
+                                <thead>
+                                    <tr class="titr-table">
+                                        <th scope="col" class="text-center">نام پروژه</th>
+                                        <th scope="col" class="text-center">مبلغ</th>
+                                        <th scope="col" class="text-center">واحد</th>
+                                        <th scope="col" class="text-center">نام کارفرما</th>
+                                        <th scope="col" class="text-center">نام خدمات دهنده</th>
+                                        <th scope="col" class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-content">
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="row w-100 mx-auto mt-5">
+                            <nav aria-label="Page navigation example " class="mx-auto">
+                                <ul class="pagination">
+                                    <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">قبلی</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper" href="#">1</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper" href="#">2</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper" href="#">3</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">بعدی</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        @*------*@
+                        <div class="row w-100 mx-auto text-center mt-5">
+                            <div class="col-12 text-md-right text-center">
+                                <h3>فعالیت های درخواستی  من</h3>
+                            </div>
+                            <div class="col-12 p-0">
+                                <img src="~/hj/img/borderbig green.png" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="row w-100 mx-auto mt-5 mb-3">
+
+
+                            <!-- Actual search box -->
+                            <div class="form-group has-search w-100">
+                                <i class="fas fa-search form-control-feedback pl-3"></i>
+                                <input type="text" class="form-control searchbox text-center" placeholder="جستجو">
+                            </div>
+
+
+
+                        </div>
+                        <div class="table-responsive text-nowrap">
+                            <table class="table text-center p-0 m-0  ">
+                                <thead>
+                                    <tr class="titr-table">
+                                        <th scope="col" class="text-center">نام پروژه</th>
+                                        <th scope="col" class="text-center">مبلغ</th>
+                                        <th scope="col" class="text-center">واحد</th>
+                                        <th scope="col" class="text-center">نام کارفرما</th>
+                                        <th scope="col" class="text-center">نام خدمات دهنده</th>
+                                        <th scope="col" class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-content">
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="row w-100 mx-auto mt-5">
+                            <nav aria-label="Page navigation example " class="mx-auto">
+                                <ul class="pagination">
+                                    <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">قبلی</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper" href="#">1</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper" href="#">2</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper" href="#">3</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">بعدی</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="row w-100 mx-auto text-center mt-5 mb-4 hj-hiden">
+                            <div class="col-12 text-md-right text-center">
+                                <h3> پیامهای من   </h3>
+                            </div>
+                            <div class="col-12 p-0">
+                                <img src="/hj/img/borderbig green.png" class="img-fluid">
+                            </div>
+                        </div>
+                        @*--chat--*@
+                        <div class="row w-100 mx-auto hj-hiden">
+                            <div id="frame">
+                                <div id="sidepanel">
+                                    <div id="profile">
+                                        <div class="wrap">
+                                            <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+                                            <p>Mike Ross</p>
+                                            <i class="fas fa-chevron-down expand-button" aria-hidden="true"></i>
+                                            <div id="status-options">
+                                                <ul>
+                                                    <li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
+                                                    <li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
+                                                    <li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
+                                                    <li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
+                                                </ul>
+                                            </div>
+                                            <div id="expanded">
+                                                <label for="twitter"><i class="fab fa-facebook fa-fw" aria-hidden="true"></i></label>
+                                                <input name="twitter" type="text" value="mikeross" />
+                                                <label for="twitter"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></label>
+                                                <input name="twitter" type="text" value="ross81" />
+                                                <label for="twitter"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></label>
+                                                <input name="twitter" type="text" value="mike.ross" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="search">
+                                        <label for=""><i class="fas fa-search" aria-hidden="true"></i></label>
+                                        <input type="text" placeholder="Search contacts..." />
+                                    </div>
+                                    <div id="contacts">
+                                        <ul>
+                                            <li class="contact">
+                                                <div class="wrap">
+                                                    <span class="contact-status online"></span>
+                                                    <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Louis Litt</p>
+                                                        <p class="preview">You just got LITT up, Mike.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="contact active">
+                                                <div class="wrap">
+                                                    <span class="contact-status busy"></span>
+                                                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Harvey Specter</p>
+                                                        <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="contact">
+                                                <div class="wrap">
+                                                    <span class="contact-status away"></span>
+                                                    <img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Rachel Zane</p>
+                                                        <p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="contact">
+                                                <div class="wrap">
+                                                    <span class="contact-status online"></span>
+                                                    <img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Donna Paulsen</p>
+                                                        <p class="preview">Mike, I know everything! I'm Donna..</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="contact">
+                                                <div class="wrap">
+                                                    <span class="contact-status busy"></span>
+                                                    <img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Jessica Pearson</p>
+                                                        <p class="preview">Have you finished the draft on the Hinsenburg deal?</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="contact">
+                                                <div class="wrap">
+                                                    <span class="contact-status"></span>
+                                                    <img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Harold Gunderson</p>
+                                                        <p class="preview">Thanks Mike! :)</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="contact">
+                                                <div class="wrap">
+                                                    <span class="contact-status"></span>
+                                                    <img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Daniel Hardman</p>
+                                                        <p class="preview">We'll meet again, Mike. Tell Jessica I said 'Hi'.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="contact">
+                                                <div class="wrap">
+                                                    <span class="contact-status busy"></span>
+                                                    <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Katrina Bennett</p>
+                                                        <p class="preview">I've sent you the files for the Garrett trial.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="contact">
+                                                <div class="wrap">
+                                                    <span class="contact-status"></span>
+                                                    <img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Charles Forstman</p>
+                                                        <p class="preview">Mike, this isn't over.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="contact">
+                                                <div class="wrap">
+                                                    <span class="contact-status"></span>
+                                                    <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
+                                                    <div class="meta">
+                                                        <p class="name">Jonathan Sidwell</p>
+                                                        <p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="bottom-bar">
+                                        <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
+                                        <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="contact-profile">
+                                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                        <p>Harvey Specter</p>
+                                        <div class="social-media pr-3">
+                                            <i class="fab fa-facebook" aria-hidden="true"></i>
+                                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="messages">
+                                        <ul>
+                                            <li class="sent">
+                                                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                                                <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+                                            </li>
+                                            <li class="replies">
+                                                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                                <p>When you're backed against the wall, break the god damn thing down.</p>
+                                            </li>
+                                            <li class="replies">
+                                                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                                <p>Excuses don't win championships.</p>
+                                            </li>
+                                            <li class="sent">
+                                                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                                                <p>Oh yeah, did Michael Jordan tell you that?</p>
+                                            </li>
+                                            <li class="replies">
+                                                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                                <p>No, I told him that.</p>
+                                            </li>
+                                            <li class="replies">
+                                                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                                <p>What are your choices when someone puts a gun to your head?</p>
+                                            </li>
+                                            <li class="sent">
+                                                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                                                <p>What are you talking about? You do what they say or they shoot you.</p>
+                                            </li>
+                                            <li class="replies">
+                                                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                                                <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="message-input">
+                                        <div class="wrap">
+                                            <input type="text" placeholder="Write your message..." />
+                                            <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+                                            <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                        @*---end chat--*@
+
+                        @*----announcement----*@
+                        <div class="row w-100 mx-auto text-center mt-5 mb-4">
+                            <div class="col-12 text-md-right text-center">
+                                <h3>اطلاعیه های من</h3>
+                            </div>
+                            <div class="col-12 p-0">
+                                <img src="/hj/img/borderbig green.png" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="row w-75 mx-auto hj-serachW-100 ">
+                            <div class="form-group has-search w-100 position-relative">
+                                <i class="fas fa-search form-control-feedback pl-3"></i>
+                                <input type="text" class="form-control searchbox text-center" placeholder="جستجو">
+                            </div>
+
+                        </div>
+                        <div class="row w-100 mx-auto mt-2">
+                            <div class="col-md-2 col-12 text-center">
+                                <img src="~/hj/img/h.png" class="img-fluid" />
+                            </div>
+                            <div class="col-md-10 col-12">
+                                <div class="row w-100 py-3">
+                                    <div class="col-10 text-right">نیما کفش آرا</div>
+                                    <div class="col-2 text-helper">27/2/1396</div>
+                                </div>
+                                <div class="row w-100">
+                                    <h6 class="text-helper text-md-right text-center pr-md-3">نام پروژه</h6>
+                                </div>
+                                <div class="col-12 p-0">
+                                    <h6 class="text-justify">مختصری از آخرین پیام  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <div class="row w-100 mx-auto mt-2">
+                            <div class="col-md-2 col-12 text-center">
+                                <img src="~/hj/img/h.png" class="img-fluid" />
+                            </div>
+                            <div class="col-md-10 col-12">
+                                <div class="row w-100 py-3">
+                                    <div class="col-10 text-right">نیما کفش آرا</div>
+                                    <div class="col-2 text-helper">27/2/1396</div>
+                                </div>
+                                <div class="row w-100">
+                                    <h6 class="text-helper text-md-right text-center pr-md-3">نام پروژه</h6>
+                                </div>
+                                <div class="col-12 p-0">
+                                    <h6 class="text-justify">مختصری از آخرین پیام  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row w-100 mx-auto mt-2">
+                            <div class="col-md-2 col-12 text-center">
+                                <img src="~/hj/img/h.png" class="img-fluid" />
+                            </div>
+                            <div class="col-md-10 col-12">
+                                <div class="row w-100 py-3">
+                                    <div class="col-10 text-right">نیما کفش آرا</div>
+                                    <div class="col-2 text-helper">27/2/1396</div>
+                                </div>
+                                <div class="row w-100">
+                                    <h6 class="text-helper text-md-right text-center pr-md-3">نام پروژه</h6>
+                                </div>
+                                <div class="col-12 p-0">
+                                    <h6 class="text-justify">مختصری از آخرین پیام  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <div class="row w-100 mx-auto mt-2">
+                            <div class="col-md-2 col-12 text-center">
+                                <img src="~/hj/img/h.png" class="img-fluid" />
+                            </div>
+                            <div class="col-md-10 col-12">
+                                <div class="row w-100 py-3">
+                                    <div class="col-10 text-right">نیما کفش آرا</div>
+                                    <div class="col-2 text-helper">27/2/1396</div>
+                                </div>
+                                <div class="row w-100">
+                                    <h6 class="text-helper text-md-right text-center pr-md-3">نام پروژه</h6>
+                                </div>
+                                <div class="col-12 p-0">
+                                    <h6 class="text-justify">مختصری از آخرین پیام  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+
+
+                        @*----end announcement----*@
+
+                        @*---table--*@
+                        <div class="row w-100 mx-auto text-center mt-5">
+                            <div class="col-12 text-md-right text-center">
+                                <h3>اختلافات من</h3>
+                            </div>
+                            <div class="col-12 p-0">
+                                <img src="/hj/img/borderbig green.png" class="img-fluid">
+                            </div>
+                        </div>
+
+
+                        <div class="row w-100 mx-auto mt-5 mb-3">
+
+
+                            <!-- Actual search box -->
+                            <div class="form-group has-search w-100">
+                                <i class="fas fa-search form-control-feedback pl-3"></i>
+                                <input type="text" class="form-control searchbox text-center" placeholder="جستجو">
+                            </div>
+
+
+
+                        </div>
+                        <div class="table-responsive text-nowrap">
+                            <table class="table text-center p-0 m-0  ">
+                                <thead>
+                                    <tr class="titr-table">
+                                        <th scope="col" class="text-center">نام پروژه</th>
+                                        <th scope="col" class="text-center">مبلغ</th>
+                                        <th scope="col" class="text-center">واحد</th>
+                                        <th scope="col" class="text-center">نام کارفرما</th>
+                                        <th scope="col" class="text-center">نام خدمات دهنده</th>
+                                        <th scope="col" class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-content">
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">نام پروژه</td>
+                                        <td>250.000</td>
+                                        <td>ریال </td>
+                                        <td>نام کارفرما</td>
+                                        <td>نام خدمات دهنده</td>
+                                        <td><a href="#" class="color-helper">مشاهده</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="row w-100 mx-auto mt-5">
+                            <nav aria-label="Page navigation example " class="mx-auto">
+                                <ul class="pagination">
+                                    <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">قبلی</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper" href="#">1</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper" href="#">2</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper" href="#">3</a></li>
+                                    <li class="page-item mx-1"><a class="page-link color-helper bg-helper" href="#">بعدی</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        @*-----end table --*@
+
+
+                    </div>
 
                     </div>
 
@@ -1558,6 +1578,19 @@
             }
 
 
+     //checkif file selected or not
+        $("#file").on('change', function () {
+            if ($(this).get(0).files.length === 0) {
+                $("#fileIcon").removeClass("fa-check")
+                var src = $("#ProfleImageAddress").val()
+                $("#UploadedImage").attr("src", src);
+            }
+            else {
+                $("#fileIcon").addClass("fa-check")
+            }
+        })
+
+
 
 
 
@@ -1578,6 +1611,9 @@
                 reader.onload = function (e) {
                     $('#UploadedImage')
                         .attr('src', e.target.result)
+                        .height(282)
+                        //.heightstyle = "height:282px"
+
                         //.width("100%")
                         //.height(240);
                 };
@@ -1594,7 +1630,7 @@
         /* edit Profile */
 
 
-        $("#profileForm").submit(function (e) {
+        $("#profileForm").on('submit',function (e) {
             e.preventDefault();
             if (!$(this).valid()) {
                 return;
@@ -1602,36 +1638,25 @@
 
 
 
-            //var str = $("form").serialize();
-            //console.log(str)
-            //var ownername = $("#Owner-name").val();
-            //var banckname = $("#Bank-name").val();
-            //var cardNumber = $("#card-number").val();
-            //var shabaNumber = $("#shaba-number").val();
-            //var visalNumber = $("#visa-number").val();
-            //var Id = $("#usreId").val()
-
-            //var data = {
-            //    "BankName": ownername,
-            //    "AccountOwner": banckname,
-            //    "CardNumber": cardNumber,
-            //    "ShabaNumber": shabaNumber,
-            //    "VisaNumber": visalNumber,
-
-            //    "Id": Id
-            //};
             $("#submitProfileBtn").prop('disabled', true);
             $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
             $.ajax({
                 method: "POST",
                 url: '/Profiles/Index',
-                data: $('#profileForm').serialize(),
+                //data: $('#profileForm').serialize() ,
+                data: new FormData(this) ,
+                processData: false,
+                contentType: false,
+
                 //contentType: "application/json; charset=utf-8",
                 success: function (r) {
                     if (r.status) {
                         $("#submitProfileBtn").prop('disabled', false);
                         $.unblockUI();
                         SuccessAlert(r.message)
+                        $("#ProfleImageAddress").val(r.data)
+                        $("#UploadedImage").attr("src", r.data);
+
                     }
                     else {
                         $("#submitProfileBtn").prop('disabled', false);

@@ -2,6 +2,8 @@
 
 @using System.Globalization
 @using Helper.Models.Entities
+@using Helper.Models.Utilities;
+
 @{
     ViewData["Title"] = "Home Page";
     Layout = "_landing";
@@ -33,14 +35,14 @@
                 <img src="~/hj/img/border-bottom.png" class="img-fluid" />
             </div>
             <div class="row mt-3 mx-auto">
-                <span class="text-justify hj-intro-text">@ViewData["Text2"]</span>
+                <span class="text-justify hj-intro-text"> @Html.Raw(Model.LandingHelperText) </span>
             </div>
             <div class="row mt-5 ">
                 <div class="col-6">
                     <button type="button" class="btn btn-primary w-100 hj-intro-button">@ViewData["StartNow"]   </button>
                 </div>
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary w-100 hj-intro-button">@ViewData["ViewCategories"]</button>
+                    <a href="#categories" class="btn btn-primary w-100 hj-intro-button">@ViewData["ViewCategories"]</a>
                 </div>
             </div>
         </div>
@@ -66,7 +68,7 @@
                 <div class="col-md-4  mb-5">
                     <img src="~/hj/img/2.png" class="img-fluid" alt="Responsive image">
                     <h4 class="pt-4 text-center">@ViewData["ServicesProvided"]</h4>
-                    <span class="timer" data-to="@Model.DoneServiceCount" data-speed="8000"></span>
+                    <span class="timer" data-to="0" data-speed="8000"></span>
                 </div>
                 <div class="col-md-4  mb-5">
                     <img src="~/hj/img/3.png" class="img-fluid" alt="Responsive image">
@@ -85,31 +87,30 @@
 
 
             </div>
-            <div class="row text-center mt-5 ">
+            <div class="row text-center mt-5 " id="categories">
 
                 @foreach (var item in Model.Categories)
                 {
                     @if (counter != 4)
                     {
-
-
                         <div class="col-md-3 col-6 py-3">
                             @*<img class="categoryImage img-fluid " src="~/Upload/User/cd29605d-bdca-4975-83e9-db1921487b5b_consullingIcon.svg" />*@
-                            <img class="_imageRadius categoryImage img-fluid " src="@item.PhotoAddress" />
+                            <a href="/Services/SearchService?catId=@item.Id">
+                                <img class="_imageRadius categoryImage img-fluid " src="@item.PhotoAddress" />
 
-                            <br />
-                            <br />
-                            @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
-                            {
-                                <span class=" hj-text-service pt-4">@item.Name</span>
-                                counter++;
-                            }
-                            else
-                            {
-                                <span class=" hj-text-service pt-4">@item.EnglishName</span>
-                                counter++;
-                            }
-
+                                <br />
+                                <br />
+                                @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+                                {
+                                    <span class=" hj-text-service pt-4">@item.Name</span>
+                                    counter++;
+                                }
+                                else
+                                {
+                                    <span class=" hj-text-service pt-4">@item.EnglishName</span>
+                                    counter++;
+                                }
+                            </a>
                         </div>
                     }
                     else
@@ -121,86 +122,46 @@
 
 
 
-                @*<div class="col-md-3 col-6 py-3">
-                         <img class="categoryImage img-fluid" src="~/hj/img/service1.png" alt="Responsive image">
-                        <br />
-                        <br />
-                        <span class=" hj-text-service pt-4">ماشین</span>
-                    </div>
-                    <div class="col-md-3 col-6 py-3">
-                        <img class="categoryImage img-fluid " src="~/hj/img/service2.png" class="img-fluid " alt="Responsive image">
-                        <br />
-                        <br />
-                        <span class=" hj-text-service pt-4">شارژ و قبض</span>
-                    </div>
-                    <div class="col-md-3 col-6 py-3">
-                        <img class="categoryImage img-fluid " src="~/hj/img/service3.png" class="img-fluid " alt="Responsive image">
-                        <br />
-                        <br />
-                        <span class=" hj-text-service pt-4">بلیط</span>
-                    </div>
-                    <div class="col-md-3 col-6 py-3">
-                        <img class="categoryImage img-fluid " src="~/hj/img/service4.png" alt="Responsive image">
-                        <br />
-                        <br />
-                        <span class=" hj-text-service pt-4"> مسکن</span>
-                    </div>*@
             </div>
             <div class="row text-center  ">
                 <div class="col-md-3 col-6 py-3 pt-5 order-md-0 order-3">
-                    <span class=" hj-text-service pt-4"> @ViewData["SeeAll"]</span>
-                    <div class="load-wrapp ">
-                        <div class="load-3 pt-3">
-
-                            <div class="line"></div>
-                            <div class="line"></div>
-                            <div class="line"></div>
+                    <a href="/Services/SearchService" class=" hj-text-service pt-4" style="color:#9BC93A">
+                        @ViewData["SeeAll"]
+                        <div class="load-wrapp ">
+                            <div class="load-3 pt-3">
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 @foreach (var item in cats)
                 {
                     <div class="col-md-3 col-6  py-3 order-md-1 order-2">
                         @*<img class="categoryImage img-fluid " src="~/hj/img/service7.png" alt="Responsive image">*@
-                        <img class="_imageRadius categoryImage img-fluid " src="@item.PhotoAddress" alt="Responsive image">
-
-                        <br />
-                        <br />
-                        @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
-                        {
-                            <span class=" hj-text-service pt-4">@item.Name</span>
-                        }
-                        else
-                        {
-                            <span class=" hj-text-service pt-4">@item.EnglishName</span>
-                        }
+                        <a href="/Services/SearchService?catId=@item.Id">
+                            <img class="_imageRadius categoryImage img-fluid " src="@item.PhotoAddress" alt="Responsive image">
+                            <br />
+                            <br />
+                            @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+                            {
+                                <span class=" hj-text-service pt-4">@item.Name</span>
+                            }
+                            else
+                            {
+                                <span class=" hj-text-service pt-4">@item.EnglishName</span>
+                            }
+                        </a>
                     </div>
                 }
 
 
-                @*<div class="col-md-3 col-6  py-3 order-md-1 order-2">
-                        <img class="categoryImage img-fluid " src="~/hj/img/service7.png" alt="Responsive image">
-                        <br />
-                        <br />
-                        <span class=" hj-text-service pt-4">مترجم</span>
-                    </div>
-                    <div class="col-md-3 col-6  py-3  order-md-2 order-1 ">
-                        <img class="categoryImage img-fluid " src="~/hj/img/service6.png" alt="Responsive image">
-                        <br />
-                        <br />
-                        <span class=" hj-text-service pt-4">خدمات شهروندی</span>
-                    </div>
-                    <div class="col-md-3 col-6 py-3  order-md-3 order-0">
-                        <img class="categoryImage img-fluid " src="~/hj/img/service5.png" alt="Responsive image">
-                        <br />
-                        <br />
-                        <span class=" hj-text-service pt-4  "> صرافی</span>
-                    </div>*@
             </div>
             <div class="row text-center mt-5">
                 <div class="col-12">
-                    <button type="button" class="btn btn-success hj-service-index-button  "> @ViewData["StartNow"]</button>
+                    <a href="Services/SearchService" class="btn btn-success hj-service-index-button  "> @ViewData["StartNow"]</a>
                 </div>
             </div>
             @*........................End service....................*@
@@ -231,13 +192,17 @@
                     </div>
 
                     <div class="row pt-3 mx-auto">
-                        <span class="text-justify hj-intro-text pl-md-5">  @ViewData["ForUsersText"]</span>
+                        <span class="_text-position hj-intro-text">@Html.Raw(Model.ForUserText)</span>
                     </div>
-                    <div class="row text-right mt-5 ">
-                        <div class="col-12 text-md-right text-center">
-                            <button type="button" class="btn btn-success hj-service-index-button ">@ViewData["StartNow"]   </button>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div class="row text-right mt-5 ">
+                            <div class="col-12 _text-position">
+                                <a type="button" href="Account/Login" class="btn btn-success hj-service-index-button ">@ViewData["StartNow"]   </a>
+                            </div>
                         </div>
-                    </div>
+
+                    }
                 </div>
                 <div class="col-md-6 col-12 order-0 order-md-1 mt-md-0 mt-4">
                     <img src="~/hj/img/work index.svg" class="img-fluid " alt="Responsive image">
@@ -258,13 +223,18 @@
                         <img src="~/hj/img/border-bottom.png" class="img-fluid" />
                     </div>
                     <div class="row pt-3">
-                        <span class="_text-position hj-intro-text"> @ViewData["ForProfessionalsText"]  </span>
+                        <span class="_text-position hj-intro-text">  @Html.Raw(Model.ForProfessionalText)  </span>
                     </div>
-                    <div class="row text-right mt-5">
-                        <div class="col-12 text-md-right text-center">
-                            <button type="button" class="btn btn-success hj-service-index-button ">  @ViewData["StartNow"]</button>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div class="row text-right mt-5">
+                            <div class="col-12 _text-position">
+                                <a type="button" href="Account/Login" class="btn btn-success hj-service-index-button ">  @ViewData["StartNow"]</a>
+                            </div>
                         </div>
-                    </div>
+                    }
+
+
                 </div>
             </div>
         </div>
@@ -290,10 +260,10 @@
                             @foreach (var item in Model.Slides)
                             {
                                 <div class="swiper-slide">
-                                    <img src="@item.PhotoAddress" class="img-fluid" alt="Responsive image">
+                                    <img style="height:248px;" src="@item.PhotoAddress" class="img-fluid" alt="Responsive image">
                                     <div class="row w-100 text-justify Text-blue mx-auto">
                                         <div class="col-8 text-center py-2 mx-auto  hj-TilteSliderIndex "><span><b>@item.Title</b></span></div>
-                                        <div class="col-12 text-cener mx-auto py-2"><span>@item.Description</span></div>
+                                        <div class="col-12 text-cener mx-auto py-2" style="height:300px"><span> @item.Description.GetSummary(320) </span></div>
                                     </div>
                                 </div>
                             }

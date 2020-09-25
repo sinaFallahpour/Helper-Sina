@@ -30,9 +30,13 @@ namespace Helper.Controllers
 
         #region ctor
         private readonly ApplicationDbContext _context;
+#pragma warning disable CS0618 // 'IHostingEnvironment' is obsolete: 'This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.'
         private readonly IHostingEnvironment _hostingEnvironment;
+#pragma warning restore CS0618 // 'IHostingEnvironment' is obsolete: 'This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.'
         public NewsArticleVideoController(ApplicationDbContext context,
+#pragma warning disable CS0618 // 'IHostingEnvironment' is obsolete: 'This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.'
               IHostingEnvironment hostingEnvironment)
+#pragma warning restore CS0618 // 'IHostingEnvironment' is obsolete: 'This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.'
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
@@ -147,7 +151,9 @@ namespace Helper.Controllers
                     ModelState.AddModelError("", "خطا در ثبت");
                     return View(model);
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     ModelState.AddModelError("", "خطا در ثبت");
                     return View(model);

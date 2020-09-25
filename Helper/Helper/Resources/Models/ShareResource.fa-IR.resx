@@ -162,4 +162,7 @@
   <data name="Skills" xml:space="preserve">
     <value>مهارت های مورد نظر</value>
   </data>
+  <data name="{0} Is required." xml:space="preserve">
+    <value>{0}  اجباریست.</value>
+  </data>
 </root>

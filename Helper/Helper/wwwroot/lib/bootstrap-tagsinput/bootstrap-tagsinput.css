@@ -18,13 +18,7 @@
 }
 
     .bootstrap-tagsinput input {
-        height: 100%;
-
-
-
-
-
-
+      
         border: none;
         box-shadow: none;
         outline: none;
@@ -33,6 +27,7 @@
         margin: 0;
         width: auto;
         max-width: inherit;
+       
     }
 
     .bootstrap-tagsinput.form-control input::-moz-placeholder {

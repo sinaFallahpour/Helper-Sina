@@ -15,6 +15,7 @@
     <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
 }
 
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; ">  ادمین ها</h1>
 
 <a asp-action="Create" class="btn btn-primary mb-3">ایجاد ادمین</a>
 <div class="card">
@@ -34,7 +35,7 @@
                     </th>
                     <th class="_noneBorder"> </th>
                 </tr>
-            
+
             </thead>
             <tbody>
                 @foreach (var item in Model)
@@ -49,7 +50,7 @@
                         <td>
 
                             <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-warning" asp-action="Profile" asp-route-Username="@item.Username">
+                                <a type="button" class="btn btn-success" asp-action="Profile" asp-route-Username="@item.Username">
                                     <i class="">پروفایل </i>
                                 </a>
                             </div>

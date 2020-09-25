@@ -68,6 +68,7 @@ namespace Helper.ViewModels
         //[MaxLength(16, ErrorMessage = "Maximum length is {1} characters")]
         [MaxLength(16, ErrorMessage = "Enter just {1} character")]
         [MinLength(16, ErrorMessage = "Enter just {1} character")]
+       
         [Display(Name = " شماره کارت")]
         public string CardNumber { get; set; }
 
@@ -77,7 +78,7 @@ namespace Helper.ViewModels
         //[MaxLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
         //[MinLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
         [Required(ErrorMessage = "Required")]
-        [ValidIranShebaNumber(ErrorMessage = "Required")]
+        [ValidIranShebaNumber(ErrorMessage = "sdssdsd")]
         [Display(Name = "شماره شبا" )]
         public string ShabaNumber { get; set; }
 
@@ -85,8 +86,8 @@ namespace Helper.ViewModels
         /// <summary>
         /// شماره ویزا یا مسترکارد
         /// </summary>
-        [MaxLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
-        [MinLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
+        //[MaxLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
+        //[MinLength(16, ErrorMessage = "فقط 16 کاراکتر وارد کنید")]
         [Display(Name = "شماره ویزا یا مسترکارد")]
         public string VisaNumber { get; set; }
 

@@ -221,7 +221,7 @@ service</value>
     <value>Accept</value>
   </data>
   <data name="SuccessFullRegisterMessage" xml:space="preserve">
-    <value>Successful registration of service.</value>
+    <value>Successful registration of service. This service will be displayed on the site after admin approval.</value>
   </data>
   <data name="Titles" xml:space="preserve">
     <value>Title</value>

@@ -14,11 +14,12 @@
     <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
 
     <link href="~/lib/DataTable/datatables.min.css" rel="stylesheet" />
-        <link href="~/lib/DataTable/responsive.dataTables.min.css" rel="stylesheet" />
+    <link href="~/lib/DataTable/responsive.dataTables.min.css" rel="stylesheet" />
 
 
 }
 
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; ">    دسته بندی  ها </h1>
 
 <a asp-action="Create" class="btn btn-primary mb-3">ایجاد دسته بندی</a>
 <div class="card">
@@ -66,30 +67,30 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td class="text-center"> @Html.DisplayFor(modelItem => item.Id) </td>
+                    <tr>
+                        <td class="text-center"> @Html.DisplayFor(modelItem => item.Id) </td>
 
-                    @*<td class="text-center"> <a href="@item.PhotoAddress">عکس </a>  </td>*@
-                    <td>
-                        <img class="_dataTableImage" src="@item.PhotoAddress" />
-                    </td>
+                        @*<td class="text-center"> <a href="@item.PhotoAddress">عکس </a>  </td>*@
+                        <td class="text-center">
+                            <img class="_dataTableImage" src="@item.PhotoAddress" />
+                        </td>
 
-                    <td class="text-center">  @Html.DisplayFor(modelItem => item.Name)</td>
-                    <td class="text-center">  @Html.DisplayFor(modelItem => item.EnglishName)</td>
+                        <td class="text-center">  @Html.DisplayFor(modelItem => item.Name)</td>
+                        <td class="text-center">  @Html.DisplayFor(modelItem => item.EnglishName)</td>
 
-                    <td class="text-center">  @Html.DisplayFor(modelItem => item.IsEnabled)</td>
+                        <td class="text-center">  @Html.DisplayFor(modelItem => item.IsEnabled)</td>
 
-                    <td>
-                        <div class="btn-group" role="group">
-                            <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">
-                                <i class="">تصحیح </i>
-                            </a>
-                            <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
-                                <i class="">حذف</i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="">تصحیح </i>
+                                </a>
+                                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                    <i class="">حذف</i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                 }
             </tbody>
             <tfoot class="bg-info text-white _table-corder-reduse">
@@ -125,7 +126,7 @@
 
     <script src="~/lib//DataTable/datatables.min.js"></script>
     <script src="~/lib//DataTable/dataTables.responsive.min.js"></script>
-     <script>
+    <script>
 
         //$(document).ready(function () {
         //    $('#example1').DataTable();

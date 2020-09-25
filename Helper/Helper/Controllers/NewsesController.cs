@@ -50,6 +50,7 @@ namespace Helper.Controllers
 
             var Articles = await _context.TBL_NewsArticleVideo
                 .Where(c => c.NewsType == NewsType.Arrticle)
+                .Take(12)
                 .OrderByDescending(c => c.LikesCount)
                 .ThenByDescending(c => c.CommentsCount)
                 .Include(c => c.NewsLike)
@@ -57,6 +58,7 @@ namespace Helper.Controllers
 
             var Newses = await _context.TBL_NewsArticleVideo
                        .Where(c => c.NewsType == NewsType.News)
+                         .Take(12)
                        .OrderByDescending(c => c.LikesCount)
                        .ThenByDescending(c => c.CommentsCount)
                         .Include(c => c.NewsLike)
@@ -64,6 +66,7 @@ namespace Helper.Controllers
 
             var Videos = await _context.TBL_NewsArticleVideo
                 .Where(c => c.NewsType == NewsType.Videos)
+                  .Take(12)
                    .OrderByDescending(c => c.LikesCount)
                     .ThenByDescending(c => c.CommentsCount)
                     .Include(c => c.NewsLike)
@@ -93,10 +96,11 @@ namespace Helper.Controllers
         {
             var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
+
             var user = _context.Users.Where(c => c.Id == currentUserId).FirstOrDefault();
+            if (user == null)
+                return new JsonResult(new { Status = false, Message = _localizer["LoginForLikeArticleMessage"].Value.ToString() });
             var userId = user.Id;
-            if (string.IsNullOrEmpty(userId))
-                return new JsonResult(new { Status = false, Message = "برای لایک  ابتدا لاگین کنید." });
             if (newsID == null)
                 return new JsonResult(new { Status = false, Message = "   این خبر یا مقاله موجود نیست." });
 
@@ -138,7 +142,7 @@ namespace Helper.Controllers
             }
             catch
             {
-                return new JsonResult(new { Status = false, Message = "خطا  در ثبت" });
+                return new JsonResult(new { Status = false, Message = "An Error Ecured" });
             }
         }
 

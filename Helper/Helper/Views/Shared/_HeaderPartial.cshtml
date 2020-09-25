@@ -10,12 +10,8 @@
 
                 <div class="col-md-4 col-5 d-flex justify-content-center align-items-center">
                     <form action="/action_page.php" class="hj-language text-right">
-
-                        <select name="language" id="language" onchange="changeLanguage(this);">
-                            <option value="@PublicHelper.persianCultureName">  Ln فارسی  </option>
-                            <option value="@PublicHelper.EngCultureName"> Ln EN  </option>
-                        </select>
-
+                        <a href="/Home/ChangeLanguage?culture=@PublicHelper.EngCultureName"   class="_language"> En</a>/
+                        <a href="/Home/ChangeLanguage?culture=@PublicHelper.persianCultureName"  class="_language">Fa </a>
                     </form>
                 </div>
 
@@ -23,13 +19,10 @@
                     <img src="~/hj/img/logo.png" class="img-fluid" alt="Responsive image">
                 </div>
 
-
-
-
                 <div class="col-md-4  col-5 d-flex justify-content-center align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        @Html.ActionLink(Localizer["logOut"].Value , "LogOut", "Account", new { Area = "", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) }, new { @class = "btn btn-link hj-index-login" })
+                        @Html.ActionLink(Localizer["logOut"].Value, "LogOut", "Account", new { Area = "", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) }, new { @class = "btn btn-link hj-index-login" })
                         <a href="/profiles" class="btn btn-link hj-index-login"> @Localizer["Profile"]</a>
 
                     }
@@ -105,14 +98,6 @@
 
 
 <script>
-
-
-    const changeLanguage = (culturName) => {
-        $.get(`/Home/ChangeLanguage?culture=${culturName.value}`,
-            function (res) {
-                //location.reload()
-            });
-    }
 
 </script>
 

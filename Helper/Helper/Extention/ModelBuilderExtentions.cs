@@ -12,7 +12,7 @@ namespace Helper.Extention
 {
     public static class ModelBuilderExtentions
     {
-       
+
         public static void Seed(this ModelBuilder builder)
         {
             builder.Entity<TBL_Setting>().HasData(
@@ -27,10 +27,10 @@ namespace Helper.Extention
                    new TBL_Setting()
                    {
                        Id = 2,
-                       Key =PublicHelper.ContactKeyName,
+                       Key = PublicHelper.ContactKeyName,
                        CreatedAt = DateTime.Now,
                        Value = "",
-                       EnglishValue=""
+                       EnglishValue = ""
                    },
                     new TBL_Setting()
                     {
@@ -39,7 +39,41 @@ namespace Helper.Extention
                         CreatedAt = DateTime.Now,
                         Value = "",
                         EnglishValue = ""
-                    }
+                    },
+                    new TBL_Setting()
+                    {
+                        Id = 4,
+                        Key = PublicHelper.landingHelperText,
+                        CreatedAt = DateTime.Now,
+                        Value = "",
+                        EnglishValue = ""
+                    },
+                    new TBL_Setting()
+                    {
+                        Id = 5,
+                        Key = PublicHelper.ForUserText,
+                        CreatedAt = DateTime.Now,
+                        Value = "",
+                        EnglishValue = ""
+                    },
+                    new TBL_Setting()
+                    {
+                        Id = 6,
+                        Key = PublicHelper.ForProfessionalText,
+                        CreatedAt = DateTime.Now,
+                        Value = "",
+                        EnglishValue = ""
+                    },
+                       new TBL_Setting()
+                       {
+                           Id = 7,
+                           Key = PublicHelper.CreateServiceText,
+                           CreatedAt = DateTime.Now,
+                           Value = "",
+                           EnglishValue = ""
+                       }
+
+
                  );
 
 
@@ -66,6 +100,6 @@ namespace Helper.Extention
 
 
 
-       
+
     }
 }

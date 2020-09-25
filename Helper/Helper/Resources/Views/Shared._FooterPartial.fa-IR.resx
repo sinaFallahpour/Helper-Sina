@@ -124,7 +124,7 @@
     <value>ثبت</value>
   </data>
   <data name="Faq" xml:space="preserve">
-    <value>سوالات متداول</value>
+    <value>اخبار</value>
   </data>
   <data name="LearningArticles" xml:space="preserve">
     <value>مقالات آموزشی</value>
@@ -156,8 +156,8 @@
   <data name="Title1" xml:space="preserve">
     <value>هلپر ، بستری مناسب برای دسترسی آسان</value>
   </data>
-  <data name="TrainingCourse" xml:space="preserve">
-    <value>دوره آموزشی</value>
+  <data name="Videos" xml:space="preserve">
+    <value>ویدیو های آموزشی</value>
   </data>
   <data name="Walet" xml:space="preserve">
     <value>کیف پول هلپر</value>

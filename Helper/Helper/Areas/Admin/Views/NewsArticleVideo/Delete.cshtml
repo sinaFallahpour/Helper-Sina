@@ -13,6 +13,8 @@
     <link href="~/SinaCustom/css/main.css" rel="stylesheet" />
 }
 
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; ">   حذف مقاله یا  فیلم و خبر     </h1>
+
 
 <div class="card">
     <div class="card-body">
@@ -29,136 +31,136 @@
             <h3 class="card-title">   حذف   فیلم. آیا مطمئن به حذف هستید؟</h3>
         }
 
-    <form asp-action="Delete" class="needs-validation" novalidate="">
+        <form asp-action="Delete" class="needs-validation" novalidate="">
 
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        @if (Model.NewsType == NewsType.Arrticle)
-        {
+            @if (Model.NewsType == NewsType.Arrticle)
+            {
+                <div class="form-row">
+                    <div class="col-md-6 mb-3  ">
+                        <img src="@Model.ArticlePhotoAddress" class="d-block _editimageContainer" id="UploadedImage" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3  ">
+                        <img src="@Model.EnglishArticlePhotoAddress" class="d-block _editimageContainer" id="UploadedImage" />
+                    </div>
+                </div>
+            }
+            @if (Model.NewsType != NewsType.Arrticle)
+            {
+                @*<div class="form-row">
+                        <div class="  _editimageContainer">
+                            <img src="@Model.VideoAddress" class="d-block " id="UploadedImage" />
+                        </div>
+                    </div>*@
+
+
+                <div class="form-row">
+                    <div class="col-md-8 mb-3">
+                        <video width="400" controls>
+                            <source src="@Model.VideoAddress" id="video_here">
+                            <source src="mov_bbb.ogg" id="video_here">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-8 mb-3">
+                        <video width="400" controls>
+                            <source src="@Model.EnglishVideoAddress" id="video_here">
+                            <source src="mov_bbb.ogg" id="video_here">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                </div>
+
+            }
+
+
+
+            <input type="hidden" asp-for="Id" />
+            <!-- input -->
             <div class="form-row">
-                <div class="col-md-6 mb-3  ">
-                    <img src="@Model.ArticlePhotoAddress" class="d-block _editimageContainer" id="UploadedImage" />
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Title" for="validationCustom03"></label>
+                    <input readonly asp-for="Title" class="form-control" id="validationCustom03"
+                           placeholder="عنوان">
+                    <span asp-validation-for="Title" class="text-danger"> </span>
                 </div>
             </div>
-
-            <div class="form-row">
-                <div class="col-md-6 mb-3  ">
-                    <img src="@Model.EnglishArticlePhotoAddress" class="d-block _editimageContainer" id="UploadedImage" />
-                </div>
-            </div>
-        }
-        @if (Model.NewsType != NewsType.Arrticle)
-        {
-            @*<div class="form-row">
-                <div class="  _editimageContainer">
-                    <img src="@Model.VideoAddress" class="d-block " id="UploadedImage" />
-                </div>
-            </div>*@
 
 
             <div class="form-row">
-                <div class="col-md-8 mb-3">
-                    <video width="400" controls>
-                        <source src="@Model.VideoAddress" id="video_here">
-                        <source src="mov_bbb.ogg" id="video_here">
-                        Your browser does not support HTML5 video.
-                    </video>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EnglishTitle" for="validationCustom03"></label>
+                    <input readonly asp-for="EnglishTitle" class="form-control" id="validationCustom03"
+                           placeholder="عنوان">
+                    <span asp-validation-for="EnglishTitle" class="text-danger"> </span>
                 </div>
             </div>
+
 
             <div class="form-row">
-                <div class="col-md-8 mb-3">
-                    <video width="400" controls>
-                        <source src="@Model.EnglishVideoAddress" id="video_here">
-                        <source src="mov_bbb.ogg" id="video_here">
-                        Your browser does not support HTML5 video.
-                    </video>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LikesCount" for="validationCustom03"></label>
+                    <input readonly asp-for="LikesCount" class="form-control" id="validationCustom03"
+                           placeholder="تعداد لایک">
+                    <span asp-validation-for="LikesCount" class="text-danger"> </span>
                 </div>
             </div>
 
-        }
 
-
-
-        <input type="hidden" asp-for="Id" />
-        <!-- input -->
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="Title" for="validationCustom03"></label>
-                <input readonly asp-for="Title" class="form-control" id="validationCustom03"
-                       placeholder="عنوان">
-                <span asp-validation-for="Title" class="text-danger"> </span>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="SeenCount" for="validationCustom03"></label>
+                    <input readonly asp-for="SeenCount" class="form-control" id="validationCustom03"
+                           placeholder="تعداد بازدید">
+                    <span asp-validation-for="SeenCount" class="text-danger"> </span>
+                </div>
             </div>
-        </div>
 
 
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="EnglishTitle" for="validationCustom03"></label>
-                <input readonly asp-for="EnglishTitle" class="form-control" id="validationCustom03"
-                       placeholder="عنوان">
-                <span asp-validation-for="EnglishTitle" class="text-danger"> </span>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CommentsCount" for="validationCustom03"></label>
+                    <input readonly asp-for="CommentsCount" class="form-control" id="validationCustom03"
+                           placeholder="تعداد  کامنت">
+                    <span asp-validation-for="CommentsCount" class="text-danger"> </span>
+                </div>
             </div>
-        </div>
 
 
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="LikesCount" for="validationCustom03"></label>
-                <input readonly asp-for="LikesCount" class="form-control" id="validationCustom03"
-                       placeholder="تعداد لایک">
-                <span asp-validation-for="LikesCount" class="text-danger"> </span>
-            </div>
-        </div>
-
-
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="SeenCount" for="validationCustom03"></label>
-                <input readonly asp-for="SeenCount" class="form-control" id="validationCustom03"
-                       placeholder="تعداد بازدید">
-                <span asp-validation-for="SeenCount" class="text-danger"> </span>
-            </div>
-        </div>
-
-
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="CommentsCount" for="validationCustom03"></label>
-                <input readonly asp-for="CommentsCount" class="form-control" id="validationCustom03"
-                       placeholder="تعداد  کامنت">
-                <span asp-validation-for="CommentsCount" class="text-danger"> </span>
-            </div>
-        </div>
-
-
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="Description" for="validationCustom03"></label>
-                <textarea readonly asp-for="Description" type="" class="form-control _areaHeght" id="validationCustom03"
-                          placeholder="...">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Description" for="validationCustom03"></label>
+                    <textarea readonly asp-for="Description" type="" class="form-control _areaHeght" id="validationCustom03"
+                              placeholder="...">
                     </textarea>
-                <span asp-validation-for="Description" class="text-danger"> </span>
+                    <span asp-validation-for="Description" class="text-danger"> </span>
+                </div>
             </div>
-        </div>
 
 
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="EnglishDescription" for="validationCustom03"></label>
-                <textarea readonly asp-for="EnglishDescription" type="" class="form-control _areaHeght" id="validationCustom03"
-                          placeholder="...">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EnglishDescription" for="validationCustom03"></label>
+                    <textarea readonly asp-for="EnglishDescription" type="" class="form-control _areaHeght" id="validationCustom03"
+                              placeholder="...">
                     </textarea>
-                <span asp-validation-for="EnglishDescription" class="text-danger"> </span>
+                    <span asp-validation-for="EnglishDescription" class="text-danger"> </span>
+                </div>
             </div>
-        </div>
 
 
 
 
-        <button type="submit" class="btn btn-danger">حذف</button>
-        <button type="submit" asp-action="Index" class="btn btn-success">بازگشت ب لیست</button>
-    </form>
+            <button type="submit" class="btn btn-danger">حذف</button>
+            <button type="submit" asp-action="Index" class="btn btn-success">بازگشت ب لیست</button>
+        </form>
 
     </div>
 </div>

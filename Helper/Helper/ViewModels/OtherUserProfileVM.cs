@@ -16,8 +16,6 @@ namespace Helper.ViewModels
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
-       
-      
 
 
          

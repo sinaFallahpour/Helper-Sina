@@ -15,6 +15,16 @@ namespace Helper
         public const string AboutUsKeyName = "AboutUs";
         public const string ContactKeyName = "Contactus";
         public const string SiteRulesKeyName = "SiteRules";
+        public const string landingHelperText = "landingHelperText";
+        public const string ForUserText = "ForUserText";
+        public const string ForProfessionalText = "ForProfessionalText";
+        public const string CreateServiceText = "CreateServiceText";
+
+        
+
+        //public const string SiteRulesKeyName = "SiteRules";
+        //public const string SiteRulesKeyName = "SiteRules";
+        //public const string SiteRulesKeyName = "SiteRules";
 
 
         public const string CitiesKeyName = "City";

@@ -14,10 +14,11 @@
 
 
 
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; "> تنظیمات متون  سایت </h1>
 
 <div class="card">
     <div class="card-body">
-        <h6 class="card-title"> فرم درباره ما</h6>
+        <h6 class="card-title"> فرم تنظیمات</h6>
         <form asp-action="Index" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
 
@@ -124,13 +125,112 @@
             <!-- EnglishSiteRules -->
             <div class="form-row">
                 <div class="col-md-12 mb-3">
-                    <label asp-for="EnglishSiteRules" for="validationCustom03"></label>
+                    <label asp-for="EnglishSiteRules" for="EnglishSiteRules"></label>
                     <textarea asp-for="EnglishSiteRules" type="" rows="4" class="form-control" id="EnglishSiteRules"
                               placeholder="متن EnglishSiteRules...">
                     </textarea>
                     <span asp-validation-for="EnglishSiteRules" class="text-danger"> </span>
                 </div>
             </div>
+
+
+
+            <!-- LandingHelperText -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="LandingHelperText" for="LandingHelperText"></label>
+                    <textarea asp-for="LandingHelperText" type="" rows="4" class="form-control" id="LandingHelperText"
+                              placeholder="متن هلپر بستری مناسب...">
+                    </textarea>
+                    <span asp-validation-for="LandingHelperText" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <!-- LandingHelperText -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="EnglishlandingHelperText" for="EnglishlandingHelperText"></label>
+                    <textarea asp-for="EnglishlandingHelperText" type="" rows="4" class="form-control" id="EnglishlandingHelperText"
+                              placeholder="متن Helper,a good platform for easy access...">
+                    </textarea>
+                    <span asp-validation-for="EnglishlandingHelperText" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <!-- ForUserText -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="ForUserText" for="ForUserText"></label>
+                    <textarea asp-for="ForUserText" type="" rows="4" class="form-control" id="ForUserText"
+                              placeholder="متن  برای کاربران...">
+                    </textarea>
+                    <span asp-validation-for="ForUserText" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <!-- ForUserText -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="EnglishForUserText" for="EnglishForUserText"></label>
+                    <textarea asp-for="EnglishForUserText" type="" rows="4" class="form-control" id="EnglishForUserText"
+                              placeholder="متن EnglishForUserText...">
+                    </textarea>
+                    <span asp-validation-for="EnglishForUserText" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+
+            <!-- ForUserText -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="ForProfessionalText" for="ForProfessionalText"></label>
+                    <textarea asp-for="ForProfessionalText" type="" rows="4" class="form-control" id="ForProfessionalText"
+                              placeholder="متن  برای حرفه ایی ها...">
+                    </textarea>
+                    <span asp-validation-for="ForProfessionalText" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <!-- ForUserText -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="EnglishForProfessionalText" for="EnglishForProfessionalText"></label>
+                    <textarea asp-for="EnglishForProfessionalText" type="" rows="4" class="form-control" id="EnglishForProfessionalText"
+                              placeholder="متن EnglishForProfessionalText...">
+                    </textarea>
+                    <span asp-validation-for="EnglishForProfessionalText" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- ForUserText -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="CreateServiceText" for="CreateServiceText"></label>
+                    <textarea asp-for="CreateServiceText" type="" rows="4" class="form-control" id="CreateServiceText"
+                              placeholder="متن  برای  ایجاد سرویس...">
+                    </textarea>
+                    <span asp-validation-for="CreateServiceText" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <!-- ForUserText -->
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="EnglishCreateServiceText" for="EnglishCreateServiceText"></label>
+                    <textarea asp-for="EnglishCreateServiceText" type="" rows="4" class="form-control" id="EnglishCreateServiceText"
+                              placeholder="متن CreateServiceText...">
+                    </textarea>
+                    <span asp-validation-for="EnglishCreateServiceText" class="text-danger"> </span>
+                </div>
+            </div>
+
 
 
             <button type="submit" class="btn btn-success">ارسال</button>
@@ -174,10 +274,25 @@
             CKEDITOR.replace('ContactUs');
             CKEDITOR.replace('EnglishContactUs');
 
-             CKEDITOR.replace('SiteRules');
+            CKEDITOR.replace('SiteRules');
             CKEDITOR.replace('EnglishSiteRules');
 
+            CKEDITOR.replace('LandingHelperText');
+            CKEDITOR.replace('EnglishlandingHelperText');
+
+            CKEDITOR.replace('ForUserText');
+            CKEDITOR.replace('EnglishForUserText');
+
+            CKEDITOR.replace('ForProfessionalText');
+            CKEDITOR.replace('EnglishForProfessionalText');
+
+            CKEDITOR.replace('CreateServiceText');
+            CKEDITOR.replace('EnglishCreateServiceText');
         });
+
+
+
+
 
     </script>
 

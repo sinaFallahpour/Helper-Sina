@@ -63,7 +63,7 @@ namespace Helper.ViewModels
         /// قیمت پنل
         /// </summary>
         [Display(Name = "قیت")]
-        public int Price { get; set; }
+        public string Price { get; set; }
 
 
 

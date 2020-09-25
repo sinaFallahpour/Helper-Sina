@@ -39,7 +39,7 @@
 
             </div><!--.tabs-->
 
-            <div class="tabs-content mt-4">
+            <div class="tabs-content mt-4" style="width:400px">
 
 
                 <div id="signup-tab-content" class=" text-center">
@@ -78,7 +78,6 @@
                                    value="">
 
                             <span class="text-danger w-10 d-block field-validation-valid" data-valmsg-for="_Username" data-valmsg-replace="true"></span>*@
-
 
                         @*......._Email....... *@
 
@@ -128,7 +127,7 @@
                                type="checkbox"
                                value="true">
 
-                        <label for="AcceptRules" class="pr-4 my-3 ">      @ViewData["AcceptRole"]    </label>
+                        <label for="AcceptRules" class="pr-4 my-3 "> @ViewData["AcceptRole"] </label>
 
 
 
@@ -140,8 +139,8 @@
                         <p><a href="/account/login">    @ViewData["ImLogin"]</a></p>
                     </div>
                     <!--.help-text-->
-                    <hr />
-                    <div class="row w-100 mx-auto text-center">
+                    @*<hr />*@
+                    @*<div class="row w-100 mx-auto text-center">
                         <p class="w-100 text-center">   @ViewData["UseGoogleText"]   </p>
 
                     </div>
@@ -150,7 +149,7 @@
                             <img src="~/hj/img/google-icon.png" class="text-center mx-auto img-fluid" /><br />
                             <span class="text-center w-100">   @ViewData["LogInWithGoogle"]  </span>
                         </a>
-                    </div>
+                    </div>*@
                 </div><!--.signup-tab-content-->
 
 
@@ -394,15 +393,17 @@
                 success: function (r) {
                     if (r.status) {
                         $("#loginSubmitButton").prop('disabled', false);
-                        $.unblockUI();
+
                         window.location.href = `${r.data}`;
+                        $.unblockUI();
                         //SuccessAlert(r.message)
                     }
                     else {
                         $("#loginSubmitButton").prop('disabled', false);
-                        $.unblockUI();
+                       
                         //FailedAlert(r.message);
                         FailedAlert2(r.message, titleSuitAlert, submiSuitAlertText);
+                        $.unblockUI();
                     }
                 },
                 error: function () {
@@ -453,8 +454,9 @@
                 success: function (r) {
                     if (r.status) {
                         $("#registerSubmitButton").prop('disabled', false);
-                        $.unblockUI();
+                    
                         window.location.href = `${r.data}`;
+                        $.unblockUI();
                         //SuccessAlert(r.message)
                     }
                     else {

@@ -13,7 +13,7 @@
     <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
     <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
 }
-<div class="container mx-auto p-0 m-0 mt-5">
+<div class="container mx-auto p-0 m-0 mt-5 " id="Newses">
     <div class="row w-100 p-0 m-0 mx-auto">
         <div class="col-md-10 col-8 text-right"><h3><b> @ViewData["HelperNews"]  </b></h3></div>
         <div class="col-md-2 col-4 text-news"><span> @ViewData["New"]</span></div>
@@ -62,7 +62,7 @@
                                         <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
                                     </div>
                                     <h5 class="card-title text-right pt-4"> @item.Title</h5>
-                                    <p class="card-text text-justify size-14"> @item.Description.GetSummary(500) </p>
+                                    <p style="height:317px" class="card-text text-justify size-14"> @item.Description.GetSummary(280) </p>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                                         <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
                                     </div>
                                     <h5 class="card-title   pt-4"> @item.EnglishTitle</h5>
-                                    <p class="card-text text-justify size-14"> @item.EnglishDescription.GetSummary(500) </p>
+                                    <p style="height:317px" class="card-text text-justify size-14"> @item.EnglishDescription.GetSummary(280) </p>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
 
 </div>
 @*-------*@
-<div class="container mx-auto p-0 m-0 mt-5">
+<div class="container mx-auto p-0 m-0 mt-5" id="Videos">
     <div class="row w-100 p-0 m-0 mx-auto">
         <div class="col-md-10 col-8 text-right"><h3><b>@ViewData["EducationalVideos"]</b></h3></div>
         <div class="col-md-2 col-4 text-news"><span> @ViewData["New"]</span></div>
@@ -166,8 +166,7 @@
                                         <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
                                     </div>
                                     <h5 class="card-title text-right pt-4"> @item.Title</h5>
-                                    <p class="card-text text-justify size-14"> @item.Description.GetSummary(500) </p>
-
+                                    <p style="height:317px" class="card-text text-justify size-14"> @item.Description.GetSummary(500) </p>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +201,7 @@
                                         <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
                                     </div>
                                     <h5 class="card-title  pt-4"> @item.EnglishTitle</h5>
-                                    <p class="card-text text-justify size-14"> @item.EnglishDescription.GetSummary(500) </p>
+                                    <p style="height:317px" class="card-text text-justify size-14"> @item.EnglishDescription.GetSummary(280) </p>
 
                                 </div>
                             </div>
@@ -237,7 +236,7 @@
 @*----articles----*@
 
 
-<div class="container mx-auto p-0 m-0 mt-5">
+<div class="container mx-auto p-0 m-0 mt-5"  id="artcles">
     <div class="row w-100 p-0 m-0 mx-auto">
         <div class="col-md-10 col-8 text-right"><h3><b> @ViewData["Articles"]</b></h3></div>
         <div class="col-md-2 col-4 text-news"><span> @ViewData["New"]</span></div>
@@ -246,7 +245,7 @@
         <img src="/hj/img/borderbig green.png" class="img-fluid mx-auto">
     </div>
 
-    <div class="swiper-container swiper-container3 swiper-container-initialized swiper-container-horizontal swiper-container-rtl">
+    <div class="swiper-container swiper-container3  swiper-container-initialized swiper-container-horizontal swiper-container-rtl">
         <div class="swiper-wrapper" style="transform: translate3d(1170px, 0px, 0px); transition-duration: 0ms;">
 
 
@@ -257,7 +256,7 @@
                     <div class="swiper-slide" style="width: 360px; margin-left: 30px;">
                         <div class=" col-12 mx-auto  my-3 p-0">
                             <div class="card w-100 hj-card-news">
-                                <img class="card-img-top" src="@item.ArticlePhotoAddress" alt="new">
+                                <img  style="height:302px" class="card-img-top" src="@item.ArticlePhotoAddress" alt="new">
 
                                 <div class="card-body card-Index">
                                     <div class="row w-100 p-0 m-0 hj-option-card text-center">
@@ -277,7 +276,7 @@
                                         <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
                                     </div>
                                     <h5 class="card-title text-right  pt-4"> @item.Title</h5>
-                                    <p class="card-text text-justify size-14">@item.Description.GetSummary(300)</p>
+                                    <p style="height:217px" class="card-text text-justify size-14">@item.Description.GetSummary(300)</p>
                                 </div>
                             </div>
                         </div>
@@ -288,7 +287,7 @@
                     <div class="swiper-slide" style="width: 360px; margin-left: 30px;">
                         <div class=" col-12 mx-auto  my-3 p-0">
                             <div class="card w-100 hj-card-news">
-                                <img class="card-img-top" src="@item.EnglishArticlePhotoAddress" alt="new">
+                                <img style="height:302px" class="card-img-top" src="@item.EnglishArticlePhotoAddress" alt="new">
 
                                 <div class="card-body card-Index">
                                     <div class="row w-100 p-0 m-0 hj-option-card text-center">
@@ -307,7 +306,7 @@
                                         <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like">@item.SeenCount</span></div>
                                     </div>
                                     <h5 class="card-title  pt-4"> @item.EnglishTitle</h5>
-                                    <p class="card-text text-justify size-14" >@item.EnglishDescription.GetSummary(300)</p>
+                                    <p style="height:217px" class="card-text text-justify size-14" >@item.EnglishDescription.GetSummary(300)</p>
                                 </div>
                             </div>
                         </div>
@@ -377,16 +376,17 @@
 
             var UserId = $("#userId").val();
             var NewsId = newsId;
-            if (!UserId) {
-                FailedAlert("برای لایک کردن محصولات ابتدا لاگین کنید.");
-                return
-            }
+            //if (!UserId) {
+            //    FailedAlert("برای لایک کردن  ابتدا لاگین کنید.");
+            //    return
+            //}
             var data = {
                 "newsID": NewsId
             };
             $(tagId).remove();
             var el = `<i id="loading-${newsId}" class="fa fa-spinner fa-spin  fa-fw pl-2"></i>`
             $(`#likeConta-${newsId}`).prepend(el)
+          
             $.ajax({
                 method: "POST",
                 url: '/Newses/ToggleLike',
@@ -410,7 +410,8 @@
                     else
                         FailedAlert(r.message);
                 },
-                error: function () {
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(1)
                     FailedAlert("خطا رخ داده است.");
                 }
             });

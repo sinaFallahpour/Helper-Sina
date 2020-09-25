@@ -12,9 +12,11 @@
 }
 
 
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; "> تصحیح مقاله   </h1>
+
 <div class="card">
     <div class="card-body">
-        <h3 class="mb-3"> فرم ایجاد فیلم و خبر</h3>
+        <h3 class="mb-3"> فرم ایجاد مقاله</h3>
 
         <form asp-action="EditArticle" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
@@ -23,10 +25,10 @@
             <input type="hidden" asp-for="Id" />
 
             @*<div class="form-row">
-            <div class="_editimageContainer">
-                <img src="@Model.ArticlePhotoAddress" class="d-block " id="UploadedImage" />
-            </div>
-        </div>*@
+                    <div class="_editimageContainer">
+                        <img src="@Model.ArticlePhotoAddress" class="d-block " id="UploadedImage" />
+                    </div>
+                </div>*@
 
             <div class="form-row">
                 <div class="col-md-6 mb-3  ">
@@ -40,14 +42,14 @@
                 </div>
             </div>
             @*<div class="form-row">
-            <div class="col-md-8 mb-3">
-                <video width="400" controls>
-                    <source src="@Model.VideoAddress" id="video_here">
-                    <source src="mov_bbb.ogg" id="video_here">
-                    Your browser does not support HTML5 video.
-                </video>
-            </div>
-        </div>*@
+                    <div class="col-md-8 mb-3">
+                        <video width="400" controls>
+                            <source src="@Model.VideoAddress" id="video_here">
+                            <source src="mov_bbb.ogg" id="video_here">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                </div>*@
 
 
 
@@ -65,22 +67,22 @@
                     <span asp-validation-for="EnglishTitle" class="text-danger"> </span>
                 </div>
                 @*<div class="col-md-6 mb-3">
-                <label asp-for="NewsType" for="validationCustom03" class="text-dark"></label>
+                        <label asp-for="NewsType" for="validationCustom03" class="text-dark"></label>
 
-                <select asp-for="NewsType" class="custom-select custom-select-lg">
-                    <option selected>این انتخابگر را امتحان کنید</option>
-                    @if (Model.NewsType == NewsType.News)
-                    {
-                        <option selected value="0">خبر</option>
-                        <option value="2">فیلم آموزشی</option>
-                    }
-                    else
-                    {
-                        <option value="0">خبر</option>
-                        <option selected value="2">فیلم آموزشی</option>
-                    }
-                </select>
-            </div>*@
+                        <select asp-for="NewsType" class="custom-select custom-select-lg">
+                            <option selected>این انتخابگر را امتحان کنید</option>
+                            @if (Model.NewsType == NewsType.News)
+                            {
+                                <option selected value="0">خبر</option>
+                                <option value="2">فیلم آموزشی</option>
+                            }
+                            else
+                            {
+                                <option value="0">خبر</option>
+                                <option selected value="2">فیلم آموزشی</option>
+                            }
+                        </select>
+                    </div>*@
 
                 <div class="col-md-8 mb-3">
                     <label class="text-dark" for="file">انتخاب  عکس  </label>
@@ -147,7 +149,7 @@
 
 
         //preview of Image
-     function readURL(input) {
+        function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 

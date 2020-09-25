@@ -1,0 +1,15 @@
+﻿.blockUI.blockMsg.blockPage {
+    outline: none !important;
+    z-index: unset !important;
+    position: fixed !important;
+    padding: 0px;
+    margin: 0px;
+    width: 30%;
+    top: 40%;
+    left: 35%;
+    text-align: center;
+    color: unset !important;
+    border: unset !important;
+    background-color: unset !important;
+    cursor: wait;
+}

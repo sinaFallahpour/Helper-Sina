@@ -917,9 +917,8 @@ a {
     background: #F6F0F8;
     box-shadow: 1px 1px 9px #46454661;
     color: #8D24B3;
-
-
 }
+
 .height-120 {
     height: 120px;
 }
@@ -2312,10 +2311,10 @@ h3, h1, h2, h4, h5, h6 {
     direction: ltr;
 }
 
-  /*swit alert */
+/*swit alert */
 
-.sweet-alert.showSweetAlert  h2{
-text-align:center !important;
+.sweet-alert.showSweetAlert h2 {
+    text-align: center !important;
 }
 
 ._selectDir > option {
@@ -2367,7 +2366,6 @@ text-align:center !important;
 */
 #largeFile:after {
     position: absolute;
-  
     content: "انتخاب عکس";
     left: 0;
     right: 0;
@@ -2382,7 +2380,8 @@ text-align:center !important;
     font-family: "Helvetica Neue", Helvetica, Arial;
     font-size: 30px;
 }
-    #largeFile:hover:after {
+
+#largeFile:hover:after {
     background: #ccc;
     color: #fff;
     cursor: pointer;
@@ -2403,3 +2402,20 @@ text-align:center !important;
 ._imageRadius {
     border-radius: 12px;
 }
+
+
+
+
+._language {
+    color: black;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 900;
+    padding: 5px;
+    transition: all 0.5s;
+}
+
+
+    ._language:hover {
+        color: #ccc;
+    }

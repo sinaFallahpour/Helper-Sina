@@ -126,6 +126,9 @@
   <data name="HelperNews" xml:space="preserve">
     <value>Helper News</value>
   </data>
+  <data name="LoginForLikeArticleMessage" xml:space="preserve">
+    <value>Please log in for like</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>lates</value>
   </data>

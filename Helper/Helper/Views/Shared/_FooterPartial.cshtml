@@ -1,7 +1,25 @@
 ﻿@using Helper
+@using Helper.Data
 @using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
 @inject IViewLocalizer Localizer
-﻿<div class="footer">
+@inject ApplicationDbContext _context;
+
+@{
+
+    string LandingHelperText;
+    @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+    {
+        LandingHelperText = _context.TBL_Settings.Where(c => c.Key == PublicHelper.landingHelperText).SingleOrDefault().Value;
+    }
+    else
+    {
+        LandingHelperText = _context.TBL_Settings.Where(c => c.Key == PublicHelper.landingHelperText).SingleOrDefault().EnglishValue;
+    }
+}
+
+
+<div class="footer">
     <div class="container-fluid p-0 m-0 ">
 
         <div class="container mb-5 hj-wallet-img ">
@@ -26,7 +44,7 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="col-12 mb-3">
-                        <h3 class="text-right">
+                        <h3 class="">
                             @Localizer["Title1"]
 
                         </h3>
@@ -34,12 +52,15 @@
                     <div class="row w-100 pt-5">
                         <img src="~/hj/img/border-bottom.png" class="img-fluid mr-4" />
                     </div>
-                    <div class="col-12 pt-5">
-                        <p class="text-justify hj-footer-ditalis">@Localizer["Text2"] </p>
+                    <div class="col-12 ">
+                        <p class="text-justify hj-footer-ditalis">@Html.Raw(LandingHelperText) </p>
                     </div>
-                    <div class="col-12 text-md-right text-center mt-4">
-                        <button type="button" class="btn btn-success hj-service-index-button  ">  @Localizer["Login"] / @Localizer["SignIn"] </button>
-                    </div>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div class="col-12 _text-position mt-4">
+                            <a href="/Account/Login" class="btn btn-success hj-service-index-button">  @Localizer["Login"] / @Localizer["SignIn"] </a>
+                        </div>
+                    }
                 </div>
                 <div class="col-md-3">
 
@@ -75,61 +96,96 @@
 
         <div class="row w-100 justify-content text-center width-90 mx-auto mt-3 pt-4">
             <div class="col-1"></div>
-            <div class="col-lg-2  col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
-                <div class="row w-100">
-                    <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
+
+
+            <div class="col-12 mb-3">
+                <h5 class="_text-position">
+                    @Localizer["TermAndCondirion"]
+                </h5>
+            </div>
+            <div class="row w-100 pt-1">
+
+                <img src="~/hj/img/border-bottom.png" class="img-fluid mr-4" />
+            </div>
+            <div class="col-lg-12  col-12 _text-position">
+                <div class="row">
+                    <div class="col-3 p-2 _text-position">
+                        <a href="/home/SiteRules/INDEX" dideo-checked="true"><span class="text-dark">  <i class="fa fa-circle pl-1"></i>  @Localizer["TermAndCondirion"]   </span> </a>
+                    </div>
+
+                    <div class="col-3 p-2 _text-position">
+                        <a href="/Newses#Newses" dideo-checked="true"><span class="text-dark">  <i class="fa fa-circle pl-1"></i>  @Localizer["Faq"] </span> </a>
+                    </div>
+
+                    <div class="col-3 p-2 _text-position">
+                        <a href="/Newses#artcles" dideo-checked="true"><span class="text-dark">  <i class="fa fa-circle pl-1"></i>  @Localizer["LearningArticles"] </span> </a>
+                    </div>
+
+                    <div class="col-3 p-2 _text-position">
+                        <a href="/Newses#Videos" dideo-checked="true"><span class="text-dark">  <i class="fa fa-circle pl-1"></i>  @Localizer["Videos"]  </span> </a>
+                    </div>
+
+
+
                 </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
 
             </div>
-            <div class="col-lg-2  col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
-                <div class="row w-100">
-                    <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
-                </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
 
-            </div>
-            <div class="col-lg-2  col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
-                <div class="row w-100">
-                    <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
-                </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
 
-            </div>
-            <div class="col-lg-2  col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
-                <div class="row w-100">
-                    <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
-                </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
+            @*<div class="col-lg-2  col-12 text-right">
+                    <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
+                    <div class="row w-100">
+                        <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
+                    </div>
+                    <div class="_direction _text-position col-12 py-2"><a href="/home/SiteRules/INDEX"><span class="text-dark">  <i class="fa fa-circle pl-1"></i> @Localizer["TermAndCondirion"]  </span> </a></div>
+                    <div class="_direction _text-position col-12 py-2"><a href="/Newses#Newses"> <span class="text-dark"><i class="fa fa-circle pl-1"></i>  @Localizer["Faq"] </span>  </a></div>
+                    <div class="_direction _text-position col-12 py-2"><a href="/Newses#artcles"> <span class="text-dark"><i class="fa fa-circle pl-1"></i>  @Localizer["LearningArticles"] </span> </a></div>
+                    <div class="_direction _text-position col-12 py-2"> <a href="/Newses#Videos">  <span class="text-dark"><i class="fa fa-circle pl-1"></i> @Localizer["Videos"]</span>  </a></div>
+                </div>*@
+            @*<div class="col-lg-2  col-12 text-right">
+                    <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
+                    <div class="row w-100">
+                        <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
+                    </div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i> @Localizer["TermAndCondirion"]  </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i>  @Localizer["Faq"] </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i>  @Localizer["LearningArticles"] </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i> @Localizer["TrainingCourse"]</span></div>
 
-            </div>
-            <div class="col-lg-2  col-12 text-right">
-                <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
-                <div class="row w-100">
-                    <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
-                </div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TermAndCondirion"]  </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["Faq"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i>  @Localizer["LearningArticles"] </span></div>
-                <div class="col-12 py-2"><span><i class="fa fa-circle pl-2"></i> @Localizer["TrainingCourse"]</span></div>
+                </div>*@
+            @*<div class="col-lg-2  col-12 text-right">
+                    <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
+                    <div class="row w-100">
+                        <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
+                    </div>
+                    <div class="_direction _text-position col-12 py-2 "><span><i class="fa fa-circle pl-1"></i> @Localizer["TermAndCondirion"]  </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i>  @Localizer["Faq"] </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i>  @Localizer["LearningArticles"] </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i> @Localizer["TrainingCourse"]</span></div>
 
-            </div>
+                </div>*@
+            @*<div class="col-lg-2  col-12 text-right">
+                    <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
+                    <div class="row w-100">
+                        <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
+                    </div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i> @Localizer["TermAndCondirion"]  </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i>  @Localizer["Faq"] </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i>  @Localizer["LearningArticles"] </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i> @Localizer["TrainingCourse"]</span></div>
+
+                </div>*@
+            @*<div class="col-lg-2  col-12 text-right">
+                    <div class="col-12 hj-titr-Footer py-2"><h6> @Localizer["SiteSection"]</h6></div>
+                    <div class="row w-100">
+                        <div class="col-md-11 mx-auto"> <img src="~/hj/img/border-bottom.png" class="img-fluid mr-2" /></div>
+                    </div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i> @Localizer["TermAndCondirion"]  </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i>  @Localizer["Faq"] </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i>  @Localizer["LearningArticles"] </span></div>
+                    <div class="_direction _text-position col-12 py-2"><span><i class="fa fa-circle pl-1"></i> @Localizer["TrainingCourse"]</span></div>
+
+                </div>*@
             <div class="col-1"></div>
         </div>
         @*-----Electronic symbol----*@

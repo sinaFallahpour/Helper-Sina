@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+
+@section Style{
+
+    <!-- DataTable -->
+    <link rel="stylesheet" href="~/Admin/vendors/dataTable//dataTables.min.css" type="text/css">
+    <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
+}
+
+
+
+
+
+
+
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; ">داشبورد</h1>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row hj-content hj-content">
+            <div class="container mt-md-5 pt-md-5">
+                <div class="row text-center mt-5">
+                    <div class="col-md-4  mb-5">
+                        <img src="~/hj/img/1.png" class="img-fluid " alt="Responsive image">
+                        <h4 class="pt-4 text-center">
+                            تعداد خدمات دهندگان
+                        </h4>
+                        <span class="timer">@ViewData["ServiceProviderCount"]</span>
+                    </div>
+                    <div class="col-md-4  mb-5">
+                        <img src="~/hj/img/2.png" class="img-fluid" alt="Responsive image">
+                        <h4 class="pt-4 text-center">
+                            خدمات انجام شده
+                        </h4>
+                        <span class="timer">@ViewData["doneServiceCount"]</span>
+                    </div>
+                    <div class="col-md-4  mb-5">
+                        <img src="~/hj/img/3.png" class="img-fluid" alt="Responsive image">
+                        <h4 class="pt-4 text-center">
+                            شهر های تحت پوشش
+                        </h4>
+                        <span class="timer">@ViewData["citiesCount"]</span>
+                    </div>
+                </div>
+                @*........................service....................*@
+               
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+

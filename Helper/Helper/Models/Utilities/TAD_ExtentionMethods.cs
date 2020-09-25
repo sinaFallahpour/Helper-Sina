@@ -131,6 +131,11 @@ namespace Helper.Models.Utilities
         }
 
 
+        public static string GetPriceFormat(this double price)
+        {
+            return String.Format("{0:n0}", price);
+        }
+
 
         /// <summary>
         /// تبدیل قیمت به فرمت 95,000
@@ -376,11 +381,6 @@ namespace Helper.Models.Utilities
 
 
 
-
-
-
-
-
         /// <summary>
         /// یک استرینگ تاریخ شمسی را به معادل میلادی تبدیل میکند
         /// </summary>
@@ -447,19 +447,6 @@ namespace Helper.Models.Utilities
         /// </summary>
         public string Title { get; set; }
     }
-
-
-    
-
-
-
-
-
-
-
-
-
-
 
 
 }

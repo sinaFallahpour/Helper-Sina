@@ -162,4 +162,7 @@
   <data name="Skills" xml:space="preserve">
     <value>The desiret Skill</value>
   </data>
+  <data name="{0} Is required." xml:space="preserve">
+    <value>{0} Is required.</value>
+  </data>
 </root>

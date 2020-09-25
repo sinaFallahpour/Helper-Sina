@@ -71,7 +71,7 @@ namespace Helper.Controllers
 
             var ServiceProviderCount = await _context.Users.CountAsync(c => c.HasProviderService);
 
-            var doneServiceCount = -12;
+            var doneServiceCount = 0;
 
             var categories = await _context.TBL_Category.Where(c => c.IsEnabled == true)
                      .OrderByDescending(c => c.CreateDate).Take(7).ToListAsync();
@@ -79,17 +79,31 @@ namespace Helper.Controllers
 
 
             List<TBL_Slide> slides;
+            string LandingHelperText;
+            string ForUserText;
+            string ForProfessionalText;
+            string CreateServiceText;
             if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
             {
                 slides = await _context.TBL_Sliders
                     .Where(c => c.IsActive == true && c.LanguageType == LanguageType.Persian)
                     .ToListAsync();
+
+                LandingHelperText = _context.TBL_Settings.AsNoTracking().Where(c => c.Key == PublicHelper.landingHelperText).SingleOrDefault().Value;
+                ForUserText = _context.TBL_Settings.AsNoTracking().Where(c => c.Key == PublicHelper.ForUserText).SingleOrDefault().Value;
+                ForProfessionalText = _context.TBL_Settings.AsNoTracking().Where(c => c.Key == PublicHelper.ForProfessionalText).SingleOrDefault().Value;
+                CreateServiceText = _context.TBL_Settings.AsNoTracking().Where(c => c.Key == PublicHelper.CreateServiceText).SingleOrDefault().Value;
             }
             else
             {
                 slides = await _context.TBL_Sliders
                     .Where(c => c.IsActive == true && c.LanguageType == LanguageType.English)
                     .ToListAsync();
+
+                LandingHelperText = _context.TBL_Settings.AsNoTracking().Where(c => c.Key == PublicHelper.landingHelperText).SingleOrDefault().EnglishValue;
+                ForUserText = _context.TBL_Settings.AsNoTracking().Where(c => c.Key == PublicHelper.ForUserText).SingleOrDefault().EnglishValue;
+                ForProfessionalText = _context.TBL_Settings.AsNoTracking().Where(c => c.Key == PublicHelper.ForProfessionalText).SingleOrDefault().EnglishValue;
+                //CreateServiceText = _context.TBL_Settings.AsNoTracking().Where(c => c.Key == PublicHelper.CreateServiceText).SingleOrDefault().EnglishValue;
             }
 
             var model = new HomePageVM
@@ -98,7 +112,11 @@ namespace Helper.Controllers
                 ServiceProviderCount = ServiceProviderCount,
                 DoneServiceCount = doneServiceCount,
                 CityCount = citiesCount,
-                Categories = categories
+                Categories = categories,
+                LandingHelperText = LandingHelperText,
+                ForUserText = ForUserText,
+                ForProfessionalText = ForProfessionalText,
+               
             };
             return View(model);
         }

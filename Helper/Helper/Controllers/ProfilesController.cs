@@ -17,6 +17,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Helper.Models.Utilities;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Helper.Models.Enums;
+
 namespace Helper.Controllers
 {
     public class ProfilesController : Controller
@@ -26,10 +30,12 @@ namespace Helper.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         private IStringLocalizer<ProfilesController> _localizer;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
         public ProfilesController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ApplicationDbContext context,
+            IWebHostEnvironment hostingEnvironment,
                //JwtGenerator jwtGenerator,
                IHttpContextAccessor httpContextAccessor,
                   IMapper mapper,
@@ -37,7 +43,7 @@ namespace Helper.Controllers
         {
             _context = context;
             _userManager = userManager;
-
+            _hostingEnvironment = hostingEnvironment;
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
             _localizer = localizer;
@@ -88,115 +94,111 @@ namespace Helper.Controllers
                         WorkDescriptions = c.WorkExperience.Descriptions,
                         Semat = c.WorkExperience.Semat,
                         CompanyName = c.WorkExperience.CompanyName,
-
                     })
                     .FirstOrDefaultAsync();
-            if (user != null)
-                return View(user);
-            return NotFound();
 
 
+            if (user == null)
+                return NotFound();
+
+            var query = _context.TBL_Service.AsQueryable();
+            var count = query.Where(c => c.Username == user.UserName && c.ServiceType == ServiceType.GiverService).Count();
+
+            var services = await _context.TBL_Service
+                 .AsNoTracking()
+                .Where(m => m.Username == user.UserName && m.ServiceType == ServiceType.GiverService)
+                .Select(c => new ServiceListVM
+                {
+                    Id = c.Id,
+                    CreateDate = c.CreateDate,
+                    Description = c.Description,
+                    LikeCount = c.LikeCount,
+                    CommentCount = c.CommentCount,
+                    SeenCount = c.SeenCount,
+                    Title = c.Title,
+                    CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
+                    CategoryImageAddres = c.Category.PhotoAddress,
+                    ConfirmServiceType = c.ConfirmServiceType,
+                    //IsLiked = c.UserLikeServices.Any(p => p.UserName == user.UserName && p.ServiceId == c.Id),
+                })
+                .OrderByDescending(c => c.CreateDate)
+                .ThenBy(c => c.LikeCount)
+                .ThenBy(c => c.ConfirmServiceType == ConfirmServiceType.Confirmed)
+                .ToListAsync();
+
+
+
+            var data = new ProfileWithDashboardVM()
+            {
+                Profile = user,
+                Services = services
+            };
+
+            return View(user);
+
+
+            //return View(user);
         }
+
+
+
+
+
+
+
+
+
+        [Route("Services/UsersService/{username}")]
+        public async Task<IActionResult> UsersService(string username, int? limit, int? offset)
+        {
+            var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _context.Users.Where(c => c.Id == currentUserId).Select(c => new { c.Id, c.UserName }).FirstOrDefaultAsync();
+
+            var query = _context.TBL_Service.AsQueryable();
+            var count = query.Where(c => c.Username == username && c.ServiceType == ServiceType.GiverService).Count();
+
+            var services = await _context.TBL_Service
+                 .AsNoTracking()
+                .Where(m => m.Username == username && m.ServiceType == ServiceType.GiverService && m.ConfirmServiceType == ConfirmServiceType.Confirmed && m.Category.IsEnabled == true)
+                .Skip(offset ?? 0)
+                .Take(limit ?? 8)
+                 .Include(c => c.UserLikeServices)
+                .Select(c => new ServiceListVM
+                {
+                    Id = c.Id,
+                    CreateDate = c.CreateDate,
+                    Description = c.Description,
+                    LikeCount = c.LikeCount,
+                    CommentCount = c.CommentCount,
+                    SeenCount = c.SeenCount,
+                    Title = c.Title,
+                    CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
+                    CategoryImageAddres = c.Category.PhotoAddress,
+                    IsLiked = c.UserLikeServices.Any(p => p.UserName == user.UserName && p.ServiceId == c.Id),
+                })
+                .OrderByDescending(c => c.CreateDate)
+                .ThenBy(c => c.LikeCount)
+                .ToListAsync();
+            var response = new { Count = count, services = services };
+            return new JsonResult(new { Status = true, Message = "", data = response });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         #endregion
 
 
-
-
-        //#region UpdateProfile
-
-        ////  /api/Profile/UpdateProfile
-        //[HttpPost]
-        //[Authorize]
-        //public async Task<ActionResult> Index(string Id, ProfileVM2 model)
-        //{
-        //    returnViewDate();
-
-
-        //    if (Id != model.Id)
-        //    {
-        //        return NotFound();
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            var userFromDb = await _context.Users.Where(c => c.Id == model.Id)
-        //                  .Include(c => c.EducationHistry)
-        //                  .Include(c => c.WorkExperience)
-        //                   .FirstOrDefaultAsync();
-
-        //            if (userFromDb != null)
-        //            {
-        //                //if (await _context.Users.Where(x => x.UserName == model.UserName && x.UserName != userFromDb.UserName).AnyAsync())
-        //                //{
-        //                //    TempData["Error"] = _localizer["ExistUserName"].Value.ToString();
-        //                //    return View(model);
-        //                //}
-
-        //                if (await _context.Users.Where(x => x.Email == model.Email && x.Email != userFromDb.Email).AnyAsync())
-        //                {
-        //                    TempData["Error"] = _localizer["ExistEmail"].Value.ToString();
-        //                    return View(model);
-        //                }
-
-
-        //                userFromDb.Nickname = model.Nickname;
-        //                //userFromDb.UserName = model.UserName;
-        //                userFromDb.Email = model.Email;
-        //                userFromDb.City = model.City;
-        //                userFromDb.Phone = model.Phone;
-
-        //                //اطلاعات کاری
-        //                if (userFromDb.WorkExperience != null)
-        //                {
-        //                    userFromDb.WorkExperience.CompanyName = model.CompanyName;
-        //                    userFromDb.WorkExperience.Descriptions = model.Descriptions;
-        //                    userFromDb.WorkExperience.EnterDate = model.WorkEnterDate;
-        //                    userFromDb.WorkExperience.ExitDate = model.WorkExitDate;
-        //                    userFromDb.WorkExperience.Semat = model.Semat;
-        //                }
-
-        //                //اطلاهات درسی
-        //                if (userFromDb.EducationHistry != null)
-        //                {
-        //                    userFromDb.EducationHistry.EnterDate = model.EduEnterDate;
-        //                    userFromDb.EducationHistry.ExitDate = model.EduExitDate;
-        //                    userFromDb.EducationHistry.MaghTa = model.MaghTa;
-        //                    userFromDb.EducationHistry.UnivercityName = model.UnivercityName;
-        //                }
-
-        //                //اطلاعات ديگر
-        //                userFromDb.Birthdate = model.Birthdate;
-        //                userFromDb.Gender = model.Gender;
-        //                userFromDb.MarriedType = model.MarriedType;
-        //                userFromDb.LanguageKnowing = model.LanguageKnowing;
-
-        //                var result = _context.SaveChanges();
-
-        //                await HttpContext.RefreshLoginAsync();
-        //                TempData["Success"] = "ثبت موفقیت آمیز";
-        //                return View(model);
-        //                //return RedirectToAction(nameof(Index));
-        //            }
-
-        //            TempData["Error"] = "کاربر یافت نشد";
-        //            return View(model);
-
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            TempData["Error"] = "خطا در ثبت";
-        //            return View(model);
-        //        }
-
-        //    }
-        //    return View(model);
-
-
-        //}
-
-        //#endregion
 
 
 
@@ -239,6 +241,60 @@ namespace Helper.Controllers
                             //return View(model);
                         }
 
+
+
+
+                        if (model.file != null)
+                        {
+                            if (!FileUploader.IsImageMimeTypeValid(model.file) || !FileUploader.IsImageExtentionValid(model.file))
+                            {
+                                return new JsonResult(new { Status = false, Message = _localizer["image format Is not valid"].Value.ToString() });
+                            }
+
+                            if (!FileUploader.IsImageSizeValid(model.file, 0.4))
+                            {
+                                return new JsonResult(new { Status = false, Message = _localizer[$"Image size should less than {400} kiloBite"].Value.ToString() });
+                            }
+
+
+
+
+                            var host = _hostingEnvironment.WebRootPath;
+                            var url = "Upload/User";
+                            var savePath = Path.Combine(host, url);
+                            var uploadResult = FileUploader.UploadImagePng(file: model.file, maxLength: 0.4, path: savePath, compression: 100);
+                            if (uploadResult.succsseded == false)
+                            {
+
+                                return new JsonResult(new { Status = false, Message = uploadResult.result });
+
+                                //ModelState.AddModelError("", uploadResult.result);
+                                //return View(model);
+                            }
+
+                            var img = uploadResult.result;
+                            model.PhotoAddress = "/Upload/User/" + img;
+
+
+                            if (!string.IsNullOrEmpty(userFromDb.PhotoAddress))
+                            {
+                                var LastImagePath = userFromDb.PhotoAddress.Substring(1);
+                                LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
+                                if (System.IO.File.Exists(LastImagePath))
+                                {
+                                    System.IO.File.Delete(LastImagePath);
+                                }
+                            }
+                            //update Newe Pic Address To database
+                            userFromDb.PhotoAddress = model.PhotoAddress;
+                        }
+
+
+
+
+
+
+
                         userFromDb.Nickname = model.Nickname;
                         //userFromDb.UserName = model.UserName;
                         userFromDb.Email = model.Email;
@@ -275,7 +331,7 @@ namespace Helper.Controllers
                         var result = _context.SaveChanges();
 
                         await HttpContext.RefreshLoginAsync();
-                        return new JsonResult(new { Status = true, Message = _localizer["SuccessMessage"].Value.ToString() });
+                        return new JsonResult(new { Status = true, Message = _localizer["SuccessMessage"].Value.ToString(), data = userFromDb.PhotoAddress });
 
                         //TempData["Success"] = "ثبت موفقیت آمیز";
                         //return View(model);
@@ -302,18 +358,6 @@ namespace Helper.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         [Authorize]
         [Route("Profiles/OtherUserProfile/{username}")]
         public async Task<ActionResult> OtherUserProfile(string username)
@@ -321,12 +365,6 @@ namespace Helper.Controllers
 
             returnViewDate();
             var currentUsername = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            var isEnglish = true;
-            if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
-            {
-                isEnglish = false;
-            }
-
             var user = await _context
                 .Users
                 .Where(c => c.UserName == username)
@@ -342,8 +380,8 @@ namespace Helper.Controllers
                     Descriptions = c.Descriptions,
                     PhotoAddress = c.PhotoAddress,
 
-                    ////////////////////////////////////////Phone = c.Phone,
-                    LanguageKnowing = c.LanguageKnowing,
+                ////////////////////////////////////////Phone = c.Phone,
+                LanguageKnowing = c.LanguageKnowing,
                     City = c.City,
                     Gender = c.Gender,
                     MarriedType = c.MarriedType,

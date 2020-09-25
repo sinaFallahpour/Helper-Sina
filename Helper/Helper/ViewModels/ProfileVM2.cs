@@ -1,5 +1,6 @@
 ﻿using Helper.Models.Enums;
 using Helper.ViewModels.Api.Profiles.DTO;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -71,6 +72,8 @@ namespace Helper.ViewModels
         /// </summary>
         public string PhotoAddress { get; set; }
 
+      
+        public IFormFile file { get; set; }
 
         //public UserVM CurrentUser { get; set; }
 

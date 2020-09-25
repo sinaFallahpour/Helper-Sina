@@ -13,6 +13,9 @@
 }
 
 
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; "> ایجاد فیلم و خبر </h1>
+
+
 <div class="card">
     <div class="card-body">
         <h3 class="mb-3"> فرم ایجاد فیلم و خبر</h3>
@@ -20,15 +23,15 @@
         <form asp-action="Create" class="needs-validation" novalidate="" enctype="multipart/form-data">
 
             <div asp-validation-summary="ModelOnly" class="lert alert-success text-danger"></div>
-         
+
 
 
             <input type="hidden" name="Id" value="0" />
             @*<div class="form-row">
-            <div class="col-md-8 mb-3">
-                <img class="d-block " id="UploadedImage" />
-            </div>
-        </div>*@
+                    <div class="col-md-8 mb-3">
+                        <img class="d-block " id="UploadedImage" />
+                    </div>
+                </div>*@
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
@@ -126,14 +129,14 @@
 
 
             @*<div class="form-row">
-            <div class="col-lg-9 mb-3">
-                <label asp-for="Description" for="Description"></label>
-                <textarea asp-for="Description" type="" class="form-control" id="Description"
-                          placeholder="متن مقاله ...">
-                </textarea>
-                <span asp-validation-for="Description" class="text-danger"> </span>
-            </div>
-        </div>*@
+                    <div class="col-lg-9 mb-3">
+                        <label asp-for="Description" for="Description"></label>
+                        <textarea asp-for="Description" type="" class="form-control" id="Description"
+                                  placeholder="متن مقاله ...">
+                        </textarea>
+                        <span asp-validation-for="Description" class="text-danger"> </span>
+                    </div>
+                </div>*@
 
 
 

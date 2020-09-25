@@ -221,7 +221,7 @@
     <value>تایید</value>
   </data>
   <data name="SuccessFullRegisterMessage" xml:space="preserve">
-    <value>ثبت موفقیت آمیز خدمت</value>
+    <value>ثبت موفقیت آمیز خدمت . این خدمت بعد از تایید ادمین در سایت نمایش داده خواهد شد.</value>
   </data>
   <data name="Titles" xml:space="preserve">
     <value>عنوان خدمت</value>

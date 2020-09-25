@@ -16,20 +16,22 @@
 }
 
 
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; ">   جزییات مقاله یا  فیلم و خبر     </h1>
+
 <div class="card">
     <div class="card-body">
         @*@if (Model.NewsType == NewsType.Arrticle)
-        {
-            <h2 class="card-title">     </h2>
-        }
-        else if (Model.NewsType == NewsType.News)
-        {
-            <h3 class="card-title">   حذف   خبر. آیا مطمئن به حذف هستید؟</h3>
-        }
-        else
-        {
-            <h3 class="card-title">   حذف   فیلم. آیا مطمئن به حذف هستید؟</h3>
-        }*@
+            {
+                <h2 class="card-title">     </h2>
+            }
+            else if (Model.NewsType == NewsType.News)
+            {
+                <h3 class="card-title">   حذف   خبر. آیا مطمئن به حذف هستید؟</h3>
+            }
+            else
+            {
+                <h3 class="card-title">   حذف   فیلم. آیا مطمئن به حذف هستید؟</h3>
+            }*@
 
         <form asp-action="Delete" class="needs-validation" novalidate="">
 
@@ -38,10 +40,10 @@
             @if (Model.NewsType == NewsType.Arrticle)
             {
                 @*<div class="form-row">
-                <div class="  _editimageContainer">
-                    <img src="@Model.ArticlePhotoAddress" class="d-block " id="UploadedImage" />
-                </div>
-            </div>*@
+                        <div class="  _editimageContainer">
+                            <img src="@Model.ArticlePhotoAddress" class="d-block " id="UploadedImage" />
+                        </div>
+                    </div>*@
 
 
                 <div class="form-row">
@@ -59,10 +61,10 @@
             @if (Model.NewsType != NewsType.Arrticle)
             {
                 @*<div class="form-row">
-                <div class="  _editimageContainer">
-                    <img src="@Model.VideoAddress" class="d-block " id="UploadedImage" />
-                </div>
-            </div>*@
+                        <div class="  _editimageContainer">
+                            <img src="@Model.VideoAddress" class="d-block " id="UploadedImage" />
+                        </div>
+                    </div>*@
 
 
                 <div class="form-row">
@@ -156,12 +158,12 @@
 
         @*@if (Model.NewsComments.Count != 0) {
 
-            foreach (var item in Model.NewsComments)
-            {
-                <h2>@item.User.FirstName</h2>
-                <div>@item.Text</div>
-            }
-        }*@
+                foreach (var item in Model.NewsComments)
+                {
+                    <h2>@item.User.FirstName</h2>
+                    <div>@item.Text</div>
+                }
+            }*@
 
 
 

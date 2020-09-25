@@ -33,14 +33,14 @@
         <div class="col-md-7 col-12 text-center mx-auto">
             <div class="row w-100 pt-3 text-center text-md-right  d-block pr-md-2">
 
-                @if (!string.IsNullOrEmpty(Model.Nickname))
-                {
-                    <h5>@Model.Nickname</h5> ;
-                }
-                else
-                {
-                    <h5>@Model.UserName</h5>;
-                }
+                @*@if (!string.IsNullOrEmpty(Model.Nickname))
+                    {
+                        <h5>@Model.Nickname</h5> ;
+                    }*@
+                @*else
+                    {*@
+                <h5>@Model.UserName</h5>
+                @* }*@
 
             </div>
             <div class="row w-100 mx-auto text-center text-md-right  d-block "><h6 class="text-justify hj-detalis-userProfile ">   @Model.Descriptions   </h6></div>
@@ -50,14 +50,14 @@
             <div class="row w-100 pt-3 mx-auto"><button type="button" class="btn btn-success py-3 w-100 btn-profileUser-send">  @ViewData["SendMsg"]</button></div>
         </div>
     </div>
-    <div class="row w-100 mx-auto hj-skill mt-5 py-3">
+    @*<div class="row w-100 mx-auto hj-skill mt-5 py-3">
         @{
 
             var skills = Model.SKILLS;
             if (!string.IsNullOrEmpty(skills))
             {
-                var listLanguage = skills.Split(',');
-                foreach (var item in listLanguage)
+                var listSkills = skills.Split(',');
+                foreach (var item in listSkills)
                 {
                     <div class="col-md-2 col-sm-3 col-12   py-1">
                         <button type="button" class="btn  w-100 button-Service">@item</button>
@@ -67,8 +67,7 @@
         }
 
 
-
-    </div>
+    </div>*@
 </div>
 
 <input type="hidden" name="userId" id="userId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
@@ -83,13 +82,13 @@
                     <input type="hidden" name="username" id="username" value="@Model.UserName" />
                     <nav>
                         <div class="nav nav-tabs nav-fill p-0 m-0 w-100" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link  w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">  @ViewData["Services"]</a>
-                            <a class="nav-item nav-link active w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">@ViewData["Resume2"]</a>
+                            <a class="nav-item nav-link  w-50 active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">  @ViewData["Services"]</a>
+                            <a class="nav-item nav-link  w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">@ViewData["Resume2"]</a>
                         </div>
                     </nav>
 
                     <div class="tab-content py-3 px-sm-0 pt-md-4 mt-md-3" id="nav-tabContent">
-                        <div class="tab-pane fade " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             @*---------------------------*@
                             <div class="row w-100 mx-auto " v-if="services && !servicesLoading">
                                 <div v-for="service in services" :key="service.Id" class="col-lg-3 col-sm-6 col-12 py-md-5 my-3 py-lg-0 my-lg-0">
@@ -167,7 +166,7 @@
 
 
                         -@*------dashbord-----*@
-                        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade  " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
                             <div class="row w-100 mx-auto mt-5">
                                 <div class="col-12 text-right">
@@ -185,7 +184,7 @@
                                     <img src="/hj/img/borderbig green.png" class="img-fluid">
                                 </div>
                             </div>
-                            <div class="row w-100 mx-auto mt-5">
+                            @*<div class="row w-100 mx-auto mt-5">
                                 <h6 class="text-right pr-3">  @ViewData["Position"]  </h6>
                             </div>
                             <hr />
@@ -195,7 +194,7 @@
                             <div class="row w-100 text-justify">
                                 <h6 class="line-27 pr-4">    ؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟ </h6>
                             </div>
-                            <hr />
+                            <hr />*@
                             <div class="row w-100 mx-auto mt-5">
                                 <h6 class="text-right pr-3">   @ViewData["Resume"] </h6>
                             </div>
@@ -302,18 +301,18 @@
                                     <h6>
                                         @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
                                         {
-                                            <text> @Model.Gender.GetEnumDescription()</text>
-                                        }
-                                        else
-                                        {
                                             if (Model.Gender == UserGender.Man)
                                             {
-                                                <text>man</text>
+                                                <text>مرد</text>
                                             }
                                             else
                                             {
-                                                <text>woman</text>
+                                                <text>زن</text>
                                             }
+                                        }
+                                        else
+                                        {
+                                            <text> @Model.Gender.GetEnumDescription()</text>
                                         }
 
                                     </h6>
@@ -327,20 +326,18 @@
                                     <h6>
                                         @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
                                         {
-                                            <text> @Model.MarriedType.GetEnumDescription()</text>
-                                        }
-                                        else
-                                        {
                                             if (Model.MarriedType == UserMarriedType.Married)
                                             {
-                                                <text> married</text>
-
+                                                <text> متاهل</text>
                                             }
                                             else
                                             {
-                                                <text>single</text>
-
+                                                <text>مجرد</text>
                                             }
+                                        }
+                                        else
+                                        {
+                                            <text> @Model.MarriedType.GetEnumDescription()</text>
                                         }
 
                                     </h6>
@@ -423,10 +420,10 @@
 
                     var UserId = $("#userId").val();
 
-                    if (!UserId) {
-                        FailedAlert("برای لایک کردن محصولات ابتدا لاگین کنید.");
-                        return
-                    }
+                    //if (!UserId) {
+                    //    FailedAlert("برای لایک کردن محصولات ابتدا لاگین کنید.");
+                    //    return
+                    //}
 
                     this.likeLoading = true;
                     this.selectedService = this.services.find(c => c.id == serviceId)

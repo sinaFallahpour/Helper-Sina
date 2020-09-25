@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helper.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -54,5 +55,13 @@ namespace Helper.ViewModels
         /// عکس کاربر
         /// </summary>
         public string UserImageAddress { get; set; }
+
+
+        public string  Username { get; set; }
+
+
+        public ConfirmServiceType ConfirmServiceType { get; set; }
+
+
     }
 }

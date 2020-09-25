@@ -11,6 +11,7 @@
 
 }
 
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; ">ایجاد ادمین</h1>
 
 <div class="card">
     <div class="card-body">
@@ -126,18 +127,18 @@
 
 
             @*<div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="Gender" for="validationCustom03"></label>
-                <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()">
-                      <option selected="selected" value="">Please select</option>
-                </select>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Gender" for="validationCustom03"></label>
+                        <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Helper.Models.Enums.UserGender>()">
+                              <option selected="selected" value="">Please select</option>
+                        </select>
 
 
 
 
-                <span asp-validation-for="Gender" class="text-danger"> </span>
-            </div>
-        </div>*@
+                        <span asp-validation-for="Gender" class="text-danger"> </span>
+                    </div>
+                </div>*@
 
 
 
@@ -146,15 +147,15 @@
             <!-- fileUpload checkBox && selectOption -->
             @*<div class="form-row">
 
-            <div class="col-md-6 mb-3">
-                <div class="custom-file">
-                   <input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">
-                    <label class="form-contro custom-file-label" for="customFile">انتخاب فایل </label>
-                </div>
-                <span asp-validation-for="Photo" class="text-danger"> </span>
+                    <div class="col-md-6 mb-3">
+                        <div class="custom-file">
+                           <input asp-for="Photo" class="custom-file-input" onchange="readURL(this);" id="customFile">
+                            <label class="form-contro custom-file-label" for="customFile">انتخاب فایل </label>
+                        </div>
+                        <span asp-validation-for="Photo" class="text-danger"> </span>
 
-            </div>
-        </div>*@
+                    </div>
+                </div>*@
 
 
             <button type="submit" class="btn btn-success">ارسال</button>

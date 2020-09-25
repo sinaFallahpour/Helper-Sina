@@ -1,0 +1,186 @@
+﻿@model Helper.Models.Entities.TBL_Service
+@using Helper.Models.Utilities;
+@using Helper.Models.Enums;
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@section Style{
+    <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/SinaCustom/css/main.css" rel="stylesheet" />
+}
+
+
+
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; ">  جزییات سرویس   </h1>
+
+<div class="card">
+    <div class="card-body">
+
+
+        <form asp-action="Delete" class="needs-validation" novalidate="">
+
+
+            <input type="hidden" asp-for="Id" />
+            <!-- input -->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Title" for="validationCustom03"></label>
+                    <input readonly asp-for="Title" class="form-control" id="validationCustom03"
+                           placeholder="عنوان">
+                </div>
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Username" for="validationCustom03"></label>
+                    <input readonly value="@Model.Username" class="form-control" id="validationCustom03"
+                           placeholder=" نام کاربر">
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CreateDate" for="validationCustom03"></label>
+                    <input readonly value="@Model.CreateDate.ToPersianDateTime()" class="form-control" id="validationCustom03"
+                           placeholder="تاریخ ثبت">
+                </div>
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ServiceType" for="validationCustom03"></label>
+                    <input readonly value="@Model.ServiceType.GetEnumDescription()" class="form-control" id="validationCustom03"
+                           placeholder="نوغ سرویس">
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="MinpRice" for="validationCustom03"></label>
+                    <input readonly value="@Model.MinpRice.GetPriceFormat()" class="form-control" id="validationCustom03"
+                           placeholder="حداقل قیمت">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="MaxPrice" for="validationCustom03"></label>
+                    <input readonly value="@Model.MaxPrice.GetPriceFormat()" class="form-control" id="validationCustom03"
+                           placeholder="حداکثر قیمت">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="MonyUnit" for="validationCustom03"></label>
+                    <input readonly value="@Model.MonyUnit.Name" class="form-control" id="validationCustom03"
+                           placeholder="واحد پول">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Category.Name" for="validationCustom03"></label>
+                    <input readonly asp-for="Category.Name" class="form-control" id="validationCustom03"
+                           placeholder="دسته بندی">
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="City.Name" for="validationCustom03"></label>
+                    <input readonly asp-for="City.Name" class="form-control" id="validationCustom03"
+                           placeholder=" شهر">
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LikeCount" for="validationCustom03"></label>
+                    <input readonly asp-for="LikeCount" class="form-control" id="validationCustom03"
+                           placeholder="تعداد بازدید">
+                    <span asp-validation-for="LikeCount" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="SeenCount" for="validationCustom03"></label>
+                    <input readonly asp-for="SeenCount" class="form-control" id="validationCustom03"
+                           placeholder="تعداد بازدید">
+                    <span asp-validation-for="SeenCount" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CommentCount" for="validationCustom03"></label>
+                    <input readonly asp-for="CommentCount" class="form-control" id="validationCustom03"
+                           placeholder="تعداد  کامنت">
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Description" for="validationCustom03"></label>
+                    <textarea readonly asp-for="Description" type="" class="form-control _areaHeght" id="validationCustom03"
+                              placeholder="توضیحات">
+                    </textarea>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Skills" for="validationCustom03"></label>
+                    @{
+                        var skills = Model.Skills;
+                        if (!string.IsNullOrEmpty(skills))
+                        {
+                            var listSkills = skills.Split(',');
+                            foreach (var item in listSkills)
+                            {
+                                <input readonly value="@item" class="form-control mb-2 col-6" id="validationCustom03">
+
+
+                                @*<div class="col-md-2 col-sm-3 col-12   py-1">
+                                        <button type="button" class="btn   w-100 button-Service">@item</button>
+                                    </div>*@
+                            }
+                        }
+
+
+                    }
+                    @*<textarea readonly asp-for="Description" type="" class="form-control _areaHeght" id="validationCustom03"
+                                  placeholder="توضیحات">
+                        </textarea>*@
+                </div>
+            </div>
+
+
+
+
+            @*<button type="submit" class="btn btn-danger">حذف</button>*@
+            @*<button type="submit" asp-action="Index" class="btn btn-success">بازگشت ب لیست</button>*@
+        </form>
+
+
+
+    </div>
+</div>
+

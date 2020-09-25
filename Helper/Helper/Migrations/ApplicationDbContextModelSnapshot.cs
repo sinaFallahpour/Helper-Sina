@@ -504,11 +504,11 @@ namespace Helper.Migrations
                     b.Property<int>("LikeCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaxPrice")
-                        .HasColumnType("int");
+                    b.Property<double>("MaxPrice")
+                        .HasColumnType("float");
 
-                    b.Property<int>("MinpRice")
-                        .HasColumnType("int");
+                    b.Property<double>("MinpRice")
+                        .HasColumnType("float");
 
                     b.Property<int?>("MonyUnitId")
                         .HasColumnType("int");
@@ -574,7 +574,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 9, 5, 15, 57, 39, 635, DateTimeKind.Local).AddTicks(5452),
+                            CreatedAt = new DateTime(2020, 9, 25, 7, 13, 5, 807, DateTimeKind.Local).AddTicks(1569),
                             EnglishValue = "",
                             Key = "AboutUs",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -583,7 +583,7 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2020, 9, 5, 15, 57, 39, 639, DateTimeKind.Local).AddTicks(3028),
+                            CreatedAt = new DateTime(2020, 9, 25, 7, 13, 5, 811, DateTimeKind.Local).AddTicks(9922),
                             EnglishValue = "",
                             Key = "Contactus",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -592,9 +592,45 @@ namespace Helper.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2020, 9, 5, 15, 57, 39, 639, DateTimeKind.Local).AddTicks(3119),
+                            CreatedAt = new DateTime(2020, 9, 25, 7, 13, 5, 812, DateTimeKind.Local),
                             EnglishValue = "",
                             Key = "SiteRules",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Value = ""
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2020, 9, 25, 7, 13, 5, 812, DateTimeKind.Local).AddTicks(8),
+                            EnglishValue = "",
+                            Key = "landingHelperText",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Value = ""
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2020, 9, 25, 7, 13, 5, 812, DateTimeKind.Local).AddTicks(13),
+                            EnglishValue = "",
+                            Key = "ForUserText",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Value = ""
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2020, 9, 25, 7, 13, 5, 812, DateTimeKind.Local).AddTicks(18),
+                            EnglishValue = "",
+                            Key = "ForProfessionalText",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Value = ""
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2020, 9, 25, 7, 13, 5, 812, DateTimeKind.Local).AddTicks(22),
+                            EnglishValue = "",
+                            Key = "CreateServiceText",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Value = ""
                         });
@@ -742,187 +778,6 @@ namespace Helper.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("TBL_WorkExperience");
-                });
-
-            modelBuilder.Entity("Helper.ViewModels.CreateServiceVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CommentCount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<bool>("IsAgreement")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSendByEmail")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSendByNOtification")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSendBySms")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LikeCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaxPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinpRice")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MonyUnitId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeenCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServiceType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Skills")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(600)")
-                        .HasMaxLength(600);
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CreateServiceVM");
-                });
-
-            modelBuilder.Entity("Helper.ViewModels.OtherUserProfileVM", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Birthdate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descriptions")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EduEnterDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EduExitDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LanguageKnowing")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MaghTa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MarriedType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nickname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhotoAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SKILLS")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Semat")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UnivercityName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WorkDescriptions")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WorkEnterDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WorkExitDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OtherUserProfile");
-                });
-
-            modelBuilder.Entity("Helper.ViewModels.ServiceListVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CategoryImageAddres")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CommentCount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsLiked")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LikeCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeenCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserImageAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ServiceListVM");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -101,7 +101,7 @@ namespace Helper.ViewModels
         /// </summary>
         [Required(ErrorMessage = "Required")]
         [Display(Name = "حداقل قیمت")]
-        public int MinpRice { get; set; }
+        public double MinpRice { get; set; }
 
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Helper.ViewModels
         /// </summary>
         [Required(ErrorMessage = "Required")]
         [Display(Name = "حداقل قیمت")]
-        public int MaxPrice { get; set; }
+        public double MaxPrice { get; set; } = 9999999999999999999;
 
 
 

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using SixLabors.ImageSharp.Formats.Png;
 
 namespace Helper.Models.Utilities
 {
@@ -42,7 +43,7 @@ namespace Helper.Models.Utilities
         const int _maxImageLength = 10;
 
 
-        public static (bool succsseded, string result) UploadImage(IFormFile file, string path, int maxLength = _maxImageLength, int width = (int)ImageWidth.Medium, int height = (int)ImageHeight.Medium, int compression = (int)ImageComperssion.Normal)
+        public static (bool succsseded, string result) UploadImage(IFormFile file, string path, double maxLength = _maxImageLength, int width = (int)ImageWidth.Medium, int height = (int)ImageHeight.Medium, int compression = (int)ImageComperssion.Normal)
         {
 
             if (!IsImageMimeTypeValid(file) || !IsImageExtentionValid(file))
@@ -84,7 +85,42 @@ namespace Helper.Models.Utilities
 
         }
 
-        private static bool IsImageSizeValid(IFormFile image, int validLength = _maxImageLength)
+        public static (bool succsseded, string result) UploadImagePng(IFormFile file, string path, double maxLength = _maxImageLength, int width = (int)ImageWidth.Medium, int height = (int)ImageHeight.Medium, int compression = (int)ImageComperssion.Normal)
+        {
+
+            if (!IsImageMimeTypeValid(file) || !IsImageExtentionValid(file))
+            {
+                return (false, "فرمت عکس صحیح نیست.");
+            }
+
+            if (!IsImageSizeValid(file, maxLength))
+            {
+                return (false, $"سایز عکس باید کمتر از {maxLength} باشد");
+            }
+
+            try
+            {
+                var image = Image.Load(file.OpenReadStream());
+                var resizeOptions = new ResizeOptions()
+                {
+                    Size = new Size(width, height),
+                    Mode = ResizeMode.Crop
+                };
+                image.Mutate(x => x.Resize(resizeOptions));
+                var fileName = GetRandomFileName(file);
+                var savePath = Path.GetFullPath(Path.Combine(path, fileName));
+                image.SaveAsPng(savePath);
+                
+                return (true, fileName);
+            }
+            catch (Exception e)
+            {
+                return (false, e.Message);
+            }
+
+        }
+
+        public static bool IsImageSizeValid(IFormFile image, double validLength = _maxImageLength)
         {
             if (image.Length > (validLength * 1024 * 1024))
             {
@@ -96,7 +132,7 @@ namespace Helper.Models.Utilities
             }
         }
 
-        private static bool IsImageMimeTypeValid(IFormFile image)
+        public static bool IsImageMimeTypeValid(IFormFile image)
         {
             string mimeType = image.ContentType.ToLower();
             if (mimeType != "image/jpg" &&
@@ -112,12 +148,17 @@ namespace Helper.Models.Utilities
             return true;
         }
 
-        private static string GetRandomFileName(IFormFile file)
+
+       
+
+
+
+        public static string GetRandomFileName(IFormFile file)
         {
             return Guid.NewGuid() + Path.GetExtension(file.FileName).ToLower();
         }
 
-        private static bool IsImageExtentionValid(IFormFile image)
+        public static bool IsImageExtentionValid(IFormFile image)
         {
             string extention = Path.GetExtension(image.FileName).ToLower();
 
@@ -135,7 +176,7 @@ namespace Helper.Models.Utilities
             }
         }
 
-        private bool IsFileExtentionValid(IFormFile file)
+        public bool IsFileExtentionValid(IFormFile file)
         {
             string[] validExt = { ".jpg", ".gif", ".png", ".rar", ".pdf", ".zip", ".mp4", ".flv", ".avi", ".wmv", ".mp3", ".wav", ".aac", ".3gp", ".xls", ".xlsx", ".doc", ".docx", ".ppt", ".pptx" };
 

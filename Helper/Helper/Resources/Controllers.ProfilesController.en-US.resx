@@ -165,6 +165,12 @@
   <data name="GradePL" xml:space="preserve">
     <value>Grade</value>
   </data>
+  <data name="image format Is not valid" xml:space="preserve">
+    <value>image format Is not valid</value>
+  </data>
+  <data name="Image size should less than {0} kilbite" xml:space="preserve">
+    <value>Image size should less than {0} kilbite</value>
+  </data>
   <data name="LanguageKnowing" xml:space="preserve">
     <value>Languages You Know</value>
   </data>

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Helper.Models.Entities.TBL_City>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "مدیریت شهر ها";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="~/Admin/vendors/dataTable//dataTables.min.css" type="text/css">
     <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
 }
+
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; ">    شهر ها </h1>
 
 <a asp-action="Create" class="btn btn-primary mb-3">ایجاد شهر</a>
 <div class="card">

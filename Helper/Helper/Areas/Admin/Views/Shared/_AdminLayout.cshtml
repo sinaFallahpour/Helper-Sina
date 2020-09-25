@@ -89,7 +89,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             @Html.ActionLink("خروج", "LogOut", "Account",
-                          new {Area="", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) },
+                          new { Area = "", @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()) },
                           new { @class = "dropdown-item" }
                               )
 
@@ -171,32 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-grow-1">
-                    <ul>
-                        <li>
-                            <a href="#" data-toggle="tooltip" data-placement="right" title="داشبردها"
-                               data-nav-target="#dashboards">
-                                <i data-feather="bar-chart-2"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="tooltip" data-placement="right" title="اپ ها" data-nav-target="#apps">
-                                <i data-feather="command"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="active" href="#" data-toggle="tooltip" data-placement="right" title="عناصر رابط کاربری"
-                               data-nav-target="#elements">
-                                <i data-feather="layers"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="tooltip" data-placement="right" title="صفحات" data-nav-target="#pages">
-                                <i data-feather="copy"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                
                 <div>
                     <ul>
                         <li>
@@ -225,7 +200,7 @@
         <div class="main-content">
 
             <!-- begin::page-header -->
-            <div class="page-header">
+            @*<div class="page-header">
                 <div class="container-fluid d-sm-flex justify-content-between">
                     <h4>اعتبارسنجی فرم</h4>
                     <nav aria-label="breadcrumb">
@@ -240,7 +215,7 @@
                         </ol>
                     </nav>
                 </div>
-            </div>
+            </div>*@
             <!-- end::page-header -->
 
             <div class="container-fluid">
@@ -250,13 +225,12 @@
                         @RenderBody();
                     </div>
                 </div>
-
             </div>
 
             <!-- begin::footer -->
-            <footer>
+            @*<footer>
                 <div class="container-fluid">
-                    <div>© 1399 | قالب مدیریت بورداش ورژن 1.0.0 ارایه از  <a href="">AFARIDTEAM</a></div>
+                    <div> پنل مدیریت محتوای هلپر   </div>
 
                     <div>
                         <nav class="nav">
@@ -266,7 +240,7 @@
                         </nav>
                     </div>
                 </div>
-            </footer>
+            </footer>*@
             <!-- end::footer -->
 
         </div>
@@ -283,7 +257,37 @@
     <!-- App scripts همه پیج ها دارند -->
     <script src="~/Admin/assets/js/app.min.js"></script>
 
+    <script>
+        //$(function () {
+        //    var url = window.location;
+        //    var element = $('.menuUl li').filter(function () {
+        //        $("li").removeClass("active");
+        //        //$(".mainSidebar").removeClass("active");
+        //        //var menu = $(this).attr("data-menu");
+        //        //console.log("**********************");
+        //        //console.log(menu);
+        //        //console.log($(this) );
+        //        //$("#" + menu).addClass("active");
+        //        return url.pathname.toLowerCase() === $(this).attr("href");
+        //    }).last().closest("li").addClass("active");
+
+
+        //    targetParentId = $(".navigation-menu-group a.active").closest("div").attr("id");
+        //    if (targetParentId) {
+        //        $(".navigation-menu-group > div").removeClass("open");
+        //        $(".navigation-menu-group a.active").closest("div").addClass("open");
+        //        $(".UlMainMenu a").removeClass("active");
+        //        $(".UlMainMenu li>a[data-nav-target='#" + targetParentId + "']").addClass("active");
+        //    }
+
+
+        //});
+
+    </script>
     @RenderSection("Scripts", false)
+
+
+
 </body>
 
 </html>
