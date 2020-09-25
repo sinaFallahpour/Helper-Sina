@@ -454,114 +454,69 @@
 
         @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
         {
-               <text>
+            <text>
+                $(document).ready(function () {
+                    $("#Skills").tagsinput({
+                        maxChars: 50,
+                        trimValue: true,
+                        maxTags: 10,
+                    });
+                    $("#Skills1").tagsinput({
+                        maxChars: 50,
+                        trimValue: true,
+                        maxTags: 10,
+                    });
 
-        $(document).ready(function () {
-
-
-
-
-
-
-
-            //$('.skill').tagsInput({
-            //    'interactive': true,
-            //    'defaultText': 'وارد کنید',
-            //});
-            //$("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
-            //$("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
-            $("#Skills").tagsinput({
-                maxChars: 50,
-                trimValue: true,
-                maxTags: 10,
-            });
-            $("#Skills1").tagsinput({
-                maxChars: 50,
-                trimValue: true,
-                maxTags: 10,
-            });
-
-            //$('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
-            $('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
-            $('.bootstrap-tagsinput').css({ "min-height": "60px", "height": "auto " })
-            //$("#Skills").closest('.bootstrap-tagsinput').css({ background: "#eee" })
+                    $('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
+                    $('.bootstrap-tagsinput').css({ "min-height": "60px", "height": "auto " })
 
 
 
-            $(".catId").select2({
-                dir: "rtl"
-            });
-            $(".cityId").select2({
-                dir: "rtl"
-            });
-            $(".monyUnitid").select2({
-                dir: "rtl"
-            });
+                    $(".catId").select2({
+                        dir: "rtl"
+                    });
+                    $(".cityId").select2({
+                        dir: "rtl"
+                    });
+                    $(".monyUnitid").select2({
+                        dir: "rtl"
+                    });
 
 
 
-         @*@if (IsDisabled)
-            {
+                    $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
+                    $('#IsAgreement').change(function () {
+                        $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
+                    });
 
-                $(".catId").prop("disabled", false)
-                $(".cityId").prop("disabled", false)
-                $(".monyUnitid").prop("disabled", false)
-
-            }
-            else {
-
-                $(".catId").prop("disabled", true)
-                $(".cityId").prop("disabled", true)
-                 $(".monyUnitid").prop("disabled", true)*@
-
-            }
-
-            //عدم اجازه یراس وارد کردن  اسپیس
-            $('#donnerForm1 input[type=text]').on('keypress', function (e) {
-                if (e.which == 32)
-                    return false;
-            });
-            //عدم اجازه یراس وارد کردن  اسپیس
-            $('#donnerForm input[type=text]').on('keypress', function (e) {
-                if (e.which == 32)
-                    return false;
-            });
-
-
-            $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
-            $('#IsAgreement').change(function () {
-                $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
-            });
-
-            $('#IsAgreementVal1').val($('#IsAgree').is(':checked'));
-            $('#IsAgree').change(function () {
-                $('#IsAgreementVal1').val($('#IsAgree').is(':checked'));
-            });
+                    $('#IsAgreementVal1').val($('#IsAgree').is(':checked'));
+                    $('#IsAgree').change(function () {
+                        $('#IsAgreementVal1').val($('#IsAgree').is(':checked'));
+                    });
 
 
 
-            $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
-            $('#IsSendByEmail').change(function () {
-                $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
-            });
+                    $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
+                    $('#IsSendByEmail').change(function () {
+                        $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
+                    });
 
 
-            $('#IsSendByNOtificationVal').val($('#IsSendByNOtification').is(':checked'));
-            $('#IsSendByNOtification').change(function () {
-                $('#IsSendByNOtificationVal').val($('#IsSendByNOtification').is(':checked'));
-            });
+                    $('#IsSendByNOtificationVal').val($('#IsSendByNOtification').is(':checked'));
+                    $('#IsSendByNOtification').change(function () {
+                        $('#IsSendByNOtificationVal').val($('#IsSendByNOtification').is(':checked'));
+                    });
 
 
-            $('#IsSendBySmsVal').val($('#IsSendBySms').is(':checked'));
-            $('#IsSendBySms').change(function () {
-                $('#IsSendBySmsVal').val($('#IsSendBySms').is(':checked'));
-            });
+                    $('#IsSendBySmsVal').val($('#IsSendBySms').is(':checked'));
+                    $('#IsSendBySms').change(function () {
+                        $('#IsSendBySmsVal').val($('#IsSendBySms').is(':checked'));
+                    });
 
 
-        })
+                })
 
-
-             </text>
+            </text>
 
 
         }
@@ -599,34 +554,16 @@
             $(".cityId").select2();
             $(".monyUnitid").select2();
 
-
-
-
-            //عدم اجازه یراس وارد کردن  اسپیس
-            $('#donnerForm1 input[type=text]').on('keypress', function (e) {
-                if (e.which == 32)
-                    return false;
-            });
-            //عدم اجازه یراس وارد کردن  اسپیس
-            $('#donnerForm input[type=text]').on('keypress', function (e) {
-                if (e.which == 32)
-                    return false;
-            });
-
-
-
             $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
             $('#IsAgreement').change(function () {
                 $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
             });
 
 
-
             $('#IsAgreementVal1').val($('#IsAgreement1').is(':checked'));
             $('#IsAgreement1').change(function () {
                 $('#IsAgreementVal1').val($('#IsAgreement1').is(':checked'));
             });
-
 
 
             $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
@@ -654,34 +591,12 @@
         </text>
         }
 
-
-
-
-
-
-
-
-
-
-
-
-        //<input name="IsSendByEmailVal" type="hidden" id="IsSendByEmailVal" value="false">
-        //    <input name="IsSendByNOtificationVal" type="hidden" id="IsSendByNOtificationVal" value="false">
-        //        <input name="IsSendBySmsVal" type="hidden" id="IsSendBySmsVal" value="false">
-
-
-
-
-
-
         //service Provider
         $("#donnerForm").submit(function (e) {
             e.preventDefault();
             if (!$(this).valid()) {
                 return;
             }
-
-
 
               //data = $(this).serialize()
 
