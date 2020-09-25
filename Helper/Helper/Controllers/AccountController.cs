@@ -91,109 +91,20 @@ namespace Helper.Controllers
 
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Login(LoginVm model)
-        //{
-        //    //var UserReturnUrl = model.ReturnUrl ?? "/profiles";
-        //    //var AdminReturnUrl = model.ReturnUrl ?? "/admin/admins/Profile";
-
-        //    //model.ReturnUrl = UserReturnUrl;
-
-
-        //    var UserReturnUrl = model.UserReturnUrl ?? "/profiles";
-        //    var AdminReturnUrl = model.AdminReturnUrl ?? "/admin/admins/Profile";
-
-
-
-        //    ViewBag.ActiveTab = "Login";
-        //    returnViewDate();
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _userManager.FindByNameAsync(model.Username);
-        //        if (user == null)
-        //        {
-        //            ViewBag.Error = "نام کاربری یا رمز عبور غلط میباشد";
-        //            return View(model);
-        //        }
-
-        //        var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
-        //        if (result.Succeeded)
-        //        {
-        //            var existingRole = await _userManager.GetRolesAsync(user);
-        //            var role = existingRole.SingleOrDefault();
-
-        //            if (role == Static.ADMINROLE)
-        //            {
-        //                //return Redirect(AdminReturnUrl);
-        //                return Redirect(AdminReturnUrl);
-        //            }
-        //            //if (User.IsInRole(Static.ADMINROLE))
-        //            //{
-        //            //    return LocalRedirect(AdminReturnUrl);
-        //            //}
-        //            return Redirect(UserReturnUrl);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Error = "نام کاربری یا رمز عبور اشتباه است ";
-        //            return View(model);
-        //        }
-        //    }
-
-        //    var errors = new List<string>();
-        //    foreach (var item in ModelState.Values)
-        //    {
-        //        foreach (var err in item.Errors)
-        //        {
-        //            errors.Add(err.ErrorMessage);
-        //        }
-        //    }
-        //    ModelState.AddModelError("", errors.First());
-        //    return View(model);
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginVm model)
         {
-            //var UserReturnUrl = model.ReturnUrl ?? "/profiles";
-            //var AdminReturnUrl = model.ReturnUrl ?? "/admin/admins/Profile";
-
-            //model.ReturnUrl = UserReturnUrl;
-
-
             var UserReturnUrl = model.UserReturnUrl ?? "/profiles";
             var AdminReturnUrl = model.AdminReturnUrl ?? "/admin/admins/Profile";
-
-
-
-            //ViewBag.ActiveTab = "Login";
-            //returnViewDate();
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(model.Username);
                 if (user == null)
                 {
-                    //ViewBag.Error = _localizer["InValidUsernameOrEmail"].Value.ToString();
                     return new JsonResult(new { Status = false, Message = _localizer["InValidUsernameOrEmail"].Value.ToString() });
-
-                    //return View(model);
                 }
 
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -201,22 +112,15 @@ namespace Helper.Controllers
                 {
                     var existingRole = await _userManager.GetRolesAsync(user);
                     var role = existingRole.SingleOrDefault();
-
                     if (role == Static.ADMINROLE)
                     {
                         return new JsonResult(new { Status = true, Message = "", data = AdminReturnUrl });
-
-                        //return Redirect(AdminReturnUrl);
-                        //return Redirect(AdminReturnUrl);
                     }
                     return new JsonResult(new { Status = true, Message = "", data = UserReturnUrl });
-                    //return Redirect(UserReturnUrl);
                 }
                 else
                 {
                     return new JsonResult(new { Status = false, Message = _localizer["InValidUsernameOrEmail"].Value.ToString() });
-                    //ViewBag.Error = "نام کاربری یا رمز عبور اشتباه است ";
-                    //return View(model);
                 }
             }
 
@@ -229,9 +133,6 @@ namespace Helper.Controllers
                 }
             }
             return new JsonResult(new { Status = false, Message = errors.First() });
-
-            //ModelState.AddModelError("", errors.First());
-            //return View(model);
         }
 
 
@@ -366,6 +267,28 @@ namespace Helper.Controllers
 
 
 
+
+        [AllowAnonymous]
+        public IActionResult ForgetPAssword()
+        {
+            returnViewDate();
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async  Task<IActionResult> ForgetPAssword(ForgetPasswordVM model)
+        {
+           
+            returnViewDate();
+            return View();
+        }
+
+
+
+
         private void returnViewDate()
         {
             ViewData["Login"] = _localizer["Login"];
@@ -379,7 +302,7 @@ namespace Helper.Controllers
             ViewData["Password"] = _localizer["Password"];
             ViewData["ImLogin"] = _localizer["ImLogin"];
             ViewData["EmailPl"] = _localizer["EmailPl"];
-
+            ViewData["BackToLogin"] = _localizer["BackToLogin"];
         }
 
 

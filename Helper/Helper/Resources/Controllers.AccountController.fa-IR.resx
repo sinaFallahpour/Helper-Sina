@@ -120,6 +120,9 @@
   <data name="AcceptRole" xml:space="preserve">
     <value>قوانین را میپذیرم</value>
   </data>
+  <data name="BackToLogin" xml:space="preserve">
+    <value>صفحه ورود</value>
+  </data>
   <data name="EmailExistMessage" xml:space="preserve">
     <value>ایمیل موجود است.</value>
   </data>

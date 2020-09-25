@@ -120,6 +120,9 @@
   <data name="AcceptRole" xml:space="preserve">
     <value>I Agree Helpers Roles</value>
   </data>
+  <data name="BackToLogin" xml:space="preserve">
+    <value>Back To Login Page</value>
+  </data>
   <data name="EmailExistMessage" xml:space="preserve">
     <value>email already exist.</value>
   </data>

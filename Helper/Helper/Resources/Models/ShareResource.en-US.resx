@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="400" xml:space="preserve">
+    <value>The requested request is invalid</value>
+  </data>
+  <data name="401" xml:space="preserve">
+    <value>You are not allowed to access this page</value>
+  </data>
+  <data name="403" xml:space="preserve">
+    <value>You are not allowed to access this page</value>
+  </data>
+  <data name="404" xml:space="preserve">
+    <value>The page you requested was not found!</value>
+  </data>
+  <data name="500" xml:space="preserve">
+    <value>There was a problem loading the page. Please be patient with the problem</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Back To List</value>
   </data>

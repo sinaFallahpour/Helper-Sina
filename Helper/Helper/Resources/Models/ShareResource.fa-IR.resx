@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="400" xml:space="preserve">
+    <value>درخواست ارسال شده نامعتبر است</value>
+  </data>
+  <data name="401" xml:space="preserve">
+    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
+  </data>
+  <data name="403" xml:space="preserve">
+    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
+  </data>
+  <data name="404" xml:space="preserve">
+    <value>  صفحه موردنظر شما پیدا نشد!</value>
+  </data>
+  <data name="500" xml:space="preserve">
+    <value>مشکلی در بارگذاری صفحه رخ داده لطفا تارفع مشکل شکیبا باشید </value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>بازگشت به لیست</value>
   </data>

@@ -101,7 +101,7 @@ namespace Helper
             //setting of cookie
             services.ConfigureApplicationCookie(options =>
             {
-                options.AccessDeniedPath = "/accessDenied";
+                options.AccessDeniedPath = "/Error/AccesDenied";
                 options.Cookie.Name = "YourAppCookieName";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(1);
@@ -215,10 +215,19 @@ namespace Helper
             }
             else
             {
+
+                //app.UseStatusCodePagesWithRedirects("/Error/{0}");
+
                 app.UseExceptionHandler("/Home/Error");
+                
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseStatusCodePagesWithRedirects("/Error/{0}");
+
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
