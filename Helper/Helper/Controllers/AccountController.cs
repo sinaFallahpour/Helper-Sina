@@ -266,8 +266,6 @@ namespace Helper.Controllers
 
 
 
-
-
         [AllowAnonymous]
         public IActionResult ForgetPAssword()
         {
@@ -281,7 +279,6 @@ namespace Helper.Controllers
         [HttpPost]
         public async  Task<IActionResult> ForgetPAssword(ForgetPasswordVM model)
         {
-           
             returnViewDate();
             return View();
         }
