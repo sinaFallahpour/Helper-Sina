@@ -5,145 +5,110 @@
     Layout = "~/Views/Shared/_landing.cshtml";
 }
 
-<h1>Edit</h1>
+@*<h1>Edit</h1>
 
-<h4>CreateServiceVM</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Skills" class="control-label"></label>
-                <input asp-for="Skills" class="form-control" />
-                <span asp-validation-for="Skills" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ServiceType" class="control-label"></label>
-                <select asp-for="ServiceType" class="form-control"></select>
-                <span asp-validation-for="ServiceType" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsAgreement" /> @Html.DisplayNameFor(model => model.IsAgreement)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="LikeCount" class="control-label"></label>
-                <input asp-for="LikeCount" class="form-control" />
-                <span asp-validation-for="LikeCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CommentCount" class="control-label"></label>
-                <input asp-for="CommentCount" class="form-control" />
-                <span asp-validation-for="CommentCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SeenCount" class="control-label"></label>
-                <input asp-for="SeenCount" class="form-control" />
-                <span asp-validation-for="SeenCount" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsSendByEmail" /> @Html.DisplayNameFor(model => model.IsSendByEmail)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsSendByNOtification" /> @Html.DisplayNameFor(model => model.IsSendByNOtification)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsSendBySms" /> @Html.DisplayNameFor(model => model.IsSendBySms)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="MinpRice" class="control-label"></label>
-                <input asp-for="MinpRice" class="form-control" />
-                <span asp-validation-for="MinpRice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxPrice" class="control-label"></label>
-                <input asp-for="MaxPrice" class="form-control" />
-                <span asp-validation-for="MaxPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CityId" class="control-label"></label>
-                <input asp-for="CityId" class="form-control" />
-                <span asp-validation-for="CityId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <input asp-for="CategoryId" class="form-control" />
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MonyUnitId" class="control-label"></label>
-                <input asp-for="MonyUnitId" class="form-control" />
-                <span asp-validation-for="MonyUnitId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>CreateServiceVM</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreateDate" class="control-label"></label>
+                    <input asp-for="CreateDate" class="form-control" />
+                    <span asp-validation-for="CreateDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Skills" class="control-label"></label>
+                    <input asp-for="Skills" class="form-control" />
+                    <span asp-validation-for="Skills" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ServiceType" class="control-label"></label>
+                    <select asp-for="ServiceType" class="form-control"></select>
+                    <span asp-validation-for="ServiceType" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsAgreement" /> @Html.DisplayNameFor(model => model.IsAgreement)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LikeCount" class="control-label"></label>
+                    <input asp-for="LikeCount" class="form-control" />
+                    <span asp-validation-for="LikeCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CommentCount" class="control-label"></label>
+                    <input asp-for="CommentCount" class="form-control" />
+                    <span asp-validation-for="CommentCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SeenCount" class="control-label"></label>
+                    <input asp-for="SeenCount" class="form-control" />
+                    <span asp-validation-for="SeenCount" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsSendByEmail" /> @Html.DisplayNameFor(model => model.IsSendByEmail)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsSendByNOtification" /> @Html.DisplayNameFor(model => model.IsSendByNOtification)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsSendBySms" /> @Html.DisplayNameFor(model => model.IsSendBySms)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MinpRice" class="control-label"></label>
+                    <input asp-for="MinpRice" class="form-control" />
+                    <span asp-validation-for="MinpRice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaxPrice" class="control-label"></label>
+                    <input asp-for="MaxPrice" class="form-control" />
+                    <span asp-validation-for="MaxPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CityId" class="control-label"></label>
+                    <input asp-for="CityId" class="form-control" />
+                    <span asp-validation-for="CityId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <input asp-for="CategoryId" class="form-control" />
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MonyUnitId" class="control-label"></label>
+                    <input asp-for="MonyUnitId" class="form-control" />
+                    <span asp-validation-for="MonyUnitId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
 
 @using Helper.Data
 @using System.Globalization
@@ -234,134 +199,12 @@
                     </nav>
                     <div class="tab-content py-3 px-sm-0 mt-5" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-
-
-                            <form asp-action="CreateService" id="donnerForm1">
-
-
-                                <input type="hidden" name="Id1" id="Id1" value="0" />
-                                <div class="row w-100 mx-auto my-3 text-center ">
-                                    <h5 class="_text-position">    @ViewData["Titles"]  </h5>
-
-                                    <input asp-for="Title" id="Title1" autocomplete="off" placeholder='@ViewData["Titles"] ' class="service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
-                                    <span asp-validation-for="Title" class="text-center w-100 text-danger"> </span>
-                                    @*<h5 class="text-center w-100 pt-2"> تایتل خدمت</h5>*@
-                                </div>
-                                <div class="row w-100 mx-auto my-3  text-center  service-form-detalis">
-                                    <h5 class="_text-position">        @ViewData["Descriptions"] </h5>
-
-                                    <textarea asp-for="Description" autocomplete="off" id="Description1" placeholder='@ViewData["Descriptions"]' class=" pt-2 pb-2 service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
-                                </textarea>
-                                    <span asp-validation-for="Description" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
-
-                                </div>
-
-
-
-
-
-
-
-                                <div className="form-group  hj-height">
-                                    <h5 class="_text-position">    @ViewData["Categories"]</h5>
-                                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form", @id = "CategoryId1" })
-                                    <span asp-validation-for="CategoryId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
-                                </div>
-
-
-
-
-                                <div className="form-group hj-height">
-                                    <h5 class="_text-position"> @ViewData["City"] </h5>
-                                    @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form", @id = "CityId1" })
-                                    <span asp-validation-for="CityId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
-                                </div>
-
-
-                                <div class="row w-100 mx-auto my-3 text-center ">
-                                    <h5 class="_text-position"> @ViewData["Skills"] </h5>
-
-                                    <input asp-for="Skills" id="Skills1" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
-                                    <span asp-validation-for="Skills" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
-                                </div>
-
-
-
-
-
-
-                                <div class="row w-100 mx-auto">
-                                    <div class="col-lg-10 col-md-8 col-6">
-                                        <h5 class="_text-position Pricerange  ">@ViewData["PriceRange"]</h5>
-                                    </div>
-
-                                    <div class="col-lg-2 col-md-4 col-6 text-news">
-                                        @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency", @id = "MonyUnitId1" })
-                                        <span asp-validation-for="MonyUnitId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
-                                        @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
-                                    </div>
-                                </div>
-                                <div class="row w-100 mx-auto  pb-5 active">
-                                    <div class="col-sm-6 py-2">
-                                        <input asp-for="MinpRice" id="MinpRice1" min="0" max="9999999999999999999" autocomplete="off" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                                        <span asp-validation-for="MinpRice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
-                                    </div>
-                                    <div class="col-sm-6 py-2">
-                                        <input asp-for="MaxPrice" id="MaxPrice1" autocomplete="off" min="0" max="9999999999999999999" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                                        <span asp-validation-for="MaxPrice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
-                                    </div>
-                                </div>
-                                <div class="row w-100 mx-auto ">
-                                    <div class="col-12 text-right">
-                                        <input class="checkbox-service"
-                                               type="checkbox"
-                                               data-val="true"
-                                               data-val-required="The IsAgreement field is required."
-                                               id="IsAgree"
-                                               name="IsAgreement1"
-                                               value="true">
-                                        <label for="IsAgree" class="label-chekbox"> @ViewData["Agreed"]</label>
-                                    </div>
-                                </div>
-
-
-
-
-                                <input name="IsAgreementVal1" type="hidden" id="IsAgreementVal1" value="false">
-
-
-                                <div class="row w-100 mx-auto mt-4 pt-4">
-                                    <input type="submit" id="createBtnSubmit1" value="@ViewData["Submit"]" class="btn btn-success w-25 mx-auto Confirmation">
-                                </div>
-                            </form>
                         </div>
-
-
 
 
                         -@*------dashbord-----*@
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-
-
-                            @*@if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
-                            {
-                                if (!HasActivePlan)
-                                {
-                                    <div class="alert alert-success text-center" role="alert">
-                                        You dont Have Active an active  Plan! <a href="/plan/index"> I will buy it now </a>
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                if (!HasActivePlan)
-                                {
-                                    <div class="alert alert-success text-center" role="alert">
-                                        پلن فعالی برای شما موجودنیست <a href="/plan/index">   همین حالا میخرم        </a>
-                                    </div>
-                                }
-                            }*@
 
                             <form asp-action="CreateService" id="donnerForm">
 
@@ -377,7 +220,7 @@
                                 <div class="row w-100 mx-auto my-3  text-center  service-form-detalis">
                                     <h5 class="_text-position">        @ViewData["Descriptions"] </h5>
 
-                                    <textarea asp-for="Description"   autocomplete="off" id="Description" placeholder='@ViewData["Descriptions"]' class=" pt-2 pb-2 service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
+                                    <textarea asp-for="Description" autocomplete="off" id="Description" placeholder='@ViewData["Descriptions"]' class=" pt-2 pb-2 service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput">
                                 </textarea>
                                     <span asp-validation-for="Description" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
 
@@ -386,35 +229,29 @@
 
 
                                 </div>
-                                    <div className="form-group  hj-height">
-                                        <h5 class="_text-position">    @ViewData["Categories"]</h5>
-                                        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form" })
-                                        <span asp-validation-for="CategoryId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
-                                    </div>
+                                <div className="form-group  hj-height">
+                                    <h5 class="_text-position">    @ViewData["Categories"]</h5>
+                                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "catId form-control my-3 service-form" })
+                                    <span asp-validation-for="CategoryId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                </div>
 
 
-                               
-                                    <div className="form-group hj-height">
-                                        <h5 class="_text-position"> @ViewData["City"] </h5>
-                                        @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form" })
-                                        <span asp-validation-for="CityId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
-                                    </div>
-                               
-
+                                <div className="form-group hj-height">
+                                    <h5 class="_text-position"> @ViewData["City"] </h5>
+                                    @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "cityId form-control my-3 service-form" })
+                                    <span asp-validation-for="CityId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                </div>
 
 
 
 
+                                <div class="row w-100 mx-auto my-3 text-center ">
+                                    <h5 class="_text-position"> @ViewData["Skills"] </h5>
 
-                             
-                                    <div class="row w-100 mx-auto my-3 text-center ">
-                                        <h5 class="_text-position"> @ViewData["Skills"] </h5>
+                                    <input asp-for="Skills" id="Skills" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
+                                    <span asp-validation-for="Skills" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
+                                </div>
 
-                                        <input asp-for="Skills"  id="Skills" class="skill service-form text-center form-control hj-form-profile w-100 py-3 pr-3 text-dark _formInput" />
-                                        <span asp-validation-for="Skills" class="pt-2 pb-2 text-center w-100 text-danger"> </span>
-                                    </div>
-
-                                }
 
 
                                 @*<div class="row w-100 mx-auto hj-select">
@@ -432,21 +269,21 @@
                                         <h5 class="_text-position Pricerange  ">   @ViewData["PriceRange"]</h5>
                                     </div>
 
-                                        <div class="col-lg-2 col-md-4 col-6 text-news">
-                                            @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency" })
-                                            <span asp-validation-for="MonyUnitId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
-                                            @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
-                                        </div>
-                                  
+                                    <div class="col-lg-2 col-md-4 col-6 text-news">
+                                        @Html.DropDownList("MonyUnitId", null, htmlAttributes: new { @class = "monyUnitid form-control text-left currency" })
+                                        <span asp-validation-for="MonyUnitId" class="pt-2 pb-2 text-center w-100 text-danger"></span>
+                                        @* <h5 class="text-left  ">  واحد پول <i class="fas fa-chevron-down pl-3 pt-3 mr-3" id="Pricerange-down"></i></h5>*@
+                                    </div>
+
 
                                 </div>
                                 <div class="row w-100 mx-auto  pb-5 active">
                                     <div class="col-sm-6 py-2">
-                                        <input asp-for="MinpRice"  min="0" max="9999999999999999999" autocomplete="off" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input asp-for="MinpRice" min="0" max="9999999999999999999" autocomplete="off" class="form-control text-center hj-input-service py-3" placeholder="@ViewData["FromPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                         <span asp-validation-for="MinpRice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                     <div class="col-sm-6 py-2">
-                                        <input asp-for="MaxPrice"   autocomplete="off" min="0" max="9999999999999999999" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        <input asp-for="MaxPrice" autocomplete="off" min="0" max="9999999999999999999" class="form-control text-center hj-input-service py-3 " placeholder="@ViewData["ToPrice"]" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                         <span asp-validation-for="MaxPrice" class="pt-2 pb-2 text-center  text-danger d-block"></span>
                                     </div>
                                 </div>
@@ -466,9 +303,16 @@
                                     </div>
                                 </div>
 
+
+
+
+
+
+
+
+
                                 <div class="row w-100 p-0 m-0 mx-auto pt-md-3 pt-5 mt-3">
                                     <div class="col-12  text-right"><h5><b>   @ViewData["HowToSendService"]  </b></h5></div>
-
                                 </div>
                                 <div class="row w-100 mx-auto">
                                     <img src="~/hj/img/borderbig green.png" class="img-fluid mx-auto" />
@@ -478,15 +322,44 @@
 
                                 <input name="IsAgreementVal" type="hidden" id="IsAgreementVal" value="false">
 
-                                <input name="IsSendByEmailVal"  type="hidden" id="IsSendByEmailVal" value="false">
-                                <input name="IsSendByNOtificationVal"  type="hidden" id="IsSendByNOtificationVal" value="false">
+                                <input name="IsSendByEmailVal" type="hidden" id="IsSendByEmailVal" value="false">
+                                <input name="IsSendByNOtificationVal" type="hidden" id="IsSendByNOtificationVal" value="false">
                                 <input name="IsSendBySmsVal" type="hidden" id="IsSendBySmsVal" value="false">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 <div class="row w-100 mx-auto text-md-center text-right mt-3">
                                     <div class="col-md-4">
 
 
-                                        <input  class="checkbox-service"
+                                        <input class="checkbox-service"
                                                type="checkbox"
                                                data-val="true"
                                                data-val-required="The IsSendByEmail field is required."
@@ -510,7 +383,7 @@
 
 
                                     <div class="col-md-4">
-                                        <input  name="IsSendBySms"
+                                        <input name="IsSendBySms"
                                                data-val="true"
                                                value="true"
                                                type="checkbox"
@@ -520,7 +393,7 @@
                                     </div>
                                 </div>
                                 <div class="row w-100 mx-auto mt-4 pt-4">
-                                    <input type="submit"  id="createBtnSubmit" value="@ViewData["Submit"]" class="btn btn-success w-25 mx-auto Confirmation">
+                                    <input type="submit" id="createBtnSubmit" value="@ViewData["Submit"]" class="btn btn-success w-25 mx-auto Confirmation">
                                 </div>
                             </form>
 
@@ -570,14 +443,19 @@
                     $('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
                     $('.bootstrap-tagsinput').css({ "min-height": "60px", "height": "auto " })
 
-
-
+                    $(".catId").val("@Model.CityId")
                     $(".catId").select2({
                         dir: "rtl"
                     });
+
+
+                    $(".cityId").val("@Model.CityId")
                     $(".cityId").select2({
                         dir: "rtl"
                     });
+
+
+                    $(".monyUnitid").val("@Model.MonyUnitId")
                     $(".monyUnitid").select2({
                         dir: "rtl"
                     });
@@ -588,12 +466,6 @@
                     $('#IsAgreement').change(function () {
                         $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
                     });
-
-                    $('#IsAgreementVal1').val($('#IsAgree').is(':checked'));
-                    $('#IsAgree').change(function () {
-                        $('#IsAgreementVal1').val($('#IsAgree').is(':checked'));
-                    });
-
 
 
                     $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
@@ -626,8 +498,6 @@
         $(document).ready(function () {
 
 
-
-
             $("#Skills").tagsinput({
                 maxChars: 50,
                 trimValue: true,
@@ -638,31 +508,27 @@
                 trimValue: true,
                 maxTags: 10,
             });
-            //$('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
+
             $('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
             $('.bootstrap-tagsinput').css({ "min-height": "60px", "height": "auto " })
-            //$("#Skills").closest('.bootstrap-tagsinput').css({   background: "#eee" })
 
-            //$('.skill').tagsInput({
-            //    'interactive': true,
-            //    'defaultText': 'Enter new',
-            //});
-            //$("#Skills_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
-            //$("#Skills1_tagsinput").addClass("form-group w-100 text-right hj-form-profile")
 
+            $(".catId").val("@Model.CategoryId")
             $(".catId").select2();
+
+            $(".cityId").val("@Model.CityId")
             $(".cityId").select2();
+
+            $(".monyUnitid").val("@Model.MonyUnitId")
             $(".monyUnitid").select2();
+
+
+
+
 
             $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
             $('#IsAgreement').change(function () {
                 $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
-            });
-
-
-            $('#IsAgreementVal1').val($('#IsAgreement1').is(':checked'));
-            $('#IsAgreement1').change(function () {
-                $('#IsAgreementVal1').val($('#IsAgreement1').is(':checked'));
             });
 
 
@@ -733,8 +599,6 @@
                 "ServiceType": 0
             };
 
-
-
             $("#createBtnSubmit").prop('disabled', true);
             $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
             $.ajax({
@@ -767,88 +631,13 @@
 
 
 
-
-        //request Service
-        $("#donnerForm1").submit(function (e) {
-            e.preventDefault();
-            if (!$(this).valid()) {
-                return;
-            }
-
-
-
-            //data = $(this).serialize()
-
-            id1 = $("#Id1").val();
-            title1 = $("#Title1").val();
-            description1 = $("#Description1").val()
-            catId1 = $("#CategoryId1").val()
-            cityId1 = $("#CityId1").val()
-            monyUnitId1 = $("#MonyUnitId1").val()
-            minpRice1 = $("#MinpRice1").val()
-            maxPrice1 = $("#MaxPrice1").val()
-            skills1 = $("#Skills1").val();
-            isAgreement1 = $("#IsAgreementVal1").val()
-
-
-
-
-            var data = {
-                "Id": id1,
-                "Title": title1,
-                "Description": description1,
-                "CategoryId": catId1,
-                "CityId": cityId1,
-                "MonyUnitId": monyUnitId1,
-                "MinpRice": minpRice1,
-                "MaxPrice": maxPrice1,
-                "IsAgreement": isAgreement1,
-                "IsSendByEmail": false,
-                "IsSendByNOtification": false,
-                "IsSendBySms": false,
-                "Skills": skills1,
-                "ServiceType": 1
-            };
-
-
-
-            $("#createBtnSubmit1").prop('disabled', true);
-            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
-            $.ajax({
-                method: "POST",
-                url: "/Services/ServiceRequestCreate",
-                data: data,
-                //contentType: "application/json; charset=utf-8",
-                success: function (r) {
-                    if (r.status) {
-                        $("#createBtnSubmit1").prop('disabled', false);
-                        $.unblockUI();
-                        SuccessAlert(r.message)
-                        $('#Skills1').tagsinput('removeAll');
-                        //resetForm(1);
-                    }
-                    else {
-                        $("#createBtnSubmit1").prop('disabled', false);
-                        $.unblockUI();
-                        FailedAlert(r.message);
-                    }
-                },
-                error: function () {
-                    $("#createBtnSubmit1").prop('disabled', false);
-                    $.unblockUI();
-                    FailedAlert("خطا رخ داده است.");
-                }
-            });
-        })
-
-
         function resetForm(value) {
              $(`#Id${value}`).val();
              $(`#Title${value}`).val("");
              $(`#Description${value}`).val("")
               $(`#MinpRice${value}`).val("")
             $(`#MaxPrice${value}`).val("")
-         
+
         }
 
 

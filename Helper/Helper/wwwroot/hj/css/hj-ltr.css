@@ -2301,7 +2301,7 @@ h3, h1, h2, h4, h5, h6 {
 
 
 ._fuck {
-    text-align: right;
+    text-align: right !important;
 }
 
 ._text-position {

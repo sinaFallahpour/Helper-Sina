@@ -288,6 +288,9 @@ namespace Helper.Controllers
 
         private void returnViewDate()
         {
+            ViewData["ForgetPasswordText"] = _localizer["ForgetPasswordText"];
+
+            ViewData["Send"] = _localizer["Send"];
             ViewData["Login"] = _localizer["Login"];
             ViewData["Register"] = _localizer["Register"];
             ViewData["RememberMe"] = _localizer["RememberMe"];

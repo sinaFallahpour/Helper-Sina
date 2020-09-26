@@ -132,6 +132,9 @@
   <data name="Fail" xml:space="preserve">
     <value>خطا در ثبت</value>
   </data>
+  <data name="ForgetPasswordText" xml:space="preserve">
+    <value>بازیابی کلمه ی عبور</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>رمز عبور را فراموش کردید ؟</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>مرا به خاطر بسپار</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>ارسال</value>
   </data>
   <data name="UseGoogleText" xml:space="preserve">
     <value>می توانید از سرویس گوگل برای ثبت نام استفاده کنید</value>

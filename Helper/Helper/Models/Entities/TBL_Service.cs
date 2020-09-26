@@ -75,7 +75,7 @@ namespace Helper.Models.Entities
         /// <summary>
         /// ایا با ایمیل به خدمت دهتده فرستاده شود
         /// </summary>
-     [Display(Name ="وضعیت ارسال با ایمیل")]
+        [Display(Name ="وضعیت ارسال با ایمیل")]
         public bool IsSendByEmail { get; set; }
 
 

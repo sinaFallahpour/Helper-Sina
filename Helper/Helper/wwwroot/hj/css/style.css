@@ -2272,7 +2272,7 @@ input[type=checkbox]:checked + .label-chekbox:before {
 
 
 ._fuck {
-    text-align: left;
+    text-align: left !important;
 }
 
 

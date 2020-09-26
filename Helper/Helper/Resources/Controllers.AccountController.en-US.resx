@@ -132,6 +132,9 @@
   <data name="Fail" xml:space="preserve">
     <value>faile To register</value>
   </data>
+  <data name="ForgetPasswordText" xml:space="preserve">
+    <value>Forget Password</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot password?</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember Mee</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
   </data>
   <data name="UseGoogleText" xml:space="preserve">
     <value>You can use Google's login service</value>

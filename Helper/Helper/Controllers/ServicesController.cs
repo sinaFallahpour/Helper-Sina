@@ -94,8 +94,6 @@ namespace Helper.Controllers
                 ViewBag.MonyUnitId = new SelectList(monyUnits, "Id", "EnglishName");
             }
 
-
-
             return View();
         }
 
@@ -280,11 +278,6 @@ namespace Helper.Controllers
         #endregion
 
 
-
-
-
-
-
         #region Edit
         // GET: Admin/Slides/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -427,40 +420,6 @@ namespace Helper.Controllers
         //}
 
         #endregion Edit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
