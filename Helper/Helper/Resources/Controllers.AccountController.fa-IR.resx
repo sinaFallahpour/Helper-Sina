@@ -141,6 +141,9 @@
   <data name="ImLogin" xml:space="preserve">
     <value>قبلا ثبت نام کرده ام!</value>
   </data>
+  <data name="InternalMessage" xml:space="preserve">
+    <value>خطایی رخ داده</value>
+  </data>
   <data name="InValidUsernameOrEmail" xml:space="preserve">
     <value>رمز عبور یا نام کاربری صحیح نمی باشد.</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="LogInWithGoogle" xml:space="preserve">
     <value>ثبت نام با گوگل</value>
+  </data>
+  <data name="NotFoundMessage" xml:space="preserve">
+    <value>کاربری با مشخصات وارد شده یافت نشد!</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>رمز عبور</value>
@@ -161,6 +167,9 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>ارسال</value>
+  </data>
+  <data name="SuccessForgetPassMessage" xml:space="preserve">
+    <value>کلمه عبور جدید به ایمیلتان ارسال شد</value>
   </data>
   <data name="UseGoogleText" xml:space="preserve">
     <value>می توانید از سرویس گوگل برای ثبت نام استفاده کنید</value>

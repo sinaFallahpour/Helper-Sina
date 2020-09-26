@@ -189,13 +189,10 @@
                 <div class="col-xs-12 p-0 m-0 ">
 
                     <nav>
-
                         <div class="nav nav-tabs nav-fill p-0 m-0 w-100" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">  @ViewData["ServiceRequest"] </a>
-                            <a class="nav-item nav-link w-50" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">  @ViewData["ServiceDelivery"]</a>
-
+                            @*<a class="nav-item nav-link active w-50" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">  @ViewData["ServiceRequest"] </a>*@
+                            <a class="nav-item nav-link w-50 active show" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">  @ViewData["ServiceDelivery"]</a>
                         </div>
-
                     </nav>
                     <div class="tab-content py-3 px-sm-0 mt-5" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -203,12 +200,12 @@
 
 
                         -@*------dashbord-----*@
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade active show" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
 
                             <form asp-action="CreateService" id="donnerForm">
-
-                                <input type="hidden" name="Id" id="Id" value="0" />
+                                <input type="hidden" asp-for="Id" />
+                                @*<input type="hidden" name="Id" id="Id" value="0" />*@
                                 <div class="row w-100 mx-auto my-3 text-center ">
                                     <h5 class="_text-position">    @ViewData["Titles"]  </h5>
 
@@ -289,9 +286,8 @@
                                 </div>
                                 <div class="row w-100 mx-auto ">
                                     <div class="col-12 text-right">
-
-
-                                        <input class="checkbox-service"
+                                        <input asp-for="IsAgreement"
+                                               class="checkbox-service"
                                                type="checkbox"
                                                data-val="true"
                                                data-val-required="The IsAgreement field is required."
@@ -302,11 +298,6 @@
                                         <label for="IsAgreement" class="label-chekbox"> @ViewData["Agreed"]</label>
                                     </div>
                                 </div>
-
-
-
-
-
 
 
 
@@ -340,39 +331,22 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 <div class="row w-100 mx-auto text-md-center text-right mt-3">
                                     <div class="col-md-4">
 
-
-                                        <input class="checkbox-service"
+                                        <input asp-for="IsSendByEmail" class="checkbox-service"
                                                type="checkbox"
                                                data-val="true"
                                                data-val-required="The IsSendByEmail field is required."
                                                id="IsSendByEmail"
                                                name="IsSendByEmail"
                                                value="true">
-
                                         <label for="IsSendByEmail" class=" label-chekbox "> @ViewData["Email"]</label>
                                     </div>
 
                                     <div class="col-md-4">
-
-                                        <input name="IsSendByNOtification"
+                                        <input asp-for="IsSendByNOtification"
+                                               name="IsSendByNOtification"
                                                data-val="true"
                                                value="true"
                                                type="checkbox"
@@ -383,13 +357,14 @@
 
 
                                     <div class="col-md-4">
-                                        <input name="IsSendBySms"
+                                        <input asp-for="IsSendBySms"
+                                               name="IsSendBySms"
                                                data-val="true"
                                                value="true"
                                                type="checkbox"
                                                id="IsSendBySms"
                                                class="checkbox-service">
-                                        <label for="IsSendBySms" class="label-chekbox">    @ViewData["Sms"]</label>
+                                        <label for="IsSendBySms" class="label-chekbox"> @ViewData["Sms"]</label>
                                     </div>
                                 </div>
                                 <div class="row w-100 mx-auto mt-4 pt-4">
@@ -443,7 +418,7 @@
                     $('.bootstrap-tagsinput').addClass(' text-center w-100 mx-auto my-3 service-form px-3')
                     $('.bootstrap-tagsinput').css({ "min-height": "60px", "height": "auto " })
 
-                    $(".catId").val("@Model.CityId")
+                    $(".catId").val("@Model.CategoryId")
                     $(".catId").select2({
                         dir: "rtl"
                     });
@@ -466,6 +441,8 @@
                     $('#IsAgreement').change(function () {
                         $('#IsAgreementVal').val($('#IsAgreement').is(':checked'));
                     });
+
+
 
 
                     $('#IsSendByEmailVal').val($('#IsSendByEmail').is(':checked'));
@@ -496,8 +473,6 @@
         <text>
 
         $(document).ready(function () {
-
-
             $("#Skills").tagsinput({
                 maxChars: 50,
                 trimValue: true,
@@ -603,7 +578,7 @@
             $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
             $.ajax({
                 method: "POST",
-                url: "/Services/ServiceProviderCreate",
+                url: "/Services/Edit",
                 data: data,
                 //contentType: "application/json; charset=utf-8",
                 success: function (r) {
@@ -611,7 +586,7 @@
                                  $("#createBtnSubmit").prop('disabled', false);
                                  $.unblockUI();
                                  SuccessAlert(r.message)
-                                 $('#Skills').tagsinput('removeAll');
+                                 //$('#Skills').tagsinput('removeAll');
 
                                  //resetForm("");
                              }

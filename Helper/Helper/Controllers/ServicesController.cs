@@ -284,16 +284,12 @@ namespace Helper.Controllers
         {
             returnViewDate();
             if (id == null)
-            {
                 return NotFound();
-            }
             var service = await _context.TBL_Service.FindAsync(id);
             if (service == null)
-            {
                 return NotFound();
-            }
-
-
+            if (service.Username != User.Identity.Name)
+                return Unauthorized();
             List<TBL_Category> cats;
             List<TBL_City> cities;
             List<TBL_MonyUnit> monyUnits;
@@ -346,83 +342,119 @@ namespace Helper.Controllers
 
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Edit(int id, EditCategoryViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            var slideFromDb = _context.TBL_Sliders.SingleOrDefault(c => c.Id == model.Id);
-        //            slideFromDb.Description = model.Description;
-        //            slideFromDb.Title = model.Title;
-        //            slideFromDb.IsActive = model.IsActive;
-        //            slideFromDb.LanguageType = model.LanguageType;
-        //            #region file validation
-        //            if (model.Photo != null)
-        //            {
-        //                string uniqueFileName = null;
-        //                if (!model.Photo.IsImage())
-        //                {
-        //                    ModelState.AddModelError("", "به فرمت عکس وارد کنید");
-        //                    return View(model);
-        //                }
-        //                if (model.Photo.Length > 15000000)
-        //                {
-        //                    ModelState.AddModelError("", "حجم فایل زیاد است");
-        //                    return View(model);
-        //                }
-        //                if (model.Photo != null && model.Photo.Length > 0 && model.Photo.IsImage())
-        //                {
-        //                    var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Upload/Slider");
-        //                    uniqueFileName = (Guid.NewGuid().ToString().GetImgUrlFriendly() + "_" + model.Photo.FileName);
-        //                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-        //                    //model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+        [HttpPost]
+        public async Task<IActionResult> Edit(CreateServiceVM model)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return new JsonResult(new { Status = false, Message = _localizer["NotLogeInMessage"].Value.ToString() });
+                }
+                try
+                {
 
 
-        //                    using (var stream = new FileStream(filePath, FileMode.Create))
-        //                    {
-        //                        model.Photo.CopyTo(stream);
-        //                    }
+                    if (model.MinpRice > model.MaxPrice)
+                    {
+                        return new JsonResult(new { Status = false, Message = _localizer["MinPriceMoreThanMaXPriceMessage"].Value.ToString() });
+                    }
 
-        //                    if (!string.IsNullOrEmpty(slideFromDb.PhotoAddress))
-        //                    {
-        //                        var LastImagePath = slideFromDb.PhotoAddress.Substring(1);
-        //                        LastImagePath = Path.Combine(_hostingEnvironment.WebRootPath, LastImagePath);
-        //                        if (System.IO.File.Exists(LastImagePath))
-        //                        {
-        //                            System.IO.File.Delete(LastImagePath);
-        //                        }
+                    var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                    var username = User.Identity.Name;
+                    var userFromDb = await _context.Users.Where(c => c.Id == currentUserId && c.UserName == username)
+                           .FirstOrDefaultAsync();
 
-        //                        //System.IO.File.Delete(LastImagePath);
-        //                    }
+                    if (userFromDb != null )
+                    {
+                       
+                        //if (userFromDb.PlanCount < 1 || userFromDb.PlanExpDate < DateTime.Now || userFromDb.PlanId == 0)
+                        //{
+                        //    return new JsonResult(new { Status = false, Message = _localizer["NoActivePlanMessage"].Value.ToString(), hasPlan = false });
+                        //}
 
-        //                    //update Newe Pic Address To database
-        //                    slideFromDb.PhotoAddress = "/Upload/Slider/" + uniqueFileName;
-        //                }
-        //            }
-        //            #endregion file validation
+                        var serviceFromDb = _context.TBL_Service.Find(model.Id);
+                        if (serviceFromDb == null)
+                            return NotFound();
+                        if(serviceFromDb.Username !=  serviceFromDb.Username)
+                            return new JsonResult(new { Status = false, Message = _localizer["unAuthorizedMessage"].Value.ToString() });
+
+                        serviceFromDb.Title = model.Title;
+                        serviceFromDb.IsAgreement = model.IsAgreement;
+                        serviceFromDb.IsSendByEmail = model.IsSendByEmail;
+                        serviceFromDb.IsSendByNOtification = model.IsSendByNOtification;
+                        serviceFromDb.IsSendBySms = model.IsSendBySms;
+                        serviceFromDb.MinpRice = model.MinpRice;
+                        serviceFromDb.MaxPrice = model.MaxPrice;
+                        serviceFromDb.Skills = model.Skills;
+                        serviceFromDb.Description = model.Description;
+                        serviceFromDb.CityId = model.CityId;
+                        serviceFromDb.CategoryId = model.CategoryId;
+                        serviceFromDb.MonyUnitId = model.MonyUnitId;
 
 
-        //            var result = _context.SaveChanges();
-        //            return RedirectToAction(nameof(Index));
+                        //var TBL_Service = new TBL_Service
+                        //{
+                        //    ConfirmServiceType = ConfirmServiceType.Pending,
+                        //    Title = model.Title,
+                        //    LikeCount = 0,
+                        //    CommentCount = 0,
+                        //    SeenCount = 0,
+                        //    CreateDate = DateTime.Now,
+                        //    IsAgreement = model.IsAgreement,
+                        //    IsSendByEmail = model.IsSendByEmail,
+                        //    IsSendByNOtification = model.IsSendByNOtification,
+                        //    IsSendBySms = model.IsSendBySms,
+                        //    MinpRice = model.MinpRice,
+                        //    MaxPrice = model.MaxPrice,
+                        //    Skills = model.Skills,
+                        //    Description = model.Description,
+                        //    ServiceType = model.ServiceType,
+                        //    CityId = model.CityId,
+                        //    CategoryId = model.CategoryId,
+                        //    MonyUnitId = model.MonyUnitId,
 
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            ModelState.AddModelError("", "خطا در ثبت");
-        //            return View(model);
-        //        }
+                        //    UserId = userFromDb.Id,
+                        //    Username = userFromDb.UserName,
+                        //};
 
-        //    }
-        //    return View(model);
-        //}
+
+                        //userFromDb.PlanCount--;
+                        //userFromDb.Skils = userFromDb.Skils != null ? userFromDb.Skils + "," + model.Skills : model.Skills;
+                        //_context.Add(TBL_Service);
+
+                        await _context.SaveChangesAsync();
+
+                        return new JsonResult(new { Status = 1, Message = _localizer["SuccessFullmsg"].Value.ToString() });
+                    }
+                    return new JsonResult(new { Status = false, Message = _localizer["NotLogeInMessage"].Value.ToString() });
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return new JsonResult(new { Status = false, Message = _localizer["ErrorMessage"].Value.ToString() });
+                }
+            }
+
+            var errors = new List<string>();
+            foreach (var item in ModelState.Values)
+            {
+                foreach (var err in item.Errors)
+                {
+                    errors.Add(err.ErrorMessage);
+                }
+            }
+            return new JsonResult(new { Status = false, Message = errors.First() });
+
+        }
+
+
+
+
 
         #endregion Edit
-
-
-
 
 
         [Route("Services/UsersService/{username}")]
@@ -468,9 +500,6 @@ namespace Helper.Controllers
             returnViewDate();
             return View();
         }
-
-
-
 
 
 
@@ -762,21 +791,6 @@ namespace Helper.Controllers
                 return new JsonResult(new { Status = false, Message = _localizer["FailMessage"].Value.ToString() });
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

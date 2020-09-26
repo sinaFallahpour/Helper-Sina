@@ -220,6 +220,9 @@
   <data name="submitText" xml:space="preserve">
     <value>تایید</value>
   </data>
+  <data name="SuccessFullmsg" xml:space="preserve">
+    <value>ثبت موفقیت آمیز تغییرات</value>
+  </data>
   <data name="SuccessFullRegisterMessage" xml:space="preserve">
     <value>ثبت موفقیت آمیز خدمت . این خدمت بعد از تایید ادمین در سایت نمایش داده خواهد شد.</value>
   </data>
@@ -228,5 +231,8 @@
   </data>
   <data name="ToPrice" xml:space="preserve">
     <value>تا قیمت</value>
+  </data>
+  <data name="unAuthorizedMessage" xml:space="preserve">
+    <value>عدم دسترسی</value>
   </data>
 </root>

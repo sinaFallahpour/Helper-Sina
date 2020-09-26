@@ -220,6 +220,9 @@ service</value>
   <data name="submitText" xml:space="preserve">
     <value>Accept</value>
   </data>
+  <data name="SuccessFullmsg" xml:space="preserve">
+    <value>Successful  registration </value>
+  </data>
   <data name="SuccessFullRegisterMessage" xml:space="preserve">
     <value>Successful registration of service. This service will be displayed on the site after admin approval.</value>
   </data>
@@ -228,5 +231,8 @@ service</value>
   </data>
   <data name="ToPrice" xml:space="preserve">
     <value>Up to the  Price</value>
+  </data>
+  <data name="unAuthorizedMessage" xml:space="preserve">
+    <value>Un Authorized </value>
   </data>
 </root>

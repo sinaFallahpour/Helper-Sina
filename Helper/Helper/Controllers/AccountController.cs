@@ -141,9 +141,6 @@ namespace Helper.Controllers
         #endregion
 
 
-
-
-
         #region  Register
 
 
@@ -213,8 +210,6 @@ namespace Helper.Controllers
 
                     return new JsonResult(new { Status = false, Message = _localizer["Fail"].Value.ToString() });
 
-                    //ViewBag.RegisterError = "  ";
-                    //return View("Login");
                 }
 
             }
@@ -236,7 +231,6 @@ namespace Helper.Controllers
 
 
         #endregion
-
 
 
         #region logOut
@@ -267,21 +261,79 @@ namespace Helper.Controllers
 
 
         [AllowAnonymous]
-        public IActionResult ForgetPAssword()
+        public IActionResult ForgetPAssword(string returnUrl)
         {
             returnViewDate();
+            var UserReturnUrl = string.IsNullOrEmpty(returnUrl) ? "/profiles" : returnUrl;
+            var AdminReturnUrl = string.IsNullOrEmpty(returnUrl) ? "/admin/admins/Profile" : returnUrl;
+
+            if (_signInManager.IsSignedIn(User))
+            {
+                if (User.IsInRole(Static.ADMINROLE))
+                    return Redirect(AdminReturnUrl);
+                return Redirect(UserReturnUrl);
+            }
+
+            ViewBag.UserReturnUrl = UserReturnUrl;
+            ViewBag.AdminReturnUrl = AdminReturnUrl;
+
+            ViewBag.ReturnUrl = returnUrl;
+            //return LocalRedirect(returnUrl);
             return View();
         }
+
+
+
 
 
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async  Task<IActionResult> ForgetPAssword(ForgetPasswordVM model)
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordVM model)
         {
-            returnViewDate();
-            return View();
+
+           
+
+            if (ModelState.IsValid)
+            {
+
+                var Email = model.Email.ToString().Trim();
+
+                var user = await _userManager.FindByEmailAsync(Email);
+
+                if (user == null)
+                    return new JsonResult(new { Status = false, Message = _localizer["NotFoundMessage"].Value.ToString() });
+
+                var newpass = 8.RandomString();
+
+                string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordChangeResult = await _userManager.ResetPasswordAsync(user, resetToken, newpass);
+                if (passwordChangeResult.Succeeded)
+                {
+                    return new JsonResult(new { Status = true, Message = _localizer["SuccessForgetPassMessage"].Value.ToString() });
+                    //send password to user
+
+
+                }
+                else
+                {
+                    return new JsonResult(new { Status = false, Message = _localizer["InternalMessage"].Value.ToString() });
+                }
+
+            }
+
+            var errors = new List<string>();
+            foreach (var item in ModelState.Values)
+            {
+                foreach (var err in item.Errors)
+                {
+                    errors.Add(err.ErrorMessage);
+                }
+            }
+            return new JsonResult(new { Status = false, Message = errors.First() });
         }
+
+
 
 
 

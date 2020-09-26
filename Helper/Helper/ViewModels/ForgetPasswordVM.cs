@@ -18,6 +18,10 @@ namespace Helper.ViewModels
         [EmailAddress(ErrorMessage = "InValidEmail")]
         [Display(Name = "ایمیل")]
         public string Email { get; set; }
+
+
+
+        public string ReturnUrl { get; set; }
     }
 
 }

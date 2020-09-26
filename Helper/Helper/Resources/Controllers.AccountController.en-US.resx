@@ -141,6 +141,9 @@
   <data name="ImLogin" xml:space="preserve">
     <value>I have already registered !</value>
   </data>
+  <data name="InternalMessage" xml:space="preserve">
+    <value>Some error Ecured</value>
+  </data>
   <data name="InValidUsernameOrEmail" xml:space="preserve">
     <value>Invalid Login or password.          </value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="LogInWithGoogle" xml:space="preserve">
     <value>log in with Google</value>
+  </data>
+  <data name="NotFoundMessage" xml:space="preserve">
+    <value>No user with entered profile found!</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -161,6 +167,9 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>Send</value>
+  </data>
+  <data name="SuccessForgetPassMessage" xml:space="preserve">
+    <value>New password sent to your email</value>
   </data>
   <data name="UseGoogleText" xml:space="preserve">
     <value>You can use Google's login service</value>
