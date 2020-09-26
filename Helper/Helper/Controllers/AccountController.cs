@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using NETCore.MailKit.Core;
 
 namespace Helper.Controllers
 {
@@ -26,17 +27,22 @@ namespace Helper.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private IStringLocalizer<AccountController> _localizer;
+        private readonly IEmailService _EmailService;
+
         public AccountController(ApplicationDbContext context,
              UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
-             IStringLocalizer<AccountController> localizer)
+             IStringLocalizer<AccountController> localizer,
+             IEmailService emailService)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _localizer = localizer;
+            _EmailService = emailService;
+
         }
 
 
@@ -292,11 +298,8 @@ namespace Helper.Controllers
         public async Task<IActionResult> ForgetPassword(ForgetPasswordVM model)
         {
 
-           
-
             if (ModelState.IsValid)
             {
-
                 var Email = model.Email.ToString().Trim();
 
                 var user = await _userManager.FindByEmailAsync(Email);
@@ -310,10 +313,9 @@ namespace Helper.Controllers
                 var passwordChangeResult = await _userManager.ResetPasswordAsync(user, resetToken, newpass);
                 if (passwordChangeResult.Succeeded)
                 {
-                    return new JsonResult(new { Status = true, Message = _localizer["SuccessForgetPassMessage"].Value.ToString() });
                     //send password to user
-
-
+                    //_EmailService.Send(Email, "Forget Password ", $"Your New Password: ${newpass}");
+                    return new JsonResult(new { Status = true, Message = _localizer["SuccessForgetPassMessage"].Value.ToString() });
                 }
                 else
                 {

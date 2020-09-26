@@ -17,7 +17,7 @@ namespace Helper.ViewModels
 
         [Required(ErrorMessage = "Required")]
         [MinLength(3, ErrorMessage = "Minimum length is {1} characters")]
-        [MaxLength(80, ErrorMessage = "Maximum length is {1} characters")]
+        [MaxLength(30, ErrorMessage = "Maximum length is {1} characters")]
         [Display(Name = "عنوان خدمت")]
         public string Title { get; set; }
 

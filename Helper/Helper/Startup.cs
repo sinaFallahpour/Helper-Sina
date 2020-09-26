@@ -30,6 +30,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
 
 namespace Helper
 {
@@ -57,14 +59,7 @@ namespace Helper
             //cors origin
             services.AddCors(opt =>
             {
-                //services.AddCors(options =>
-                //{
-                //    options.AddPolicy("CorsApi",
-                //        builder => builder.WithOrigins("http://localhost:4200", "http://mywebsite.com")
-                //    .AllowAnyHeader()
-                //    .AllowAnyMethod());
-                //});
-
+                
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://helperlanding.niknet.co",
@@ -194,6 +189,28 @@ namespace Helper
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
                         factory.Create(typeof(ShareResource));
                 });
+
+
+            //Add MailKit
+            services.AddMailKit(optionBuilder =>
+            {
+                optionBuilder.UseMailKit(new MailKitOptions()
+                {
+                    //get options from sercets.json
+                    Server = "Server",
+
+                    Port = Convert.ToInt32(587),
+                    SenderName = "Helper",
+                    SenderEmail = "fallahpour.sina77@gmail.com",
+
+                    // can be optional with no authentication 
+                    //Account = Configuration["Account"],
+                    //Password = Configuration["Password"],
+                    // enable ssl or tls
+                    Security = true
+                });
+            });
+
 
 
             //inject autoMapper
