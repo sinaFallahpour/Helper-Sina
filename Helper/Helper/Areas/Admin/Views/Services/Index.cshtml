@@ -85,19 +85,64 @@
                         <td class="text-right" style="vertical-align:middle">@item.MinpRice.GetPriceFormat()  ( @item.MonyUnit?.Name )</td>
                         <td class="text-right" style="vertical-align:middle"> @item.MaxPrice.GetPriceFormat() ( @item.MonyUnit?.Name )</td>
 
-                        <td class="text-right" style="vertical-align:middle">
-                            <div class="btn-group" role="group">
+                        <td id="@item.Id-Buttons" class="text-right" style="vertical-align:middle">
 
-                                <button type="button" class="btn   btn-warning" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
-                                    <i class="">تایید نشده </i>
-                                </button>
-                                <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="btn       btn-info">
-                                    <i class="">جزییات</i>
-                                </a>
-                                @*<button type="button" id="delete-@item.Id" class="btn     btn-danger">
-                                        <i class="">حذف</i>
-                                    </button>*@
-                            </div>
+                            @if (item.ConfirmServiceType == ConfirmServiceType.Pending)
+                            {
+                                <div class="btn-group" role="group">
+
+                                    <button type="button" class="btn bg-success" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
+                                        <i class="">تایید</i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-danger" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
+                                        <i class="">رد</i>
+                                    </button>
+
+
+
+                                    <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="btn       btn-info">
+                                        <i class="">جزییات</i>
+                                    </a>
+
+                                </div>
+                            }
+                            else if (item.ConfirmServiceType == ConfirmServiceType.Confirmed)
+                            {
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
+                                        <i class="">تایید شده</i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-warning" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
+                                        <i class="">بازگرداندن</i>
+                                    </button>
+
+                                    <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="btn       btn-info">
+                                        <i class="">جزییات</i>
+                                    </a>
+
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="btn-group" role="group">
+
+                                    <button type="button" class="btn btn-danger" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
+                                        <i class="">رد شده</i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-warning" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
+                                        <i class="">بازگرداندن</i>
+                                    </button>
+
+                                    <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="btn       btn-info">
+                                        <i class="">جزییات</i>
+                                    </a>
+
+                                </div>
+                            }
+
                         </td>
                     </tr>
                 }
@@ -130,47 +175,47 @@
 
 @section Scripts{
     <!-- DataTable -->
-    @*<script src="~/Admin/vendors/dataTable/jquery.dataTables.min.js"></script>
-        <script src="~/Admin/vendors/dataTable/dataTables.bootstrap4.min.js"></script>
-        <script src="~/Admin/vendors/dataTable/dataTables.responsive.min.js"></script>*@
-    @*<script src="~/Admin/vendors/dataTable/jquery.dataTables.min.js"></script>
-        <script src="~/Admin/vendors/dataTable/dataTables.bootstrap4.min.js"></script>
-        <script src="~/Admin/vendors/dataTable/dataTables.responsive.min.js"></script>*@
-    @*<script src="~/Admin/assets/js/examples/datatable.js"></script>*@
-    @*<script src="~/Admin/assets/js/examples/datatable.js"></script>*@
+
 
     <script src="~/lib/swal-alert/sweetalert.min.js"></script>
     <script src="~/SinaCustom/js/main.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
+    <script src="~/lib/DataTable/datatables.min.js"></script>
+    <script src="~/lib/DataTable/dataTables.responsive.min.js"></script>
+    @*<script src="~/Admin/assets/js/examples/datatable.js"></script>*@
 
-    <script src="~/lib//DataTable/datatables.min.js"></script>
-    <script src="~/lib//DataTable/dataTables.responsive.min.js"></script>
+
+
+
     <script>
 
-        //$(document).ready(function () {
-        //    $('#example1').DataTable();
-        //});
+
         var dataTable
         $(document).ready(function () {
-            dataTable = $('#example1').DataTable({
-                language: {
-                    url: "/lib/DataTable/fa-lang.json"
-                },
-                "pagingType": "full_numbers",
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                "columnDefs": [
-                    //{ "orderable": false, "targets": 5 }
-                ],
-                "order": [[0, "desc"]],
-                "responsive": true
+
+            $('#example1').DataTable({
+                responsive: true
             });
 
-        });
 
+            //dataTable = $('#example1').DataTable({
+            //    language: {
+            //        url: "/lib/DataTable/fa-lang.json"
+            //    },
+            //    "pagingType": "full_numbers",
+            //    "lengthMenu": [
+            //        [10, 25, 50, -1],
+            //        [10, 25, 50, "All"]
+            //    ],
+            //    "columnDefs": [
+            //        //{ "orderable": false, "targets": 5 }
+            //    ],
+            //    "order": [[0, "desc"]],
+            //    "responsive": true
+            //});
+
+        });
 
 
 
@@ -188,75 +233,51 @@
 
             $(curentElement).prop('disabled', true);
 
-            $.ajax({
-                method: "POST",
-                url: "/Admin/Services/ToggleConfirmService",
-                data: data,
-                //contentType: "application/json; charset=utf-8",
-                success: function (r) {
-                    if (r.status) {
-                        //$(curentElement).next().prop('disabled', true)
-                        //$(curentElement).next().prop('disabled', true)
-                        var detailsBtn = `#details-${serviceId}`
-                        var deleteBtn = `#delete-${serviceId}`;
-                        console.log($(detailsBtn))
-                        console.log($(deleteBtn))
-
-                        $(detailsBtn).prop('disabled', true)
-                        $(deleteBtn).prop('disabled', true)
-                        //console.log($(detailsBtn))
-                        //console.log($(deleteBtn))
-                        dataTable.row($(curentElement).parents('tr')).remove().draw();
-                        //$.unblockUI();
-                        SuccessAlert(r.message)
-                    }
-                    else {
+            Swal.fire({
+                text: "آیا مطمئن هستید؟",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'بله',
+                cancelButtonText: 'خیر'
+            }).then((result) => {
+                $.ajax({
+                    method: "POST",
+                    url: "/Admin/Services/ToggleConfirmService",
+                    data: data,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (r) {
+                        if (r.status) {
+                            var detailsBtn = `#details-${serviceId}`
+                            var deleteBtn = `#delete-${serviceId}`;
+                            $(detailsBtn).prop('disabled', true)
+                            $(deleteBtn).prop('disabled', true)
+                            $('#' + serviceId).html('<h1>Hello</h1>');
+                            //dataTable.row($(curentElement).parents('tr')).remove().draw();
+                            SuccessAlert(r.message)
+                        }
+                        else {
+                            $.unblockUI();
+                            FailedAlert(r.message);
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
                         $.unblockUI();
-                        FailedAlert(r.message);
+                        FailedAlert("خطا رخ داده است.");
                     }
-                },
-                error: function (err) {
-                    console.log(err)
-                    //$.unblockUI();
-                    FailedAlert("خطا رخ داده است.");
-                }
+                });
+
+
             });
 
 
 
-
-
-
-
-
-
-
-            //$.ajax({
-            //    method: "POST",
-            //    url: `/Services/ToggleConfirmService`,
-            //    data: data,
-            //    contentType: "application/json; charset=utf-8",
-            //    success: function () {
-            //        if (data.d) {
-            //            if (DeleteRow && dataTable) {
-            //                dataTable.row($this.parents('tr')).remove().draw();
-            //            }
-            //            else {
-            //                if ($this.hasClass("btn-success"))
-            //                    $this.removeClass("btn-success").addClass("btn-warning").html("بررسی نشد");
-            //                else
-            //                    $this.removeClass("btn-warning").addClass("btn-success").html("بررسی شد");
-            //            }
-            //        }
-            //        else
-            //            FailedAlert("تغییر وضعیت کامنت با خطا همراه بوده است.");
-            //    },
-            //    error: function () {
-            //        FailedAlert("تغییر وضعیت کامنت دچار خطا شده است.");
-            //    }
-            //});
-
         }
+
+
+
+
 
 
 

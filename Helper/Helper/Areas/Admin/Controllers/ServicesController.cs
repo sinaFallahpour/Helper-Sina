@@ -22,13 +22,6 @@ namespace Helper.Areas.Admin.Controllers
             _context = context;
         }
 
-
-
-
-
-
-
-
         /// <summary>
         ///    صفحه  خدمت دهندگان برسی نشده
         /// </summary>
@@ -36,12 +29,31 @@ namespace Helper.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var serviceProviders = await _context.TBL_Service
-                .Where(c => c.ServiceType == ServiceType.GiverService && c.ConfirmServiceType == ConfirmServiceType.Pending)
+                .Where(c => c.ServiceType == ServiceType.GiverService)
               .Include(c => c.MonyUnit)
                 .OrderByDescending(c => c.CreateDate)
                 .ToListAsync();
             return View(serviceProviders);
         }
+
+
+
+
+
+
+        ///// <summary>
+        /////    صفحه  خدمت دهندگان برسی نشده
+        ///// </summary>
+        ///// <returns></returns>
+        //public async Task<IActionResult> Index()
+        //{
+        //    var serviceProviders = await _context.TBL_Service
+        //        .Where(c => c.ServiceType == ServiceType.GiverService && c.ConfirmServiceType == ConfirmServiceType.Pending)
+        //      .Include(c => c.MonyUnit)
+        //        .OrderByDescending(c => c.CreateDate)
+        //        .ToListAsync();
+        //    return View(serviceProviders);
+        //}
 
 
 
