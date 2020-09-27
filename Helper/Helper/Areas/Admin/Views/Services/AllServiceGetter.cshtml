@@ -2,10 +2,9 @@
 @using Helper.Models.Utilities;
 @using Helper.Models.Enums;
 @{
-    ViewData["Title"] = " خدمت دهندگان تایید نشده";
+    ViewData["Title"] = "آرشیو خدمت گیرندگان";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-
 
 
 @section Style{
@@ -17,33 +16,13 @@
 
     <link href="~/lib/DataTable/datatables.min.css" rel="stylesheet" />
     <link href="~/lib/DataTable/responsive.dataTables.min.css" rel="stylesheet" />
-
 }
 
-<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; "> لیست خدمات(دهنده) تایید نشده  </h1>
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; "> آرشیو  خدمات(گیرنده) </h1>
 
-<a asp-action="AllServiceProvider" class="btn btn-primary mb-3">        آرشیو  خدمات(دهنده)    </a>
+<a asp-action="Index" class="btn btn-primary mb-3"> لیست خدمات(گیرنده) بررسی نشده </a>
 <div class="card">
     <div class="card-body">
-        @if (!string.IsNullOrEmpty(TempData["Success"] as string))
-        {
-            <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
-                <strong>  @TempData["Success"]</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
-
-        @if (!string.IsNullOrEmpty(TempData["Error"] as string))
-        {
-            <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
-                <strong>  @TempData["Error"] </strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
 
 
         <table id="example1" class="table table-striped table-bordered">
@@ -85,11 +64,7 @@
                         <td class="text-right" style="vertical-align:middle">@item.MinpRice.GetPriceFormat()  ( @item.MonyUnit?.Name )</td>
                         <td class="text-right" style="vertical-align:middle"> @item.MaxPrice.GetPriceFormat() ( @item.MonyUnit?.Name )</td>
 
-                        <td id="@item.Id-Buttons" class="text-right" style="vertical-align:middle">
-
-
-
-
+                        <td class="text-right" style="vertical-align:middle">
 
                             @if (!item.IsReaded)
                             {
@@ -118,87 +93,10 @@
                                 </button>
                             }
 
-                            @*<button type="button" class="btn bg-success" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
-                                    <i class="">تایید</i>
-                                </button>
-
-                                <button type="button" class="btn btn-danger" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
-                                    <i class="">رد</i>
-                                </button>*@
-
                             <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="text-white btn btn-sm btn-info">
                                 <i class="">جزییات</i>
                             </a>
 
-
-
-
-
-
-
-
-
-
-
-
-
-                            @*@if (item.ConfirmServiceType == ConfirmServiceType.Pending)
-                                {
-                                    <div class="btn-group" role="group">
-
-                                        <button type="button" class="btn bg-success" id="@item.Id" onclick="
-
-                                (@item.Id)" ;>
-                                            <i class="">تایید</i>
-                                        </button>
-
-                                        <button type="button" class="btn btn-danger" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
-                                            <i class="">رد</i>
-                                        </button>
-
-
-
-                                        <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="btn       btn-info">
-                                            <i class="">جزییات</i>
-                                        </a>
-
-                                    </div>
-                                }
-                                else if (item.ConfirmServiceType == ConfirmServiceType.Confirmed)
-                                {
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-success" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
-                                            <i class="">تایید شده</i>
-                                        </button>
-
-                                        <button type="button" class="btn btn-warning" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
-                                            <i class="">بازگرداندن</i>
-                                        </button>
-
-                                        <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="btn       btn-info">
-                                            <i class="">جزییات</i>
-                                        </a>
-
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="btn-group" role="group">
-
-                                        <button type="button" class="btn btn-danger" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
-                                            <i class="">رد شده</i>
-                                        </button>
-
-                                        <button type="button" class="btn btn-warning" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
-                                            <i class="">بازگرداندن</i>
-                                        </button>
-
-                                        <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="btn       btn-info">
-                                            <i class="">جزییات</i>
-                                        </a>
-
-                                    </div>
-                                }*@
 
                         </td>
                     </tr>
@@ -231,26 +129,19 @@
 </div>
 
 @section Scripts{
-    <!-- DataTable -->
-
 
     <script src="~/lib/swal-alert/sweetalert.min.js"></script>
     <script src="~/SinaCustom/js/main.js"></script>
-
+    <link href="~/lib/LibStyles/LibStyles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
-    <script src="~/lib/DataTable/datatables.min.js"></script>
-    <script src="~/lib/DataTable/dataTables.responsive.min.js"></script>
-    @*<script src="~/Admin/assets/js/examples/datatable.js"></script>*@
 
-
-
-
+    <script src="~/lib//DataTable/datatables.min.js"></script>
+    <script src="~/lib//DataTable/dataTables.responsive.min.js"></script>
     <script>
 
-
+    
         var dataTable
         $(document).ready(function () {
-
             dataTable = $('#example1').DataTable({
                 language: {
                     url: "/lib/DataTable/fa-lang.json"
@@ -282,7 +173,7 @@
 
             //$.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
             var curentElement = `#read-${serviceId}`;
-            $(curentElement).prop('disabled', true);
+            //$(curentElement).prop('disabled', true);
 
             $.ajax({
                 method: "POST",
@@ -291,7 +182,10 @@
                 //contentType: "application/json; charset=utf-8",
                 success: function (r) {
                     if (r.status) {
-                        dataTable.row($(curentElement).parents('tr')).remove().draw();
+                        if (r.data)
+                            $(curentElement).removeClass("btn-warning ").addClass("btn-success").html("بررسی شد")
+                        else
+                            $(curentElement).removeClass("btn-success ").addClass("btn-warning").html("بررسی نشد")
                     }
                     else {
                         FailedAlert(r.message);
@@ -311,7 +205,6 @@
         var ToggleConfirmService = function (serviceId, username, DeleteRow) {
 
             var $this = $(event.srcElement);
-
             var data = {
                 "serviceId": serviceId,
                 "username": username
@@ -320,7 +213,7 @@
             //$.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
             var curentElement = `#confirm-${serviceId}`;
 
-            $(curentElement).prop('disabled', true);
+            //$(curentElement).prop('disabled', true);
             $.ajax({
                 method: "POST",
                 url: "/Admin/Services/ToggleConfirmService",
@@ -328,7 +221,14 @@
                 //contentType: "application/json; charset=utf-8",
                 success: function (r) {
                     if (r.status) {
-                        dataTable.row($(curentElement).parents('tr')).remove().draw();
+                        if (r.data == 0) {
+                            $(curentElement).removeClass("btn-warning ").addClass("btn-success").html("تایید شد")
+                            $(`#read-${serviceId}`).removeClass("btn-warning").addClass("btn-success").html("بررسی شد")
+                        }
+                        if (r.data == 1) {
+                            $(curentElement).removeClass("btn-success ").addClass("btn-warning").html("تایید نشد")
+                            $(`#read-${serviceId}`).removeClass("btn-success").addClass("btn-warning").html("بررسی نشد")
+                        }
                     }
                     else {
                         //$.unblockUI();
@@ -347,4 +247,3 @@
 
     </script>
 }
-

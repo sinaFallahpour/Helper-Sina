@@ -132,7 +132,8 @@ namespace Helper.Controllers
 
                         var TBL_Service = new TBL_Service
                         {
-                            ConfirmServiceType = ConfirmServiceType.Pending,
+                            ConfirmServiceType = ConfirmServiceType.Rejected,
+                            IsReaded = false,
                             Title = model.Title,
                             LikeCount = 0,
                             CommentCount = 0,
@@ -220,7 +221,8 @@ namespace Helper.Controllers
 
                         var TBL_Service = new TBL_Service
                         {
-                            ConfirmServiceType = ConfirmServiceType.Pending,
+                            ConfirmServiceType = ConfirmServiceType.Rejected,
+                            IsReaded = false,
                             Title = model.Title,
                             LikeCount = 0,
                             CommentCount = 0,
@@ -319,6 +321,8 @@ namespace Helper.Controllers
             {
                 Id = service.Id,
                 Title = service.Title,
+                ConfirmServiceType = service.ConfirmServiceType,
+                IsReaded = service.IsReaded,
                 Description = service.Description,
                 CategoryId = service.CategoryId,
                 CityId = service.CityId,
@@ -356,7 +360,6 @@ namespace Helper.Controllers
                 try
                 {
 
-
                     if (model.MinpRice > model.MaxPrice)
                     {
                         return new JsonResult(new { Status = false, Message = _localizer["MinPriceMoreThanMaXPriceMessage"].Value.ToString() });
@@ -367,9 +370,9 @@ namespace Helper.Controllers
                     var userFromDb = await _context.Users.Where(c => c.Id == currentUserId && c.UserName == username)
                            .FirstOrDefaultAsync();
 
-                    if (userFromDb != null )
+                    if (userFromDb != null)
                     {
-                       
+
                         //if (userFromDb.PlanCount < 1 || userFromDb.PlanExpDate < DateTime.Now || userFromDb.PlanId == 0)
                         //{
                         //    return new JsonResult(new { Status = false, Message = _localizer["NoActivePlanMessage"].Value.ToString(), hasPlan = false });
@@ -378,7 +381,11 @@ namespace Helper.Controllers
                         var serviceFromDb = _context.TBL_Service.Find(model.Id);
                         if (serviceFromDb == null)
                             return NotFound();
-                        if(serviceFromDb.Username !=  serviceFromDb.Username)
+
+                        if (serviceFromDb.IsReaded || serviceFromDb.ConfirmServiceType == ConfirmServiceType.Rejected)
+                            return new JsonResult(new { Status = false, Message = _localizer["serviceConfirmedMessage"].Value.ToString() });
+
+                        if (serviceFromDb.Username != serviceFromDb.Username)
                             return new JsonResult(new { Status = false, Message = _localizer["unAuthorizedMessage"].Value.ToString() });
 
                         serviceFromDb.Title = model.Title;
@@ -451,9 +458,6 @@ namespace Helper.Controllers
         }
 
 
-
-
-
         #endregion Edit
 
 
@@ -464,11 +468,21 @@ namespace Helper.Controllers
             var user = await _context.Users.Where(c => c.Id == currentUserId).Select(c => new { c.Id, c.UserName }).FirstOrDefaultAsync();
 
             var query = _context.TBL_Service.AsQueryable();
-            var count = query.Where(c => c.Username == username && c.ServiceType == ServiceType.GiverService).Count();
+            var count = query.
+                Where(c => c.Username == username
+                && c.ServiceType == ServiceType.GiverService
+                && c.ConfirmServiceType == ConfirmServiceType.Confirmed
+                && c.Category.IsEnabled == true
+                )
+                .Count();
 
             var services = await _context.TBL_Service
                  .AsNoTracking()
-                .Where(m => m.Username == username && m.ServiceType == ServiceType.GiverService && m.ConfirmServiceType == ConfirmServiceType.Confirmed && m.Category.IsEnabled == true)
+                .Where(m => m.Username == username
+                && m.ServiceType == ServiceType.GiverService
+                && m.ConfirmServiceType == ConfirmServiceType.Confirmed &&
+                m.Category.IsEnabled == true
+                )
                 .Skip(offset ?? 0)
                 .Take(limit ?? 8)
                  .Include(c => c.UserLikeServices)
@@ -544,14 +558,17 @@ namespace Helper.Controllers
 
 
             var service = _context.TBL_Service.AsNoTracking()
-                .Where(c => c.ServiceType == ServiceType.GiverService && c.ConfirmServiceType == ConfirmServiceType.Confirmed && c.Category.IsEnabled == true).AsQueryable();
+                .Where(c => c.ServiceType == ServiceType.GiverService
+              && c.ConfirmServiceType == ConfirmServiceType.Confirmed
+               && c.Category.IsEnabled == true
+                )
+                .AsQueryable();
             //var query = _context.TBL_Service.AsQueryable();
             //var count = query.AsNoTracking().Where(c => c.ServiceType == ServiceType.GiverService).Count();
 
 
 
-            var findServices = Enumerable.Empty<TBL_Service>().AsQueryable();
-            var findService = new List<TBL_Service>();
+
 
             if (cityId != null)
                 service = service.Where(c => c.CityId == cityId);

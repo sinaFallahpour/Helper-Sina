@@ -113,6 +113,13 @@ namespace Helper.ViewModels
 
 
 
+
+        [Display(Name = "وضعیت تایید ادمین")]
+        public ConfirmServiceType ConfirmServiceType { get; set; }
+
+
+        public bool IsReaded { get; set; }
+
         #region relatoin
 
         //public string UserId { get; set; }

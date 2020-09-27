@@ -29,32 +29,12 @@ namespace Helper.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var serviceProviders = await _context.TBL_Service
-                .Where(c => c.ServiceType == ServiceType.GiverService)
+                .Where(c => c.ServiceType == ServiceType.GiverService && !c.IsReaded)
               .Include(c => c.MonyUnit)
                 .OrderByDescending(c => c.CreateDate)
                 .ToListAsync();
             return View(serviceProviders);
         }
-
-
-
-
-
-
-        ///// <summary>
-        /////    صفحه  خدمت دهندگان برسی نشده
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task<IActionResult> Index()
-        //{
-        //    var serviceProviders = await _context.TBL_Service
-        //        .Where(c => c.ServiceType == ServiceType.GiverService && c.ConfirmServiceType == ConfirmServiceType.Pending)
-        //      .Include(c => c.MonyUnit)
-        //        .OrderByDescending(c => c.CreateDate)
-        //        .ToListAsync();
-        //    return View(serviceProviders);
-        //}
-
 
 
 
@@ -90,33 +70,73 @@ namespace Helper.Areas.Admin.Controllers
         ///    صفحه  خدمت گیرندگان برسی نشده
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> ServiceGiverInPendding()
+        public async Task<IActionResult> IndexGetterService()
         {
             var serviceProviders = await _context.TBL_Service
-                .Where(c => c.ServiceType == ServiceType.GetterService && c.ConfirmServiceType == ConfirmServiceType.Pending)
-                  .Include(c => c.MonyUnit)
-                .OrderByDescending(c => c.ConfirmServiceType)
+                .Where(c => c.ServiceType == ServiceType.GetterService && !c.IsReaded)
+              .Include(c => c.MonyUnit)
+                .OrderByDescending(c => c.CreateDate)
                 .ToListAsync();
             return View(serviceProviders);
         }
+
 
 
 
 
         /// <summary>
-        ///    صفحه  خدمت گیرندگان جه بررسی شده چه نشده و....کلش
+        ///    صفحه  خدمت گیرندان جه بررسی ش ده چه نشده و....کلش
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> AllServiceGivver()
+        public async Task<IActionResult> AllServiceGetter()
         {
             var serviceProviders = await _context.TBL_Service
                 .Where(c => c.ServiceType == ServiceType.GetterService)
-                  .Include(c => c.MonyUnit)
-                  .OrderBy(c => c.ConfirmServiceType)
+                 .Include(c => c.MonyUnit)
+                 .OrderBy(c => c.ConfirmServiceType)
                 .OrderByDescending(c => c.CreateDate)
                 .ToListAsync();
             return View(serviceProviders);
         }
+
+
+
+
+
+
+
+
+        ///// <summary>
+        /////    صفحه  خدمت گیرندگان برسی نشده
+        ///// </summary>
+        ///// <returns></returns>
+        //public async Task<IActionResult> ServiceGiverInPendding()
+        //{
+        //    var serviceProviders = await _context.TBL_Service
+        //        .Where(c => c.ServiceType == ServiceType.GetterService && c.ConfirmServiceType == ConfirmServiceType.Pending)
+        //          .Include(c => c.MonyUnit)
+        //        .OrderByDescending(c => c.ConfirmServiceType)
+        //        .ToListAsync();
+        //    return View(serviceProviders);
+        //}
+
+
+
+
+        ///// <summary>
+        /////    صفحه  خدمت گیرندگان جه بررسی شده چه نشده و....کلش
+        ///// </summary>
+        ///// <returns></returns>
+        //public async Task<IActionResult> AllServiceGivver()
+        //{
+        //    var serviceProviders = await _context.TBL_Service
+        //        .Where(c => c.ServiceType == ServiceType.GetterService)
+        //          .Include(c => c.MonyUnit)
+        //          .OrderBy(c => c.ConfirmServiceType)
+        //        .OrderByDescending(c => c.CreateDate)
+        //        .ToListAsync();
+        //    return View(serviceProviders);
+        //}
 
 
 
@@ -150,44 +170,105 @@ namespace Helper.Areas.Admin.Controllers
 
 
 
-
         /// <summary>
-        /// تایید خدمت   
+        /// بررسی شده یا نشده کردن یک سرویس
         /// </summary>
         /// <param name="serviceId"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> ToggleConfirmService(int? serviceId)
+        public async Task<ActionResult> ToggleServiceReaded(int serviceId)
         {
-            try
-            {
-                if (serviceId == null)
-                    return new JsonResult(new { Status = false, Message = "این سرویس یافت نشد" });
-                var serviceFromDb = await _context.TBL_Service
-                    .Where(c => c.Id == serviceId)
-                    .Include(c => c.User).FirstOrDefaultAsync();
-                if (serviceFromDb == null)
-                {
-                    return new JsonResult(new { Status = false, Message = "این سرویس یافت نشد" });
-                }
+            var serviceFromDB = await _context.TBL_Service.Where(c => c.Id == serviceId).FirstOrDefaultAsync();
+            if (serviceFromDB == null)
+                return new JsonResult(new { Status = false, Message = "سرویس یافت نشد", });
 
-                serviceFromDb.ConfirmServiceType = ConfirmServiceType.Confirmed;
+            serviceFromDB.IsReaded = !serviceFromDB.IsReaded;
+            await _context.SaveChangesAsync();
 
-                if (serviceFromDb.ServiceType == ServiceType.GiverService)
-                {
-                    serviceFromDb.User.HasProviderService = true;
-                }
-
-                var result = _context.SaveChanges();
-
-                return new JsonResult(new { Status = true, Message = "ثبت موفقیت آمیز", });
-            }
-
-            catch
-            {
-                return new JsonResult(new { Status = false, Message = "خطا در ثبت اطلاعات" });
-            }
+            return new JsonResult(new { Status = true, Message = " ", Data = serviceFromDB.IsReaded });
         }
+
+
+
+
+
+        /// <summary>
+        /// رد یا قبول سرویس
+        /// </summary>
+        /// <param name="serviceId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> ToggleConfirmService(int serviceId, string username)
+        {
+            var serviceFromDB = await _context.TBL_Service.Where(c => c.Id == serviceId)
+                .Include(c => c.User)
+                .FirstOrDefaultAsync();
+            if (serviceFromDB == null)
+                return new JsonResult(new { Status = false, Message = "سرویس یافت نشد", });
+
+            serviceFromDB.IsReaded = true;
+            if (serviceFromDB.ConfirmServiceType == ConfirmServiceType.Confirmed)
+            {
+                if (serviceFromDB.ServiceType == ServiceType.GiverService)
+                {
+                    var userSrviceCount = _context.TBL_Service.Where(c => c.Username == username).Count();
+                    if (userSrviceCount == 1)
+                    {
+                        serviceFromDB.User.HasProviderService = false;
+                    }
+                }
+                serviceFromDB.ConfirmServiceType = ConfirmServiceType.Rejected;
+            }
+            else
+            {
+                if (serviceFromDB.ServiceType == ServiceType.GiverService)
+                    serviceFromDB.User.HasProviderService = true;
+                serviceFromDB.ConfirmServiceType = ConfirmServiceType.Confirmed;
+            }
+
+            await _context.SaveChangesAsync();
+            return new JsonResult(new { Status = true, Message = "", Data = serviceFromDB.ConfirmServiceType });
+        }
+
+
+
+        ///// <summary>
+        ///// تایید خدمت   
+        ///// </summary>
+        ///// <param name="serviceId"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //public async Task<ActionResult> ToggleConfirmService(int? serviceId)
+        //{
+        //    try
+        //    {
+        //        if (serviceId == null)
+        //            return new JsonResult(new { Status = false, Message = "این سرویس یافت نشد" });
+        //        var serviceFromDb = await _context.TBL_Service
+        //            .Where(c => c.Id == serviceId)
+        //            .Include(c => c.User).FirstOrDefaultAsync();
+        //        if (serviceFromDb == null)
+        //        {
+        //            return new JsonResult(new { Status = false, Message = "این سرویس یافت نشد" });
+        //        }
+
+        //        serviceFromDb.ConfirmServiceType = ConfirmServiceType.Confirmed;
+
+        //        if (serviceFromDb.ServiceType == ServiceType.GiverService)
+        //        {
+        //            serviceFromDb.User.HasProviderService = true;
+        //        }
+
+        //        var result = _context.SaveChanges();
+
+        //        return new JsonResult(new { Status = true, Message = "ثبت موفقیت آمیز", });
+        //    }
+
+        //    catch
+        //    {
+        //        return new JsonResult(new { Status = false, Message = "خطا در ثبت اطلاعات" });
+        //    }
+        //}
 
 
 
@@ -198,40 +279,40 @@ namespace Helper.Areas.Admin.Controllers
         /// </summary>
         /// <param name="serviceId"></param>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult> TogglRegectService(int? serviceId, string username)
-        {
-            try
-            {
-                if (serviceId == null)
-                    return new JsonResult(new { Status = false, Message = "این سرویس یافت نشد" });
-                var serviceFromDb = await _context.TBL_Service
-                    .Where(c => c.Id == serviceId)
-                    .Include(c => c.User).FirstOrDefaultAsync();
-                if (serviceFromDb == null)
-                {
-                    return new JsonResult(new { Status = false, Message = "این سرویس یافت نشد" });
-                }
+        //[HttpPost]
+        //public async Task<ActionResult> TogglRegectService(int? serviceId, string username)
+        //{
+        //    try
+        //    {
+        //        if (serviceId == null)
+        //            return new JsonResult(new { Status = false, Message = "این سرویس یافت نشد" });
+        //        var serviceFromDb = await _context.TBL_Service
+        //            .Where(c => c.Id == serviceId)
+        //            .Include(c => c.User).FirstOrDefaultAsync();
+        //        if (serviceFromDb == null)
+        //        {
+        //            return new JsonResult(new { Status = false, Message = "این سرویس یافت نشد" });
+        //        }
 
-                serviceFromDb.ConfirmServiceType = ConfirmServiceType.Pending;
+        //        serviceFromDb.ConfirmServiceType = ConfirmServiceType.Pending;
 
-                if (serviceFromDb.ServiceType == ServiceType.GiverService)
-                {
-                    var userSrviceCount = _context.TBL_Service.Where(c => c.Username == username).Count();
-                    if (userSrviceCount == 1)
-                    {
-                        serviceFromDb.User.HasProviderService = false;
-                    }
-                }
-                var result = _context.SaveChanges();
+        //        if (serviceFromDb.ServiceType == ServiceType.GiverService)
+        //        {
+        //            var userSrviceCount = _context.TBL_Service.Where(c => c.Username == username).Count();
+        //            if (userSrviceCount == 1)
+        //            {
+        //                serviceFromDb.User.HasProviderService = false;
+        //            }
+        //        }
+        //        var result = _context.SaveChanges();
 
-                return new JsonResult(new { Status = true, Message = "ثبت موفقیت آمیز", });
-            }
-            catch
-            {
-                return new JsonResult(new { Status = false, Message = "خطا در ثبت اطلاعات" });
-            }
-        }
+        //        return new JsonResult(new { Status = true, Message = "ثبت موفقیت آمیز", });
+        //    }
+        //    catch
+        //    {
+        //        return new JsonResult(new { Status = false, Message = "خطا در ثبت اطلاعات" });
+        //    }
+        //}
 
 
 

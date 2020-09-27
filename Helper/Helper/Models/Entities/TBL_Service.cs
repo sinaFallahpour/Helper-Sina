@@ -89,7 +89,6 @@ namespace Helper.Models.Entities
         /// <summary>
         /// ایا با اس ام اس به خدمت دهتده فرستاده شود
         /// </summary>
-
         [Display(Name = "وضعیت ارسال با اس ام اس")]
         public bool IsSendBySms { get; set; }
 
@@ -109,6 +108,10 @@ namespace Helper.Models.Entities
 
         [Display(Name ="وضعیت تایید ادمین")]
         public ConfirmServiceType ConfirmServiceType { get; set; }
+
+
+
+        public bool IsReaded { get; set; }
 
         #region relatoin
 

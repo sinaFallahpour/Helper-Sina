@@ -196,6 +196,9 @@
   <data name="SelectMonyUnitErrorMessage" xml:space="preserve">
     <value>واحد پول را انتخاب کنید</value>
   </data>
+  <data name="serviceConfirmedMessage" xml:space="preserve">
+    <value>امکات تغییر سرویس بعد از تایید ادمین امکان پذیر نمی باشد</value>
+  </data>
   <data name="ServiceDelivery" xml:space="preserve">
     <value>ارائه خدمت</value>
   </data>

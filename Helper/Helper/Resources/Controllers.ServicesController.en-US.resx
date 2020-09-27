@@ -196,6 +196,9 @@ service</value>
   <data name="SelectMonyUnitErrorMessage" xml:space="preserve">
     <value>Please Enter the currency</value>
   </data>
+  <data name="serviceConfirmedMessage" xml:space="preserve">
+    <value>You cant change  Service Information after admin confirmation.</value>
+  </data>
   <data name="ServiceDelivery" xml:space="preserve">
     <value>Service delivery</value>
   </data>

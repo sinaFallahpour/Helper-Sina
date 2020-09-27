@@ -2,7 +2,7 @@
 @using Helper.Models.Utilities;
 @using Helper.Models.Enums;
 @{
-    ViewData["Title"] = "آرشیو خدمت دهدگان";
+    ViewData["Title"] = "آرشیو خدمت دهندگان";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -20,7 +20,7 @@
 
 <h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; "> آرشیو  خدمات(دهنده) </h1>
 
-<a asp-action="ServiceGiverInPendding" class="btn btn-primary mb-3"> لیست خدمات(دهنده) تایید نشده </a>
+<a asp-action="Index" class="btn btn-primary mb-3"> لیست خدمات(دهنده) بررسی نشده </a>
 <div class="card">
     <div class="card-body">
 
@@ -65,26 +65,39 @@
                         <td class="text-right" style="vertical-align:middle"> @item.MaxPrice.GetPriceFormat() ( @item.MonyUnit?.Name )</td>
 
                         <td class="text-right" style="vertical-align:middle">
-                            <div class="btn-group" role="group">
-                                @if (item.ConfirmServiceType == ConfirmServiceType.Pending)
-                                {
-                                    <button type="button" class="btn   btn-warning" id="@item.Id" onclick="ToggleConfirmService(@item.Id)" ;>
-                                        <i class="">تایید نشده </i>
-                                    </button>
-                                }
-                                else
-                                {
-                                    <button type="button" class="btn   btn-success" id="@item.Id" onclick="TogglRegectService(@item.Id,@item.Username)" ;>
-                                        <i class="">تایید شده </i>
-                                    </button>
-                                }
-                                <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="btn       btn-info">
-                                    <i class="">جزییات</i>
-                                </a>
-                                @*<button type="button" id="delete-@item.Id" class="btn     btn-danger">
-                                        <i class="">حذف</i>
-                                    </button>*@
-                            </div>
+
+                            @if (!item.IsReaded)
+                            {
+                                <button type="button" class="text-white btn btn-sm btn-warning" id="read-@item.Id" onclick="ToggleServiceReaded(@item.Id)" ;>
+                                    <i class="">بررسی نشد</i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="text-white btn btn-sm btn-success" id="read-@item.Id" onclick="ToggleServiceReaded(@item.Id)" ;>
+                                    <i class="">بررسی شد</i>
+                                </button>
+                            }
+
+
+                            @if (item.ConfirmServiceType == ConfirmServiceType.Confirmed)
+                            {
+                                <button type="button" class="text-white btn btn-sm btn-success" id="confirm-@item.Id" onclick="ToggleConfirmService('@item.Id', '@item.Username')">
+                                    <i class="">تایید شد</i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="text-white btn  btn-sm btn-warning" id="confirm-@item.Id" onclick="ToggleConfirmService('@item.Id', '@item.Username')">
+                                    <i class="">تایید نشد</i>
+                                </button>
+                            }
+
+                            <a type="button" asp-action="Details" asp-route-id="@item.Id" id="details-@item.Id" class="text-white btn btn-sm btn-info">
+                                <i class="">جزییات</i>
+                            </a>
+
+
                         </td>
                     </tr>
                 }
@@ -161,71 +174,57 @@
 
 
 
-
-        //تغییر وضعیت بررسی کامنت
-        var ToggleConfirmService = function (serviceId, DeleteRow) {
+        //تغییر وضعیت بررسی  سرویس
+        var ToggleServiceReaded = function (serviceId, DeleteRow) {
 
             var $this = $(event.srcElement);
             var data = {
                 "serviceId": serviceId
             }
 
-            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
-            var curentElement = `#${serviceId}`;
-
-            $(curentElement).prop('disabled', true);
+            //$.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
+            var curentElement = `#read-${serviceId}`;
+            //$(curentElement).prop('disabled', true);
 
             $.ajax({
                 method: "POST",
-                url: "/Admin/Services/ToggleConfirmService",
+                url: "/Admin/Services/ToggleServiceReaded",
                 data: data,
                 //contentType: "application/json; charset=utf-8",
                 success: function (r) {
                     if (r.status) {
-                        //dataTable.row($(curentElement).parents('tr')).remove().draw();
-                        $(curentElement).prop('disabled', false);
-                        $(curentElement).removeClass('btn-warning').addClass('btn-success')
-                        var li = $(`#${serviceId} > i`)
-                        console.log(li)
-                        //$(curentElement 'li').text('test');
-                        li.text('تایید شده')
-                        $.unblockUI();
-                        SuccessAlert(r.message)
+                        if (r.data)
+                            $(curentElement).removeClass("btn-warning ").addClass("btn-success").html("بررسی شد")
+                        else
+                            $(curentElement).removeClass("btn-success ").addClass("btn-warning").html("بررسی نشد")
                     }
                     else {
-                        $.unblockUI();
-                        $(curentElement).prop('disabled', false);
                         FailedAlert(r.message);
                     }
                 },
                 error: function (err) {
                     console.log(err)
-                    $.unblockUI();
-                    $(curentElement).prop('disabled', false);
                     FailedAlert("خطا رخ داده است.");
                 }
             });
-
         }
 
 
 
 
-
         //تغییر وضعیت بررسی کامنت
-        var TogglRegectService = function (serviceId, username) {
-            alert(1)
+        var ToggleConfirmService = function (serviceId, username, DeleteRow) {
+
             var $this = $(event.srcElement);
             var data = {
                 "serviceId": serviceId,
                 "username": username
             }
 
-            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
-            var curentElement = `#${serviceId}`;
+            //$.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
+            var curentElement = `#confirm-${serviceId}`;
 
-            $(curentElement).prop('disabled', true);
-
+            //$(curentElement).prop('disabled', true);
             $.ajax({
                 method: "POST",
                 url: "/Admin/Services/ToggleConfirmService",
@@ -233,31 +232,28 @@
                 //contentType: "application/json; charset=utf-8",
                 success: function (r) {
                     if (r.status) {
-                        $(curentElement).prop('disabled', false);
-                        $(curentElement).removeClass('btn-succes ').addClass('btn-warning')
-                        var li = `#${serviceId} > i`
-                        $(li).html('تایید نشد')
-                        $.unblockUI();
-                        SuccessAlert(r.message)
-
-
+                        if (r.data == 0) {
+                            $(curentElement).removeClass("btn-warning ").addClass("btn-success").html("تایید شد")
+                            $(`#read-${serviceId}`).removeClass("btn-warning").addClass("btn-success").html("بررسی شد")
+                        }
+                        if (r.data == 1) {
+                            $(curentElement).removeClass("btn-success ").addClass("btn-warning").html("تایید نشد")
+                            $(`#read-${serviceId}`).removeClass("btn-success").addClass("btn-warning").html("بررسی نشد")
+                        }
                         //dataTable.row($(curentElement).parents('tr')).remove().draw();
-                        //$(curentElement).prop('disabled', false);
-                        //SuccessAlert(r.message)
                     }
                     else {
-                        $.unblockUI();
-                        $(curentElement).prop('disabled', false);
+                        //$.unblockUI();
                         FailedAlert(r.message);
                     }
                 },
                 error: function (err) {
                     console.log(err)
-                    $.unblockUI();
-                    $(curentElement).prop('disabled', false);
+                    //$.unblockUI();
                     FailedAlert("خطا رخ داده است.");
                 }
             });
+
         }
 
 

@@ -52,9 +52,6 @@ namespace Helper.Controllers
 
 
         #region get Profile
-
-
-
         [Authorize]
         public async Task<ActionResult> Index()
         {
@@ -140,63 +137,6 @@ namespace Helper.Controllers
 
             //return View(user);
         }
-
-
-
-
-
-
-
-
-
-        //[Route("Services/UsersService/{username}")]
-        //public async Task<IActionResult> UsersService(string username, int? limit, int? offset)
-        //{
-        //    var currentUserId = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-        //    var user = await _context.Users.Where(c => c.Id == currentUserId).Select(c => new { c.Id, c.UserName }).FirstOrDefaultAsync();
-
-        //    var query = _context.TBL_Service.AsQueryable();
-        //    var count = query.Where(c => c.Username == username && c.ServiceType == ServiceType.GiverService).Count();
-
-        //    var services = await _context.TBL_Service
-        //         .AsNoTracking()
-        //        .Where(m => m.Username == username && m.ServiceType == ServiceType.GiverService && m.ConfirmServiceType == ConfirmServiceType.Confirmed && m.Category.IsEnabled == true)
-        //        .Skip(offset ?? 0)
-        //        .Take(limit ?? 8)
-        //         .Include(c => c.UserLikeServices)
-        //        .Select(c => new ServiceListVM
-        //        {
-        //            Id = c.Id,
-        //            CreateDate = c.CreateDate,
-        //            Description = c.Description,
-        //            LikeCount = c.LikeCount,
-        //            CommentCount = c.CommentCount,
-        //            SeenCount = c.SeenCount,
-        //            Title = c.Title,
-        //            CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
-        //            CategoryImageAddres = c.Category.PhotoAddress,
-        //            IsLiked = c.UserLikeServices.Any(p => p.UserName == user.UserName && p.ServiceId == c.Id),
-        //        })
-        //        .OrderByDescending(c => c.CreateDate)
-        //        .ThenBy(c => c.LikeCount)
-        //        .ToListAsync();
-        //    var response = new { Count = count, services = services };
-        //    return new JsonResult(new { Status = true, Message = "", data = response });
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         #endregion
 
 
@@ -417,7 +357,6 @@ namespace Helper.Controllers
 
 
 
-
         private void returnViewDate()
         {
             ViewData["EditProfile"] = _localizer["EditProfile"];
@@ -474,9 +413,6 @@ namespace Helper.Controllers
             ViewData["SaveChanges"] = _localizer["SaveChanges"];
 
         }
-
-
-
 
 
     }
