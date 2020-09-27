@@ -65,7 +65,7 @@
                     <div class="tab-content py-3 px-sm-0 mt-5" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                            <form asp-action="Index" id="profileForm"  enctype="multipart/form-data">
+                            <form asp-action="Index" id="profileForm" enctype="multipart/form-data">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
@@ -121,7 +121,7 @@
 
 
 
-                                <input type="hidden" asp-for="Profile.Id"  name="Id"/>
+                                <input type="hidden" asp-for="Profile.Id" name="Id" />
                                 <div class="row hj-form  mx-auto">
                                     <div class="form-group w-100">
                                         <input asp-for="Profile.Nickname" name="Nickname" autocomplete="off" oninput="validate(this)" class="_text-position form-control hj-form-profile w-100 py-3 pr-3 text-dark" placeholder="@ViewData["NameAndLastNamePL"]">
@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="row w-100 hj-Records hj-form mt-3  mx-auto p-0 m-0 px-2" id="Record">
                                         <div class="form-group w-100 text-right">
-                                            <label asp-for="Profile.CompanyName"  for="CompanyName">@ViewData["Office"]</label>
+                                            <label asp-for="Profile.CompanyName" for="CompanyName">@ViewData["Office"]</label>
                                             <input asp-for="Profile.CompanyName" name="CompanyName" oninput="validate(this)" autocomplete="off" class="_text-position form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="CompanyName" placeholder="@ViewData["OfficePL"]">
                                             <span asp-validation-for="Profile.CompanyName" class="text-center d-block text-danger"></span>
                                         </div>
@@ -200,7 +200,7 @@
 
                                     <div class="row w-100 hj-Records hj-form mt-3  mx-auto p-0 m-0 px-2" id="Record2">
                                         <div class="form-group w-100 text-right">
-                                            <label asp-for="Profile.MaghTa"  for="MaghTa">@ViewData["GradePL"]</label>
+                                            <label asp-for="Profile.MaghTa" for="MaghTa">@ViewData["GradePL"]</label>
                                             <input asp-for="Profile.MaghTa" name="MaghTa" oninput="validate(this)" autocomplete="off" class="_text-position form-control hj-form-profile w-100 py-3 pr-3 text-dark" id="MaghTa" placeholder="@ViewData["GradePL"]">
                                             <span asp-validation-for="Profile.MaghTa" class="text-danger"></span>
                                         </div>
@@ -698,6 +698,122 @@
                                     <span class="timer text-helper" data-to="3556" data-speed="8000">3556</span>
                                 </div>
                             </div>
+
+
+
+
+
+
+                            <div class="row w-100 mx-auto mt-5">
+                                <div class="col-12 text-right">
+                                    <h3>فعالیت من (خدمات گیرنده)</h3>
+                                </div>
+                                <div class="col-12">
+                                    <img src="/hj/img/borderbig.png" class="img-fluid">
+                                </div>
+
+                            </div>
+
+                            <div class="row w-100 mx-auto text-center hj-dashbord-service">
+                                @if (Model.Services.Count == 0)
+                                {
+                                    <span>  No Service</span>
+                                }
+
+                                @*<div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0  px-0">
+                                    <div href="#">
+                                        <div class="hj-card-dashbord mx-auto">
+                                            <div class="row  w-100 hj-img-dashbord mx-auto">
+                                                <img src="~/hj/img/11.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                            </div>
+                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                                <div class="col-12 pt-5 ">
+                                                    <h5 class="text-center w-100 color-green">  <b>  درامد در ماه</b></h5>
+                                                </div>
+                                                <div class="col-12 pt-5 text-center mx-auto ">
+                                                    <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
+                                                </div>
+                                                <div class="col-12 pt-5 text-center mx-auto">
+                                                    <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>*@
+
+
+                                @foreach (var item in Model.Services)
+                                {
+                                    <div class="col-md-4 col-12 mt-3">
+                                        <div class=" py-4 my-4 mx-auto  p-md-0  px-0">
+                                            <div href="#">
+                                                <div class="hj-card-dashbord mx-auto " style="height:auto">
+                                                    <div class="row  w-100 hj-img-dashbord mx-auto">
+                                                        @*<img src="~/hj/img/22.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">*@
+                                                        <img src="@item.CategoryImageAddres" style="border-radius:14px" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                                    </div>
+                                                    <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                                        <div class="col-12 pt-5 ">
+                                                            <h5 class="text-center w-100 color-green">  <b> @item.Title   </b></h5>
+                                                        </div>
+                                                        <div class="col-12 pt-5 text-center mx-auto " style="height:124px">
+                                                            <b>
+                                                                <span class=" color-green size-14 text-break">
+                                                                    @item.Description.GetSummary(180)
+                                                                </span>
+                                                            </b>
+                                                        </div>
+
+                                                        <div class="col-12 pt-5 text-center mx-auto">
+                                                            @if (item.ConfirmServiceType != ConfirmServiceType.Confirmed && !item.IsReaded)
+                                                            {
+                                                                <a asp-action="Edit" asp-controller="Services" asp-route-id="@item.Id">  <h5 class="text-center w-100 color-blue a-dashbord"><i class="fa-lg fas fa-edit"></i>   </h5></a>
+                                                            }
+                                                            else if (item.ConfirmServiceType == ConfirmServiceType.Confirmed)
+                                                            {
+                                                                <a>  <h5 class="text-center w-100 color-blue a-dashbord"> <i class="fa fa-ban"></i>  </h5></a>
+                                                            }
+                                                            else if (item.ConfirmServiceType == ConfirmServiceType.Rejected)
+                                                            {
+                                                                <a>  <h5 class="text-center w-100 color-blue a-dashbord"> <i class="fas fa-check"></i> </h5></a>
+                                                            }
+                                                        </div>
+
+
+                                                        <div class="col-12 text-center mx-auto">
+
+
+                                                            <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
+                                                                <div class="col-4 p-0 m-0"><i class="far fa-heart pl-2"></i><span class="hj-like"><br>@item.LikeCount</span></div>
+                                                                <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>@item.SeenCount</span></div>
+                                                                <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>@item.SeenCount</span></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                             @*--------------*@
                             <div class="row w-100 mx-auto mt-5">
                                 <div class="col-12 text-right">
@@ -717,47 +833,47 @@
                                 }
                                 @foreach (var item in Model.Services)
                                 {
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="py-3 hj-Property my-2 text-Purple" style="justify-content:flex-end">
+
+                                            <div class="row w-100 mx-auto">
+
+                                                @*<div class="col-md-4 p-0">
+                                                        <img src="~/hj/img/home.png" class="img-fluid w-100" />
+                                                        <img src="@item.CategoryImageAddres" style="height:60px; border-radius:4px"   class="img-fluid w-100" />
+                                                    </div>*@
 
 
-                                    <div class="col-lg-3 col-12 py-3 hj-Property  mx-auto    my-2 text-Purple">
-
-                                        <div class="row w-100 mx-auto">
-
-                                            @*<div class="col-md-4 p-0">
-                                                    <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                                    <img src="@item.CategoryImageAddres" style="height:60px; border-radius:4px"   class="img-fluid w-100" />
-                                                </div>*@
-
-
-                                            <div class="col-md-4 p-0">
-                                                <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                            </div>
-
-                                            <div class="col-md-8 p-0 pt-2">
-                                                <div class="row w-100 d-flex justify-content-between mx-auto text-right ">
-                                                    <h6><b>  @item.Title </b></h6>
-                                                    <a asp-action="Edit" asp-controller="Services" asp-route-id="@item.Id">
-                                                        <i class="fa-lg fas fa-edit"></i>
-                                                    </a>
+                                                @*<div class="col-md-4 p-0 ">
+                                                        <img src="~/hj/img/home.png" class="img-fluid w-100" />
+                                                    </div>*@
+                                                <div class="col-md-4 p-0 ">
+                                                    <img src="@item.CategoryImageAddres" class="img-fluid w-100" />
                                                 </div>
-                                                <div class="row w-100 mx-auto text-justify">
-                                                    <h6 style="height:150px" class="text-break"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top">
-                                                        @item.Description.GetSummary(120)
-                                                    </h6>
+                                                <div class="col-md-8 p-0 pt-2">
+                                                    <div class="row w-100 d-flex justify-content-between mx-auto text-right ">
+                                                        <h6><b>  @item.Title </b></h6>
+                                                        <a asp-action="Edit" asp-controller="Services" asp-route-id="@item.Id">
+                                                            <i class="fa-lg fas fa-edit"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="row w-100 mx-auto text-justify">
+                                                        <h6 style="height:150px" class="text-break"
+                                                            data-toggle="tooltip"
+                                                            data-placement="top">
+                                                            @item.Description.GetSummary(120)
+                                                        </h6>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                            <div class="col-4 p-0 m-0"><i class="far fa-heart pl-2"></i><span class="hj-like"><br>@item.LikeCount</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>@item.SeenCount</span></div>
-                                            <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>@item.SeenCount</span></div>
+                                            <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
+                                                <div class="col-4 p-0 m-0"><i class="far fa-heart pl-2"></i><span class="hj-like"><br>@item.LikeCount</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>@item.SeenCount</span></div>
+                                                <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>@item.SeenCount</span></div>
+                                            </div>
                                         </div>
                                     </div>
-
                                 }
-
 
                                 @*<div class="col-lg-3 col-12 py-3 hj-Property  mx-auto    my-2 text-Purple">
                                         <div class="row w-100 mx-auto">
@@ -779,59 +895,7 @@
 
 
                             </div>
-                            @*<div class="row w-100 mx-auto mt-4">
-                                <div class="col-lg-3 col-12 py-3 hj-Property  mx-auto my-2 text-Purple">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-md-4 p-0">
-                                            <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                        </div>
-                                        <div class="col-md-8 p-0 pt-2">
-                                            <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
-                                            <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-md-4 p-0">
-                                            <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                        </div>
-                                        <div class="col-md-8 p-0 pt-2">
-                                            <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
-                                            <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-12 py-3 hj-Property mx-auto my-2 text-Purple">
-                                    <div class="row w-100 mx-auto">
-                                        <div class="col-md-4 p-0">
-                                            <img src="~/hj/img/home.png" class="img-fluid w-100" />
-                                        </div>
-                                        <div class="col-md-8 p-0 pt-2">
-                                            <div class="row w-100 mx-auto text-right"><h6><b>نام خدمت</b></h6></div>
-                                            <div class="row w-100 mx-auto text-justify"><span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، </span></div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                        <div class="col-4 p-0 m-0"><i onclick="myFunction(this)" class="far fa-heart pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                        <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>350.000</span></div>
-                                    </div>
-                                </div>
-                            </div>*@
+                        
 
                             @*-------------------*@
                             <div class="row w-100 mx-auto mt-5 py-3">
@@ -1673,7 +1737,7 @@
 
                 //contentType: "application/json; charset=utf-8",
                 success: function (r) {
-                 
+
                     if (r.status) {
                         $("#submitProfileBtn").prop('disabled', false);
                         $.unblockUI();
@@ -1689,7 +1753,7 @@
                     }
                 },
                 error: function () {
-                 
+
                     $("#submitProfileBtn").prop('disabled', false);
                     $.unblockUI();
                     FailedAlert("Fail to submit Profile.");

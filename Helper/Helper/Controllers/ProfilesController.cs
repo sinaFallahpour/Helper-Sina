@@ -103,7 +103,10 @@ namespace Helper.Controllers
 
             var services = await _context.TBL_Service
                  .AsNoTracking()
-                .Where(m => m.Username == user.UserName && m.ServiceType == ServiceType.GiverService)
+                .Where(m => m.Username == user.UserName
+                && m.ServiceType == ServiceType.GiverService
+                
+                )
                 .Select(c => new ServiceListVM
                 {
                     Id = c.Id,
@@ -116,7 +119,8 @@ namespace Helper.Controllers
                     CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
                     CategoryImageAddres = c.Category.PhotoAddress,
                     ConfirmServiceType = c.ConfirmServiceType,
-                    
+                    IsReaded = c.IsReaded
+
                     //IsLiked = c.UserLikeServices.Any(p => p.UserName == user.UserName && p.ServiceId == c.Id),
                 })
                 .OrderByDescending(c => c.CreateDate)
@@ -321,8 +325,8 @@ namespace Helper.Controllers
                     Descriptions = c.Descriptions,
                     PhotoAddress = c.PhotoAddress,
 
-                ////////////////////////////////////////Phone = c.Phone,
-                LanguageKnowing = c.LanguageKnowing,
+                    ////////////////////////////////////////Phone = c.Phone,
+                    LanguageKnowing = c.LanguageKnowing,
                     City = c.City,
                     Gender = c.Gender,
                     MarriedType = c.MarriedType,

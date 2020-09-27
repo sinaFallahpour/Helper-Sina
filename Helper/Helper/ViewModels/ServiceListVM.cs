@@ -63,5 +63,9 @@ namespace Helper.ViewModels
         public ConfirmServiceType ConfirmServiceType { get; set; }
 
 
+
+        public bool IsReaded { get; set; }
+
+
     }
 }
