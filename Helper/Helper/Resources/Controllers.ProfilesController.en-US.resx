@@ -186,6 +186,9 @@
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
+  <data name="NoServiceExistMessage" xml:space="preserve">
+    <value>No Service Exist</value>
+  </data>
   <data name="Office" xml:space="preserve">
     <value>Company Name</value>
   </data>

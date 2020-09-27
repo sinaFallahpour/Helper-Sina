@@ -186,6 +186,9 @@
   <data name="Next" xml:space="preserve">
     <value>بعدی</value>
   </data>
+  <data name="NoServiceExistMessage" xml:space="preserve">
+    <value>سرویسی موجود نیست</value>
+  </data>
   <data name="Office" xml:space="preserve">
     <value>نام شرکت</value>
   </data>

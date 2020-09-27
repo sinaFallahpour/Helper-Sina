@@ -498,6 +498,8 @@ namespace Helper.Controllers
                     CategoryName = CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName ? c.Category.Name : c.Category.EnglishName,
                     CategoryImageAddres = c.Category.PhotoAddress,
                     IsLiked = c.UserLikeServices.Any(p => p.UserName == user.UserName && p.ServiceId == c.Id),
+                    IsReaded = c.IsReaded,
+                    ConfirmServiceType = c.ConfirmServiceType,
                 })
                 .OrderByDescending(c => c.CreateDate)
                 .ThenBy(c => c.LikeCount)

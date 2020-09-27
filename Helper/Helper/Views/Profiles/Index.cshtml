@@ -30,7 +30,11 @@
         @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-uCQmAoax6aJTxC03VlH0uCEtE0iLi83TW1Qh6VezEZ5Y17rTrIE+8irz4H4ehM7Fbfbm8rb30OkxVkuwhXxrRg==" crossorigin="anonymous" />*@
     }
 
-
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
 
 }
 
@@ -70,6 +74,7 @@
 
 
                                 <input name="usreId" id="usreId" type="hidden" />
+                                <input type="hidden" name="username" id="username" value="@Model.Profile.UserName" />
 
                                 <div class="row hj-form mx-auto  ">
                                     @if (!string.IsNullOrEmpty(TempData["Success"] as string))
@@ -714,80 +719,57 @@
 
                             </div>
 
-                            <div class="row w-100 mx-auto text-center hj-dashbord-service">
-                                @if (Model.Services.Count == 0)
-                                {
-                                    <span>  No Service</span>
-                                }
-
-                                @*<div class="col-md-4 col-12 py-4 my-4 mx-auto  p-md-0  px-0">
-                                    <div href="#">
-                                        <div class="hj-card-dashbord mx-auto">
-                                            <div class="row  w-100 hj-img-dashbord mx-auto">
-                                                <img src="~/hj/img/11.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
-                                            </div>
-                                            <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
-                                                <div class="col-12 pt-5 ">
-                                                    <h5 class="text-center w-100 color-green">  <b>  درامد در ماه</b></h5>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto ">
-                                                    <b> <span class="timer color-green size-33" data-to="180" data-speed="10000"></span></b>
-                                                </div>
-                                                <div class="col-12 pt-5 text-center mx-auto">
-                                                    <a href="#">  <h5 class="text-center w-100 color-blue a-dashbord">  مشاهده همه </h5></a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>*@
 
 
-                                @foreach (var item in Model.Services)
-                                {
-                                    <div class="col-md-4 col-12 mt-3">
+                            <div id="root" v-cloak class="row w-100 mx-auto text-center hj-dashbord-service">
+
+                                <template v-if="services && services.length>0">
+                                    <div v-for="service in services" :key="service.Id" class="col-md-4 col-12 mt-3">
                                         <div class=" py-4 my-4 mx-auto  p-md-0  px-0">
-                                            <div href="#">
+                                            <div>
                                                 <div class="hj-card-dashbord mx-auto " style="height:auto">
                                                     <div class="row  w-100 hj-img-dashbord mx-auto">
                                                         @*<img src="~/hj/img/22.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">*@
-                                                        <img src="@item.CategoryImageAddres" style="border-radius:14px" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                                        <img v-bind:src="service.categoryImageAddres" style="border-radius:14px" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
                                                     </div>
                                                     <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
                                                         <div class="col-12 pt-5 ">
-                                                            <h5 class="text-center w-100 color-green">  <b> @item.Title   </b></h5>
+                                                            <h5 class="text-center w-100 color-green">  <b>  {{service.title}}  </b></h5>
                                                         </div>
                                                         <div class="col-12 pt-5 text-center mx-auto " style="height:124px">
                                                             <b>
                                                                 <span class=" color-green size-14 text-break">
-                                                                    @item.Description.GetSummary(180)
+                                                                    {{getSummary(service.description,180)}}
                                                                 </span>
                                                             </b>
                                                         </div>
 
                                                         <div class="col-12 pt-5 text-center mx-auto">
-                                                            @if (item.ConfirmServiceType != ConfirmServiceType.Confirmed && !item.IsReaded)
-                                                            {
-                                                                <a asp-action="Edit" asp-controller="Services" asp-route-id="@item.Id">  <h5 class="text-center w-100 color-blue a-dashbord"><i class="fa-lg fas fa-edit"></i>   </h5></a>
-                                                            }
-                                                            else if (item.ConfirmServiceType == ConfirmServiceType.Confirmed)
-                                                            {
-                                                                <a>  <h5 class="text-center w-100 color-blue a-dashbord"> <i class="fa fa-ban"></i>  </h5></a>
-                                                            }
-                                                            else if (item.ConfirmServiceType == ConfirmServiceType.Rejected)
-                                                            {
-                                                                <a>  <h5 class="text-center w-100 color-blue a-dashbord"> <i class="fas fa-check"></i> </h5></a>
-                                                            }
+                                                            <a v-if="service.confirmServiceType == 0 && service.isReaded == false" v-bind:href="'/Services/Edit/'+ service.id">
+                                                                <h5 class="text-center w-100 color-blue a-dashbord">
+                                                                    <i class="fa-lg fas fa-edit"></i>
+                                                                </h5>
+                                                            </a>
+                                                            <a v-else-if="service.confirmServiceType==0">
+                                                                <h5 class="text-center w-100 color-blue a-dashbord">
+                                                                    <i class="fa fa-ban"></i>
+                                                                </h5>
+                                                            </a>
+
+                                                            <a v-else-if="service.confirmServiceType==1">
+                                                                <h5 class="text-center w-100 color-blue a-dashbord">
+                                                                    <i class="fas fa-check"></i>
+                                                                </h5>
+                                                            </a>
+
                                                         </div>
 
 
                                                         <div class="col-12 text-center mx-auto">
-
-
                                                             <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
-                                                                <div class="col-4 p-0 m-0"><i class="far fa-heart pl-2"></i><span class="hj-like"><br>@item.LikeCount</span></div>
-                                                                <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>@item.SeenCount</span></div>
-                                                                <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>@item.SeenCount</span></div>
+                                                                <div class="col-4 p-0 m-0"><i class="far fa-heart pl-2"></i><span class="hj-like"><br>{{service.likeCount}}</span></div>
+                                                                <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>{{service.commentCount}} </span></div>
+                                                                <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>{{service.seenCount}} </span></div>
                                                             </div>
                                                         </div>
 
@@ -798,9 +780,122 @@
                                         </div>
 
                                     </div>
-                                }
+                                    @*--------pagination----*@
+                                    <div class="row w-100 mx-auto">
+                                        <div class="pagination-wrapper mx-auto">
+                                            <div class="pagination _direction">
+                                                <a @@click="setPrevPage()" class=" page-numbers">@ViewData["Prev"]</a>
+                                                @*<span aria-current="page" class="page-numbers current">1</span>*@
+                                                <a v-for="(item ,index) in countForLoopPAgination"
+                                                   :key="index"
+                                                   @@click="setPage(item - 1)"
+                                                   v-bind:class="[index === page ? 'page-numbers current' : 'page-numbers']">
+                                                    {{item }}
+                                                </a>
+                                                <a @@click="setNextPage()" class=" page-numbers">@ViewData["Next"]</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
+
+                                </template>
+                               
+                                <h3 v-else class="w-100 text-center">@ViewData["NoServiceExistMessage"] </h3>
                             </div>
+
+
+
+
+                            <div class="row w-100 mx-auto mt-5">
+                                <div class="col-12 text-right">
+                                    <h3>فعالیت من (خدمات دهنده)</h3>
+                                </div>
+                                <div class="col-12">
+                                    <img src="/hj/img/borderbig.png" class="img-fluid">
+                                </div>
+                            </div>
+
+                            <div id="rootGetter" v-cloak class="row w-100 mx-auto text-center hj-dashbord-service">
+
+                                <template v-if="services && services.length>0">
+                                    <div v-for="service in services" :key="service.Id" class="col-md-4 col-12 mt-3">
+                                        <div class=" py-4 my-4 mx-auto  p-md-0  px-0">
+                                            <div>
+                                                <div class="hj-card-dashbord mx-auto " style="height:auto">
+                                                    <div class="row  w-100 hj-img-dashbord mx-auto">
+                                                        @*<img src="~/hj/img/22.png" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">*@
+                                                        <img v-bind:src="service.categoryImageAddres" style="border-radius:14px" class="img-fluid image-profile-desi mx-auto " alt="Responsive image">
+                                                    </div>
+                                                    <div class="row w-100 mx-auto mt-5 pt-5 text-center d-block">
+                                                        <div class="col-12 pt-5 ">
+                                                            <h5 class="text-center w-100 color-green">  <b>  {{service.title}}  </b></h5>
+                                                        </div>
+                                                        <div class="col-12 pt-5 text-center mx-auto " style="height:124px">
+                                                            <b>
+                                                                <span class=" color-green size-14 text-break">
+                                                                    {{getSummary(service.description,180)}}
+                                                                </span>
+                                                            </b>
+                                                        </div>
+
+                                                        <div class="col-12 pt-5 text-center mx-auto">
+                                                            <a v-if="service.confirmServiceType == 0 && service.isReaded == false" v-bind:href="'/Services/Edit/'+ service.id">
+                                                                <h5 class="text-center w-100 color-blue a-dashbord">
+                                                                    <i class="fa-lg fas fa-edit"></i>
+                                                                </h5>
+                                                            </a>
+                                                            <a v-else-if="service.confirmServiceType==0">
+                                                                <h5 class="text-center w-100 color-blue a-dashbord">
+                                                                    <i class="fa fa-ban"></i>
+                                                                </h5>
+                                                            </a>
+
+                                                            <a v-else-if="service.confirmServiceType==1">
+                                                                <h5 class="text-center w-100 color-blue a-dashbord">
+                                                                    <i class="fas fa-check"></i>
+                                                                </h5>
+                                                            </a>
+
+                                                        </div>
+
+                                                        <div class="col-12 text-center mx-auto">
+                                                            <div class="row w-100 p-0 m-0 hj-option-card text-center pt-3">
+                                                                <div class="col-4 p-0 m-0"><i class="far fa-heart pl-2"></i><span class="hj-like"><br>{{service.likeCount}}</span></div>
+                                                                <div class="col-4 p-0 m-0"><i class="fa fa-comments  pl-2"></i><span class="hj-like"><br>{{service.commentCount}} </span></div>
+                                                                <div class="col-4 p-0 m-0"><i class="fa fa-eye  pl-2"></i><span class="hj-like"><br>{{service.seenCount}} </span></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    @*--------pagination----*@
+                                    <div class="row w-100 mx-auto">
+                                        <div class="pagination-wrapper mx-auto">
+                                            <div class="pagination _direction">
+                                                <a @@click="setPrevPage()" class=" page-numbers">@ViewData["Prev"]</a>
+                                                @*<span aria-current="page" class="page-numbers current">1</span>*@
+                                                <a v-for="(item ,index) in countForLoopPAgination"
+                                                   :key="index"
+                                                   @@click="setPage(item - 1)"
+                                                   v-bind:class="[index === page ? 'page-numbers current' : 'page-numbers']">
+                                                    {{item }}
+                                                </a>
+                                                <a @@click="setNextPage()" class=" page-numbers">@ViewData["Next"]</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </template>
+
+                                <h3 v-else class="w-100 text-center">@ViewData["NoServiceExistMessage"] </h3>
+                            </div>
+
 
 
 
@@ -895,7 +990,7 @@
 
 
                             </div>
-                        
+
 
                             @*-------------------*@
                             <div class="row w-100 mx-auto mt-5 py-3">
@@ -1563,19 +1658,259 @@
 
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+
+    @*<script src="~/lib/vuejs/vue.min.js"></script>*@
+
+
+    <script src="~/lib/vuejs/vue.js"></script>
+    <script src="~/lib/axios/dist/axios.min.js"></script>
     <script src="~/lib/swal-alert/sweetalert.min.js"></script>
+    <script src="~/SinaCustom/js/main.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
     <script src="~/lib/jquery.tagsinput/jquery.tagsinput.min.js"></script>
     <script src="~/lib/dateicker/kamadatepicker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
-    <script src="~/SinaCustom/js/main.js"></script>
+
 
     @*  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>*@
 
 
 
+
     <script>
+
+
+
+
+        let username = $("#username").val();
+
+        var vue = new Vue({
+            el: "#root",
+            data: {
+                services: null,
+                servicesLoading: true,
+                showList: false,
+
+                likeLoading: false,
+                selectedService: null,
+
+                //data for pagination filter search ,...
+                serviceCount: 0,
+                //این تعداد ایتم های صفحس
+                limit: 6,
+                page: 0,
+
+            },
+
+            methods: {
+                toggleShowList: function () {
+                    this.showList = !this.showList;
+                },
+                getListemService: async function () {
+                    var vueInstance = this;
+                    this.servicesLoading = true;
+                    var params = this.axiosParams;
+
+                    axios.get(`/Profiles/MyGiverService/${username}`, { params: params })
+                        .then(function (response) {
+                            vueInstance.services = response.data.data.services;
+                            vueInstance.serviceCount = response.data.data.count;
+                        }).catch(function (er) {
+                            console.log(er)
+                            FailedAlert('some error ecured')
+                        }).finally(function () {
+                            vueInstance.servicesLoading = false;
+                        });
+                },
+
+                setPage: function (value) {
+                    //this.page = value;
+                    if (this.page === value)
+                        return
+                    //fetch new data from sever
+                    this.page = value;
+                    this.getListemService();
+                },
+                setPrevPage: function () {
+                    if (this.page != 0) {
+                        this.page--;
+                        this.getListemService();
+                    }
+                },
+                setNextPage: function () {
+                    if (this.totalPages === 0)
+                        return
+                    if (this.totalPages != 0 && this.page + 1 != this.totalPages) {
+                        this.page++;
+                        this.getListemService();
+                    }
+                },
+                isLastPage: function () {
+                    if (this.page + 1 == this.totalPages)
+                        return true
+                    return false;
+                },
+                getSummary: function (text, count) {
+                    if (!text) return "";
+                    if (text.length >= count) return text.substring(0, count) + "[...]";
+                    else return text;
+                },
+            },
+            mounted: function () {
+                //fetch data from sever
+                this.getListemService();
+            },
+            computed: {
+                totalPages: function () {
+                    return Math.ceil(this.serviceCount / this.limit);
+                },
+                countForLoopPAgination: function () {
+                    return this.totalPages == 0 ? 1 : this.totalPages;
+                },
+
+                axiosParams: function () {
+                    var params = new URLSearchParams();
+                    params.append('username', String(username))
+                    params.append('limit', String(this.limit));
+                    params.append('offset', `${this.page ? this.page * this.limit : 0}`);
+                    return params;
+                }
+            },
+            watch: {
+                serviceCount: function () {
+                    this.totalPages;
+                }
+            }
+        })
+
+
+
+
+
+
+
+        var vueGetter = new Vue({
+            el: "#rootGetter",
+            data: {
+                services: null,
+                servicesLoading: true,
+                showList: false,
+
+                likeLoading: false,
+                selectedService: null,
+
+                //data for pagination filter search ,...
+                serviceCount: 0,
+                //این تعداد ایتم های صفحس
+                limit: 6,
+                page: 0,
+
+            },
+
+            methods: {
+                toggleShowList: function () {
+                    this.showList = !this.showList;
+                },
+                getListemService: async function () {
+                    var vueInstance = this;
+                    this.servicesLoading = true;
+                    var params = this.axiosParams;
+
+                    axios.get(`/Profiles/MyGetterService/${username}`, { params: params })
+                        .then(function (response) {
+                            vueInstance.services = response.data.data.services;
+                            vueInstance.serviceCount = response.data.data.count;
+                        }).catch(function (er) {
+                            console.log(er)
+                            FailedAlert('some error ecured')
+                        }).finally(function () {
+                            vueInstance.servicesLoading = false;
+                        });
+                },
+
+                setPage: function (value) {
+                    //this.page = value;
+                    if (this.page === value)
+                        return
+                    //fetch new data from sever
+                    this.page = value;
+                    this.getListemService();
+                },
+                setPrevPage: function () {
+                    if (this.page != 0) {
+                        this.page--;
+                        this.getListemService();
+                    }
+                },
+                setNextPage: function () {
+                    if (this.totalPages === 0)
+                        return
+                    if (this.totalPages != 0 && this.page + 1 != this.totalPages) {
+                        this.page++;
+                        this.getListemService();
+                    }
+                },
+                isLastPage: function () {
+                    if (this.page + 1 == this.totalPages)
+                        return true
+                    return false;
+                },
+                getSummary: function (text, count) {
+                    if (!text) return "";
+                    if (text.length >= count) return text.substring(0, count) + "[...]";
+                    else return text;
+                },
+            },
+            mounted: function () {
+                //fetch data from sever
+                this.getListemService();
+            },
+            computed: {
+                totalPages: function () {
+                    return Math.ceil(this.serviceCount / this.limit);
+                },
+                countForLoopPAgination: function () {
+                    return this.totalPages == 0 ? 1 : this.totalPages;
+                },
+                axiosParams: function () {
+                    var params = new URLSearchParams();
+                    params.append('username', String(username))
+                    params.append('limit', String(this.limit));
+                    params.append('offset', `${this.page ? this.page * this.limit : 0}`);
+                    return params;
+                }
+            },
+            watch: {
+                serviceCount: function () {
+                    this.totalPages;
+                }
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             $('[data-toggle="tooltip"]').tooltip()
