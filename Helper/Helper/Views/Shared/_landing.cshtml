@@ -70,6 +70,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.esm.browser.bundle.min.js" integrity="sha512-HDbA4VnY3b6od1pe8MZsAEg/aJktLsrkTqMr5eaAhNlHPd8u7/7+WnGYPrPg8+4fXFU77tYjdoje8xxgrz9LJw==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js" integrity="sha512-9CWGXFSJ+/X0LWzSRCZFsOPhSfm6jbnL+Mpqo0o8Ke2SYr8rCTqb4/wGm+9n13HtDE1NQpAEOrMecDZw4FXQGg==" crossorigin="anonymous"></script>
     <script src="~/hj/js/app.js"></script>
+    <script>
+        $(document).ready(() => {
+            RedirectWithScreenPos()
+        })
+
+        function RedirectWithScreenPos() {
+            var screenPos = $(document).scrollTop();
+            alert(screenPos)
+            link = link.replace('123', screenPos);
+            window.location.href = link;
+
+        }
+
+    </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

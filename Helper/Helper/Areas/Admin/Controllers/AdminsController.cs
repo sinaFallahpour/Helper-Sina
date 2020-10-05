@@ -228,13 +228,13 @@ namespace Helper.Controllers
                 var user = new ApplicationUser
                 {
                     AccessFailedCount = 0,
-               
+
                     Birthdate = "",
                     Email = model.Email,
-                 
+
                     NormalizedEmail = "",
                     EmailConfirmed = true,
-                   
+
                     //عدم استفاده از پلن رایگان
                     IsUsedFree = false,
                     FirstName = model.FirstName,
@@ -367,7 +367,7 @@ namespace Helper.Controllers
             await _signInManager.SignOutAsync();
             returnUrl = returnUrl ?? Url.Content("/admin/admins/Profile");
 
-            return RedirectToAction("Login",new { returnUrl=returnUrl });
+            return RedirectToAction("Login", new { returnUrl = returnUrl });
             //return LocalRedirect(returnUrl);
         }
 
