@@ -180,6 +180,12 @@
   <data name="MobileNumberPL" xml:space="preserve">
     <value>MobileNumber</value>
   </data>
+  <data name="MyActivityGetterText" xml:space="preserve">
+    <value>فعالیت های  من (خدمات گیرنده)</value>
+  </data>
+  <data name="MyActivityGivverText" xml:space="preserve">
+    <value>فعالیت های من (خدمات دهنده)</value>
+  </data>
   <data name="NameAndLastNamePL" xml:space="preserve">
     <value>Profle Name</value>
   </data>

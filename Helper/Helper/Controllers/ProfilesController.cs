@@ -105,7 +105,7 @@ namespace Helper.Controllers
                  .AsNoTracking()
                 .Where(m => m.Username == user.UserName
                 && m.ServiceType == ServiceType.GiverService
-                
+
                 )
                 .Select(c => new ServiceListVM
                 {
@@ -489,6 +489,9 @@ namespace Helper.Controllers
             ViewData["Resume"] = _localizer["Resume"];
             ViewData["OtherInfo"] = _localizer["OtherInfo"];
             ViewData["AcademicRecords"] = _localizer["AcademicRecords"];
+
+            ViewData["MyActivityGetterText"] = _localizer["MyActivityGetterText"];
+            ViewData["MyActivityGivverText"] = _localizer["MyActivityGivverText"];
 
 
             ViewData["NameAndLastNamePL"] = _localizer["NameAndLastNamePL"];
