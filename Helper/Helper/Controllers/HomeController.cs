@@ -116,7 +116,7 @@ namespace Helper.Controllers
                 LandingHelperText = LandingHelperText,
                 ForUserText = ForUserText,
                 ForProfessionalText = ForProfessionalText,
-               
+
             };
             return View(model);
         }
@@ -156,6 +156,54 @@ namespace Helper.Controllers
         }
 
 
+
+
+        #region UpdateProfile
+
+
+
+        //  /api/Profile/UpdateProfile
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> SubscribeNews(SubscribeNewsVM model)
+        {
+            //returnViewDate();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var subscribeNews = new TBL_SubscribeNew()
+                    {
+                        Email = model.Email,
+                    };
+                    await _context.TBL_SubscribeNew.AddAsync(subscribeNews);
+                    var result = _context.SaveChanges();
+
+                    return new JsonResult(new { Status = true, Message = _localizer["SuccessMessage"].Value.ToString(),  });
+                }
+                catch 
+                {
+                    return new JsonResult(new { Status = true, Message = _localizer["SuccessMessage"].Value.ToString(), });
+                }
+            }
+
+
+            var errors = new List<string>();
+            foreach (var item in ModelState.Values)
+            {
+                foreach (var err in item.Errors)
+                {
+                    errors.Add(err.ErrorMessage);
+                }
+            }
+            return new JsonResult(new { Status = false, Message = errors.First() });
+
+            //return View(model);
+
+        }
+
+        #endregion
 
 
 

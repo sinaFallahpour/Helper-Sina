@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Helper.ViewModels.PlanVM>
 @using Helper.Models.Utilities
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Plans";
     Layout = "~/Views/Shared/_landing.cshtml";
 }
 
@@ -64,17 +64,13 @@
 
 
 
-
-
-
-
 <div class="container">
     <div class="row mt-md-5 pt-md-5">
         <div class="col-md-5 col-12 ml-lg-5 order-md-0 order-1 hj-intro-h">
             <div class="row mx-auto">
                 <span class="text-justify size-33">
                     <b>
-                        ایجاد خدمت
+                        @ViewData["CreateService"]   
                     </b>
                 </span>
             </div>
@@ -82,7 +78,7 @@
                 <img src="~/hj/img/border-bottom.png" class="img-fluid" />
             </div>
             <div class="row mt-3 mx-auto">
-                <span class="text-justify hj-intro-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف</span>
+                <span class="text-justify hj-intro-text">@Html.Raw(ViewBag.CreateServiceText)</span>
             </div>
 
         </div>

@@ -117,73 +117,148 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="400" xml:space="preserve">
-    <value>درخواست ارسال شده نامعتبر است</value>
+  <data name="AcademicRecords" xml:space="preserve">
+    <value>Academic records</value>
   </data>
-  <data name="401" xml:space="preserve">
-    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
+  <data name="BirthDate" xml:space="preserve">
+    <value>BirthDate</value>
   </data>
-  <data name="403" xml:space="preserve">
-    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
+  <data name="BirthDatePL" xml:space="preserve">
+    <value>Enter Your  BirthDate</value>
   </data>
-  <data name="404" xml:space="preserve">
-    <value>  صفحه موردنظر شما پیدا نشد!</value>
+  <data name="CityPL" xml:space="preserve">
+    <value>City</value>
   </data>
-  <data name="500" xml:space="preserve">
-    <value>مشکلی در بارگذاری صفحه رخ داده لطفا تارفع مشکل شکیبا باشید </value>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
   </data>
-  <data name="Back" xml:space="preserve">
-    <value>بازگشت به لیست</value>
+  <data name="DescriptionPL" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="ComparePassWordErrorMessage" xml:space="preserve">
-    <value>تکرار پسورد صحیح نمیباشد</value>
+  <data name="EditProfile" xml:space="preserve">
+    <value>Edit Profile</value>
   </data>
-  <data name="Create" xml:space="preserve">
-    <value>افرودن جدید</value>
+  <data name="EmailPL" xml:space="preserve">
+    <value>Email</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>حذف</value>
+  <data name="EndEduDatePL" xml:space="preserve">
+    <value>fnished date of graduation</value>
   </data>
-  <data name="Detail" xml:space="preserve">
-    <value>جزئیات</value>
+  <data name="ExistEmail" xml:space="preserve">
+    <value>Email  has already been taken</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>ویرایش</value>
+  <data name="ExistUserName" xml:space="preserve">
+    <value>Username has already been taken</value>
   </data>
-  <data name="EmailFormat" xml:space="preserve">
-    <value>ایمیل نامعتبر است</value>
+  <data name="FailMessage" xml:space="preserve">
+    <value>Registration error.</value>
   </data>
-  <data name="Enter just {1} character" xml:space="preserve">
-    <value>فقط {1} کاراکتر وارد کنید</value>
+  <data name="from" xml:space="preserve">
+    <value>from date</value>
   </data>
-  <data name="InValidEmail" xml:space="preserve">
-    <value>ایمیل نا معتبر است</value>
+  <data name="fromPL" xml:space="preserve">
+    <value>from date</value>
   </data>
-  <data name="LoadingText" xml:space="preserve">
-    <value>صبر کنید...</value>
+  <data name="GenderPL" xml:space="preserve">
+    <value>gender</value>
   </data>
-  <data name="Maximum length is {1} characters" xml:space="preserve">
-    <value>حداکثر  {1} کاراکتر وارد کنید</value>
+  <data name="GradePL" xml:space="preserve">
+    <value>Grade</value>
   </data>
-  <data name="Minimum length is {1} characters" xml:space="preserve">
-    <value>حداقل {1} کاراکتر وارد کنید</value>
+  <data name="image format Is not valid" xml:space="preserve">
+    <value>image format Is not valid</value>
   </data>
-  <data name="MobileFormat" xml:space="preserve">
-    <value>به فرمت موبایل وارد کنید</value>
+  <data name="Image size should less than {0} kilbite" xml:space="preserve">
+    <value>Image size should less than {0} kilbite</value>
   </data>
-  <data name="Required" xml:space="preserve">
-    <value>این فیلد اجباری است</value>
+  <data name="LanguageKnowing" xml:space="preserve">
+    <value>Languages You Know</value>
   </data>
-  <data name="ShebaFormat" xml:space="preserve">
-    <value>شماره شبا نا معتبر</value>
+  <data name="LanguageKnowingPL" xml:space="preserve">
+    <value>Enter the languages ​​you are fluent in</value>
+  </data>
+  <data name="MobileNumberPL" xml:space="preserve">
+    <value>MobileNumber</value>
+  </data>
+  <data name="MyActivityGetterText" xml:space="preserve">
+    <value>فعالیت های  من (خدمات گیرنده)</value>
+  </data>
+  <data name="MyActivityGivverText" xml:space="preserve">
+    <value>فعالیت های من (خدمات دهنده)</value>
+  </data>
+  <data name="NameAndLastNamePL" xml:space="preserve">
+    <value>Profle Name</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NoServiceExistMessage" xml:space="preserve">
+    <value>No Service Exist</value>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="OfficePL" xml:space="preserve">
+    <value>Enter company Name</value>
+  </data>
+  <data name="OtherInfo" xml:space="preserve">
+    <value>the rest of the information</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>position</value>
+  </data>
+  <data name="PositionPL" xml:space="preserve">
+    <value>Enter Your  position</value>
+  </data>
+  <data name="Prev" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="RequestService" xml:space="preserve">
+    <value>Service request</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>resume</value>
+  </data>
+  <data name="Resume2" xml:space="preserve">
+    <value>resume</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="SendMsg" xml:space="preserve">
+    <value>Send msg</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="SituationPL" xml:space="preserve">
+    <value>Situation</value>
   </data>
   <data name="Skills" xml:space="preserve">
-    <value>مهارت های مورد نظر</value>
+    <value>Specializations</value>
   </data>
-  <data name="{0} is required" xml:space="preserve">
-    <value>{0} الزامیست</value>
+  <data name="StartEduDatePL" xml:space="preserve">
+    <value>Start date of study</value>
   </data>
-  <data name="{0} Is required." xml:space="preserve">
-    <value>{0}  اجباریست.</value>
+  <data name="SuccessMessage" xml:space="preserve">
+    <value>Successful registration.</value>
+  </data>
+  <data name="to" xml:space="preserve">
+    <value>to date</value>
+  </data>
+  <data name="toPL" xml:space="preserve">
+    <value>to date</value>
+  </data>
+  <data name="UniverCityName" xml:space="preserve">
+    <value>Univer CityName</value>
+  </data>
+  <data name="UniverCityNamePL" xml:space="preserve">
+    <value>Enter Unvercity Name</value>
+  </data>
+  <data name="UserNamePL" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="UserNotFoundMessage" xml:space="preserve">
+    <value>User NotFound</value>
   </data>
 </root>

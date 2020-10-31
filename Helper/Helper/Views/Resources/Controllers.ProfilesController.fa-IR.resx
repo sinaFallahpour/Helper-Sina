@@ -117,73 +117,148 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="400" xml:space="preserve">
-    <value>درخواست ارسال شده نامعتبر است</value>
+  <data name="AcademicRecords" xml:space="preserve">
+    <value>سابقه تحصیلی</value>
   </data>
-  <data name="401" xml:space="preserve">
-    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
+  <data name="BirthDate" xml:space="preserve">
+    <value>تاریخ تولد</value>
   </data>
-  <data name="403" xml:space="preserve">
-    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
+  <data name="BirthDatePL" xml:space="preserve">
+    <value>تاریخ تولد خو د را  وارد کنید</value>
   </data>
-  <data name="404" xml:space="preserve">
-    <value>  صفحه موردنظر شما پیدا نشد!</value>
+  <data name="CityPL" xml:space="preserve">
+    <value>شهر</value>
   </data>
-  <data name="500" xml:space="preserve">
-    <value>مشکلی در بارگذاری صفحه رخ داده لطفا تارفع مشکل شکیبا باشید </value>
+  <data name="Dashboard" xml:space="preserve">
+    <value>دشبورد</value>
   </data>
-  <data name="Back" xml:space="preserve">
-    <value>بازگشت به لیست</value>
+  <data name="DescriptionPL" xml:space="preserve">
+    <value>توضیحات</value>
   </data>
-  <data name="ComparePassWordErrorMessage" xml:space="preserve">
-    <value>تکرار پسورد صحیح نمیباشد</value>
+  <data name="EditProfile" xml:space="preserve">
+    <value>ویرایش پروفایل</value>
   </data>
-  <data name="Create" xml:space="preserve">
-    <value>افرودن جدید</value>
+  <data name="EmailPL" xml:space="preserve">
+    <value>ایمیل</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>حذف</value>
+  <data name="EndEduDatePL" xml:space="preserve">
+    <value>تاریخ پایان تحصیل</value>
   </data>
-  <data name="Detail" xml:space="preserve">
-    <value>جزئیات</value>
+  <data name="ExistEmail" xml:space="preserve">
+    <value>ایمیل  موجود است</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>ویرایش</value>
+  <data name="ExistUserName" xml:space="preserve">
+    <value>نام کاربری موجود است</value>
   </data>
-  <data name="EmailFormat" xml:space="preserve">
-    <value>ایمیل نامعتبر است</value>
+  <data name="FailMessage" xml:space="preserve">
+    <value>خطا در ثبت</value>
   </data>
-  <data name="Enter just {1} character" xml:space="preserve">
-    <value>فقط {1} کاراکتر وارد کنید</value>
+  <data name="from" xml:space="preserve">
+    <value>از تاریخ</value>
   </data>
-  <data name="InValidEmail" xml:space="preserve">
-    <value>ایمیل نا معتبر است</value>
+  <data name="fromPL" xml:space="preserve">
+    <value>تاریخ شروع کار</value>
   </data>
-  <data name="LoadingText" xml:space="preserve">
-    <value>صبر کنید...</value>
+  <data name="GenderPL" xml:space="preserve">
+    <value>جنسیت</value>
   </data>
-  <data name="Maximum length is {1} characters" xml:space="preserve">
-    <value>حداکثر  {1} کاراکتر وارد کنید</value>
+  <data name="GradePL" xml:space="preserve">
+    <value>مقطع</value>
   </data>
-  <data name="Minimum length is {1} characters" xml:space="preserve">
-    <value>حداقل {1} کاراکتر وارد کنید</value>
+  <data name="image format Is not valid" xml:space="preserve">
+    <value>فرمت عکس نامناسب است</value>
   </data>
-  <data name="MobileFormat" xml:space="preserve">
-    <value>به فرمت موبایل وارد کنید</value>
+  <data name="Image size should less than {0} kilbite" xml:space="preserve">
+    <value>سایز عکس باید کمتر از {0} باشد</value>
   </data>
-  <data name="Required" xml:space="preserve">
-    <value>این فیلد اجباری است</value>
+  <data name="LanguageKnowing" xml:space="preserve">
+    <value>زبان هایی تسلط دارید</value>
   </data>
-  <data name="ShebaFormat" xml:space="preserve">
-    <value>شماره شبا نا معتبر</value>
+  <data name="LanguageKnowingPL" xml:space="preserve">
+    <value>زبان هایی تسلط دارید را وارد کنید</value>
+  </data>
+  <data name="MobileNumberPL" xml:space="preserve">
+    <value>شماره موبایل</value>
+  </data>
+  <data name="MyActivityGetterText" xml:space="preserve">
+    <value>فعالیت من (خدمات گیرنده)</value>
+  </data>
+  <data name="MyActivityGivverText" xml:space="preserve">
+    <value>فعالیت من (خدمات دهنده)</value>
+  </data>
+  <data name="NameAndLastNamePL" xml:space="preserve">
+    <value>نام ونام خانوادگی</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>بعدی</value>
+  </data>
+  <data name="NoServiceExistMessage" xml:space="preserve">
+    <value>سرویسی موجود نیست</value>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>نام شرکت</value>
+  </data>
+  <data name="OfficePL" xml:space="preserve">
+    <value>نام شرکت را وارد کنید</value>
+  </data>
+  <data name="OtherInfo" xml:space="preserve">
+    <value>سایر اطلاعات</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>سمت</value>
+  </data>
+  <data name="PositionPL" xml:space="preserve">
+    <value>سمت خود را وراد کنید</value>
+  </data>
+  <data name="Prev" xml:space="preserve">
+    <value>قبلی</value>
+  </data>
+  <data name="RequestService" xml:space="preserve">
+    <value>درخواست خدمت</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>سابقه کاری</value>
+  </data>
+  <data name="Resume2" xml:space="preserve">
+    <value>رزومه</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>ذخیره تغییرات</value>
+  </data>
+  <data name="SendMsg" xml:space="preserve">
+    <value>ارسال پیام</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>خدمات</value>
+  </data>
+  <data name="SituationPL" xml:space="preserve">
+    <value>وضعیت تاهل</value>
   </data>
   <data name="Skills" xml:space="preserve">
-    <value>مهارت های مورد نظر</value>
+    <value>تخصص ها</value>
   </data>
-  <data name="{0} is required" xml:space="preserve">
-    <value>{0} الزامیست</value>
+  <data name="StartEduDatePL" xml:space="preserve">
+    <value>تاریخ شروع تحصیل  </value>
   </data>
-  <data name="{0} Is required." xml:space="preserve">
-    <value>{0}  اجباریست.</value>
+  <data name="SuccessMessage" xml:space="preserve">
+    <value>ثبت موفقیت آمیز</value>
+  </data>
+  <data name="to" xml:space="preserve">
+    <value>تا تاریخ</value>
+  </data>
+  <data name="toPL" xml:space="preserve">
+    <value>تاریخ اتمام کار</value>
+  </data>
+  <data name="UniverCityName" xml:space="preserve">
+    <value>نام دانشگاه</value>
+  </data>
+  <data name="UniverCityNamePL" xml:space="preserve">
+    <value>نام دانشگاه را وارد کنید</value>
+  </data>
+  <data name="UserNamePL" xml:space="preserve">
+    <value>نام کاربری</value>
+  </data>
+  <data name="UserNotFoundMessage" xml:space="preserve">
+    <value>کاربر یافت نشد</value>
   </data>
 </root>

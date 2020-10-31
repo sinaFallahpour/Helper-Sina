@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <EmbeddedResource Remove="Resources\Models\Enums\UserMarriedType.en-US.resx" />
+    <EmbeddedResource Remove="Views\Resources\Models\Enums\UserMarriedType.en-US.resx" />
   </ItemGroup>
 
 
@@ -61,6 +62,8 @@
     <Folder Include="Areas\Admin\Models\ViewModels\Plan\" />
     <Folder Include="Resources\Controllers\" />
     <Folder Include="Resources\ViewModels\" />
+    <Folder Include="Views\Resources\Controllers\" />
+    <Folder Include="Views\Resources\ViewModels\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\clipboard\dialogs\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\plugins\" />
     <Folder Include="wwwroot\Upload\Category\" />
@@ -71,6 +74,7 @@
 
   <ItemGroup>
     <None Include="Resources\Models\Enums\UserMarriedType.en-US.resx" />
+    <None Include="Views\Resources\Models\Enums\UserMarriedType.en-US.resx" />
     <None Include="wwwroot\lib\bootstrap-tagsinput\bootstrap-tagsinput.js" />
     <None Include="wwwroot\lib\ckeditor\build-config.js" />
     <None Include="wwwroot\lib\ckeditor\ckeditor.js" />
@@ -114,6 +118,25 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Models\ShareResource.fa-IR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Resources\Models\Enums\UserGender.en-US.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Resources\Models\Enums\UserGender.fa-IR.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Resources\Models\Enums\UserMarriedType.fa-IR.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>UserMarriedType.fa-IR.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Resources\Models\ShareResource.en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Resources\Models\ShareResource.fa-IR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>

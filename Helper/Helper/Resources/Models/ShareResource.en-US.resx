@@ -150,6 +150,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EmailFormat" xml:space="preserve">
+    <value>Invalid email format</value>
+  </data>
   <data name="Enter just {1} character" xml:space="preserve">
     <value>Enter just {1} character</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="Skills" xml:space="preserve">
     <value>The desiret Skill</value>
+  </data>
+  <data name="{0} is required" xml:space="preserve">
+    <value>{0} is required</value>
   </data>
   <data name="{0} Is required." xml:space="preserve">
     <value>{0} Is required.</value>

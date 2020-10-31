@@ -69,11 +69,11 @@
                     <div class="row">
                         <div class="col-12 text-right mb-3 hj-join-news"> @Localizer["newseTitle"]  </div>
                         <div class="col-12">
+                            <form id="Form" asp-action="SubscribeNews" asp-controller="Home">
+                                <input class="SubmitBox" type="email" id="mailInput" placeholder="@Localizer["newsletterText"]" />
+                                <button id="submitBtn" type="button" class="btn btn-success hj-Record">@Localizer["Done"] </button>
 
-                            <form>
-                                <input class="SubmitBox" type="email" placeholder="@Localizer["newsletterText"]" />
                             </form>
-                            <button type="button" class="btn btn-success hj-Record">@Localizer["Done"] </button>
 
                         </div>
                         <div class="row w-100 mt-4  text-center">
@@ -81,8 +81,6 @@
                             <div class="col-4"><ul class="hj-share text-left"><i class="fab fa-telegram-plane"></i> </ul></div>
                             <div class="col-4"><ul class="hj-share text-center"> <i class="fab fa-instagram"></i></ul></div>
                             <div class="col-4"><ul class="hj-share  text-right"> <i class="fab fa-facebook-f"></i></ul></div>
-
-
 
 
                         </div>
@@ -211,3 +209,88 @@
 
     </div>
 </div>
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/SinaCustom/js/main.js"></script>
+
+
+<script>
+        var error = "";
+        var titleSuitAlert = ""
+        var  OkTitleSuitAlert=""
+        var submiSuitAlertText =""
+            @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+
+                <text>
+                    error = "خطا رخ داده است."
+        titleSuitAlert = "خطا"
+        OkTitleSuitAlert="انجام شد"
+                    submiSuitAlertText="باشه"
+                </text>
+            }
+            else
+            {
+               <text>
+                error = "An error has occurred."
+        titleSuitAlert = "error"
+        OkTitleSuitAlert="done"
+                submiSuitAlertText="ok"
+
+
+             </text>
+            }
+</script>
+
+
+
+<script>
+
+
+
+    $("#submitBtn").on('click', function (e) {
+        e.preventDefault();
+        //if (!$(this).valid()) {
+        //    return;
+        //}
+
+        var data = {
+            Email : $("#mailInput").val()
+        }
+        $("#submitBtn").prop('disabled', true);
+        //$.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
+        $.ajax({
+            method: "POST",
+            url: '/Home/SubscribeNews',
+            //data: $('#profileForm').serialize() ,
+            data: data,
+            //processData: false,
+            //contentType: false,
+            //contentType: "application/json; charset=utf-8",
+            success: function (r) {
+                if (r.status) {
+                    $("#submitBtn").prop('disabled', false);
+                    SuccessAlert2(r.message, OkTitleSuitAlert, submiSuitAlertText)
+                }
+                else {
+                    $("#submitBtn").prop('disabled', false);
+                    FailedAlert2(r.message, titleSuitAlert, submiSuitAlertText);
+                }
+            },
+            error: function () {
+                $("#submitBtn").prop('disabled', false);
+                //$.unblockUI();
+                //FailedAlert("Fail to submit Profile.");
+                SuccessAlert2(r.message, OkTitleSuitAlert, submiSuitAlertText)
+            }
+        });
+    })
+
+
+
+
+
+</script>

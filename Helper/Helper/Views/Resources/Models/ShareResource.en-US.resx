@@ -118,72 +118,66 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="400" xml:space="preserve">
-    <value>درخواست ارسال شده نامعتبر است</value>
+    <value>The requested request is invalid</value>
   </data>
   <data name="401" xml:space="preserve">
-    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
+    <value>You are not allowed to access this page</value>
   </data>
   <data name="403" xml:space="preserve">
-    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
+    <value>You are not allowed to access this page</value>
   </data>
   <data name="404" xml:space="preserve">
-    <value>  صفحه موردنظر شما پیدا نشد!</value>
+    <value>The page you requested was not found!</value>
   </data>
   <data name="500" xml:space="preserve">
-    <value>مشکلی در بارگذاری صفحه رخ داده لطفا تارفع مشکل شکیبا باشید </value>
+    <value>There was a problem loading the page. Please be patient with the problem</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>بازگشت به لیست</value>
+    <value>Back To List</value>
   </data>
   <data name="ComparePassWordErrorMessage" xml:space="preserve">
-    <value>تکرار پسورد صحیح نمیباشد</value>
+    <value>Repeat password is incorrect</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>افرودن جدید</value>
+    <value>Create New</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>حذف</value>
+    <value>Delete</value>
   </data>
   <data name="Detail" xml:space="preserve">
-    <value>جزئیات</value>
+    <value>Details</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>ویرایش</value>
-  </data>
-  <data name="EmailFormat" xml:space="preserve">
-    <value>ایمیل نامعتبر است</value>
+    <value>Edit</value>
   </data>
   <data name="Enter just {1} character" xml:space="preserve">
-    <value>فقط {1} کاراکتر وارد کنید</value>
+    <value>Enter just {1} character</value>
   </data>
   <data name="InValidEmail" xml:space="preserve">
-    <value>ایمیل نا معتبر است</value>
+    <value>Please provide a valid email address.</value>
   </data>
   <data name="LoadingText" xml:space="preserve">
-    <value>صبر کنید...</value>
+    <value>loading...</value>
   </data>
   <data name="Maximum length is {1} characters" xml:space="preserve">
-    <value>حداکثر  {1} کاراکتر وارد کنید</value>
+    <value>Maximum length is {1} characters</value>
   </data>
   <data name="Minimum length is {1} characters" xml:space="preserve">
-    <value>حداقل {1} کاراکتر وارد کنید</value>
+    <value>Minimum length is {1} characters</value>
   </data>
   <data name="MobileFormat" xml:space="preserve">
-    <value>به فرمت موبایل وارد کنید</value>
+    <value>Enter in mobile format.</value>
   </data>
   <data name="Required" xml:space="preserve">
-    <value>این فیلد اجباری است</value>
+    <value>this fiel is required</value>
   </data>
   <data name="ShebaFormat" xml:space="preserve">
-    <value>شماره شبا نا معتبر</value>
+    <value>Enter in Sheba number format</value>
   </data>
   <data name="Skills" xml:space="preserve">
-    <value>مهارت های مورد نظر</value>
-  </data>
-  <data name="{0} is required" xml:space="preserve">
-    <value>{0} الزامیست</value>
+    <value>The desiret Skill</value>
   </data>
   <data name="{0} Is required." xml:space="preserve">
-    <value>{0}  اجباریست.</value>
+    <value>{0} Is required.</value>
   </data>
 </root>

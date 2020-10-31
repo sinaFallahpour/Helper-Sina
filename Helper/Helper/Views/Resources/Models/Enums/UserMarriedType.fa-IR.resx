@@ -117,73 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="400" xml:space="preserve">
-    <value>درخواست ارسال شده نامعتبر است</value>
+  <data name="Married" xml:space="preserve">
+    <value>متاهل</value>
   </data>
-  <data name="401" xml:space="preserve">
-    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
-  </data>
-  <data name="403" xml:space="preserve">
-    <value>شما اجازه دسترسی به این صفحه را ندارید</value>
-  </data>
-  <data name="404" xml:space="preserve">
-    <value>  صفحه موردنظر شما پیدا نشد!</value>
-  </data>
-  <data name="500" xml:space="preserve">
-    <value>مشکلی در بارگذاری صفحه رخ داده لطفا تارفع مشکل شکیبا باشید </value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>بازگشت به لیست</value>
-  </data>
-  <data name="ComparePassWordErrorMessage" xml:space="preserve">
-    <value>تکرار پسورد صحیح نمیباشد</value>
-  </data>
-  <data name="Create" xml:space="preserve">
-    <value>افرودن جدید</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>حذف</value>
-  </data>
-  <data name="Detail" xml:space="preserve">
-    <value>جزئیات</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>ویرایش</value>
-  </data>
-  <data name="EmailFormat" xml:space="preserve">
-    <value>ایمیل نامعتبر است</value>
-  </data>
-  <data name="Enter just {1} character" xml:space="preserve">
-    <value>فقط {1} کاراکتر وارد کنید</value>
-  </data>
-  <data name="InValidEmail" xml:space="preserve">
-    <value>ایمیل نا معتبر است</value>
-  </data>
-  <data name="LoadingText" xml:space="preserve">
-    <value>صبر کنید...</value>
-  </data>
-  <data name="Maximum length is {1} characters" xml:space="preserve">
-    <value>حداکثر  {1} کاراکتر وارد کنید</value>
-  </data>
-  <data name="Minimum length is {1} characters" xml:space="preserve">
-    <value>حداقل {1} کاراکتر وارد کنید</value>
-  </data>
-  <data name="MobileFormat" xml:space="preserve">
-    <value>به فرمت موبایل وارد کنید</value>
-  </data>
-  <data name="Required" xml:space="preserve">
-    <value>این فیلد اجباری است</value>
-  </data>
-  <data name="ShebaFormat" xml:space="preserve">
-    <value>شماره شبا نا معتبر</value>
-  </data>
-  <data name="Skills" xml:space="preserve">
-    <value>مهارت های مورد نظر</value>
-  </data>
-  <data name="{0} is required" xml:space="preserve">
-    <value>{0} الزامیست</value>
-  </data>
-  <data name="{0} Is required." xml:space="preserve">
-    <value>{0}  اجباریست.</value>
+  <data name="Single" xml:space="preserve">
+    <value>مجرد</value>
   </data>
 </root>

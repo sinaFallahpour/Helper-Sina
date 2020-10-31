@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -9,6 +10,7 @@ using Helper.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace Helper.Controllers
 {
@@ -16,16 +18,20 @@ namespace Helper.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IStringLocalizer<ServicesController> _serviceControllerLocalizer;
 
 
+       
 
         public PlanController(
             ApplicationDbContext context,
-             IMapper mapper
+             IMapper mapper,
+             IStringLocalizer<ServicesController> serviceControllerLocalizer
                 )
         {
             _context = context;
             _mapper = mapper;
+            _serviceControllerLocalizer = serviceControllerLocalizer;
         }
 
 
@@ -37,11 +43,20 @@ namespace Helper.Controllers
         [Authorize()]
         public async Task<ActionResult> Index()
         {
+            returnViewDate();
             //var plans = await _context.TBL_Plans.Include(c => c.PlansMonyUnit).ToListAsync();
             //var Planses = new List<PlanVM>();
 
-
-
+            if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+                var data = await _context.TBL_Settings.Where(c => c.Key == PublicHelper.CreateServiceText).FirstOrDefaultAsync();
+                ViewBag.CreateServiceText = data.Value;
+            }
+            else
+            {
+                var data = await _context.TBL_Settings.Where(c => c.Key == PublicHelper.CreateServiceText).FirstOrDefaultAsync();
+                ViewBag.CreateServiceText = data.EnglishValue;
+            }
 
             var plans = await _context.TBL_Plans.AsNoTracking().Select(c => new PlanVM
             {
@@ -80,57 +95,11 @@ namespace Helper.Controllers
 
 
 
-        //        Id { get; set; }
 
-        //    Name { get; set; }
-
-
-        //ServiceCount { get; set; }
-
-
-
-
-        //            Description { get; set; }
-
-
-
-
-        //            Duration { get; set; }
-
-
-
-
-
-        //            IsSelected { get; set; }
-
-
-
-        //            IsFree { get; set; }
-
-
-        //        /// <summary>
-        //        /// لیست واحد های پولی پلن
-        //        /// </summary>
-        //        public virtual ICollection<MonyUnitTVM> PlanMonyUnits { get; set; }
-        //    }
-
-
-
-        //    public class MonyUnitTVM
-        //{
-        //    /// <summary>
-        //    /// قیمت پنل
-        //    /// </summary>
-        //    [Display(Name = "قیت")]
-        //    public int Price { get; set; }
-
-
-
-
-        //    [Display(Name = "نام واحد پول")]
-        //    public string MonyName { get; set; }
-        //}
-
+        private void returnViewDate()
+        {
+            ViewData["CreateService"] = _serviceControllerLocalizer["CreateService"];
+        }
 
 
 

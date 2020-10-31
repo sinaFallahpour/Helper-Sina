@@ -17,6 +17,7 @@ namespace Helper.Controllers
 {
     public class NewsesController : Controller
     {
+
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;

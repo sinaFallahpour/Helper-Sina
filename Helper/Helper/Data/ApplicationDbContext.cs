@@ -98,9 +98,11 @@ namespace Helper.Data
         public DbSet<TBL_Slide> TBL_Sliders { get; set; }
 
 
+        public DbSet<TBL_SubscribeNew> TBL_SubscribeNew { get; set; }
+
 
         public DbSet<TBL_NewsArticleVideo> TBL_NewsArticleVideo { get; set; }
-
+ 
         public DbSet<TBL_NewsComment> TBL_NewsComment { get; set; }
 
         public DbSet<TBL_NewsLike> TBL_NewsLike { get; set; }

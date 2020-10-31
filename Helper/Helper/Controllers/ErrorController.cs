@@ -11,10 +11,13 @@ namespace Helper.Controllers
     public class ErrorController : Controller
     {
         private IStringLocalizer<ShareResource> _shareResource;
+        private IStringLocalizer<ErrorController> _localizer;
 
-        public ErrorController(IStringLocalizer<ShareResource> shareResource)
+        public ErrorController(IStringLocalizer<ShareResource> shareResource,
+            IStringLocalizer<ErrorController> localizer)
         {
             _shareResource = shareResource;
+            _localizer = localizer;
         }
 
 
@@ -51,10 +54,20 @@ namespace Helper.Controllers
 
 
         [Route("/Error/AccesDenied")]
-
         public IActionResult AccesDenied()
         {
+            returnViewDate();
             return View();
         }
+
+
+
+
+        private void returnViewDate()
+        {
+            ViewData["AccessDenied"] = _localizer["AccessDenied"];
+        }
+
+
     }
 }

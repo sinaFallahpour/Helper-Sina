@@ -294,7 +294,17 @@ namespace Helper.Controllers
                 }
 
             }
-            return View(model);
+
+            var errors = new List<string>();
+            foreach (var item in ModelState.Values)
+            {
+                foreach (var err in item.Errors)
+                {
+                    errors.Add(err.ErrorMessage);
+                }
+            }
+            return new JsonResult(new { Status = false, Message = errors.First() });
+            //return View(model);
 
 
         }
