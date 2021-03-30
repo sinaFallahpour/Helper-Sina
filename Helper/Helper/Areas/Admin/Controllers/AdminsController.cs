@@ -75,6 +75,147 @@ namespace Helper.Controllers
 
         #endregion
 
+
+        #region  Users
+        /// <summary>
+        /// Get All  Users
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Users()
+        {
+
+            var users = (from u in _context.Users
+                         join ur in _context.UserRoles
+                         on u.Id equals ur.UserId
+                         join r in _context.Roles
+                         on ur.RoleId equals r.Id
+                         select new UserListViewModel
+                         {
+                             Id = u.Id,
+                             UserName = u.UserName,
+                             Nickname = u.Nickname,
+                             City = u.City,
+                             Islocked = u.LockoutEnd != null && u.LockoutEnd > DateTime.Now,
+                             PhotoAddress = u.PhotoAddress,
+                             CreateDate = u.RegistrationDateTime,
+                             RoleName = r.Name
+                         })
+                         .OrderByDescending(c => c.CreateDate)
+                         .AsQueryable();
+
+            //var AdminRoleId = _context.Roles.Where(c => c.Name == Static.ADMINROLE).FirstOrDefault().Id;
+            //var UserRoles = _context.UserRoles.Where(c => c.RoleId == AdminRoleId).Select(c => c.UserId).ToList();
+            return View(await users.ToListAsync());
+        }
+
+
+        #endregion
+
+
+
+
+        #region ChangePasswordInAdmin
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePasswordInAdmin(ChangePassInAdmin model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var userFromDB = await _userManager.FindByNameAsync(model.Username);
+                if (userFromDB == null)
+                    return new JsonResult(new { Status = false, Message = $"کاربری با نام کاربری {model.Username} یافت نشد", });
+                var newPassword = _userManager.PasswordHasher.HashPassword(userFromDB, model.NewPassword);
+                userFromDB.PasswordHash = newPassword;
+                var result = await _userManager.UpdateAsync(userFromDB);
+
+                if (result.Succeeded)
+                    return new JsonResult(new { Status = true, Message = $"پسورد با موفقیت تغییر یافت", });
+                else
+                    return new JsonResult(new { Status = false, Message = $"خطایی در تغییر پسورد رخ داده", });
+            }
+
+
+            var errors = new List<string>();
+            foreach (var item in ModelState.Values)
+            {
+                foreach (var err in item.Errors)
+                {
+                    errors.Add(err.ErrorMessage);
+                }
+            }
+            return new JsonResult(new { Status = false, Message = errors.First() });
+        }
+
+
+        #endregion
+
+
+
+
+
+
+        #region    locked User
+
+
+        [HttpPost]
+        public async Task<ActionResult> LockedUser(LockedUserVM model)
+        { if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(model.Username))
+                    return new JsonResult(new { Status = false, Message = $"کاربری با نام کاربری {model.Username} یافت نشد", });
+
+                var userFromDB = await _context.Users.Where(c => c.UserName == model.Username).FirstOrDefaultAsync();
+                if (userFromDB == null)
+                    return new JsonResult(new { Status = false, Message = $"کاربری با نام کاربری {model.Username} یافت نشد", });
+
+                var locked = true;
+                var LockoutEnd = userFromDB.LockoutEnd;
+                if (LockoutEnd != null && LockoutEnd > DateTime.Now)
+                {
+                    userFromDB.LockoutEnd = null;
+                    userFromDB.LockoutEnd = DateTime.Now.AddYears(-1000);
+                    locked = false;
+                }
+                if (LockoutEnd == null || LockoutEnd < DateTime.Now)
+                {
+                    userFromDB.LockoutEnd = DateTime.Now.AddYears(1000);
+                    //userFromDB.LockoutEnd = DateTime.Now.AddYears(1000);
+                    locked = true;
+                }
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    if (locked)
+                        return new JsonResult(new { Status = true, Data = locked, Message = $"حساب کاربر با موفقیت قفل  گردید", });
+                    else
+                        return new JsonResult(new { Status = true, Data = locked, Message = $"حساب کاربر با موفقیت آزاد  شد", });
+                }
+                catch
+                {
+                    return new JsonResult(new { Status = false, Message = $"خطایی رخ داده", });
+                }
+            }
+            var errors = new List<string>();
+            foreach (var item in ModelState.Values)
+            {
+                foreach (var err in item.Errors)
+                {
+                    errors.Add(err.ErrorMessage);
+                }
+            }
+            return new JsonResult(new { Status = false, Message = errors.First() });
+
+        }
+
+
+        #endregion
+
+
+
+
+
+
         #region   Profile
         public async Task<IActionResult> Profile(string Username)
         {

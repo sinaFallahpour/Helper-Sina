@@ -6,8 +6,8 @@
     Layout = null;
 }
 ﻿
-<!DOCTYPE html >
-<html  style="scroll-behavior: smooth; ">
+<!DOCTYPE html>
+<html style="scroll-behavior: smooth; ">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,31 +30,31 @@
         <link href="~/hj/css/hj-ltr.css" rel="stylesheet" />
     }
 
-   
+
     @RenderSection("Styles", required: false)
 </head>
 <body>
-  
+
     @*---loader---*@
-    <div class="loader" >
-            <div class="loader-inner">
-                <div class="loader-line-wrap">
-                    <div class="loader-line"></div>
-                </div>
-                <div class="loader-line-wrap">
-                    <div class="loader-line"></div>
-                </div>
-                <div class="loader-line-wrap">
-                    <div class="loader-line"></div>
-                </div>
-                <div class="loader-line-wrap">
-                    <div class="loader-line"></div>
-                </div>
-                <div class="loader-line-wrap">
-                    <div class="loader-line"></div>
-                </div>
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
             </div>
         </div>
+    </div>
     @*---endloader---*@
     <partial name="_HeaderPartial" />
     @RenderBody()
@@ -70,7 +70,93 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.esm.browser.bundle.min.js" integrity="sha512-HDbA4VnY3b6od1pe8MZsAEg/aJktLsrkTqMr5eaAhNlHPd8u7/7+WnGYPrPg8+4fXFU77tYjdoje8xxgrz9LJw==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js" integrity="sha512-9CWGXFSJ+/X0LWzSRCZFsOPhSfm6jbnL+Mpqo0o8Ke2SYr8rCTqb4/wGm+9n13HtDE1NQpAEOrMecDZw4FXQGg==" crossorigin="anonymous"></script>
     <script src="~/hj/js/app.js"></script>
-   
+    <script src="~/SinaCustom/js/main.js"></script>
+    <script src="~/lib/swal-alert/sweetalert.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+        var error = "";
+        var titleSuitAlert = ""
+        var  OkTitleSuitAlert=""
+        var submiSuitAlertText =""
+            @if (CultureInfo.CurrentCulture.Name == PublicHelper.persianCultureName)
+            {
+
+                <text>
+                    error = "خطا رخ داده است."
+                    titleSuitAlert = "خطا"
+                    OkTitleSuitAlert="انجام شد"
+                    submiSuitAlertText="باشه"
+                </text>
+            }
+            else
+            {
+               <text>
+                error = "An error has occurred."
+                titleSuitAlert = "error"
+                OkTitleSuitAlert="done"
+                submiSuitAlertText="ok"
+             </text>
+            }
+    </script>
+
+
+
+    <script>
+
+
+        //js For footer
+        $("#submitBtn").on('click', function (e) {
+            e.preventDefault();
+            //if (!$(this).valid()) {
+            //    return;
+            //}
+
+            var data = {
+                Email: $("#mailInput").val()
+            }
+            $("#submitBtn").prop('disabled', true);
+            //$.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
+            $.ajax({
+                method: "POST",
+                url: '/Home/SubscribeNews',
+                //data: $('#profileForm').serialize() ,
+                data: data,
+                //processData: false,
+                //contentType: false,
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                    if (r.status) {
+                        $("#submitBtn").prop('disabled', false);
+                        SuccessAlert2(r.message, OkTitleSuitAlert, submiSuitAlertText)
+                    }
+                    else {
+                        $("#submitBtn").prop('disabled', false);
+                        FailedAlert2(r.message, titleSuitAlert, submiSuitAlertText);
+                    }
+                },
+                error: function () {
+                    $("#submitBtn").prop('disabled', false);
+                    //$.unblockUI();
+                    //FailedAlert("Fail to submit Profile.");
+                    SuccessAlert2(r.message, OkTitleSuitAlert, submiSuitAlertText)
+                }
+            });
+        })
+
+
+
+
+
+    </script>
+
+
+
     <script>
         $(document).ready(function () {
             window.scrollTo(0, 0);

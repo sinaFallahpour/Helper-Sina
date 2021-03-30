@@ -13,7 +13,7 @@ var FailedAlert = function (msg) {
 }
 
 
-var FailedAlert2 = function (msg,title, confirmButtonText) {
+var FailedAlert2 = function (msg, title, confirmButtonText) {
     swal({
         title: `${title}!`,
         text: msg,
@@ -53,7 +53,7 @@ var SuccessAlert2 = function (msg, title, confirmButtonText) {
 }
 
 
-var toShortString = function (text, count)  {
+var toShortString = function (text, count) {
     if (!text) return "";
     if (text.length >= count) return text.substring(0, count) + "[...]";
     else return text;
@@ -62,7 +62,7 @@ var toShortString = function (text, count)  {
 
 
 
-var getPriceFormat = function (price)  {
+var getPriceFormat = function (price) {
     if (!price)
         return null;
     price += '';
@@ -75,6 +75,23 @@ var getPriceFormat = function (price)  {
         y = y.replace(rgx, '$1' + ',' + '$2');
     return y + z;
 }
+
+
+
+
+//این تابع هر وقت صدا بخورد دقیقا تو را میبرد به انجایه صفحه
+function smoothScrollTo(location) {
+    document.getElementById(location).scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+}
+
+/*   usage
+<div  onclick="smoothScrollTo('grouping')"></div>
+<div id="grouping"></div>
+*/
+
+
+
+
 
 
 

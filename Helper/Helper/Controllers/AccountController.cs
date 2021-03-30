@@ -181,6 +181,7 @@ namespace Helper.Controllers
                     AcceptRules = model.AcceptRules,
 
                     PhotoAddress = "/Upload/User/default2.png",
+                    RegistrationDateTime = DateTime.Now,
                     //عدم استفاده از پلن رایگان
                     IsUsedFree = false,
                     //SerialNumber = SerialNumber,

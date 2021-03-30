@@ -158,7 +158,7 @@ namespace Helper.Controllers
 
 
 
-        #region UpdateProfile
+        #region SubscribeNews
 
 
 
@@ -173,10 +173,15 @@ namespace Helper.Controllers
             {
                 try
                 {
+                    var isExist =await _context.TBL_SubscribeNew.AnyAsync(c => c.Email == model.Email);
+                    if (isExist) 
+                        return new JsonResult(new { Status = true, Message = _localizer["SuccessMessage"].Value.ToString(), });
+
                     var subscribeNews = new TBL_SubscribeNew()
                     {
                         Email = model.Email,
                     };
+                    
                     await _context.TBL_SubscribeNew.AddAsync(subscribeNews);
                     var result = _context.SaveChanges();
 

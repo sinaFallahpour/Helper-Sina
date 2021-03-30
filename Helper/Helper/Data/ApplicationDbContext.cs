@@ -187,6 +187,11 @@ namespace Helper.Data
         /// </summary>
         public DbSet<Helper.ViewModels.ForgetPasswordVM> ForgetPasswordVM { get; set; }
 
+        /// <summary>
+        /// پنل و واحد پول
+        /// </summary>
+        public DbSet<Helper.Areas.Admin.Models.ViewModels.User.UserListViewModel> UserListViewModel { get; set; }
+
     
 
        

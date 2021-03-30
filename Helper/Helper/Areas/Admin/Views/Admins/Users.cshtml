@@ -1,0 +1,412 @@
+﻿@model IEnumerable<Helper.Areas.Admin.Models.ViewModels.User.UserListViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<h1>Users</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Islocked)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhotoAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlanCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoleName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+
+
+
+
+
+
+
+
+
+
+@section Style{
+
+    <!-- DataTable -->
+    <link rel="stylesheet" href="~/Admin/vendors/dataTable//dataTables.min.css" type="text/css">
+    <link href="~/SinaCustom/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/lib/swal-alert/sweetalert.css" rel="stylesheet" />
+}
+
+<h1 class="text-center" style="text-shadow: 0.3px 1px #FF0000; ">   کاربر ها</h1>
+
+@*<a asp-action="Create" class="btn btn-primary mb-3"> </a>*@
+<div class="card">
+    <div class="card-body">
+        <table id="example1" class="table table-striped table-bordered">
+            <thead class="bg-info text-white _table-corder-reduse">
+                <tr>
+                    <th class="_noneBorder">  عکس</th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.Nickname)
+                    </th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.RoleName)
+                    </th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.Islocked)
+                    </th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th class="_noneBorder"> </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img class="_dataTableImage" src="@item.PhotoAddress" />
+                        </td>
+                        @*<td class="text-center"><a asp-action="Profile" asp-route-Id="@item.Id"> @Html.DisplayFor(modelItem => item.Username)</a>  </td>*@
+                        <td class="text-center">  @Html.DisplayFor(modelItem => item.UserName)</td>
+                        <td class="text-center">  @Html.DisplayFor(modelItem => item.Nickname)</td>
+                        <td class="text-center">  @Html.DisplayFor(modelItem => item.RoleName)</td>
+                        <td class="text-center" id='lockText-@item.Id'>
+                            @if (item.Islocked)
+                            {
+                                <text>
+                                    قفل
+                                </text>
+                            }
+                            else
+                            {
+                                <text>
+                                    آزاد
+                                </text>
+                            }
+                        </td>
+                        <td class="text-center"> @Html.DisplayFor(modelItem => item.City) </td>
+
+                        <td>
+
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-danger text-white" id="lockBtn" onclick="lockUser('@item.UserName','@item.Id')">
+                                    <i class="">قفل کردن </i>
+                                </a>
+
+                                <a class="btn btn-success text-white" onclick="setUserName('@item.UserName')" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="">تغییر رمز عبور </i>
+                                </a>
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="bg-info text-white _table-corder-reduse">
+                <tr>
+                    <th class="_noneBorder"> عکس</th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.Nickname)
+                    </th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.RoleName)
+                    </th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.Islocked)
+                    </th>
+                    <th class="text-center _noneBorder">
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th class="_noneBorder"> </th>
+
+
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> تغییر پسورد</h5>
+                <button type="submit" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="ti-close"></i>
+                </button>
+            </div>
+            <form id="form" asp-action="ChangePasswordInAdmin">
+
+                <div class="modal-body">
+
+
+
+                    <input type="hidden" name="Username" id="Username" value="">
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label"> پسورد جدید</label>
+                        <input type="text" name="NewPassword" class="form-control" minlength="6" required maxlength="20" id="recipient-name1">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">    تکرار پسورد  </label>
+                        <input type="text" class="form-control" name="NewPasswordConfirm" minlength="6" required maxlength="20" id="recipient-name2">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        بستن
+                    </button>
+                    <button type="submit" id="sendFormBtn" class="btn btn-primary">ارسال</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <!-- DataTable -->
+    <script src="~/Admin/vendors/dataTable/jquery.dataTables.min.js"></script>
+    <script src="~/Admin/vendors/dataTable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Admin/vendors/dataTable/dataTables.responsive.min.js"></script>
+    <script src="~/Admin/assets/js/examples/datatable.js"></script>
+    <script src="~/lib/swal-alert/sweetalert.min.js"></script>
+    <script src="~/SinaCustom/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#example1').DataTable();
+        });
+
+
+
+
+        //$("#exampleModal").on("show.bs.modal", function (a) {
+        //    console.log(a)
+        //    alert(1)
+        //})
+
+
+
+        $("#form").on('submit', function (e) {
+
+            e.preventDefault();
+            if (!$(this).valid()) {
+                return;
+            }
+
+            $("#sendFormBtn").prop('disabled', true);
+            $.blockUI({ message: '<h1 class="text-center"><img src="/SinaCustom/img/Spinner-0.9s-58px.svg" />  </h1>' });
+            $.ajax({
+                method: "POST",
+                url: "/Admin/Admins/ChangePasswordInAdmin",
+                //data: $('#profileForm').serialize() ,
+                data: $("#form").serialize(),
+                //processData: false,
+                //contentType: false,
+
+                //contentType: "application/json; charset=utf-8",
+                success: function (r) {
+                    if (r.status) {
+                        $("#sendFormBtn").prop('disabled', false);
+                        $.unblockUI();
+                        SuccessAlert(r.message)
+                        //$("#ProfleImageAddress").val(r.data)
+                        //$("#UploadedImage").attr("src", r.data);
+                    }
+                    else {
+                        //var element = $(`<div class="alert alert-success text-center" role="alert">${r.message}</div>`)
+                        //$(".serverError").empty().append(element);
+
+                        $("#sendFormBtn").prop('disabled', false);
+                        $.unblockUI();
+                        //FailedAlert(r.message);
+                        FailedAlert(r.message);
+                    }
+                },
+                error: function () {
+
+                    $("#sendFormBtn").prop('disabled', false);
+                    $.unblockUI();
+                    FailedAlert("خطایی رخ داده است.");
+                }
+            });
+        })
+
+
+        //$('#myModal').modal('toggle');
+
+
+        function setUserName(username) {
+            $("#Username").val(username);
+        }
+
+
+        function lockUser(username,userId) {
+
+            swal({
+                title: "تغییر وضعیت قفل",
+                text: "آیا مطمئن هستید؟",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn btn-danger",
+                cancelButtonClass: "btn btn-defult",
+                confirmButtonText: "بله",
+                cancelButtonText: "لغو",
+                closeOnConfirm: false,
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $("#lockBtn").prop('disabled', true);
+                    swal({ title: "صبر کنید...", showConfirmButton: false })
+
+                    $.ajax({
+                        method: "POST",
+                        url: "/Admin/Admins/LockedUser",
+                        data: { Username: username },
+                        //contentType: "application/json; charset=utf-8",
+                        success: function (r) {
+                            if (r.status) {
+                                if (r.data) {
+                                    var element = `#lockText-${userId}`
+                                    $(element).text("قفل")
+                                }
+                                else {
+                                    var element = `#lockText-${userId}`
+                                    $(element).text("آزاد")
+                                }
+                                $("#lockBtn").prop('disabled', false);
+
+                                //$("#sendFormBtn").prop('disabled', false);
+                                SuccessAlert(r.message)
+                            }
+                            else {
+                                //var element = $(`<div class="alert alert-success text-center" role="alert">${r.message}</div>`)
+                                //$(".serverError").empty().append(element);
+
+                                $("#lockBtn").prop('disabled', false);
+                                //FailedAlert(r.message);
+                                FailedAlert(r.message);
+                            }
+                        },
+                        error: function () {
+                            $("#lockBtn").prop('disabled', false);
+
+                            FailedAlert("خطایی رخ داده است.");
+                        }
+                    });
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //$.ajax({
+            //    method: "POST",
+            //    url: "/Admin/Admins/LockedUser",
+            //    //data: $('#profileForm').serialize() ,
+            //    data: $("#form").serialize(),
+            //    //processData: false,
+            //    //contentType: false,
+
+            //    //contentType: "application/json; charset=utf-8",
+            //    success: function (r) {
+            //        if (r.status) {
+            //            if (r.data)
+            //                $("#lockText").text("قفل")
+            //            else
+            //                $("#lockText").text("آزاد")
+
+            //            $("#lockBtn").prop('disabled', false);
+
+            //            //$("#sendFormBtn").prop('disabled', false);
+            //            //$.unblockUI();
+            //            SuccessAlert(r.message)
+            //        }
+            //        else {
+            //            //var element = $(`<div class="alert alert-success text-center" role="alert">${r.message}</div>`)
+            //            //$(".serverError").empty().append(element);
+
+            //            $("#lockBtn").prop('disabled', false);
+            //            //$.unblockUI();
+            //            //FailedAlert(r.message);
+            //            FailedAlert(r.message);
+            //        }
+            //    },
+            //    error: function () {
+            //        $("#lockBtn").prop('disabled', false);
+            //        //$.unblockUI();
+            //        FailedAlert("خطایی رخ داده است.");
+            //    }
+            //});
+
+        }
+
+
+
+    </script>
+}
+
